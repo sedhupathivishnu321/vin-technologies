@@ -1,5 +1,5 @@
 // Set your public contact address here
-const CONTACT_EMAIL = "contact@example.com";
+const CONTACT_EMAIL = "electronlearners@gmail.com";
 
 const menu = document.querySelector('.menu'), list = document.querySelector('nav ul');
 menu.addEventListener('click', () => list.classList.toggle('open'));

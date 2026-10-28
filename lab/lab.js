@@ -325,7 +325,7 @@ function rotSel(mirror) {
   if (mirror) c.mirror = !c.mirror; else c.rot = (c.rot + 1) % 4; renderAll(); changed();
 }
 document.addEventListener("keydown", (e) => {
-  const tag = (e.target.tagName || "").toLowerCase(); if (tag === "input" || tag === "select" || tag === "textarea") return;
+  const tag = (e.target.tagName || "").toLowerCase(); if (tag === "input" || tag === "select" || tag === "textarea" || netMode) return;
   const k = e.key.toLowerCase();
   if ((e.ctrlKey || e.metaKey) && k === "z") { e.preventDefault(); e.shiftKey ? redo() : undo(); }
   else if ((e.ctrlKey || e.metaKey) && k === "y") { e.preventDefault(); redo(); }
@@ -351,7 +351,7 @@ function updStatusbar() {
 let toastTimer = 0;
 function toast(t, ms = 2400) { const e = $("toast"); e.textContent = t; e.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => e.classList.remove("show"), ms); }
 let liveTimer = 0;
-function changed() { S.cur = null; if (S.live) { clearTimeout(liveTimer); liveTimer = setTimeout(run, 110); } else if (S.res) setStatus("Edited — press Run"); }
+function changed() { stopAudio(); S.cur = null; if (S.live) { clearTimeout(liveTimer); liveTimer = setTimeout(run, 110); } else if (S.res) setStatus("Edited — press Run"); }
 async function run() {
   if (S.running) { S.again = true; return; }
   if (!S.proj.components.length) return;
@@ -368,28 +368,94 @@ async function run() {
 function afterRun() {
   const r = S.res; const bad = !r || !r.ok || (r.checks || []).some((c) => !c.passed);
   if (!r.ok) toast(r.error.length > 110 ? r.error.slice(0, 110) + "…" : r.error, 4200);
-  updStatusbar(); if (S.live) return;
+  updStatusbar(); buildSerial(); if (S.live) return;
   const d = $("resDot"); d.hidden = false; d.classList.toggle("bad", bad);
-  openPage(scopeRefs().length ? "scope" : "res");
+  if (r.ok && r.serial) openPage("serial"); else openPage("res");
+  openPage(scopeRefs().length ? "scope" : "graph");
+  if (r.ok && r.audio && S.sound) playAudio(r.audio);
 }
 
-/* ---------------------------------------------------------------- tabs, palette, examples */
+/* ---------------------------------------------------------------- docks, menus, palette, examples */
+let netMode = false;
 const isDesk = () => true;
 const SH = { state: "open" };
-const TABMAP = { prop: "insp", ctl: "ctl", exp: "guide", res: "res", scope: "scope" };
+const TABMAP = { prop: "insp", ctl: "ctl", exp: "guide", res: "res", scope: "scope", graph: "graph", serial: "serial", sketch: "sketch" };
+const RIGHT = { insp: "pInsp", ctl: "pCtl", guide: "pGuide", res: "pRes", serial: "pSerial", sketch: "pSketch" };
+const BOTTOM = { scope: "pScope", graph: "pGraph" };
+const bdCollapsed = () => $("bdock").classList.contains("collapsed");
 function openPage(page, _state, sub) {
   let t = TABMAP[page] || page; if (page === "res" && sub === 1) t = "graph";
-  document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("on", b.dataset.t === t));
-  const pages = { insp: "pInsp", ctl: "pCtl", guide: "pGuide", res: "pRes", graph: "pGraph", scope: "pScope" };
-  for (const k in pages) $(pages[k]).hidden = k !== t;
-  if (t === "res") $("resDot").hidden = true;
-  if (t === "graph") drawGraph(); if (t === "scope") drawScope();
+  if (RIGHT[t]) {
+    document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("on", b.dataset.t === t));
+    for (const k in RIGHT) $(RIGHT[k]).hidden = k !== t;
+    if (t === "res") $("resDot").hidden = true;
+    if (t === "sketch") buildSketch(); if (t === "serial") buildSerial();
+  } else if (BOTTOM[t]) {
+    document.querySelectorAll("#btabs button[data-t]").forEach((b) => b.classList.toggle("on", b.dataset.t === t));
+    for (const k in BOTTOM) $(BOTTOM[k]).hidden = k !== t;
+    $("bdock").classList.remove("collapsed");
+    requestAnimationFrame(() => { drawGraph(); drawScope(); });
+  }
 }
 $("tabs").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) openPage(b.dataset.t); });
-window.addEventListener("resize", () => { drawGraph(); drawScope(); });
+$("btabs").addEventListener("click", (e) => { const b = e.target.closest("button[data-t]"); if (b) openPage(b.dataset.t); });
+$("bdToggle").onclick = () => { $("bdock").classList.toggle("collapsed"); setTimeout(() => { fit(); drawGraph(); drawScope(); }, 30); };
+function makeSplitter(grip, dock, center) {
+  let d = null;
+  grip.addEventListener("pointerdown", (e) => { d = { y: e.clientY, h: dock.getBoundingClientRect().height }; grip.setPointerCapture(e.pointerId); });
+  grip.addEventListener("pointermove", (e) => { if (!d) return; const max = center.getBoundingClientRect().height - 160; dock.classList.remove("collapsed"); dock.style.height = Math.max(80, Math.min(max, d.h + d.y - e.clientY)) + "px"; });
+  const up = () => { if (d) { d = null; window.dispatchEvent(new Event("resize")); } };
+  grip.addEventListener("pointerup", up); grip.addEventListener("pointercancel", up);
+}
+makeSplitter($("bgrip"), $("bdock"), document.querySelector("#workElec .center"));
+window.addEventListener("resize", () => { if (!netMode) { drawGraph(); drawScope(); } });
+
+/* generic drop-down menu */
+const menuEl = $("menu");
+function showMenu(anchor, items) {
+  menuEl.innerHTML = "";
+  for (const it of items) {
+    if (it.sep) { menuEl.appendChild(document.createElement("hr")); continue; }
+    const b = document.createElement("button"); b.disabled = !!it.d;
+    b.innerHTML = `<span class="chk">${it.chk ? "✓" : ""}</span><span>${html(it.t)}</span>${it.k ? `<span class="k">${html(it.k)}</span>` : ""}`;
+    b.onclick = () => { menuEl.hidden = true; it.f && it.f(); }; menuEl.appendChild(b);
+  }
+  const r = anchor.getBoundingClientRect(); menuEl.hidden = false; menuEl.style.left = Math.min(r.left, innerWidth - 230) + "px"; menuEl.style.top = r.bottom + 4 + "px";
+}
+document.addEventListener("pointerdown", (e) => {
+  if (!menuEl.hidden && !e.target.closest("#menu") && !e.target.closest(".rb")) menuEl.hidden = true;
+  const m = $("exMenu"); if (!m.hidden && !e.target.closest("#exMenu") && !e.target.closest("#mEx")) m.hidden = true;
+});
+const FILE = {
+  elec: { new: () => newCircuit(), open: () => $("fOpen").click(), save: () => saveCircuit(), csv: () => exportCsv() },
+  net: {},
+};
+const EDIT = { elec: () => [
+  { t: "Undo", k: "Ctrl+Z", f: undo, d: !S.hist.length }, { t: "Redo", k: "Ctrl+Y", f: redo, d: !S.fut.length }, { sep: 1 },
+  { t: "Rotate", k: "R", f: () => rotSel(false), d: !S.sel || S.sel.kind !== "c" }, { t: "Mirror", k: "F", f: () => rotSel(true), d: !S.sel || S.sel.kind !== "c" }, { t: "Delete", k: "Del", f: delSel, d: !S.sel },
+  { sep: 1 }, { t: "Fit circuit to window", k: "Home", f: fit }], net: () => [] };
+$("mFile").onclick = (e) => { const f = FILE[netMode ? "net" : "elec"]; showMenu(e.currentTarget, [
+  { t: netMode ? "New network" : "New circuit", f: f.new }, { t: "Open…", f: f.open }, { t: "Save", f: f.save }, { sep: 1 }, { t: netMode ? "Export packet capture (CSV)" : "Export results (CSV)", f: f.csv }]); };
+$("mEdit").onclick = (e) => showMenu(e.currentTarget, EDIT[netMode ? "net" : "elec"]());
+$("mMore").onclick = (e) => showMenu(e.currentTarget, [
+  { t: "Palette", f: () => togglePanel("palette"), chk: !panelHidden("palette") }, { t: "Properties dock", f: () => togglePanel("rdock"), chk: !panelHidden("rdock") }, { t: "Bottom dock", f: () => $("bdToggle").click(), chk: !bdCollapsed() },
+  { sep: 1 }, { t: document.documentElement.dataset.theme === "light" ? "Switch to dark theme" : "Switch to light theme", f: toggleTheme },
+  { sep: 1 }, { t: "Quick guide", f: showGuide }, { t: "About", f: showAbout }, { t: "Download the desktop app", f: () => (location.href = "../#app") }]);
+function panelHidden(cls) { const w = netMode ? $("workNet") : $("workElec"); const n = w.querySelector("." + cls); return !n || n.style.display === "none"; }
+function togglePanel(cls) { const w = netMode ? $("workNet") : $("workElec"); const n = w.querySelector("." + cls); if (!n) return; n.style.display = n.style.display === "none" ? "" : "none"; w.style.gridTemplateColumns = ""; setTimeout(() => { fit(); window.dispatchEvent(new Event("resize")); }, 30); }
+function toggleTheme() {
+  const light = document.documentElement.dataset.theme !== "light"; document.documentElement.dataset.theme = light ? "light" : "dark";
+  try { localStorage.setItem("ll-theme", light ? "light" : "dark"); } catch (e) { /* ignore */ }
+  document.querySelector('meta[name="theme-color"]').content = light ? "#eceef0" : "#1f2226"; renderAll(); drawGraph(); drawScope();
+}
+try { if (localStorage.getItem("ll-theme") === "light") { document.documentElement.dataset.theme = "light"; } } catch (e) { /* ignore */ }
+function modal(h) { $("modalBody").innerHTML = h; $("modal").hidden = false; }
+$("modalClose").onclick = () => ($("modal").hidden = true); $("modal").addEventListener("pointerdown", (e) => { if (e.target === $("modal")) $("modal").hidden = true; });
+function showGuide() { modal(`<h3>Quick guide</h3><p><b>Electronics.</b> Pick an experiment from <b>Examples</b>, or drag parts in from the palette. Click a pin, then another pin, to wire them. Press <b>Run</b>; switch on <b>Live</b> and drag a slider in <b>Controls</b> to watch the circuit respond.</p><p><b>Network.</b> Switch to the Network workspace, add blocks, connect them, set addresses and applications in Properties, press <b>Run</b> and watch the packets replay.</p><p><kbd>Ctrl</kbd>+<kbd>Enter</kbd> run · <kbd>Ctrl</kbd>+<kbd>L</kbd> live · <kbd>R</kbd> rotate · <kbd>F</kbd> mirror · <kbd>W</kbd> wire · <kbd>Del</kbd> delete · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd> undo/redo · wheel zooms · drag empty space to pan.</p>`); }
+function showAbout() { modal(`<h3>LEARNERS LAB</h3><p>A virtual electronics and networks laboratory by VIN Technologies. This page runs the same Python simulation engine as the Windows app, inside your browser (Pyodide + NumPy). Nothing is sent to a server.</p><p class="mute">Models are simplified (level-1 transistors, ideal breadboard, Arduino C++ subset). See the desktop manual for limits.</p>`); }
 
 /* wire colours */
-const WCOL = ["#d93a42", "#1a1f2b", "#e8841a", "#e3b505", "#2e9e4f", "#2563eb", "#8b46c4", "#ffffff", "#8a94a6", "#7a4a2a", "#e0559a", "#1aa3b8"];
+const WCOL = ["#d46a63", "#1a1c20", "#d1953b", "#e3c04a", "#5fae78", "#6f9bc0", "#9a7fd0", "#f2f2f2", "#8b929b", "#8a5a3a", "#d675a8", "#4fb3c0"];
 S.wireColor = "";
 function buildSwatches() {
   const box = $("swatches"); box.innerHTML = "";
@@ -403,37 +469,50 @@ function buildSwatches() {
 function wireColorFor(a, b) {
   if (!$("autoColor").checked) return S.wireColor || "";
   const n = (a + " " + b).toLowerCase();
-  if (/(^|\s)(gnd|g|−|-|vss|e)(\s|$)/.test(n)) return "#1a1f2b";
-  if (/(^|\s)(\+|vcc|vdd|5v|3v3|v\+)(\s|$)/.test(n)) return "#d93a42";
+  if (/(^|\s)(gnd|g|−|-|vss|e)(\s|$)/.test(n)) return "#1a1c20";
+  if (/(^|\s)(\+|vcc|vdd|5v|3v3|v\+)(\s|$)/.test(n)) return "#d46a63";
   return "";
 }
 
-/* examples menu */
-let expFilter = "All";
-const GCOL = ["#4f7fe0", "#2f9e8c", "#8a6fe0", "#d1703c", "#c4527a", "#6f9a2e", "#3d8fc4", "#b0842a"];
+/* examples menu (circuits and networks) */
+let expFilter = "All", expKind = "elec";
+const GCOL = ["#6f9bc0", "#5fae78", "#d1953b", "#d46a63", "#b9a46a", "#7fb5b8", "#c08a5a", "#a3a9b0"];
 function chipRow(box, items, cur, onPick) {
   box.innerHTML = ""; for (const it of items) { const b = document.createElement("button"); b.textContent = it; if (it === cur) b.className = "on"; b.onclick = () => onPick(it); box.appendChild(b); }
 }
+const expItems = () => (expKind === "net" ? (window.NET ? NET.examples : []) : S.examples);
 function renderExp() {
-  chipRow($("expChips"), ["All", ...S.groups], expFilter, (g) => { expFilter = g; renderExp(); });
+  const items = expItems(), groups = [...new Set(items.map((e) => e.group))]; S.groupCol = Object.fromEntries([...new Set([...S.examples, ...(window.NET ? NET.examples : [])].map((e) => e.group))].map((g, i) => [g, GCOL[i % GCOL.length]]));
+  if (expFilter !== "All" && !groups.includes(expFilter)) expFilter = "All";
+  chipRow($("expChips"), ["All", ...groups], expFilter, (g) => { expFilter = g; renderExp(); });
   const q = $("expSearch").value.trim().toLowerCase(), box = $("expList"); box.innerHTML = ""; let last = "", n = 0;
-  for (const e of S.examples) {
+  for (const e of items) {
     if (expFilter !== "All" && e.group !== expFilter) continue; if (q && !(e.title + " " + e.group).toLowerCase().includes(q)) continue;
     if (e.group !== last) { const h = document.createElement("h4"); h.textContent = e.group; box.appendChild(h); }
     last = e.group; n++;
-    const b = document.createElement("button"); b.className = "card" + (e.key === S.key ? " on" : ""); b.dataset.key = e.key;
+    const b = document.createElement("button"); b.className = "card" + (e.key === (expKind === "net" ? NET.key : S.key) ? " on" : ""); b.dataset.key = e.key;
     b.innerHTML = `<span class="ci" style="background:${S.groupCol[e.group]}"></span><span class="tx"><b>${html(e.title)}</b></span>`; box.appendChild(b);
   }
   if (!n) box.innerHTML = '<div class="empty">No experiments match.</div>';
 }
-$("bExamples").onclick = (e) => { e.stopPropagation(); const m = $("exMenu"); m.hidden = !m.hidden; if (!m.hidden) $("expSearch").focus(); };
-document.addEventListener("pointerdown", (e) => { const m = $("exMenu"); if (!m.hidden && !e.target.closest(".dd")) m.hidden = true; });
+$("mEx").onclick = (e) => {
+  const m = $("exMenu"); if (!m.hidden) { m.hidden = true; return; }
+  expKind = netMode ? "net" : "elec"; $("exSeg").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.k === expKind)); renderExp();
+  const r = e.currentTarget.getBoundingClientRect(); m.style.left = Math.min(r.left, innerWidth - m.offsetWidth - 8) + "px"; m.style.top = r.bottom + 4 + "px"; m.hidden = false; $("expSearch").focus();
+};
+$("exSeg").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; expKind = b.dataset.k; $("exSeg").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); renderExp(); };
 
 /* palette */
 const catClosed = {};
+function thumbHtml(d) {
+  const svg = document.createElementNS(NS, "svg"), g = el("g", {}, svg); const fake = { type: d.type, ref: "", params: {}, rot: 0, mirror: false };
+  symbolSVG(fake, d, g); const [x0, y0, x1, y1] = localBox(d); const w = x1 - x0, h = y1 - y0, k = Math.min(60 / w, 50 / h, 1);
+  svg.setAttribute("viewBox", `${x0} ${y0} ${w} ${h}`); svg.setAttribute("width", Math.round(w * k)); svg.setAttribute("height", Math.round(h * k));
+  svg.querySelectorAll("text.plabel").forEach((t) => t.remove()); return svg.outerHTML;
+}
 function renderParts() {
   const q = $("partSearch").value.trim().toLowerCase(), box = $("partTree"); box.innerHTML = ""; const by = {};
-  for (const d of Object.values(S.defs)) { if (d.engine === "none" || d.type === "breadboard" || d.type === "arduino") continue; if (q && !(d.name + " " + d.type + " " + d.category).toLowerCase().includes(q)) continue; (by[d.category] ||= []).push(d); }
+  for (const d of Object.values(S.defs)) { if (d.engine === "none" || d.type === "breadboard") continue; if (q && !(d.name + " " + d.type + " " + d.category).toLowerCase().includes(q)) continue; (by[d.category] ||= []).push(d); }
   for (const c of S.cats) {
     if (!by[c]) continue; const sec = document.createElement("div"); sec.className = "cat" + (!q && catClosed[c] ? " closed" : "");
     const h = document.createElement("button"); h.className = "cathead"; h.innerHTML = `<svg class="ic xs"><use href="#i-chev"/></svg>${html(c)}<span class="n">${by[c].length}</span>`;
@@ -441,7 +520,7 @@ function renderParts() {
     const grid = document.createElement("div"); grid.className = "tiles";
     for (const d of by[c].sort((a, b) => a.name.localeCompare(b.name))) {
       const b = document.createElement("button"); b.className = "tile"; b.dataset.type = d.type; b.draggable = true; b.title = d.description;
-      b.innerHTML = `<span class="th">${d.sprite ? `<img loading="lazy" alt="" src="af/${d.sprite[0]}.svg">` : '<svg class="ic"><use href="#i-chip"/></svg>'}</span><span>${html(d.name)}</span>`;
+      b.innerHTML = `<span class="th">${d.sprite ? `<img loading="lazy" alt="" src="af/${d.sprite[0]}.svg">` : thumbHtml(d)}</span><span>${html(d.name)}</span>`;
       const im = b.querySelector("img"); if (im) im.onerror = () => { b.querySelector(".th").innerHTML = '<svg class="ic"><use href="#i-chip"/></svg>'; };
       grid.appendChild(b);
     }
@@ -450,24 +529,50 @@ function renderParts() {
   if (!box.children.length) box.innerHTML = '<div class="empty">No components match.</div>';
 }
 function buildLists() {
-  const groups = [...new Set(S.examples.map((e) => e.group))];
-  S.groupCol = Object.fromEntries(groups.map((g, i) => [g, GCOL[i % GCOL.length]]));
   const ORDER = ["Boards and breadboards", "Sources and power", "Passive components", "Semiconductors", "Analog ICs", "Digital ICs", "Digital logic", "Power ICs", "Switches and buzzers", "Instruments"];
-  S.cats = [...new Set(Object.values(S.defs).filter((d) => d.engine !== "none" && d.type !== "breadboard" && d.type !== "arduino").map((d) => d.category))].sort((x, y) => (ORDER.indexOf(x) + 99) % 99 - (ORDER.indexOf(y) + 99) % 99);
-  S.groups = groups; $("exCount").textContent = S.examples.length; $("partSearch").placeholder = `Search ${Object.values(S.defs).filter((d) => d.engine !== "none" && d.type !== "arduino").length} components…`;
+  S.cats = [...new Set(Object.values(S.defs).filter((d) => d.engine !== "none" && d.type !== "breadboard").map((d) => d.category))].sort((x, y) => (ORDER.indexOf(x) + 99) % 99 - (ORDER.indexOf(y) + 99) % 99);
+  $("partSearch").placeholder = `Search ${Object.values(S.defs).filter((d) => d.engine !== "none").length} components`;
   buildSwatches(); renderExp(); renderParts();
-  $("expList").onclick = (e) => { const b = e.target.closest(".card"); if (b) { $("exMenu").hidden = true; openExample(b.dataset.key, true); } };
-  $("partTree").onclick = (e) => { const b = e.target.closest(".tile"); if (b) { addPartCenter(b.dataset.type); $("ws").classList.remove("showparts"); } };
+  $("expList").onclick = (e) => { const b = e.target.closest(".card"); if (b) { $("exMenu").hidden = true; expKind === "net" ? openNetExample(b.dataset.key) : openExample(b.dataset.key, true); } };
+  $("partTree").onclick = (e) => { const b = e.target.closest(".tile"); if (b) { addPartCenter(b.dataset.type); $("app").classList.remove("showparts"); } };
   $("partTree").addEventListener("dragstart", (e) => { const b = e.target.closest(".tile"); if (b) { e.dataTransfer.setData("text/plain", b.dataset.type); e.dataTransfer.effectAllowed = "copy"; } });
   const st = $("stage");
   st.addEventListener("dragover", (e) => { e.preventDefault(); e.dataTransfer.dropEffect = "copy"; });
   st.addEventListener("drop", (e) => { e.preventDefault(); const t = e.dataTransfer.getData("text/plain"); if (t && S.defs[t]) { const w = toWorld(e); placePart(t, Math.round(w.x / G), Math.round(w.y / G), 0); } });
   $("expSearch").addEventListener("input", renderExp); $("partSearch").addEventListener("input", renderParts);
-  $("bParts").onclick = () => $("ws").classList.toggle("showparts");
+  $("bParts").onclick = () => $("app").classList.toggle("showparts");
+}
+
+/* sound */
+S.sound = true; let audioEl = null;
+function stopAudio() { if (audioEl) { try { audioEl.pause(); } catch (e) { /* ignore */ } audioEl = null; } }
+function playAudio(b64) { stopAudio(); try { audioEl = new Audio("data:audio/wav;base64," + b64); audioEl.play().catch(() => toast("Click the page once to allow sound")); } catch (e) { /* ignore */ } }
+$("bSound").onclick = () => { S.sound = !S.sound; $("bSound").classList.toggle("on", S.sound); $("bSound").setAttribute("aria-pressed", S.sound); if (!S.sound) stopAudio(); else if (S.res && S.res.audio) playAudio(S.res.audio); };
+
+/* serial monitor and sketch editor */
+function buildSerial() {
+  const p = $("rserial"), r = S.res;
+  const t = r && r.ok && r.serial ? r.serial : "";
+  p.innerHTML = `<div class="hl"><b>Serial monitor</b><span class="mute">${t ? "output of Serial.print() from the sketch" : "Run a circuit with an Arduino sketch that uses Serial."}</span></div><pre class="serial">${html(t)}</pre>`;
+}
+function arduinoComp() {
+  if (S.sel && S.sel.kind === "c") { const c = compById(S.sel.id); if (c && c.type === "arduino") return c; }
+  return S.proj.components.find((c) => c.type === "arduino") || null;
+}
+function buildSketch() {
+  const p = $("rsketch"), c = arduinoComp();
+  if (!c) { p.innerHTML = '<p class="empty">Place an Arduino UNO from the palette to write a sketch for it.</p>'; return; }
+  p.innerHTML = `<div class="hl"><b>${html(c.ref)} sketch</b><span class="grow"></span><button id="skCheck" class="btn">Compile check</button><button id="skRun" class="btn">Run</button></div><textarea id="skCode" class="codebox" spellcheck="false"></textarea><div id="skMsg" class="mute" style="margin-top:6px"></div>`;
+  const ta = $("skCode"); ta.value = c.params.code || ""; let pushed = false;
+  ta.addEventListener("input", () => { if (!pushed) { pushed = true; pushHist(); } c.params.code = ta.value; changed(); });
+  ta.addEventListener("change", () => { pushed = false; });
+  ta.addEventListener("keydown", (e) => { if (e.key === "Tab") { e.preventDefault(); const s0 = ta.selectionStart; ta.setRangeText("  ", s0, ta.selectionEnd, "end"); ta.dispatchEvent(new Event("input")); } });
+  $("skCheck").onclick = async () => { const r = JSON.parse(await call("compile_check", ta.value)); $("skMsg").style.color = r.ok ? "var(--ok)" : "var(--bad)"; $("skMsg").textContent = r.message; };
+  $("skRun").onclick = run;
 }
 
 /* ---------------------------------------------------------------- panels */
-function buildPanels() { buildCtl(); buildProps(); }
+function buildPanels() { buildCtl(); buildProps(); if (!$("pSketch").hidden) buildSketch(); }
 function buildInfo() {
   const i = S.info; const p = $("rinfo"); if (!i) { p.innerHTML = '<p class="empty">Pick an experiment on the left, or build your own circuit from the Parts tab.</p>'; return; }
   let h = `<h3>${html(i.title)}</h3><div class="mute">${html(i.group)}</div>`;
@@ -542,6 +647,7 @@ function buildProps() {
   const c = compById(s.id); if (!c) return; const d = defOf(c);
   p.insertAdjacentHTML("beforeend", `<h3>${html(c.ref)} — ${html(d.name)}</h3><p class="mute">${html(d.description)}</p>`);
   for (const k in d.params) {
+    if (k === "code") { const b = document.createElement("button"); b.className = "btn block"; b.textContent = "Edit sketch"; b.onclick = () => openPage("sketch"); p.appendChild(b); continue; }
     const pm = d.params[k]; const row = document.createElement("label"); row.className = "row p";
     const lab = document.createElement("span"); lab.className = "mute"; lab.textContent = pm.label + (pm.unit ? ` (${pm.unit})` : ""); row.appendChild(lab);
     const v = c.params[k]; let inp;
@@ -599,7 +705,7 @@ function niceTicks(lo, hi, n = 6) {
 function setupCanvas(c) { const r = c.getBoundingClientRect(), dpr = window.devicePixelRatio || 1; c.width = Math.max(10, r.width * dpr); c.height = Math.max(10, r.height * dpr); const x = c.getContext("2d"); x.setTransform(dpr, 0, 0, dpr, 0, 0); return [x, r.width, r.height]; }
 let gView = null;
 function drawGraph(cursorX) {
-  const c = $("gcv"); if ($("pGraph").hidden || (!isDesk() && SH.state === "closed")) return; const [x, W, H] = setupCanvas(c);
+  const c = $("gcv"); if ($("pGraph").hidden || bdCollapsed() || netMode) return; const [x, W, H] = setupCanvas(c);
   x.clearRect(0, 0, W, H); const names = sigNames().filter((n) => S.sigOn[n]);
   x.font = "11px system-ui"; x.fillStyle = css("--mute");
   if (!names.length) { x.fillText("Run the circuit to see waveforms", 14, 24); gView = null; return; }
@@ -698,7 +804,7 @@ function scopeAuto() {
   SC.td = snap125(per ? 3 * per / 10 : (i.t[i.t.length - 1] - i.t[0]) / 10); SC.lvl = 0; SC.c1 = SC.c2 = "DC"; SC.xy = false;
 }
 function drawScope() {
-  if ($("pScope").hidden || $("scopeBox").hidden || (!isDesk() && SH.state === "closed")) return; const i = scopeData(); if (!i) return;
+  if ($("pScope").hidden || $("scopeBox").hidden || bdCollapsed() || netMode) return; const i = scopeData(); if (!i) return;
   const c = $("scv"), [x, W, H] = setupCanvas(c); x.fillStyle = "#0b1410"; x.fillRect(0, 0, W, H);
   const m = 10, w = W - 2 * m, h = H - 2 * m, dx = w / 10, dy = h / 8;
   x.strokeStyle = "#1d3a2b"; x.lineWidth = 1; x.beginPath();
@@ -749,21 +855,33 @@ $("bDel").onclick = delSel; $("bWire").onclick = () => setTool(S.tool === "wire"
 function toggleLive() { S.live = !S.live; $("bLive").classList.toggle("on", S.live); $("bLive").setAttribute("aria-pressed", S.live); toast(S.live ? "Live: results update as you change values" : "Live off"); if (S.live) run(); }
 $("bLive").onclick = toggleLive;
 $("bZin").onclick = () => zoomBy(1.3); $("bZout").onclick = () => zoomBy(1 / 1.3);
-$("bSave").onclick = () => download((S.proj.meta?.name || "circuit").replace(/[^\w-]+/g, "_") + ".ecelab.json", JSON.stringify({ ...S.proj }, null, 1), "application/json");
-$("bOpen").onclick = () => $("fOpen").click();
 $("fOpen").onchange = async (e) => {
   const f = e.target.files[0]; if (!f) return;
+  if (netMode) { await NET.openFile(f); e.target.value = ""; return; }
   try { const o = JSON.parse(await f.text()); if (!o.components) throw new Error("not a circuit file"); for (const c of o.components) if (!S.defs[c.type]) throw new Error("unknown part " + c.type);
     setProject(o, { title: o.meta?.name || f.name, group: "Opened file", objective: "", steps: [], theory: "" }, ""); run(); }
   catch (err) { setStatus("Cannot open: " + err.message, "err"); }
   e.target.value = "";
 };
 
-/* ---------------------------------------------------------------- full screen, new, offline */
-const goFull = () => { const w = $("ws"); document.fullscreenElement ? document.exitFullscreen() : w.requestFullscreen && w.requestFullscreen(); setTimeout(fit, 200); };
-$("bFull").onclick = goFull; $("bFullTop").onclick = () => { $("ws").scrollIntoView({ behavior: "smooth" }); goFull(); };
-document.addEventListener("fullscreenchange", () => setTimeout(() => { fit(); drawGraph(); drawScope(); }, 150));
-$("bNew").onclick = () => { setProject({ components: [], wires: [], meta: { name: "Untitled" }, sim: {} }, null, ""); toast("New circuit. Drag parts in from the left."); };
+/* ---------------------------------------------------------------- files, mode switch, full screen, offline */
+function newCircuit() { setProject({ components: [], wires: [], meta: { name: "Untitled" }, sim: {} }, null, ""); toast("New circuit. Drag parts in from the palette."); }
+function saveCircuit() { download((S.proj.meta?.name || "circuit").replace(/[^\w-]+/g, "_") + ".ecelab.json", JSON.stringify({ ...S.proj }, null, 1), "application/json"); }
+function exportCsv() {
+  const r = S.res; if (!r || !r.ok) { toast("Run the circuit first"); return; }
+  const rows = ["name,value,unit"].concat((r.measurements || []).map((m) => `"${m.name}",${m.value},${m.unit || ""}`)); download("results.csv", rows.join("\n"), "text/csv");
+}
+const goFull = () => { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); };
+$("bFull").onclick = goFull; $("nFull").onclick = goFull;
+document.addEventListener("fullscreenchange", () => setTimeout(() => { netMode ? window.NET && NET.fit() : fit(); drawGraph(); drawScope(); }, 150));
+function setMode(m) {
+  netMode = m === "net"; $("app").dataset.mode = m;
+  $("modeseg").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.m === m));
+  $("workElec").hidden = netMode; $("workNet").hidden = !netMode; $("tbElec").hidden = netMode; $("tbNet").hidden = !netMode; $("app").classList.remove("showparts");
+  $("tip").textContent = netMode ? "Select a block to edit it · connect tool links two blocks · wheel zoom · drag empty space to pan · Del delete" : "Click a pin, then another pin to wire · wheel zoom · drag empty space to pan · R rotate · Del delete";
+  if (netMode) { NET.enter(); } else { $("doctitle").textContent = S.proj.meta?.name || "Untitled"; updStatusbar(); setTimeout(() => { fit(); drawGraph(); drawScope(); }, 30); }
+}
+$("modeseg").onclick = (e) => { const b = e.target.closest("button"); if (b && b.dataset.m !== (netMode ? "net" : "elec")) setMode(b.dataset.m); };
 if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
 
 /* ---------------------------------------------------------------- boot */
@@ -772,7 +890,7 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.ser
     S.resVals = await (await fetch("res_values.json")).json();
     await call("boot", S.resVals);
     S.defs = JSON.parse(await call("part_defs")); S.examples = JSON.parse(await call("example_list"));
-    buildLists(); $("boot").remove(); setStatus("Ready");
+    buildLists(); if (window.NET) await NET.init(); $("boot").remove(); setStatus("Ready");
     const q = new URLSearchParams(location.search).get("ex");
     await openExample(q && S.examples.some((e) => e.key === q) ? q : "lg_cmos_not");
     openPage("exp");

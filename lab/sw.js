@@ -1,6 +1,6 @@
 /* Offline support: the app shell, part artwork and the Python engine are cached after the first visit. */
-const VER = "ll-v2";
-const SHELL = ["./", "index.html", "lab.css", "lab.js", "worker.js", "manifest.webmanifest", "res_values.json", "py/ecelab.zip", "icons/icon-192.png"];
+const VER = "ll-v3";
+const SHELL = ["./", "index.html", "lab.css", "lab.js", "net.js", "worker.js", "manifest.webmanifest", "res_values.json", "py/ecelab.zip", "icons/icon-192.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(VER).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== VER).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener("fetch", (e) => {

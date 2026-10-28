@@ -10,11 +10,11 @@ const worker = new Worker("worker.js");
 let seq = 0; const pending = new Map();
 worker.onmessage = (e) => {
   const m = e.data;
-  if (m.type === "progress") { $("bootbar").style.width = m.pct + "%"; $("boottext").textContent = m.text; return; }
+  if (m.type === "progress") { if ($("bootbar")) { $("bootbar").style.width = m.pct + "%"; $("boottext").textContent = m.text; } else setStatus(m.pct < 100 ? "Loading simulation engine " + m.pct + " %" : "Ready", m.pct < 100 ? "busy" : "ok"); return; }
   const p = pending.get(m.id); if (!p) return; pending.delete(m.id);
   m.ok ? p.res(m.value) : p.rej(new Error(m.error));
 };
-worker.onerror = (e) => { $("boottext").textContent = "The engine could not start: " + (e.message || "unknown error"); };
+worker.onerror = (e) => { if ($("boottext")) $("boottext").textContent = "The engine could not start: " + (e.message || "unknown error"); };
 const call = (fn, ...args) => new Promise((res, rej) => { const id = ++seq; pending.set(id, { res, rej }); worker.postMessage({ id, fn, args }); });
 
 /* ---------------------------------------------------------------- state */
@@ -623,7 +623,7 @@ function togglePanel(cls) { const w = netMode ? $("workNet") : $("workElec"); co
 function toggleTheme() {
   const light = document.documentElement.dataset.theme !== "light"; document.documentElement.dataset.theme = light ? "light" : "dark";
   try { localStorage.setItem("ll-theme", light ? "light" : "dark"); } catch (e) { /* ignore */ }
-  document.querySelector('meta[name="theme-color"]').content = light ? "#eceef0" : "#1f2226"; renderAll(); drawGraph(); drawScope();
+  document.querySelector('meta[name="theme-color"]').content = light ? "#eceef0" : "#1f2226"; try { $("ardFrame").contentWindow.postMessage({ theme: light ? "light" : "dark" }, "*"); } catch (e) { /* frame not loaded */ } if (S.proj) { renderAll(); drawGraph(); drawScope(); }
 }
 try { if (localStorage.getItem("ll-theme") === "light") { document.documentElement.dataset.theme = "light"; } } catch (e) { /* ignore */ }
 function modal(h) { $("modalBody").innerHTML = h; $("modal").hidden = false; }
@@ -1047,12 +1047,13 @@ const goFull = () => { document.fullscreenElement ? document.exitFullscreen() : 
 $("bFull").onclick = goFull; $("nFull").onclick = goFull;
 document.addEventListener("fullscreenchange", () => setTimeout(() => { netMode ? window.NET && NET.fit() : fit(); drawGraph(); drawScope(); }, 150));
 function setMode(m) {
+  if (m !== "ard" && !S.ready) { toast("The analog engine is still loading. One moment."); return; }
   netMode = m === "net"; const ard = m === "ard"; $("app").dataset.mode = m;
   $("modeseg").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.m === m));
   $("workElec").hidden = m !== "elec"; $("workNet").hidden = !netMode; $("workArd").hidden = !ard; $("tbElec").hidden = m !== "elec"; $("tbNet").hidden = !netMode; $("app").classList.remove("showparts");
   for (const id of ["mFile", "mEx", "mEdit"]) $(id).hidden = ard;
-  $("tip").textContent = ard ? "ArduinoForge: 131 parts and 400 Kit 1–8 projects. Use its own Examples menu, Parts panel and Start Simulation (F5)." : netMode ? "Select a block to edit it · connect tool links two blocks · wheel zoom · drag empty space to pan · Del delete" : "Click a pin, then another pin to wire · wheel zoom · drag empty space to pan · R rotate · Del delete";
-  if (ard) { const f = $("ardFrame"); if (!f.getAttribute("src")) f.src = "arduinoforge/index.html"; $("doctitle").textContent = "ArduinoForge"; setStatus("ArduinoForge", "ok"); }
+  $("tip").textContent = ard ? "Circuits: 131 parts, Arduino sketches and 400 Kit 1–8 projects. Use Examples, the parts panel and Start Simulation (F5)." : netMode ? "Select a block to edit it · connect tool links two blocks · wheel zoom · drag empty space to pan · Del delete" : "Click a pin, then another pin to wire · wheel zoom · drag empty space to pan · R rotate · Del delete";
+  if (ard) { const f = $("ardFrame"); if (!f.getAttribute("src")) f.src = "circuits/index.html"; $("doctitle").textContent = "Circuits"; setStatus(S.ready ? "Ready" : "Loading simulation engine", S.ready ? "ok" : "busy"); }
   else if (netMode) { NET.enter(); } else { $("doctitle").textContent = S.proj.meta?.name || "Untitled"; updStatusbar(); setTimeout(() => { fit(); drawGraph(); drawScope(); }, 30); }
 }
 $("modeseg").onclick = (e) => { const b = e.target.closest("button"); if (b && b.dataset.m !== $("app").dataset.mode) setMode(b.dataset.m); };
@@ -1060,14 +1061,17 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.ser
 
 /* ---------------------------------------------------------------- boot */
 (async () => {
+  const qs = new URLSearchParams(location.search), startMode = qs.get("m") || (qs.get("ex") ? "elec" : "ard");
   try {
+    if (startMode === "ard") { setMode("ard"); const f = $("ardFrame"); const rm = () => $("boot") && $("boot").remove(); f.addEventListener("load", rm, { once: true }); setTimeout(rm, 4000); }
     S.resVals = await (await fetch("res_values.json")).json();
     await call("boot", S.resVals);
     S.defs = JSON.parse(await call("part_defs")); S.examples = JSON.parse(await call("example_list"));
-    buildLists(); if (window.NET) await NET.init(); $("boot").remove(); setStatus("Ready");
-    const q = new URLSearchParams(location.search).get("ex");
+    buildLists(); if (window.NET) await NET.init(); if ($("boot")) $("boot").remove(); S.ready = true;
+    const q = qs.get("ex");
     await openExample(q && S.examples.some((e) => e.key === q) ? q : "lg_cmos_not");
-    if (new URLSearchParams(location.search).get("m") === "ard") setMode("ard");
     openPage("exp");
+    if (startMode === "net") setMode("net"); else if (startMode === "ard") setStatus("ArduinoForge", "ok"); else setMode("elec");
+    if (startMode === "ard") { $("doctitle").textContent = "Circuits"; }
   } catch (err) { const m = "Could not start: " + (err.message || err); if ($("boottext")) $("boottext").textContent = m; else setStatus(m.slice(0, 160), "err"); console.error(m); }
 })();

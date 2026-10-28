@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>LEARNERS LAB — Online | VIN Technologies</title>
+<title>LEARNERS LAB — Circuits, Analog Lab and Networks | VIN Technologies</title>
 <meta name="description" content="LEARNERS LAB in your browser: the full electronics and network laboratory with breadboard circuits, Arduino sketches, live sliders, oscilloscope, graphs, packet replay and 130+ experiments.">
 <meta name="theme-color" content="#1f2226">
 <link rel="manifest" href="manifest.webmanifest">
@@ -50,11 +50,11 @@
 
 <div id="boot"><div class="boot-card"><img src="icons/icon-192.png" alt="" class="boot-icon"><div class="boot-title">LEARNERS LAB</div><div class="bar"><i id="bootbar"></i></div><div id="boottext">Starting</div></div></div>
 
-<div id="app" data-mode="elec">
+<div id="app" data-mode="ard">
   <header class="ribbon">
     <div class="r1">
       <a class="brand" href="../" title="Back to VIN Technologies"><img src="icons/icon-192.png" alt=""><b>LEARNERS LAB</b></a>
-      <div class="modeseg" id="modeseg"><button data-m="elec" class="on">Electronics</button><button data-m="ard">Arduino</button><button data-m="net">Network</button></div>
+      <div class="modeseg" id="modeseg"><button data-m="ard" class="on">Circuits</button><button data-m="elec">Analog Lab</button><button data-m="net">Network</button></div>
       <span class="vsep"></span>
       <button id="mFile" class="rb">File <svg class="ic xs"><use href="#i-chev"/></svg></button>
       <button id="mEx" class="rb">Examples <svg class="ic xs"><use href="#i-chev"/></svg></button>
@@ -65,7 +65,7 @@
       <input id="fOpen" type="file" accept=".json,application/json" hidden>
     </div>
 
-    <div class="r2" id="tbElec">
+    <div class="r2" id="tbElec" hidden>
       <button id="bRun" class="rb go" title="Run the simulation (Ctrl+Enter)"><svg class="ic sm play"><use href="#i-play"/></svg><span class="spin"></span><b>Run</b></button>
       <button id="bLive" class="rb toggle" aria-pressed="false" title="Re-run automatically whenever a value changes (Ctrl+L)"><svg class="ic sm"><use href="#i-bolt"/></svg>Live</button>
       <button id="bSound" class="rb toggle on" aria-pressed="true" title="Play buzzers through the speakers (M)"><svg class="ic sm"><use href="#i-sound"/></svg>Sound</button>
@@ -113,7 +113,7 @@
   </header>
 
   <!-- ============================================================ electronics workspace -->
-  <div class="work" id="workElec">
+  <div class="work" id="workElec" hidden>
     <aside class="palette" id="palette">
       <div class="searchbox"><svg class="ic sm"><use href="#i-search"/></svg><input id="partSearch" type="search" placeholder="Search components" aria-label="Search components"></div>
       <div id="partTree" class="tree"></div>
@@ -188,7 +188,7 @@
   </div>
 
   <!-- ============================================================ Arduino workspace (ArduinoForge, 131 parts, Kit 1-8 projects) -->
-  <div class="work" id="workArd" hidden><iframe id="ardFrame" title="ArduinoForge circuit simulator" allow="fullscreen; autoplay"></iframe></div>
+  <div class="work" id="workArd"><iframe id="ardFrame" title="ArduinoForge circuit simulator" allow="fullscreen; autoplay"></iframe></div>
 
   <!-- ============================================================ network workspace -->
   <div class="work" id="workNet" hidden>

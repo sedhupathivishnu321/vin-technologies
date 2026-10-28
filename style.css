@@ -5,7 +5,7 @@ a{color:var(--a);text-decoration:none}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 header{position:sticky;top:0;z-index:10;background:rgba(11,16,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-weight:800;letter-spacing:.5px;color:var(--text);font-size:1.15rem}.logo span{color:var(--a)}
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.5px;color:var(--text);font-size:1.15rem}.logo b{font-weight:800}.logo span{color:var(--a)}.logo img{width:44px;height:44px;border-radius:11px;background:#fff;padding:2px;flex:none}
 nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
 nav a{color:var(--mute);font-size:.95rem}nav a:hover{color:var(--text)}
 .menu{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;font-size:1.1rem}

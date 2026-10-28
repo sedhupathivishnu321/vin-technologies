@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Packet size versus latency — Computer Networks Lab Experiment Online | LEARNERS LAB</title>
+<meta name="description" content="Free online Computer Networks Lab experiment: Ping with 64-byte and with 1400-byte packets over a slow 2 Mbit/s link and compare the round-trip times.">
+<link rel="canonical" href="https://vintechnologies.co.in/labs/packet-size-versus-latency/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Packet size versus latency — Computer Networks Lab Experiment Online | LEARNERS LAB"><meta property="og:description" content="Free online Computer Networks Lab experiment: Ping with 64-byte and with 1400-byte packets over a slow 2 Mbit/s link and compare the round-trip times.">
+<meta property="og:url" content="https://vintechnologies.co.in/labs/packet-size-versus-latency/"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Packet size versus latency — Computer Networks Lab Experiment Online | LEARNERS LAB"><meta name="twitter:description" content="Free online Computer Networks Lab experiment: Ping with 64-byte and with 1400-byte packets over a slow 2 Mbit/s link and compare the round-trip times."><meta name="twitter:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" href="/lab/icons/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/labs/labs.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "name": "Packet size versus latency", "description": "Ping with 64-byte and with 1400-byte packets over a slow 2 Mbit/s link and compare the round-trip times.", "url": "https://vintechnologies.co.in/labs/packet-size-versus-latency/", "learningResourceType": "Lab experiment", "educationalLevel": "University", "teaches": "Packet size versus latency", "isAccessibleForFree": true, "inLanguage": "en", "image": "https://vintechnologies.co.in/og-image.png", "provider": {"@type": "Organization", "name": "VIN Technologies", "url": "https://vintechnologies.co.in/"}, "about": "Computer Networks Lab"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "VIN Technologies", "item": "https://vintechnologies.co.in/"}, {"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://vintechnologies.co.in/labs/"}, {"@type": "ListItem", "position": 3, "name": "Packet size versus latency", "item": "https://vintechnologies.co.in/labs/packet-size-versus-latency/"}]}]}</script>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">VIN <span>TECHNOLOGIES</span></a>
+<nav><ul><li><a href="/">Home</a></li><li><a href="/lab/">Circuits</a></li><li><a href="/lab/network/">Networks</a></li><li><a href="/labs/">Labs</a></li></ul></nav></div></header>
+<main class="wrap lab">
+<p class="crumb"><a href="/">VIN Technologies</a> › <a href="/labs/">Labs</a> › Computer Networks Lab</p>
+<h1>Packet size versus latency</h1>
+<p class="lead">Computer Networks Lab · free online experiment, runs in your browser with no install or sign-up.</p>
+<p><a class="btn primary" href="/lab/network/?ex=cn_packet_size">Open this experiment in the network simulator</a></p>
+<section><h2>Objective</h2><p>Ping with 64-byte and with 1400-byte packets over a slow 2 Mbit/s link and compare the round-trip times.</p></section>
+<section><h2>Procedure</h2><ol><li>Run: two ping lines, small packets then large ones.</li><li>Raise the link rate to 100 Mbit/s: the difference nearly vanishes.</li></ol></section>
+<section><h2>Theory</h2><p>Serialisation delay = bits / rate. Over 2 Mbit/s a 64-byte packet (+38 B Ethernet overhead) takes 0.41 ms, a 1400-byte packet 5.75 ms; the RTT grows by twice the difference because the reply is as large as the request.</p></section>
+
+<section><h2>Network blocks used</h2><p>2 × Host / PC</p></section>
+
+<p><a class="btn primary" href="/lab/network/?ex=cn_packet_size">Open this experiment in the network simulator</a></p>
+<section><h2>More Computer Networks Lab experiments</h2><ul class="rel"><li><a href="/labs/queueing-delay-and-loss-on-an-overloaded-link/">Queueing delay and loss on an overloaded link</a></li><li><a href="/labs/tcp-congestion-control-slow-start-and-loss-recovery/">TCP congestion control (slow start and loss recovery)</a></li><li><a href="/labs/file-transfer-over-tcp-lan-versus-wan/">File transfer over TCP: LAN versus WAN</a></li><li><a href="/labs/vlans-across-a-trunk-link/">VLANs across a trunk link</a></li><li><a href="/labs/arp-packet-inspection/">ARP packet inspection</a></li></ul></section>
+</main>
+<footer><div class="wrap foot"><div>© VIN Technologies · Made in India</div><div><a href="/labs/">All labs</a><a href="/lab/">Circuit simulator</a><a href="/lab/network/">Network simulator</a></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Two subnets joined by a router — Routing and security Experiment Online | LEARNERS LAB</title>
+<meta name="description" content="Free online Routing and security experiment: PC1 (10.0.0.0/24) and PC2 (10.0.1.0/24) talk through router R1; a TCP download crosses it.">
+<link rel="canonical" href="https://vintechnologies.co.in/labs/two-subnets-joined-by-a-router/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Two subnets joined by a router — Routing and security Experiment Online | LEARNERS LAB"><meta property="og:description" content="Free online Routing and security experiment: PC1 (10.0.0.0/24) and PC2 (10.0.1.0/24) talk through router R1; a TCP download crosses it.">
+<meta property="og:url" content="https://vintechnologies.co.in/labs/two-subnets-joined-by-a-router/"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Two subnets joined by a router — Routing and security Experiment Online | LEARNERS LAB"><meta name="twitter:description" content="Free online Routing and security experiment: PC1 (10.0.0.0/24) and PC2 (10.0.1.0/24) talk through router R1; a TCP download crosses it."><meta name="twitter:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" href="/lab/icons/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/labs/labs.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "name": "Two subnets joined by a router", "description": "PC1 (10.0.0.0/24) and PC2 (10.0.1.0/24) talk through router R1; a TCP download crosses it.", "url": "https://vintechnologies.co.in/labs/two-subnets-joined-by-a-router/", "learningResourceType": "Lab experiment", "educationalLevel": "University", "teaches": "Two subnets joined by a router", "isAccessibleForFree": true, "inLanguage": "en", "image": "https://vintechnologies.co.in/og-image.png", "provider": {"@type": "Organization", "name": "VIN Technologies", "url": "https://vintechnologies.co.in/"}, "about": "Routing and security"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "VIN Technologies", "item": "https://vintechnologies.co.in/"}, {"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://vintechnologies.co.in/labs/"}, {"@type": "ListItem", "position": 3, "name": "Two subnets joined by a router", "item": "https://vintechnologies.co.in/labs/two-subnets-joined-by-a-router/"}]}]}</script>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">VIN <span>TECHNOLOGIES</span></a>
+<nav><ul><li><a href="/">Home</a></li><li><a href="/lab/">Circuits</a></li><li><a href="/lab/network/">Networks</a></li><li><a href="/labs/">Labs</a></li></ul></nav></div></header>
+<main class="wrap lab">
+<p class="crumb"><a href="/">VIN Technologies</a> › <a href="/labs/">Labs</a> › Routing and security</p>
+<h1>Two subnets joined by a router</h1>
+<p class="lead">Routing and security · free online experiment, runs in your browser with no install or sign-up.</p>
+<p><a class="btn primary" href="/lab/network/?ex=two_subnets">Open this experiment in the network simulator</a></p>
+<section><h2>Objective</h2><p>PC1 (10.0.0.0/24) and PC2 (10.0.1.0/24) talk through router R1; a TCP download crosses it.</p></section>
+<section><h2>Procedure</h2><ol><li>Press Run: ping and the TCP transfer both work.</li><li>Open Packet capture and check the TTL: 64 at the sender, 63 after one router.</li><li>Clear PC2&#x27;s gateway and run again: replies cannot return, the pings fail.</li></ol></section>
+<section><h2>Theory</h2><p>Hosts send off-subnet packets to their default gateway. The router looks up the destination in its routing table, decrements the TTL and forwards out of the right port.</p></section>
+
+<section><h2>Network blocks used</h2><p>2 × Host / PC, Router</p></section>
+
+<p><a class="btn primary" href="/lab/network/?ex=two_subnets">Open this experiment in the network simulator</a></p>
+<section><h2>More Routing and security experiments</h2><ul class="rel"><li><a href="/labs/firewall-rules/">Firewall rules</a></li><li><a href="/labs/dhcp-and-dns-server/">DHCP and DNS server</a></li></ul></section>
+</main>
+<footer><div class="wrap foot"><div>© VIN Technologies · Made in India</div><div><a href="/labs/">All labs</a><a href="/lab/">Circuit simulator</a><a href="/lab/network/">Network simulator</a></div></div></footer>
+</body>
+</html>

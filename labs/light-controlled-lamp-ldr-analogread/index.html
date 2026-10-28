@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Light-controlled lamp (LDR + analogRead) — Microcontroller Lab Experiment Online | LEARNERS LAB</title>
+<meta name="description" content="Free online Microcontroller Lab experiment: Read an LDR divider on A0 and switch an LED on when the room gets dark.">
+<link rel="canonical" href="https://vintechnologies.co.in/labs/light-controlled-lamp-ldr-analogread/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Light-controlled lamp (LDR + analogRead) — Microcontroller Lab Experiment Online | LEARNERS LAB"><meta property="og:description" content="Free online Microcontroller Lab experiment: Read an LDR divider on A0 and switch an LED on when the room gets dark.">
+<meta property="og:url" content="https://vintechnologies.co.in/labs/light-controlled-lamp-ldr-analogread/"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Light-controlled lamp (LDR + analogRead) — Microcontroller Lab Experiment Online | LEARNERS LAB"><meta name="twitter:description" content="Free online Microcontroller Lab experiment: Read an LDR divider on A0 and switch an LED on when the room gets dark."><meta name="twitter:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" href="/lab/icons/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/labs/labs.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "name": "Light-controlled lamp (LDR + analogRead)", "description": "Read an LDR divider on A0 and switch an LED on when the room gets dark.", "url": "https://vintechnologies.co.in/labs/light-controlled-lamp-ldr-analogread/", "learningResourceType": "Lab experiment", "educationalLevel": "University", "teaches": "Light-controlled lamp (LDR + analogRead)", "isAccessibleForFree": true, "inLanguage": "en", "image": "https://vintechnologies.co.in/og-image.png", "provider": {"@type": "Organization", "name": "VIN Technologies", "url": "https://vintechnologies.co.in/"}, "about": "Microcontroller Lab"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "VIN Technologies", "item": "https://vintechnologies.co.in/"}, {"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://vintechnologies.co.in/labs/"}, {"@type": "ListItem", "position": 3, "name": "Light-controlled lamp (LDR + analogRead)", "item": "https://vintechnologies.co.in/labs/light-controlled-lamp-ldr-analogread/"}]}]}</script>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">VIN <span>TECHNOLOGIES</span></a>
+<nav><ul><li><a href="/">Home</a></li><li><a href="/lab/">Circuits</a></li><li><a href="/lab/network/">Networks</a></li><li><a href="/labs/">Labs</a></li></ul></nav></div></header>
+<main class="wrap lab">
+<p class="crumb"><a href="/">VIN Technologies</a> › <a href="/labs/">Labs</a> › Microcontroller Lab</p>
+<h1>Light-controlled lamp (LDR + analogRead)</h1>
+<p class="lead">Microcontroller Lab · free online experiment, runs in your browser with no install or sign-up.</p>
+<p><a class="btn primary" href="/lab/?lab=lab-mc_ldr_lamp">Open this experiment in the circuit simulator</a></p>
+<section><h2>Objective</h2><p>Read an LDR divider on A0 and switch an LED on when the room gets dark.</p></section>
+<section><h2>Procedure</h2><ol><li>Press Start Simulation with the LDR at 1 lux: the LED is on.</li><li>Change the LDR &#x27;lux&#x27; to 1000 and run again: the LED goes off.</li></ol></section>
+<section><h2>Theory</h2><p>The LDR and a 10 kΩ resistor form a divider: in the dark the LDR resistance is high, so A0 is low (below 300 of 1023) and the sketch lights the LED; in bright light A0 is high and the LED is off.</p></section>
+<section><h2>Questions to answer</h2><ol><li>How would you add hysteresis so the lamp does not flicker at dusk?</li></ol></section>
+<section><h2>Components used</h2><p>Arduino UNO R3 (clone, SMD), Breadboard 400 points, LDR GL5528, LED 5mm Red, 2 × Resistor 220 ohm 1/4W</p></section>
+<section><h2>About the model</h2><p> Breadboard contacts are ideal (no contact resistance or capacitance). Arduino-style C/C++ subset interpreter (not AVR machine code): no interrupts or libraries, int is 16-bit, only delay() advances time, pin modes are fixed after setup(). Outputs are 5 V behind 25 Ω.</p></section>
+<p><a class="btn primary" href="/lab/?lab=lab-mc_ldr_lamp">Open this experiment in the circuit simulator</a></p>
+<section><h2>More Microcontroller Lab experiments</h2><ul class="rel"><li><a href="/labs/pwm-fade-analogwrite-ramp/">PWM fade (analogWrite ramp)</a></li><li><a href="/labs/led-chaser-for-loop-over-pins/">LED chaser (for loop over pins)</a></li><li><a href="/labs/button-press-counter-serial-output/">Button press counter (Serial output)</a></li></ul></section>
+</main>
+<footer><div class="wrap foot"><div>© VIN Technologies · Made in India</div><div><a href="/labs/">All labs</a><a href="/lab/">Circuit simulator</a><a href="/lab/network/">Network simulator</a></div></div></footer>
+</body>
+</html>

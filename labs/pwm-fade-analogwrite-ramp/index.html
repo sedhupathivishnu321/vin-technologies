@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PWM fade (analogWrite ramp) — Microcontroller Lab Experiment Online | LEARNERS LAB</title>
+<meta name="description" content="Free online Microcontroller Lab experiment: Ramp the duty cycle of pin 9 from 0 to 100 % and watch the LED brighten.">
+<link rel="canonical" href="https://vintechnologies.co.in/labs/pwm-fade-analogwrite-ramp/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="PWM fade (analogWrite ramp) — Microcontroller Lab Experiment Online | LEARNERS LAB"><meta property="og:description" content="Free online Microcontroller Lab experiment: Ramp the duty cycle of pin 9 from 0 to 100 % and watch the LED brighten.">
+<meta property="og:url" content="https://vintechnologies.co.in/labs/pwm-fade-analogwrite-ramp/"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="PWM fade (analogWrite ramp) — Microcontroller Lab Experiment Online | LEARNERS LAB"><meta name="twitter:description" content="Free online Microcontroller Lab experiment: Ramp the duty cycle of pin 9 from 0 to 100 % and watch the LED brighten."><meta name="twitter:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" href="/lab/icons/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/labs/labs.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "name": "PWM fade (analogWrite ramp)", "description": "Ramp the duty cycle of pin 9 from 0 to 100 % and watch the LED brighten.", "url": "https://vintechnologies.co.in/labs/pwm-fade-analogwrite-ramp/", "learningResourceType": "Lab experiment", "educationalLevel": "University", "teaches": "PWM fade (analogWrite ramp)", "isAccessibleForFree": true, "inLanguage": "en", "image": "https://vintechnologies.co.in/og-image.png", "provider": {"@type": "Organization", "name": "VIN Technologies", "url": "https://vintechnologies.co.in/"}, "about": "Microcontroller Lab"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "VIN Technologies", "item": "https://vintechnologies.co.in/"}, {"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://vintechnologies.co.in/labs/"}, {"@type": "ListItem", "position": 3, "name": "PWM fade (analogWrite ramp)", "item": "https://vintechnologies.co.in/labs/pwm-fade-analogwrite-ramp/"}]}]}</script>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">VIN <span>TECHNOLOGIES</span></a>
+<nav><ul><li><a href="/">Home</a></li><li><a href="/lab/">Circuits</a></li><li><a href="/lab/network/">Networks</a></li><li><a href="/labs/">Labs</a></li></ul></nav></div></header>
+<main class="wrap lab">
+<p class="crumb"><a href="/">VIN Technologies</a> › <a href="/labs/">Labs</a> › Microcontroller Lab</p>
+<h1>PWM fade (analogWrite ramp)</h1>
+<p class="lead">Microcontroller Lab · free online experiment, runs in your browser with no install or sign-up.</p>
+<p><a class="btn primary" href="/lab/?lab=lab-mc_pwm_fade">Open this experiment in the circuit simulator</a></p>
+<section><h2>Objective</h2><p>Ramp the duty cycle of pin 9 from 0 to 100 % and watch the LED brighten.</p></section>
+<section><h2>Procedure</h2><ol><li>Press Start Simulation and watch the LED brighten over about 1 s.</li><li>Change the step 5 to 15 for a coarser, faster ramp.</li></ol></section>
+<section><h2>Theory</h2><p>analogWrite(pin, b) produces a 490 Hz PWM wave with duty b/255. The LED&#x27;s average current, and so its brightness, grows in proportion to the duty cycle.</p></section>
+<section><h2>Questions to answer</h2><ol><li>Why does the eye see the LED as dimmer rather than flickering at 490 Hz?</li></ol></section>
+<section><h2>Components used</h2><p>Arduino UNO R3 (clone, SMD), Breadboard 400 points, LED 5mm Red, Resistor 220 ohm 1/4W</p></section>
+<section><h2>About the model</h2><p> Breadboard contacts are ideal (no contact resistance or capacitance). Arduino-style C/C++ subset interpreter (not AVR machine code): no interrupts or libraries, int is 16-bit, only delay() advances time, pin modes are fixed after setup(). Outputs are 5 V behind 25 Ω.</p></section>
+<p><a class="btn primary" href="/lab/?lab=lab-mc_pwm_fade">Open this experiment in the circuit simulator</a></p>
+<section><h2>More Microcontroller Lab experiments</h2><ul class="rel"><li><a href="/labs/led-chaser-for-loop-over-pins/">LED chaser (for loop over pins)</a></li><li><a href="/labs/button-press-counter-serial-output/">Button press counter (Serial output)</a></li><li><a href="/labs/light-controlled-lamp-ldr-analogread/">Light-controlled lamp (LDR + analogRead)</a></li></ul></section>
+</main>
+<footer><div class="wrap foot"><div>© VIN Technologies · Made in India</div><div><a href="/labs/">All labs</a><a href="/lab/">Circuit simulator</a><a href="/lab/network/">Network simulator</a></div></div></footer>
+</body>
+</html>

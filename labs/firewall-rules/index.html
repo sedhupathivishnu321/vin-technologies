@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Firewall rules — Routing and security Experiment Online | LEARNERS LAB</title>
+<meta name="description" content="Free online Routing and security experiment: A firewall allows ping and web traffic (port 80) from the LAN to the server but blocks port 23 (telnet).">
+<link rel="canonical" href="https://vintechnologies.co.in/labs/firewall-rules/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Firewall rules — Routing and security Experiment Online | LEARNERS LAB"><meta property="og:description" content="Free online Routing and security experiment: A firewall allows ping and web traffic (port 80) from the LAN to the server but blocks port 23 (telnet).">
+<meta property="og:url" content="https://vintechnologies.co.in/labs/firewall-rules/"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Firewall rules — Routing and security Experiment Online | LEARNERS LAB"><meta name="twitter:description" content="Free online Routing and security experiment: A firewall allows ping and web traffic (port 80) from the LAN to the server but blocks port 23 (telnet)."><meta name="twitter:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" href="/lab/icons/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/labs/labs.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "name": "Firewall rules", "description": "A firewall allows ping and web traffic (port 80) from the LAN to the server but blocks port 23 (telnet).", "url": "https://vintechnologies.co.in/labs/firewall-rules/", "learningResourceType": "Lab experiment", "educationalLevel": "University", "teaches": "Firewall rules", "isAccessibleForFree": true, "inLanguage": "en", "image": "https://vintechnologies.co.in/og-image.png", "provider": {"@type": "Organization", "name": "VIN Technologies", "url": "https://vintechnologies.co.in/"}, "about": "Routing and security"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "VIN Technologies", "item": "https://vintechnologies.co.in/"}, {"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://vintechnologies.co.in/labs/"}, {"@type": "ListItem", "position": 3, "name": "Firewall rules", "item": "https://vintechnologies.co.in/labs/firewall-rules/"}]}]}</script>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">VIN <span>TECHNOLOGIES</span></a>
+<nav><ul><li><a href="/">Home</a></li><li><a href="/lab/">Circuits</a></li><li><a href="/lab/network/">Networks</a></li><li><a href="/labs/">Labs</a></li></ul></nav></div></header>
+<main class="wrap lab">
+<p class="crumb"><a href="/">VIN Technologies</a> › <a href="/labs/">Labs</a> › Routing and security</p>
+<h1>Firewall rules</h1>
+<p class="lead">Routing and security · free online experiment, runs in your browser with no install or sign-up.</p>
+<p><a class="btn primary" href="/lab/network/?ex=firewall">Open this experiment in the network simulator</a></p>
+<section><h2>Objective</h2><p>A firewall allows ping and web traffic (port 80) from the LAN to the server but blocks port 23 (telnet).</p></section>
+<section><h2>Procedure</h2><ol><li>Run: ping and the port-80 transfer work, the telnet (port 23) transfer never connects.</li><li>Edit the firewall rules (select FW) and swap &#x27;deny … 23&#x27; for &#x27;allow … 23&#x27;: telnet works.</li></ol></section>
+<section><h2>Theory</h2><p>Rules are checked top to bottom, first match wins; unmatched packets follow the default policy. A TCP connection whose SYN is dropped never opens.</p></section>
+
+<section><h2>Network blocks used</h2><p>Firewall, Host / PC, Server (DNS + DHCP)</p></section>
+
+<p><a class="btn primary" href="/lab/network/?ex=firewall">Open this experiment in the network simulator</a></p>
+<section><h2>More Routing and security experiments</h2><ul class="rel"><li><a href="/labs/dhcp-and-dns-server/">DHCP and DNS server</a></li><li><a href="/labs/two-subnets-joined-by-a-router/">Two subnets joined by a router</a></li></ul></section>
+</main>
+<footer><div class="wrap foot"><div>© VIN Technologies · Made in India</div><div><a href="/labs/">All labs</a><a href="/lab/">Circuit simulator</a><a href="/lab/network/">Network simulator</a></div></div></footer>
+</body>
+</html>

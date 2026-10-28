@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Switched LAN: ping and ARP — Local networks Experiment Online | LEARNERS LAB</title>
+<meta name="description" content="Free online Local networks experiment: Three PCs on one switch. H1 pings H2; watch ARP resolution and MAC learning in the capture.">
+<link rel="canonical" href="https://vintechnologies.co.in/labs/switched-lan-ping-and-arp/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Switched LAN: ping and ARP — Local networks Experiment Online | LEARNERS LAB"><meta property="og:description" content="Free online Local networks experiment: Three PCs on one switch. H1 pings H2; watch ARP resolution and MAC learning in the capture.">
+<meta property="og:url" content="https://vintechnologies.co.in/labs/switched-lan-ping-and-arp/"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Switched LAN: ping and ARP — Local networks Experiment Online | LEARNERS LAB"><meta name="twitter:description" content="Free online Local networks experiment: Three PCs on one switch. H1 pings H2; watch ARP resolution and MAC learning in the capture."><meta name="twitter:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" href="/lab/icons/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/labs/labs.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "name": "Switched LAN: ping and ARP", "description": "Three PCs on one switch. H1 pings H2; watch ARP resolution and MAC learning in the capture.", "url": "https://vintechnologies.co.in/labs/switched-lan-ping-and-arp/", "learningResourceType": "Lab experiment", "educationalLevel": "University", "teaches": "Switched LAN: ping and ARP", "isAccessibleForFree": true, "inLanguage": "en", "image": "https://vintechnologies.co.in/og-image.png", "provider": {"@type": "Organization", "name": "VIN Technologies", "url": "https://vintechnologies.co.in/"}, "about": "Local networks"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "VIN Technologies", "item": "https://vintechnologies.co.in/"}, {"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://vintechnologies.co.in/labs/"}, {"@type": "ListItem", "position": 3, "name": "Switched LAN: ping and ARP", "item": "https://vintechnologies.co.in/labs/switched-lan-ping-and-arp/"}]}]}</script>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">VIN <span>TECHNOLOGIES</span></a>
+<nav><ul><li><a href="/">Home</a></li><li><a href="/lab/">Circuits</a></li><li><a href="/lab/network/">Networks</a></li><li><a href="/labs/">Labs</a></li></ul></nav></div></header>
+<main class="wrap lab">
+<p class="crumb"><a href="/">VIN Technologies</a> › <a href="/labs/">Labs</a> › Local networks</p>
+<h1>Switched LAN: ping and ARP</h1>
+<p class="lead">Local networks · free online experiment, runs in your browser with no install or sign-up.</p>
+<p><a class="btn primary" href="/lab/network/?ex=lan_ping">Open this experiment in the network simulator</a></p>
+<section><h2>Objective</h2><p>Three PCs on one switch. H1 pings H2; watch ARP resolution and MAC learning in the capture.</p></section>
+<section><h2>Procedure</h2><ol><li>Press Run.</li><li>Open Packet capture: the first lines are ARP who-has / is-at, then ICMP echo request / reply.</li><li>Select the link H1–SW and change its delay to 5 ms; run again and compare the RTT.</li></ol></section>
+<section><h2>Theory</h2><p>The first packet triggers an ARP broadcast (flooded by the switch). The reply teaches the switch where H1 and H2 are, so later frames are forwarded only to the right port. RTT = 2 × hops × (frame bits / rate + propagation delay), plus the switch&#x27;s few microseconds.</p></section>
+
+<section><h2>Network blocks used</h2><p>3 × Host / PC, Switch</p></section>
+
+<p><a class="btn primary" href="/lab/network/?ex=lan_ping">Open this experiment in the network simulator</a></p>
+<section><h2>More Local networks experiments</h2><ul class="rel"><li><a href="/labs/hub-versus-switch/">Hub versus switch</a></li><li><a href="/labs/vlans-on-one-switch/">VLANs on one switch</a></li><li><a href="/labs/wi-fi-access-point/">Wi-Fi access point</a></li></ul></section>
+</main>
+<footer><div class="wrap foot"><div>© VIN Technologies · Made in India</div><div><a href="/labs/">All labs</a><a href="/lab/">Circuit simulator</a><a href="/lab/network/">Network simulator</a></div></div></footer>
+</body>
+</html>

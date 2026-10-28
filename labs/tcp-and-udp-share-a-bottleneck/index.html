@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TCP and UDP share a bottleneck — Traffic and performance Experiment Online | LEARNERS LAB</title>
+<meta name="description" content="Free online Traffic and performance experiment: A bulk TCP transfer and a 6 Mbit/s UDP stream compete for an 8 Mbit/s link.">
+<link rel="canonical" href="https://vintechnologies.co.in/labs/tcp-and-udp-share-a-bottleneck/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="TCP and UDP share a bottleneck — Traffic and performance Experiment Online | LEARNERS LAB"><meta property="og:description" content="Free online Traffic and performance experiment: A bulk TCP transfer and a 6 Mbit/s UDP stream compete for an 8 Mbit/s link.">
+<meta property="og:url" content="https://vintechnologies.co.in/labs/tcp-and-udp-share-a-bottleneck/"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="TCP and UDP share a bottleneck — Traffic and performance Experiment Online | LEARNERS LAB"><meta name="twitter:description" content="Free online Traffic and performance experiment: A bulk TCP transfer and a 6 Mbit/s UDP stream compete for an 8 Mbit/s link."><meta name="twitter:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" href="/lab/icons/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/labs/labs.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "name": "TCP and UDP share a bottleneck", "description": "A bulk TCP transfer and a 6 Mbit/s UDP stream compete for an 8 Mbit/s link.", "url": "https://vintechnologies.co.in/labs/tcp-and-udp-share-a-bottleneck/", "learningResourceType": "Lab experiment", "educationalLevel": "University", "teaches": "TCP and UDP share a bottleneck", "isAccessibleForFree": true, "inLanguage": "en", "image": "https://vintechnologies.co.in/og-image.png", "provider": {"@type": "Organization", "name": "VIN Technologies", "url": "https://vintechnologies.co.in/"}, "about": "Traffic and performance"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "VIN Technologies", "item": "https://vintechnologies.co.in/"}, {"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://vintechnologies.co.in/labs/"}, {"@type": "ListItem", "position": 3, "name": "TCP and UDP share a bottleneck", "item": "https://vintechnologies.co.in/labs/tcp-and-udp-share-a-bottleneck/"}]}]}</script>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">VIN <span>TECHNOLOGIES</span></a>
+<nav><ul><li><a href="/">Home</a></li><li><a href="/lab/">Circuits</a></li><li><a href="/lab/network/">Networks</a></li><li><a href="/labs/">Labs</a></li></ul></nav></div></header>
+<main class="wrap lab">
+<p class="crumb"><a href="/">VIN Technologies</a> › <a href="/labs/">Labs</a> › Traffic and performance</p>
+<h1>TCP and UDP share a bottleneck</h1>
+<p class="lead">Traffic and performance · free online experiment, runs in your browser with no install or sign-up.</p>
+<p><a class="btn primary" href="/lab/network/?ex=bottleneck">Open this experiment in the network simulator</a></p>
+<section><h2>Objective</h2><p>A bulk TCP transfer and a 6 Mbit/s UDP stream compete for an 8 Mbit/s link.</p></section>
+<section><h2>Procedure</h2><ol><li>Run and read the Summary tab: UDP loss, TCP goodput, retransmissions.</li><li>Select the bottleneck link and raise its rate to 20 Mbit/s: both flows run unhindered.</li><li>Increase the queue length: more delay, fewer drops.</li></ol></section>
+<section><h2>Theory</h2><p>Queues fill, packets are dropped, TCP&#x27;s congestion window shrinks. UDP does not back off, so it keeps its rate and TCP gets what remains.</p></section>
+
+<section><h2>Network blocks used</h2><p>4 × Host / PC, Router, 2 × Switch</p></section>
+
+<p><a class="btn primary" href="/lab/network/?ex=bottleneck">Open this experiment in the network simulator</a></p>
+<section><h2>More Traffic and performance experiments</h2><ul class="rel"></ul></section>
+</main>
+<footer><div class="wrap foot"><div>© VIN Technologies · Made in India</div><div><a href="/labs/">All labs</a><a href="/lab/">Circuit simulator</a><a href="/lab/network/">Network simulator</a></div></div></footer>
+</body>
+</html>

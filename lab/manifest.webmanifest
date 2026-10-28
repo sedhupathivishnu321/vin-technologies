@@ -1,0 +1,16 @@
+{
+  "name": "LEARNERS LAB",
+  "short_name": "Learners Lab",
+  "description": "Virtual electronics laboratory: circuits, live sliders, oscilloscope and 100+ experiments.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f141c",
+  "theme_color": "#0f141c",
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

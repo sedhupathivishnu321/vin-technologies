@@ -94,6 +94,7 @@ function updHist() { $("bUndo").disabled = !S.hist.length; $("bRedo").disabled =
 /* ---------------------------------------------------------------- canvas rendering */
 const cv = $("cv"), world = $("world"), gComps = $("comps"), gWires = $("wires"), gOver = $("over");
 function applyView() {
+  const zp = $("zoomPct"); if (zp) zp.textContent = Math.round(S.view.k * 100) + "%";
   const v = S.view; world.setAttribute("transform", `translate(${v.x},${v.y}) scale(${v.k})`);
   $("grid").setAttribute("patternTransform", `translate(${v.x},${v.y}) scale(${v.k})`);
 }
@@ -217,7 +218,7 @@ function drawWires() {
 }
 function renderAll() {
   gComps.innerHTML = ""; for (const c of S.proj.components) drawComp(c);
-  drawWires(); drawOver(); $("doctitle").textContent = S.proj.meta?.name || "";
+  drawWires(); drawOver(); $("doctitle").textContent = S.proj.meta?.name || "Untitled"; updStatusbar();
 }
 function drawOver() {
   gOver.innerHTML = "";
@@ -233,7 +234,7 @@ function hint(t) { $("hint").textContent = t || ""; }
 function toWorld(ev) { const r = cv.getBoundingClientRect(); return { x: (ev.clientX - r.left - S.view.x) / S.view.k, y: (ev.clientY - r.top - S.view.y) / S.view.k }; }
 function visibleBottom() { const r = cv.getBoundingClientRect(); return isDesk() ? 0 : Math.min(r.height * 0.7, SH.p * r.height); }
 function fit() {
-  const cs = S.proj.components; const r = cv.getBoundingClientRect(), bi = visibleBottom(), H = r.height - bi, tr = isDesk() ? 70 : 62;
+  const cs = S.proj.components; const r = cv.getBoundingClientRect(), bi = visibleBottom(), H = r.height - bi, tr = 24;
   if (!cs.length || !r.width) { S.view = { x: r.width / 2, y: H / 2, k: 1 }; applyView(); return; }
   let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
   for (const c of cs) { const b = worldBox(c); x0 = Math.min(x0, b[0]); y0 = Math.min(y0, b[1]); x1 = Math.max(x1, b[2]); y1 = Math.max(y1, b[3]); }
@@ -266,7 +267,7 @@ cv.addEventListener("pointerdown", (e) => {
 cv.addEventListener("pointermove", (e) => {
   if (ptrs.has(e.pointerId)) ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
   if (pinch && ptrs.size === 2) { const [a, b] = [...ptrs.values()]; S.view.k = Math.min(4, Math.max(0.12, pinch.k * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d)); applyView(); return; }
-  const w = toWorld(e); S.mouse = w; const d = S.dragging;
+  const w = toWorld(e); S.mouse = w; $("coords").textContent = `x ${Math.round(w.x / G)} y ${Math.round(w.y / G)}`; const d = S.dragging;
   if (d && d.type === "pan") { S.view.x = d.vx + e.clientX - d.sx; S.view.y = d.vy + e.clientY - d.sy; applyView(); }
   else if (d && d.type === "move") {
     const c = compById(d.id), nx = d.ox + Math.round((w.x - d.sx) / G), ny = d.oy + Math.round((w.y - d.sy) / G);
@@ -286,24 +287,22 @@ function pinClick(cid, pin) {
   const [a, ap] = S.wireFrom;
   if (a === cid && ap === pin) { S.wireFrom = null; hint(""); drawOver(); return; }
   if (!S.proj.wires.some((w) => (w.a[0] === a && w.a[1] === ap && w.b[0] === cid && w.b[1] === pin) || (w.b[0] === a && w.b[1] === ap && w.a[0] === cid && w.a[1] === pin))) {
-    pushHist(); S.proj.wires.push({ id: Math.random().toString(16).slice(2, 10), a: [a, ap], b: [cid, pin], color: "" }); changed();
+    pushHist(); S.proj.wires.push({ id: Math.random().toString(16).slice(2, 10), a: [a, ap], b: [cid, pin], color: wireColorFor(ap, pin) }); changed();
   }
   S.wireFrom = null; hint(""); renderAll();
 }
-function select(s) { S.sel = s; renderAll(); buildProps(); updCtx(); }
+function select(s) { S.sel = s; renderAll(); buildProps(); updCtx(); if (s) openPage("prop"); }
 function updCtx() {
-  const c = $("ctx"), sel = S.sel; c.hidden = !sel; if (!sel) return;
-  const isC = sel.kind === "c"; const cc = isC ? compById(sel.id) : null;
-  $("ctxName").textContent = isC ? (cc ? cc.ref : "") : "Wire";
-  for (const id of ["bEdit", "bRot", "bMir"]) $(id).hidden = !isC;
+  const sel = S.sel, isC = !!sel && sel.kind === "c";
+  $("bRot").disabled = !isC; $("bMir").disabled = !isC; $("bDel").disabled = !sel;
 }
-cv.addEventListener("dblclick", (e) => { const g = e.target.closest && e.target.closest(".comp"); if (g) { select({ kind: "c", id: g.dataset.id }); openPage("prop", "peek"); } });
+cv.addEventListener("dblclick", (e) => { const g = e.target.closest && e.target.closest(".comp"); if (g) { select({ kind: "c", id: g.dataset.id }); openPage("prop"); } });
 function nextRef(d) { const used = new Set(S.proj.components.map((c) => c.ref)); let n = 1; while (used.has(d.prefix + n)) n++; return d.prefix + n; }
 function placePart(type, x, y, r) {
   const d = S.defs[type]; pushHist();
   const c = { id: Math.random().toString(16).slice(2, 10), type, ref: nextRef(d), x, y, rot: r, mirror: false, params: defaultParams(d) };
   S.proj.components.push(c); S.sel = { kind: "c", id: c.id }; changed(); renderAll(); buildPanels();
-  updCtx(); toast(`Added ${c.ref}. Drag it into place.`);
+  updCtx(); toast(`Added ${c.ref}. Drag it into place.`); openPage("prop");
 }
 function setTool(t) {
   S.tool = t; S.wireFrom = null; cv.setAttribute("class", t === "wire" ? "wiring" : "");
@@ -340,7 +339,15 @@ document.addEventListener("keydown", (e) => {
 });
 
 /* ---------------------------------------------------------------- run */
-function setStatus(t, cls = "") { const e = $("status"); e.textContent = t; e.className = "t2 " + cls; }
+function setStatus(t, cls = "") { const e = $("status"); e.textContent = t; e.className = "st " + cls; $("sdot").className = "sdot " + cls; }
+function updStatusbar() {
+  if (!S.proj) return; $("counts").textContent = `${S.proj.components.length} parts · ${S.proj.wires.length} wires`;
+  const dg = (S.res && S.res.diagnostics) || [], e = dg.filter((d) => d.severity === "error").length, w = dg.filter((d) => d.severity === "warning").length, p = $("problems");
+  if (S.res && !S.res.ok) { p.textContent = "Simulation error"; p.className = "problems bad"; }
+  else if (e) { p.textContent = `${e} wiring problem${e > 1 ? "s" : ""}`; p.className = "problems bad"; }
+  else if (w) { p.textContent = `${w} warning${w > 1 ? "s" : ""}`; p.className = "problems warn"; }
+  else { p.textContent = "No wiring problems"; p.className = "problems ok"; }
+}
 let toastTimer = 0;
 function toast(t, ms = 2400) { const e = $("toast"); e.textContent = t; e.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => e.classList.remove("show"), ms); }
 let liveTimer = 0;
@@ -348,7 +355,7 @@ function changed() { S.cur = null; if (S.live) { clearTimeout(liveTimer); liveTi
 async function run() {
   if (S.running) { S.again = true; return; }
   if (!S.proj.components.length) return;
-  S.running = true; setStatus("Running", "busy"); $("bRun").classList.add("busy"); const t0 = performance.now();
+  S.running = true; setStatus("Running", "busy"); $("bRun").classList.add("busy"); $("bRun").disabled = true; const t0 = performance.now();
   try {
     const out = JSON.parse(await call("run", JSON.stringify({ ...S.proj, sim: S.proj.sim }), "{}", S.key));
     S.res = out;
@@ -356,111 +363,107 @@ async function run() {
     else setStatus(`Done in ${((performance.now() - t0) / 1000).toFixed(2)} s`, "ok");
     renderAll(); buildResults(); buildGraph(); buildScope(); afterRun();
   } catch (err) { setStatus(String(err.message || err), "err"); }
-  S.running = false; $("bRun").classList.remove("busy"); if (S.again) { S.again = false; run(); }
+  S.running = false; $("bRun").classList.remove("busy"); $("bRun").disabled = false; if (S.again) { S.again = false; run(); }
 }
 function afterRun() {
   const r = S.res; const bad = !r || !r.ok || (r.checks || []).some((c) => !c.passed);
   if (!r.ok) toast(r.error.length > 110 ? r.error.slice(0, 110) + "…" : r.error, 4200);
-  if (S.live) return;
+  updStatusbar(); if (S.live) return;
   const d = $("resDot"); d.hidden = false; d.classList.toggle("bad", bad);
-  const target = scopeRefs().length ? "scope" : "res";
-  if (!isDesk()) { if (SH.state === "closed") openPage(target, "peek"); else if (SH.page === "res" || SH.page === "scope") openPage(SH.page, SH.state); }
-  else if (!["res", "scope", "ctl"].includes(SH.page)) openPage(target);
-  if (SH.page === "res") d.hidden = true;
+  openPage(scopeRefs().length ? "scope" : "res");
 }
 
-/* ---------------------------------------------------------------- sheet, pages, lists */
-const isDesk = () => matchMedia("(min-width:900px)").matches;
-const PEEK = 0.46, FULL = 0.93;
-const SH = { page: "exp", state: "closed", p: 0, sub: { exp: 0, res: 0 } };
-const PAGE = {
-  exp: { title: "Labs", subs: [["Browse", "pExp"], ["Guide", "pGuide"]] },
-  parts: { title: "Parts", subs: [["", "pParts"]] },
-  ctl: { title: "Tune", subs: [["", "pCtl"]] },
-  res: { title: "Results", subs: [["Summary", "pRes"], ["Graph", "pGraph"]] },
-  scope: { title: "Oscilloscope", subs: [["", "pScope"]] },
-  prop: { title: "Edit", subs: [["", "pProp"]] },
-};
-function setP(p) { SH.p = p; $("body").style.setProperty("--p", p); $("floats").classList.toggle("hide", p > 0.62 && !isDesk()); }
-function setSheet(state) { SH.state = state; $("sheet").dataset.state = state; setP(state === "closed" ? 0 : state === "peek" ? PEEK : FULL); redrawPlots(); }
-function redrawPlots() { drawGraph(); drawScope(); setTimeout(() => { drawGraph(); drawScope(); }, 300); }
-function propTitle() { const s = S.sel; if (!s) return "Edit"; if (s.kind === "w") return "Wire"; const c = compById(s.id); return c ? `${c.ref} · ${defOf(c).name}` : "Edit"; }
-function openPage(page, state, sub) {
-  const was = SH.state; SH.page = page; if (sub !== undefined) SH.sub[page] = sub;
-  const d = PAGE[page], si = SH.sub[page] || 0;
-  document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.p === page));
-  document.querySelectorAll(".sbody .page").forEach((p) => (p.hidden = true));
-  $(d.subs[si][1]).hidden = false;
-  const seg = $("seg");
-  if (d.subs.length > 1) { seg.hidden = false; seg.innerHTML = d.subs.map((x, i) => `<button data-i="${i}" class="${i === si ? "on" : ""}">${x[0]}</button>`).join(""); } else seg.hidden = true;
-  $("stitle").textContent = page === "prop" ? propTitle() : d.title;
-  $("sbody").scrollTop = 0;
-  if (page === "res") $("resDot").hidden = true;
-  if (state) { setSheet(state); if (!isDesk() && was === "closed" && state === "peek") fit(); } else redrawPlots();
+/* ---------------------------------------------------------------- tabs, palette, examples */
+const isDesk = () => true;
+const SH = { state: "open" };
+const TABMAP = { prop: "insp", ctl: "ctl", exp: "guide", res: "res", scope: "scope" };
+function openPage(page, _state, sub) {
+  let t = TABMAP[page] || page; if (page === "res" && sub === 1) t = "graph";
+  document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("on", b.dataset.t === t));
+  const pages = { insp: "pInsp", ctl: "pCtl", guide: "pGuide", res: "pRes", graph: "pGraph", scope: "pScope" };
+  for (const k in pages) $(pages[k]).hidden = k !== t;
+  if (t === "res") $("resDot").hidden = true;
+  if (t === "graph") drawGraph(); if (t === "scope") drawScope();
 }
-function closeSheet() { setSheet("closed"); }
-$("seg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) openPage(SH.page, undefined, +b.dataset.i); });
-$("sclose").onclick = closeSheet;
-$("nav").addEventListener("click", (e) => {
-  const b = e.target.closest("button"); if (!b) return; const p = b.dataset.p;
-  if (isDesk()) { openPage(p); return; }
-  if (SH.page === p && SH.state !== "closed") closeSheet(); else openPage(p, SH.state === "closed" ? "peek" : SH.state);
-});
-(function dragSheet() {
-  let d = null; const sh = $("sheet");
-  const down = (e) => { if (isDesk() || e.target.closest("button")) return; d = { y: e.clientY, p: SH.p, h: $("body").getBoundingClientRect().height, moved: false, t: performance.now() }; sh.classList.add("drag"); e.currentTarget.setPointerCapture(e.pointerId); };
-  const move = (e) => { if (!d) return; const dy = d.y - e.clientY; if (Math.abs(dy) > 4) d.moved = true; setP(Math.max(0, Math.min(FULL + 0.02, d.p + dy / d.h))); };
-  const up = (e) => {
-    if (!d) return; sh.classList.remove("drag"); const p = SH.p, dir = (d.y - e.clientY) / d.h; const moved = d.moved; d = null;
-    if (!moved) { setSheet(SH.state === "full" ? "peek" : "full"); return; }
-    let st = p < 0.2 ? "closed" : Math.abs(p - PEEK) < Math.abs(p - FULL) ? "peek" : "full";
-    if (dir > 0.08 && st === "peek" && p > 0.36) st = "full"; if (dir < -0.08 && st === "full" && p < 0.85) st = "peek";
-    setSheet(st);
+$("tabs").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) openPage(b.dataset.t); });
+window.addEventListener("resize", () => { drawGraph(); drawScope(); });
+
+/* wire colours */
+const WCOL = ["#d93a42", "#1a1f2b", "#e8841a", "#e3b505", "#2e9e4f", "#2563eb", "#8b46c4", "#ffffff", "#8a94a6", "#7a4a2a", "#e0559a", "#1aa3b8"];
+S.wireColor = "";
+function buildSwatches() {
+  const box = $("swatches"); box.innerHTML = "";
+  for (const c of WCOL) { const b = document.createElement("button"); b.style.background = c; b.setAttribute("aria-label", "Wire colour " + c); b.dataset.c = c; box.appendChild(b); }
+  box.onclick = (e) => {
+    const b = e.target.closest("button"); if (!b) return; S.wireColor = b.dataset.c; $("autoColor").checked = false;
+    box.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+    if (S.sel && S.sel.kind === "w") { const w = S.proj.wires.find((x) => x.id === S.sel.id); if (w) { pushHist(); w.color = S.wireColor; drawWires(); } }
   };
-  for (const el of [$("grab"), document.querySelector(".shead")]) { el.addEventListener("pointerdown", down); el.addEventListener("pointermove", move); el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up); }
-})();
-window.addEventListener("resize", () => { setP(isDesk() ? 0 : SH.state === "closed" ? 0 : SH.state === "peek" ? PEEK : FULL); redrawPlots(); });
+}
+function wireColorFor(a, b) {
+  if (!$("autoColor").checked) return S.wireColor || "";
+  const n = (a + " " + b).toLowerCase();
+  if (/(^|\s)(gnd|g|−|-|vss|e)(\s|$)/.test(n)) return "#1a1f2b";
+  if (/(^|\s)(\+|vcc|vdd|5v|3v3|v\+)(\s|$)/.test(n)) return "#d93a42";
+  return "";
+}
 
+/* examples menu */
+let expFilter = "All";
 const GCOL = ["#4f7fe0", "#2f9e8c", "#8a6fe0", "#d1703c", "#c4527a", "#6f9a2e", "#3d8fc4", "#b0842a"];
-let expFilter = "All", partFilter = "All";
 function chipRow(box, items, cur, onPick) {
   box.innerHTML = ""; for (const it of items) { const b = document.createElement("button"); b.textContent = it; if (it === cur) b.className = "on"; b.onclick = () => onPick(it); box.appendChild(b); }
-}
-function buildLists() {
-  const groups = [...new Set(S.examples.map((e) => e.group))];
-  S.groupCol = Object.fromEntries(groups.map((g, i) => [g, GCOL[i % GCOL.length]]));
-  const cats = [...new Set(Object.values(S.defs).filter((d) => d.engine !== "none" && d.type !== "breadboard" && d.type !== "arduino").map((d) => d.category))];
-  S.cats = cats; S.groups = groups; renderExp(); renderParts();
-  $("expList").onclick = (e) => { const b = e.target.closest(".card"); if (b) openExample(b.dataset.key, true); };
-  $("partList").onclick = (e) => { const b = e.target.closest(".tile"); if (b) { addPartCenter(b.dataset.type); if (!isDesk()) closeSheet(); } };
-  $("expSearch").addEventListener("input", renderExp); $("partSearch").addEventListener("input", renderParts);
 }
 function renderExp() {
   chipRow($("expChips"), ["All", ...S.groups], expFilter, (g) => { expFilter = g; renderExp(); });
   const q = $("expSearch").value.trim().toLowerCase(), box = $("expList"); box.innerHTML = ""; let last = "", n = 0;
   for (const e of S.examples) {
     if (expFilter !== "All" && e.group !== expFilter) continue; if (q && !(e.title + " " + e.group).toLowerCase().includes(q)) continue;
-    if (expFilter === "All" && !q && e.group !== last) { const h = document.createElement("h4"); h.textContent = e.group; box.appendChild(h); }
+    if (e.group !== last) { const h = document.createElement("h4"); h.textContent = e.group; box.appendChild(h); }
     last = e.group; n++;
     const b = document.createElement("button"); b.className = "card" + (e.key === S.key ? " on" : ""); b.dataset.key = e.key;
-    b.innerHTML = `<span class="ci" style="background:${S.groupCol[e.group]}"><svg class="ic"><use href="#i-flask"/></svg></span><span class="tx"><b>${html(e.title)}</b><small>${html(e.group)}</small></span>`; box.appendChild(b);
+    b.innerHTML = `<span class="ci" style="background:${S.groupCol[e.group]}"></span><span class="tx"><b>${html(e.title)}</b></span>`; box.appendChild(b);
   }
   if (!n) box.innerHTML = '<div class="empty">No experiments match.</div>';
 }
+$("bExamples").onclick = (e) => { e.stopPropagation(); const m = $("exMenu"); m.hidden = !m.hidden; if (!m.hidden) $("expSearch").focus(); };
+document.addEventListener("pointerdown", (e) => { const m = $("exMenu"); if (!m.hidden && !e.target.closest(".dd")) m.hidden = true; });
+
+/* palette */
+const catClosed = {};
 function renderParts() {
-  chipRow($("partChips"), ["All", ...S.cats], partFilter, (g) => { partFilter = g; renderParts(); });
-  const q = $("partSearch").value.trim().toLowerCase(), box = $("partList"); box.innerHTML = "";
-  const by = {}; for (const d of Object.values(S.defs)) { if (d.engine === "none" || d.type === "breadboard" || d.type === "arduino") continue; if (partFilter !== "All" && d.category !== partFilter) continue; if (q && !(d.name + " " + d.type + " " + d.category).toLowerCase().includes(q)) continue; (by[d.category] ||= []).push(d); }
-  for (const c of Object.keys(by)) {
-    if (partFilter === "All" && !q) { const h = document.createElement("h4"); h.textContent = c; box.appendChild(h); }
+  const q = $("partSearch").value.trim().toLowerCase(), box = $("partTree"); box.innerHTML = ""; const by = {};
+  for (const d of Object.values(S.defs)) { if (d.engine === "none" || d.type === "breadboard" || d.type === "arduino") continue; if (q && !(d.name + " " + d.type + " " + d.category).toLowerCase().includes(q)) continue; (by[d.category] ||= []).push(d); }
+  for (const c of S.cats) {
+    if (!by[c]) continue; const sec = document.createElement("div"); sec.className = "cat" + (!q && catClosed[c] ? " closed" : "");
+    const h = document.createElement("button"); h.className = "cathead"; h.innerHTML = `<svg class="ic xs"><use href="#i-chev"/></svg>${html(c)}<span class="n">${by[c].length}</span>`;
+    h.onclick = () => { catClosed[c] = !catClosed[c]; sec.classList.toggle("closed", catClosed[c]); }; sec.appendChild(h);
+    const grid = document.createElement("div"); grid.className = "tiles";
     for (const d of by[c].sort((a, b) => a.name.localeCompare(b.name))) {
-      const b = document.createElement("button"); b.className = "tile"; b.dataset.type = d.type;
+      const b = document.createElement("button"); b.className = "tile"; b.dataset.type = d.type; b.draggable = true; b.title = d.description;
       b.innerHTML = `<span class="th">${d.sprite ? `<img loading="lazy" alt="" src="af/${d.sprite[0]}.svg">` : '<svg class="ic"><use href="#i-chip"/></svg>'}</span><span>${html(d.name)}</span>`;
       const im = b.querySelector("img"); if (im) im.onerror = () => { b.querySelector(".th").innerHTML = '<svg class="ic"><use href="#i-chip"/></svg>'; };
-      box.appendChild(b);
+      grid.appendChild(b);
     }
+    sec.appendChild(grid); box.appendChild(sec);
   }
-  if (!box.children.length) box.innerHTML = '<div class="empty" style="grid-column:1/-1">No parts match.</div>';
+  if (!box.children.length) box.innerHTML = '<div class="empty">No components match.</div>';
+}
+function buildLists() {
+  const groups = [...new Set(S.examples.map((e) => e.group))];
+  S.groupCol = Object.fromEntries(groups.map((g, i) => [g, GCOL[i % GCOL.length]]));
+  const ORDER = ["Boards and breadboards", "Sources and power", "Passive components", "Semiconductors", "Analog ICs", "Digital ICs", "Digital logic", "Power ICs", "Switches and buzzers", "Instruments"];
+  S.cats = [...new Set(Object.values(S.defs).filter((d) => d.engine !== "none" && d.type !== "breadboard" && d.type !== "arduino").map((d) => d.category))].sort((x, y) => (ORDER.indexOf(x) + 99) % 99 - (ORDER.indexOf(y) + 99) % 99);
+  S.groups = groups; $("exCount").textContent = S.examples.length; $("partSearch").placeholder = `Search ${Object.values(S.defs).filter((d) => d.engine !== "none" && d.type !== "arduino").length} components…`;
+  buildSwatches(); renderExp(); renderParts();
+  $("expList").onclick = (e) => { const b = e.target.closest(".card"); if (b) { $("exMenu").hidden = true; openExample(b.dataset.key, true); } };
+  $("partTree").onclick = (e) => { const b = e.target.closest(".tile"); if (b) { addPartCenter(b.dataset.type); $("ws").classList.remove("showparts"); } };
+  $("partTree").addEventListener("dragstart", (e) => { const b = e.target.closest(".tile"); if (b) { e.dataTransfer.setData("text/plain", b.dataset.type); e.dataTransfer.effectAllowed = "copy"; } });
+  const st = $("stage");
+  st.addEventListener("dragover", (e) => { e.preventDefault(); e.dataTransfer.dropEffect = "copy"; });
+  st.addEventListener("drop", (e) => { e.preventDefault(); const t = e.dataTransfer.getData("text/plain"); if (t && S.defs[t]) { const w = toWorld(e); placePart(t, Math.round(w.x / G), Math.round(w.y / G), 0); } });
+  $("expSearch").addEventListener("input", renderExp); $("partSearch").addEventListener("input", renderParts);
+  $("bParts").onclick = () => $("ws").classList.toggle("showparts");
 }
 
 /* ---------------------------------------------------------------- panels */
@@ -523,9 +526,13 @@ function buildCtl() {
 function refreshComp(c) { renderAll(); }
 
 /* properties */
+function circuitSummary(p) {
+  const cs = S.proj.components, counts = {}; for (const c of cs) counts[defOf(c).name] = (counts[defOf(c).name] || 0) + 1;
+  p.innerHTML = `<h3>Circuit</h3><p class="mute">${cs.length} parts · ${S.proj.wires.length} wires</p><p class="mute">Select a part or wire to edit it. Drag parts from the left; click a pin then another pin to connect them.</p><h5>Parts list</h5><ul class="plist">${Object.entries(counts).sort().map(([n, k]) => `<li><span>${html(n)}</span><span class="mute">×${k}</span></li>`).join("")}</ul>`;
+}
 function buildProps() {
   const p = $("rprop"); p.innerHTML = ""; const s = S.sel;
-  if (!s) { p.innerHTML = '<p class="empty">Select a part to edit its values. Click a pin to start a wire; drag parts to move them; R rotates, F mirrors, Del deletes.</p>'; return; }
+  if (!s) { circuitSummary(p); return; }
   if (s.kind === "w") {
     const w = S.proj.wires.find((x) => x.id === s.id); if (!w) return;
     const a = compById(w.a[0]), b = compById(w.b[0]);
@@ -729,11 +736,11 @@ function drawScope() {
 async function openExample(key, fromList) {
   setStatus("Loading", "busy");
   const o = JSON.parse(await call("load_example", key)); setProject(o.project, o.info, key);
-  if (fromList) { openPage("exp", isDesk() ? undefined : "peek", 1); fit(); toast(o.info.title); }
+  if (fromList) { openPage("exp"); fit(); toast(o.info.title); }
   renderExp(); run();
 }
 function setProject(proj, info, key) {
-  S.proj = proj; S.proj.wires ||= []; S.proj.sim ||= {}; S.info = info; S.key = key || ""; S.sel = null; S.res = null; S.hist = []; S.fut = []; S.sigOn = {}; updHist();
+  S.proj = proj; S.proj.wires ||= []; S.proj.sim ||= {}; S.info = info || null; S.key = key || ""; S.sel = null; S.res = null; S.hist = []; S.fut = []; S.sigOn = {}; updHist();
   setTool(null); renderAll(); buildInfo(); buildPanels(); buildResults(); buildGraph(); buildScope(); updCtx(); fit();
   $("scopeNone").hidden = false; $("scopeBox").hidden = true;
 }
@@ -741,7 +748,7 @@ $("bRun").onclick = run; $("bUndo").onclick = undo; $("bRedo").onclick = redo; $
 $("bDel").onclick = delSel; $("bWire").onclick = () => setTool(S.tool === "wire" ? null : "wire"); $("bFit").onclick = fit;
 function toggleLive() { S.live = !S.live; $("bLive").classList.toggle("on", S.live); $("bLive").setAttribute("aria-pressed", S.live); toast(S.live ? "Live: results update as you change values" : "Live off"); if (S.live) run(); }
 $("bLive").onclick = toggleLive;
-$("bZin").onclick = () => zoomBy(1.3); $("bZout").onclick = () => zoomBy(1 / 1.3); $("bEdit").onclick = () => openPage("prop", "peek");
+$("bZin").onclick = () => zoomBy(1.3); $("bZout").onclick = () => zoomBy(1 / 1.3);
 $("bSave").onclick = () => download((S.proj.meta?.name || "circuit").replace(/[^\w-]+/g, "_") + ".ecelab.json", JSON.stringify({ ...S.proj }, null, 1), "application/json");
 $("bOpen").onclick = () => $("fOpen").click();
 $("fOpen").onchange = async (e) => {
@@ -752,13 +759,11 @@ $("fOpen").onchange = async (e) => {
   e.target.value = "";
 };
 
-/* ---------------------------------------------------------------- menu, install, offline */
-$("bMenu").onclick = (e) => { e.stopPropagation(); $("menu").hidden = !$("menu").hidden; };
-document.addEventListener("pointerdown", (e) => { if (!$("menu").hidden && !e.target.closest("#menu") && !e.target.closest("#bMenu")) $("menu").hidden = true; });
-$("menu").addEventListener("click", () => { $("menu").hidden = true; });
-let installEv = null;
-window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installEv = e; $("bInstall").hidden = false; });
-$("bInstall").onclick = async () => { if (installEv) { installEv.prompt(); installEv = null; $("bInstall").hidden = true; } };
+/* ---------------------------------------------------------------- full screen, new, offline */
+const goFull = () => { const w = $("ws"); document.fullscreenElement ? document.exitFullscreen() : w.requestFullscreen && w.requestFullscreen(); setTimeout(fit, 200); };
+$("bFull").onclick = goFull; $("bFullTop").onclick = () => { $("ws").scrollIntoView({ behavior: "smooth" }); goFull(); };
+document.addEventListener("fullscreenchange", () => setTimeout(() => { fit(); drawGraph(); drawScope(); }, 150));
+$("bNew").onclick = () => { setProject({ components: [], wires: [], meta: { name: "Untitled" }, sim: {} }, null, ""); toast("New circuit. Drag parts in from the left."); };
 if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
 
 /* ---------------------------------------------------------------- boot */
@@ -767,9 +772,9 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.ser
     S.resVals = await (await fetch("res_values.json")).json();
     await call("boot", S.resVals);
     S.defs = JSON.parse(await call("part_defs")); S.examples = JSON.parse(await call("example_list"));
-    buildLists(); $("boot").remove(); setStatus("Ready"); setSheet("closed"); if (isDesk()) openPage("exp", undefined, 0);
+    buildLists(); $("boot").remove(); setStatus("Ready");
     const q = new URLSearchParams(location.search).get("ex");
     await openExample(q && S.examples.some((e) => e.key === q) ? q : "lg_cmos_not");
-    if (isDesk()) openPage("exp", undefined, 1);
+    openPage("exp");
   } catch (err) { const m = "Could not start: " + (err.message || err); if ($("boottext")) $("boottext").textContent = m; else setStatus(m.slice(0, 160), "err"); console.error(m); }
 })();

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Networks — LEARNERS LAB | VIN Technologies</title>
+<meta name="description" content="Computer-network laboratory in your browser: build topologies, run them and watch every packet, ARP entry and routing decision.">
+<meta name="theme-color" content="#ffffff">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="stylesheet" href="network.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 5v14M19 5l-9 7 9 7z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M18 5v14M5 5l9 7-9 7z"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path d="M15 14l5-5-5-5M20 9H10a6 6 0 0 0 0 12h3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+  <symbol id="i-full" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
+  <symbol id="i-wire" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="5.5" r="2.5"/><path d="M7.5 16.5l9-9"/></symbol>
+  <symbol id="i-select" viewBox="0 0 24 24"><path d="M5 3l14 8-6 2-3 6z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-parts" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-ping" viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9.3h16M4 14.7h16M9.3 4v16M14.7 4v16"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
+  <symbol id="n-host" viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="24" rx="3"/><path d="M18 40h12M24 32v8"/></symbol>
+  <symbol id="n-server" viewBox="0 0 48 48"><rect x="9" y="5" width="30" height="11" rx="2"/><rect x="9" y="19" width="30" height="11" rx="2"/><rect x="9" y="33" width="30" height="11" rx="2"/><path d="M14 10.5h2M14 24.5h2M14 38.5h2"/></symbol>
+  <symbol id="n-switch" viewBox="0 0 48 48"><rect x="4" y="14" width="40" height="20" rx="3"/><path d="M12 24h24M30 19l6 5-6 5M18 19l-6 5 6 5"/></symbol>
+  <symbol id="n-hub" viewBox="0 0 48 48"><rect x="4" y="16" width="40" height="16" rx="3"/><path d="M11 24h.1M19 24h.1M27 24h.1M35 24h.1"/></symbol>
+  <symbol id="n-ap" viewBox="0 0 48 48"><rect x="8" y="30" width="32" height="10" rx="3"/><path d="M24 30V22M16 17a11 11 0 0 1 16 0M11 12a18 18 0 0 1 26 0"/></symbol>
+  <symbol id="n-router" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M24 11v26M11 24h26M24 11l-4 4M24 11l4 4M24 37l-4-4M24 37l4-4M11 24l4-4M11 24l4 4M37 24l-4-4M37 24l-4 4"/></symbol>
+  <symbol id="n-firewall" viewBox="0 0 48 48"><rect x="5" y="9" width="38" height="30" rx="2"/><path d="M5 19h38M5 29h38M17 9v10M31 9v10M24 19v10M12 29v10M36 29v10"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></symbol>
+</defs></svg>
+
+<div id="boot"><div class="boot-card"><img src="../icons/icon-192.png" alt="" class="boot-icon"><div class="boot-title">LEARNERS LAB · NETWORKS</div><div class="bar"><i id="bootbar"></i></div><div id="boottext">Starting</div></div></div>
+
+<div id="app">
+  <header class="ribbon">
+    <div class="r1">
+      <a class="brand" href="../" title="Circuits"><img src="../icons/icon-192.png" alt=""><b>LEARNERS LAB</b></a>
+      <span class="crumb">Networks</span>
+      <button id="mFile" class="rb">File <svg class="ic xs"><use href="#i-chev"/></svg></button>
+      <button id="mEx" class="rb">Examples <svg class="ic xs"><use href="#i-chev"/></svg></button>
+      <button id="mEdit" class="rb">Edit <svg class="ic xs"><use href="#i-chev"/></svg></button>
+      <span id="doctitle" class="doc">Untitled network</span>
+      <span class="grow"></span>
+      <a class="rb" href="../" title="Circuit laboratory">Circuits</a>
+      <button id="bTheme" class="rb sq" aria-label="Light or dark theme"><svg class="ic sm"><use href="#i-moon"/></svg></button>
+      <button id="mHelp" class="rb sq" aria-label="Help">?</button>
+      <input id="fOpen" type="file" accept=".json,application/json" hidden>
+    </div>
+    <div class="r2" id="tbNet">
+      <button id="nRun" class="rb go" title="Run the network (Ctrl+Enter)"><svg class="ic sm play"><use href="#i-play"/></svg><span class="spin"></span><b>Run</b></button>
+      <label class="inl">Duration <input id="nDur" type="number" min="0.1" max="600" step="0.5" value="10"><span class="mute">s</span></label>
+      <span class="vsep"></span>
+      <button id="nSel" class="rb sq toggle on" aria-label="Select" title="Select / move (Esc)"><svg class="ic sm"><use href="#i-select"/></svg></button>
+      <button id="nLink" class="rb sq toggle" aria-label="Connect blocks" title="Connect two blocks (L)"><svg class="ic sm"><use href="#i-wire"/></svg></button>
+      <button id="nUndo" class="rb sq" aria-label="Undo"><svg class="ic sm"><use href="#i-undo"/></svg></button>
+      <button id="nRedo" class="rb sq" aria-label="Redo"><svg class="ic sm"><use href="#i-redo"/></svg></button>
+      <button id="nDel" class="rb sq danger" aria-label="Delete" disabled><svg class="ic sm"><use href="#i-trash"/></svg></button>
+      <span class="vsep"></span>
+      <label class="inl">Test <select id="nSrc" aria-label="From"></select><span class="mute">to</span><select id="nDst" aria-label="To"></select><select id="nKind" aria-label="Test"></select></label>
+      <button id="nProbe" class="rb"><svg class="ic sm"><use href="#i-ping"/></svg>Test</button>
+      <button id="nMatrix" class="rb"><svg class="ic sm"><use href="#i-grid"/></svg>Connectivity</button>
+      <span class="grow"></span>
+      <button id="nParts" class="rb partsbtn"><svg class="ic sm"><use href="#i-parts"/></svg>Blocks</button>
+      <button id="nZout" class="rb sq" aria-label="Zoom out"><svg class="ic sm"><use href="#i-minus"/></svg></button>
+      <span id="nZoom" class="zoompct">100%</span>
+      <button id="nZin" class="rb sq" aria-label="Zoom in"><svg class="ic sm"><use href="#i-plus"/></svg></button>
+      <button id="nFit" class="rb sq" aria-label="Fit"><svg class="ic sm"><use href="#i-fit"/></svg></button>
+      <button id="nFull" class="rb sq" aria-label="Full screen"><svg class="ic sm"><use href="#i-full"/></svg></button>
+    </div>
+  
+  </header>
+
+  <div class="work" id="workNet">
+    <aside class="palette" id="npalette">
+      <div class="phead">Network blocks</div>
+      <div id="ntiles" class="ntiles"></div>
+      <p class="pnote">Click a block to add it, or drag it onto the canvas. Use the connect tool to link two blocks.</p>
+    </aside>
+    <section class="center">
+      <div class="stage" id="nstage">
+        <svg id="ncv" xmlns="http://www.w3.org/2000/svg" tabindex="0">
+          <defs><pattern id="ngrid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="0" cy="0" r="1" class="gdot"/></pattern></defs>
+          <rect x="-20000" y="-20000" width="40000" height="40000" fill="url(#ngrid)"/>
+          <g id="nworld"><g id="nlinks"></g><g id="nnodes"></g><g id="nfly"></g></g>
+        </svg>
+        <div id="nhint" class="hint"></div>
+        <div id="toast" class="toast" role="status"></div>
+        <div class="player" id="player">
+          <button id="pPrev" class="rb sq" aria-label="Rewind"><svg class="ic sm"><use href="#i-prev"/></svg></button>
+          <button id="pPlay" class="rb sq go" aria-label="Play"><svg class="ic sm"><use href="#i-play"/></svg></button>
+          <button id="pNext" class="rb sq" aria-label="Step to next packet"><svg class="ic sm"><use href="#i-next"/></svg></button>
+          <input id="pTime" type="range" min="0" max="1000" value="0" aria-label="Time">
+          <span id="pClock" class="clock">0 ms</span>
+          <select id="pSpeed" aria-label="Speed"></select>
+          <label class="check"><input type="checkbox" id="pSkip" checked><span>Skip idle</span></label>
+        </div>
+      </div>
+      <div class="vgrip" id="nbgrip"></div>
+      <div class="bdock" id="nbdock">
+        <div class="tabs" id="ntabs">
+          <button data-t="sum" class="on">Summary</button><button data-t="narr">Narration</button><button data-t="cap">Packet capture</button><button data-t="insp">Packet inspector</button>
+          <button data-t="links">Links</button><button data-t="mat">Connectivity</button><button data-t="prob">Problems</button>
+          <span class="grow"></span>
+          <button id="nbdToggle" class="collapse" aria-label="Collapse panel"><svg class="ic sm"><use href="#i-down"/></svg></button>
+        </div>
+        <div class="bbody">
+          <div id="nSum" class="page"></div><div id="nNarr" class="page" hidden></div><div id="nCap" class="page" hidden></div>
+          <div id="nInsp" class="page" hidden></div><div id="nLinks" class="page" hidden></div><div id="nMat" class="page" hidden></div><div id="nProb" class="page" hidden></div>
+        </div>
+      </div>
+    </section>
+    <aside class="rdock" id="nside">
+      <div class="tabs" id="nrtabs"><button data-t="prop" class="on">Properties</button><button data-t="about">About</button><button data-t="state">Block state</button></div>
+      <div class="sbody">
+        <div id="nProp" class="page"></div><div id="nAbout" class="page" hidden></div><div id="nState" class="page" hidden></div>
+      </div>
+    </aside>
+  </div>
+
+  
+  <footer class="statusbar">
+    <span class="sdot" id="sdot"></span><span id="status" class="st">Loading</span>
+    <span class="sep">|</span><span id="counts">0 blocks · 0 links</span>
+    <span id="problems" class="problems ok">No problems</span>
+    <span class="grow"></span>
+    <span id="coords" class="coords">x 0 y 0</span>
+    <span class="tip">Select a block to edit it · connect tool links two blocks · wheel zoom · drag empty space to pan · Del delete</span>
+  </footer>
+
+  <div id="menu" class="popmenu" hidden></div>
+  <div id="exMenu" class="exmenu" hidden>
+    <div class="searchbox"><svg class="ic sm"><use href="#i-search"/></svg><input id="expSearch" type="search" placeholder="Search experiments" aria-label="Search experiments"></div>
+    <div id="expChips" class="chips"></div>
+    <div id="expList" class="exlist"></div>
+  </div>
+  <div id="modal" class="modal" hidden><div class="modalbox"><div id="modalBody"></div><button id="modalClose" class="rb">Close</button></div></div>
+</div>
+<script src="network.js"></script>
+</body>
+</html>

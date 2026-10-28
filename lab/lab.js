@@ -623,9 +623,9 @@ function togglePanel(cls) { const w = netMode ? $("workNet") : $("workElec"); co
 function toggleTheme() {
   const light = document.documentElement.dataset.theme !== "light"; document.documentElement.dataset.theme = light ? "light" : "dark";
   try { localStorage.setItem("ll-theme", light ? "light" : "dark"); } catch (e) { /* ignore */ }
-  document.querySelector('meta[name="theme-color"]').content = light ? "#eceef0" : "#1f2226"; try { $("ardFrame").contentWindow.postMessage({ theme: light ? "light" : "dark" }, "*"); } catch (e) { /* frame not loaded */ } if (S.proj) { renderAll(); drawGraph(); drawScope(); }
+  document.querySelector('meta[name="theme-color"]').content = light ? "#ffffff" : "#1f2226"; try { $("ardFrame").contentWindow.postMessage({ theme: light ? "light" : "dark" }, "*"); } catch (e) { /* frame not loaded */ } if (S.proj) { renderAll(); drawGraph(); drawScope(); }
 }
-try { if (localStorage.getItem("ll-theme") === "light") { document.documentElement.dataset.theme = "light"; } } catch (e) { /* ignore */ }
+try { if (localStorage.getItem("ll-theme") === "dark") { document.documentElement.dataset.theme = "dark"; } } catch (e) { /* ignore */ }
 function modal(h) { $("modalBody").innerHTML = h; $("modal").hidden = false; }
 $("modalClose").onclick = () => ($("modal").hidden = true); $("modal").addEventListener("pointerdown", (e) => { if (e.target === $("modal")) $("modal").hidden = true; });
 function showGuide() { modal(`<h3>Quick guide</h3><p><b>Electronics.</b> Pick an experiment from <b>Examples</b>, or drag parts in from the palette. Click a pin, then another pin, to wire them. Press <b>Run</b>; switch on <b>Live</b> and drag a slider in <b>Controls</b> to watch the circuit respond.</p><p><b>Network.</b> Switch to the Network workspace, add blocks, connect them, set addresses and applications in Properties, press <b>Run</b> and watch the packets replay.</p><p><kbd>Ctrl</kbd>+<kbd>Enter</kbd> run · <kbd>Ctrl</kbd>+<kbd>L</kbd> live · <kbd>R</kbd> rotate · <kbd>F</kbd> mirror · <kbd>W</kbd> wire · <kbd>Del</kbd> delete · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd> undo/redo · wheel zooms · drag empty space to pan.</p>`); }
@@ -1052,7 +1052,7 @@ function setMode(m) {
   $("modeseg").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.m === m));
   $("workElec").hidden = m !== "elec"; $("workNet").hidden = !netMode; $("workArd").hidden = !ard; $("tbElec").hidden = m !== "elec"; $("tbNet").hidden = !netMode; $("app").classList.remove("showparts");
   for (const id of ["mFile", "mEx", "mEdit"]) $(id).hidden = ard;
-  $("tip").textContent = ard ? "Circuits: 131 parts, Arduino sketches and 400 Kit 1–8 projects. Use Examples, the parts panel and Start Simulation (F5)." : netMode ? "Select a block to edit it · connect tool links two blocks · wheel zoom · drag empty space to pan · Del delete" : "Click a pin, then another pin to wire · wheel zoom · drag empty space to pan · R rotate · Del delete";
+  $("tip").textContent = ard ? "Circuits: 196 parts (131 ArduinoForge + 65 LEARNERS LAB), Arduino sketches and 400 Kit 1–8 projects. Use Examples, the parts panel and Start Simulation (F5)." : netMode ? "Select a block to edit it · connect tool links two blocks · wheel zoom · drag empty space to pan · Del delete" : "Click a pin, then another pin to wire · wheel zoom · drag empty space to pan · R rotate · Del delete";
   if (ard) { const f = $("ardFrame"); if (!f.getAttribute("src")) f.src = "circuits/index.html"; $("doctitle").textContent = "Circuits"; setStatus(S.ready ? "Ready" : "Loading simulation engine", S.ready ? "ok" : "busy"); }
   else if (netMode) { NET.enter(); } else { $("doctitle").textContent = S.proj.meta?.name || "Untitled"; updStatusbar(); setTimeout(() => { fit(); drawGraph(); drawScope(); }, 30); }
 }

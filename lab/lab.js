@@ -99,9 +99,121 @@ function applyView() {
   $("grid").setAttribute("patternTransform", `translate(${v.x},${v.y}) scale(${v.k})`);
 }
 function compById(id) { return S.proj.components.find((c) => c.id === id); }
-function connectedPins() {
-  const m = new Set(); for (const w of S.proj.wires) { m.add(w.a[0] + "|" + w.a[1]); m.add(w.b[0] + "|" + w.b[1]); } return m;
+/* ---------------------------------------------------------------- wiring engine (the desktop canvas rules: routing, pin snapping, nets, breadboard seating) */
+const HIT_R = 9;
+const NETPAL = ["#1d78d6", "#2a9d3a", "#f2c200", "#f77f00", "#7b2cbf", "#e5e7eb", "#8a5a2b"];
+const bbGroup = (n) => (/^[a-e]\d+$/.test(n) ? "top" + n.slice(1) : /^[f-j]\d+$/.test(n) ? "bot" + n.slice(1) : n.slice(0, 2));
+const pinKey = (c, p) => c + "|" + p;
+function pinPx(ref) { const c = compById(ref[0]); const [x, y] = pinPos(c, ref[1]); return { x: x * G, y: y * G }; }
+function pinDir(ref) {
+  const c = compById(ref[0]), d = defOf(c), p = d.pins.find((q) => q.name === ref[1]); const [ox, oy] = rot(p.dx, p.dy, c.rot, c.mirror);
+  if (d.engine === "board") return [0, oy > 0 ? 1 : -1];
+  if (ox === 0 && oy === 0) return [0, 1];
+  return Math.abs(ox) >= Math.abs(oy) ? [ox > 0 ? 1 : -1, 0] : [0, oy > 0 ? 1 : -1];
 }
+function cleanPts(pts) {
+  const out = [];
+  for (const q of pts) { const l = out[out.length - 1]; if (l && Math.abs(l.x - q.x) < 0.5 && Math.abs(l.y - q.y) < 0.5) continue; out.push(q); }
+  let i = 1;
+  while (i < out.length - 1) { const a = out[i - 1], b = out[i], c = out[i + 1]; if ((Math.abs(a.x - b.x) < 0.5 && Math.abs(b.x - c.x) < 0.5) || (Math.abs(a.y - b.y) < 0.5 && Math.abs(b.y - c.y) < 0.5)) out.splice(i, 1); else i++; }
+  return out;
+}
+function route(a, b, via) {
+  const pa = pinPx(a), pb = pinPx(b);
+  if (via && via.length) {
+    const pts = [pa, ...via.map(([x, y]) => ({ x: x * G, y: y * G })), pb]; let out = [pts[0]]; let horiz = pinDir(a)[1] === 0;
+    for (const q of pts.slice(1)) {
+      const prev = out[out.length - 1];
+      if (Math.abs(prev.x - q.x) > 0.5 && Math.abs(prev.y - q.y) > 0.5) { out.push(horiz ? { x: q.x, y: prev.y } : { x: prev.x, y: q.y }); horiz = !horiz; } else horiz = Math.abs(prev.y - q.y) < 0.5;
+      out.push(q);
+    }
+    out = cleanPts(out); return out.length >= 2 ? out : [pa, pb];
+  }
+  const da = pinDir(a), db = pinDir(b), ha = da[1] === 0, hb = db[1] === 0;
+  if (Math.abs(pa.x - pb.x) < 0.5 || Math.abs(pa.y - pb.y) < 0.5) return [pa, pb];
+  if (ha && hb) { const mx = Math.round((pa.x + pb.x) / 2 / G) * G; return [pa, { x: mx, y: pa.y }, { x: mx, y: pb.y }, pb]; }
+  if (!ha && !hb) { const my = Math.round((pa.y + pb.y) / 2 / G) * G; return [pa, { x: pa.x, y: my }, { x: pb.x, y: my }, pb]; }
+  return ha ? [pa, { x: pb.x, y: pa.y }, pb] : [pa, { x: pa.x, y: pb.y }, pb];
+}
+const routeFor = (w) => (compById(w.a[0]) && compById(w.b[0]) ? route(w.a, w.b, w.via) : null);
+function pinAt(pos) {
+  let best = null, bd = HIT_R;
+  const comps = [...S.proj.components].sort((a, b) => (defOf(a).engine === "board") - (defOf(b).engine === "board"));
+  for (const c of comps) { const d = defOf(c); if (d.engine === "none" && !d.pins.length) continue; for (const p of d.pins) { const [x, y] = pinPos(c, p.name); const dd = Math.hypot(x * G - pos.x, y * G - pos.y); if (dd < bd) { best = [c.id, p.name]; bd = dd; } } }
+  return best;
+}
+const samePin = (a, b) => a && b && a[0] === b[0] && a[1] === b[1];
+function canWire(a, b, ignore) {
+  for (const [cid, pin] of [a, b]) { const c = compById(cid); if (!c) return [false, "Unknown component"]; if (!defOf(c).pins.some((p) => p.name === pin)) return [false, `${c.ref} has no pin ${pin}`]; }
+  if (samePin(a, b)) return [false, "Cannot connect a pin to itself"];
+  if (S.proj.wires.some((w) => w !== ignore && ((samePin(w.a, a) && samePin(w.b, b)) || (samePin(w.a, b) && samePin(w.b, a))))) return [false, "Wire already exists"];
+  const ca = compById(a[0]), cb = compById(b[0]), da = defOf(ca).engine, db = defOf(cb).engine;
+  if (da === "board" || db === "board") return [true, ""];
+  for (const c of [ca, cb]) if (defOf(c).engine === "none") return [false, `${c.ref} (${defOf(c).name}) has no simulation model and cannot be wired`];
+  if (da !== db) return [false, "Analog and digital pins cannot be wired together (no mixed-signal model)"];
+  return [true, ""];
+}
+function connectPins(a, b) {
+  const [ok, why] = canWire(a, b); if (!ok) { toast(why); return false; }
+  pushHist(); const w = { id: Math.random().toString(16).slice(2, 10), a, b, color: wireColorFor(), via: [] }; S.proj.wires.push(w); changed(); renderAll(); return true;
+}
+
+/* nets: union-find over wires, strips inside parts and breadboard strips; used for the automatic wire colours */
+function computeNets() {
+  const parent = new Map(), find = (k) => { while (parent.get(k) !== k) { parent.set(k, parent.get(parent.get(k))); k = parent.get(k); } return k; };
+  const union = (x, y) => { const rx = find(x), ry = find(y); if (rx !== ry) parent.set(rx, ry); };
+  const comps = S.proj.components;
+  for (const c of comps) for (const p of defOf(c).pins) parent.set(pinKey(c.id, p.name), pinKey(c.id, p.name));
+  for (const w of S.proj.wires) { const ka = pinKey(...w.a), kb = pinKey(...w.b); if (parent.has(ka) && parent.has(kb)) union(ka, kb); }
+  for (const c of comps) for (const g of defOf(c).links || []) for (const o of g.slice(1)) union(pinKey(c.id, g[0]), pinKey(c.id, o));
+  const boards = comps.filter((c) => defOf(c).engine === "board");
+  if (boards.length) {
+    const holeAt = new Map(), strips = new Map();
+    for (const bd of boards) for (const p of defOf(bd).pins) { const key = pinKey(bd.id, p.name); const sk = bd.id + "|" + bbGroup(p.name); (strips.get(sk) || strips.set(sk, []).get(sk)).push(key); const [x, y] = pinPos(bd, p.name); holeAt.set(x + "," + y, key); }
+    for (const m of strips.values()) for (const k of m.slice(1)) union(m[0], k);
+    for (const c of comps) { if (defOf(c).engine === "board") continue; for (const p of defOf(c).pins) { const [x, y] = pinPos(c, p.name), h = holeAt.get(x + "," + y); if (h) union(pinKey(c.id, p.name), h); } }
+  }
+  const groups = new Map(); for (const k of parent.keys()) { const r = find(k); (groups.get(r) || groups.set(r, []).get(r)).push(k); }
+  const refOf = (k) => compById(k.split("|")[0]).ref + k.split("|")[1];
+  const ordered = [...groups.values()].sort((g1, g2) => { const a = g1.map(refOf).sort()[0], b = g2.map(refOf).sort()[0]; return a < b ? -1 : a > b ? 1 : 0; });
+  const color = new Map(), deg = new Map();
+  ordered.forEach((g, idx) => {
+    const pins = g.map((k) => { const [cid, pn] = k.split("|"); const c = compById(cid); return [c.type, pn]; });
+    const ground = pins.some(([t, pn]) => t === "ground" || (t === "arduino" && pn.startsWith("GND")));
+    const col = ground ? "#2b2b2b" : pins.some(([t, pn]) => ["vdc", "vac", "vpulse", "idc"].includes(t) && pn === "+") ? "#d62828" : NETPAL[idx % NETPAL.length];
+    for (const k of g) color.set(k, col);
+  });
+  return { color, deg };
+}
+
+/* breadboard seating (magnetic snap), identical to the desktop model */
+function holeMap() { const m = new Map(); for (const bd of S.proj.components) if (defOf(bd).engine === "board") for (const p of defOf(bd).pins) { const [x, y] = pinPos(bd, p.name); m.set(x + "," + y, [bd.id, p.name]); } return m; }
+function seatedOn(boardId) {
+  const bd = compById(boardId), mine = new Set(defOf(bd).pins.map((p) => pinPos(bd, p.name).join(","))), out = [];
+  for (const c of S.proj.components) { if (defOf(c).engine === "board" || c.type === "arduino" || c.type === "ground") continue; if (defOf(c).pins.some((p) => mine.has(pinPos(c, p.name).join(",")))) out.push(c.id); }
+  return out;
+}
+function snapOffset(cid, reach = 4) {
+  const c = compById(cid), pins = defOf(c).pins, holes = holeMap();
+  if (!holes.size || defOf(c).engine === "board" || c.type === "arduino" || c.type === "ground" || !pins.length || pins.length > 20) return [0, 0, 0];
+  const pos = pins.map((p) => pinPos(c, p.name)), cands = new Map([["0,0", [0, 0]]]);
+  for (const [x, y] of pos.slice(0, 3)) for (let dx = -reach; dx <= reach; dx++) for (let dy = -reach; dy <= reach; dy++) if (holes.has(x + dx + "," + (y + dy))) cands.set(dx + "," + dy, [dx, dy]);
+  let best = null;
+  for (const [dx, dy] of cands.values()) {
+    const strips = pos.filter(([x, y]) => holes.has(x + dx + "," + (y + dy))).map(([x, y]) => { const h = holes.get(x + dx + "," + (y + dy)); return h[0] + "|" + bbGroup(h[1]); });
+    const n = strips.length, shorts = n - new Set(strips).size, key = [-n, shorts, Math.abs(dx) + Math.abs(dy)];
+    if (!best || key[0] < best.key[0] || (key[0] === best.key[0] && (key[1] < best.key[1] || (key[1] === best.key[1] && key[2] < best.key[2])))) best = { key, dx, dy, n };
+  }
+  if (best.n < Math.min(pins.length, 2)) return [0, 0, pos.filter(([x, y]) => holes.has(x + "," + y)).length];
+  return [best.dx, best.dy, best.n];
+}
+function seatComp(cid, announce) {
+  const c = compById(cid); if (!c || defOf(c).engine === "board") return 0;
+  const [dx, dy, n] = snapOffset(cid); if (dx || dy) { c.x += dx; c.y += dy; }
+  if (announce && holeMap().size && c.type !== "arduino" && c.type !== "ground") toast(n ? `${c.ref}: ${n}/${defOf(c).pins.length} pins in breadboard holes` : `${c.ref} is not seated in the breadboard`);
+  return n;
+}
+function shiftVia(ids, dx, dy) { for (const w of S.proj.wires) if (w.via && w.via.length && ids.has(w.a[0]) && ids.has(w.b[0])) w.via = w.via.map(([x, y]) => [x + dx, y + dy]); }
 
 function symbolSVG(c, d, g) {
   const L = (x1, y1, x2, y2) => el("line", { x1, y1, x2, y2, class: "symline" }, g);
@@ -163,12 +275,6 @@ function drawComp(c) {
       const i = st.inst; txt.textContent = i ? (i.overload ? "OL" : fmt(i.value, i.unit || "", 3).replace(" ", "")) : "----";
     }
   } else symbolSVG(c, d, t);
-  // pins
-  const used = connectedPins(), small = d.pins.length > 60;
-  for (const p of d.pins) {
-    const e = el("circle", { cx: p.dx * G, cy: p.dy * G, r: small ? 4 : 9, class: "pin", "data-c": c.id, "data-p": p.name }, t);
-    const ti = el("title", {}, e); ti.textContent = `${c.ref}.${p.name}`;
-  }
   // labels (kept upright)
   const [wx0, wy0, wx1, wy1] = worldBox(c);
   const lab = el("g", { "pointer-events": "none" }, g);
@@ -199,21 +305,31 @@ function valueText(c, d) {
   }
   return d.category === "Semiconductors" || d.category === "Analog ICs" || d.category === "Digital ICs" ? d.name.split(" ")[0] : "";
 }
-function wirePath(w) {
-  const a = compById(w.a[0]), b = compById(w.b[0]); if (!a || !b) return null;
-  const [ax, ay] = pinPos(a, w.a[1]), [bx, by] = pinPos(b, w.b[1]);
-  const X1 = ax * G, Y1 = ay * G, X2 = bx * G, Y2 = by * G;
-  if (X1 === X2 || Y1 === Y2) return `M${X1},${Y1} L${X2},${Y2}`;
-  const mx = Math.round((X1 + X2) / 2 / G) * G;
-  return `M${X1},${Y1} H${mx} V${Y2} H${X2}`;
+const darker = (hex, f = 190) => { const n = parseInt(hex.slice(1), 16), k = 100 / f; return "#" + [n >> 16 & 255, n >> 8 & 255, n & 255].map((v) => Math.round(v * k).toString(16).padStart(2, "0")).join(""); };
+const lum = (hex) => { const n = parseInt(hex.slice(1), 16); return 0.3 * (n >> 16 & 255) + 0.59 * (n >> 8 & 255) + 0.11 * (n & 255); };
+function roundedPath(pts) {
+  let d = `M${pts[0].x},${pts[0].y}`;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const a = pts[i - 1], b = pts[i], c = pts[i + 1], l1 = Math.hypot(b.x - a.x, b.y - a.y), l2 = Math.hypot(c.x - b.x, c.y - b.y), rr = Math.min(10, l1 / 2, l2 / 2);
+    if (rr < 1) { d += ` L${b.x},${b.y}`; continue; }
+    d += ` L${b.x + (a.x - b.x) / l1 * rr},${b.y + (a.y - b.y) / l1 * rr} Q${b.x},${b.y} ${b.x + (c.x - b.x) / l2 * rr},${b.y + (c.y - b.y) / l2 * rr}`;
+  }
+  return d + ` L${pts[pts.length - 1].x},${pts[pts.length - 1].y}`;
 }
 function drawWires() {
-  gWires.innerHTML = "";
+  gWires.innerHTML = ""; S.nets = computeNets();
   for (const w of S.proj.wires) {
-    const d = wirePath(w); if (!d) continue;
+    if (S.wend && S.wend.w === w) continue;
+    const pts = routeFor(w); if (!pts) continue;
     const sel = S.sel && S.sel.kind === "w" && S.sel.id === w.id;
-    el("path", { d, class: "wire" + (sel ? " sel" : ""), style: w.color ? `stroke:${w.color}` : "" }, gWires);
-    el("path", { d, class: "wirehit", "data-w": w.id }, gWires);
+    const base = sel ? "#e0a84e" : w.color || S.nets.color.get(pinKey(...w.a)) || "#1d78d6", out = lum(base) < 70 ? "#7b8696" : darker(base), d = roundedPath(pts), g = el("g", {}, gWires);
+    el("path", { d, transform: "translate(2,3)", class: "w-sh" }, g); el("path", { d, class: "w-out", style: `stroke:${out}` }, g); el("path", { d, class: "w-main", style: `stroke:${base}` }, g); el("path", { d, transform: "translate(-0.8,-0.8)", class: "w-hi" }, g);
+    for (const q of [pts[0], pts[pts.length - 1]]) el("circle", { cx: q.x, cy: q.y, r: 3.6, fill: base, stroke: out, "stroke-width": 1 }, g);
+    el("path", { d, class: "wirehit", "data-w": w.id }, g);
+    if (sel) {
+      for (let i = 0; i < pts.length - 1; i++) { const a = pts[i], b = pts[i + 1]; if (Math.abs(a.x - b.x) + Math.abs(a.y - b.y) >= 1.5 * G) el("rect", { x: (a.x + b.x) / 2 - 3.5, y: (a.y + b.y) / 2 - 3.5, width: 7, height: 7, class: "w-handle" }, g); }
+      for (const q of [pts[0], pts[pts.length - 1]]) el("circle", { cx: q.x, cy: q.y, r: 6, class: "w-end" }, g);
+    }
   }
 }
 function renderAll() {
@@ -222,10 +338,9 @@ function renderAll() {
 }
 function drawOver() {
   gOver.innerHTML = "";
-  if (S.wireFrom) {
-    const c = compById(S.wireFrom[0]); if (!c) return; const [x, y] = pinPos(c, S.wireFrom[1]);
-    el("path", { d: `M${x * G},${y * G} L${S.mouse.x},${S.mouse.y}`, class: "wire", style: "stroke-dasharray:5 4;opacity:.8", "pointer-events": "none" }, gOver);
-  }
+  const from = S.wireFrom || (S.wend && S.wend.fixed);
+  if (from && compById(from[0])) { const a = pinPx(from); el("path", { d: `M${a.x},${a.y} L${S.mouse.x},${a.y} L${S.mouse.x},${S.mouse.y}`, class: "w-prev", "pointer-events": "none" }, gOver); }
+  if (S.hover && compById(S.hover[0])) { const q = pinPx(S.hover); el("circle", { cx: q.x, cy: q.y, r: 7, class: "pinring" }, gOver); }
 }
 function defaultParams(d) { const o = {}; for (const k in d.params) o[k] = d.params[k].default; return o; }
 function hint(t) { $("hint").textContent = t || ""; }
@@ -250,47 +365,104 @@ cv.addEventListener("wheel", (e) => {
 
 /* ---------------------------------------------------------------- pointer interaction */
 const ptrs = new Map(); let pinch = null;
+const segDist = (p, a, b) => { const dx = b.x - a.x, dy = b.y - a.y, L = dx * dx + dy * dy, t = L === 0 ? 0 : Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / L)); return Math.hypot(a.x + t * dx - p.x, a.y + t * dy - p.y); };
+function wireEndAt(pos) {
+  if (!S.sel || S.sel.kind !== "w") return null; const w = S.proj.wires.find((x) => x.id === S.sel.id); if (!w) return null;
+  for (const end of ["a", "b"]) { const q = pinPx(w[end]); if ((q.x - pos.x) ** 2 + (q.y - pos.y) ** 2 <= 64) return { w, end }; }
+  return null;
+}
+function beginSegDrag(w, pos) {
+  const pts = (routeFor(w) || []).map((p) => ({ ...p })); let best = null, bd = 1e9;
+  for (let i = 0; i < pts.length - 1; i++) { const d = segDist(pos, pts[i], pts[i + 1]); if (d < bd && (Math.abs(pts[i].x - pts[i + 1].x) > 0.5 || Math.abs(pts[i].y - pts[i + 1].y) > 0.5)) { best = i; bd = d; } }
+  if (best === null) return false; S.wseg = { w, pts, i: best, start: { ...pos }, moved: false, old: [...(w.via || [])], pre: snap() }; return true;
+}
+function applySegDrag(pos) {
+  const d = S.wseg; const pts = d.pts.map((p) => ({ ...p })); let i = d.i; const horizontal = Math.abs(pts[i].y - pts[i + 1].y) < 0.5;
+  if (i === 0) { pts.unshift({ ...pts[0] }); i++; } const j = i + 1; if (j === pts.length - 1) pts.push({ ...pts[pts.length - 1] });
+  const delta = horizontal ? pos.y - d.start.y : pos.x - d.start.x; if (Math.abs(delta) > 3) d.moved = true;
+  const nw = Math.round(((horizontal ? pts[i].y : pts[i].x) + delta) / G) * G;
+  for (const k of [i, j]) { if (horizontal) pts[k].y = nw; else pts[k].x = nw; }
+  d.w.via = pts.slice(1, -1).map((q) => [Math.round(q.x / G), Math.round(q.y / G)]); drawWires();
+}
+function finishSegDrag() {
+  const d = S.wseg; S.wseg = null; const w = d.w;
+  if (!d.moved) { w.via = d.old; drawWires(); return; }
+  const pts = routeFor(w); w.via = pts.slice(1, -1).map((q) => [Math.round(q.x / G), Math.round(q.y / G)]);
+  S.hist.push(d.pre); S.fut = []; updHist(); changed(); renderAll();
+}
+function finishEndDrag(pos) {
+  const d = S.wend; S.wend = null; S.wireFrom = null; hint(""); const pin = pinAt(pos), w = d.w;
+  if (!pin || samePin(pin, w[d.end]) || samePin(pin, d.fixed)) { renderAll(); return; }
+  const [ok, why] = canWire(pin, d.fixed, w); if (!ok) { toast(why); renderAll(); return; }
+  pushHist(); w[d.end] = pin; w.via = []; changed(); renderAll();
+}
 cv.addEventListener("pointerdown", (e) => {
   cv.focus(); cv.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
   if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), k: S.view.k }; S.dragging = null; return; }
-  const w = toWorld(e); S.mouse = w; const tg = e.target;
-  if (tg.classList.contains("pin") && (S.tool === "wire" || e.pointerType === "mouse" || S.wireFrom)) { pinClick(tg.dataset.c, tg.dataset.p); return; }
-  const cg = tg.closest && tg.closest(".comp");
-  if (cg && !S.wireFrom && S.tool !== "wire") {
-    const c = compById(cg.dataset.id); select({ kind: "c", id: c.id });
-    S.dragging = { type: "move", id: c.id, sx: w.x, sy: w.y, ox: c.x, oy: c.y, moved: false, pre: snap() }; return;
+  if (e.button === 2) return;
+  const w = toWorld(e); S.mouse = w; const tg = e.target, usePins = S.tool === "wire" || e.pointerType === "mouse" || !!S.wireFrom, pin = usePins ? pinAt(w) : null;
+  if (S.tool !== "wire" && !S.wireFrom) {
+    const hit = wireEndAt(w);
+    if (hit) { S.wend = { w: hit.w, end: hit.end, fixed: hit.end === "a" ? hit.w.b : hit.w.a }; hint("Drop the wire end on another pin (empty space cancels)"); drawWires(); drawOver(); return; }
+    if (!pin && tg.dataset && tg.dataset.w) { const id = tg.dataset.w; select({ kind: "w", id }); const wr = S.proj.wires.find((x) => x.id === id); if (wr) beginSegDrag(wr, w); return; }
   }
-  if (tg.dataset && tg.dataset.w) { select({ kind: "w", id: tg.dataset.w }); return; }
-  if (S.wireFrom) { S.wireFrom = null; drawOver(); hint(""); return; }
+  if (pin) {
+    if (!S.wireFrom) { S.wireFrom = pin; S.pressPos = w; hint("Wire: click or release on another pin (Esc cancels)"); drawOver(); return; }
+    if (!samePin(pin, S.wireFrom)) { const a = S.wireFrom; S.wireFrom = null; hint(""); connectPins(a, pin); drawOver(); }
+    return;
+  }
+  if (S.wireFrom) { S.wireFrom = null; hint("Wire cancelled"); drawOver(); return; }
+  if (S.tool === "wire") return;
+  const cg = tg.closest && tg.closest(".comp");
+  if (cg) {
+    const c = compById(cg.dataset.id); select({ kind: "c", id: c.id });
+    const carry = defOf(c).engine === "board" ? seatedOn(c.id).map((id) => { const o = compById(id); return { id, ox: o.x, oy: o.y }; }) : [];
+    S.dragging = { type: "move", id: c.id, sx: w.x, sy: w.y, ox: c.x, oy: c.y, px: c.x, py: c.y, carry, moved: false, pre: snap() }; return;
+  }
   select(null); S.dragging = { type: "pan", sx: e.clientX, sy: e.clientY, vx: S.view.x, vy: S.view.y }; cv.classList.add("pan");
 });
 cv.addEventListener("pointermove", (e) => {
   if (ptrs.has(e.pointerId)) ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
   if (pinch && ptrs.size === 2) { const [a, b] = [...ptrs.values()]; S.view.k = Math.min(4, Math.max(0.12, pinch.k * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d)); applyView(); return; }
   const w = toWorld(e); S.mouse = w; $("coords").textContent = `x ${Math.round(w.x / G)} y ${Math.round(w.y / G)}`; const d = S.dragging;
+  if (e.pointerType === "mouse") { const hp = pinAt(w); if (!samePin(hp, S.hover) && !d) { S.hover = hp; drawOver(); } }
+  if (S.wseg) { applySegDrag(w); return; }
+  if (S.wend || S.wireFrom) { drawOver(); return; }
   if (d && d.type === "pan") { S.view.x = d.vx + e.clientX - d.sx; S.view.y = d.vy + e.clientY - d.sy; applyView(); }
   else if (d && d.type === "move") {
     const c = compById(d.id), nx = d.ox + Math.round((w.x - d.sx) / G), ny = d.oy + Math.round((w.y - d.sy) / G);
-    if (nx !== c.x || ny !== c.y) { c.x = nx; c.y = ny; d.moved = true; renderAll(); }
-  } else if (S.wireFrom) drawOver();
+    if (nx !== c.x || ny !== c.y) {
+      const dx = nx - d.px, dy = ny - d.py; d.px = nx; d.py = ny; c.x = nx; c.y = ny; d.moved = true;
+      const ids = new Set([c.id, ...d.carry.map((k) => k.id)]); shiftVia(ids, dx, dy);
+      for (const k of d.carry) { const o = compById(k.id); o.x = k.ox + (nx - d.ox); o.y = k.oy + (ny - d.oy); }
+      S.hover = null; renderAll();
+    }
+  }
 });
 function endPtr(e) {
   ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null;
+  const w = toWorld(e);
+  if (S.wseg) { finishSegDrag(); return; }
+  if (S.wend) { finishEndDrag(w); return; }
+  if (S.wireFrom && S.pressPos) {
+    const moved = Math.abs(w.x - S.pressPos.x) + Math.abs(w.y - S.pressPos.y) > 6, pin = pinAt(w);
+    if (moved) { const a = S.wireFrom; S.wireFrom = null; S.pressPos = null; hint(""); if (pin && !samePin(pin, a)) connectPins(a, pin); drawOver(); }
+    else S.pressPos = null;
+    return;
+  }
   const d = S.dragging; S.dragging = null; cv.classList.remove("pan");
-  if (d && d.type === "move" && d.moved) { S.hist.push(d.pre); S.fut = []; updHist(); changed(); buildProps(); }
+  if (d && d.type === "move" && d.moved) {
+    if (!d.carry.some(() => false) && defOf(compById(d.id)).engine !== "board") seatComp(d.id, true);
+    S.hist.push(d.pre); S.fut = []; updHist(); renderAll(); changed(); buildProps();
+  }
 }
 cv.addEventListener("pointerup", endPtr); cv.addEventListener("pointercancel", endPtr);
-cv.addEventListener("contextmenu", (e) => { e.preventDefault(); if (S.tool) setTool(null); S.wireFrom = null; drawOver(); });
+cv.addEventListener("contextmenu", (e) => { e.preventDefault(); if (S.tool) setTool(null); S.wireFrom = null; S.wend = null; renderAll(); });
+cv.addEventListener("dblclick", (e) => {
+  const wh = e.target.dataset && e.target.dataset.w;
+  if (wh && !pinAt(toWorld(e))) { const w = S.proj.wires.find((x) => x.id === wh); if (w && w.via && w.via.length) { pushHist(); w.via = []; changed(); renderAll(); toast("Wire auto-routed"); } }
+});
 
-function pinClick(cid, pin) {
-  if (!S.wireFrom) { S.wireFrom = [cid, pin]; hint("Click the second pin to finish the wire (Esc cancels)"); drawOver(); return; }
-  const [a, ap] = S.wireFrom;
-  if (a === cid && ap === pin) { S.wireFrom = null; hint(""); drawOver(); return; }
-  if (!S.proj.wires.some((w) => (w.a[0] === a && w.a[1] === ap && w.b[0] === cid && w.b[1] === pin) || (w.b[0] === a && w.b[1] === ap && w.a[0] === cid && w.a[1] === pin))) {
-    pushHist(); S.proj.wires.push({ id: Math.random().toString(16).slice(2, 10), a: [a, ap], b: [cid, pin], color: wireColorFor(ap, pin) }); changed();
-  }
-  S.wireFrom = null; hint(""); renderAll();
-}
 function select(s) { S.sel = s; renderAll(); buildProps(); updCtx(); if (s) openPage("prop"); }
 function updCtx() {
   const sel = S.sel, isC = !!sel && sel.kind === "c";
@@ -301,13 +473,13 @@ function nextRef(d) { const used = new Set(S.proj.components.map((c) => c.ref));
 function placePart(type, x, y, r) {
   const d = S.defs[type]; pushHist();
   const c = { id: Math.random().toString(16).slice(2, 10), type, ref: nextRef(d), x, y, rot: r, mirror: false, params: defaultParams(d) };
-  S.proj.components.push(c); S.sel = { kind: "c", id: c.id }; changed(); renderAll(); buildPanels();
+  S.proj.components.push(c); seatComp(c.id, true); S.sel = { kind: "c", id: c.id }; changed(); renderAll(); buildPanels();
   updCtx(); toast(`Added ${c.ref}. Drag it into place.`); openPage("prop");
 }
 function setTool(t) {
   S.tool = t; S.wireFrom = null; cv.setAttribute("class", t === "wire" ? "wiring" : "");
   $("bWire").classList.toggle("on", t === "wire"); $("bWire").setAttribute("aria-pressed", t === "wire");
-  hint(t === "wire" ? "Wire tool: tap a pin, then another pin" : ""); drawOver();
+  hint(t === "wire" ? "Wire tool: click a pin, then another pin (drag from a pin works too)" : ""); drawOver();
 }
 function addPartCenter(type) {
   const r = cv.getBoundingClientRect(), v = S.view, bi = visibleBottom();
@@ -327,6 +499,11 @@ function rotSel(mirror) {
 document.addEventListener("keydown", (e) => {
   const tag = (e.target.tagName || "").toLowerCase(); if (tag === "input" || tag === "select" || tag === "textarea" || netMode) return;
   const k = e.key.toLowerCase();
+  if (k.startsWith("arrow") && S.sel && S.sel.kind === "c" && !e.ctrlKey) {
+    e.preventDefault(); const dx = { arrowleft: -1, arrowright: 1 }[k] || 0, dy = { arrowup: -1, arrowdown: 1 }[k] || 0, c = compById(S.sel.id); pushHist();
+    const carry = defOf(c).engine === "board" ? seatedOn(c.id) : []; c.x += dx; c.y += dy; for (const id of carry) { const o = compById(id); o.x += dx; o.y += dy; } shiftVia(new Set([c.id, ...carry]), dx, dy);
+    if (defOf(c).engine !== "board") seatComp(c.id, true); renderAll(); changed(); return;
+  }
   if ((e.ctrlKey || e.metaKey) && k === "z") { e.preventDefault(); e.shiftKey ? redo() : undo(); }
   else if ((e.ctrlKey || e.metaKey) && k === "y") { e.preventDefault(); redo(); }
   else if ((e.ctrlKey || e.metaKey) && k === "l") { e.preventDefault(); toggleLive(); }
@@ -460,19 +637,14 @@ S.wireColor = "";
 function buildSwatches() {
   const box = $("swatches"); box.innerHTML = "";
   for (const c of WCOL) { const b = document.createElement("button"); b.style.background = c; b.setAttribute("aria-label", "Wire colour " + c); b.dataset.c = c; box.appendChild(b); }
+  $("autoColor").onchange = () => { if ($("autoColor").checked) { S.wireColor = ""; box.querySelectorAll("button").forEach((x) => x.classList.remove("on")); } };
   box.onclick = (e) => {
     const b = e.target.closest("button"); if (!b) return; S.wireColor = b.dataset.c; $("autoColor").checked = false;
     box.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
     if (S.sel && S.sel.kind === "w") { const w = S.proj.wires.find((x) => x.id === S.sel.id); if (w) { pushHist(); w.color = S.wireColor; drawWires(); } }
   };
 }
-function wireColorFor(a, b) {
-  if (!$("autoColor").checked) return S.wireColor || "";
-  const n = (a + " " + b).toLowerCase();
-  if (/(^|\s)(gnd|g|−|-|vss|e)(\s|$)/.test(n)) return "#1a1c20";
-  if (/(^|\s)(\+|vcc|vdd|5v|3v3|v\+)(\s|$)/.test(n)) return "#d46a63";
-  return "";
-}
+function wireColorFor() { return $("autoColor").checked ? "" : S.wireColor || ""; }
 
 /* examples menu (circuits and networks) */
 let expFilter = "All", expKind = "elec";

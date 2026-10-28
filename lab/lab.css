@@ -197,13 +197,14 @@ pre.serial{background:var(--plot);border:1px solid var(--line);border-radius:6px
 .tip{overflow:hidden;text-overflow:ellipsis}
 
 /* circuit drawing */
-.wire{fill:none;stroke:var(--wire);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.wire.sel{stroke:#e0a84e;stroke-width:3.6}
-.wirehit{fill:none;stroke:transparent;stroke-width:16;cursor:pointer}
+.w-sh,.w-out,.w-main,.w-hi{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.w-sh{stroke:rgba(0,0,0,.28);stroke-width:5.5}.w-out{stroke-width:5}.w-main{stroke-width:3.4}.w-hi{stroke:rgba(255,255,255,.35);stroke-width:1}
+.wirehit{fill:none;stroke:transparent;stroke-width:12;cursor:pointer}
+.w-handle{fill:#fff;stroke:#e0a84e;stroke-width:1.5;pointer-events:none}
+.w-end{fill:#e0a84e;stroke:#fff;stroke-width:1;pointer-events:none}
+.w-prev{fill:none;stroke:#e0a84e;stroke-width:2;stroke-dasharray:6 4;stroke-linecap:round;stroke-linejoin:round}
+.pinring{fill:rgba(255,255,255,.22);stroke:var(--acc2);stroke-width:2;pointer-events:none}
 .sel-box{fill:none;stroke:#e0a84e;stroke-width:1.5;stroke-dasharray:5 4;pointer-events:none}
-.pin{fill:transparent;stroke:none;cursor:crosshair}
-.pin:hover,.pin.hot{fill:#fff;stroke:var(--acc);stroke-width:1.5}
-#cv.wiring .pin{fill:color-mix(in srgb,var(--ok) 55%,transparent);stroke:var(--ok);stroke-width:1}
 .plabel{fill:var(--mute);font-size:9px;pointer-events:none;user-select:none}
 .symline{fill:none;stroke:var(--text);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .symfill{fill:var(--partfill);stroke:var(--text);stroke-width:2}

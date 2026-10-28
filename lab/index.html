@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LEARNERS LAB — Online circuit simulator | VIN Technologies</title>
+<meta name="description" content="A virtual electronics laboratory in your browser: breadboard-style circuits, live sliders, oscilloscope, graphs and 100+ lab experiments, simulated by a real analog and digital engine.">
+<link rel="icon" href="af/led-red.svg">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div id="boot"><div class="boot-card"><div class="boot-title">LEARNERS LAB</div><div class="bar"><i id="bootbar"></i></div><div id="boottext">Starting</div></div></div>
+
+<header class="top">
+  <a class="brand" href="../">VIN <span>TECHNOLOGIES</span></a>
+  <span class="sep"></span>
+  <span class="app">LEARNERS LAB</span>
+  <span class="doc" id="doctitle"></span>
+  <span class="grow"></span>
+  <a class="plain" href="../#app">Download the desktop app</a>
+</header>
+
+<div class="ribbon">
+  <button id="bRun" class="primary" title="Run the simulation (Ctrl+Enter)">Run</button>
+  <button id="bLive" class="toggle" title="Re-run automatically whenever a value changes (Ctrl+L)">Live</button>
+  <span class="vsep"></span>
+  <button id="bUndo" title="Undo (Ctrl+Z)">Undo</button>
+  <button id="bRedo" title="Redo (Ctrl+Y)">Redo</button>
+  <span class="vsep"></span>
+  <button id="bRot" title="Rotate selected (R)">Rotate</button>
+  <button id="bMir" title="Mirror selected (F)">Mirror</button>
+  <button id="bDel" title="Delete selected (Del)">Delete</button>
+  <span class="vsep"></span>
+  <button id="bWire" class="toggle" title="Wire tool: click a pin, then another pin (W). Click any pin to start a wire too.">Wire</button>
+  <button id="bFit" title="Fit circuit to window (Home)">Fit</button>
+  <span class="vsep"></span>
+  <button id="bSave" title="Download this circuit as a file">Save</button>
+  <button id="bOpen" title="Open a saved circuit">Open</button>
+  <input id="fOpen" type="file" accept=".json,application/json" hidden>
+  <span class="grow"></span>
+  <span id="status" class="status">Loading</span>
+</div>
+
+<main class="shell">
+  <aside class="left">
+    <div class="tabs" id="ltabs"><button class="on" data-t="exp">Experiments</button><button data-t="parts">Parts</button></div>
+    <input id="search" type="search" placeholder="Search" aria-label="Search">
+    <div id="lexp" class="list"></div>
+    <div id="lparts" class="list" hidden></div>
+  </aside>
+
+  <section class="stage" id="stage">
+    <svg id="cv" xmlns="http://www.w3.org/2000/svg" tabindex="0">
+      <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="0" cy="0" r="1" class="gdot"/></pattern>
+        <radialGradient id="glowR"><stop offset="0" stop-color="#e11d1d" stop-opacity=".95"/><stop offset=".5" stop-color="#e11d1d" stop-opacity=".45"/><stop offset="1" stop-color="#e11d1d" stop-opacity="0"/></radialGradient>
+        <radialGradient id="glowG"><stop offset="0" stop-color="#22c55e" stop-opacity=".95"/><stop offset=".5" stop-color="#22c55e" stop-opacity=".45"/><stop offset="1" stop-color="#22c55e" stop-opacity="0"/></radialGradient>
+        <radialGradient id="glowY"><stop offset="0" stop-color="#eab308" stop-opacity=".95"/><stop offset=".5" stop-color="#eab308" stop-opacity=".45"/><stop offset="1" stop-color="#eab308" stop-opacity="0"/></radialGradient>
+        <radialGradient id="glowB"><stop offset="0" stop-color="#2563eb" stop-opacity=".95"/><stop offset=".5" stop-color="#2563eb" stop-opacity=".45"/><stop offset="1" stop-color="#2563eb" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect id="gridrect" x="-20000" y="-20000" width="40000" height="40000" fill="url(#grid)"/>
+      <g id="world"><g id="wires"></g><g id="comps"></g><g id="over"></g></g>
+    </svg>
+    <div id="hint" class="hint"></div>
+  </section>
+
+  <aside class="right">
+    <div class="tabs" id="rtabs">
+      <button class="on" data-t="info">Guide</button><button data-t="ctl">Controls</button><button data-t="prop">Properties</button>
+      <button data-t="res">Results</button><button data-t="graph">Graph</button><button data-t="scope">Scope</button>
+    </div>
+    <div id="rinfo" class="pane"></div>
+    <div id="rctl" class="pane" hidden></div>
+    <div id="rprop" class="pane" hidden></div>
+    <div id="rres" class="pane" hidden></div>
+    <div id="rgraph" class="pane plotpane" hidden>
+      <div class="plotbar"><label><input type="checkbox" id="gLogX"> log X</label><label><input type="checkbox" id="gLogY"> log Y</label><button id="gCsv" class="small">CSV</button><button id="gPng" class="small">PNG</button></div>
+      <canvas id="gcv"></canvas>
+      <div id="greadout" class="readout"></div>
+      <div id="gsig" class="siglist"></div>
+    </div>
+    <div id="rscope" class="pane plotpane" hidden>
+      <div id="scopeNone" class="empty">Add an oscilloscope to the circuit and run it.</div>
+      <div id="scopeBox" hidden>
+        <canvas id="scv"></canvas>
+        <div class="scopeknobs" id="sknobs"></div>
+        <div id="smeas" class="meas"></div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<script src="lab.js"></script>
+</body>
+</html>

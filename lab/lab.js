@@ -1047,13 +1047,15 @@ const goFull = () => { document.fullscreenElement ? document.exitFullscreen() : 
 $("bFull").onclick = goFull; $("nFull").onclick = goFull;
 document.addEventListener("fullscreenchange", () => setTimeout(() => { netMode ? window.NET && NET.fit() : fit(); drawGraph(); drawScope(); }, 150));
 function setMode(m) {
-  netMode = m === "net"; $("app").dataset.mode = m;
+  netMode = m === "net"; const ard = m === "ard"; $("app").dataset.mode = m;
   $("modeseg").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.m === m));
-  $("workElec").hidden = netMode; $("workNet").hidden = !netMode; $("tbElec").hidden = netMode; $("tbNet").hidden = !netMode; $("app").classList.remove("showparts");
-  $("tip").textContent = netMode ? "Select a block to edit it · connect tool links two blocks · wheel zoom · drag empty space to pan · Del delete" : "Click a pin, then another pin to wire · wheel zoom · drag empty space to pan · R rotate · Del delete";
-  if (netMode) { NET.enter(); } else { $("doctitle").textContent = S.proj.meta?.name || "Untitled"; updStatusbar(); setTimeout(() => { fit(); drawGraph(); drawScope(); }, 30); }
+  $("workElec").hidden = m !== "elec"; $("workNet").hidden = !netMode; $("workArd").hidden = !ard; $("tbElec").hidden = m !== "elec"; $("tbNet").hidden = !netMode; $("app").classList.remove("showparts");
+  for (const id of ["mFile", "mEx", "mEdit"]) $(id).hidden = ard;
+  $("tip").textContent = ard ? "ArduinoForge: 131 parts and 400 Kit 1–8 projects. Use its own Examples menu, Parts panel and Start Simulation (F5)." : netMode ? "Select a block to edit it · connect tool links two blocks · wheel zoom · drag empty space to pan · Del delete" : "Click a pin, then another pin to wire · wheel zoom · drag empty space to pan · R rotate · Del delete";
+  if (ard) { const f = $("ardFrame"); if (!f.getAttribute("src")) f.src = "arduinoforge/index.html"; $("doctitle").textContent = "ArduinoForge"; setStatus("ArduinoForge", "ok"); }
+  else if (netMode) { NET.enter(); } else { $("doctitle").textContent = S.proj.meta?.name || "Untitled"; updStatusbar(); setTimeout(() => { fit(); drawGraph(); drawScope(); }, 30); }
 }
-$("modeseg").onclick = (e) => { const b = e.target.closest("button"); if (b && b.dataset.m !== (netMode ? "net" : "elec")) setMode(b.dataset.m); };
+$("modeseg").onclick = (e) => { const b = e.target.closest("button"); if (b && b.dataset.m !== $("app").dataset.mode) setMode(b.dataset.m); };
 if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
 
 /* ---------------------------------------------------------------- boot */
@@ -1065,6 +1067,7 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.ser
     buildLists(); if (window.NET) await NET.init(); $("boot").remove(); setStatus("Ready");
     const q = new URLSearchParams(location.search).get("ex");
     await openExample(q && S.examples.some((e) => e.key === q) ? q : "lg_cmos_not");
+    if (new URLSearchParams(location.search).get("m") === "ard") setMode("ard");
     openPage("exp");
   } catch (err) { const m = "Could not start: " + (err.message || err); if ($("boottext")) $("boottext").textContent = m; else setStatus(m.slice(0, 160), "err"); console.error(m); }
 })();

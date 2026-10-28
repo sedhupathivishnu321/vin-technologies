@@ -95,6 +95,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset
 /* work area */
 .work{flex:1;min-height:0;display:grid;grid-template-columns:260px minmax(0,1fr) 360px}
 .work[hidden]{display:none}
+#workArd{display:block;padding:0;background:var(--canvas)}
+#ardFrame{width:100%;height:100%;border:0;display:block;background:#fff}
+#app[data-mode=ard] .statusbar .coords,#app[data-mode=ard] #counts,#app[data-mode=ard] #problems{display:none}
 .palette{border-right:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;min-height:0;padding:8px;gap:8px}
 .tree{flex:1;min-height:0;overflow-y:auto;padding-right:2px}
 .cat{margin-bottom:2px}

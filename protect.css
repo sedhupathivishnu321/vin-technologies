@@ -1,0 +1,10 @@
+/* Print / copy deterrents shared by every page (see protect.js). */
+@media print{
+  @page{margin:0;size:auto}
+  html,body{display:none!important;visibility:hidden!important;background:#fff!important}
+  html:before{content:"Printing and saving this site as PDF are disabled. Read it online at vintechnologies.co.in";display:block!important;visibility:visible!important;font:600 18px/1.5 Arial,sans-serif;padding:40px;color:#14213d}
+}
+/* No text selection or image dragging on content pages (inputs stay usable) */
+html.nocopy body{-webkit-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
+html.nocopy input,html.nocopy textarea,html.nocopy select,html.nocopy [contenteditable],html.nocopy #contact,html.nocopy #contact *{-webkit-user-select:text;user-select:text}
+html.nocopy img,html.nocopy canvas{-webkit-user-drag:none;user-drag:none}

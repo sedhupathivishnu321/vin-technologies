@@ -93,6 +93,23 @@
     c.onclick = function () { if (confirm("Delete the projects stored in this browser? Copies in your Google Drive are kept.")) { managedKeys().forEach(function (k) { if (!/theme/.test(k)) rawRemove.call(ls, k); }); saveMeta({}); toast("Local cache cleared"); renderPop(); } };
     p.append(c, h("small", { style: "margin-top:8px" }, [h("a", { href: "/privacy/", target: "_blank", rel: "noopener" }, ["Privacy policy"]), " · ", h("a", { href: "/terms/", target: "_blank", rel: "noopener" }, ["Terms of service"])]));
   }
+  // ---------------------------------------------------------------- sign-in gate (config: requireSignIn)
+  function showGate() {
+    if (el.gate) return;
+    el.gate = h("div", { id: "llgate", role: "dialog", "aria-modal": "true", "aria-label": "Sign in required", style: "position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg,#f3f5f8);font:14px/1.5 system-ui,'Segoe UI',sans-serif;color:var(--text,#1c2430)" });
+    var card = h("div", { style: "max-width:420px;width:100%;background:var(--panel,#fff);border:1px solid var(--line,#d9dfe8);border-radius:14px;box-shadow:0 12px 32px rgba(20,30,50,.18);padding:26px;text-align:center" });
+    var btn = h("button", { type: "button", style: "margin-top:16px;height:40px;padding:0 22px;border-radius:8px;border:0;background:var(--acc,#2f6fed);color:#fff;font:600 14px system-ui,sans-serif;cursor:pointer" }, ["Sign in with Google"]);
+    btn.onclick = signIn;
+    var title = (document.title || "LEARNERS LAB").split("|")[0].split("—")[0].trim();
+    card.append(h("h2", { style: "margin:0 0 8px;font-size:20px" }, ["Sign in to open " + title]),
+      h("p", { style: "margin:0;color:var(--mute,#6b7686)" }, ["LEARNERS LAB simulators and trainer kits are free. Sign in with Google to use them; your projects are then kept in your own Google Drive."]), btn,
+      h("p", { style: "margin:14px 0 0;font-size:12px;color:var(--mute,#6b7686)" }, ["By signing in you agree to the ", h("a", { href: "/terms/", target: "_blank", rel: "noopener" }, ["Terms"]), " and ", h("a", { href: "/privacy/", target: "_blank", rel: "noopener" }, ["Privacy Policy"]), "."]));
+    el.gate.append(card);
+    document.documentElement.append(el.gate);
+    document.body.setAttribute("inert", "");
+  }
+  function hideGate() { if (el.gate) { el.gate.remove(); el.gate = null; document.body.removeAttribute("inert"); } }
+
   function mount() {
     css();
     el.root = h("div", { "class": "llacct" });
@@ -124,8 +141,8 @@
           st.token = r.access_token;
           fetch("https://www.googleapis.com/oauth2/v3/userinfo", { headers: { Authorization: "Bearer " + st.token } }).then(function (x) { return x.json(); }).then(function (u) {
             st.email = u.email || st.email; st.name = u.name || ""; try { rawSet.call(ls, "ll:acct", JSON.stringify({ email: st.email, name: st.name })); } catch (e) { /* ignore */ }
-            pull(false);
-          }).catch(function () { pull(false); });
+            hideGate(); pull(false);
+          }).catch(function () { hideGate(); pull(false); });
         },
         error_callback: function () { st.state = st.email ? "expired" : "out"; render(); },
       });
@@ -135,7 +152,7 @@
   function signOut() {
     try { if (st.token && window.google) google.accounts.oauth2.revoke(st.token, function () {}); } catch (e) { /* ignore */ }
     st = { state: "out", email: "", name: "", token: "", pushT: 0, last: "", fileId: "" }; try { rawRemove.call(ls, "ll:acct"); } catch (e) { /* ignore */ }
-    el.pop.hidden = true; render(); toast("Signed out. Your work stays in this browser.");
+    el.pop.hidden = true; render(); if (GATED) showGate(); else toast("Signed out. Your work stays in this browser.");
   }
   function api(url, opt) {
     opt = opt || {}; opt.headers = Object.assign({ Authorization: "Bearer " + st.token }, opt.headers || {});
@@ -182,6 +199,7 @@
   window.addEventListener("pagehide", function () { if (st.state === "ready" && st.token && st.pushT) { try { push(); } catch (e) { /* best effort */ } } });
 
   window.LLAccount = { used: used, limit: LIMIT, signIn: signIn, signOut: signOut, sync: function () { return pull(true); } };
-  function start() { if (CLIENT) mount(); }
+  var GATED = !!CLIENT && CFG.requireSignIn !== false;
+  function start() { if (CLIENT) { mount(); if (GATED && st.state === "out") showGate(); } }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();

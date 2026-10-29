@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>8085 and 8051 Microprocessor Trainer Kit Online — Assembler, Simulator, Interfacing | LEARNERS LAB</title>
+<meta name="description" content="Free online 8085 and 8051 trainer kits: assembler, step debugger, hex keypad monitor, LEDs, 7-segment, LCD, keypad, stepper motor, DAC, ADC, 8255, 8253, 8251, timers, interrupts and serial. 74 ready-made lab experiments with automatic result checking.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://vintechnologies.co.in/lab/trainer/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VIN Technologies">
+<meta property="og:title" content="8085 and 8051 Microprocessor Trainer Kit Online | LEARNERS LAB">
+<meta property="og:description" content="Free online 8085 and 8051 trainer kits with assembler, debugger, interfacing boards (LCD, 7-segment, keypad, stepper, DAC, ADC, 8255, 8253, 8251) and 74 lab experiments.">
+<meta property="og:url" content="https://vintechnologies.co.in/lab/trainer/">
+<meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="8085 and 8051 Microprocessor Trainer Kit Online | LEARNERS LAB">
+<meta name="twitter:image" content="https://vintechnologies.co.in/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"LEARNERS LAB 8085 and 8051 Trainer Kits","url":"https://vintechnologies.co.in/lab/trainer/","description":"Online 8085 and 8051 microprocessor trainer kits with assembler, debugger and interfacing boards, plus 74 lab experiments.","applicationCategory":"EducationalApplication","operatingSystem":"Any (web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"featureList":["8085 and 8051 assemblers","Single-step debugger with breakpoints","Hex keypad monitor with 7-segment display","LED, DIP switch, 7-segment, LCD, matrix keypad","Stepper motor, DC motor, relay, traffic light","DAC with oscilloscope, ADC0809","8255, 8253, 8251, timers, interrupts, UART","74 lab experiments with automatic checking"],"audience":{"@type":"EducationalAudience","educationalRole":"student"},"publisher":{"@id":"https://vintechnologies.co.in/#org"},"image":"https://vintechnologies.co.in/og-image.png"}</script>
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<link rel="stylesheet" href="trainer.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-step" viewBox="0 0 24 24"><path d="M5 5l9 7-9 7zM19 5v14"/></symbol>
+  <symbol id="i-over" viewBox="0 0 24 24"><path d="M4 15a8 8 0 0 1 16 0M16 12l4 3-4 3"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5"/></symbol>
+  <symbol id="i-build" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></symbol>
+  <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zM16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
+</defs></svg>
+
+<div id="app">
+  <header class="ribbon">
+    <div class="r1">
+      <a class="brand" href="../" title="Circuits"><img src="../icons/icon-192.png" alt=""><b>LEARNERS LAB</b><span class="sub">Trainer Kits</span></a>
+      <div class="modeseg" id="kitseg" role="tablist"><button data-kit="8085" class="on">8085</button><button data-kit="8051">8051</button></div>
+      <span class="vsep"></span>
+      <button class="rb" id="bEx" title="Experiments"><svg class="ic sm"><use href="#i-flask"/></svg><span class="t">Experiments</span><svg class="ic xs"><use href="#i-chev"/></svg></button>
+      <span class="vsep"></span>
+      <button class="rb" id="bAsm" title="Assemble and load (F7)"><svg class="ic sm"><use href="#i-build"/></svg><span class="t">Assemble</span></button>
+      <button class="rb go" id="bRun" title="Run (F5)"><svg class="ic sm"><use href="#i-play"/></svg><span>Run</span></button>
+      <button class="rb" id="bStep" title="Step (F10)"><svg class="ic sm"><use href="#i-step"/></svg><span class="t">Step</span></button>
+      <button class="rb" id="bOver" title="Step over calls (F8)"><svg class="ic sm"><use href="#i-over"/></svg><span class="t">Over</span></button>
+      <button class="rb" id="bReset" title="Reset the CPU and devices (program stays in memory)"><svg class="ic sm"><use href="#i-reset"/></svg><span class="t">Reset</span></button>
+      <span class="vsep"></span>
+      <label class="inl" title="How fast simulated time runs"><span class="mute t">Speed</span>
+        <select id="speed">
+          <option value="r:2">2 instr/s</option>
+          <option value="r:10">10 instr/s</option>
+          <option value="r:100">100 instr/s</option>
+          <option value="m:1" selected>Real time 1x</option>
+          <option value="m:10">10x</option>
+          <option value="m:100">100x</option>
+          <option value="m:1000">Max</option>
+        </select></label>
+      <span class="grow"></span>
+      <span class="clock" id="clock" title="Simulated time / effective speed">0.000 s</span>
+      <button class="rb sq" id="bMore" title="More"><svg class="ic sm"><use href="#i-more"/></svg></button>
+      <button class="rb sq" id="bTheme" title="Light / dark"><svg class="ic sm"><use href="#i-moon"/></svg></button>
+      <a class="rb" href="../" title="Circuit simulator">Circuits</a>
+      <a class="rb" href="../network/" title="Network simulator">Networks</a>
+    </div>
+  </header>
+
+  <div class="work" id="work">
+    <section class="pane left" id="pLeft">
+      <div class="tabs" id="tabsLeft"><button data-t="code" class="on">Code</button><button data-t="list">Listing</button><button data-t="lab">Experiment</button><button data-t="help">Reference</button></div>
+      <div class="pg" id="pgCode">
+        <div class="ed">
+          <div class="gutter" id="gutter"><pre id="gnums"></pre></div>
+          <div class="edmain"><div class="curline" id="curline"></div><textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="off"></textarea></div>
+        </div>
+        <div class="problems" id="problems"></div>
+      </div>
+      <div class="pg" id="pgList" hidden><pre class="list" id="listing"></pre></div>
+      <div class="pg lab" id="pgLab" hidden></div>
+      <div class="pg lab" id="pgHelp" hidden></div>
+    </section>
+
+    <section class="pane mid" id="pMid">
+      <div class="board" id="board"></div>
+    </section>
+
+    <aside class="pane right" id="pRight">
+      <div class="tabs" id="tabsRight"><button data-t="cpu" class="on">CPU</button><button data-t="mem">Memory</button><button data-t="dis">Disassembly</button><button data-t="io">Chips</button></div>
+      <div class="pg" id="pgCpu"></div>
+      <div class="pg" id="pgMem" hidden></div>
+      <div class="pg" id="pgDis" hidden></div>
+      <div class="pg" id="pgIo" hidden></div>
+    </aside>
+  </div>
+
+  <nav class="mtabs" id="mtabs"><button data-p="left" class="on">Code</button><button data-p="mid">Kit</button><button data-p="right">State</button></nav>
+  <footer class="statusbar"><i class="sdot" id="sdot"></i><span class="st" id="stmsg">Ready</span><span class="grow"></span><span id="stpc" class="mono"></span><span id="stprob" class="problems-badge"></span></footer>
+</div>
+
+<div class="popmenu" id="moreMenu" hidden></div>
+<div class="exmenu" id="exMenu" hidden></div>
+<div class="modal" id="modal" hidden><div class="modalbox" id="modalbox"></div></div>
+<script type="module" src="trainer.js"></script>
+</body>
+</html>

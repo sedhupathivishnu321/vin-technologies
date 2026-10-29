@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 5: Rectifiers | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch05.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 5: Rectifiers | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch05.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 5</div><h1>Rectifiers</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-5-1">5.1 Half-wave rectifier</a></li><li><a href="#s-5-2">5.2 Full-wave rectifier</a></li><li><a href="#s-5-3">5.3 Centre-tapped rectifier</a></li><li><a href="#s-5-4">5.4 Bridge rectifier</a></li><li><a href="#s-5-5">5.5 Average and RMS output voltage</a></li><li><a href="#s-5-6">5.6 DC load current</a></li><li><a href="#s-5-7">5.7 Ripple factor</a></li><li><a href="#s-5-8">5.8 Rectifier efficiency</a></li><li><a href="#s-5-9">5.9 Peak inverse voltage</a></li><li><a href="#s-5-10">5.10 Transformer utilization factor</a></li><li><a href="#s-5-11">5.11 Capacitor-filtered rectifiers</a></li><li><a href="#s-5-12">5.12 Ripple voltage</a></li><li><a href="#s-5-13">5.13 Diode conduction angle</a></li><li><a href="#s-5-14">5.14 Voltage regulation</a></li><li><a href="#s-5-15">5.15 Comparison of rectifier configurations</a></li><li><a href="#s-5-16">5.16 GATE numerical problems</a></li></ol></details><h2 id="s-5-1"><span class="n">5.1</span> Half-wave rectifier</h2>
+<p>One diode in series with the load passes one half of every input cycle.</p>
+<figure id="fig-5-1"><div class="figimgs"><img src="img/f5_hwr.png" alt="" loading="lazy"><img src="img/w5_hwr.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.1.</b> Half-wave rectifier and its output (\(V_m=10\) V, ideal diode).</figcaption></figure>
+<p>With \(v_s=V_m\sin\omega t\), diode resistance \(r_f\) and load \(R_L\): \(i=I_m\sin\omega t\) for \(0&lt;\omega t&lt;\pi\), where \(I_m=V_m/(r_f+R_L)\).</p>
+<div class="box derive"><div class="bt">Average and RMS values (half-wave)</div><div class="bb"><p>\(I_{dc}=\dfrac1{2\pi}\int_0^\pi I_m\sin\theta\,d\theta=\dfrac{I_m}{\pi}\), &emsp;&emsp;
+\(I_{rms}=\sqrt{\dfrac1{2\pi}\int_0^\pi I_m^2\sin^2\theta\,d\theta}=\dfrac{I_m}{2}\).<br>
+Hence \(V_{dc}=I_{dc}R_L=\dfrac{V_m}{\pi}\) (ideal diode) and \(V_{rms,o}=\dfrac{V_m}2\).</p></div></div>
+<h2 id="s-5-2"><span class="n">5.2</span> Full-wave rectifier</h2>
+<p>A full-wave rectifier passes both half-cycles in the same direction across the load: \(|v_s|\) (for an ideal circuit). Average and RMS over one period of \(|\sin|\):
+\[I_{dc}=\frac{2I_m}{\pi},\qquad I_{rms}=\frac{I_m}{\sqrt2}.\]</p>
+<figure id="fig-5-2"><div class="figimgs"><img src="img/w5_fwr.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.2.</b> Full-wave rectified output, \(V_{dc}=2V_m/\pi\) (ideal).</figcaption></figure>
+<h2 id="s-5-3"><span class="n">5.3</span> Centre-tapped rectifier</h2>
+<p>A transformer with a centre-tapped secondary and two diodes: each diode conducts on alternate half-cycles and each sees only half of the total secondary voltage in the forward direction.</p>
+<figure id="fig-5-3"><div class="figimgs"><img src="img/f5_ct.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.3.</b> Centre-tapped full-wave rectifier (\(D_1\) conducts during one half-cycle, \(D_2\) during the other).</figcaption></figure>
+<p>Each half-secondary supplies \(V_m\) (peak). Output: \(V_{dc}=2V_m/\pi\) where \(V_m\) is the peak of <em>one half</em> of the secondary. When one diode conducts, the other is reverse biased by the <em>full</em> secondary voltage \(2V_m\): PIV \(=2V_m\).</p>
+<h2 id="s-5-4"><span class="n">5.4</span> Bridge rectifier</h2>
+<p>Four diodes and a plain (no tap) secondary: two diodes conduct in each half-cycle (\(D_1,D_4\) when the top terminal is positive; \(D_2,D_3\) otherwise).</p>
+<figure id="fig-5-4"><div class="figimgs"><img src="img/f5_bridge.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.4.</b> Bridge rectifier. For \(v_s&gt;0\): \(D_1\) and \(D_4\) conduct. For \(v_s&lt;0\): \(D_2\) and \(D_3\) conduct.</figcaption></figure>
+<p>The output is \(|v_s|-2V_{on}\) (two diode drops in series). PIV of each diode \(=V_m\) (just the peak secondary voltage). Requires no centre tap, so the transformer is smaller.</p>
+<h2 id="s-5-5"><span class="n">5.5</span> Average and RMS output voltage</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Quantity</th><th class="c">Half-wave</th><th class="c">Full-wave (CT or bridge)</th></tr></thead><tbody><tr><td>\(V_{dc}\)</td><td class="c">\(V_m/\pi=0.318V_m\)</td><td class="c">\(2V_m/\pi=0.637V_m\)</td></tr><tr><td>\(V_{rms}\)</td><td class="c">\(V_m/2=0.5V_m\)</td><td class="c">\(V_m/\sqrt2=0.707V_m\)</td></tr><tr><td>Ripple frequency</td><td class="c">\(f\)</td><td class="c">\(2f\)</td></tr></tbody></table></div></div>
+<p>With real diode: replace \(V_m\) by \(V_m-V_{on}\) (bridge: \(V_m-2V_{on}\)).</p>
+<h2 id="s-5-6"><span class="n">5.6</span> DC load current</h2>
+<p>\[I_{dc}=\frac{V_{dc}}{R_L}=\begin{cases}\dfrac{I_m}{\pi}, &amp; \text{half-wave}\\[6pt]\dfrac{2I_m}{\pi}, &amp; \text{full-wave}\end{cases},\qquad I_m=\frac{V_m}{R_L+r_f}\ (\text{HW; FW CT})\ \text{or}\ \frac{V_m}{R_L+2r_f}\ (\text{bridge}).\]</p>
+<h2 id="s-5-7"><span class="n">5.7</span> Ripple factor</h2>
+<p>The ripple factor measures how much AC remains on the DC output.</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\gamma=\dfrac{V_{ac,rms}}{V_{dc}}=\sqrt{\left(\dfrac{V_{rms}}{V_{dc}}\right)^2-1}=\sqrt{F^2-1}\), with form factor \(F=V_{rms}/V_{dc}\).<br>
+Half-wave: \(F=\pi/2=1.57\), \(\gamma=1.21\). &emsp; Full-wave: \(F=\pi/(2\sqrt2)=1.11\), \(\gamma=0.482\).</p></div></div>
+<h2 id="s-5-8"><span class="n">5.8</span> Rectifier efficiency</h2>
+<p>\(\eta=\dfrac{P_{dc}}{P_{ac,in}}=\dfrac{I_{dc}^2R_L}{I_{rms}^2(R_L+r_f)}\). For \(r_f=0\): half-wave \(\eta=\dfrac{4}{\pi^2}=40.6\%\), full-wave \(\eta=\dfrac{8}{\pi^2}=81.2\%\). With \(r_f\): \(\eta=\eta_{max}/(1+r_f/R_L)\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Half-wave rectifier, \(V_m=100\) V, \(r_f=100\ \Omega\), \(R_L=900\ \Omega\). \(I_m=0.1\) A. \(I_{dc}=31.8\) mA, \(V_{dc}=28.6\) V, \(I_{rms}=50\) mA. \(P_{dc}=0.0318^2\times900=0.910\) W; \(P_{ac}=0.05^2\times1000=2.5\) W; \(\eta=36.4\%=40.6\%/(1+0.111)\) \(\checkmark\).</p></div></div>
+<h2 id="s-5-9"><span class="n">5.9</span> Peak inverse voltage</h2>
+<p>PIV is the maximum reverse voltage across an OFF diode.</p>
+<div class="center"><div class="tw"><table><thead><tr><th>Circuit</th><th class="c">PIV</th></tr></thead><tbody><tr><td>Half-wave</td><td class="c">\(V_m\) (no filter); \(2V_m\) with capacitor filter</td></tr><tr><td>Centre-tap full-wave</td><td class="c">\(2V_m\)</td></tr><tr><td>Bridge</td><td class="c">\(V_m\)</td></tr></tbody></table></div></div>
+<figure id="fig-5-5"><div class="figimgs"><img src="img/f5_piv.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.5.</b> Voltage across an OFF diode in the half-wave circuit (peak \(V_m\)) and the centre-tap circuit (peak \(2V_m\)).</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>In the half-wave rectifier with a filter capacitor the capacitor holds \(+V_m\) while the source swings to \(-V_m\): PIV \(=2V_m\), not \(V_m\).</p></div></div>
+<h2 id="s-5-10"><span class="n">5.10</span> Transformer utilization factor</h2>
+<p>\(\mathrm{TUF}=P_{dc}/(\text{VA rating of the transformer})\). Half-wave: \(0.287\). Full-wave centre-tap: \(0.693\) (secondary \(0.574\), primary \(0.812\); average \(0.693\)). Bridge: \(0.812\). Half-wave has a low TUF because the secondary carries a DC component which may saturate the core.</p>
+<h2 id="s-5-11"><span class="n">5.11</span> Capacitor-filtered rectifiers</h2>
+<p>A large capacitor across \(R_L\) charges to the peak and discharges slowly through \(R_L\) (Figure <a href="ch05.html#fig-5-6">5.6</a>).</p>
+<figure id="fig-5-6"><div class="figimgs"><img src="img/f5_filter.png" alt="" loading="lazy"><img src="img/w5_filter.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.6.</b> Half-wave rectifier with capacitor filter: the diode conducts only briefly near each peak.</figcaption></figure>
+<h2 id="s-5-12"><span class="n">5.12</span> Ripple voltage</h2>
+<p>Approximate the discharge as a linear ramp at constant \(I_{dc}=V_{dc}/R_L\) over the interval between peaks (\(T_{r}=1/f_r\) for ripple frequency \(f_r\)):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Peak-to-peak ripple \(V_r=\dfrac{I_{dc}}{f_rC}\): half-wave \(f_r=f\); full-wave \(f_r=2f\).<br>
+\(V_{dc}\approx V_m-\dfrac{V_r}{2}\), &emsp;&emsp; ripple factor (RMS triangle) \(\gamma=\dfrac{V_r}{2\sqrt3\,V_{dc}}\).<br>
+Full-wave: \(\gamma=\dfrac1{4\sqrt3\,fCR_L}\); half-wave: \(\gamma=\dfrac{1}{2\sqrt3\,fCR_L}\).</p></div></div>
+<figure id="fig-5-7"><div class="figimgs"><img src="img/w5_ripple.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.7.</b> Ripple voltage \(V_r\) on a filtered full-wave output.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Full-wave, \(f=50\) Hz, \(I_{dc}=100\) mA, \(C=2200\ \mu\)F: \(V_r=0.1/(100\times2200\times10^{-6})=0.45\) V p-p. The half-wave circuit with the same numbers has double ripple: \(0.91\) V.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Full-wave, \(C=1000\ \mu\)F, \(R_L=100\ \Omega\), \(f=50\) Hz: \(\gamma=1/(4\sqrt3\times50\times10^{-3}\times100)=1/34.6=2.9\%\).</p></div></div>
+<h2 id="s-5-13"><span class="n">5.13</span> Diode conduction angle</h2>
+<p>With a filter capacitor the diode conducts for a short interval \(\Delta\theta\) around each peak. For small ripple:
+\[\omega\Delta t\approx\sqrt{\frac{2V_r}{V_m}},\quad i_{D,avg}=I_{dc}\left(1+\pi\sqrt{\frac{2V_m}{V_r}}\right),\quad i_{D,max}=I_{dc}\left(1+2\pi\sqrt{\frac{2V_m}{V_r}}\right)\ (\text{half-wave}).\]</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_m=10\) V, \(V_r=0.5\) V: \(\omega\Delta t=\sqrt{0.1}=0.316\) rad \(=18.1^\circ\). Average diode current during conduction \(=I_{dc}(1+\pi\sqrt{40})=20.9\,I_{dc}\): the diode must be rated for currents many times the load current.</p></div></div>
+<p>A larger \(C\) (smaller ripple) gives a narrower conduction angle and higher surge current.</p>
+<h2 id="s-5-14"><span class="n">5.14</span> Voltage regulation</h2>
+<p>\[\text{VR}\%=\frac{V_{NL}-V_{FL}}{V_{FL}}\times100.\]
+For an unfiltered rectifier, \(V_{dc}=V_{dc,0}-I_{dc}r_f\) (HW) so VR \(=r_f/R_L\) approximately. For capacitor filters, \(V_{dc}\) falls with load because \(V_r\propto I_{dc}\): \(V_{dc}=V_m-I_{dc}/(2f_rC)\), a <em>linear</em> droop with slope \(-1/(2f_rC)\) (an “output resistance”).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Full-wave, \(V_m=15\) V, \(f=50\) Hz, \(C=2000\ \mu\)F. Output resistance \(=1/(2\times100\times2000\times10^{-6})=2.5\ \Omega\). At \(I_{dc}=200\) mA: \(V_{dc}=15-0.2\times2.5=14.5\) V. At no load \(V_{dc}=15\) V, so VR \(=3.4\%\).</p></div></div>
+<h2 id="s-5-15"><span class="n">5.15</span> Comparison of rectifier configurations</h2>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th class="c">Half-wave</th><th class="c">Centre-tap FW</th><th class="c">Bridge FW</th></tr></thead><tbody><tr><td>Diodes</td><td class="c">1</td><td class="c">2</td><td class="c">4</td></tr><tr><td>\(V_{dc}\)</td><td class="c">\(V_m/\pi\)</td><td class="c">\(2V_m/\pi\)</td><td class="c">\(2V_m/\pi\)</td></tr><tr><td>Ripple factor</td><td class="c">1.21</td><td class="c">0.482</td><td class="c">0.482</td></tr><tr><td>Efficiency (max)</td><td class="c">40.6%</td><td class="c">81.2%</td><td class="c">81.2%</td></tr><tr><td>PIV</td><td class="c">\(V_m\)</td><td class="c">\(2V_m\)</td><td class="c">\(V_m\)</td></tr><tr><td>TUF</td><td class="c">0.287</td><td class="c">0.693</td><td class="c">0.812</td></tr><tr><td>Ripple frequency</td><td class="c">\(f\)</td><td class="c">\(2f\)</td><td class="c">\(2f\)</td></tr><tr><td>Diode drop in path</td><td class="c">1</td><td class="c">1</td><td class="c">2</td></tr><tr><td>Transformer</td><td class="c">any</td><td class="c">centre tap</td><td class="c">any</td></tr></tbody></table></div></div>
+<h2 id="s-5-16"><span class="n">5.16</span> GATE numerical problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> A half-wave rectifier is fed with \(v_s=20\sin\omega t\) and \(R_L=1\) k\(\Omega\) (ideal diode). \(V_{dc}\) (V) is <span class="blank"></span>.</p>
+<p><strong>Q2.</strong> The ripple factor of an ideal full-wave rectifier is (A) 1.21 (B) 0.482 (C) 0.121 (D) 0.406.</p>
+<p><strong>Q3.</strong> A bridge rectifier uses Si diodes and a transformer secondary of \(12\sin\omega t\) V. The DC output voltage is <span class="blank"></span> V (ideal filtering by average value).</p>
+<p><strong>Q4.</strong> The PIV of each diode in a centre-tap rectifier whose full secondary is \(2\times10\) V peak per half is (A) 10 (B) 20 (C) 40 (D) 5 V.</p>
+<p><strong>Q5.</strong> A full-wave rectifier of \(50\) Hz mains has \(C=1000\ \mu\)F and \(I_{dc}=50\) mA. The peak-to-peak ripple (V) is <span class="blank"></span>.</p>
+<p><strong>Q6.</strong> For a half-wave rectifier the ratio of rectification efficiency to that of a full-wave (ideal diodes) is (A) 1 (B) 1/2 (C) 2 (D) 1/4.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(20/\pi=6.37\) V. Q2: (B). Q3: \(|v|-1.4\): \(V_{dc}=2(12-1.4)/\pi=6.75\) V (approx). Q4: (B) \(=20\) V. Q5: \(V_r=I_{dc}/(2fC)=0.05/(100\times1000\times10^{-6})=0.5\) V. Q6: (B).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>A bridge rectifier delivers \(9\) V DC to a \(100\ \Omega\) load. Peak secondary voltage needed (ideal)? &emsp; [14.1 V]</li><li>Efficiency of an HW rectifier with \(r_f=50\ \Omega\), \(R_L=450\ \Omega\). &emsp; [36.5%]</li><li>Find \(C\) so that the ripple of a full-wave \(60\) Hz supply at \(500\) mA is \(1\) V p-p. &emsp; [4167 \(\mu\)F]</li><li>Compute PIV for a HW rectifier with capacitor filter and \(V_m=12\) V. &emsp; [24 V]</li><li>Why does the bridge need only \(V_m\) PIV rating? &emsp; [Only one diode’s OFF voltage, equal to secondary peak, is across an OFF diode]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch04.html">&larr; Diode Clampers</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch06.html">BJT Fundamentals for Amplifier Design &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

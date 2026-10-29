@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 7: AC Circuit Analysis | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Resonance (series and parallel: \omega_0, Q, bandwidth, voltages at resonance), phasor nodal/mesh analysis, AC Thevenin equivalents. Resonance is almost guaranteed to appear once per paper.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch07.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 7: AC Circuit Analysis | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Resonance (series and parallel: \omega_0, Q, bandwidth, voltages at resonance), phasor nodal/mesh analysis, AC Thevenin equivalents. Resonance is almost guaranteed to appear once per paper."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch07.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 7</div><h1>AC Circuit Analysis</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-7-1">7.1 Kirchhoff’s laws in the phasor domain</a></li><li><a href="#s-7-2">7.2 Nodal analysis using phasors</a></li><li><a href="#s-7-3">7.3 Mesh analysis using phasors</a></li><li><a href="#s-7-4">7.4 AC circuit theorems</a></li><li><a href="#s-7-5">7.5 AC Thevenin and Norton equivalent</a></li><li><a href="#s-7-6">7.6 Resonance</a></li><li><a href="#s-7-7">7.7 Series resonance</a></li><li><a href="#s-7-8">7.8 Parallel resonance</a></li><li><a href="#s-7-9">7.9 Quality factor</a></li><li><a href="#s-7-10">7.10 Bandwidth and selectivity</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Resonance (series and parallel: \(\omega_0\), \(Q\), bandwidth, voltages at resonance), phasor nodal/mesh analysis, AC Thevenin equivalents. Resonance is almost guaranteed to appear once per paper.</p></div></div>
+<h2 id="s-7-1"><span class="n">7.1</span> Kirchhoff’s laws in the phasor domain</h2>
+<p>\(\sum\tilde I_k=0\) at a node and \(\sum\tilde V_k=0\) around a loop, exactly as in DC, but with complex numbers. All DC methods (dividers, nodal, mesh, superposition, Thevenin, Norton, source transformation) carry over with \(R\to Z\), \(G\to Y\), provided all sources have the <em>same</em> frequency. If sources have different frequencies use superposition and add the <em>time-domain</em> responses.</p>
+<h2 id="s-7-2"><span class="n">7.2</span> Nodal analysis using phasors</h2>
+<p>Write KCL with admittances: \(\mathbf Y\mathbf V=\mathbf I\), where \(Y_{kk}=\sum\) admittances at node \(k\), \(Y_{kj}=-\sum\) admittance between \(k\) and \(j\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>A \(2\angle0^\circ\) A source feeds a node having \(3\ \Omega\), an inductor \(j4\ \Omega\) and a capacitor \(-j2\ \Omega\) to ground (Figure <a href="ch07.html#fig-7-1">7.1</a>).<br>
+\(Y=\dfrac13+\dfrac1{j4}+\dfrac1{-j2}=0.333-j0.25+j0.5=0.333+j0.25=0.4167\angle36.87^\circ\) S.<br>
+\(\tilde V=\dfrac{\tilde I}{Y}=\dfrac{2}{0.4167\angle36.87^\circ}=4.8\angle-36.87^\circ\) V.</p></div></div>
+<figure id="fig-7-1"><div class="figimgs"><img src="img/f7_ac_nodal.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.1.</b> Parallel \(R\), \(L\), \(C\) driven by a current source: \(\tilde V=4.8\angle-36.87^\circ\) V.</figcaption></figure>
+<h2 id="s-7-3"><span class="n">7.3</span> Mesh analysis using phasors</h2>
+<p>Write KVL with impedances: \(\mathbf Z\mathbf I=\mathbf V\), with \(Z_{kk}=\sum\) impedances in mesh \(k\) and \(Z_{kj}=-\sum\) impedance shared. Supermesh and dependent-source rules are identical to Chapter 3.</p>
+<h2 id="s-7-4"><span class="n">7.4</span> AC circuit theorems</h2>
+<p>Superposition, Thevenin, Norton, source transformation, reciprocity and maximum power transfer all work with phasors (Chapter 4). The Thevenin <em>impedance</em> \(Z_{Th}\) is complex.</p>
+<h2 id="s-7-5"><span class="n">7.5</span> AC Thevenin and Norton equivalent</h2>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>A \(10\angle0^\circ\) V source in series with \(R=3\ \Omega\); a capacitor \(-j4\ \Omega\) across the output terminals \(a\)–\(b\) (Figure <a href="ch07.html#fig-7-2">7.2</a>).<br>
+\(\tilde V_{Th}=10\times\dfrac{-j4}{3-j4}=8\angle-36.87^\circ=6.4-j4.8\) V. &emsp; \(Z_{Th}=3\parallel(-j4)=\dfrac{-j12}{3-j4}=1.92-j1.44=2.4\angle-36.87^\circ\ \Omega\).<br>
+Norton current \(\tilde I_N=\tilde V_{Th}/Z_{Th}=10/3=3.33\angle0^\circ\) A (short circuit: only \(R\) remains). ✓</p></div></div>
+<figure id="fig-7-2"><div class="figimgs"><img src="img/f7_ac_thev.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.2.</b> AC Thevenin: \(\tilde V_{Th}=8\angle-36.87^\circ\) V, \(Z_{Th}=1.92-j1.44\ \Omega\).</figcaption></figure>
+<h2 id="s-7-6"><span class="n">7.6</span> Resonance</h2>
+<p>A circuit is at <strong>resonance</strong> when the voltage and current at its input terminals are <em>in phase</em> (the input impedance is purely real). It occurs when the net reactance is zero.</p>
+<h2 id="s-7-7"><span class="n">7.7</span> Series resonance</h2>
+<figure id="fig-7-3"><div class="figimgs"><img src="img/f7_ser_ckt.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.3.</b> Series \(RLC\) driven by \(\tilde V_s\).</figcaption></figure>
+<p>\(Z=R+j(\omega L-\dfrac1{\omega C})\). At resonance \(\omega L=1/\omega C\):</p>
+<div class="box formula"><div class="bt">Series RLC</div><div class="bb"><p>\(\omega_0=\dfrac1{\sqrt{LC}}\), &emsp; \(Z(\omega_0)=R\) (minimum), &emsp; \(I_0=\dfrac{V_s}{R}\) (maximum).<br>
+\(Q=\dfrac{\omega_0L}{R}=\dfrac1{\omega_0CR}=\dfrac1R\sqrt{\dfrac LC}\), &emsp; \(BW=\omega_2-\omega_1=\dfrac{\omega_0}{Q}=\dfrac RL\).<br>
+Half-power frequencies: \(\omega_{1,2}=\omega_0\left[\sqrt{1+\dfrac1{4Q^2}}\mp\dfrac1{2Q}\right]\), &emsp; \(\omega_0=\sqrt{\omega_1\omega_2}\) (geometric mean).<br>
+At resonance \(|V_L|=|V_C|=QV_s\) (voltage magnification), with \(V_L\) and \(V_C\) in antiphase.</p></div></div>
+<div class="box derive"><div class="bt">Half-power frequencies</div><div class="bb"><p>Half power occurs where \(|I|=I_0/\sqrt2\), i.e. where \(|X|=R\): \(\omega L-1/\omega C=\pm R\). Solving \(\omega^2LC\mp\omega RC-1=0\) gives \(\omega=\pm\dfrac{R}{2L}+\sqrt{\left(\dfrac R{2L}\right)^2+\dfrac1{LC}}\). Their difference is \(R/L\) and their product is \(1/LC\).</p></div></div>
+<figure id="fig-7-4"><div class="figimgs"><img src="img/f7_res_series.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.4.</b> Series resonance: current magnitude and phase versus \(\omega/\omega_0\) for \(Q=1,5,20\). Higher \(Q\) \(\Rightarrow\) narrower bandwidth; below \(\omega_0\) the circuit is capacitive (current leads), above it inductive (current lags).</figcaption></figure>
+<div class="box example"><div class="bt">Series</div><div class="bb"><p>\(R=2\ \Omega\), \(L=1\) mH, \(C=10\ \mu\)F, \(V_s=10\) V.<br>
+\(\omega_0=1/\sqrt{10^{-3}\times10^{-5}}=10^4\) rad/s (\(f_0=1.59\) kHz). \(Q=\omega_0L/R=10^4\times10^{-3}/2=5\). \(BW=R/L=2000\) rad/s (\(318\) Hz).<br>
+\(\omega_{1,2}=10^4(\sqrt{1.01}\mp0.1)=9050,\ 11050\) rad/s. \(I_0=5\) A. \(V_C=V_L=QV_s=50\) V, five times the source voltage.</p></div></div>
+<figure id="fig-7-5"><div class="figimgs"><img src="img/f7_ph_series.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.5.</b> Phasor diagrams of a series \(RLC\) circuit below, at, and above resonance (reference: current).</figcaption></figure>
+<h2 id="s-7-8"><span class="n">7.8</span> Parallel resonance</h2>
+<figure id="fig-7-6"><div class="figimgs"><img src="img/f7_par_ckt.png" alt="" loading="lazy"><img src="img/f7_tank.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.6.</b> Ideal parallel \(RLC\) (left) and practical tank with inductor series resistance \(r\) (right).</figcaption></figure>
+<p>Ideal parallel \(RLC\) driven by a current source: \(Y=\dfrac1R+j(\omega C-\dfrac1{\omega L})\); resonance at \(\omega_0=1/\sqrt{LC}\) where \(Y=1/R\) (minimum admittance, maximum impedance \(R\)).</p>
+<div class="box formula"><div class="bt">Parallel RLC (dual of series)</div><div class="bb"><p>\(\omega_0=\dfrac1{\sqrt{LC}}\), &emsp; \(Q=\dfrac R{\omega_0L}=\omega_0CR=R\sqrt{\dfrac CL}\), &emsp; \(BW=\dfrac{\omega_0}Q=\dfrac1{RC}\).<br>
+At resonance the branch currents in \(L\) and \(C\) are each \(Q\) times the source current (current magnification).</p></div></div>
+<p><strong>Practical tank (coil resistance \(r\) in series with \(L\), in parallel with \(C\)):</strong>
+\[\omega_0=\sqrt{\frac1{LC}-\frac{r^2}{L^2}}\approx\frac1{\sqrt{LC}}\ (Q_L\gg1),\quad Z_{dyn}=\frac{L}{Cr}=Q_L^2\,r,\quad Q_L=\frac{\omega_0L}{r}.\]</p>
+<figure id="fig-7-7"><div class="figimgs"><img src="img/f7_res_par.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.7.</b> Parallel resonance: \(|Z|\) versus \(\omega/\omega_0\) for \(Q=2,10\); the peak is \(R\) and the phase swings from \(+90^\circ\) (inductive) to \(-90^\circ\) (capacitive).</figcaption></figure>
+<div class="box example"><div class="bt">Parallel</div><div class="bb"><p>\(R=100\ \Omega\), \(L=1\) mH, \(C=10\ \mu\)F: \(\omega_0=10^4\) rad/s, \(Q=R/\omega_0L=100/10=10\), \(BW=1/RC=1000\) rad/s \(=\omega_0/Q\). ✓</p></div></div>
+<div class="box example"><div class="bt">Tank</div><div class="bb"><p>\(L=1\) mH, \(r=1\ \Omega\), \(C=10\ \mu\)F: \(\omega_0=\sqrt{10^8-10^6}=9950\) rad/s, \(Q_L\approx10\), \(Z_{dyn}=L/Cr=10^{-3}/10^{-5}=100\ \Omega\).</p></div></div>
+<h2 id="s-7-9"><span class="n">7.9</span> Quality factor</h2>
+<p>\(Q=2\pi\dfrac{\text{peak energy stored}}{\text{energy dissipated per cycle}}=\dfrac{\omega_0\,W_{stored}}{P_{loss}}\). For a coil, \(Q_L=\omega L/r\); for a capacitor, \(Q_C=1/(\omega Cr_C)\).</p>
+<h2 id="s-7-10"><span class="n">7.10</span> Bandwidth and selectivity</h2>
+<p>Bandwidth \(BW=f_2-f_1\) (half-power, \(-3\) dB points). Selectivity is \(f_0/BW=Q\). A high-\(Q\) circuit is more selective. For \(Q\ge10\) the resonance curve is nearly symmetric and \(\omega_{1,2}\approx\omega_0\mp BW/2\).</p>
+<figure id="fig-7-8"><div class="figimgs"><img src="img/f7_bw.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.8.</b> Normalised response with the \(-3\) dB (half-power) points \(\omega_1,\omega_2\) and bandwidth marked.</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) In series resonance the <em>circuit</em> does not amplify power, but component voltages \(V_L\), \(V_C\) can exceed the source by the factor \(Q\). (ii) The resonant frequency at which <em>current is maximum</em> for a practical tank is not exactly where \(|Z|\) is maximum; GATE usually asks for the ideal \(1/\sqrt{LC}\). (iii) In a parallel circuit \(BW=1/RC\), in series \(BW=R/L\): do not swap them. (iv) \(\omega_{1,2}\) are <em>not</em> symmetric about \(\omega_0\) (geometric mean).</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A series \(RLC\) has \(L=1\) H, \(C=1\) F. Its resonant frequency is (A) \(1\) rad/s (B) \(\sqrt2\) rad/s (C) \(2\pi\) rad/s (D) \(0.5\) rad/s.</p>
+<p><strong>Q2.</strong> At series resonance, the phase difference between \(V_L\) and \(V_C\) is (A) \(0^\circ\) (B) \(90^\circ\) (C) \(180^\circ\) (D) \(45^\circ\).</p>
+<p><strong>Q3.</strong> In a parallel \(RLC\) circuit at resonance, the impedance is (A) minimum (B) maximum and equal to \(R\) (C) zero (D) purely reactive.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A). Q2 (C). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> A series \(RLC\) with \(R=5\ \Omega\), \(L=20\) mH, \(C=0.5\ \mu\)F is driven by \(10\) V. The voltage across \(C\) at resonance is (A) \(10\) V (B) \(200\) V (C) \(400\) V (D) \(2000\) V.</p>
+<p><strong>Q5.</strong> A circuit with \(\omega_0=10^5\) rad/s and \(Q=50\) has half-power bandwidth (A) \(500\) rad/s (B) \(2000\) rad/s (C) \(5000\) rad/s (D) \(50\) rad/s.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (C): \(Q=\frac1R\sqrt{L/C}=\frac15\sqrt{0.02/0.5\times10^{-6}}=\frac15\sqrt{40000}=40\); \(V_C=QV_s=400\) V. Q5 (B): \(10^5/50=2000\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> A series \(RLC\) has \(\omega_1=900\) rad/s and \(\omega_2=1600\) rad/s as half-power frequencies. Its resonant frequency is <span class="blank"></span> rad/s.</p>
+<p><strong>Q7.</strong> A parallel \(RLC\) has \(R=50\ \Omega\), \(L=2\) mH, \(C=20\ \mu\)F. Its quality factor is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(\sqrt{900\times1600}=1200\) rad/s. Q7: \(\omega_0=1/\sqrt{4\times10^{-8}}=5000\) rad/s; \(Q=R/\omega_0L=50/(5000\times0.002)=5\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> At series resonance of an \(RLC\) circuit: (A) \(|Z|\) is minimum. (B) \(V_R=V_s\). (C) power factor is unity. (D) current is minimum.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (C).</p>
+<div class="box trap"><div class="bt">Common traps in this chapter</div><div class="bb"><p>(i) Using \(Q=R/\omega_0L\) for series (that is for parallel). (ii) Forgetting the \(\tfrac12\) in \(BW=\omega_0/Q\) derivations of \(\omega_{1,2}\). (iii) Taking the arithmetic mean of \(\omega_1,\omega_2\) as \(\omega_0\). (iv) Applying phasors to circuits with multiple frequencies without superposition.</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> A series \(RLC\): \(R=10\ \Omega\), \(L=0.1\) H, \(C=10\ \mu\)F. Find \(\omega_0\), \(Q\), \(BW\).<br>
+<strong>T2.</strong> Find \(V_C\) at resonance in T1 if \(V_s=20\) V.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(\omega_0=1/\sqrt{10^{-6}}=1000\) rad/s; \(Q=\omega_0L/R=10\); \(BW=100\) rad/s. T2: \(200\) V.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Resonance: \(\Imag\{Z_{in}\}=0\). \(\omega_0=1/\sqrt{LC}\).</li><li>Series: \(Q=\omega_0L/R=(1/R)\sqrt{L/C}\); \(BW=R/L\); \(V_L=V_C=QV_s\); \(Z_{min}=R\).</li><li>Parallel: \(Q=R/\omega_0L=R\sqrt{C/L}\); \(BW=1/RC\); \(I_L=I_C=QI_s\); \(Z_{max}=R\).</li><li>\(\omega_{1,2}=\omega_0[\sqrt{1+1/4Q^2}\mp1/2Q]\); \(\omega_0=\sqrt{\omega_1\omega_2}\); \(BW=\omega_2-\omega_1\).</li><li>Tank: \(\omega_0\approx1/\sqrt{LC}\), \(Z_{dyn}=L/Cr=Q^2r\).</li><li>Different frequencies \(\Rightarrow\) superposition in the time domain.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch06.html">&larr; Sinusoidal Signals and Phasors</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch08.html">AC Power and Maximum Power Transfer &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

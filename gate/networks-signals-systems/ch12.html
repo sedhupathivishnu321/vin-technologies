@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 12: Circuit Analysis Using the Laplace Transform | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="s-domain models of R, L, C with initial conditions; transfer functions; poles and zeros; step/impulse response from H(s); stability from pole locations. Transfer-function questions appear every year.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch12.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 12: Circuit Analysis Using the Laplace Transform | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="s-domain models of R, L, C with initial conditions; transfer functions; poles and zeros; step/impulse response from H(s); stability from pole locations. Transfer-function questions appear every year."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch12.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 12</div><h1>Circuit Analysis Using the Laplace Transform</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-12-1">12.1 The \(s\)-domain representation</a></li><li><a href="#s-12-2">12.2 Impedance in the \(s\)-domain</a></li><li><a href="#s-12-3">12.3 Initial conditions</a></li><li><a href="#s-12-4">12.4 Zero-state, zero-input and complete response</a></li><li><a href="#s-12-5">12.5 Transfer function</a></li><li><a href="#s-12-6">12.6 Network functions</a></li><li><a href="#s-12-7">12.7 Poles and zeros</a></li><li><a href="#s-12-8">12.8 Step response and impulse response</a></li><li><a href="#s-12-9">12.9 Stability from poles</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>\(s\)-domain models of R, L, C with initial conditions; transfer functions; poles and zeros; step/impulse response from \(H(s)\); stability from pole locations. Transfer-function questions appear every year.</p></div></div>
+<h2 id="s-12-1"><span class="n">12.1</span> The \(s\)-domain representation</h2>
+<p>Transform every element and every source; KCL, KVL and all circuit theorems hold for the transformed variables \(V(s)\), \(I(s)\).</p>
+<h2 id="s-12-2"><span class="n">12.2</span> Impedance in the \(s\)-domain</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(Z_R=R\), &emsp; \(Z_L=sL\) (with series source \(Li(0^-)\)), &emsp; \(Z_C=\dfrac1{sC}\) (with series source \(\dfrac{v(0^-)}{s}\)).<br>
+Norton forms: L in parallel with current source \(\dfrac{i(0^-)}{s}\); C in parallel with current source \(Cv(0^-)\).</p></div></div>
+<figure id="fig-12-1"><div class="figimgs"><img src="img/f12_models.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.1.</b> \(s\)-domain models. Inductor: \(V=sLI-Li(0^-)\). Capacitor: \(V=\dfrac{I}{sC}+\dfrac{v(0^-)}{s}\). Source polarities follow from these equations.</figcaption></figure>
+<p>The equations are \(V_L=sLI_L-Li_L(0^-)\) and \(V_C=\dfrac{1}{sC}I_C+\dfrac{v_C(0^-)}{s}\).</p>
+<h2 id="s-12-3"><span class="n">12.3</span> Initial conditions</h2>
+<p>With \(s\)-domain models, initial conditions appear as independent sources: there is no need to determine \(x(0^+)\) separately. Use \(0^-\) values (from the circuit before switching).</p>
+<h2 id="s-12-4"><span class="n">12.4</span> Zero-state, zero-input and complete response</h2>
+<ul><li><strong>Zero-state response (ZSR):</strong> initial conditions \(=0\), input applied: \(Y_{zs}(s)=H(s)X(s)\).</li><li><strong>Zero-input response (ZIR):</strong> input \(=0\), only initial conditions.</li><li><strong>Complete</strong> \(=\) ZSR \(+\) ZIR. Alternatively <strong>natural</strong> (roots of the characteristic polynomial) \(+\) <strong>forced</strong> (poles of the input).</li></ul>
+<div class="box example"><div class="bt">RC step</div><div class="bb"><p>Series \(R\), \(C\) with \(V_s/s\), \(v_C(0^-)=0\): \(I(s)=\dfrac{V_s/s}{R+1/sC}=\dfrac{V_s/R}{s+1/RC}\), so \(i=\dfrac{V_s}{R}e^{-t/RC}\); \(V_C=I/sC=\dfrac{V_s}{s(1+sRC)}\Rightarrow v_C=V_s(1-e^{-t/RC})\).</p></div></div>
+<div class="box example"><div class="bt">RL step</div><div class="bb"><p>\(V=10/s\), \(R=2\ \Omega\), \(L=1\) H, \(i(0^-)=0\): \(I=\dfrac{10/s}{2+s}=\dfrac5s-\dfrac5{s+2}\Rightarrow i=5(1-e^{-2t})\) A.</p></div></div>
+<div class="box example"><div class="bt">Zero-input RL</div><div class="bb"><p>\(i(0^-)=I_0\), no source, \(L\) with \(R\): the inductor model contributes \(LI_0\): \(I(s)=\dfrac{LI_0}{R+sL}=\dfrac{I_0}{s+R/L}\Rightarrow i=I_0e^{-Rt/L}\).</p></div></div>
+<div class="box example"><div class="bt">Series RLC step, underdamped</div><div class="bb"><p>\(R=6\ \Omega\), \(L=1\) H, \(C=0.04\) F, \(v_s=10u(t)\), zero initial state. \(V_C(s)=\dfrac{10}{s}\cdot\dfrac{25}{s^2+6s+25}=\dfrac{10}{s}-\dfrac{10(s+3)+30}{(s+3)^2+16}\), so \(v_C=10-e^{-3t}(10\cos4t+7.5\sin4t)\): the same result as Chapter 10, obtained algebraically.</p></div></div>
+<h2 id="s-12-5"><span class="n">12.5</span> Transfer function</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(H(s)=\dfrac{Y(s)}{X(s)}\Big|_{\text{zero initial conditions}}=\mathcal L\{h(t)\}\), where \(h(t)\) is the impulse response.<br>
+RC low-pass (\(v_C\) output): \(H=\dfrac1{1+sRC}\). Series RLC (\(v_C\) output): \(H=\dfrac{\omega_0^2}{s^2+2\alpha s+\omega_0^2}\).<br>
+Series RLC (\(v_R\) output): \(H=\dfrac{sR/L}{s^2+2\alpha s+\omega_0^2}\) (band-pass).</p></div></div>
+<h2 id="s-12-6"><span class="n">12.6</span> Network functions</h2>
+<ul><li><strong>Driving-point</strong> impedance \(Z(s)=V_1/I_1\) and admittance \(Y(s)=I_1/V_1\) (same port).</li><li><strong>Transfer</strong> functions: \(V_2/V_1\), \(I_2/I_1\), \(V_2/I_1\) (transfer impedance), \(I_2/V_1\) (transfer admittance).</li><li><strong>Realisability (Foster/Cauer):</strong> for an \(RC\) driving-point impedance, poles and zeros are simple, lie on the negative real axis, alternate, and the critical frequency nearest the origin is a <em>pole</em>. For an \(RL\) impedance the nearest is a <em>zero</em>. For \(LC\): critical frequencies on the \(j\omega\) axis, simple, alternating.</li></ul>
+<h2 id="s-12-7"><span class="n">12.7</span> Poles and zeros</h2>
+<p>\(H(s)=K\dfrac{(s-z_1)(s-z_2)\cdots}{(s-p_1)(s-p_2)\cdots}\). Poles \(p_k\) are roots of the denominator (natural modes); zeros \(z_k\) are roots of the numerator.</p>
+<figure id="fig-12-2"><div class="figimgs"><img src="img/f12_pz.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.2.</b> Pole–zero plot of \(H(s)=\dfrac{s+2}{(s+1)(s+3)}\) with the ROC (right of \(-1\)); poles \(\times\) at \(-1,-3\), zero \(\circ\) at \(-2\). DC gain \(H(0)=2/3\).</figcaption></figure>
+<h2 id="s-12-8"><span class="n">12.8</span> Step response and impulse response</h2>
+<p>\(Y_{step}(s)=H(s)/s\), \(Y_{imp}(s)=H(s)\). Steady-state (final) value of the step response \(=H(0)\) if \(H\) is stable.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(H(s)=\dfrac{10}{s+5}\): \(\tau=0.2\) s; step response \(=2(1-e^{-5t})\), final value \(2\); impulse response \(10e^{-5t}\).</p></div></div>
+<h2 id="s-12-9"><span class="n">12.9</span> Stability from poles</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Pole location</th><th>Mode</th><th>Stability</th></tr></thead><tbody><tr><td>Left half plane (simple or repeated)</td><td>decaying</td><td>stable</td></tr><tr><td>Simple pole on \(j\omega\) axis</td><td>sustained oscillation / constant</td><td>marginal (BIBO-unstable)</td></tr><tr><td>Repeated poles on \(j\omega\) axis</td><td>growing polynomial</td><td>unstable</td></tr><tr><td>Right half plane</td><td>growing exponential</td><td>unstable</td></tr></tbody></table></div></div>
+<p>BIBO stability (bounded input \(\Rightarrow\) bounded output) requires all poles of \(H(s)\) (after cancellation) in the open left half plane, equivalently \(\int|h(t)|dt&lt;\infty\).</p>
+<figure id="fig-12-3"><div class="figimgs"><img src="img/f12_stab.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.3.</b> Pole location and time response: LHP pole (\(e^{-t}\), decays); complex LHP pair (decaying oscillation); \(j\omega\)-axis pair (sustained oscillation); RHP pole (\(e^{t}\), grows).</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) A pole–zero cancellation can hide an unstable pole in the transfer function while the internal mode still grows. (ii) \(H(s)=1/s\) is not BIBO stable (integrator: bounded input \(u(t)\) gives a ramp). (iii) Marginal stability is <em>not</em> BIBO stability.</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The \(s\)-domain impedance of a \(2\) H inductor is (A) \(2/s\) (B) \(2s\) (C) \(s/2\) (D) \(2\).</p>
+<p><strong>Q2.</strong> A system with \(H(s)=\dfrac1{(s+1)(s-2)}\) is (A) stable (B) marginally stable (C) unstable (D) oscillatory.</p>
+<p><strong>Q3.</strong> The impulse response of \(H(s)=1/(s+3)\) is (A) \(e^{3t}u(t)\) (B) \(e^{-3t}u(t)\) (C) \(u(t)\) (D) \(\delta(t)\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (C): pole at \(+2\). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> A series \(R=2\ \Omega\), \(L=1\) H circuit is connected to \(10\) V DC at \(t=0\) with \(i(0^-)=0\). The current at \(t=1\) s is (A) \(5\) A (B) \(4.32\) A (C) \(3.16\) A (D) \(10\) A.</p>
+<p><strong>Q5.</strong> The DC gain of \(H(s)=\dfrac{s+2}{(s+1)(s+3)}\) is (A) \(1\) (B) \(2/3\) (C) \(2\) (D) \(1/3\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): \(5(1-e^{-2})=4.32\). Q5 (B).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> For the RL step example, \(i(1\text{ s})=\) <span class="blank"></span> A (two decimals).</p>
+<p><strong>Q7.</strong> \(H(s)=\dfrac{100}{s^2+10s+100}\): the damping ratio is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(4.32\). Q7: \(\omega_n=10\), \(2\zeta\omega_n=10\Rightarrow\zeta=0.5\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Which systems are BIBO stable? (A) \(\frac1{s+2}\) (B) \(\frac{s}{s^2+4}\) (C) \(\frac{1}{s^2+2s+2}\) (D) \(\frac{1}{s(s+1)}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (C). (B) marginal, (D) has a pole at \(0\).</p>
+<div class="box trap"><div class="bt">Common traps in this chapter</div><div class="bb"><p>(i) Wrong polarity of the initial-condition source. (ii) Using \(0^+\) instead of \(0^-\). (iii) Applying \(H(s)\) with nonzero initial conditions (it only gives the zero-state response). (iv) Forgetting that \(Z_L=sL\) (not \(j\omega L\)) in the \(s\)-domain.</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Find \(H(s)=V_o/V_i\) for a series \(R\) then shunt \(C\) (\(V_o\) across \(C\)) and its pole.<br>
+<strong>T2.</strong> A system has poles at \(-1\pm j2\) and a zero at \(-3\). Is it stable?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(H=\dfrac1{1+sRC}\), pole at \(-1/RC\). T2: yes, poles in the LHP.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(R\); \(sL\) (+ \(Li(0^-)\) series source); \(1/sC\) (+ \(v(0^-)/s\)). \(H(s)=\mathcal L\{h\}\); ZSR \(=HX\).</li><li>Step response \(H(s)/s\); DC gain \(H(0)\); impulse response \(=h(t)\).</li><li>Poles in the open LHP \(\Rightarrow\) BIBO stable; \(j\omega\)-axis simple \(\Rightarrow\) marginal; RHP \(\Rightarrow\) unstable.</li><li>RC impedance: nearest critical frequency is a pole; RL: a zero.</li><li>Complete response \(=\) ZSR \(+\) ZIR \(=\) natural \(+\) forced.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch11.html">&larr; Laplace Transform</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch13.html">Two-Port Networks &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

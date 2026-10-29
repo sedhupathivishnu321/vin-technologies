@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 10: Spatial Aptitude | General Aptitude | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Cube nets and dice, painted-cube counting, rotation and reflection of figures and letters, mirror and water images (including clocks), paper folding with punched holes, and pattern recognition in">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/general-aptitude/ch10.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 10: Spatial Aptitude | General Aptitude | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Cube nets and dice, painted-cube counting, rotation and reflection of figures and letters, mirror and water images (including clocks), paper folding with punched holes, and pattern recognition in"><meta property="og:url" content="https://vintechnologies.co.in/gate/general-aptitude/ch10.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">General Aptitude</a></div><div class="chlabel">Chapter 10</div><h1>Spatial Aptitude</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-10-1">10.1 Spatial visualization: cubes and dice</a></li><li><a href="#s-10-2">10.2 Rotation and reflection</a></li><li><a href="#s-10-3">10.3 Paper folding and punching</a></li><li><a href="#s-10-4">10.4 Pattern recognition</a></li><li><a href="#s-10-5">10.5 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Cube nets and dice, painted-cube counting, rotation and reflection of figures and letters, mirror and water images (including clocks), paper folding with punched holes, and pattern recognition in figure series. The rules are mechanical once learned.</p></div></div>
+<h2 id="s-10-1"><span class="n">10.1</span> Spatial visualization: cubes and dice</h2>
+<figure id="fig-10-1"><div class="figimgs"><img src="img/a10_cube.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.1.</b> Left: a cross-shaped cube net and its pairs of opposite faces. Right: a \(3\times3\times3\) cube painted on the outside, cut into \(27\) small cubes.</figcaption></figure>
+<div class="box formula"><div class="bt">Cube facts</div><div class="bb"><p>A cube has \(6\) faces, \(12\) edges, \(8\) vertices. In a net, faces separated by exactly one face in a straight line are <em>opposite</em>. On a standard die opposite faces sum to \(7\) (\(1\!-\!6\), \(2\!-\!5\), \(3\!-\!4\)). Three faces meeting at a corner are never opposite.<br>
+<strong>Painted cube.</strong> An \(n\times n\times n\) cube painted on all faces and cut into \(n^3\) unit cubes has<br>
+&emsp;3 faces painted: \(8\) (corners); 2 faces: \(12(n-2)\); 1 face: \(6(n-2)^2\); 0 faces: \((n-2)^3\).<br>
+For \(n=4\): \(8\), \(24\), \(24\), \(8\) (total \(64\)). For \(n=5\): unpainted \(3^3=27\).</p></div></div>
+<p>Counting blocks in a stack: count the cubes in each column, then add; hidden blocks under a visible one are still present. A cube cut by \(k\) plane cuts in each direction gives \((k+1)^3\) pieces.</p>
+<h2 id="s-10-2"><span class="n">10.2</span> Rotation and reflection</h2>
+<figure id="fig-10-2"><div class="figimgs"><img src="img/a10_mirror.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.2.</b> A letter and its mirror image, water image and \(90^\circ\) clockwise rotation.</figcaption></figure>
+<div class="box formula"><div class="bt">Transformations</div><div class="bb"><p><strong>Rotation</strong> turns the whole figure; a \(90^\circ\) clockwise turn sends “up” to “right”. Four \(90^\circ\) turns return the figure; \(180^\circ\) swaps up/down and left/right at once.<br>
+<strong>Mirror image</strong> (vertical mirror at the side): left and right are exchanged, the top stays at the top (\(b\to d\)). <strong>Water image</strong> (mirror below, a horizontal mirror): top and bottom are exchanged (\(b\to p\)).<br>
+<strong>Clocks:</strong> mirror image of time \(t\) is \(11{:}60-t\) (\(3{:}15\to8{:}45\)); water image is \(6{:}00-t\) (\(3{:}15\to2{:}45\)).<br>
+A mirror image is <em>not</em> the same as a \(180^\circ\) rotation (rotating \(b\) by \(180^\circ\) gives \(q\), mirroring gives \(d\)).</p></div></div>
+<p><strong>Symmetry.</strong> A regular \(n\)-gon has \(n\) lines of symmetry and rotational symmetry of order \(n\) (a hexagon: \(6\) lines; a square: \(4\) lines and \(4\) rotations including the identity). A circle has infinitely many.</p>
+<h2 id="s-10-3"><span class="n">10.3</span> Paper folding and punching</h2>
+<figure id="fig-10-3"><div class="figimgs"><img src="img/a10_fold.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.3.</b> Fold twice, punch one hole away from the folds, unfold: four symmetric holes.</figcaption></figure>
+<div class="box formula"><div class="bt">Unfolding rule</div><div class="bb"><p>Unfold in the <em>reverse</em> order of folding; at each unfold, reflect every hole (and every cut) across the fold line. A hole punched through \(k\) layers produces \(k\) holes after unfolding. Folding in half twice makes \(4\) layers, so a punch away from the folds gives \(4\) holes; a hole on a fold line is shared by the two layers it joins (fewer holes).<br>
+Cuts on a folded paper become mirror-symmetric shapes across the folds.</p></div></div>
+<h2 id="s-10-4"><span class="n">10.4</span> Pattern recognition</h2>
+<p>Look for one change per step: rotation by a fixed angle (\(45^\circ\) or \(90^\circ\) per frame), alternate shading, an element added or removed each step, movement around a square (clockwise or anticlockwise by a fixed number of positions), or reflection every second frame. If two features change, track them separately and test each against the options. The next figure completes both patterns.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Confusing a mirror image with a rotated figure. (ii) Forgetting that the mirror reverses left–right only (up–down for a water image). (iii) Counting only visible cubes. (iv) Unfolding in the wrong order. (v) Treating adjacent faces of a net as opposite.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>For dice, use opposite faces sum to \(7\). For painted cubes use \(8,\ 12(n-2),\ 6(n-2)^2,\ (n-2)^3\). For clocks apply \(11{:}60-t\). For folding, count the layers; the number of holes equals the number of layers punched. For rotation, track one distinguishing mark (a dot or corner) through the transformation.</p></div></div>
+<h2 id="s-10-5"><span class="n">10.5</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A cube has (A) 6 faces, 12 edges, 8 vertices (B) 8 faces, 12 edges, 6 vertices (C) 6 faces, 8 edges, 12 vertices (D) 12 faces, 6 edges, 8 vertices.</p>
+<p><strong>Q2.</strong> The mirror image (mirror at the right side) of the letter “b” looks like (A) d (B) p (C) q (D) b.</p>
+<p><strong>Q3.</strong> The water image of “b” looks like (A) d (B) q (C) p (D) b.</p>
+<p><strong>Q4.</strong> On a standard die, if \(2\) is on top the bottom face is (A) 3 (B) 4 (C) 5 (D) 6.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A). Q2 (A). Q3 (C). Q4 (C).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A \(4\times4\times4\) cube is painted on all faces and cut into \(64\) unit cubes. The number with exactly two faces painted is (A) 8 (B) 12 (C) 24 (D) 36.</p>
+<p><strong>Q6.</strong> A square sheet is folded in half twice, one hole is punched away from all folds, and the sheet is opened. The number of holes is (A) 1 (B) 2 (C) 3 (D) 4.</p>
+<p><strong>Q7.</strong> A clock shows \(3{:}15\). Its mirror image shows (A) 8:45 (B) 9:15 (C) 2:45 (D) 8:15.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (C): \(12\times2\). Q6 (D). Q7 (A): \(11{:}60-3{:}15\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> A \(5\times5\times5\) cube is painted outside and cut into unit cubes. The number with no painted face is <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> The number of lines of symmetry of a regular hexagon is <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> The number of rotations (including the identity) that map a square onto itself is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(3^3=27\). Q9: 6. Q10: 4.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which are true? (A) A mirror image exchanges left and right. (B) A water image exchanges top and bottom. (C) A \(360^\circ\) rotation returns the figure. (D) A mirror image equals a \(180^\circ\) rotation.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Painted \(3\times3\times3\) cube: cubes with one painted face? &emsp; <strong>T2.</strong> Water image of \(3{:}15\)? &emsp; <strong>T3.</strong> Holes after one fold and one punch away from the fold?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(6\). T2: \(2{:}45\). T3: \(2\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Cube: \(6/12/8\); die opposite faces sum to \(7\); painted cube \(8,12(n-2),6(n-2)^2,(n-2)^3\).</li><li>Mirror swaps left–right (\(b\to d\)); water swaps top–bottom (\(b\to p\)); clock mirror \(11{:}60-t\), water \(6{:}00-t\).</li><li>Regular \(n\)-gon: \(n\) lines of symmetry, \(n\) rotations.</li><li>Folding: unfold in reverse order, reflect holes over each fold; holes \(=\) layers punched.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch09.html">&larr; Analytical Reasoning: Deduction, Induction, Analogies and Numerical Reasoning</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch11.html">Master Problem Set and Revision Sheet &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Rs": "\\text{\\textrupee}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

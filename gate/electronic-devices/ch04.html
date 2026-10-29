@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 4: The PN Junction Diode | Electronic Devices | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Built-in potential, depletion width and field for abrupt junctions, the ideal diode equation and its temperature behaviour, small-signal resistance, junction and diffusion capacitance, and Zener">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electronic-devices/ch04.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 4: The PN Junction Diode | Electronic Devices | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Built-in potential, depletion width and field for abrupt junctions, the ideal diode equation and its temperature behaviour, small-signal resistance, junction and diffusion capacitance, and Zener"><meta property="og:url" content="https://vintechnologies.co.in/gate/electronic-devices/ch04.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electronic Devices</a></div><div class="chlabel">Chapter 4</div><h1>The PN Junction Diode</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-4-1">4.1 Junction formation and equilibrium</a></li><li><a href="#s-4-2">4.2 Forward and reverse bias</a></li><li><a href="#s-4-3">4.3 Breakdown mechanisms</a></li><li><a href="#s-4-4">4.4 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Built-in potential, depletion width and field for abrupt junctions, the ideal diode equation and its temperature behaviour, small-signal resistance, junction and diffusion capacitance, and Zener versus avalanche breakdown. Capacitance–voltage scaling is a favourite.</p></div></div>
+<h2 id="s-4-1"><span class="n">4.1</span> Junction formation and equilibrium</h2>
+<p>When p-type and n-type regions are joined, electrons diffuse into the p-side and holes into the n-side, leaving behind uncompensated ions: a <strong>depletion (space-charge) region</strong> with positive donor ions on the n-side and negative acceptor ions on the p-side. The resulting electric field opposes further diffusion. At equilibrium drift and diffusion cancel for each carrier, \(E_F\) is constant across the junction, and the bands bend by \(q\Vbi\).</p>
+<figure id="fig-4-1"><div class="figimgs"><img src="img/e04_pn.png" alt="" loading="lazy"></div><figcaption><b>Figure 4.1.</b> Abrupt p\({}^+\)n junction: space-charge density, electric field (triangular), potential and band diagram. Total drop \(=V_{bi}-V\).</figcaption></figure>
+<div class="box formula"><div class="bt">Equilibrium electrostatics: abrupt junction</div><div class="bb"><p><strong>Built-in potential:</strong>&emsp; \(V_{bi}=\dfrac{kT}{q}\ln\dfrac{N_AN_D}{n_i^2}\).<br>
+Charge neutrality: \(N_Ax_p=N_Dx_n\) (the lightly doped side depletes more).<br>
+<strong>Depletion width</strong> (applied voltage \(V\); forward positive):
+\[
+W=x_n+x_p=\sqrt{\frac{2\varepsilon_s(V_{bi}-V)}{q}\left(\frac1{N_A}+\frac1{N_D}\right)},\quad x_n=\frac{WN_A}{N_A+N_D},\ x_p=\frac{WN_D}{N_A+N_D}.
+\]
+<strong>Peak field</strong> (at the metallurgical junction): \(\mathcal E_{max}=\dfrac{qN_Dx_n}{\varepsilon_s}=\dfrac{2(V_{bi}-V)}{W}\).<br>
+One-sided junction (\(N_A\gg N_D\)): \(W\approx\sqrt{\dfrac{2\varepsilon_s(V_{bi}-V)}{qN_D}}\), all the depletion lies in the lightly doped side.</p></div></div>
+<div class="box example"><div class="bt">Numbers</div><div class="bb"><p>\(N_A=10^{17}\), \(N_D=10^{16}\,\text{cm}^{-3}\), Si, 300 K: \(V_{bi}=0.0259\ln\!\dfrac{10^{33}}{2.25\times10^{20}}=0.753\) V. At \(V=0\): \(W=\sqrt{\dfrac{2(1.036\times10^{-12})(0.753)}{1.6\times10^{-19}}\left(\dfrac1{10^{17}}+\dfrac1{10^{16}}\right)}=0.327\,\mu\)m, \(x_n=0.298\,\mu\)m, \(x_p=0.030\,\mu\)m, \(\mathcal E_{max}=4.6\times10^4\) V/cm. At \(V=-5\) V: \(W=0.905\,\mu\)m.</p></div></div>
+<h2 id="s-4-2"><span class="n">4.2</span> Forward and reverse bias</h2>
+<p><strong>Forward bias</strong> (\(V&gt;0\)): barrier lowers to \(V_{bi}-V\), the depletion region narrows, minority carriers are injected across (\(np=n_i^2e^{V/V_T}\) at the edge) and diffuse; current rises exponentially. <strong>Reverse bias</strong>: barrier \(V_{bi}+V_R\), the depletion region widens, only a small saturation (generation) current flows.</p>
+<h3 id="s-4-2-1"><span class="n">4.2.1</span> Ideal diode equation</h3>
+<div class="box formula"><div class="bt">Shockley equation</div><div class="bb"><p>\(I=I_s\left(e^{V/\eta V_T}-1\right)\), \(\ \eta=1\) (ideal) to \(2\) (recombination in the depletion region).<br>
+Long diode: \(I_s=qA\left(\dfrac{D_pp_{n0}}{L_p}+\dfrac{D_nn_{p0}}{L_n}\right)=qAn_i^2\left(\dfrac{D_p}{L_pN_D}+\dfrac{D_n}{L_nN_A}\right)\).<br>
+Short diode (widths \(W_n,W_p\ll L\)): replace \(L\) by the neutral width.<br>
+For a p\({}^+\)n diode the hole current dominates: \(I_s\approx qAD_pn_i^2/(L_pN_D)\).<br>
+Forward: \(I\approx I_se^{V/\eta V_T}\); at constant current the diode voltage changes by \(\eta V_T\ln10=59.5\) mV per decade of current (at \(\eta=1\)).</p></div></div>
+<p><strong>Temperature behaviour.</strong> \(I_s\propto n_i^2\propto T^{3}e^{-E_g/kT}\): it roughly doubles for each \(7\)–\(10^\circ\)C rise. At fixed forward current \(V_D\) falls by about \(2\) mV/\({}^\circ\)C. Leakage in reverse bias also contains a generation component \(\propto W\propto\sqrt{V_R+V_{bi}}\) so it does not saturate perfectly.</p>
+<div class="box example"><div class="bt">Diode current and voltage</div><div class="bb"><p>\(I_s=10^{-12}\) A, \(V=0.6\) V: \(I=10^{-12}e^{0.6/0.0259}=11.5\) mA.<br>
+If \(V_D=0.70\) V at \(1\) mA, then at \(10\) mA \(V_D=0.70+0.0259\ln10=0.760\) V.<br>
+From \(25^\circ\)C to \(75^\circ\)C at constant current: \(\Delta V_D\approx-2\times50=-100\) mV.</p></div></div>
+<h3 id="s-4-2-2"><span class="n">4.2.2</span> Small-signal behaviour</h3>
+<div class="box formula"><div class="bt">Dynamic parameters</div><div class="bb"><p>Dynamic (incremental) resistance \(r_d=\dfrac{\eta V_T}{I_D}\) (25.9 \(\Omega\) at 1 mA).<br>
+Junction (depletion) capacitance: \(C_j=\dfrac{\varepsilon_sA}{W}=\dfrac{C_{j0}}{(1-V/V_{bi})^m}\), \(\ m=\tfrac12\) (abrupt), \(\tfrac13\) (linearly graded). \(\ C_j\propto(V_{bi}+V_R)^{-m}\).<br>
+Diffusion capacitance (forward bias): \(C_d=\dfrac{\tau_T\,I_D}{\eta V_T}\), with \(\tau_T\) the transit/lifetime of stored charge; \(C_d\) dominates in forward bias, \(C_j\) in reverse.</p></div></div>
+<p>For the example above \(C_{j0}=\varepsilon_s/W=3.2\times10^{-8}\,\text{F/cm}^2\), falling to \(1.1\times10^{-8}\) at \(V_R=5\) V. Stored charge \(Q=I\tau\); \(C_d\) for \(I=1\) mA and \(\tau=1\) ns is \(38.6\) pF.</p>
+<h2 id="s-4-3"><span class="n">4.3</span> Breakdown mechanisms</h2>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th>Zener (tunnelling)</th><th>Avalanche</th></tr></thead><tbody><tr><td>Mechanism</td><td>band-to-band tunnelling in a very thin, heavily doped junction</td><td>impact ionisation multiplication</td></tr><tr><td>Breakdown voltage</td><td>\(&lt;\approx5\,\)V</td><td>\(&gt;\approx7\,\)V (between: both)</td></tr><tr><td>Temperature coefficient</td><td>negative</td><td>positive</td></tr><tr><td>Doping</td><td>heavy</td><td>lighter</td></tr></tbody></table></div></div>
+<p>Avalanche multiplication: \(M=1/[1-(V_R/V_{BR})^n]\). Breakdown occurs when \(\mathcal E_{max}\) reaches the critical field (\(\sim3\times10^5\) V/cm in Si). Lower doping \(\Rightarrow\) higher \(V_{BR}\) (\(V_{BR}\propto N^{-3/4}\) for an abrupt one-sided junction). Reach-through (punch-through) occurs when the depletion region spans a thin lightly doped layer before avalanche.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(x_n/x_p=N_A/N_D\): the lightly doped side has the <em>wider</em> depletion layer. (ii) \(V_{bi}\) cannot be measured with a voltmeter (contact potentials cancel). (iii) Forward current needs the barrier to be lowered: \(V&lt;V_{bi}\) always. (iv) \(C_j\) increases with forward bias and decreases with reverse bias. (v) Zener breakdown has a <em>negative</em> temperature coefficient; avalanche positive.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>\(V_{bi}\) rises by \(59.5\) mV per decade of \(N_AN_D\) <em>each side</em>: e.g. \(10^{16}\)–\(10^{16}\to0.69\), \(10^{17}\)–\(10^{16}\to0.75\). Capacitance ratio: \(\dfrac{C_1}{C_2}=\left(\dfrac{V_{bi}+V_{R2}}{V_{bi}+V_{R1}}\right)^{m}\). Diode voltage drift \(-2\) mV/\({}^\circ\)C.</p></div></div>
+<h2 id="s-4-4"><span class="n">4.4</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> In a p\({}^+\)n junction the depletion region extends mainly into (A) the p\({}^+\) side (B) the n side (C) equally (D) neither.</p>
+<p><strong>Q2.</strong> Junction capacitance of an abrupt junction varies with reverse voltage \(V_R\) as (A) \(V_R^{1/2}\) (B) \(V_R^{-1/2}\) (C) \(V_R^{-1/3}\) (D) \(V_R^{-2}\) (for \(V_R\gg V_{bi}\)).</p>
+<p><strong>Q3.</strong> The temperature coefficient of avalanche breakdown voltage is (A) positive (B) negative (C) zero (D) depends on bias only.</p>
+<p><strong>Q4.</strong> Under forward bias the diode capacitance is dominated by (A) depletion (B) diffusion (C) parasitic (D) oxide capacitance.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (A). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> For Si with \(N_A=10^{17}\), \(N_D=10^{16}\,\text{cm}^{-3}\) the built-in potential is (A) 0.65 V (B) 0.75 V (C) 0.85 V (D) 0.95 V.</p>
+<p><strong>Q6.</strong> An abrupt junction has \(V_{bi}=1\) V and \(C_j\) measured at \(V_R=3\) V and \(15\) V. The ratio \(C(3\text{V})/C(15\text{V})\) is (A) 2 (B) 4 (C) 5 (D) \(\sqrt5\).</p>
+<p><strong>Q7.</strong> A silicon diode has \(V_D=0.70\) V at \(1\) mA (\(\eta=1\), \(V_T=25.9\) mV). Its voltage at \(10\) mA is (A) 0.73 V (B) 0.76 V (C) 0.80 V (D) 0.96 V.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (A): \(\sqrt{16/4}=2\). Q7 (B): \(+59.6\) mV.</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Dynamic resistance (\(\Omega\), nearest integer) at \(I_D=2\) mA, \(V_T=25.9\) mV: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Peak electric field (kV/cm) for the example junction (\(V_{bi}=0.753\) V, \(W=0.327\,\mu\)m, \(V=0\)): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Diffusion capacitance (pF, one decimal) at 1 mA with \(\tau_T=1\) ns: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(25.9/2=12.95\to13\). Q9: \(2\times0.753/(0.327\times10^{-4})=4.6\times10^4\) V/cm \(=46\) kV/cm. Q10: \(38.6\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select the true statements. (A) \(x_n/x_p=N_A/N_D\). (B) Forward-biased \(C_d\) is proportional to current. (C) Zener breakdown has a positive temperature coefficient. (D) \(W\propto\sqrt{V_{bi}-V}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Write \(V_{bi}\). &emsp; <strong>T2.</strong> What happens to \(W\) if \(V_R\) rises from 0? &emsp; <strong>T3.</strong> \(\eta V_T\ln10\) value?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(V_T\ln(N_AN_D/n_i^2)\). T2: grows as \(\sqrt{V_{bi}+V_R}\). T3: 59.5 mV.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(V_{bi}=V_T\ln(N_AN_D/n_i^2)\); \(W=\sqrt{2\varepsilon(V_{bi}-V)/q\,(1/N_A+1/N_D)}\); \(x_nN_D=x_pN_A\).</li><li>\(I=I_s(e^{V/\eta V_T}-1)\); 59.5 mV/decade; \(-2\) mV/\({}^\circ\)C; \(r_d=\eta V_T/I\).</li><li>\(C_j\propto(V_{bi}+V_R)^{-m}\); \(C_d=\tau I/\eta V_T\).</li><li>Zener \(&lt;5\) V (\(-\)ve TC); avalanche \(&gt;7\) V (\(+\)ve TC).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch03.html">&larr; Generation, Recombination, Continuity and Poisson Equations</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch05.html">Special Semiconductor Diodes and Optoelectronic Devices &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\kTq": "\\dfrac{kT}{q}", "\\EF": "E_F", "\\Ei": "E_i", "\\Ec": "E_C", "\\Ev": "E_V", "\\Eg": "E_g", "\\Vbi": "V_{bi}", "\\Cox": "C_{ox}", "\\Vov": "V_{ov}", "\\gm": "g_m", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

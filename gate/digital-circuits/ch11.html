@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 11: Timing: Setup, Hold, Clock Skew and Pipelining | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Maximum clock frequency between two registers, hold-time checks with clock skew, and the speed-up from pipelining. Numerical problems with t_{cq}, t_{su}, t_h and gate delays appear regularly.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch11.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 11: Timing: Setup, Hold, Clock Skew and Pipelining | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Maximum clock frequency between two registers, hold-time checks with clock skew, and the speed-up from pipelining. Numerical problems with t_{cq}, t_{su}, t_h and gate delays appear regularly."><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch11.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 11</div><h1>Timing: Setup, Hold, Clock Skew and Pipelining</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-11-1">11.1 Definitions</a></li><li><a href="#s-11-2">11.2 Timing constraints between two registers</a></li><li><a href="#s-11-3">11.3 Input and output timing</a></li><li><a href="#s-11-4">11.4 Metastability and synchronisers</a></li><li><a href="#s-11-5">11.5 Pipelining</a></li><li><a href="#s-11-6">11.6 Latch-based design and time borrowing</a></li><li><a href="#s-11-7">11.7 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Maximum clock frequency between two registers, hold-time checks with clock skew, and the speed-up from pipelining. Numerical problems with \(t_{cq}\), \(t_{su}\), \(t_h\) and gate delays appear regularly.</p></div></div>
+<h2 id="s-11-1"><span class="n">11.1</span> Definitions</h2>
+<figure id="fig-11-1"><div class="figimgs"><img src="img/d11_setuphold.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.1.</b> The data input must be stable for \(t_{su}\) before and \(t_h\) after the active clock edge; the output settles \(t_{cq}\) after the edge.</figcaption></figure>
+<ul><li><strong>Setup time</strong> \(t_{su}\): minimum time the data must be stable <em>before</em> the active clock edge.</li><li><strong>Hold time</strong> \(t_h\): minimum time the data must stay stable <em>after</em> the edge.</li><li><strong>Clock-to-Q delay</strong> \(t_{cq}\): delay from the active edge to a valid output.</li><li><strong>Clock skew</strong> \(\delta\): difference in clock arrival times between the capturing and launching flip-flops. Take \(\delta&gt;0\) when the capture clock arrives <em>later</em> than the launch clock.</li></ul>
+<h2 id="s-11-2"><span class="n">11.2</span> Timing constraints between two registers</h2>
+<p>For a launch flip-flop \(\to\) combinational logic \(\to\) capture flip-flop on the same clock:</p>
+<div class="box formula"><div class="bt">Setup and hold inequalities</div><div class="bb"><p><strong>Setup</strong> (limits the clock period): \(\;T\ge t_{cq}+t_{logic,max}+t_{su}-\delta\),&emsp; so&emsp; \(f_{max}=\dfrac1{t_{cq}+t_{logic,max}+t_{su}-\delta}\).<br>
+<strong>Hold</strong> (independent of the clock period): \(\;t_{cq,min}+t_{logic,min}\ge t_h+\delta\).<br>
+Setup slack \(=T-(t_{cq}+t_{logic,max}+t_{su}-\delta)\); hold slack \(=t_{cq,min}+t_{logic,min}-t_h-\delta\). Negative slack is a violation.</p></div></div>
+<ul><li>A <strong>setup violation</strong> is cured by slowing the clock, reducing logic delay or retiming.</li><li>A <strong>hold violation</strong> cannot be cured by changing the clock frequency; insert delay (buffers) in the short data path, reduce skew, or use faster-hold flip-flops.</li><li>Positive skew (\(\delta&gt;0\)) helps setup but hurts hold; negative skew does the opposite.</li></ul>
+<div class="box example"><div class="bt">Maximum frequency and hold check</div><div class="bb"><p>\(t_{cq}=0.5\,\)ns, \(t_{su}=0.3\,\)ns, \(t_h=0.1\,\)ns, \(t_{logic}\in[0.4,\,2.2]\,\)ns.<br>
+No skew: \(T\ge0.5+2.2+0.3=3.0\,\)ns, \(f_{max}=333.3\,\)MHz. Hold: \(0.5+0.4=0.9\ge0.1\) \(\checkmark\).<br>
+With \(\delta=+0.2\,\)ns: \(T\ge2.8\,\)ns, \(f_{max}=357.1\,\)MHz; hold: \(0.9\ge0.1+0.2=0.3\) \(\checkmark\).<br>
+With \(\delta=+1.0\,\)ns: setup improves further, but hold requires \(0.9\ge1.1\): <em>violated</em>; add at least \(0.2\,\)ns delay in the short path.</p></div></div>
+<div class="box example"><div class="bt">Directly connected flip-flops</div><div class="bb"><p>A shift register has \(t_{logic}\approx0\). Hold requires \(t_{cq,min}\ge t_h+\delta\); so a flip-flop with \(t_{cq}=0.4\,\)ns and \(t_h=0.3\,\)ns tolerates skew up to \(0.1\,\)ns.</p></div></div>
+<h2 id="s-11-3"><span class="n">11.3</span> Input and output timing</h2>
+<p>For a signal arriving from outside, the external delay must satisfy the same inequality with the external launch time. For a synchronous system with period \(T\) and an input arriving \(t_{in}\) after the launching edge, the remaining budget for the internal logic is \(T-t_{in}-t_{su}\).</p>
+<h2 id="s-11-4"><span class="n">11.4</span> Metastability and synchronisers</h2>
+<p>If the data changes inside the setup–hold window the flip-flop can enter a metastable state with an output between the logic levels for an unpredictable time. The probability that it has not resolved within \(t_r\) falls exponentially:
+\[
+\text{MTBF}=\frac{e^{\,t_r/\tau}}{T_0\,f_{clk}\,f_{data}} .
+\]
+A <strong>two-flip-flop synchroniser</strong> gives a full extra clock period \(t_r\approx T-t_{su}-t_{cq}\) for resolution; it is the standard way to bring an asynchronous input or a signal from another clock domain into a clock domain. Multi-bit buses need handshakes or FIFOs, not per-bit synchronisers.</p>
+<h2 id="s-11-5"><span class="n">11.5</span> Pipelining</h2>
+<p>Insert registers to split a long combinational path into stages. If the original delay is \(D\) and there are \(k\) equal stages, with register overhead \(t_{reg}=t_{cq}+t_{su}\):</p>
+<div class="box formula"><div class="bt">Pipeline speed-up</div><div class="bb"><p>Clock period \(T_{pipe}=\dfrac Dk+t_{reg}\) (for balanced stages); the slowest stage sets the period.<br>
+Throughput \(=1/T_{pipe}\); latency \(=k\,T_{pipe}\) (increases).<br>
+Speed-up \(=\dfrac{D+t_{reg}}{D/k+t_{reg}}\ &lt;k\); for \(n\) operations total time \((k+n-1)T_{pipe}\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(D=12\,\)ns, \(t_{reg}=1\,\)ns, three equal stages: \(T=4+1=5\,\)ns; unpipelined \(T=13\,\)ns; speed-up \(=13/5=2.6\); latency \(15\,\)ns.</p></div></div>
+<h2 id="s-11-6"><span class="n">11.6</span> Latch-based design and time borrowing</h2>
+<p>In a two-phase latch design a stage may borrow time from the next stage if its data arrives while the following latch is still transparent, balancing unequal stage delays; the constraint becomes a total-loop delay rather than a per-stage one.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Hold violations are independent of the clock frequency. (ii) Setup uses the <em>maximum</em> logic delay, hold uses the <em>minimum</em>. (iii) Skew sign: capture later helps setup and hurts hold. (iv) Pipelining raises throughput but not single-operation latency. (v) A synchroniser reduces but never eliminates the probability of metastability.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Write \(T_{min}=t_{cq}+t_{logic,max}+t_{su}\mp\delta\) first, then \(f=1/T\). For hold, check \(t_{cq}+t_{logic,min}-t_h-\delta\ge0\). For balanced pipelines divide the logic delay by the number of stages and add the register overhead once.</p></div></div>
+<h2 id="s-11-7"><span class="n">11.7</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A hold-time violation can be removed by (A) lowering the clock frequency (B) adding delay in the data path (C) increasing the supply voltage (D) none of these.</p>
+<p><strong>Q2.</strong> The maximum clock frequency of a synchronous path depends on (A) \(t_{cq}+t_{logic,max}+t_{su}\) (B) \(t_h\) only (C) \(t_{logic,min}\) (D) \(t_{su}-t_h\).</p>
+<p><strong>Q3.</strong> A metastable output is (A) always 1 (B) always 0 (C) at an intermediate level for an unpredictable time (D) a clock glitch.</p>
+<p><strong>Q4.</strong> Pipelining a combinational block into \(k\) stages does what to latency? (A) reduces it (B) increases it (C) leaves it unchanged (D) divides by \(k\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (A). Q3 (C). Q4 (B), because of register overhead per stage.</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> \(t_{cq}=0.6\,\)ns, \(t_{su}=0.4\,\)ns, longest logic path \(3.0\,\)ns. The maximum clock frequency (MHz): (A) 200 (B) 250 (C) 278 (D) 333.</p>
+<p><strong>Q6.</strong> With \(t_{cq,min}=0.4\,\)ns, \(t_h=0.3\,\)ns, \(t_{logic,min}=0.1\,\)ns and capture-clock skew \(\delta=+0.5\,\)ns the additional minimum delay needed in the short path (ns): (A) 0.1 (B) 0.2 (C) 0.3 (D) 0.5.</p>
+<p><strong>Q7.</strong> A 3-stage balanced pipeline replaces a block of delay \(12\,\)ns; \(t_{reg}=1\,\)ns. Throughput improvement over the unpipelined design: (A) 2.6 (B) 2.4 (C) 3.0 (D) 3.25.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B): \(T=4.0\,\)ns. Q6 (C): \(0.3+0.5-0.4-0.1=0.3\). Q7 (A): \(13/5=2.6\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> A path has \(t_{cq}=0.5\), \(t_{su}=0.3\) and logic \(2.2\) (all ns) with \(\delta=+0.2\) ns (capture later). Maximum frequency (MHz, one decimal): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Two directly connected flip-flops with \(t_{cq,min}=0.35\,\)ns and \(t_h=0.15\,\)ns. Maximum tolerable skew (ns): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> A balanced \(k\)-stage pipeline processes \(n=100\) operations at period \(T=5\,\)ns with \(k=3\). Total time (ns): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(T=2.8\) ns, \(357.1\) MHz. Q9: \(0.2\) ns. Q10: \((k+n-1)T=102\times5=510\) ns.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which are true? (A) Positive skew (capture later) helps setup. (B) Hold violations depend on the clock period. (C) A two-flop synchroniser reduces metastability probability. (D) Setup analysis uses the maximum delay.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (C), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Define setup and hold time. &emsp; <strong>T2.</strong> Is a hold violation fixed by slowing the clock? &emsp; <strong>T3.</strong> Speed-up of a 5-stage ideal pipeline (no overhead).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: stable before/after the edge. T2: No. T3: 5.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Setup: \(T\ge t_{cq}+t_{logic,max}+t_{su}-\delta\). Hold: \(t_{cq}+t_{logic,min}\ge t_h+\delta\).</li><li>Hold is fixed by delay insertion, not by slower clocks.</li><li>Metastability: two-flop synchroniser; MTBF grows exponentially with resolution time.</li><li>Pipeline: \(T=D/k+t_{reg}\); latency up, throughput up.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch10.html">&larr; Logic Families and Static CMOS Implementations</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch12.html">Memories and Programmable Logic Devices &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

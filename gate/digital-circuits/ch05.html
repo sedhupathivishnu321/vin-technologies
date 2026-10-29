@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 5: Arithmetic Circuits, Comparators and the ALU | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Full-adder equations, ripple versus look-ahead delay, the adder–subtractor with overflow, BCD adder correction, magnitude comparators and the structure of an ALU. Delay calculations in NAT form are">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch05.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 5: Arithmetic Circuits, Comparators and the ALU | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Full-adder equations, ripple versus look-ahead delay, the adder–subtractor with overflow, BCD adder correction, magnitude comparators and the structure of an ALU. Delay calculations in NAT form are"><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch05.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 5</div><h1>Arithmetic Circuits, Comparators and the ALU</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-5-1">5.1 Half adder and full adder</a></li><li><a href="#s-5-2">5.2 Half and full subtractor</a></li><li><a href="#s-5-3">5.3 Multi-bit adders</a></li><li><a href="#s-5-4">5.4 Adder–subtractor</a></li><li><a href="#s-5-5">5.5 BCD adder</a></li><li><a href="#s-5-6">5.6 Magnitude comparator</a></li><li><a href="#s-5-7">5.7 Binary multiplier</a></li><li><a href="#s-5-8">5.8 The ALU</a></li><li><a href="#s-5-9">5.9 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Full-adder equations, ripple versus look-ahead delay, the adder–subtractor with overflow, BCD adder correction, magnitude comparators and the structure of an ALU. Delay calculations in NAT form are common.</p></div></div>
+<h2 id="s-5-1"><span class="n">5.1</span> Half adder and full adder</h2>
+<div class="box formula"><div class="bt">Adders</div><div class="bb"><p>Half adder (HA): \(S=A\oplus B,\ \ C=AB\).<br>
+Full adder (FA): \(S=A\oplus B\oplus C_{in},\quad C_{out}=AB+C_{in}(A\oplus B)=AB+BC_{in}+AC_{in}\) (majority).<br>
+An FA = 2 HAs + 1 OR gate. FA outputs: \(S=1\) for an odd number of 1s at the inputs; \(C_{out}=1\) for two or more.</p></div></div>
+<figure id="fig-5-1"><div class="figimgs"><img src="img/d05_fa.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.1.</b> Full adder from two half adders and an OR gate.</figcaption></figure>
+<h2 id="s-5-2"><span class="n">5.2</span> Half and full subtractor</h2>
+<div class="box formula"><div class="bt">Subtractors</div><div class="bb"><p>Half subtractor: \(D=A\oplus B,\quad B_{out}=\overline AB\).<br>
+Full subtractor: \(D=A\oplus B\oplus B_{in},\quad B_{out}=\overline AB+\overline AB_{in}+BB_{in}\).<br>
+A full subtractor is a full adder with \(A\) complemented at the carry logic: \(B_{out}\) equals the carry of \(\overline A+B+B_{in}\).</p></div></div>
+<h2 id="s-5-3"><span class="n">5.3</span> Multi-bit adders</h2>
+<h3 id="s-5-3-1"><span class="n">5.3.1</span> Ripple-carry adder (RCA)</h3>
+<p>\(n\) full adders in cascade; \(C_{out}\) of stage \(i\) feeds \(C_{in}\) of stage \(i+1\). The delay is dominated by carry propagation and grows linearly with \(n\).
+\[
+t_{RCA}\approx (n-1)\,t_{carry}+t_{sum},
+\]
+with \(t_{carry}\) the carry-in to carry-out delay of one FA and \(t_{sum}\) its carry-in to sum delay.</p>
+<h3 id="s-5-3-2"><span class="n">5.3.2</span> Carry-lookahead adder (CLA)</h3>
+<p>Define for each bit <strong>generate</strong> \(G_i=A_iB_i\) and <strong>propagate</strong> \(P_i=A_i\oplus B_i\) (or \(A_i+B_i\)). Then
+\[
+C_{i+1}=G_i+P_iC_i,\qquad S_i=P_i\oplus C_i.
+\]
+Expanding gives carries directly from the inputs:
+\begin{align*}
+C_1&amp;=G_0+P_0C_0\\
+C_2&amp;=G_1+P_1G_0+P_1P_0C_0\\
+C_3&amp;=G_2+P_2G_1+P_2P_1G_0+P_2P_1P_0C_0\\
+C_4&amp;=G_3+P_3G_2+P_3P_2G_1+P_3P_2P_1G_0+P_3P_2P_1P_0C_0.
+\end{align*}
+All carries are two gate levels (AND–OR) after \(G,P\), independent of \(n\) (assuming unlimited fan-in). Gate counts and fan-in grow with \(n\), so large adders use blocks of 4 bits with second-level lookahead.</p>
+<div class="box formula"><div class="bt">Gate-delay model</div><div class="bb"><p>Let each gate cost one unit. \(G_i,P_i\) ready at \(t=1\). <strong>RCA</strong>: \(C_{i+1}\) every 2 units, so \(C_n\) at \(1+2n\); the last sum \(S_{n-1}\) at \(2n\).<br>
+<strong>CLA (4-bit block)</strong>: all carries at 3, all sums at 4, independent of the position within the block.</p></div></div>
+<h3 id="s-5-3-3"><span class="n">5.3.3</span> Other fast adders</h3>
+<p>Carry-skip (bypass a block when all \(P_i=1\)), carry-select (compute both \(C_{in}=0\) and \(C_{in}=1\) results and choose with a MUX) and prefix adders (Kogge–Stone, Brent–Kung) reduce delay to \(O(\log n)\) at an area cost.</p>
+<h2 id="s-5-4"><span class="n">5.4</span> Adder–subtractor</h2>
+<figure id="fig-5-2"><div class="figimgs"><img src="img/d05_addsub.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.2.</b> 4-bit adder–subtractor: \(M=0\) adds, \(M=1\) subtracts.</figcaption></figure>
+<p>XOR each \(B_i\) with the mode input \(M\) and feed \(M\) into \(C_0\). For \(M=1\): \(A+\overline B+1=A-B\) in two’s complement. Signed overflow: \(V=C_{n-1}\oplus C_n\). Unsigned subtraction: carry-out \(=1\) means <em>no borrow</em> (\(A\ge B\)); carry-out \(=0\) means borrow.</p>
+<div class="box example"><div class="bt">4-bit subtraction</div><div class="bb"><p>\(A=0101\,(5)\), \(B=0011\,(3)\), \(M=1\): \(A+\overline B+1=0101+1100+1=1\,0010\). Result \(0010=2\), carry-out \(=1\) (no borrow).<br>
+Overflow check, signed: \(0110+0101=1011\): operands \(+6,+5\), result negative, \(V=1\) (true sum \(11&gt;7\)).</p></div></div>
+<h2 id="s-5-5"><span class="n">5.5</span> BCD adder</h2>
+<p>Add two BCD digits in a 4-bit binary adder, producing \(Z_3Z_2Z_1Z_0\) and carry \(K\). Correction is needed when the sum exceeds 9 or \(K=1\):
+\[
+\text{carry out}=K+Z_3Z_2+Z_3Z_1.
+\]
+When that signal is 1, a second 4-bit adder adds \(0110\) to the sum. A one-digit BCD adder therefore uses two 4-bit binary adders plus a few gates.</p>
+<h2 id="s-5-6"><span class="n">5.6</span> Magnitude comparator</h2>
+<p>For one bit: \(A&gt;B:\ A\overline B\); \(A&lt;B:\ \overline AB\); \(A=B:\ A\odot B\).</p>
+<div class="box formula"><div class="bt">\(n\)-bit comparison</div><div class="bb"><p>Let \(x_i=A_i\odot B_i\). Then \((A=B)=x_{n-1}x_{n-2}\cdots x_0\).<br>
+\((A&gt;B)=A_{n-1}\overline{B_{n-1}}+x_{n-1}A_{n-2}\overline{B_{n-2}}+x_{n-1}x_{n-2}A_{n-3}\overline{B_{n-3}}+\cdots\)<br>
+Comparators cascade by feeding the previous result into the least-significant stage (74x85 style \(A&gt;B\), \(A=B\), \(A&lt;B\) inputs).</p></div></div>
+<h2 id="s-5-7"><span class="n">5.7</span> Binary multiplier</h2>
+<p>Multiplying a \(J\)-bit multiplicand by a \(K\)-bit multiplier forms \(K\) partial products (\(J\) ANDs each), added with shifts. A combinational array multiplier uses \(J\times K\) AND gates and \((K-1)\) \(J\)-bit adders; the product has \(J+K\) bits. Sequential (shift-and-add) multipliers take \(K\) cycles with one adder. Booth recoding handles signed operands and reduces additions by encoding runs of 1s.</p>
+<h2 id="s-5-8"><span class="n">5.8</span> The ALU</h2>
+<p>An arithmetic logic unit selects, with control inputs, one of several operations on operands \(A,B\): add, subtract, increment, AND, OR, XOR, NOT, shift and so on. A one-bit slice is an FA plus logic units, a multiplexer chooses the result. Status flags produced are:</p>
+<div class="center"><div class="tw"><table><thead><tr><th>Flag</th><th>Meaning</th></tr></thead><tbody><tr><td>Z (zero)</td><td>result is all zeros</td></tr><tr><td>N (sign)</td><td>MSB of result</td></tr><tr><td>C (carry)</td><td>carry out of the MSB (unsigned overflow; \(\overline{\text{borrow}}\) for subtraction)</td></tr><tr><td>V (overflow)</td><td>signed overflow, \(C_{n-1}\oplus C_n\)</td></tr></tbody></table></div></div>
+<p>Branch conditions use the flags: unsigned \(A&lt;B\) is \(\overline{C}\) after \(A-B\); signed \(A&lt;B\) is \(N\oplus V\).</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) A full adder’s carry is the <em>majority</em>, not the OR. (ii) With subtraction, carry-out \(=1\) means no borrow. (iii) Overflow and carry are different: unsigned arithmetic uses \(C\), signed arithmetic uses \(V\). (iv) CLA delay is independent of \(n\) only for a fixed block; the fan-in grows with block size.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Stage count: an \(n\)-bit adder–subtractor needs \(n\) FAs and \(n\) XOR gates. For a delay question compute carry stages first, then add the sum gate. For a BCD digit: binary add; if result \(&gt;9\) add 6.</p></div></div>
+<h2 id="s-5-9"><span class="n">5.9</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The carry output of a full adder is the (A) XOR of the three inputs (B) majority function (C) OR of the three inputs (D) AND of the three inputs.</p>
+<p><strong>Q2.</strong> The minimum number of half adders and OR gates needed to build a full adder: (A) 1 HA + 1 OR (B) 2 HA + 1 OR (C) 2 HA + 2 OR (D) 3 HA.</p>
+<p><strong>Q3.</strong> In a 4-bit CLA with \(G_i,P_i\), \(C_2=\) (A) \(G_1+P_1G_0\) (B) \(G_1+P_1G_0+P_1P_0C_0\) (C) \(G_0+P_0C_0\) (D) \(P_1P_0C_0\).</p>
+<p><strong>Q4.</strong> Number of full adders required in an \(n\)-bit ripple-carry adder–subtractor: (A) \(n\) (B) \(n+1\) (C) \(2n\) (D) \(n-1\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (B). Q4 (A) plus \(n\) XOR gates.</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A 4-bit adder–subtractor computes \(A-B\) with \(A=0011\), \(B=0101\). The 4-bit result and carry-out are (A) \(1110,\ 0\) (B) \(0010,\ 1\) (C) \(1110,\ 1\) (D) \(0010,\ 0\).</p>
+<p><strong>Q6.</strong> Two 4-bit signed numbers \(0111\) and \(0010\) are added. The sum bits and overflow flag \(V\) are (A) \(1001,\ V=1\) (B) \(1001,\ V=0\) (C) \(0101,\ V=0\) (D) \(1001,\ V=0\) with carry-out 1.</p>
+<p><strong>Q7.</strong> In a one-digit BCD adder the binary sum is \(Z=1100\) with \(K=0\). The correction signal \(K+Z_3Z_2+Z_3Z_1\) is (A) 0 (B) 1 (C) depends on \(Z_0\) (D) undefined.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A): \(0011+\overline{0101}+1=0011+1010+1=1110\) with carry-out \(0\) (a borrow occurred since \(3&lt;5\)); \(1110=-2\). Q6 (A): \(7+2=9&gt;7\), \(V=1\). Q7 (B): \(Z_3Z_2=1\), correction applied: \(1100+0110=1\,0010\), i.e. digit 2 carry 1 (\(12\) in BCD).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> In a ripple-carry adder each FA has a carry delay of \(10\,\)ns and a carry-to-sum delay of \(15\,\)ns. All inputs arrive at \(t=0\). Delay of the last sum bit of an 8-bit adder (ns): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Number of AND gates and 4-bit adders in a combinational \(4\times3\) array multiplier: <span class="blank"></span> and <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> In unit-gate-delay terms, the final sum \(S_{15}\) of a 16-bit RCA (gate-delay model above) arrives at <span class="blank"></span> units.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(7\times10+15=85\) ns (carry rippled through 7 stages, then the last sum). Q9: 12 ANDs, 2 adders. Q10: \(2n=32\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which hold for a full adder? (A) \(S=A\oplus B\oplus C_{in}\) (B) \(C_{out}=AB+C_{in}(A+B)\) (C) can be built from 2 HAs and an OR (D) \(C_{out}=A\oplus B\oplus C_{in}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Write \(P,G\) expression for \(C_3\). &emsp; <strong>T2.</strong> What does carry-out \(=0\) mean after subtraction? &emsp; <strong>T3.</strong> Flags for signed \(A&lt;B\)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(C_3=G_2+P_2G_1+P_2P_1G_0+P_2P_1P_0C_0\). T2: a borrow occurred (\(A&lt;B\) unsigned). T3: \(N\oplus V\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>FA: \(S=A\oplus B\oplus C\), \(C_{out}\)=majority; 2 HA + OR.</li><li>CLA: \(C_{i+1}=G_i+P_iC_i\); RCA delay linear in \(n\).</li><li>Adder–subtractor: XOR on \(B\), \(C_0=M\); \(V=C_{n-1}\oplus C_n\).</li><li>BCD: add 6 if sum \(&gt;9\) or carry; correction \(=K+Z_3Z_2+Z_3Z_1\).</li><li>Comparator: \(x_i=A_i\odot B_i\); multiplier \(J\times K\) needs \(JK\) ANDs, \((K-1)\) adders.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch04.html">&larr; Karnaugh Maps and Boolean Minimization</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch06.html">Multiplexers, Decoders, Encoders and Code Converters &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 7: Numerical Methods | Engineering Mathematics | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="One or two iterations of bisection and Newton–Raphson, trapezoidal and Simpson integration on a few points, Euler/RK2 steps for an ODE, and error-order statements. Calculators are not allowed, so the">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/engineering-mathematics/ch07.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 7: Numerical Methods | Engineering Mathematics | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="One or two iterations of bisection and Newton–Raphson, trapezoidal and Simpson integration on a few points, Euler/RK2 steps for an ODE, and error-order statements. Calculators are not allowed, so the"><meta property="og:url" content="https://vintechnologies.co.in/gate/engineering-mathematics/ch07.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Engineering Mathematics</a></div><div class="chlabel">Chapter 7</div><h1>Numerical Methods</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-7-1">7.1 Root finding</a></li><li><a href="#s-7-2">7.2 Numerical integration</a></li><li><a href="#s-7-3">7.3 Numerical solution of ODEs</a></li><li><a href="#s-7-4">7.4 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>One or two iterations of bisection and Newton–Raphson, trapezoidal and Simpson integration on a few points, Euler/RK2 steps for an ODE, and error-order statements. Calculators are not allowed, so the numbers are chosen to be small.</p></div></div>
+<h2 id="s-7-1"><span class="n">7.1</span> Root finding</h2>
+<h3 id="s-7-1-1"><span class="n">7.1.1</span> Bisection</h3>
+<p>If \(f\) is continuous and \(f(a)f(b)&lt;0\), a root lies in \((a,b)\). Set \(c=\frac{a+b}2\) and keep the half in which the sign change persists. After \(n\) steps the interval is \((b-a)/2^n\), so reaching tolerance \(\varepsilon\) needs \(n\ge\log_2\frac{b-a}\varepsilon\). Convergence is linear and guaranteed.</p>
+<h3 id="s-7-1-2"><span class="n">7.1.2</span> Newton–Raphson</h3>
+<div class="box formula"><div class="bt">Newton–Raphson</div><div class="bb"><p>\(x_{n+1}=x_n-\dfrac{f(x_n)}{f'(x_n)}\). Convergence is quadratic near a simple root (\(e_{n+1}\approx\frac{f''}{2f'}e_n^2\)) but needs a good start and \(f'\ne0\).<br>
+Square root: \(x_{n+1}=\frac12\big(x_n+\frac a{x_n}\big)\). Reciprocal: \(x_{n+1}=x_n(2-ax_n)\). The secant method uses \(f'\approx\frac{f(x_n)-f(x_{n-1})}{x_n-x_{n-1}}\) (order \(\approx1.618\)); regula falsi keeps a bracket.</p></div></div>
+<figure id="fig-7-1"><div class="figimgs"><img src="img/m07_numeric.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.1.</b> Newton–Raphson converges in a few tangent steps; the trapezoidal rule replaces the curve by chords.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(f=x^2-5\), \(x_0=2\): \(x_1=2-\frac{4-5}{4}=2.25\), \(x_2=2.25-\frac{0.0625}{4.5}=2.2361\). For \(x^3-2x-5\) from \(x_0=2.5\) the iterates are \(2.164\), \(2.097\), \(2.0946\), matching the figure.</p></div></div>
+<h2 id="s-7-2"><span class="n">7.2</span> Numerical integration</h2>
+<p>With \(n\) sub-intervals of width \(h=\frac{b-a}n\) and \(y_i=f(a+ih)\):</p>
+<div class="box formula"><div class="bt">Quadrature rules</div><div class="bb"><p><strong>Trapezoidal:</strong> \(\int_a^bf\approx\frac h2\big[y_0+2(y_1+\cdots+y_{n-1})+y_n\big]\); error \(=-\frac{(b-a)h^2}{12}f''(\xi)\), exact for straight lines.<br>
+<strong>Simpson 1/3:</strong> \(\frac h3\big[y_0+4(y_1+y_3+\cdots)+2(y_2+y_4+\cdots)+y_n\big]\), \(n\) <em>even</em>; error \(-\frac{(b-a)h^4}{180}f^{(4)}(\xi)\); exact for polynomials up to degree 3.<br>
+<strong>Simpson 3/8:</strong> \(\frac{3h}8\big[y_0+3y_1+3y_2+2y_3+\cdots+y_n\big]\), \(n\) a multiple of 3; also exact up to degree 3.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\int_0^2x^2dx\) with \(h=1\): trapezoid \(\frac12(0+2\cdot1+4)=3\) (exact \(\frac83\), overestimates since \(f''&gt;0\)); Simpson \(\frac13(0+4+4)=\frac83\) exact.</p></div></div>
+<h2 id="s-7-3"><span class="n">7.3</span> Numerical solution of ODEs</h2>
+<p>For \(y'=f(x,y)\), \(y(x_0)=y_0\), step \(h\):</p>
+<div class="box formula"><div class="bt">One-step methods</div><div class="bb"><p><strong>Euler:</strong> \(y_{n+1}=y_n+hf(x_n,y_n)\); local error \(O(h^2)\), global \(O(h)\).<br>
+<strong>Modified Euler / Heun (RK2):</strong> \(k_1=f(x_n,y_n)\), \(k_2=f(x_n+h,y_n+hk_1)\), \(y_{n+1}=y_n+\frac h2(k_1+k_2)\); global error \(O(h^2)\).<br>
+<strong>RK4:</strong> \(y_{n+1}=y_n+\frac h6(k_1+2k_2+2k_3+k_4)\), \(k_2=f(x_n+\frac h2,y_n+\frac h2k_1)\), \(k_3=f(x_n+\frac h2,y_n+\frac h2k_2)\), \(k_4=f(x_n+h,y_n+hk_3)\); global error \(O(h^4)\).</p></div></div>
+<p>Stability: explicit Euler on \(y'=-\lambda y\) is stable only for \(h&lt;2/\lambda\).</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Bisection requires a sign change, not merely a root. (ii) Newton fails if \(f'(x_n)=0\) and may diverge for poor starting points. (iii) Simpson’s 1/3 rule needs an even number of intervals. (iv) The trapezoidal rule overestimates for convex \(f\). (v) Euler’s local and global errors differ by one power of \(h\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>In a bisection question just halve the interval and check the sign at the midpoint. For Newton on \(x^2-a\) use the averaging form. For integration list \(y_0,\dots,y_n\) first and apply the weights \(1,2,\dots,2,1\) (trapezoid) or \(1,4,2,\dots,4,1\) (Simpson). Check whether the integrand is a polynomial of degree \(\le3\): Simpson is then exact.</p></div></div>
+<h2 id="s-7-4"><span class="n">7.4</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> One Newton–Raphson step for \(f(x)=x^2-2\) from \(x_0=1\) gives (A) 1.25 (B) 1.5 (C) 1.4 (D) 2.</p>
+<p><strong>Q2.</strong> Trapezoidal rule with \(h=1\) for \(\int_0^2x^2dx\) gives (A) \(8/3\) (B) 3 (C) 4 (D) 2.</p>
+<p><strong>Q3.</strong> Simpson’s 1/3 rule for \(\int_0^2x^2dx\) with \(h=1\) gives (A) \(8/3\) (B) 3 (C) 4 (D) 2.</p>
+<p><strong>Q4.</strong> The minimum number of bisection steps on \([0,1]\) to guarantee error \(&lt;10^{-3}\) is (A) 7 (B) 9 (C) 10 (D) 100.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B): \(1-\frac{-1}2=1.5\). Q2 (B). Q3 (A). Q4 (C): \(2^{10}=1024&gt;1000\).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> Newton–Raphson on \(x^2-5\) from \(x_0=2\) gives \(x_1=\) (A) 2.25 (B) 2.5 (C) 2.1 (D) 2.0625.</p>
+<p><strong>Q6.</strong> Euler’s method with \(h=0.1\) for \(y'=x+y\), \(y(0)=1\) gives \(y(0.2)=\) (A) 1.2 (B) 1.22 (C) 1.24 (D) 1.21.</p>
+<p><strong>Q7.</strong> \(\int_0^1\frac{dx}{1+x^2}\) by Simpson’s 1/3 rule with \(h=0.5\) is (A) 0.775 (B) 0.7833 (C) 0.7854 (D) 0.8.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A). Q6 (B): \(y_1=1.1\), \(y_2=1.1+0.1(0.1+1.1)=1.22\). Q7 (B): \(\frac{0.5}3(1+4\cdot0.8+0.5)=0.7833\) (exact \(\pi/4=0.7854\)).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Root of \(x^3-x-1\) in \([1,2]\) by bisection: the midpoint of the interval after two steps (value of the second midpoint) is <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Simpson’s 1/3 rule with \(h=0.5\) for \(\int_0^2x^3dx\) gives <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Heun (RK2) for \(y'=y\), \(y(0)=1\), \(h=0.1\): \(y(0.1)=\) <span class="blank"></span> (three decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(f(1.5)=0.875&gt;0\), interval \([1,1.5]\), second midpoint \(1.25\). Q9: \(\frac{0.5}3[0+4(0.125)+2(1)+4(3.375)+8]=4\) (exact). Q10: \(1+0.05(1+1.1)=1.105\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which are true? (A) Simpson’s 1/3 is exact for cubics (B) it needs an even number of sub-intervals (C) the trapezoidal rule is exact for linear functions (D) Newton–Raphson always converges.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Order of convergence of Newton–Raphson? &emsp; <strong>T2.</strong> Global error order of RK4? &emsp; <strong>T3.</strong> Stability limit of Euler for \(y'=-5y\)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: quadratic. T2: \(O(h^4)\). T3: \(h&lt;2/5=0.4\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Bisection: halves interval, \(n\ge\log_2\frac{b-a}\varepsilon\); Newton: \(x-\frac f{f'}\), quadratic.</li><li>Trapezoid weights \(1,2,\dots,2,1\); Simpson \(1,4,2,\dots,4,1\), \(n\) even, exact to cubics.</li><li>Euler \(O(h)\), Heun \(O(h^2)\), RK4 \(O(h^4)\) global.</li><li>Euler stability \(h&lt;2/\lambda\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch06.html">&larr; Complex Variables</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch08.html">Master Problem Set and Formula Sheet &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\R": "\\mathbb{R}", "\\C": "\\mathbb{C}", "\\E": "\\mathrm{E}", "\\Var": "\\mathrm{Var}", "\\Cov": "\\mathrm{Cov}", "\\tr": "\\operatorname{tr}", "\\rank": "\\operatorname{rank}", "\\Res": "\\operatorname{Res}", "\\grad": "\\nabla", "\\dd": "\\mathrm{d}", "\\oiint": "\\mathop{\\oint\\!\\!\\!\\oint}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

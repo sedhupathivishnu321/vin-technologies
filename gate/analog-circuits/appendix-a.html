@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix A: Mathematical Tools | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/appendix-a.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix A: Mathematical Tools | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/appendix-a.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Appendix A</div><h1>Mathematical Tools</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-A-1">A.1 Logarithms</a></li><li><a href="#s-A-2">A.2 Decibels</a></li><li><a href="#s-A-3">A.3 Complex numbers</a></li><li><a href="#s-A-4">A.4 Phasors</a></li><li><a href="#s-A-5">A.5 Differential equations</a></li><li><a href="#s-A-6">A.6 Laplace transforms</a></li><li><a href="#s-A-7">A.7 Fourier concepts</a></li><li><a href="#s-A-8">A.8 Transfer functions</a></li></ol></details><h2 id="s-A-1"><span class="n">A.1</span> Logarithms</h2>
+<p>\(\log_{10}(ab)=\log a+\log b\); \(\log(a/b)=\log a-\log b\); \(\log a^n=n\log a\); \(\ln x=2.303\log_{10}x\). Useful values: \(\log2=0.301\), \(\log3=0.477\), \(\log5=0.699\), \(\log7=0.845\), \(\ln2=0.693\), \(\ln10=2.303\).</p>
+<h2 id="s-A-2"><span class="n">A.2</span> Decibels</h2>
+<p>\(\mathrm{dB}=20\log_{10}(V_2/V_1)=10\log_{10}(P_2/P_1)\).   \(-3\) dB \(\leftrightarrow0.707\); \(+6\) dB \(\leftrightarrow2\); \(+20\) dB \(\leftrightarrow10\); \(+40\) dB \(\leftrightarrow100\). dBm \(=10\log(P/1\,\mathrm{mW})\).</p>
+<h2 id="s-A-3"><span class="n">A.3</span> Complex numbers</h2>
+<p>\(z=a+jb=re^{j\theta}\), \(r=\sqrt{a^2+b^2}\), \(\theta=\tan^{-1}(b/a)\). \(|z_1z_2|=|z_1||z_2|\), \(\angle(z_1z_2)=\theta_1+\theta_2\). \(j^2=-1\), \(1/j=-j\), \(e^{j\theta}=\cos\theta+j\sin\theta\).</p>
+<h2 id="s-A-4"><span class="n">A.4</span> Phasors</h2>
+<p>\(v(t)=V_m\cos(\omega t+\phi)\leftrightarrow\mathbf V=V_me^{j\phi}\). Impedances: \(R\); \(j\omega L\); \(1/(j\omega C)\). RMS: \(V_{rms}=V_m/\sqrt2\).</p>
+<h2 id="s-A-5"><span class="n">A.5</span> Differential equations</h2>
+<p>First-order RC: \(\tau\dot y+y=x\); step response \(y=x_f(1-e^{-t/\tau})\); general: \(y(t)=y(\infty)+[y(0)-y(\infty)]e^{-t/\tau}\); \(10\)–\(90\%\) rise time \(=2.2\tau\); \(t_{50\%}=0.69\tau\). Second-order: \(\ddot y+2\zeta\omega_0\dot y+\omega_0^2y=\omega_0^2x\).</p>
+<h2 id="s-A-6"><span class="n">A.6</span> Laplace transforms</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>\(f(t)\)</th><th>\(F(s)\)</th></tr></thead><tbody><tr><td>\(\delta(t)\)</td><td>1</td></tr><tr><td>\(u(t)\)</td><td>\(1/s\)</td></tr><tr><td>\(t\,u(t)\)</td><td>\(1/s^2\)</td></tr><tr><td>\(e^{-at}u(t)\)</td><td>\(1/(s+a)\)</td></tr><tr><td>\(\sin\omega t\)</td><td>\(\omega/(s^2+\omega^2)\)</td></tr><tr><td>\(\cos\omega t\)</td><td>\(s/(s^2+\omega^2)\)</td></tr><tr><td>\(\dot f\)</td><td>\(sF-f(0)\)</td></tr><tr><td>\(\int f\)</td><td>\(F/s\)</td></tr></tbody></table></div></div>
+<h2 id="s-A-7"><span class="n">A.7</span> Fourier concepts</h2>
+<p>Periodic signal \(=\) sum of harmonics. Full-wave rectified sine: \(|\sin\omega t|=\dfrac{2}{\pi}-\dfrac4\pi\sum\dfrac{\cos2k\omega t}{4k^2-1}\); square wave (odd harmonics, amplitudes \(\propto1/n\)). Average \(=a_0\); RMS \(=\sqrt{a_0^2+\sum V_n^2/2}\). Bandwidth of a pulse \(\approx1/\tau_{pulse}\).</p>
+<h2 id="s-A-8"><span class="n">A.8</span> Transfer functions</h2>
+<p>\(H(s)=N(s)/D(s)\); frequency response \(H(j\omega)\); poles are roots of \(D\), zeros are roots of \(N\); \(H(0)\) is the DC gain, \(H(\infty)\) the high-frequency gain; stable iff all poles have \(\mathrm{Re}&lt;0\).</p><div class="pager bottom"><a class="pn" href="ch33.html">&larr; Mixed GATE Practice Tests</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="appendix-b.html">Essential Graphs &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

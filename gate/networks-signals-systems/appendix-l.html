@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix L: Last-Day Formula Sheet | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-l.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix L: Last-Day Formula Sheet | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-l.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Appendix L</div><h1>Last-Day Formula Sheet</h1><p><strong>Circuits.</strong> \(v=iR\); \(R_{Th}=V_{oc}/I_{sc}\); \(P_{max}=V_{Th}^2/4R_{Th}\); \(Y\)–\(\Delta\): \(R_\Delta=3R_Y\) (balanced); \(x=x_\infty+(x_0-x_\infty)e^{-t/\tau}\); \(\tau=R_{Th}C=L/R_{Th}\).<br>
+<strong>AC.</strong> \(Z_L=j\omega L\), \(Z_C=\frac1{j\omega C}\); \(S=VI^*\); \(Q_C=P(\tan\phi_1-\tan\phi_2)\); \(\omega_0=\frac1{\sqrt{LC}}\); \(Q_s=\frac{\omega_0L}R\); \(BW=\frac{\omega_0}Q\); RMS: sine \(\frac{V_m}{\sqrt2}\), half-wave \(\frac{V_m}2\).<br>
+<strong>2nd order.</strong> \(\zeta=\alpha/\omega_0\); \(\%OS=100e^{-\pi\zeta/\sqrt{1-\zeta^2}}\); \(t_p=\pi/\omega_d\).<br>
+<strong>Two-port.</strong> \(A=\frac{z_{11}}{z_{21}}\), \(B=\frac{\Delta z}{z_{21}}\), \(C=\frac1{z_{21}}\), \(D=\frac{z_{22}}{z_{21}}\); \(Z_{in}=\frac{AZ_L+B}{CZ_L+D}\); reciprocal: \(AD-BC=1\).<br>
+<strong>Laplace.</strong> \(\frac1{s+a}\leftrightarrow e^{-at}\); \(f(0^+)=\lim sF\); \(f(\infty)=\lim_{s\to0}sF\).<br>
+<strong>Signals.</strong> \(E=\int|x|^2\); \(\delta(at)=\frac{\delta(t)}{|a|}\); LTI: causal \(h=0\) (\(t&lt;0\)), stable \(\int|h|&lt;\infty\); \(y=x*h\); \(\int y=\int x\int h\).<br>
+<strong>Fourier.</strong> \(c_k=\frac1T\int xe^{-jk\omega_0t}\); \(P=\sum|c_k|^2\); square wave \(b_n=\frac{4A}{n\pi}\); \(\rect\leftrightarrow\tau\sinc\); shift \(\to e^{-j\omega t_0}\); modulation \(\to\frac12[X(\omega\mp\omega_0)]\); Parseval \(\frac1{2\pi}\int|X|^2\).<br>
+<strong>Sampling.</strong> Nyquist rate \(2f_m\); alias \(|f-kf_s|\); product BW adds; convolution min; bandpass \(\frac{2f_H}k\le f_s\le\frac{2f_L}{k-1}\).<br>
+<strong>DT.</strong> \(a^nu\leftrightarrow\frac1{1-az^{-1}}\); causal stable: poles inside; ROC no poles; \(H(e^{j\Omega})=H(z)|_{e^{j\Omega}}\); period \(2\pi\); DFT \(X[k]\): \(N\) samples, circular convolution.<br>
+<strong>Filters.</strong> Linear phase: symmetric \(h\), \(\tau_g=\frac{N-1}2\); windows Rect/Hann/Hamming/Blackman: \(c=1.8/6.2/6.6/11\); bilinear \(s=\frac2T\frac{1-z^{-1}}{1+z^{-1}}\); \(N_{But}=\frac{\log[\ldots]}{2\log(\omega_s/\omega_p)}\).</p><div class="pager bottom"><a class="pn" href="appendix-k.html">&larr; Study-Priority Index by Topic</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="appendix-m.html">Supplementary Syllabus Topics &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

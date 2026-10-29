@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 20: Op-Amp Mathematical Circuits | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch20.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 20: Op-Amp Mathematical Circuits | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch20.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 20</div><h1>Op-Amp Mathematical Circuits</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-20-1">20.1 Ideal integrator</a></li><li><a href="#s-20-2">20.2 Practical integrator</a></li><li><a href="#s-20-3">20.3 Ideal differentiator</a></li><li><a href="#s-20-4">20.4 Practical differentiator</a></li><li><a href="#s-20-5">20.5 Integrator frequency response</a></li><li><a href="#s-20-6">20.6 Differentiator frequency response</a></li><li><a href="#s-20-7">20.7 Stability limitations</a></li><li><a href="#s-20-8">20.8 Noise amplification</a></li><li><a href="#s-20-9">20.9 Waveform generation</a></li><li><a href="#s-20-10">20.10 GATE problems</a></li></ol></details><h2 id="s-20-1"><span class="n">20.1</span> Ideal integrator</h2>
+<figure id="fig-20-1"><div class="figimgs"><img src="img/f20_int.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.1.</b> Ideal (Miller) integrator: \(R\) at the input, \(C\) in the feedback path.</figcaption></figure>
+<p>Virtual ground: \(i=v_i/R=C\,d(0-v_o)/dt\), so</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(v_o(t)=-\dfrac1{RC}\int_0^tv_i\,dt+v_o(0)\), &emsp;&emsp; \(\dfrac{V_o(s)}{V_i(s)}=-\dfrac{1}{sRC}\), &emsp;&emsp; \(\left|\dfrac{V_o}{V_i}\right|=\dfrac1{\omega RC}\), phase \(+90^\circ\).</p></div></div>
+<figure id="fig-20-2"><div class="figimgs"><img src="img/w20_int.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.2.</b> A square-wave input produces a triangular output (slope \(\mp V/RC\)).</figcaption></figure>
+<figure id="fig-20-3"><div class="figimgs"><img src="img/w20_int_sin.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.3.</b> Sinusoidal input: the output is a cosine whose amplitude falls as \(1/\omega RC\).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R=10\) k\(\Omega\), \(C=0.1\ \mu\)F (\(RC=1\) ms). A \(+1\) V step gives a ramp with slope \(-1\) V/ms: \(v_o=-5\) V after \(5\) ms. For a \(1\) kHz, \(1\) V peak sine: \(|A|=1/(2\pi\times1000\times10^{-3})=0.159\), so \(0.159\) V peak.</p></div></div>
+<p>The unity-gain frequency is \(f_0=1/(2\pi RC)\).</p>
+<h2 id="s-20-2"><span class="n">20.2</span> Practical integrator</h2>
+<p>The ideal integrator has infinite DC gain: any offset or bias current integrates until the output saturates. A resistor \(R_f\) in parallel with \(C\) limits the DC gain to \(-R_f/R_1\).</p>
+<figure id="fig-20-4"><div class="figimgs"><img src="img/f20_int_prac.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.4.</b> Practical integrator with \(R_f\) across \(C\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\dfrac{V_o}{V_i}=-\dfrac{R_f/R_1}{1+j\omega R_fC}\)<br>
+Integration is valid for \(f\gg f_a=\dfrac1{2\pi R_fC}\); DC gain \(=-R_f/R_1\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_1=10\) k, \(R_f=100\) k, \(C=0.1\ \mu\)F: DC gain \(-10\) (20 dB); \(f_a=1/(2\pi\times100\,\mathrm k\times0.1\,\mu)=15.9\) Hz. The circuit integrates signals above about \(160\) Hz (\(10f_a\)).</p></div></div>
+<h2 id="s-20-3"><span class="n">20.3</span> Ideal differentiator</h2>
+<figure id="fig-20-5"><div class="figimgs"><img src="img/f20_diff.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.5.</b> Ideal differentiator: capacitor at the input, resistor in feedback.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(v_o=-RC\dfrac{dv_i}{dt}\), &emsp;&emsp; \(\dfrac{V_o}{V_i}=-sRC\), &emsp;&emsp; \(|A|=\omega RC\) (gain rises \(+20\) dB/dec), phase \(-90^\circ\).</p></div></div>
+<figure id="fig-20-6"><div class="figimgs"><img src="img/w20_diff.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.6.</b> A triangular input produces a square-wave output (constant slope \(\Rightarrow\) constant derivative).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(RC=1\) ms and \(v_i=0.5\sin(2\pi\times1000t)\): \(v_o=-RC\omega V_m\cos\omega t\), peak \(=10^{-3}\times6283\times0.5=3.14\) V. A ramp of \(5\) V/ms with \(RC=0.1\) ms gives \(v_o=-0.5\) V.</p></div></div>
+<h2 id="s-20-4"><span class="n">20.4</span> Practical differentiator</h2>
+<p>The ideal differentiator has a gain that rises without limit with frequency, amplifying noise, and it is prone to oscillation because the op-amp’s own pole adds a second \(-90^\circ\) to the loop.</p>
+<figure id="fig-20-7"><div class="figimgs"><img src="img/f20_diff_prac.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.7.</b> Practical differentiator: \(R_1\) in series with \(C_1\) limits the high-frequency gain (a capacitor \(C_f\) across \(R_f\) is often added).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\dfrac{V_o}{V_i}=-\dfrac{j\omega R_fC_1}{(1+j\omega R_1C_1)}\) (with \(C_f\): \(\dfrac{-j\omega R_fC_1}{(1+j\omega R_1C_1)(1+j\omega R_fC_f)}\))<br>
+Differentiation valid for \(f&lt;f_a=\dfrac{1}{2\pi R_1C_1}\); above \(f_a\) the gain is flat at \(-R_f/R_1\).</p></div></div>
+<h2 id="s-20-5"><span class="n">20.5</span> Integrator frequency response</h2>
+<figure id="fig-20-8"><div class="figimgs"><img src="img/f20_bode_int.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.8.</b> Bode magnitude of the ideal integrator (dashed, \(-20\) dB/dec through 0 dB at \(f_0\)) and of the practical one (solid), which levels off at the DC gain.</figcaption></figure>
+<h2 id="s-20-6"><span class="n">20.6</span> Differentiator frequency response</h2>
+<figure id="fig-20-9"><div class="figimgs"><img src="img/f20_bode_diff.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.9.</b> Ideal differentiator (\(+20\) dB/dec) and the practical circuit with a high-frequency roll-off.</figcaption></figure>
+<h2 id="s-20-7"><span class="n">20.7</span> Stability limitations</h2>
+<p>The differentiator’s loop gain \(A\beta\) has \(\beta=1/(1+j\omega R_1C)\)-like behaviour that adds phase lag; together with the op-amp pole this leaves too little phase margin at the crossover point. The remedy is to reduce loop-gain slope with \(R_1\) and \(C_f\): crossover in a region where the closed-loop gain curve is flat (Chapter 28). The integrator is inherently stable (\(\beta\) is a first-order high-pass).</p>
+<h2 id="s-20-8"><span class="n">20.8</span> Noise amplification</h2>
+<p>Since \(|A_v|\propto f\), high-frequency noise is greatly boosted by the differentiator.</p>
+<figure id="fig-20-10"><div class="figimgs"><img src="img/w20_noise.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.10.</b> A 2% noise on a sine wave becomes dominant after differentiation. The integrator, by contrast, low-pass filters noise.</figcaption></figure>
+<h2 id="s-20-9"><span class="n">20.9</span> Waveform generation</h2>
+<p>An integrator and a Schmitt trigger (Chapter 23) in a loop produce simultaneous square and triangular waves.</p>
+<figure id="fig-20-11"><div class="figimgs"><img src="img/w20_gen.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.11.</b> Triangle/square generator: the Schmitt output alternates between \(\pm V_{sat}\); the integrator ramps up or down until it reaches a Schmitt threshold.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Schmitt thresholds \(\pm V_T=\pm\dfrac{R_1}{R_2}V_{sat}\) \(\Rightarrow\) triangle amplitude \(V_T\), slope \(=V_{sat}/RC\)<br>
+\(T=4RC\dfrac{R_1}{R_2}\), &emsp;&emsp; \(f=\dfrac{R_2}{4R_1RC}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R=10\) k, \(C=10\) nF, \(R_1/R_2=0.1\), \(V_{sat}=13\) V: triangle amplitude \(1.3\) V; \(T=4\times0.1\,\mathrm{ms}\times0.1=40\ \mu\)s, \(f=25\) kHz.</p></div></div>
+<h2 id="s-20-10"><span class="n">20.10</span> GATE problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> An ideal integrator with \(RC=1\) ms receives \(+2\) V dc, starting at 0. Output after \(1\) ms is <span class="blank"></span> V.</p>
+<p><strong>Q2.</strong> Ideal differentiator with \(RC=0.1\) ms, input a ramp of \(5\) V/ms. Output is <span class="blank"></span> V.</p>
+<p><strong>Q3.</strong> Integrator \(R=10\) k\(\Omega\), \(C=0.1\ \mu\)F, input \(1\sin(1000t)\) V. Output amplitude is <span class="blank"></span> V.</p>
+<p><strong>Q4.</strong> Practical integrator with \(R_1=10\) k\(\Omega\) and \(R_f=100\) k\(\Omega\): DC gain (dB) is <span class="blank"></span>.</p>
+<p><strong>Q5.</strong> A differentiator with \(RC=1/(2\pi\times1000)\) s has gain magnitude at \(1\) kHz of (A) 0.1 (B) 1 (C) 10 (D) \(\infty\).</p>
+<p><strong>Q6.</strong> A square-wave input to an ideal integrator gives (A) sine (B) square (C) triangle (D) spikes.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(-2\) V. Q2: \(-0.5\) V. Q3: \(1/(1000\times10^{-3})=1\) V. Q4: 20 dB. Q5: (B). Q6: (C).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Find the output slope of an integrator with \(R=100\) k, \(C=1\ \mu\)F and a \(2\) V step. &emsp; [\(-20\) V/s]</li><li>State two ways to prevent integrator saturation due to offset. &emsp; [Parallel \(R_f\); reset switch; DC-blocking cap]</li><li>A differentiator with \(R=1\) k, \(C=0.1\ \mu\)F, input \(2\sin(2\pi\times5000t)\): output peak? &emsp; [6.28 V]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch19.html">&larr; Op-Amp Amplifier Circuits</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch21.html">Active Filters &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2: Electrostatics | Electromagnetics | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Coulomb’s law, fields of standard charge distributions via Gauss’s law, potential and energy, boundary conditions at conductor and dielectric surfaces, and the capacitance of standard geometries.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electromagnetics/ch02.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 2: Electrostatics | Electromagnetics | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Coulomb’s law, fields of standard charge distributions via Gauss’s law, potential and energy, boundary conditions at conductor and dielectric surfaces, and the capacitance of standard geometries."><meta property="og:url" content="https://vintechnologies.co.in/gate/electromagnetics/ch02.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electromagnetics</a></div><div class="chlabel">Chapter 2</div><h1>Electrostatics</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-2-1">2.1 Coulomb’s law and electric field</a></li><li><a href="#s-2-2">2.2 Gauss’s law and standard fields</a></li><li><a href="#s-2-3">2.3 Electric potential, energy</a></li><li><a href="#s-2-4">2.4 Boundary conditions</a></li><li><a href="#s-2-5">2.5 Capacitance</a></li><li><a href="#s-2-6">2.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Coulomb’s law, fields of standard charge distributions via Gauss’s law, potential and energy, boundary conditions at conductor and dielectric surfaces, and the capacitance of standard geometries. Most questions are one formula plus unit care.</p></div></div>
+<h2 id="s-2-1"><span class="n">2.1</span> Coulomb’s law and electric field</h2>
+<div class="box formula"><div class="bt">Point charges</div><div class="bb"><p>\(\mathbf F=\dfrac{Q_1Q_2}{4\pi\eps R^2}\ar_R\), \(\ \dfrac1{4\pi\epsz}=9\times10^9\ \mathrm{N\,m^2/C^2}\). Like charges repel.<br>
+Field \(\vE=\mathbf F/q=\dfrac{Q}{4\pi\eps R^2}\ar_R\) (V/m). Superposition applies. Flux density \(\vD=\eps\vE\) (C/m\({}^2\)), \(\eps=\eps_r\epsz\).</p></div></div>
+<h2 id="s-2-2"><span class="n">2.2</span> Gauss’s law and standard fields</h2>
+<div class="box formula"><div class="bt">Gauss’s law</div><div class="bb"><p>\(\oiint_S\vD\cdot d\mathbf S=Q_{enc}\ \Leftrightarrow\ \grad\cdot\vD=\rho_v\). Choose a Gaussian surface on which \(\vD\) is constant and normal.<br>
+Point or sphere: \(E=\frac{Q}{4\pi\eps r^2}\) outside. Infinite line charge \(\rho_l\): \(E=\frac{\rho_l}{2\pi\eps\rho}\ar_\rho\). Infinite sheet \(\rho_s\): \(E=\frac{\rho_s}{2\eps}\). Conductor surface: \(E=\rho_s/\eps\) (normal). Inside a conductor (static) \(\vE=0\), the charge resides on the surface and the conductor is an equipotential.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>An infinite line charge of \(10\,\)nC/m: \(E(2\,\mathrm m)=\dfrac{\rho_l}{2\pi\epsz\rho}=\dfrac{10\times10^{-9}}{2\pi(8.854\times10^{-12})(2)}\approx89.9\) V/m.</p></div></div>
+<h2 id="s-2-3"><span class="n">2.3</span> Electric potential, energy</h2>
+<div class="box formula"><div class="bt">Potential</div><div class="bb"><p>\(\vE=-\grad V\), \(\ V_{AB}=-\int_B^A\vE\cdot d\mathbf l\), \(\ \oint\vE\cdot d\mathbf l=0\) (conservative). Point charge: \(V=\frac{Q}{4\pi\eps r}\) (reference at infinity). Dipole: \(V=\frac{p\cos\theta}{4\pi\eps r^2}\), \(p=Qd\).<br>
+Poisson: \(\grad^2V=-\rho_v/\eps\); Laplace: \(\grad^2V=0\) (no charge). Solutions of Laplace’s equation are unique given boundary conditions.<br>
+Energy: \(W=\tfrac12\iiint\rho_vV\,dV=\tfrac12\iiint\vD\cdot\vE\,dV\); energy density \(w_e=\tfrac12\eps E^2\).</p></div></div>
+<figure id="fig-2-1"><div class="figimgs"><img src="img/e02_dipole.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.1.</b> Equipotentials (grey) and field lines (blue) of an electric dipole are mutually perpendicular.</figcaption></figure>
+<p>A shell of radius \(a\) carrying \(Q\) has \(V=\frac{Q}{4\pi\eps a}\) everywhere on and inside it; for \(Q=10\) nC and \(a=0.1\,\)m this is \(900\) V.</p>
+<h2 id="s-2-4"><span class="n">2.4</span> Boundary conditions</h2>
+<div class="box formula"><div class="bt">Interface between media 1 and 2</div><div class="bb"><p>Tangential \(\vE\) is continuous: \(E_{1t}=E_{2t}\) (\(\Leftrightarrow D_{1t}/\eps_1=D_{2t}/\eps_2\)).<br>
+Normal \(\vD\): \(D_{1n}-D_{2n}=\rho_s\) (free surface charge); with \(\rho_s=0\), \(D_{1n}=D_{2n}\), i.e. \(\eps_1E_{1n}=\eps_2E_{2n}\).<br>
+Conductor–dielectric: \(E_t=0\), \(D_n=\rho_s\). Refraction: \(\dfrac{\tan\theta_1}{\tan\theta_2}=\dfrac{\eps_1}{\eps_2}\) (\(\theta\) measured from the normal).</p></div></div>
+<p>If \(E_{1}=10\) V/m is normal to the interface of \(\eps_r=2\) and \(\eps_r=5\) dielectrics, the field in medium 2 is \(E_2=10\cdot\frac25=4\) V/m.</p>
+<h2 id="s-2-5"><span class="n">2.5</span> Capacitance</h2>
+<div class="box formula"><div class="bt">Capacitance \(C=Q/V\)</div><div class="bb"><p>Parallel plate: \(C=\dfrac{\eps A}{d}\). Coaxial (length \(L\)): \(C=\dfrac{2\pi\eps L}{\ln(b/a)}\). Concentric spheres: \(C=\dfrac{4\pi\eps ab}{b-a}\). Isolated sphere: \(C=4\pi\eps a\).<br>
+Parallel combination \(C=C_1+C_2\); series \(\frac1C=\frac1{C_1}+\frac1{C_2}\). Energy \(W=\tfrac12CV^2=\tfrac12QV\).<br>
+Dielectric slab filling part of a gap: the layers act as capacitors in series (slab perpendicular to \(\vE\)) or parallel (slab parallel to \(\vE\)).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Plates of area \(100\,\mathrm{cm^2}\), spacing \(1\,\)mm, air: \(C=\dfrac{8.854\times10^{-12}\times10^{-2}}{10^{-3}}=88.5\) pF. With a coaxial line of \(b/a=e\) and \(\eps_r=2.25\): \(C'=2\pi\eps=2\pi(2.25)(8.854\times10^{-12})=125.2\) pF/m.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(E=\rho_s/(2\eps)\) for a sheet but \(\rho_s/\eps\) at a conductor surface. (ii) The field inside a conductor is zero, but outside it is not. (iii) Normal \(\vD\) (not \(\vE\)) is continuous when \(\rho_s=0\). (iv) Capacitance depends on geometry and \(\eps\) only, not on \(Q\) or \(V\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>\(C\propto A/d\): double \(d\to\) half \(C\). For stored energy use \(\frac12CV^2\) (\(V\) fixed) or \(\frac{Q^2}{2C}\) (\(Q\) fixed). Potential of a point charge in air: \(V\approx9\times10^9Q/r\). For interface problems write \(\eps_1E_{1n}=\eps_2E_{2n}\) first.</p></div></div>
+<h2 id="s-2-6"><span class="n">2.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The force between \(1\,\mu\)C and \(2\,\mu\)C at \(10\,\)cm in air is (A) 0.18 N (B) 1.8 N (C) 18 N (D) 0.018 N.</p>
+<p><strong>Q2.</strong> Inside a conductor under electrostatic conditions the electric field is (A) uniform non-zero (B) zero (C) radial (D) infinite.</p>
+<p><strong>Q3.</strong> Doubling the plate spacing of a parallel-plate capacitor (A) doubles \(C\) (B) halves \(C\) (C) quadruples \(C\) (D) leaves \(C\) unchanged.</p>
+<p><strong>Q4.</strong> The potential of a point charge \(Q\) at distance \(r\) is (A) \(\frac{Q}{4\pi\epsz r^2}\) (B) \(\frac{Q}{4\pi\epsz r}\) (C) \(\frac{Q}{2\pi\epsz r}\) (D) \(\frac{Qr}{4\pi\epsz}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B): \(9\times10^9\cdot2\times10^{-12}/0.01=1.8\). Q2 (B). Q3 (B). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> An infinite line charge of \(10\,\)nC/m. \(E\) at \(2\,\)m is (A) 9 V/m (B) 45 V/m (C) 90 V/m (D) 180 V/m.</p>
+<p><strong>Q6.</strong> A conducting sphere of radius \(0.1\,\)m carries \(10\,\)nC. Its potential is (A) 90 V (B) 900 V (C) 9000 V (D) 9 V.</p>
+<p><strong>Q7.</strong> \(E=10\) V/m normal to an interface between \(\eps_r=2\) (medium 1) and \(\eps_r=5\) (medium 2), no surface charge. \(E_2=\) (A) 25 V/m (B) 4 V/m (C) 10 V/m (D) 2 V/m.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (C): \(89.9\). Q6 (B). Q7 (B): \(2\cdot10=5E_2\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Capacitance (pF) of air plates of \(100\,\mathrm{cm^2}\) at \(1\,\)mm: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Energy (mJ) in a \(10\,\mu\)F capacitor charged to \(100\,\)V: <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Capacitance per metre (pF/m) of a coaxial line with \(b/a=e\), \(\eps_r=2.25\): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(88.5\). Q9: \(\frac12(10^{-5})(10^4)=0.05\) J \(=50\) mJ. Q10: \(125.2\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> For an electrostatic field: (A) \(\grad\times\vE=0\) (B) \(\grad\cdot\vD=\rho_v\) (C) \(\vE=-\grad V\) (D) \(\grad\cdot\vE=0\) everywhere.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Field of an infinite sheet? &emsp; <strong>T2.</strong> Boundary condition on tangential \(\vE\)? &emsp; <strong>T3.</strong> \(C\) of an isolated sphere?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(\rho_s/2\eps\). T2: continuous. T3: \(4\pi\eps a\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(\vE=\frac{Q}{4\pi\eps r^2}\), \(V=\frac{Q}{4\pi\eps r}\), \(\vE=-\grad V\); line \(\frac{\rho_l}{2\pi\eps\rho}\), sheet \(\frac{\rho_s}{2\eps}\).</li><li>Gauss: \(\oiint\vD\cdot d\mathbf S=Q_{enc}\); conductor: \(E_{in}=0\), \(D_n=\rho_s\).</li><li>Boundary: \(E_t\) continuous; \(D_n\) continuous if \(\rho_s=0\).</li><li>\(C=\eps A/d\), coax \(\frac{2\pi\eps L}{\ln(b/a)}\), sphere \(4\pi\eps a\); \(W=\frac12CV^2\); \(w_e=\frac12\eps E^2\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch01.html">&larr; Vector Analysis and Coordinate Systems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch03.html">Magnetostatics, Inductance and Faraday’s Law &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\vE": "\\mathbf E", "\\vD": "\\mathbf D", "\\vH": "\\mathbf H", "\\vB": "\\mathbf B", "\\vJ": "\\mathbf J", "\\vS": "\\mathbf S", "\\ar": "\\mathbf a", "\\grad": "\\nabla", "\\eps": "\\varepsilon", "\\epsz": "\\varepsilon_0", "\\muz": "\\mu_0", "\\Zo": "Z_0", "\\ZL": "Z_L", "\\Gam": "\\Gamma", "\\oiint": "\\mathop{\\oint\\!\\!\\!\\oint}", "\\VSWR": "\\mathrm{VSWR}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

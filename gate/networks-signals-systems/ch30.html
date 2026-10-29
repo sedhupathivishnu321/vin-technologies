@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 30: 1-Mark Problem Bank | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="47 one-mark problems in the style of GATE (original problems; see the Preface). Target: \le90 seconds each. Answers are at the end of the chapter, followed by one-line justifications for the">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch30.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 30: 1-Mark Problem Bank | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="47 one-mark problems in the style of GATE (original problems; see the Preface). Target: \le90 seconds each. Answers are at the end of the chapter, followed by one-line justifications for the"><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch30.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 30</div><h1>1-Mark Problem Bank</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-1">A. Direct conceptual questions</a></li><li><a href="#s-2">B. Formula-based questions</a></li><li><a href="#s-3">C. Circuit reduction</a></li><li><a href="#s-4">D. Signal transformations</a></li><li><a href="#s-5">E. Pole–zero questions</a></li><li><a href="#s-6">F. Sampling calculations</a></li><li><a href="#s-7">G. Transform problems</a></li></ol></details><div class="box notebox"><div class="bt">How to use</div><div class="bb"><p>\(47\) one-mark problems in the style of GATE (original problems; see the Preface). Target: \(\le90\) seconds each. Answers are at the end of the chapter, followed by one-line justifications for the numerical ones.</p></div></div>
+<h2 id="s-1">A. Direct conceptual questions</h2>
+<div class="box onemark"><div class="bt">Set A</div><div class="bb"><p><strong>A1.</strong> Which of the following is a passive element? (A) VCVS (B) inductor (C) op-amp (D) independent current source.</p>
+<p><strong>A2.</strong> Kirchhoff’s voltage law is a statement of conservation of (A) charge (B) energy (C) momentum (D) power.</p>
+<p><strong>A3.</strong> Superposition can be used to find (A) voltage only (B) current only (C) voltage and current but not power (D) power.</p>
+<p><strong>A4.</strong> A network has \(n\) nodes. The number of independent KCL equations is (A) \(n\) (B) \(n-1\) (C) \(n+1\) (D) \(b-n+1\).</p>
+<p><strong>A5.</strong> In a purely capacitive AC circuit the current (A) leads the voltage by \(90^\circ\) (B) lags by \(90^\circ\) (C) is in phase (D) lags by \(180^\circ\).</p>
+<p><strong>A6.</strong> A capacitor voltage \(v_C\) and inductor current \(i_L\) (A) can both jump (B) cannot jump (C) \(v_C\) jumps, \(i_L\) does not (D) \(i_L\) jumps, \(v_C\) does not.</p>
+<p><strong>A7.</strong> Which system is time-invariant? (A) \(y=t\,x(t)\) (B) \(y=x(2t)\) (C) \(y=x^2(t)\) (D) \(y=x(-t)\).</p>
+<p><strong>A8.</strong> An energy signal has (A) finite energy and zero average power (B) infinite energy and finite power (C) both infinite (D) both finite and non-zero.</p>
+<p><strong>A9.</strong> The Fourier transform of a real and even signal is (A) real and even (B) imaginary and odd (C) real and odd (D) complex.</p>
+<p><strong>A10.</strong> The poles of a causal, BIBO-stable continuous-time system lie in (A) the open left half plane (B) the right half plane (C) on the \(j\omega\) axis (D) anywhere.</p></div></div>
+<h2 id="s-2">B. Formula-based questions</h2>
+<div class="box onemark"><div class="bt">Set B</div><div class="bb"><p><strong>B1.</strong> \(6\ \Omega\) and \(3\ \Omega\) in parallel: (A) \(9\ \Omega\) (B) \(2\ \Omega\) (C) \(4.5\ \Omega\) (D) \(18\ \Omega\).</p>
+<p><strong>B2.</strong> The RMS value of a full-wave rectified sine of peak \(10\) V is (A) \(6.37\) V (B) \(7.07\) V (C) \(5\) V (D) \(10\) V.</p>
+<p><strong>B3.</strong> The resonant frequency of \(L=1\) mH and \(C=1\ \mu\)F is closest to (A) \(1.59\) kHz (B) \(5.03\) kHz (C) \(31.6\) kHz (D) \(159\) kHz.</p>
+<p><strong>B4.</strong> A series RLC has \(R=10\ \Omega\), \(L=10\) mH, \(C=10\ \mu\)F. \(Q\approx\) (A) \(0.316\) (B) \(3.16\) (C) \(31.6\) (D) \(316\).</p>
+<p><strong>B5.</strong> Energy stored in a \(2\) H inductor carrying \(3\) A: (A) \(3\) J (B) \(6\) J (C) \(9\) J (D) \(18\) J.</p>
+<p><strong>B6.</strong> Nyquist rate of a signal band-limited to \(5\) kHz: (A) \(2.5\) kHz (B) \(5\) kHz (C) \(10\) kHz (D) \(20\) kHz.</p>
+<p><strong>B7.</strong> The \(z\)-transform of \((0.5)^nu[n]\) is (A) \(\frac1{1-0.5z^{-1}}\) (B) \(\frac1{1-2z^{-1}}\) (C) \(\frac{z}{z+0.5}\) (D) \(\frac1{1+0.5z^{-1}}\).</p>
+<p><strong>B8.</strong> \(\mathcal L\{te^{-2t}u(t)\}=\) (A) \(\frac1{s+2}\) (B) \(\frac1{(s+2)^2}\) (C) \(\frac{2}{s^2}\) (D) \(\frac{s}{(s+2)^2}\).</p></div></div>
+<h2 id="s-3">C. Circuit reduction</h2>
+<div class="box onemark"><div class="bt">Set C</div><div class="bb"><p><strong>C1.</strong> A balanced star of \(12\ \Omega\) resistors is converted to delta. Each delta resistor is (A) \(4\ \Omega\) (B) \(12\ \Omega\) (C) \(36\ \Omega\) (D) \(6\ \Omega\).</p>
+<p><strong>C2.</strong> \(3\ \Omega\) in series with (\(6\ \Omega\parallel3\ \Omega\)) equals (A) \(5\ \Omega\) (B) \(4\ \Omega\) (C) \(12\ \Omega\) (D) \(2\ \Omega\).</p>
+<p><strong>C3.</strong> In a balanced bridge with all arms \(10\ \Omega\) and a bridge resistor \(R_5\), \(R_{AB}=\) (A) \(5\ \Omega\) (B) \(10\ \Omega\) (C) \(20\ \Omega\) (D) depends on \(R_5\).</p>
+<p><strong>C4.</strong> The input resistance of an infinite ladder with series \(2\ \Omega\) and shunt \(2\ \Omega\) is (A) \(2\ \Omega\) (B) \(3.236\ \Omega\) (C) \(4\ \Omega\) (D) \(\infty\).</p>
+<p><strong>C5.</strong> A \(10\) V source with \(5\ \Omega\) series resistance is transformed to a current source of (A) \(2\) A in parallel with \(5\ \Omega\) (B) \(0.5\) A in parallel with \(5\ \Omega\) (C) \(2\) A in series with \(5\ \Omega\) (D) \(50\) A in parallel with \(5\ \Omega\).</p>
+<p><strong>C6.</strong> Three \(6\ \mu\)F capacitors in series equal (A) \(18\ \mu\)F (B) \(6\ \mu\)F (C) \(2\ \mu\)F (D) \(1/2\ \mu\)F.</p></div></div>
+<h2 id="s-4">D. Signal transformations</h2>
+<div class="box onemark"><div class="bt">Set D</div><div class="bb"><p><strong>D1.</strong> \(x(2t-3)\) is obtained from \(x(t)\) by (A) compress by \(2\), delay by \(1.5\) (B) compress by \(2\), delay by \(3\) (C) expand by \(2\), delay by \(3\) (D) expand by \(2\), advance by \(1.5\).</p>
+<p><strong>D2.</strong> The even part of \(x(t)=e^{-t}u(t)\) at \(t=-1\) is (A) \(0\) (B) \(0.184\) (C) \(0.368\) (D) \(-0.184\).</p>
+<p><strong>D3.</strong> \(\delta(2t-4)=\) (A) \(2\delta(t-2)\) (B) \(\frac12\delta(t-2)\) (C) \(\delta(t-4)\) (D) \(\frac12\delta(t-4)\).</p>
+<p><strong>D4.</strong> \(x[n]=\{1,2,3\}\) for \(n=0,1,2\). Then \(x[1-n]\) is (A) \(\{3,2,1\}\) starting at \(n=-1\) (B) \(\{1,2,3\}\) starting at \(n=1\) (C) \(\{3,2,1\}\) starting at \(n=0\) (D) \(\{1,2,3\}\) starting at \(n=-1\).</p>
+<p><strong>D5.</strong> \(\cos(\pi t/3)+\sin(\pi t/2)\) has period (A) \(6\) (B) \(4\) (C) \(12\) (D) \(2\).</p>
+<p><strong>D6.</strong> Energy of a rectangular pulse of amplitude \(3\) and width \(2\): (A) \(6\) (B) \(9\) (C) \(18\) (D) \(12\).</p></div></div>
+<h2 id="s-5">E. Pole–zero questions</h2>
+<div class="box onemark"><div class="bt">Set E</div><div class="bb"><p><strong>E1.</strong> \(H(s)=\dfrac{s+1}{(s+2)(s+3)}\) is (A) stable (B) unstable (C) marginally stable (D) non-causal.</p>
+<p><strong>E2.</strong> \(H(z)=\dfrac1{1-0.5z^{-1}}\) has a pole at (A) \(z=0.5\) (B) \(z=2\) (C) \(z=-0.5\) (D) \(z=0\).</p>
+<p><strong>E3.</strong> A causal system with poles at \(s=\pm j2\) is (A) stable (B) marginally stable (C) unstable (D) critically damped.</p>
+<p><strong>E4.</strong> A causal DT system with a pole at \(z=-1.2\) is (A) stable (B) marginal (C) unstable (D) FIR.</p>
+<p><strong>E5.</strong> An all-pass DT filter with a pole at \(a\) has a zero at (A) \(a\) (B) \(-a\) (C) \(1/a\) (D) \(0\).</p>
+<p><strong>E6.</strong> \(H(s)=\dfrac{s(s+1)}{s^2+4s+5}\) has zeros at (A) \(0,-1\) (B) \(0,1\) (C) \(-2\pm j\) (D) none.</p></div></div>
+<h2 id="s-6">F. Sampling calculations</h2>
+<div class="box onemark"><div class="bt">Set F</div><div class="bb"><p><strong>F1.</strong> A signal with maximum frequency \(3\) kHz needs at least (A) \(3\) (B) \(6\) (C) \(1.5\) (D) \(12\) kHz.</p>
+<p><strong>F2.</strong> A \(1300\) Hz tone sampled at \(1\) kHz appears at (A) \(1300\) (B) \(700\) (C) \(300\) (D) \(100\) Hz.</p>
+<p><strong>F3.</strong> Minimum bandpass sampling rate for a \(70\)–\(90\) MHz signal: (A) \(180\) (B) \(90\) (C) \(45\) (D) \(40\) MHz.</p>
+<p><strong>F4.</strong> \(x(t)\) (\(2\) kHz) times \(y(t)\) (\(3\) kHz): Nyquist rate (A) \(6\) (B) \(10\) (C) \(5\) (D) \(12\) kHz.</p>
+<p><strong>F5.</strong> A zero-order hold introduces a delay of (A) \(T_s\) (B) \(T_s/2\) (C) \(2T_s\) (D) \(0\).</p></div></div>
+<h2 id="s-7">G. Transform problems</h2>
+<div class="box onemark"><div class="bt">Set G</div><div class="bb"><p><strong>G1.</strong> The Fourier transform of \(\delta(t-1)\) is (A) \(e^{-j\omega}\) (B) \(e^{j\omega}\) (C) \(1\) (D) \(2\pi\delta(\omega-1)\).</p>
+<p><strong>G2.</strong> If \(F(s)=\frac1{s+1}\) then \(f(0^+)=\) (A) \(0\) (B) \(1\) (C) \(\infty\) (D) \(-1\).</p>
+<p><strong>G3.</strong> DTFT magnitude of \((0.5)^nu[n]\) at \(\Omega=0\) is (A) \(0.5\) (B) \(1\) (C) \(2\) (D) \(\infty\).</p>
+<p><strong>G4.</strong> \(\mathcal Z\{u[n-1]\}=\) (A) \(\frac{1}{1-z^{-1}}\) (B) \(\frac{z^{-1}}{1-z^{-1}}\) (C) \(\frac{z}{z-1}\) (D) \(z^{-1}\).</p>
+<p><strong>G5.</strong> Fourier-series coefficient \(c_1\) of \(\cos\omega_0t\) is (A) \(1\) (B) \(\frac12\) (C) \(2\) (D) \(0\).</p>
+<p><strong>G6.</strong> \(\mathcal L^{-1}\left\{\frac1{s(s+1)}\right\}=\) (A) \(e^{-t}\) (B) \(1-e^{-t}\) (C) \(1+e^{-t}\) (D) \(te^{-t}\).</p></div></div>
+<div class="box revision"><div class="bt">Answer key, Chapter 30</div><div class="bb"><p><strong>A:</strong> 1-B, 2-B, 3-C, 4-B, 5-A, 6-B, 7-C, 8-A, 9-A, 10-A.&emsp;
+<strong>B:</strong> 1-B, 2-B, 3-B (\({1}/{\sqrt{10^{-9}}}=31.6\) krad/s \(=5.03\) kHz), 4-B (\(\omega_0=3162\), \(Q=\omega_0L/R=3.16\)), 5-C, 6-C, 7-A, 8-B.&emsp;
+<strong>C:</strong> 1-C, 2-A, 3-B, 4-B, 5-A, 6-C.&emsp;
+<strong>D:</strong> 1-A, 2-B (\(\tfrac12e^{-1}\)), 3-B, 4-A, 5-C (periods \(6\) and \(4\)), 6-C (\(9\times2\)).&emsp;
+<strong>E:</strong> 1-A, 2-A, 3-B, 4-C, 5-C, 6-A.&emsp;
+<strong>F:</strong> 1-B, 2-C, 3-C, 4-B, 5-B.&emsp;
+<strong>G:</strong> 1-A, 2-B, 3-C, 4-B, 5-B, 6-B.</p></div></div><div class="pager bottom"><a class="pn" href="ch29.html">&larr; Previous-Year Problem Map: Signals and Systems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch31.html">2-Mark Problem Bank &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

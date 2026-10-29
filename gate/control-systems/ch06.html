@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 6: Signal Flow Graphs | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Mason’s gain formula appears almost every year: identify forward paths, individual loops, non-touching loops and the cofactors \Delta_k. Speed and care in listing loops are the whole game.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch06.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 6: Signal Flow Graphs | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Mason’s gain formula appears almost every year: identify forward paths, individual loops, non-touching loops and the cofactors \Delta_k. Speed and care in listing loops are the whole game."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch06.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 6</div><h1>Signal Flow Graphs</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-6-1">6.1 Core concept</a></li><li><a href="#s-6-2">6.2 Mason’s gain formula</a></li><li><a href="#s-6-3">6.3 Procedure</a></li><li><a href="#s-6-4">6.4 Solved examples</a></li><li><a href="#s-6-5">6.5 Multiple inputs and outputs</a></li><li><a href="#s-6-6">6.6 SFG vs block diagram</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Mason’s gain formula appears almost every year: identify forward paths, individual loops, non-touching loops and the cofactors \(\Delta_k\). Speed and care in listing loops are the whole game.</p></div></div>
+<h2 id="s-6-1"><span class="n">6.1</span> Core concept</h2>
+<p>A signal flow graph (SFG) is a directed graph: <strong>nodes</strong> are variables, <strong>branches</strong> are directed transmittances. The value of a node is the sum of all incoming branch signals; outgoing branches carry the node value unchanged. Terms:</p>
+<ul><li><strong>Input (source) node:</strong> only outgoing branches. <strong>Output (sink) node:</strong> only incoming.</li><li><strong>Forward path:</strong> path from input to output crossing each node once. Its gain \(P_k\).</li><li><strong>Loop:</strong> closed path returning to the starting node, crossing each node once. Gain \(L_i\).</li><li><strong>Non-touching loops:</strong> loops sharing no node.</li></ul>
+<h2 id="s-6-2"><span class="n">6.2</span> Mason’s gain formula</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(T=\dfrac{C}{R}=\dfrac{1}{\Delta}\sum_{k}P_k\Delta_k\)<br>
+\(\Delta=1-\sum L_i+\sum L_iL_j-\sum L_iL_jL_k+\cdots\) (products over <em>mutually non-touching</em> sets)<br>
+\(\Delta_k=\Delta\) evaluated with all loops touching the \(k\)-th forward path removed.</p></div></div>
+<p>The formula is the systematic solution of the linear equations of the graph (Cramer’s rule); for a single loop it reduces to \(\dfrac{G}{1+GH}\) (loop gain \(-GH\)).</p>
+<h2 id="s-6-3"><span class="n">6.3</span> Procedure</h2>
+<ol><li>Write all forward paths and their gains \(P_k\).</li><li>List every individual loop (check feedback branches carefully) with gains \(L_i\).</li><li>Find all pairs, triples,… of non-touching loops.</li><li>Compute \(\Delta\) and each \(\Delta_k\) (remove loops touching path \(k\)).</li><li>Substitute.</li></ol>
+<h2 id="s-6-4"><span class="n">6.4</span> Solved examples</h2>
+<figure id="fig-6-1"><div class="figimgs"><img src="img/c06_sfg.png" alt="" loading="lazy"></div><figcaption><b>Figure 6.1.</b> Signal-flow graph with two forward paths and two non-touching loops.</figcaption></figure>
+<div class="box example"><div class="bt">Two paths, two non-touching loops</div><div class="bb"><p>Forward paths: \(P_1=G_1G_2G_3G_4G_5\) (all nodes), \(P_2=G_6G_4G_5\) (skips \(x_2,x_3\)).<br>
+Loops: \(L_1=-G_2H_1\) (nodes \(x_2,x_3\)), \(L_2=-G_4H_2\) (nodes \(x_4,x_5\)). They share no node, so \(L_1L_2=G_2G_4H_1H_2\).<br>
+\(\Delta=1+G_2H_1+G_4H_2+G_2G_4H_1H_2=(1+G_2H_1)(1+G_4H_2)\).<br>
+\(P_1\) touches both loops: \(\Delta_1=1\). \(P_2\) touches \(L_2\) only (through \(x_4,x_5\)): \(\Delta_2=1-L_1=1+G_2H_1\).<br>
+\[
+T=\frac{G_1G_2G_3G_4G_5+G_6G_4G_5(1+G_2H_1)}{(1+G_2H_1)(1+G_4H_2)}.
+\]
+Check with every gain \(=1\): \(\Delta=2\times2=4\), numerator \(1+2=3\), so \(T=0.75\).</p></div></div>
+<div class="box example"><div class="bt">Single loop</div><div class="bb"><p>Forward \(G\), feedback \(-H\): \(P=G\), \(L=-GH\), \(\Delta=1+GH\), \(\Delta_1=1\), \(T=\dfrac{G}{1+GH}\).</p></div></div>
+<div class="box example"><div class="bt">Loop counts</div><div class="bb"><p>Loops \(L_1=-0.2\), \(L_2=-0.5\) non-touching, and \(L_3=-0.1\) touching both: \(\Delta=1-(-0.2-0.5-0.1)+(-0.2)(-0.5)=1+0.8+0.1=1.9\).</p></div></div>
+<div class="box example"><div class="bt">Block diagram \(\to\) SFG</div><div class="bb"><p>For the nested-loop diagram of Chapter 5 (\(G_1,G_2,G_3\) in series, \(H_1\) around \(G_2\), \(H_2\) around all): \(P=G_1G_2G_3\); \(L_1=-G_2H_1\), \(L_2=-G_1G_2G_3H_2\) (touching); \(\Delta=1+G_2H_1+G_1G_2G_3H_2\), \(\Delta_1=1\): identical to block-diagram reduction.</p></div></div>
+<h2 id="s-6-5"><span class="n">6.5</span> Multiple inputs and outputs</h2>
+<p>For several inputs use superposition: set all other inputs to zero and apply Mason’s formula with the chosen node as input. For several outputs the same \(\Delta\) (a property of the graph) is used with different \(P_k,\Delta_k\).</p>
+<h2 id="s-6-6"><span class="n">6.6</span> SFG vs block diagram</h2>
+<p>SFG needs no reduction sequence and handles interlaced loops directly; block diagrams show physical components. Both give the same \(T\).</p>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p><strong>Loops before paths.</strong> Draw the loop list first and mark node sets; non-touching checks then become set-disjointness tests. In \(\Delta_k\), drop <em>every</em> loop that shares any node with path \(k\). If every loop touches every path, \(T=\dfrac{\sum P_k}{\Delta}\).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Missing a loop that goes through a long feedback branch. (ii) Treating loops that share only a <em>branch</em> but not a node (impossible) versus sharing a node (touching). (iii) Sign errors: \(L_i\) carries the sign of its branch gains; negative feedback branches contribute negative loops. (iv) Forgetting cross-terms \(L_iL_j\) for non-touching pairs. (v) Including a loop in \(\Delta_k\) that touches \(P_k\).</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> For a graph with a single forward path \(P\) and a single loop of gain \(L\) touching it, \(T=\) (A) \(\dfrac{P}{1-L}\) (B) \(\dfrac{P}{1+L}\) (C) \(P(1-L)\) (D) \(\dfrac{P}{L}\).</p>
+<p><strong>Q2.</strong> Two individual loops \(L_1,L_2\) that do not touch: \(\Delta=\) (A) \(1-L_1-L_2\) (B) \(1-L_1-L_2+L_1L_2\) (C) \(1+L_1+L_2\) (D) \(1-L_1L_2\).</p>
+<p><strong>Q3.</strong> A loop that touches the \(k\)-th forward path is (A) retained in \(\Delta_k\) (B) removed in \(\Delta_k\) (C) doubled (D) ignored in \(\Delta\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A). Q2 (B). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> A graph has one forward path \(P=G_1G_2G_3\) and loops \(L_1=-G_2H_1\), \(L_2=-G_3H_2\) (touching, sharing node), \(L_3=-G_1G_2G_3H_3\). \(T=\) (A) \(\dfrac{G_1G_2G_3}{1+G_2H_1+G_3H_2+G_1G_2G_3H_3}\) (B) with \(+G_2G_3H_1H_2\) added to \(\Delta\) (C) \(\dfrac{P}{1-L_1-L_2-L_3}\) with all positive (D) \(\dfrac{P}{1+\sum L}\).</p>
+<p><strong>Q5.</strong> \(P_1=2\), \(P_2=3\), \(\Delta=4\), \(\Delta_1=1\), \(\Delta_2=0.5\). \(T=\) (A) \(0.875\) (B) \(1.25\) (C) \(0.5\) (D) \(2\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (A): all loops touch. Q5 (A): \((2+1.5)/4=0.875\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> In the worked example set \(G_1..G_6=2\), \(H_1=H_2=0.5\). \(T=\) <span class="blank"></span> (two decimals).</p>
+<p><strong>Q7.</strong> Loops: \(L_1=-1\), \(L_2=-2\) (non-touching with \(L_1\)). \(\Delta=\) <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(G_2H_1=1\), \(G_4H_2=1\), \((1+1)(1+1)=4\); \(P_1=2^5=32\), \(P_2=2^3=8\), \(\Delta_2=2\); \(T=(32+16)/4=12.00\). Q7: \(1+1+2+(-1)(-2)=6\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Which are true? (A) \(\Delta\) depends only on the loops (B) \(\Delta_k\) depends on path \(k\) (C) \(P_k\) depends on loops (D) non-touching loops share no node.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (D).</p>
+<div class="box gateq"><div class="bt">Previous-year pattern</div><div class="bb"><p>Graph: \(R\xrightarrow{1}x_1\xrightarrow{a}x_2\xrightarrow{b}x_3\xrightarrow{1}C\) with feedback \(x_2\to x_1\) gain \(-c\) and \(x_3\to x_2\) gain \(-d\). Loop \(x_1\to x_2\to x_1\) has gain \(a(-c)=-ac\); loop \(x_2\to x_3\to x_2\) has gain \(b(-d)=-bd\); they share \(x_2\), so they touch (and both touch the path). \(T=\dfrac{ab}{1+ac+bd}\).</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> State Mason’s formula and the meaning of each symbol.<br>
+<strong>T2.</strong> For a graph with two forward paths, both touching the only loop \(L=-0.5\), \(P_1=1\), \(P_2=2\), find \(T\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: see box. T2: \(\Delta=1.5\), \(T=(1+2)/1.5=2\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(T=\sum P_k\Delta_k/\Delta\); \(\Delta=1-\sum L+\sum LL-\cdots\) (non-touching sets).</li><li>\(\Delta_k\): remove loops touching path \(k\).</li><li>Negative feedback loop has negative gain; single loop \(\Rightarrow\) \(G/(1+GH)\).</li><li>Multiple inputs: superposition. \(\Delta\) is common to all input–output pairs.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch05.html">&larr; Block Diagram Representation</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch07.html">Standard Test Signals &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

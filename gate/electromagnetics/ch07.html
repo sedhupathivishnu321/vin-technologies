@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 7: Transmission Lines | Electromagnetics | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="The heaviest-weighted chapter of the subject: Z_0, \Gamma, VSWR, input impedance, quarter-wave and stub matching, Smith-chart readings and S-parameters. Most questions are one or two steps with a">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electromagnetics/ch07.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 7: Transmission Lines | Electromagnetics | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="The heaviest-weighted chapter of the subject: Z_0, \Gamma, VSWR, input impedance, quarter-wave and stub matching, Smith-chart readings and S-parameters. Most questions are one or two steps with a"><meta property="og:url" content="https://vintechnologies.co.in/gate/electromagnetics/ch07.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electromagnetics</a></div><div class="chlabel">Chapter 7</div><h1>Transmission Lines</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-7-1">7.1 Transmission-line equations</a></li><li><a href="#s-7-2">7.2 Reflection coefficient, VSWR and input impedance</a></li><li><a href="#s-7-3">7.3 Power and impedance matching</a></li><li><a href="#s-7-4">7.4 Smith chart</a></li><li><a href="#s-7-5">7.5 S-parameters</a></li><li><a href="#s-7-6">7.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>The heaviest-weighted chapter of the subject: \(Z_0\), \(\Gamma\), VSWR, input impedance, quarter-wave and stub matching, Smith-chart readings and S-parameters. Most questions are one or two steps with a clean number.</p></div></div>
+<h2 id="s-7-1"><span class="n">7.1</span> Transmission-line equations</h2>
+<p>A line is modelled per unit length by series \(R,L\) and shunt \(G,C\).</p>
+<div class="box formula"><div class="bt">Telegrapher’s equations</div><div class="bb"><p>\(-\dfrac{dV}{dz}=(R+j\omega L)I\), \(\ -\dfrac{dI}{dz}=(G+j\omega C)V\). Solutions \(V=V^+e^{-\gamma z}+V^-e^{\gamma z}\), with
+\[
+\gamma=\alpha+j\beta=\sqrt{(R+j\omega L)(G+j\omega C)},\qquad Z_0=\sqrt{\dfrac{R+j\omega L}{G+j\omega C}}.
+\]
+Lossless (\(R=G=0\)): \(\gamma=j\omega\sqrt{LC}\), \(\beta=\omega\sqrt{LC}\), \(Z_0=\sqrt{L/C}\) (real), \(v_p=1/\sqrt{LC}\), \(\lambda=v_p/f\).<br>
+<strong>Distortionless line:</strong> \(R/L=G/C\) gives \(\alpha=R\sqrt{C/L}\), \(Z_0=\sqrt{L/C}\) and \(v_p=1/\sqrt{LC}\) independent of \(f\). Low-loss: \(\alpha\approx\frac R{2Z_0}+\frac{GZ_0}2\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(L=250\,\)nH/m, \(C=100\,\)pF/m: \(Z_0=\sqrt{\frac{2.5\times10^{-7}}{10^{-10}}}=50\,\Omega\), \(v_p=\frac1{\sqrt{2.5\times10^{-17}}}=2\times10^8\) m/s (\(\eps_{eff}=2.25\)).</p></div></div>
+<h2 id="s-7-2"><span class="n">7.2</span> Reflection coefficient, VSWR and input impedance</h2>
+<div class="box formula"><div class="bt">Terminated lossless line, load \(Z_L\) at \(z=0\), \(d\) measured toward the generator</div><div class="bb"><p>\(\Gamma_L=\dfrac{Z_L-Z_0}{Z_L+Z_0}\), \(\ \Gamma(d)=\Gamma_Le^{-j2\beta d}\) (magnitude unchanged on a lossless line).<br>
+\(\mathrm{VSWR}=s=\dfrac{V_{max}}{V_{min}}=\dfrac{1+|\Gamma|}{1-|\Gamma|}\), \(\ s\in[1,\infty)\); \(|\Gamma|=\dfrac{s-1}{s+1}\). \(\ \mathrm{RL}=-20\log|\Gamma|\) dB (return loss).<br>
+<strong>Input impedance:</strong> \(Z_{in}(d)=Z_0\dfrac{Z_L+jZ_0\tan\beta d}{Z_0+jZ_L\tan\beta d}=Z_0\dfrac{1+\Gamma(d)}{1-\Gamma(d)}\).<br>
+At a voltage maximum \(Z_{in}=sZ_0\) (real); at a voltage minimum \(Z_{in}=Z_0/s\). Maxima and minima repeat every \(\lambda/2\), and are \(\lambda/4\) apart.</p></div></div>
+<figure id="fig-7-1"><div class="figimgs"><img src="img/e07_vswr.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.1.</b> Voltage standing wave on a line with \(\Gamma_L=1/3\) (VSWR = 2).</figcaption></figure>
+<div class="box formula"><div class="bt">Special terminations</div><div class="bb"><p>Matched \(Z_L=Z_0\): \(\Gamma=0\), \(s=1\), \(Z_{in}=Z_0\). Short: \(\Gamma=-1\), \(Z_{in}=jZ_0\tan\beta d\). Open: \(\Gamma=+1\), \(Z_{in}=-jZ_0\cot\beta d\). Purely reactive load: \(|\Gamma|=1\), \(s=\infty\), no power absorbed.<br>
+Half-wave line (\(d=\lambda/2\)): \(Z_{in}=Z_L\). Quarter-wave line: \(Z_{in}=\dfrac{Z_0^2}{Z_L}\) (a short looks like an open and vice versa).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(Z_0=50\,\Omega\), \(Z_L=100\,\Omega\): \(\Gamma=\frac{50}{150}=\frac13\), \(s=2\), RL \(=9.5\) dB. A shorted \(\lambda/8\) line: \(Z_{in}=j50\tan45^\circ=j50\,\Omega\). A shorted \(\lambda/4\) line looks like an open circuit.</p></div></div>
+<h2 id="s-7-3"><span class="n">7.3</span> Power and impedance matching</h2>
+<p>Power delivered to the load \(P_L=\frac{|V^+|^2}{2Z_0}(1-|\Gamma|^2)\). Maximum power transfer needs \(Z_L=Z_0^*\) (matched). A load can be matched to \(Z_0\) using:</p>
+<div class="box formula"><div class="bt">Matching techniques</div><div class="bb"><p><strong>Quarter-wave transformer</strong> (real \(Z_L\)): a \(\lambda/4\) section with \(Z_T=\sqrt{Z_0Z_L}\) gives \(Z_{in}=Z_0\). For complex \(Z_L\) place the transformer at a voltage maximum or minimum, where the impedance is real (\(sZ_0\) or \(Z_0/s\)).<br>
+<strong>Single stub:</strong> a short- or open-circuited stub of length \(\ell\) in parallel at distance \(d\) from the load where \(y_{in}=1\pm jb\); the stub supplies \(\mp jb\). Shorted stubs are preferred (open stubs radiate).<br>
+<strong>Double stub</strong> and lumped \(L\)-sections are other options; bandwidth is limited because the electrical lengths change with frequency.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Match a \(200\,\Omega\) load to a \(50\,\Omega\) line with a \(\lambda/4\) transformer: \(Z_T=\sqrt{50\times200}=100\,\Omega\).</p></div></div>
+<h2 id="s-7-4"><span class="n">7.4</span> Smith chart</h2>
+<figure id="fig-7-2"><div class="figimgs"><img src="img/e07_smith.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.2.</b> Smith chart: circles of constant resistance \(r\), arcs of constant reactance \(x\), and a constant-\(|\Gamma|\) circle through \(z_L=2\).</figcaption></figure>
+<p>The Smith chart maps normalized impedance \(z=Z/Z_0=r+jx\) onto the \(\Gamma\)-plane via \(\Gamma=\frac{z-1}{z+1}\). Key facts:</p>
+<ul><li>Centre: \(z=1\) (matched, \(\Gamma=0\)). Left end: short circuit (\(z=0\), \(\Gamma=-1\)). Right end: open (\(z=\infty\), \(\Gamma=+1\)). The outer circle is \(|\Gamma|=1\).</li><li>Upper half plane: inductive (\(x&gt;0\)); lower half: capacitive (\(x&lt;0\)).</li><li>Moving <em>toward the generator</em> rotates <strong>clockwise</strong>; one full revolution is \(\lambda/2\); the angle on the wavelengths-toward-generator scale is \(2\beta d\).</li><li>A \(\lambda/4\) move is a half revolution: \(z\to1/z\) (an admittance reading). The point diametrically opposite \(z\) is \(y=1/z\).</li><li>The constant-\(|\Gamma|\) circle through \(z_L\) intersects the real axis at \(s\) (right) and \(1/s\) (left): the VSWR can be read from the right intersection.</li></ul>
+<p>The reflection circle through \(z_L=2\) (\(\Gamma=1/3\)) meets the real axis at \(s=2\) on the right.</p>
+<h2 id="s-7-5"><span class="n">7.5</span> S-parameters</h2>
+<p>For a two-port with incident waves \(a_1,a_2\) and outgoing waves \(b_1,b_2\): \(b_1=S_{11}a_1+S_{12}a_2\), \(b_2=S_{21}a_1+S_{22}a_2\).</p>
+<div class="box formula"><div class="bt">S-parameters</div><div class="bb"><p>\(S_{11}=\dfrac{b_1}{a_1}\Big|_{a_2=0}\) (input reflection, port 2 matched), \(S_{21}=\dfrac{b_2}{a_1}\Big|_{a_2=0}\) (forward transmission/gain), \(S_{22}\), \(S_{12}\) similarly.<br>
+Reciprocal network: \(S_{12}=S_{21}\). Symmetric: \(S_{11}=S_{22}\). Lossless: \(|S_{11}|^2+|S_{21}|^2=1\) (matrix unitary). Insertion loss \(=-20\log|S_{21}|\) dB; return loss \(=-20\log|S_{11}|\) dB.<br>
+A matched, lossless, reciprocal three-port cannot exist; a matched lossless four-port (directional coupler) can.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(Z_0\) of a lossless line is real, independent of length and frequency. (ii) Moving toward the generator is clockwise on the Smith chart; toward the load is anticlockwise. (iii) \(|\Gamma|\) does not change along a lossless line, only its phase. (iv) VSWR \(=1\) is a perfect match; \(\infty\) is total reflection. (v) Impedance repeats every \(\lambda/2\), not \(\lambda/4\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Compute \(\Gamma_L\) first, then \(s\), then everything else follows from \(|\Gamma|\). Quarter-wave: \(Z_{in}Z_L=Z_0^2\). For a complex \(Z_L\), a quarter-wave transformer at a voltage extremum sees \(sZ_0\). On the Smith chart think of the \(\Gamma\) circle as a clock hand rotating at \(4\pi d/\lambda\).</p></div></div>
+<h2 id="s-7-6"><span class="n">7.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A lossless line has \(L=250\,\)nH/m and \(C=100\,\)pF/m. \(Z_0=\) (A) 25 \(\Omega\) (B) 50 \(\Omega\) (C) 75 \(\Omega\) (D) 100 \(\Omega\).</p>
+<p><strong>Q2.</strong> The input impedance of a \(\lambda/4\) line terminated in \(Z_L\) is (A) \(Z_L\) (B) \(Z_0^2/Z_L\) (C) \(Z_0\) (D) \(Z_LZ_0\).</p>
+<p><strong>Q3.</strong> A \(\lambda/4\) line terminated in a short circuit appears as (A) a short (B) an open circuit (C) \(Z_0\) (D) a capacitor.</p>
+<p><strong>Q4.</strong> \(\Gamma\) for a matched load is (A) 1 (B) \(-1\) (C) 0 (D) \(\infty\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (B). Q4 (C).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> \(Z_0=50\,\Omega\), \(Z_L=100\,\Omega\). \(\Gamma_L\) and VSWR are (A) \(1/3\), 2 (B) \(1/2\), 3 (C) \(1/3\), 3 (D) \(2/3\), 5.</p>
+<p><strong>Q6.</strong> To match a \(200\,\Omega\) load to a \(50\,\Omega\) line with a quarter-wave transformer the transformer impedance is (A) 75 \(\Omega\) (B) 100 \(\Omega\) (C) 125 \(\Omega\) (D) 150 \(\Omega\).</p>
+<p><strong>Q7.</strong> The input impedance of a short-circuited \(50\,\Omega\) lossless line of length \(\lambda/8\) is (A) 0 (B) \(j50\,\Omega\) (C) \(-j50\,\Omega\) (D) \(\infty\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A). Q6 (B): \(\sqrt{50\cdot200}\). Q7 (B): \(jZ_0\tan(\pi/4)\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> VSWR \(=3\): \(|\Gamma|=\) <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Return loss (dB) for \(|\Gamma|=0.1\): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Phase velocity (\(\times10^8\) m/s) on the line of \(L=250\,\)nH/m, \(C=100\,\)pF/m: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(\frac{3-1}{3+1}=0.5\). Q9: \(20\). Q10: \(2.0\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> A lossless line is terminated in a purely reactive load. Then (A) \(|\Gamma|=1\) (B) VSWR is infinite (C) no average power is absorbed by the load (D) \(\Gamma=0\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(Z_{in}\) of an open line of length \(\lambda/8\)? &emsp; <strong>T2.</strong> Distortionless condition? &emsp; <strong>T3.</strong> Direction of motion on the Smith chart toward the generator?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(-jZ_0\). T2: \(R/L=G/C\). T3: clockwise.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(Z_0=\sqrt{L/C}\), \(v_p=1/\sqrt{LC}\), \(\gamma=\sqrt{(R+j\omega L)(G+j\omega C)}\); distortionless \(R/L=G/C\).</li><li>\(\Gamma_L=\frac{Z_L-Z_0}{Z_L+Z_0}\), \(s=\frac{1+|\Gamma|}{1-|\Gamma|}\), RL \(=-20\log|\Gamma|\).</li><li>\(Z_{in}=Z_0\frac{Z_L+jZ_0\tan\beta d}{Z_0+jZ_L\tan\beta d}\); \(\lambda/4\): \(Z_0^2/Z_L\); \(\lambda/2\): \(Z_L\).</li><li>Short \(jZ_0\tan\beta d\); open \(-jZ_0\cot\beta d\); matching \(Z_T=\sqrt{Z_0Z_L}\).</li><li>Smith chart: clockwise toward generator, \(\lambda/2\) per turn, \(\lambda/4\Rightarrow y=1/z\); S-parameters \(S_{11}=\Gamma_{in}\), lossless \(\sum|S|^2=1\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch06.html">&larr; Reflection, Refraction and Power Flow</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch08.html">Waveguides and Optical Fibers &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\vE": "\\mathbf E", "\\vD": "\\mathbf D", "\\vH": "\\mathbf H", "\\vB": "\\mathbf B", "\\vJ": "\\mathbf J", "\\vS": "\\mathbf S", "\\ar": "\\mathbf a", "\\grad": "\\nabla", "\\eps": "\\varepsilon", "\\epsz": "\\varepsilon_0", "\\muz": "\\mu_0", "\\Zo": "Z_0", "\\ZL": "Z_L", "\\Gam": "\\Gamma", "\\oiint": "\\mathop{\\oint\\!\\!\\!\\oint}", "\\VSWR": "\\mathrm{VSWR}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

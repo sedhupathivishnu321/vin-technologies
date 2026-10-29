@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 13: MOSFET Biasing | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch13.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 13: MOSFET Biasing | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch13.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 13</div><h1>MOSFET Biasing</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-13-1">13.1 Fixed-gate bias</a></li><li><a href="#s-13-2">13.2 Self-bias</a></li><li><a href="#s-13-3">13.3 Voltage-divider bias</a></li><li><a href="#s-13-4">13.4 Drain-feedback bias</a></li><li><a href="#s-13-5">13.5 Q-point analysis</a></li><li><a href="#s-13-6">13.6 Bias stability</a></li><li><a href="#s-13-7">13.7 DC load-line analysis</a></li><li><a href="#s-13-8">13.8 Common GATE traps</a></li></ol></details><h2 id="s-13-1"><span class="n">13.1</span> Fixed-gate bias</h2>
+<p>A fixed voltage \(V_{GG}\) sets \(V_{GS}\) directly.</p>
+<figure id="fig-13-1"><div class="figimgs"><img src="img/f13_fixed.png" alt="" loading="lazy"></div><figcaption><b>Figure 13.1.</b> Fixed-gate bias: \(V_{GS}=V_{GG}\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(V_{GS}=V_{GG}\) &emsp;&emsp; \(I_D=\tfrac12k_n(V_{GG}-V_{th})^2\) &emsp;&emsp; \(V_{DS}=V_{DD}-I_DR_D\)<br>
+Check saturation: \(V_{DS}\ge V_{GS}-V_{th}\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_{DD}=5\) V, \(R_D=10\) k\(\Omega\), \(V_{GG}=1.5\) V, \(V_{th}=1\) V, \(k_n=1\) mA/V\({}^2\). \(I_D=\tfrac12\times1\times0.25=0.125\) mA; \(V_{DS}=5-1.25=3.75\) V \(&gt;0.5\) V: saturation.</p></div></div>
+<p>Fixed bias is highly sensitive to \(V_{th}\): a \(\pm0.2\) V spread in \(V_{th}\) moves \(I_D\) from \(0.125\) mA to \(0.245\) mA (\(+96\%\)) or \(0.045\) mA (\(-64\%\)) in this example. It is rarely used in practice without additional stabilisation.</p>
+<h2 id="s-13-2"><span class="n">13.2</span> Self-bias</h2>
+<figure id="fig-13-2"><div class="figimgs"><img src="img/f13_self.png" alt="" loading="lazy"></div><figcaption><b>Figure 13.2.</b> Self-bias (source-resistor bias). \(R_G\) returns the gate to ground; \(I_G=0\) so \(V_G=0\).</figcaption></figure>
+<p>Since \(I_G=0\): \(V_G=0\), \(V_S=I_DR_S\), so \(V_{GS}=-I_DR_S\). This is used with depletion-mode devices (negative \(V_{GS}\) needed). Two equations: the transfer curve and the bias line \(V_{GS}=-I_DR_S\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(I_{DSS}=8\) mA, \(V_P=-4\) V, \(R_S=500\ \Omega\). Let \(x=I_D\) in mA: \(x=8(1-0.125x)^2\) so \(x^2-24x+64=0\), \(x=3.06\) mA (the other root \(20.9\) mA gives \(V_{GS}&lt;V_P\), rejected). \(V_{GS}=-1.53\) V.</p></div></div>
+<figure id="fig-13-3"><div class="figimgs"><img src="img/f13_selfbias.png" alt="" loading="lazy"></div><figcaption><b>Figure 13.3.</b> Graphical solution: the intersection of the transfer curve and the bias line gives the Q-point.</figcaption></figure>
+<h2 id="s-13-3"><span class="n">13.3</span> Voltage-divider bias</h2>
+<figure id="fig-13-4"><div class="figimgs"><img src="img/f13_vd.png" alt="" loading="lazy"></div><figcaption><b>Figure 13.4.</b> Voltage-divider bias with a source resistor for an enhancement MOSFET.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(V_G=V_{DD}\dfrac{R_2}{R_1+R_2}\), &emsp;&emsp; \(V_{GS}=V_G-I_DR_S\)<br>
+Solve \(I_D=\tfrac12k_n(V_G-I_DR_S-V_{th})^2\) (a quadratic), keep the root with \(V_{GS}&gt;V_{th}\).<br>
+\(V_{DS}=V_{DD}-I_D(R_D+R_S)\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_{DD}=10\) V, \(R_1=200\) k, \(R_2=100\) k, \(R_S=1\) k, \(R_D=2\) k, \(V_{th}=1\) V, \(k_n=2\) mA/V\({}^2\). \(V_G=3.33\) V. With \(I_D\) in mA: \(I_D=(2.333-I_D)^2\) so \(I_D^2-5.667I_D+5.444=0\); \(I_D=(5.667-3.215)/2=1.226\) mA (the other root \(4.44\) mA gives \(V_{GS}&lt;V_{th}\)). \(V_{GS}=3.333-1.226=2.107\) V. \(V_{DS}=10-1.226\times3=6.32\) V \(&gt;V_{ov}=1.107\) V: saturation. \(\checkmark\)</p></div></div>
+<h2 id="s-13-4"><span class="n">13.4</span> Drain-feedback bias</h2>
+<figure id="fig-13-5"><div class="figimgs"><img src="img/f13_dfb.png" alt="" loading="lazy"></div><figcaption><b>Figure 13.5.</b> Drain-feedback bias: \(R_G\) connects drain to gate.</figcaption></figure>
+<p>With \(I_G=0\) there is no drop across \(R_G\), so \(V_{GS}=V_{DS}=V_{DD}-I_DR_D\). The transistor is diode-connected and always in saturation. Negative feedback: if \(I_D\) rises, \(V_D\) falls, reducing \(V_{GS}\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_{DD}=10\) V, \(R_D=5\) k, \(V_{th}=1\) V, \(k_n=1\) mA/V\({}^2\). \(I_D=0.5(V_{GS}-1)^2\), \(V_{GS}=10-5I_D\). \(12.5I_D^2-46I_D+40.5=0\Rightarrow I_D=1.46\) mA (\(V_{GS}=2.71\) V; the other root \(2.22\) mA gives \(V_{GS}=-1.1\) V: rejected).</p></div></div>
+<h2 id="s-13-5"><span class="n">13.5</span> Q-point analysis</h2>
+<p>The Q-point of an MOSFET amplifier is \((I_D,V_{DS})\) in saturation. Choose \(V_{ov}\) (typically \(0.2\)–\(0.5\) V); \(I_D=\tfrac12k_nV_{ov}^2\) then fixes the width \(W/L\). Set \(V_{DS}\) at roughly mid-supply for maximum swing.</p>
+<h2 id="s-13-6"><span class="n">13.6</span> Bias stability</h2>
+<p>The dominant variation is in \(V_{th}\) (process and temperature) and \(k_n\) (mobility falls with temperature: \(\mu\propto T^{-3/2}\)).</p>
+<figure id="fig-13-6"><div class="figimgs"><img src="img/f13_spread.png" alt="" loading="lazy"></div><figcaption><b>Figure 13.6.</b> Left: with fixed \(V_{GS}\) two devices with different \(V_{th}\) carry very different currents. Right: a source resistor makes \(V_{GS}\) fall as \(I_D\) rises, shrinking the spread.</figcaption></figure>
+<p>With a source resistor: \(\dfrac{\Delta I_D}{\Delta V_{th}}\approx-\dfrac{g_m}{1+g_mR_S}\), so a large \(g_mR_S\) makes \(I_D\approx(V_G-V_{th})/R_S\) almost independent of the device. Unlike BJTs, MOSFETs have a <em>zero-temperature-coefficient</em> bias point: at a certain \(V_{GS}\) the mobility and \(V_{th}\) effects cancel, and there is no thermal runaway (at high current, \(I_D\) decreases with temperature).</p>
+<h2 id="s-13-7"><span class="n">13.7</span> DC load-line analysis</h2>
+<p>KVL for the output loop: \(V_{DS}=V_{DD}-I_D(R_D+R_S)\). The load line joins \((V_{DD},0)\) and \((0,\,V_{DD}/(R_D+R_S))\) on the \(I_D\)–\(V_{DS}\) plot; the Q-point is where it meets the curve for the biased \(V_{GS}\).</p>
+<h2 id="s-13-8"><span class="n">13.8</span> Common GATE traps</h2>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(1) Forgetting \(I_G=0\): no gate current means the gate resistor has no voltage drop, so \(V_G\) is set entirely by the divider (or is 0 for \(R_G\) to ground). (2) Wrong root of the quadratic for source-resistor bias. (3) Using the triode formula when the device is saturated, or vice versa. (4) Applying BJT ideas (\(I_C=\beta I_B\)) to MOSFETs. (5) Failing to check the region after solving.</p></div></div>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> Fixed bias with \(V_{GS}=2.5\) V, \(V_{th}=1\) V, \(k_n=2\) mA/V\({}^2\), \(V_{DD}=10\) V, \(R_D=2\) k\(\Omega\). \(I_D\) (mA) and region:</p>
+<p><strong>Q2.</strong> In self-bias (\(R_G\) to ground, \(R_S=1\) k\(\Omega\)) \(I_D=2\) mA. \(V_{GS}\) is <span class="blank"></span> V.</p>
+<p><strong>Q3.</strong> A drain-feedback biased NMOS has \(V_{DD}=5\) V, \(R_D=10\) k\(\Omega\) and \(I_D=0.2\) mA. \(V_{GS}\) is <span class="blank"></span> V.</p>
+<p><strong>Q4.</strong> For a voltage-divider bias with \(R_1=R_2\) and \(V_{DD}=6\) V, \(V_G=\) <span class="blank"></span> V.</p>
+<p><strong>Q5.</strong> Which biasing is least affected by device-to-device variation of \(V_{th}\)? (A) fixed-gate (B) source-resistor (C) both same (D) none.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(I_D=\tfrac12\times2\times2.25=2.25\) mA; \(V_{DS}=10-4.5=5.5\) V \(&gt;1.5\): saturation. Q2: \(-2\) V. Q3: \(5-0.2\times10=3\) V. Q4: 3 V. Q5: (B).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Solve for \(I_D\): \(V_G=4\) V, \(R_S=2\) k, \(V_{th}=1\) V, \(k_n=1\) mA/V\({}^2\). &emsp; [\(I_D=0.5(3-2I_D)^2\Rightarrow\) 0.85 mA]</li><li>Find \(V_{DS}\) for \(V_{DD}=12\), \(I_D=1\) mA, \(R_D=6\) k, \(R_S=2\) k. &emsp; [4 V]</li><li>Design a divider with \(V_G=3\) V from \(V_{DD}=9\) V using \(R_2=100\) k. &emsp; [\(R_1=200\) k]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch12.html">&larr; MOSFET Fundamentals</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch14.html">MOSFET Small-Signal Analysis &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 9: Finite State Machines: Mealy, Moore and State Minimization | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Reading a state diagram, difference between Mealy and Moore outputs, counting states for sequence detectors, state minimization by partitioning, state assignment and finding the next-state equations.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch09.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 9: Finite State Machines: Mealy, Moore and State Minimization | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Reading a state diagram, difference between Mealy and Moore outputs, counting states for sequence detectors, state minimization by partitioning, state assignment and finding the next-state equations."><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch09.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 9</div><h1>Finite State Machines: Mealy, Moore and State Minimization</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-9-1">9.1 Structure of a synchronous FSM</a></li><li><a href="#s-9-2">9.2 State diagrams and tables</a></li><li><a href="#s-9-3">9.3 State minimization</a></li><li><a href="#s-9-4">9.4 Timing of the FSM</a></li><li><a href="#s-9-5">9.5 Design checklist</a></li><li><a href="#s-9-6">9.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Reading a state diagram, difference between Mealy and Moore outputs, counting states for sequence detectors, state minimization by partitioning, state assignment and finding the next-state equations.</p></div></div>
+<h2 id="s-9-1"><span class="n">9.1</span> Structure of a synchronous FSM</h2>
+<p>A synchronous sequential circuit has a state register (flip-flops), next-state logic \(\delta\) and output logic \(\lambda\):
+\[
+Q^+=\delta(Q,X),\qquad Z=\begin{cases}\lambda(Q)&amp;\text{Moore}\\ \lambda(Q,X)&amp;\text{Mealy}\end{cases}
+\]</p>
+<figure id="fig-9-1"><div class="figimgs"><img src="img/d09_fsm_models.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.1.</b> Moore machine (outputs depend only on the state) and Mealy machine (outputs depend on state and input).</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th>Moore</th><th>Mealy</th></tr></thead><tbody><tr><td>Output depends on</td><td>present state only</td><td>present state and present input</td></tr><tr><td>Output label in diagram</td><td>inside the state circle</td><td>on the transition arc (\(x/z\))</td></tr><tr><td>Output timing</td><td>synchronous, changes only after a clock edge</td><td>may change as soon as the input changes</td></tr><tr><td>Number of states</td><td>usually larger</td><td>usually smaller</td></tr><tr><td>Glitches</td><td>output free of input glitches</td><td>input glitches reach the output</td></tr><tr><td>Output delay</td><td>one clock later than Mealy</td><td>earlier by a clock</td></tr></tbody></table></div></div>
+<p>Any Mealy machine can be converted to a Moore machine, and vice versa; the Moore equivalent of an \(N\)-state Mealy machine with \(k\) distinct output values needs at most \(N\cdot k\) states.</p>
+<h2 id="s-9-2"><span class="n">9.2</span> State diagrams and tables</h2>
+<p>Draw a circle for each state and a labelled arc for each transition; a state table lists the next state and the output for every (state, input). A complete machine has a transition for every input combination.</p>
+<h3 id="s-9-2-1"><span class="n">9.2.1</span> Sequence detector (overlapping), Moore</h3>
+<p>Detect the pattern \(101\) on a serial input \(x\) with output \(Z=1\) when the last three bits were \(101\) (overlaps allowed).</p>
+<div class="center"><div class="tw"><table><thead><tr><th>State (meaning)</th><th class="c">\(x=0\)</th><th class="c">\(x=1\)</th><th class="c">\(Z\)</th></tr></thead><tbody><tr><td>\(S_0\) (none)</td><td class="c">\(S_0\)</td><td class="c">\(S_1\)</td><td class="c">0</td></tr><tr><td>\(S_1\) (“1”)</td><td class="c">\(S_2\)</td><td class="c">\(S_1\)</td><td class="c">0</td></tr><tr><td>\(S_2\) (“10”)</td><td class="c">\(S_0\)</td><td class="c">\(S_3\)</td><td class="c">0</td></tr><tr><td>\(S_3\) (“101”)</td><td class="c">\(S_2\)</td><td class="c">\(S_1\)</td><td class="c">1</td></tr></tbody></table></div></div>
+<p>After \(S_3\) (101), a further 0 gives the suffix “10” (overlap) so go to \(S_2\); a further 1 gives suffix “1” so go to \(S_1\).</p>
+<div class="box formula"><div class="bt">States for a sequence detector</div><div class="bb"><p>Detecting a pattern of length \(L\) (overlapping allowed): <strong>Moore</strong> needs \(L+1\) states; <strong>Mealy</strong> needs \(L\) states.<br>
+Non-overlapping detection needs the same number of states but different transitions after a match (return to \(S_0\)).</p></div></div>
+<h3 id="s-9-2-2"><span class="n">9.2.2</span> State assignment and equations</h3>
+<p>Encode with \(\lceil\log_2N\rceil\) flip-flops. Choose a code that reduces logic; <em>one-hot</em> (one flip-flop per state) needs \(N\) flip-flops but simple logic and is common in FPGAs; Gray assignment helps with races.</p>
+<p>For the table above with \(S_0..S_3=00,01,10,11\) (\(Q_1Q_0\)) and D flip-flops:</p>
+<div class="center"><div class="tw"><table><thead><tr><th class="c">\(Q_1Q_0\)</th><th class="c">\(x\)</th><th class="c">\(Q_1^+Q_0^+\)</th><th class="c">\(Z\)</th></tr></thead><tbody><tr><td class="c">00</td><td class="c">0</td><td class="c">00</td><td class="c">0</td></tr><tr><td class="c">00</td><td class="c">1</td><td class="c">01</td><td class="c">0</td></tr><tr><td class="c">01</td><td class="c">0</td><td class="c">10</td><td class="c">0</td></tr><tr><td class="c">01</td><td class="c">1</td><td class="c">01</td><td class="c">0</td></tr><tr><td class="c">10</td><td class="c">0</td><td class="c">00</td><td class="c">0</td></tr><tr><td class="c">10</td><td class="c">1</td><td class="c">11</td><td class="c">0</td></tr><tr><td class="c">11</td><td class="c">0</td><td class="c">10</td><td class="c">1</td></tr><tr><td class="c">11</td><td class="c">1</td><td class="c">01</td><td class="c">1</td></tr></tbody></table></div></div>
+<p>\[
+D_1=\overline xQ_0+x\,Q_1\overline{Q_0},\qquad D_0=x,\qquad Z=Q_1Q_0 .
+\]</p>
+<h2 id="s-9-3"><span class="n">9.3</span> State minimization</h2>
+<p>Two states are <strong>equivalent</strong> if, for every input sequence, they give the same output sequence. Equivalent states can be merged, reducing flip-flops and logic.</p>
+<h3 id="s-9-3-1"><span class="n">9.3.1</span> Partition (or implication-table) method</h3>
+<ol><li>Start with a partition of states by their outputs (for Mealy: output vector over all inputs).</li><li>Refine: two states stay together only if, for every input, their next states lie in the same block.</li><li>Repeat until the partition does not change. Each block is one state of the minimal machine.</li></ol>
+<div class="box example"><div class="bt">Minimizing a 5-state Mealy machine</div><div class="bb"><p>Next-state/output for \(x=0\,/\,x=1\): \(A:\,B/0,\,C/0\); \(B:\,D/0,\,E/0\); \(C:\,D/0,\,E/0\); \(D:\,A/0,\,A/1\); \(E:\,A/0,\,A/1\).<br>
+Output partition: \(\{A,B,C\}\) (outputs \(0,0\)) and \(\{D,E\}\) (outputs \(0,1\)).<br>
+Refine \(\{A,B,C\}\): \(A\) goes to \(\{B,C\}\) (block 1) while \(B,C\) go to \(\{D,E\}\) (block 2), so \(A\) is separated. \(B\) and \(C\) have the same successors, so they stay together.<br>
+Result: \(\{A\},\{B,C\},\{D,E\}\): three states, so two flip-flops instead of three.</p></div></div>
+<p>Incompletely specified machines need compatibility (not equivalence) classes and closure checks: minimal covers are harder to find.</p>
+<h2 id="s-9-4"><span class="n">9.4</span> Timing of the FSM</h2>
+<p>The clock period must satisfy \(T\ge t_{cq}+t_{logic}+t_{su}+t_{skew}\); hold requires \(t_{cq}+t_{logic,min}\ge t_h+t_{skew}\) (Chapter 11). For a Mealy output used asynchronously, input glitches propagate.</p>
+<h2 id="s-9-5"><span class="n">9.5</span> Design checklist</h2>
+<ol><li>Word description \(\to\) state diagram \(\to\) state table.</li><li>Minimise states, assign codes.</li><li>Derive next-state and output equations (K-map).</li><li>Check unused states and reset behaviour.</li><li>Verify timing.</li></ol>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) In a Moore machine the output is written on the state, not the arc. (ii) The number of states of an overlapping detector is \(L+1\) for Moore, \(L\) for Mealy; counting flip-flops from this is a favourite question. (iii) A Mealy output can change in the middle of a clock cycle; do not call it “synchronous” without registering it. (iv) Equivalent states must agree on <em>all</em> future outputs, not just the next output.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Sequence-detector states: write the prefixes of the pattern (the empty prefix, then the first letter, …), one state per prefix; on a mismatch fall back to the longest suffix that is also a prefix. Flip-flops \(=\lceil\log_2(\text{states})\rceil\).</p></div></div>
+<h2 id="s-9-6"><span class="n">9.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A Moore machine to detect the (overlapping) sequence \(1011\) needs how many states? (A) 3 (B) 4 (C) 5 (D) 6.</p>
+<p><strong>Q2.</strong> The Mealy machine for the same detector needs (A) 3 (B) 4 (C) 5 (D) 6.</p>
+<p><strong>Q3.</strong> In a Moore machine the output (A) depends on the input only (B) depends on the state only (C) depends on both (D) is independent of the clock.</p>
+<p><strong>Q4.</strong> Minimum number of flip-flops for a machine with 9 states after minimisation: (A) 2 (B) 3 (C) 4 (D) 9.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C): \(L+1=5\). Q2 (B). Q3 (B). Q4 (C): \(2^4=16\ge9\).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> For the Moore detector of \(101\) above, the input stream \(x=1\,0\,1\,0\,1\,1\) (starting at \(S_0\)) produces the output stream \(Z\) (A) \(0\,0\,1\,0\,1\,0\) (B) \(0\,0\,0\,0\,0\,0\) (C) \(0\,0\,1\,0\,1\,1\) (D) \(0\,1\,1\,0\,1\,0\).</p>
+<p><strong>Q6.</strong> The next-state equation \(D_1=\overline xQ_0+xQ_1\overline{Q_0}\) is evaluated at \(Q_1Q_0=11\), \(x=0\). The next state is (A) 00 (B) 01 (C) 10 (D) 11.</p>
+<p><strong>Q7.</strong> A Mealy machine has 4 states and outputs 0 or 1. Its Moore equivalent needs at most (A) 4 (B) 6 (C) 8 (D) 16 states.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A): \(S_0\xrightarrow1S_1\xrightarrow0S_2\xrightarrow1S_3(Z{=}1)\xrightarrow0S_2\xrightarrow1S_3(Z{=}1)\xrightarrow1S_1\); \(Z=0,0,1,0,1,0\). Q6 (C): \(D_1=1\), \(D_0=0\), so \(10\). Q7 (C): \(4\times2\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Number of states in the minimised machine of the 5-state example: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> A one-hot encoded 6-state FSM needs <span class="blank"></span> flip-flops versus a binary encoding needing <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> A Moore detector for the non-overlapping pattern \(0110\) needs how many states? <span class="blank"></span></p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 3. Q9: 6 and 3. Q10: 5.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Choose all true: (A) Moore outputs cannot glitch with input noise within a cycle. (B) A Mealy machine usually needs fewer states. (C) State minimization can reduce flip-flops. (D) Equivalent states may have different outputs on some input sequence.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Draw the Mealy arcs for detecting \(11\) (overlap). &emsp; <strong>T2.</strong> How many states in Moore for \(110\)? &emsp; <strong>T3.</strong> Binary code width for 17 states?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(S_0\xrightarrow{0/0}S_0\), \(S_0\xrightarrow{1/0}S_1\), \(S_1\xrightarrow{0/0}S_0\), \(S_1\xrightarrow{1/1}S_1\). T2: 4. T3: 5.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Moore \(Z=f(Q)\); Mealy \(Z=f(Q,x)\). Detector of length \(L\): Moore \(L+1\), Mealy \(L\) states.</li><li>Minimise by output-partition refinement; flip-flops \(\lceil\log_2N\rceil\) (binary) or \(N\) (one-hot).</li><li>Mealy \(\to\) Moore: at most \(N\times k\) states.</li><li>Check lock-out and timing \(T\ge t_{cq}+t_{logic}+t_{su}\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch08.html">&larr; Counters and Shift Registers</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch10.html">Logic Families and Static CMOS Implementations &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

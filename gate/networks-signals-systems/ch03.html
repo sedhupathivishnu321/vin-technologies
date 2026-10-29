@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3: Mesh-Current Analysis | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Two- and three-mesh circuits, supermesh with a current source shared by two meshes, and dependent voltage sources. Mesh analysis applies to planar circuits only.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch03.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 3: Mesh-Current Analysis | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Two- and three-mesh circuits, supermesh with a current source shared by two meshes, and dependent voltage sources. Mesh analysis applies to planar circuits only."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch03.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 3</div><h1>Mesh-Current Analysis</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-3-1">3.1 Mesh and loop concepts</a></li><li><a href="#s-3-2">3.2 The mesh-current method</a></li><li><a href="#s-3-3">3.3 Matrix formulation</a></li><li><a href="#s-3-4">3.4 Supermesh</a></li><li><a href="#s-3-5">3.5 Current sources in mesh analysis</a></li><li><a href="#s-3-6">3.6 Dependent sources in mesh analysis</a></li><li><a href="#s-3-7">3.7 Comparison of nodal and mesh analysis</a></li><li><a href="#s-3-8">3.8 Choosing the efficient method</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Two- and three-mesh circuits, supermesh with a current source shared by two meshes, and dependent voltage sources. Mesh analysis applies to <em>planar</em> circuits only.</p></div></div>
+<h2 id="s-3-1"><span class="n">3.1</span> Mesh and loop concepts</h2>
+<p>A <strong>loop</strong> is any closed path that passes through each node at most once. A <strong>mesh</strong> is a loop that contains no other loop inside it (one “window” of a planar circuit). A planar network with \(b\) branches and \(n\) nodes has
+\[m=b-n+1\]
+independent meshes. Each mesh is assigned a <strong>mesh current</strong> circulating (conventionally clockwise) around it. A branch shared by two meshes carries the <em>difference</em> of the two mesh currents.</p>
+<h2 id="s-3-2"><span class="n">3.2</span> The mesh-current method</h2>
+<ol><li>Assign clockwise mesh currents \(I_1,I_2,\ldots\) to each mesh.</li><li>Write KVL around each mesh: \(\sum(\text{resistor drops})=\sum(\text{source rises})\). A shared resistor \(R\) between meshes \(k\) and \(j\) contributes \(R(I_k-I_j)\) to mesh \(k\).</li><li>Solve the \(m\) simultaneous equations.</li></ol>
+<div class="box example"><div class="bt">Two-mesh circuit</div><div class="bb"><p>Mesh 1 contains a \(12\) V source, \(R_1=2\ \Omega\) and the shared resistor \(R_2=4\ \Omega\); mesh 2 contains \(R_2\) and \(R_3=2\ \Omega\) (Figure <a href="ch03.html#fig-3-1">3.1</a>).<br>
+Mesh 1: \(2I_1+4(I_1-I_2)=12\Rightarrow6I_1-4I_2=12\).&emsp; Mesh 2: \(4(I_2-I_1)+2I_2=0\Rightarrow-4I_1+6I_2=0\).<br>
+\(I_2=\tfrac23I_1\); \(6I_1-\tfrac83I_1=12\Rightarrow I_1=3.6\) A, \(I_2=2.4\) A. The shared resistor carries \(I_1-I_2=1.2\) A.</p></div></div>
+<figure id="fig-3-1"><div class="figimgs"><img src="img/f3_ckA.png" alt="" loading="lazy"></div><figcaption><b>Figure 3.1.</b> Two-mesh circuit: \(I_1=3.6\) A, \(I_2=2.4\) A.</figcaption></figure>
+<h2 id="s-3-3"><span class="n">3.3</span> Matrix formulation</h2>
+<p>For resistors and independent voltage sources, write by inspection
+\[\mathbf R\mathbf I=\mathbf V\]
+with
+\[R_{kk}=\sum(\text{resistances in mesh }k),\qquad R_{kj}=-\sum(\text{resistances common to meshes }k\text{ and }j),\]
+\[V_k=\sum(\text{source rises in mesh }k).\]
+(With all mesh currents clockwise the off-diagonal terms are negative.) \(\mathbf R\) is symmetric for a reciprocal network.</p>
+<div class="box example"><div class="bt">Three meshes</div><div class="bb"><p>\(\mathbf R=\begin{bmatrix}6&amp;-2&amp;0\\-2&amp;7&amp;-3\\0&amp;-3&amp;8\end{bmatrix}\Omega\), \(\mathbf V=\begin{bmatrix}10\\0\\-5\end{bmatrix}\) V. With \(\det\mathbf R=250\) (Cramer’s rule): \(I_1=1.76\) A, \(I_2=0.28\) A, \(I_3=-0.52\) A. Check row 2: \(-2(1.76)+7(0.28)-3(-0.52)=-3.52+1.96+1.56=0\). ✓</p></div></div>
+<h2 id="s-3-4"><span class="n">3.4</span> Supermesh</h2>
+<p>If a <em>current source</em> lies in a branch shared by two meshes, the voltage across it is unknown, so KVL cannot be written for either mesh alone. Instead:</p>
+<ol><li>Form a <strong>supermesh</strong>: the loop obtained by omitting the shared branch, i.e. the outer periphery of the two meshes.</li><li>Write <em>one</em> KVL around the supermesh.</li><li>Write the <em>constraint equation</em>: \(I_1-I_2=\pm I_s\) from the current source.</li></ol>
+<div class="box example"><div class="bt">Supermesh</div><div class="bb"><p>Mesh 1: \(22\) V source, \(R_1=2\ \Omega\). Shared branch: a \(3\) A current source directed downward (i.e. along mesh 1’s clockwise direction). Mesh 2: \(R_2=4\ \Omega\) on top and \(R_3=2\ \Omega\) on the right (Figure <a href="ch03.html#fig-3-2">3.2</a>).<br>
+Constraint: \(I_1-I_2=3\).&emsp; Supermesh KVL: \(2I_1+4I_2+2I_2=22\).<br>
+\(2(I_2+3)+6I_2=22\Rightarrow I_2=2\) A, \(I_1=5\) A.<br>
+Voltage across the current source: mesh 1 gives \(22=2I_1+v_{cs}\Rightarrow v_{cs}=12\) V (drop in the direction of the \(3\) A).<br>
+Power check: source delivers \(22\times5=110\) W; resistors absorb \(2(25)+4(4)+2(4)=74\) W; the current source absorbs \(12\times3=36\) W. \(74+36=110\). ✓</p></div></div>
+<figure id="fig-3-2"><div class="figimgs"><img src="img/f3_super.png" alt="" loading="lazy"></div><figcaption><b>Figure 3.2.</b> Supermesh: the dashed outer loop excludes the \(3\) A source branch.</figcaption></figure>
+<h2 id="s-3-5"><span class="n">3.5</span> Current sources in mesh analysis</h2>
+<ul><li>A current source in an <em>outer</em> branch (belonging to one mesh only) fixes that mesh current: \(I_k=\pm I_s\). One fewer unknown; no KVL is needed for that mesh.</li><li>A current source in a <em>shared</em> branch needs a supermesh (above).</li><li>A resistor in parallel with a current source is ignored when finding the other mesh currents.</li></ul>
+<h2 id="s-3-6"><span class="n">3.6</span> Dependent sources in mesh analysis</h2>
+<p>Treat a dependent voltage source as an ordinary source in the KVL; then add an equation for its controlling variable in terms of the mesh currents. A dependent <em>current</em> source in a shared branch needs a supermesh together with the control equation.</p>
+<div class="box example"><div class="bt">CCVS</div><div class="bb"><p>Mesh 1: \(24\) V source, \(R_1=3\ \Omega\), shared \(R_2=3\ \Omega\). Mesh 2: \(R_2\), \(R_3=2\ \Omega\), and a CCVS of value \(1\cdot I_1\) (volts, per ampere of \(I_1\)) acting as a voltage <em>drop</em> in the direction of \(I_2\) (Figure <a href="ch03.html#fig-3-3">3.3</a>).<br>
+Mesh 1: \(3I_1+3(I_1-I_2)=24\Rightarrow6I_1-3I_2=24\).<br>
+Mesh 2: \(3(I_2-I_1)+2I_2+I_1=0\Rightarrow-2I_1+5I_2=0\Rightarrow I_2=0.4I_1\).<br>
+\(6I_1-1.2I_1=24\Rightarrow I_1=5\) A, \(I_2=2\) A.</p></div></div>
+<figure id="fig-3-3"><div class="figimgs"><img src="img/f3_dep.png" alt="" loading="lazy"></div><figcaption><b>Figure 3.3.</b> Mesh analysis with a CCVS controlled by \(I_1\): \(I_1=5\) A, \(I_2=2\) A.</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>The CCVS in mesh 2 is controlled by \(I_1\), <em>not</em> \(I_2\). Its polarity relative to the mesh direction decides the sign in the KVL: reverse the polarity and the term \(+I_1\) becomes \(-I_1\), giving a different answer.</p></div></div>
+<h2 id="s-3-7"><span class="n">3.7</span> Comparison of nodal and mesh analysis</h2>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th>Nodal</th><th>Mesh</th></tr></thead><tbody><tr><td>Unknowns</td><td>node voltages, \(n-1\)</td><td>mesh currents, \(b-n+1\)</td></tr><tr><td>Law used</td><td>KCL</td><td>KVL</td></tr><tr><td>Handles easily</td><td>current sources</td><td>voltage sources</td></tr><tr><td>Special case</td><td>floating V-source \(\to\) supernode</td><td>shared I-source \(\to\) supermesh</td></tr><tr><td>Applicable to</td><td>any circuit</td><td>planar circuits only</td></tr></tbody></table></div></div>
+<h2 id="s-3-8"><span class="n">3.8</span> Choosing the efficient method</h2>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Count equations before starting. Nodal needs \((n-1)-(\text{V-sources to ground})-(\text{floating V-sources})\) equations. Mesh needs \(m-(\text{outer I-sources})-(\text{shared I-sources})\) equations. Pick the smaller number. Circuits with many current sources \(\to\) nodal; many voltage sources \(\to\) mesh.</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A planar network has \(9\) branches and \(6\) nodes. The number of independent mesh equations is (A) 3 (B) 4 (C) 5 (D) 6.</p>
+<p><strong>Q2.</strong> A supermesh is required when (A) a voltage source is shared by two meshes (B) a current source is shared by two meshes (C) a dependent source is present (D) a resistor is shared.</p>
+<p><strong>Q3.</strong> For a mesh-analysis resistance matrix of a reciprocal network with all mesh currents clockwise, the off-diagonal entries are (A) all positive (B) all negative or zero (C) all zero (D) alternating in sign.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(9-6+1=4\) (B). Q2 (B). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> In the two-mesh example, \(R_3\) is changed to \(4\ \Omega\) (all else same). Then \(I_2\) is (A) \(1.2\) A (B) \(1.5\) A (C) \(2\) A (D) \(2.4\) A.</p>
+<p><strong>Q5.</strong> In the supermesh example the voltage source is changed to \(38\) V. The voltage across the \(3\) A source (drop along the \(3\) A direction) is (A) \(12\) V (B) \(20\) V (C) \(24\) V (D) \(10\) V.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): \(6I_1-4I_2=12\), \(-4I_1+8I_2=0\Rightarrow I_1=2I_2\), so \(8I_2=12\), \(I_2=1.5\) A. Q5 (C): \(2(I_2+3)+6I_2=38\Rightarrow I_2=4\), \(I_1=7\), \(v_{cs}=38-2(7)=24\) V.</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> In the three-mesh example, the power absorbed by the \(3\ \Omega\) resistor shared by meshes 2 and 3 is <span class="blank"></span> W (to two decimals).</p>
+<p><strong>Q7.</strong> In the CCVS example, the dependent source gain is changed to \(3\ \Omega\) (so the source is \(3I_1\)). \(I_2\) is <span class="blank"></span> A (to two decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(I_2-I_3=0.28-(-0.52)=0.80\) A, \(P=0.8^2\times3=1.92\) W. Q7: mesh 2: \(3(I_2-I_1)+2I_2+3I_1=0\Rightarrow5I_2=0\Rightarrow I_2=0\) A.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Select all correct statements. (A) Mesh analysis can be applied to non-planar circuits. (B) A current source in an outer branch fixes a mesh current. (C) A supermesh needs a constraint equation. (D) The number of meshes is \(b-n+1\) for a planar connected network.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (B), (C), (D). (A) is false: mesh analysis needs planarity.</p>
+<div class="box trap"><div class="bt">Common traps in this chapter</div><div class="bb"><p>(i) Writing KVL around a mesh containing a current source in a shared branch. (ii) Sign of the shared-resistor term: \(R(I_k-I_j)\), not \(R(I_k+I_j)\). (iii) Mixing clockwise and anticlockwise mesh currents without fixing the signs. (iv) Using the wrong controlling current for a CCVS. (v) Forgetting that a current source in an outer branch simply sets the mesh current.</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> A planar circuit has \(12\) branches, \(8\) nodes, \(2\) current sources in outer branches and \(1\) shared current source. How many KVL equations must be solved? <strong>T2.</strong> For meshes with resistances \(R_{11}=5\), \(R_{22}=6\), \(R_{12}=R_{21}=-2\) and \(V=[8,\,-4]^T\), find \(I_1,I_2\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(m=12-8+1=5\); minus \(2\) outer sources \(=3\); a shared current source combines two meshes into one supermesh and adds a constraint, so it also removes one net unknown: \(3-1=2\). T2: \(\det=30-4=26\); \(I_1=(48-8)/26=1.538\) A; \(I_2=(-20+16)/26=-0.154\) A.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Meshes (planar): \(m=b-n+1\). Clockwise currents. KVL: \(\sum\) drops \(=\sum\) rises.</li><li>Shared resistor: \(R(I_k-I_j)\). Matrix: \(R_{kk}=\sum R\) in mesh, \(R_{kj}=-R_{shared}\), \(V_k=\sum\) rises.</li><li>Outer current source: \(I_k=\pm I_s\). Shared current source: supermesh (outer loop KVL) + \(I_1-I_2=\pm I_s\).</li><li>Dependent sources: KVL as normal + control variable in mesh currents.</li><li>Choose method by counting equations: nodal for I-sources, mesh for V-sources.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch02.html">&larr; Node-Voltage Analysis</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch04.html">Network Theorems &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

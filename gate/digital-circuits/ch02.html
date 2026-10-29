@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2: Binary Codes and Error Detection | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="BCD arithmetic with the +6 correction, Gray-code conversion, Hamming distance and the detect/correct rule, parity, and (7,4) Hamming codes. Short, formula-driven questions.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch02.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 2: Binary Codes and Error Detection | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="BCD arithmetic with the +6 correction, Gray-code conversion, Hamming distance and the detect/correct rule, parity, and (7,4) Hamming codes. Short, formula-driven questions."><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch02.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 2</div><h1>Binary Codes and Error Detection</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-2-1">2.1 Weighted and non-weighted codes</a></li><li><a href="#s-2-2">2.2 BCD addition</a></li><li><a href="#s-2-3">2.3 Gray code</a></li><li><a href="#s-2-4">2.4 Alphanumeric codes</a></li><li><a href="#s-2-5">2.5 Error-detecting and error-correcting codes</a></li><li><a href="#s-2-6">2.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>BCD arithmetic with the \(+6\) correction, Gray-code conversion, Hamming distance and the detect/correct rule, parity, and (7,4) Hamming codes. Short, formula-driven questions.</p></div></div>
+<h2 id="s-2-1"><span class="n">2.1</span> Weighted and non-weighted codes</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Digit</th><th class="c">0</th><th class="c">1</th><th class="c">2</th><th class="c">3</th><th class="c">4</th><th class="c">5</th><th class="c">6</th><th class="c">7</th><th class="c">8</th><th class="c">9</th></tr></thead><tbody><tr><td>BCD (8421)</td><td class="c">0000</td><td class="c">0001</td><td class="c">0010</td><td class="c">0011</td><td class="c">0100</td><td class="c">0101</td><td class="c">0110</td><td class="c">0111</td><td class="c">1000</td><td class="c">1001</td></tr><tr><td>Excess-3</td><td class="c">0011</td><td class="c">0100</td><td class="c">0101</td><td class="c">0110</td><td class="c">0111</td><td class="c">1000</td><td class="c">1001</td><td class="c">1010</td><td class="c">1011</td><td class="c">1100</td></tr><tr><td>2421 (self-compl.)</td><td class="c">0000</td><td class="c">0001</td><td class="c">0010</td><td class="c">0011</td><td class="c">0100</td><td class="c">1011</td><td class="c">1100</td><td class="c">1101</td><td class="c">1110</td><td class="c">1111</td></tr><tr><td>Gray (4-bit, 0–9)</td><td class="c">0000</td><td class="c">0001</td><td class="c">0011</td><td class="c">0010</td><td class="c">0110</td><td class="c">0111</td><td class="c">0101</td><td class="c">0100</td><td class="c">1100</td><td class="c">1101</td></tr></tbody></table></div></div>
+<ul><li><strong>BCD</strong>: each decimal digit coded in 4 bits; 6 codes (1010–1111) are invalid. A BCD number takes more bits than pure binary.</li><li><strong>Excess-3</strong>: BCD \(+3\); self-complementing (the 9’s complement is the bitwise complement); useful for decimal subtraction.</li><li><strong>2421</strong> and <strong>5211</strong>: weighted self-complementing codes.</li><li><strong>Gray</strong>: successive values differ in exactly one bit (unit distance).</li></ul>
+<h2 id="s-2-2"><span class="n">2.2</span> BCD addition</h2>
+<p>Add the digits as 4-bit binary numbers. If the result exceeds 9 (1001) <em>or</em> a carry is produced out of the digit, add \(0110_2\) (\(=6\)) to that digit and propagate the carry.</p>
+<div class="box example"><div class="bt">BCD sum</div><div class="bb"><p>\(47+38\): \(0100\,0111+0011\,1000\). Low digit \(0111+1000=1111\) (15 \(&gt;9\)) \(\Rightarrow\) add 0110: \(1\,0101\), digit 5, carry 1. High digit \(0100+0011+1=1000\) (8). Result \(1000\,0101=85\) \(\checkmark\).<br>
+\(9+8\): \(1001+1000=1\,0001\), carry set so add 6: \(0001+0110=0111\) with carry 1 \(\Rightarrow\ 0001\,0111=17\) \(\checkmark\).</p></div></div>
+<h2 id="s-2-3"><span class="n">2.3</span> Gray code</h2>
+<div class="box formula"><div class="bt">Binary \(\leftrightarrow\) Gray</div><div class="bb"><p>Binary \(B_{n-1}\dots B_0\to\) Gray: \(G_{n-1}=B_{n-1},\quad G_i=B_{i+1}\oplus B_i\) &emsp;(i.e. \(G=B\oplus(B\gg1)\)).<br>
+Gray \(\to\) binary: \(B_{n-1}=G_{n-1},\quad B_i=B_{i+1}\oplus G_i\) (cascaded XOR from the MSB).</p></div></div>
+<p>Reflected-Gray construction: write the \((n-1)\)-bit sequence, mirror it, prefix 0 to the first half and 1 to the second. Applications: rotary encoders, K-map labelling, glitch-free counters.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(1011_2\to G\): \(1,\ 1\oplus0=1,\ 0\oplus1=1,\ 1\oplus1=0\Rightarrow 1110\). Back: \(B_3=1\), \(B_2=1\oplus1=0\), \(B_1=0\oplus1=1\), \(B_0=1\oplus0=1\Rightarrow1011\) \(\checkmark\). An \(n\)-bit Gray counter of \(2^n\) states makes exactly \(2^n\) single-bit transitions per cycle (the last state also differs from the first by one bit).</p></div></div>
+<h2 id="s-2-4"><span class="n">2.4</span> Alphanumeric codes</h2>
+<p>ASCII is a 7-bit code (\(128\) symbols): digits <code>0–9</code> are \(30_{16}\)–\(39_{16}\), uppercase <code>A</code> is \(41_{16}\), lowercase <code>a</code> is \(61_{16}\) (differ by \(20_{16}=32\)). Extended ASCII uses 8 bits; Unicode (UTF-8) is variable-length.</p>
+<h2 id="s-2-5"><span class="n">2.5</span> Error-detecting and error-correcting codes</h2>
+<h3 id="s-2-5-1"><span class="n">2.5.1</span> Hamming distance</h3>
+<p>The Hamming distance \(d(x,y)\) is the number of bit positions in which two words differ. The minimum distance \(d_{\min}\) of a code decides its power:</p>
+<div class="box formula"><div class="bt">Detection and correction capability</div><div class="bb"><p>Detect up to \(\ d_{\min}-1\ \) errors. &emsp; Correct up to \(\ t=\left\lfloor\dfrac{d_{\min}-1}{2}\right\rfloor\ \) errors.<br>
+Detect \(e\) errors <em>and</em> correct \(t\) errors simultaneously: \(d_{\min}\ge e+t+1\) with \(e\ge t\).<br>
+Correct erasures: up to \(d_{\min}-1\).</p></div></div>
+<h3 id="s-2-5-2"><span class="n">2.5.2</span> Parity</h3>
+<p>A single parity bit makes the number of 1s even (even parity) or odd (odd parity). \(d_{\min}=2\): detects any odd number of errors, corrects none. A two-dimensional (row/column) parity array can locate and correct a single error. Parity generation: XOR of all bits.</p>
+<h3 id="s-2-5-3"><span class="n">2.5.3</span> Hamming code</h3>
+<p>For \(k\) data bits and \(r\) parity bits, single-error correction requires
+\[
+2^r\ge k+r+1.
+\]
+So \((7,4)\): \(r=3\); \((15,11)\): \(r=4\); \((31,26)\): \(r=5\). Parity bits sit at positions \(1,2,4,8,\dots\); parity bit \(p_{2^j}\) checks all positions whose binary index has bit \(j\) set. Adding one overall parity bit gives SECDED: \(d_{\min}=4\) (single-error correct, double-error detect).</p>
+<div class="box example"><div class="bt">(7,4) Hamming</div><div class="bb"><p>Data \(d_1d_2d_3d_4=1011\) at positions \(3,5,6,7\).<br>
+\(p_1\) checks positions \(1,3,5,7\): \(p_1\oplus1\oplus0\oplus1=0\Rightarrow p_1=0\).<br>
+\(p_2\) checks \(2,3,6,7\): \(p_2\oplus1\oplus1\oplus1=0\Rightarrow p_2=1\).<br>
+\(p_4\) checks \(4,5,6,7\): \(p_4\oplus0\oplus1\oplus1=0\Rightarrow p_4=0\).<br>
+Codeword (positions 1–7): \(0\,1\,1\,0\,0\,1\,1\).<br>
+Suppose it is received as \(0110111\) (bit 5 flipped). Syndrome \(s_4s_2s_1\): \(s_1=0\oplus1\oplus1\oplus1=1\), \(s_2=1\oplus1\oplus1\oplus1=0\), \(s_4=0\oplus1\oplus1\oplus1=1\Rightarrow 101_2=5\): the error is at position 5. Flip it back.</p></div></div>
+<h3 id="s-2-5-4"><span class="n">2.5.4</span> Checksums and CRC</h3>
+<p>A cyclic redundancy check appends \(m\) bits, the remainder of the message (shifted left by \(m\)) divided <em>modulo 2</em> by a generator polynomial of degree \(m\). The receiver divides the whole codeword; a non-zero remainder signals an error. CRC detects all burst errors of length \(\le m\).</p>
+<div class="box example"><div class="bt">CRC</div><div class="bb"><p>Message \(1001\), generator \(x^3+x+1=1011\). Append three zeros: \(1001000\div1011\) (XOR long division) gives remainder \(110\), so the transmitted word is \(1001110\).<br>
+Message \(1101011011\) with generator \(10011\) (\(x^4+x+1\)) gives remainder \(1110\).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Hamming distance of a code is the <em>minimum</em> over all pairs, not the average. (ii) Even parity detects an odd number of bit errors only; two errors cancel. (iii) In BCD addition a digit result \(\ge10\) <em>or</em> a carry out both require the \(+6\) correction. (iv) Gray code is not a weighted code, so it cannot be added directly.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Hamming \((n,k)\): \(n=2^r-1\) and \(k=n-r\). The syndrome, read as a binary number, is the error position (0 means no error). Self-complementing codes (excess-3, 2421) allow 9’s complement by plain inversion.</p></div></div>
+<h2 id="s-2-6"><span class="n">2.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> Excess-3 code of decimal 6 is (A) 0110 (B) 1001 (C) 1000 (D) 0101.</p>
+<p><strong>Q2.</strong> A code has \(d_{\min}=5\). Which (detect \(e\), correct \(t\)) pair can it support simultaneously? (A) \(e=3,t=3\) (B) \(e=2,t=2\) (C) \(e=4,t=2\) (D) \(e=1,t=4\).</p>
+<p><strong>Q3.</strong> Gray code of binary \(0110\) is (A) 0101 (B) 0111 (C) 1010 (D) 0011.</p>
+<p><strong>Q4.</strong> The minimum number of parity bits in a Hamming code for 11 data bits is (A) 3 (B) 4 (C) 5 (D) 6.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B): \(6+3=9=1001\). Q2 (B): need \(e+t+1\le5\) with \(e\ge t\); \(e=t=2\) works, (C) needs 7. Q3 (A): \(G_3=0\), \(G_2=0\oplus1=1\), \(G_1=1\oplus1=0\), \(G_0=1\oplus0=1\). Q4 (B): \(2^4=16\ge11+4+1\).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> BCD addition \(0111\,0101+0010\,0111\) (\(75+27\)) yields (A) 1000 0010 (B) 0001 0000 0010 (C) 0001 0000 0001 (D) 1010 1100.</p>
+<p><strong>Q6.</strong> A (7,4) Hamming code word received is \(1010101\) (positions 1–7 left to right, even parity). The bit position in error is (A) none (B) 3 (C) 5 (D) 7.</p>
+<p><strong>Q7.</strong> Message \(110\) is protected using CRC generator \(101\) (\(x^2+1\)). The transmitted codeword is (A) 11010 (B) 11011 (C) 11001 (D) 11000.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B): \(75+27=102\). Low digit \(0101+0111=1100&gt;9\), add 6: \(1\,0010\), digit 2, carry 1. High digit \(0111+0010+1=1010&gt;9\), add 6: \(1\,0000\), digit 0, carry 1. Result \(0001\,0000\,0010\). Q6 (A): with bits \(1,0,1,0,1,0,1\) at positions \(1\ldots7\), \(s_1\) (positions 1,3,5,7) \(=0\), \(s_2\) (2,3,6,7) \(=0\), \(s_4\) (4,5,6,7) \(=0\): no error. Q7 (B): \(11000\div101\) (modulo-2) leaves remainder \(11\), so the word is \(11011\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Number of parity bits needed to single-error-correct 26 data bits: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Minimum distance required to detect 3 errors and correct 1 error simultaneously: <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Total number of 8-bit words at Hamming distance exactly 2 from a given word: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(2^r\ge 26+r+1\); \(r=5\): \(32\ge32\) \(\checkmark\), so 5. Q9: \(d\ge3+1+1=5\). Q10: \(\binom82=28\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which are true? (A) A single parity bit can correct a single-bit error. (B) Gray code is a unit-distance code. (C) Excess-3 is self-complementing. (D) BCD is a weighted code.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (B), (C), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Add BCD \(38+45\). &emsp; <strong>T2.</strong> Hamming codeword for data \(0110\) (even parity, positions 1–7)? &emsp; <strong>T3.</strong> \(d_{\min}=6\): detect? correct?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: low \(8+5=13&gt;9\), add 6 gives digit 3 with carry; high \(3+4+1=8\); result \(1000\,0011=83\). T2: data bits at positions 3,5,6,7 are \(0,1,1,0\); \(p_1\) (3,5,7) \(=1\), \(p_2\) (3,6,7) \(=1\), \(p_4\) (5,6,7) \(=0\); word \(1100110\). T3: detect 5, correct 2.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>BCD sum digit \(&gt;9\) or carry \(\Rightarrow\) add 6. Excess-3 \(=\) BCD\(+3\). Gray: \(G=B\oplus(B\gg1)\).</li><li>Detect \(d_{\min}-1\); correct \(\lfloor (d_{\min}-1)/2\rfloor\). Parity: \(d_{\min}=2\).</li><li>Hamming: \(2^r\ge k+r+1\); syndrome gives error position; SECDED adds an overall parity bit.</li><li>CRC: append remainder of \(M\cdot x^m\bmod G\) (modulo-2 division).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch01.html">&larr; Number Systems and Arithmetic</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch03.html">Boolean Algebra, Logic Gates and Canonical Forms &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

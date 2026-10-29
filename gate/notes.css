@@ -1,0 +1,89 @@
+/* GATE ECE study notes (book pages). Pairs with /style.css */
+body.notes-page{background:#fff}
+.notes-page .nn{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-left:auto}
+.notes-page .nn a{color:var(--ink);font-weight:600;font-size:14px;text-decoration:none}
+.notes-page .nn a:hover{color:var(--amber-d)}
+.notes-page .nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+main.nt{max-width:860px;margin:0 auto;padding:26px 18px 56px;line-height:1.62;color:var(--ink);font-size:16.5px}
+main.nt h1{font-family:Poppins,Inter,sans-serif;font-size:clamp(26px,4.4vw,36px);line-height:1.2;margin:4px 0 14px}
+main.nt h2{font-family:Poppins,Inter,sans-serif;font-size:clamp(20px,3.2vw,25px);margin:34px 0 8px;line-height:1.25}
+main.nt h2 .n,main.nt h3 .n{color:var(--amber-d);margin-right:4px}
+main.nt h3{font-family:Poppins,Inter,sans-serif;font-size:clamp(17px,2.6vw,20px);margin:24px 0 6px}
+main.nt h4{margin:18px 0 4px}
+main.nt p{margin:10px 0}
+main.nt a{color:var(--blue)}
+.crumbs{font-size:14px;color:var(--mute);margin-bottom:6px}
+.chlabel{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-d);font-weight:700}
+.lead{font-size:18px;color:var(--mute)}
+.meta{color:var(--mute);font-size:14.5px}
+.ctoc{border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:8px 14px;margin:14px 0 22px}
+.ctoc summary{cursor:pointer;font-weight:600}
+.ctoc ol{margin:8px 0 4px;padding-left:20px;columns:2;column-gap:28px;font-size:14.5px}
+@media (max-width:640px){.ctoc ol{columns:1}}
+/* boxes */
+.box{border:1px solid;border-radius:10px;margin:18px 0;overflow:hidden;background:#fff}
+.box .bt{font-family:Poppins,Inter,sans-serif;font-weight:700;font-size:13.5px;padding:6px 14px;color:#fff;letter-spacing:.01em}
+.box .bb{padding:6px 14px 10px;overflow-x:auto}
+.box .bb>p:first-child{margin-top:8px}
+.box.formula{border-color:#2563a8;background:#f1f6fc}.box.formula .bt{background:#2563a8}
+.box.trap{border-color:#b23a3a;background:#fdf2f2}.box.trap .bt{background:#b23a3a}
+.box.shortcut{border-color:#2f7a45;background:#f1f9f3}.box.shortcut .bt{background:#2f7a45}
+.box.example{border-color:#c2680a;background:#fff7ec}.box.example .bt{background:#c2680a}
+.box.gateq,.box.onemark{border-color:#6d3a9c;background:#f8f3fc}.box.gateq .bt,.box.onemark .bt{background:#6d3a9c}
+.box.twomark{border-color:#3f51b5;background:#f2f4fc}.box.twomark .bt{background:#3f51b5}
+.box.natq{border-color:#00796b;background:#eef8f6}.box.natq .bt{background:#00796b}
+.box.msqq{border-color:#9c3a7a;background:#fbf2f8}.box.msqq .bt{background:#9c3a7a}
+.box.chtest{border-color:#9a8a2a;background:#fcfaea}.box.chtest .bt{background:#9a8a2a}
+.box.revision{border-color:#c9780a;background:#fffbe8;border-width:2px}.box.revision .bt{background:#c9780a}
+.box.practice{border-color:#2b8aa0;background:#eff9fb}.box.practice .bt{background:#2b8aa0}
+.box.derive{border-color:#6b7280;background:#f4f5f7}.box.derive .bt{background:#6b7280}
+.box.notebox{border-color:#9aa3b2;background:#f7f8fa}.box.notebox .bt{background:#6b7686}
+.ans{background:#f3faf4;border-left:3px solid #2f7a45;padding:6px 12px;border-radius:0 8px 8px 0;margin:8px 0 14px}
+.blank{display:inline-block;min-width:70px;border-bottom:1.5px solid var(--ink);margin:0 4px;transform:translateY(2px)}
+.cb{background:#eaf2fb;padding:0 4px;border-radius:3px}
+.fb{border:1px solid var(--ink);padding:0 4px}
+.center{text-align:center}
+.center>p{text-align:center}
+.center .tw{margin-left:auto;margin-right:auto}
+/* lists */
+main.nt ul,main.nt ol{padding-left:24px;margin:8px 0}
+main.nt li{margin:3px 0}
+ul.check{list-style:none;padding-left:4px}
+ul.check li:before{content:"\2610";margin-right:8px}
+li.lab{list-style:none;margin-left:-20px}.lb{font-weight:600;margin-right:4px}
+/* tables */
+.tw{overflow-x:auto;margin:12px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;font-size:15px;max-width:100%}
+th,td{padding:5px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{border-top:2px solid var(--ink);border-bottom:1.5px solid var(--ink);background:rgba(20,33,61,.04)}
+tbody tr:last-child td{border-bottom:2px solid var(--ink)}
+td.c,th.c{text-align:center}td.r,th.r{text-align:right}
+/* figures */
+figure{margin:20px 0;text-align:center}
+.figimgs{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px}
+.figimgs img{max-width:100%;height:auto;background:#fff}
+.figimgs img.half{max-width:calc(50% - 8px)}
+figcaption{font-size:14.5px;color:var(--mute);margin-top:6px;text-align:center}
+/* chapter navigation */
+.pager{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:34px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:14.5px;flex-wrap:wrap}
+.pager a.pn{text-decoration:none;font-weight:600;max-width:42%}
+.pager a.mid{color:var(--mute);font-weight:500}
+@media (max-width:560px){.pager a.pn{max-width:100%}}
+/* book index / hub */
+ol.toc{list-style:none;padding:0;margin:8px 0}
+ol.toc li{border-bottom:1px solid var(--line)}
+ol.toc a{display:flex;gap:12px;padding:9px 4px;text-decoration:none;color:var(--ink);align-items:baseline}
+ol.toc a:hover{background:var(--soft)}
+.tn{min-width:30px;color:var(--amber-d);font-weight:700;text-align:right}
+h2.part{font-size:15px!important;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin:30px 0 6px!important;font-family:Inter,sans-serif!important}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:10px 0}
+.bcard{display:block;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);background:#fff;transition:box-shadow .15s,border-color .15s}
+.bcard:hover{border-color:var(--amber);box-shadow:0 4px 14px rgba(20,33,61,.08)}
+.bcard h3{margin:0 0 6px!important;font-size:18px!important}
+.bcard p{margin:0 0 8px;font-size:14.5px;color:var(--mute);line-height:1.5}
+.bcard span{font-size:13px;font-weight:600;color:var(--amber-d)}
+.katex{font-size:1.05em}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:.92em}
+@media print{header,footer,.pager,.ctoc{display:none}}
+main.nt h1,main.nt h2,main.nt h3{text-transform:none;letter-spacing:0}

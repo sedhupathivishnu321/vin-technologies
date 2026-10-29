@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix M: Supplementary Syllabus Topics | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-m.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix M: Supplementary Syllabus Topics | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-m.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Appendix M</div><h1>Supplementary Syllabus Topics</h1><h2 id="s-1">State equations for networks</h2>
+<p>Choose the capacitor voltages and inductor currents as state variables; write KVL/KCL to get \(\dot{\mathbf x}=\mathbf A\mathbf x+\mathbf B\mathbf u\), \(\mathbf y=\mathbf C\mathbf x+\mathbf D\mathbf u\). The eigenvalues of \(\mathbf A\) are the poles of \(H(s)=\mathbf C(s\mathbf I-\mathbf A)^{-1}\mathbf B+\mathbf D\).</p>
+<div class="box example"><div class="bt">Series RLC</div><div class="bb"><p>States \(x_1=v_C\), \(x_2=i_L\); input \(v_s\): \(\dot v_C=\dfrac{i_L}C\), \(\ \dot i_L=\dfrac{v_s-Ri_L-v_C}L\).
+\[\dot{\mathbf x}=\begin{bmatrix}0&amp;\frac1C\\-\frac1L&amp;-\frac RL\end{bmatrix}\mathbf x+\begin{bmatrix}0\\\frac1L\end{bmatrix}v_s,\qquad\det(s\mathbf I-\mathbf A)=s^2+\frac RLs+\frac1{LC}.\]
+For \(R=6\ \Omega\), \(L=1\) H, \(C=0.04\) F: \(\mathbf A=\begin{bmatrix}0&amp;25\\-1&amp;-6\end{bmatrix}\), eigenvalues \(-3\pm j4\) (underdamped, as in Chapter 10). Output \(v_C\): \(H(s)=\dfrac{25}{s^2+6s+25}\).</p></div></div>
+<p>The number of state variables equals the number of independent energy-storage elements (minus capacitor-only loops and inductor-only cut-sets).</p>
+<h2 id="s-2">Interpolation of discrete-time signals</h2>
+<p>To increase the sampling rate by an integer \(L\): (i) <em>upsample</em> (insert \(L-1\) zeros), which compresses the spectrum and creates \(L-1\) images; (ii) low-pass filter with cutoff \(\pi/L\) and gain \(L\) to remove the images. Ideal interpolation uses \(h[n]=\sinc(n/L)\); linear interpolation uses the triangular FIR \(h=\{\frac1L,\ldots,1,\ldots,\frac1L\}\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(x=\{1,3\}\), \(L=2\): upsampled \(\{1,0,3,0\}\); filter \(h=\{0.5,1,0.5\}\): \(\{0.5,1,2,3,1.5,0\}\); after removing the one-sample delay the interpolated sequence is \(\{1,2,3,1.5,\ldots\}\): the new sample \(2\) lies midway between \(1\) and \(3\).</p></div></div>
+<p>Decimation by \(M\): low-pass filter at \(\pi/M\) (anti-aliasing) then keep every \(M\)th sample.</p><div class="pager bottom"><a class="pn" href="appendix-l.html">&larr; Last-Day Formula Sheet</a><a class="pn mid" href="./">All chapters</a><span></span></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

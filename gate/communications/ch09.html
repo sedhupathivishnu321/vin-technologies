@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 9: Information Theory: Entropy, Capacity and Source Coding | Communications | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Entropy and joint/conditional entropy, mutual information, BSC/BEC/AWGN capacity, Shannon–Hartley, the Shannon limit E_b/N_0\ge-1.59 dB, Kraft inequality, Huffman coding with average length and">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/communications/ch09.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 9: Information Theory: Entropy, Capacity and Source Coding | Communications | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Entropy and joint/conditional entropy, mutual information, BSC/BEC/AWGN capacity, Shannon–Hartley, the Shannon limit E_b/N_0\ge-1.59 dB, Kraft inequality, Huffman coding with average length and"><meta property="og:url" content="https://vintechnologies.co.in/gate/communications/ch09.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Communications</a></div><div class="chlabel">Chapter 9</div><h1>Information Theory: Entropy, Capacity and Source Coding</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-9-1">9.1 Information and entropy</a></li><li><a href="#s-9-2">9.2 Joint, conditional entropy and mutual information</a></li><li><a href="#s-9-3">9.3 Channel capacity</a></li><li><a href="#s-9-4">9.4 Source coding</a></li><li><a href="#s-9-5">9.5 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Entropy and joint/conditional entropy, mutual information, BSC/BEC/AWGN capacity, Shannon–Hartley, the Shannon limit \(E_b/N_0\ge-1.59\) dB, Kraft inequality, Huffman coding with average length and efficiency.</p></div></div>
+<h2 id="s-9-1"><span class="n">9.1</span> Information and entropy</h2>
+<p>The information in an event of probability \(p\) is \(I=-\log_2p\) bits (\(-\ln p\) in nats). For a discrete source with symbol probabilities \(p_i\):</p>
+<div class="box formula"><div class="bt">Entropy</div><div class="bb"><p>\(H(X)=-\displaystyle\sum_ip_i\log_2p_i\) bits/symbol. &emsp; \(0\le H\le\log_2M\), with equality \(H=\log_2M\) iff all \(M\) symbols are equiprobable; \(H=0\) for a deterministic source.<br>
+Binary entropy function: \(H_b(p)=-p\log_2p-(1-p)\log_2(1-p)\), maximum \(1\) at \(p=\tfrac12\); \(H_b(0.1)=0.469\).<br>
+Source information rate \(R=r\,H\) (bits/s) with \(r\) symbols/s.<br>
+Extension: \(H(X^n)=nH(X)\) for independent symbols.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\{1/2,1/4,1/8,1/8\}\): \(H=\tfrac12(1)+\tfrac14(2)+2\cdot\tfrac18(3)=1.75\) bits. Four equiprobable symbols: \(2\) bits. Three equiprobable: \(\log_23=1.585\).</p></div></div>
+<h2 id="s-9-2"><span class="n">9.2</span> Joint, conditional entropy and mutual information</h2>
+<div class="box formula"><div class="bt">Relations</div><div class="bb"><p>\(H(X,Y)=H(X)+H(Y|X)=H(Y)+H(X|Y)\). &emsp; \(H(X|Y)\le H(X)\) (conditioning reduces entropy).<br>
+<strong>Mutual information:</strong> \(I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)=H(X)+H(Y)-H(X,Y)=\displaystyle\sum p(x,y)\log_2\frac{p(x,y)}{p(x)p(y)}\ge0\); zero iff independent; symmetric.<br>
+Data-processing inequality: for a Markov chain \(X\to Y\to Z\), \(I(X;Z)\le I(X;Y)\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Joint pmf \(p(0,0)=p(1,1)=0.4\), \(p(0,1)=p(1,0)=0.1\): \(H(X)=H(Y)=1\), \(H(X,Y)=1.722\), \(I(X;Y)=1+1-1.722=0.278\) bits.</p></div></div>
+<h2 id="s-9-3"><span class="n">9.3</span> Channel capacity</h2>
+<p>The capacity is the maximum mutual information over input distributions, \(C=\max_{p(x)}I(X;Y)\) bits per channel use. <strong>Channel coding theorem</strong>: reliable communication (arbitrarily small error) is possible at any rate \(R&lt;C\) and impossible for \(R&gt;C\).</p>
+<div class="box formula"><div class="bt">Standard channels</div><div class="bb"><p><strong>Noiseless binary:</strong> \(C=1\). &emsp; <strong>BSC</strong> (crossover \(p\)): \(C=1-H_b(p)\); \(p=0.1\Rightarrow0.531\); \(p=0.5\Rightarrow0\).<br>
+<strong>BEC</strong> (erasure probability \(\varepsilon\)): \(C=1-\varepsilon\) (achieved by uniform input).<br>
+<strong>AWGN (Shannon–Hartley):</strong> \(C=B\log_2\left(1+\dfrac SN\right)=B\log_2\left(1+\dfrac{S}{N_0B}\right)\) bits/s.<br>
+Infinite bandwidth: \(C_\infty=\dfrac{S}{N_0\ln2}=1.44\,\dfrac S{N_0}\).<br>
+Spectral efficiency \(\eta=R_b/B\) at \(R_b=C\): \(\dfrac{E_b}{N_0}\ge\dfrac{2^\eta-1}{\eta}\); as \(\eta\to0\): \(E_b/N_0\ge\ln2=0.693\) (\(-1.59\) dB), the <strong>Shannon limit</strong>.<br>
+\(\eta=1\Rightarrow0\) dB; \(\eta=2\Rightarrow1.5\) (\(1.76\) dB).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Telephone channel \(B=3\) kHz, \(\text{SNR}=30\) dB \((1000)\): \(C=3000\log_2(1001)=29.9\) kbps.<br>
+To send \(10\) kbps in \(B=2\) kHz: \(\text{SNR}\ge2^{5}-1=31\) (\(14.9\) dB).<br>
+\(S/N_0=10^4\) Hz: \(C_\infty=14.4\) kbps.</p></div></div>
+<p>For the Gaussian channel the capacity-achieving input is Gaussian; for a continuous source with variance \(\sigma^2\) the differential entropy is maximised by the Gaussian: \(h=\tfrac12\log_2(2\pi e\sigma^2)\). Increasing bandwidth increases capacity only up to the limit \(C_\infty\) (power-limited regime); increasing power gives only a logarithmic gain (bandwidth-limited regime).</p>
+<h2 id="s-9-4"><span class="n">9.4</span> Source coding</h2>
+<p>Representing source symbols by binary codewords of length \(l_i\). Average length \(\bar L=\sum_ip_il_i\).</p>
+<div class="box formula"><div class="bt">Source coding theorem</div><div class="bb"><p>Prefix (instantaneous) codes exist iff <strong>Kraft’s inequality</strong> holds: \(\displaystyle\sum_i2^{-l_i}\le1\).<br>
+\(H(X)\le\bar L&lt;H(X)+1\) (optimal prefix code). &emsp; Efficiency \(\eta=\dfrac{H}{\bar L}\), redundancy \(1-\eta\).<br>
+Block coding of \(n\) symbols: \(H\le\bar L_n/n&lt;H+1/n\).</p></div></div>
+<ul><li><strong>Shannon–Fano</strong>: sort by probability and split into near-equal-probability groups recursively.</li><li><strong>Huffman</strong>: repeatedly combine the two least probable symbols; yields an optimal prefix code (not unique but with the same \(\bar L\)).</li><li><strong>Lempel–Ziv</strong>: universal, dictionary-based, no probabilities needed (used in zip, GIF). <strong>Run-length</strong> coding for long runs.</li></ul>
+<div class="box example"><div class="bt">Huffman</div><div class="bb"><p>\(p=\{0.4,0.3,0.2,0.1\}\): merge \(0.2+0.1=0.3\), then \(0.3+0.3=0.6\), then with \(0.4\). Lengths \((1,2,3,3)\): \(\bar L=0.4+0.6+0.6+0.3=1.9\) bits. \(H=1.846\), efficiency \(97.2\%\). A fixed-length code needs \(2\) bits.<br>
+Kraft check: \(2^{-1}+2^{-2}+2^{-3}+2^{-3}=1\) (complete code).</p></div></div>
+<p><strong>Rate–distortion</strong>: for lossy compression the minimum rate \(R(D)\) needed to reproduce the source with distortion at most \(D\); for a Gaussian source with variance \(\sigma^2\) and mean-square distortion \(D\): \(R(D)=\tfrac12\log_2(\sigma^2/D)\) for \(D\le\sigma^2\).</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(\log_2\) for bits; do not mix with \(\ln\). (ii) Entropy is maximal for equiprobable symbols. (iii) Huffman codes need not be unique, yet the average length is. (iv) The Shannon limit \(-1.59\) dB is for infinite bandwidth and \(R_b\to0\); practical systems need more. (v) Mutual information is non-negative and symmetric.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Entropy of dyadic probabilities: \(\sum p_i\,l_i\) with \(l_i=-\log_2p_i\). BSC capacity \(1-H_b(p)\). Shannon–Hartley: \(C=B\log_2(1+\text{SNR})\) (\(\text{SNR}\) linear). \(\eta\) bit/s/Hz needs \(\text{SNR}\ge2^\eta-1\).</p></div></div>
+<h2 id="s-9-5"><span class="n">9.5</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The entropy of a source emitting four equiprobable symbols is (A) 1 bit (B) 2 bits (C) 4 bits (D) 0.5 bit.</p>
+<p><strong>Q2.</strong> The capacity of a BSC with \(p=0.5\) is (A) 1 (B) 0.5 (C) 0 (D) \(\infty\).</p>
+<p><strong>Q3.</strong> The Shannon limit on \(E_b/N_0\) (infinite bandwidth) is (A) 0 dB (B) \(-1.59\) dB (C) 3 dB (D) \(-3\) dB.</p>
+<p><strong>Q4.</strong> Kraft’s inequality \(\sum2^{-l_i}\le1\) is necessary and sufficient for a (A) uniquely decodable code (B) prefix code to exist (C) Huffman code (D) fixed-length code only.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (C). Q3 (B). Q4 (B) (also holds for uniquely decodable codes).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> The entropy of \(\{1/2,1/4,1/8,1/8\}\) is (A) 1.5 (B) 1.75 (C) 2 (D) 1.25 bits.</p>
+<p><strong>Q6.</strong> A telephone channel with \(B=3\) kHz and SNR 30 dB has capacity about (A) 9.9 kbps (B) 19.9 kbps (C) 29.9 kbps (D) 90 kbps.</p>
+<p><strong>Q7.</strong> A BSC with crossover probability 0.1 has capacity (A) 0.469 (B) 0.531 (C) 0.9 (D) 0.1 bit/use.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (C). Q7 (B): \(1-0.469\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Average length (bits) of the Huffman code for \(\{0.4,0.3,0.2,0.1\}\): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Capacity (bit/use) of a BEC with erasure probability 0.25: <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Minimum SNR (dB, one decimal) to send 10 kbps over a 2 kHz AWGN channel: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 1.9. Q9: 0.75. Q10: \(2^5-1=31\to14.9\) dB.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select the true statements. (A) \(I(X;Y)\ge0\). (B) \(H(X|Y)\le H(X)\). (C) Huffman coding is optimal among prefix codes. (D) Doubling the bandwidth always doubles the capacity.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(H(0.9,0.1)\). &emsp; <strong>T2.</strong> \(C_\infty\) in terms of \(S/N_0\). &emsp; <strong>T3.</strong> Can code lengths \((1,2,2,3)\) form a prefix code?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 0.469. T2: \(1.44S/N_0\). T3: \(0.5+0.25+0.25+0.125=1.125&gt;1\): no.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(H=-\sum p\log p\); max \(\log_2M\); \(I(X;Y)=H(X)+H(Y)-H(X,Y)\).</li><li>BSC \(1-H_b(p)\); BEC \(1-\varepsilon\); AWGN \(B\log_2(1+\text{SNR})\); \(E_b/N_0\ge\ln2\).</li><li>Kraft; \(H\le\bar L&lt;H+1\); Huffman optimal.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch08.html">&larr; Digital Modulation, Signal Space and Detection in AWGN</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch10.html">Error-Control Coding: Block, Cyclic and Convolutional Codes &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Qf": "\\mathrm{Q}", "\\EbNo": "E_b/N_0", "\\Eb": "E_b", "\\Nzero": "N_0", "\\Rb": "R_b", "\\Rs": "R_s", "\\fc": "f_c", "\\fm": "f_m", "\\Ac": "A_c", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\erfc": "\\operatorname{erfc}", "\\E": "\\operatorname{E}", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

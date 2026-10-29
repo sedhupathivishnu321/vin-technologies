@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1: Semiconductor and Diode Fundamentals | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch01.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 1: Semiconductor and Diode Fundamentals | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch01.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 1</div><h1>Semiconductor and Diode Fundamentals</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-1-1">1.1 Semiconductor basics</a></li><li><a href="#s-1-2">1.2 PN junction formation</a></li><li><a href="#s-1-3">1.3 Depletion region and built-in potential</a></li><li><a href="#s-1-4">1.4 Diode I–V characteristics</a></li><li><a href="#s-1-5">1.5 Ideal, constant-voltage and piecewise-linear models</a></li><li><a href="#s-1-6">1.6 Small-signal diode model</a></li><li><a href="#s-1-7">1.7 Dynamic resistance</a></li><li><a href="#s-1-8">1.8 Junction capacitance</a></li><li><a href="#s-1-9">1.9 Diffusion capacitance</a></li><li><a href="#s-1-10">1.10 Diode switching characteristics</a></li><li><a href="#s-1-11">1.11 Temperature dependence</a></li><li><a href="#s-1-12">1.12 GATE-level approximations</a></li><li><a href="#s-1-13">1.13 Common mistakes and conceptual traps</a></li><li><a href="#s-1-14">1.14 GATE previous-year problems (pattern-based)</a></li><li><a href="#s-1-15">1.15 Practice problems</a></li></ol></details><h2 id="s-1-1"><span class="n">1.1</span> Semiconductor basics</h2>
+<p>A pure (intrinsic) silicon crystal at \(300\) K has equal electron and hole concentrations \(n=p=n_i\approx1.5\times10^{10}\,\mathrm{cm^{-3}}\). Doping with donors (P, As) gives an n-type crystal; doping with acceptors (B) gives a p-type one. Two facts carry almost every GATE numerical:</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p><strong>Mass-action law:</strong> \(np=n_i^2\) &emsp;&emsp; <strong>Charge neutrality:</strong> \(p+N_D=n+N_A\)<br>
+n-type (\(N_D\gg n_i\)): \(n\approx N_D,\; p\approx n_i^2/N_D\) &emsp;&emsp; p-type: \(p\approx N_A,\; n\approx n_i^2/N_A\)<br>
+Drift: \(J=q(\mu_nn+\mu_pp)E\) &emsp;&emsp; Diffusion: \(J_n=qD_n\,dn/dx\)<br>
+Einstein relation: \(D/\mu=V_T=kT/q\approx26\) mV at 300 K</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>A silicon sample is doped with \(N_D=10^{16}\,\mathrm{cm^{-3}}\) donors. Find \(n\), \(p\) and the resistivity (\(\mu_n=1200\) cm\({}^2\)/V s, \(\mu_p=400\)).<br>
+\(n\approx10^{16}\), \(p=n_i^2/n=(1.5\times10^{10})^2/10^{16}=2.25\times10^{4}\,\mathrm{cm^{-3}}\). Conductivity \(\sigma=qn\mu_n=1.6\times10^{-19}\times10^{16}\times1200=1.92\,(\Omega\text{cm})^{-1}\), so \(\rho=0.52\ \Omega\) cm (the hole term is negligible).</p></div></div>
+<h2 id="s-1-2"><span class="n">1.2</span> PN junction formation</h2>
+<p>When p-type and n-type material are joined, holes diffuse from p to n and electrons from n to p, because of the concentration gradient. They leave behind <em>uncovered ions</em>: negative acceptor ions on the p side and positive donor ions on the n side. This space charge builds an electric field directed from n to p, which opposes further diffusion. At equilibrium the diffusion current and the drift current cancel exactly for each carrier type; net current is zero.</p>
+<figure id="fig-1-1"><div class="figimgs"><img src="img/f1_bands.png" alt="" loading="lazy"></div><figcaption><b>Figure 1.1.</b> Energy-band view of a PN junction. The barrier seen by majority carriers is \(q(V_{bi}-V)\): forward bias lowers it, reverse bias raises it.</figcaption></figure>
+<h2 id="s-1-3"><span class="n">1.3</span> Depletion region and built-in potential</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(V_{bi}=V_T\ln\dfrac{N_AN_D}{n_i^2}\) &emsp;&emsp;
+\(W=x_n+x_p=\sqrt{\dfrac{2\varepsilon}{q}\left(\dfrac1{N_A}+\dfrac1{N_D}\right)(V_{bi}-V_D)}\)<br>
+\(N_Ax_p=N_Dx_n\) (charge balance) &emsp;&emsp; the <strong>lightly doped side</strong> carries most of \(W\).<br>
+Peak field \(E_{max}=\dfrac{qN_Dx_n}{\varepsilon}\)</p></div></div>
+<figure id="fig-1-2"><div class="figimgs"><img src="img/f1_pn.png" alt="" loading="lazy"></div><figcaption><b>Figure 1.2.</b> Charge density, electric field and potential across an abrupt PN junction.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(N_A=10^{17}\), \(N_D=10^{15}\,\mathrm{cm^{-3}}\), \(\varepsilon_{Si}=11.7\varepsilon_0=1.036\times10^{-12}\) F/cm. Find \(V_{bi}\) and \(W\) at zero bias.<br>
+\(V_{bi}=0.02585\ln\!\big(10^{32}/2.25\times10^{20}\big)=0.02585\times26.82=0.693\) V.<br>
+\(W=\sqrt{\dfrac{2(1.036\times10^{-12})(0.693)}{1.6\times10^{-19}}\,(1.01\times10^{-15})}=0.95\ \mu\)m, of which \(x_n\approx0.94\ \mu\)m lies on the lightly doped n side.</p></div></div>
+<p>Under reverse bias \(V_R\), replace \(V_{bi}-V_D\) by \(V_{bi}+V_R\): \(W\propto\sqrt{V_{bi}+V_R}\) grows. Under forward bias \(W\) shrinks.</p>
+<h2 id="s-1-4"><span class="n">1.4</span> Diode I–V characteristics</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Shockley equation: \(I_D=I_s\left(e^{V_D/(nV_T)}-1\right)\), \(\; n=1\) to \(2\).<br>
+Forward (\(V_D\gg V_T\)): \(I_D\approx I_se^{V_D/nV_T}\). Reverse (\(V_D&lt;-4V_T\)): \(I_D\approx-I_s\).<br>
+Voltage for a given current: \(V_D=nV_T\ln(I_D/I_s)\).   Ratio: \(\dfrac{I_2}{I_1}=e^{(V_2-V_1)/nV_T}\)<br>
+<strong>60 mV rule:</strong> \(\Delta V=2.3\,nV_T\log_{10}(I_2/I_1)\approx60\) mV per decade of current (\(n=1\)).</p></div></div>
+<figure id="fig-1-3"><div class="figimgs"><img src="img/f1_iv.png" alt="" loading="lazy"></div><figcaption><b>Figure 1.3.</b> Left: schematic I–V with forward, reverse-saturation and breakdown regions. Right: on a semi-log plot the forward current is a straight line of slope \(1/(nV_T)\).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(I_s=10^{-14}\) A, \(n=1\). (a) \(I_D\) at \(0.7\) V. (b) Change in \(V_D\) when \(I_D\) rises from 1 mA to 10 mA.<br>
+(a) \(I_D=10^{-14}e^{0.7/0.02585}=10^{-14}e^{27.08}=5.8\) mA. 
+(b) \(\Delta V=V_T\ln10=59.5\) mV, independent of \(I_s\).</p></div></div>
+<p><strong>Breakdown.</strong> Two mechanisms: <em>Zener</em> (heavily doped, thin \(W\), field-emission, \(V_{BR}&lt;\approx5\) V, negative temperature coefficient) and <em>avalanche</em> (lightly doped, impact ionisation, \(V_{BR}&gt;\approx7\) V, positive temperature coefficient). Near \(5\)–\(6\) V the two cancel, giving a near-zero temperature coefficient.</p>
+<h2 id="s-1-5"><span class="n">1.5</span> Ideal, constant-voltage and piecewise-linear models</h2>
+<figure id="fig-1-4"><div class="figimgs"><img src="img/f1_models.png" alt="" loading="lazy"></div><figcaption><b>Figure 1.4.</b> The three diode models and their I–V curves.</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Model</th><th>ON condition</th><th>Equivalent</th></tr></thead><tbody><tr><td>Ideal</td><td>\(V_D\ge0\)</td><td>short circuit; OFF: open, \(I=0\)</td></tr><tr><td>Constant-voltage</td><td>\(V_D\ge V_{on}\) (0.7 V Si, 0.3 V Ge)</td><td>battery \(V_{on}\) in series</td></tr><tr><td>Piecewise-linear</td><td>\(V_D\ge V_{on}\)</td><td>\(V_{on}\) battery \(+\) \(r_d\) in series</td></tr></tbody></table></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Series circuit \(V_S=5\) V, \(R=1\) k\(\Omega\), diode in forward direction. Current by each model:<br>
+Ideal: \(5\) mA. CV: \((5-0.7)/1=4.3\) mA. Exact (Shockley, \(I_s=10^{-14}\)): \(V_D=0.692\) V, \(I=4.31\) mA. The CV model is within 0.3% here, because \(R\) dominates.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Whenever the source voltage is many times \(0.7\) V, the diode drop barely matters and the CV model is essentially exact. When the source is close to \(0.7\) V (say \(1\) V), the exponential character matters and <em>the problem will usually give you the exponential law</em>.</p></div></div>
+<h2 id="s-1-6"><span class="n">1.6</span> Small-signal diode model</h2>
+<p>Let the diode be biased at \((V_D,I_D)\) and a small signal \(v_d\) ride on it. Linearising \(i_D=I_se^{v_D/nV_T}\):
+\[
+i_D=I_D+\frac{I_D}{nV_T}v_d+\cdots\quad\Rightarrow\quad i_d=\frac{v_d}{r_d},\qquad r_d=\frac{nV_T}{I_D}.
+\]
+Valid when \(v_d\ll nV_T\) (a few mV). The DC source is replaced by a short circuit and the diode by \(r_d\).</p>
+<figure id="fig-1-5"><div class="figimgs"><img src="img/f1_ss_eq.png" alt="" loading="lazy"></div><figcaption><b>Figure 1.5.</b> Small-signal equivalent: DC sources shorted, diode replaced by \(r_d=nV_T/I_D\).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>A diode is biased at \(I_D=1\) mA through a large resistor and a \(10\) mV peak, \(1\) kHz signal is superimposed by a source with \(R=1\) k\(\Omega\) in series. Find the AC diode voltage.<br>
+\(r_d=25.85\) \(\Omega\). \(v_d=10\,\mathrm{mV}\times\dfrac{25.85}{1000+25.85}=0.252\) mV peak.</p></div></div>
+<h2 id="s-1-7"><span class="n">1.7</span> Dynamic resistance</h2>
+<p>\(r_d=nV_T/I_D\) is the reciprocal slope of the I–V curve at the Q-point. Values worth memorising (\(n=1\), \(V_T=26\) mV): \(I_D=1\) mA \(\to26\ \Omega\); \(0.1\) mA \(\to260\ \Omega\); \(10\) mA \(\to2.6\ \Omega\). In the reverse-breakdown (Zener) region the corresponding quantity is \(r_z=\Delta V_Z/\Delta I_Z\), typically a few ohms to tens of ohms.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>The dynamic resistance depends on the <em>DC current</em>, not on the DC voltage or on the size of the signal. Doubling \(I_D\) halves \(r_d\). It also differs from the static resistance \(V_D/I_D\): at \(0.7\) V and \(1\) mA the static resistance is \(700\ \Omega\) but \(r_d\) is only \(26\ \Omega\).</p></div></div>
+<h2 id="s-1-8"><span class="n">1.8</span> Junction capacitance</h2>
+<p>The depletion region is a parallel-plate capacitor with spacing \(W\):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(C_j=\dfrac{C_{j0}}{\left(1+V_R/V_{bi}\right)^m}\), &emsp; \(m=\tfrac12\) (abrupt), \(\tfrac13\) (linearly graded).<br>
+\(C_j=\varepsilon A/W\); falls as reverse bias increases. Varactor diodes exploit this.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(C_{j0}=2\) pF, \(V_{bi}=0.7\) V, \(m=\tfrac12\). At \(V_R=3.3\) V: \(C_j=2/\sqrt{1+3.3/0.7}=2/2.39=0.84\) pF.</p></div></div>
+<p>In a varactor tuning a resonant circuit \(f=1/(2\pi\sqrt{LC})\), \(C_j\propto(V_R)^{-1/2}\) gives \(f\propto V_R^{1/4}\) for large \(V_R\).</p>
+<h2 id="s-1-9"><span class="n">1.9</span> Diffusion capacitance</h2>
+<p>Under forward bias, minority carriers stored near the depletion edges change with voltage, giving
+\[
+C_d=\frac{\tau_T\,I_D}{nV_T}\quad(\tau_T=\text{transit time}).
+\]
+\(C_d\) dominates under forward bias and is proportional to \(I_D\); \(C_j\) dominates under reverse bias.</p>
+<figure id="fig-1-6"><div class="figimgs"><img src="img/f1_cap.png" alt="" loading="lazy"></div><figcaption><b>Figure 1.6.</b> Junction capacitance vs. reverse voltage (left) and diffusion capacitance vs. forward voltage (right).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\tau_T=10\) ns, \(I_D=1\) mA: \(C_d=10^{-8}\times10^{-3}/0.02585=387\) pF. Note that this is far larger than any typical \(C_j\).</p></div></div>
+<h2 id="s-1-10"><span class="n">1.10</span> Diode switching characteristics</h2>
+<p>When a forward-conducting diode is suddenly reverse-biased, the stored minority charge must be removed first. Current stays at \(I_R\approx-V_R/R\) for the <em>storage time</em> \(t_s\) and then decays over the <em>transition time</em> \(t_t\); the total is the <em>reverse recovery time</em> \(t_{rr}=t_s+t_t\).</p>
+<figure id="fig-1-7"><div class="figimgs"><img src="img/f1_switch.png" alt="" loading="lazy"></div><figcaption><b>Figure 1.7.</b> Reverse recovery of a diode switched from \(+5\) V to \(-5\) V.</figcaption></figure>
+<p>Approximately, \(t_s\approx\tau\ln\!\left(1+\dfrac{I_F}{I_R}\right)\), where \(\tau\) is the minority carrier lifetime. Schottky diodes (metal–semiconductor, majority-carrier) have essentially no storage time and a lower drop (\(\approx0.3\)–\(0.4\) V), so they are used in fast switching and rectification.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\tau=20\) ns, \(I_F=10\) mA, \(I_R=5\) mA: \(t_s=20\ln3=22\) ns.</p></div></div>
+<h2 id="s-1-11"><span class="n">1.11</span> Temperature dependence</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>At fixed \(I_D\): \(\dfrac{dV_D}{dT}\approx-2\ \mathrm{mV/^\circ C}\) (Si).<br>
+\(I_s\) roughly <strong>doubles per \(10\,{}^\circ\)C</strong>; \(V_T=kT/q\) rises by \(0.086\) mV/K.<br>
+Reverse leakage also doubles per \(10\,{}^\circ\)C.</p></div></div>
+<figure id="fig-1-8"><div class="figimgs"><img src="img/f1_temp.png" alt="" loading="lazy"></div><figcaption><b>Figure 1.8.</b> Forward characteristics at three temperatures: the curve moves left as temperature rises.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>A diode has \(V_D=0.70\) V at \(25\,{}^\circ\)C, \(1\) mA. At \(75\,{}^\circ\)C and the same current: \(V_D=0.70-2\times50/1000=0.60\) V. Its reverse current has grown by about \(2^{5}=32\times\).</p></div></div>
+<h2 id="s-1-12"><span class="n">1.12</span> GATE-level approximations</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Quantity</th><th>Value to use</th></tr></thead><tbody><tr><td>\(V_T\) at 300 K</td><td>25–26 mV (use 26 unless told otherwise)</td></tr><tr><td>Si / Ge drop</td><td>0.7 V / 0.3 V</td></tr><tr><td>Schottky drop</td><td>0.3–0.4 V</td></tr><tr><td>LED drop</td><td>1.8–3 V (given in question)</td></tr><tr><td>\(r_d\)</td><td>\(26\,\mathrm{mV}/I_D\)</td></tr><tr><td>Current \(\times10\)</td><td>\(V_D\) increases by \(\approx60\) mV</td></tr><tr><td>Temp. coefficient</td><td>\(-2\) mV/\({}^\circ\)C</td></tr></tbody></table></div></div>
+<h2 id="s-1-13"><span class="n">1.13</span> Common mistakes and conceptual traps</h2>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p><strong>1.</strong> Using \(r_d\) with the wrong current: it is the <em>DC</em> bias current at the Q-point.<br>
+<strong>2.</strong> Treating a diode as ON because the source is positive. The correct test is \(V_A-V_K\ge V_{on}\) in the final circuit.<br>
+<strong>3.</strong> Forgetting the \(-1\) in Shockley’s equation for reverse or near-zero bias.<br>
+<strong>4.</strong> Confusing \(C_j\) (reverse, depends on \(V_R^{-m}\)) with \(C_d\) (forward, proportional to \(I_D\)).<br>
+<strong>5.</strong> Zener vs. avalanche temperature coefficients: negative for Zener (\(&lt;5\) V), positive for avalanche (\(&gt;7\) V).</p></div></div>
+<h2 id="s-1-14"><span class="n">1.14</span> GATE previous-year problems (pattern-based)</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> A silicon diode has \(I_D=1\) mA at \(V_D=0.65\) V. Assuming \(n=1\) and \(V_T=26\) mV, the voltage at which \(I_D=10\) mA is closest to (A) 0.68 V  (B) 0.71 V  (C) 0.75 V  (D) 0.78 V.</p>
+<p><strong>Q2.</strong> A diode operating at \(I_D=2.6\) mA has a small-signal resistance (in \(\Omega\), \(n=1\), \(V_T=26\) mV) of <span class="blank"></span>.</p>
+<p><strong>Q3.</strong> Which one of the following is TRUE for a forward-biased PN junction when temperature increases at constant current? (A) \(V_D\) increases (B) \(V_D\) decreases (C) \(I_s\) decreases (D) depletion width increases.</p>
+<p><strong>Q4.</strong> For an abrupt junction with \(N_A\gg N_D\), the depletion width extends (A) mostly into p (B) mostly into n (C) equally (D) only in the metallurgical plane.</p>
+<p><strong>Q5.</strong> The junction capacitance of a varactor with \(m=1/2\) is \(8\) pF at \(V_R=1\) V (take \(V_{bi}\ll V_R\)). At \(V_R=4\) V it is <span class="blank"></span> pF.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(\Delta V=26\ln10=59.9\) mV \(\Rightarrow0.71\) V (B). Q2: \(r_d=26/2.6=10\ \Omega\). Q3: (B). Q4: (B), lightly doped n side. Q5: \(C\propto V_R^{-1/2}\Rightarrow8/2=4\) pF.</p>
+<h2 id="s-1-15"><span class="n">1.15</span> Practice problems</h2>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Find \(V_{bi}\) for \(N_A=N_D=10^{16}\,\mathrm{cm^{-3}}\) (Si, \(n_i=1.5\times10^{10}\)). &emsp; [0.69 V]</li><li>A diode carries \(5\) mA at \(0.72\) V. What current flows at \(0.66\) V (\(n=1,V_T=26\) mV)? &emsp; [\(5e^{-0.06/0.026}=0.50\) mA]</li><li>A Ge diode at \(25^\circ\)C has \(I_s=1\ \mu\)A. Estimate \(I_s\) at \(65^\circ\)C. &emsp; [\(\approx16\ \mu\)A]</li><li>Find \(r_d\) at \(I_D=0.26\) mA. &emsp; [100 \(\Omega\)]</li><li>Compute \(C_d\) if \(\tau_T=2\) ns and \(I_D=5.2\) mA. &emsp; [400 pF]</li><li>State two reasons why a Schottky diode switches faster than a PN diode. &emsp; [no minority-carrier storage; lower junction capacitance]</li></ol></div></div><div class="pager bottom"><a class="pn" href="preface.html">&larr; Preface: How to Use This Book</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch02.html">Diode Circuit Analysis &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

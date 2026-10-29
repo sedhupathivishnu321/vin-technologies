@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 23: GATE 2-Mark Problems | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Thirty original two-mark problems (three per topic) in the style of GATE ECE. Target: about 2.5–3 minutes each. Solutions are given in full so you can check your method, not just the answer.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch23.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 23: GATE 2-Mark Problems | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Thirty original two-mark problems (three per topic) in the style of GATE ECE. Target: about 2.5–3 minutes each. Solutions are given in full so you can check your method, not just the answer."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch23.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 23</div><h1>GATE 2-Mark Problems</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-23-1">23.1 Multi-loop block diagrams</a></li><li><a href="#s-23-2">23.2 Mason’s gain formula</a></li><li><a href="#s-23-3">23.3 Higher-order and design-based transient response</a></li><li><a href="#s-23-4">23.4 Steady-state error</a></li><li><a href="#s-23-5">23.5 Routh–Hurwitz</a></li><li><a href="#s-23-6">23.6 Bode and frequency-domain stability</a></li><li><a href="#s-23-7">23.7 Root-locus design</a></li><li><a href="#s-23-8">23.8 Nyquist</a></li><li><a href="#s-23-9">23.9 Compensator design</a></li><li><a href="#s-23-10">23.10 State-transition matrix and state-space</a></li></ol></details><div class="box notebox"><div class="bt">How to use this chapter</div><div class="bb"><p>Thirty original two-mark problems (three per topic) in the style of GATE ECE. Target: about \(2.5\)–\(3\) minutes each. Solutions are given in full so you can check your method, not just the answer.</p></div></div>
+<h2 id="s-23-1"><span class="n">23.1</span> Multi-loop block diagrams</h2>
+<div class="box twomark"><div class="bt">Set 23.1</div><div class="bb"><p><strong>Q1.</strong> \(G_1=\dfrac1s\) and \(G_2=\dfrac1{s+1}\) are in cascade; a negative feedback \(H_1=2\) surrounds \(G_2\) only, and a unity negative feedback surrounds the whole. \(C/R=\) (A) \(\dfrac1{s^2+3s+1}\) (B) \(\dfrac1{s^2+3s+3}\) (C) \(\dfrac{1}{s^2+s+1}\) (D) \(\dfrac{1}{s^2+2s+1}\).</p>
+<p><strong>Q2.</strong> In the nested-loop diagram of Chapter 5 (\(C/R=\dfrac{G_1G_2G_3}{1+G_2H_1+G_1G_2G_3H_2}\)), \(G_1=2,G_2=3,G_3=4,H_1=1,H_2=0.5\). \(C/R=\) (A) \(1\) (B) \(1.5\) (C) \(2\) (D) \(24\).</p>
+<p><strong>Q3.</strong> \(G_1=1\) and \(G_2=2\) in parallel, followed by \(G_3=\dfrac1{s+1}\), all inside a unity negative feedback. \(C/R=\) (A) \(\dfrac{3}{s+4}\) (B) \(\dfrac3{s+3}\) (C) \(\dfrac{1}{s+4}\) (D) \(\dfrac{3}{s+1}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A): inner loop \(\dfrac{G_2}{1+2G_2}=\dfrac1{s+3}\); open loop \(\dfrac1{s(s+3)}\); closed \(\dfrac{1}{s^2+3s+1}\). Q2 (B): \(\dfrac{24}{1+3+12}=1.5\). Q3 (A): forward \(\dfrac{3}{s+1}\); \(\dfrac{3}{s+1+3}\).</p>
+<h2 id="s-23-2"><span class="n">23.2</span> Mason’s gain formula</h2>
+<div class="box twomark"><div class="bt">Set 23.2</div><div class="bb"><p><strong>Q4.</strong> Two forward paths \(P_1=10\) (touching both loops) and \(P_2=5\) (touching only \(L_2\)). Loops \(L_1=-0.4\), \(L_2=-0.5\) do not touch each other. \(T=\) (A) \(6.25\) (B) \(8.10\) (C) \(10.0\) (D) \(7.14\).</p>
+<p><strong>Q5.</strong> Use the graph of Figure in Chapter 6 with \(G_1=\dots=G_6=1\), \(H_1=1\), \(H_2=2\). \(T=\) (A) \(0.75\) (B) \(0.5\) (C) \(1\) (D) \(0.33\).</p>
+<p><strong>Q6.</strong> One forward path \(P=6\) touches two touching loops \(L_1=-2\), \(L_2=-1\). \(T=\) (A) \(6/4\) (B) \(6/2\) (C) \(6/6\) (D) \(6/1\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): \(\Delta=1+0.4+0.5+0.2=2.1\); \(\Delta_2=1-L_1=1.4\); \(\dfrac{10+5(1.4)}{2.1}=8.10\). Q5 (B): \(\Delta=(1+1)(1+2)=6\); \(P_1\Delta_1=1\); \(P_2\Delta_2=1\cdot2=2\); \(3/6\). Q6 (A): \(\Delta=1+2+1=4\), \(T=6/4=1.5\).</p>
+<h2 id="s-23-3"><span class="n">23.3</span> Higher-order and design-based transient response</h2>
+<div class="box twomark"><div class="bt">Set 23.3</div><div class="bb"><p><strong>Q7.</strong> \(T(s)=\dfrac{100}{(s^2+2s+5)(s+20)}\). Using the dominant-pole approximation, the peak overshoot and \(2\%\) settling time are approximately (A) \(21\%\), \(4\) s (B) \(5\%\), \(1\) s (C) \(16\%\), \(2\) s (D) \(0\%\), \(0.2\) s.</p>
+<p><strong>Q8.</strong> \(G=\dfrac{K}{s(s+6)}\) in a unity-feedback loop gives \(16.3\%\) overshoot for \(K=\) (A) \(9\) (B) \(18\) (C) \(36\) (D) \(72\).</p>
+<p><strong>Q9.</strong> A standard second-order system has \(25\%\) overshoot with peak time \(2\) s. Then \(\omega_n\) is approximately (A) \(1.0\) (B) \(1.7\) (C) \(2.5\) (D) \(3.1\) rad/s.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q7 (A): dominant poles \(-1\pm j2\) (\(\zeta=0.447\)): \(M_p=e^{-\pi\zeta/\sqrt{1-\zeta^2}}=20.8\%\), \(t_s=4/1=4\) s (the exact peak is \(1.207\)). Q8 (C): \(\zeta=0.5\), \(2\zeta\omega_n=6\Rightarrow\omega_n=6\), \(K=\omega_n^2=36\). Q9 (B): \(\zeta=0.404\), \(\omega_d=\pi/2=1.571\), \(\omega_n=1.571/0.915=1.72\).</p>
+<h2 id="s-23-4"><span class="n">23.4</span> Steady-state error</h2>
+<div class="box twomark"><div class="bt">Set 23.4</div><div class="bb"><p><strong>Q10.</strong> \(G=\dfrac{10(s+2)}{s^2(s+5)}\), unity feedback, input \(r=t^2/2\). \(e_{ss}=\) (A) \(0\) (B) \(0.25\) (C) \(4\) (D) \(\infty\).</p>
+<p><strong>Q11.</strong> \(G=\dfrac{20}{(s+1)(s+4)}\), unity feedback, \(r=3u(t)\). \(e_{ss}=\) (A) \(0.5\) (B) \(0.6\) (C) \(1\) (D) \(0.25\).</p>
+<p><strong>Q12.</strong> \(G=\dfrac{10}{s(s+2)}\), \(H=0.5\), \(r=t\). The steady-state actuating error \(e=r-b\) is (A) \(0.2\) (B) \(0.4\) (C) \(0.5\) (D) \(1\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q10 (B): stable (\(s^3+5s^2+10s+20\): \(50&gt;20\)); \(K_a=\dfrac{10\cdot2}{5}=4\). Q11 (A): \(K_p=\dfrac{20}{4}=5\), \(\dfrac{3}{6}\). Q12 (B): \(K_v=\dfrac{10\cdot0.5}{2}=2.5\), \(e=1/2.5\).</p>
+<h2 id="s-23-5"><span class="n">23.5</span> Routh–Hurwitz</h2>
+<div class="box twomark"><div class="bt">Set 23.5</div><div class="bb"><p><strong>Q13.</strong> \(s^4+6s^3+11s^2+6s+K\) is stable for (A) \(0&lt;K&lt;6\) (B) \(0&lt;K&lt;10\) (C) \(K&gt;10\) (D) \(0&lt;K&lt;66\).</p>
+<p><strong>Q14.</strong> \(1+\dfrac{K}{s(s+3)(s+6)}=0\): the maximum stable \(K\) and the frequency at marginal stability are (A) \(162\), \(4.24\) (B) \(54\), \(3\) (C) \(162\), \(3\) (D) \(18\), \(4.24\).</p>
+<p><strong>Q15.</strong> The number of RHP roots of \(s^5+2s^4+2s^3+4s^2+11s+10\) is (A) 0 (B) 1 (C) 2 (D) 3.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q13 (B): \(s^2\) row: \(10,K\); \(s^1\): \(6-0.6K&gt;0\). At \(K=10\): \(10s^2+10=0\), \(s=\pm j\). Q14 (A): \(s^3+9s^2+18s+K\): \(9\cdot18=162\); \(9s^2+162=0\Rightarrow\omega=\sqrt{18}=4.24\). Q15 (C): rows \(1,2,11\); \(2,4,10\); \(0\to\varepsilon,6\); \(s^2\): \(4-12/\varepsilon&lt;0\); \(s^1\to6\); \(s^0=10\): signs \(+,+,+,-,+,+\): two changes.</p>
+<h2 id="s-23-6"><span class="n">23.6</span> Bode and frequency-domain stability</h2>
+<div class="box twomark"><div class="bt">Set 23.6</div><div class="bb"><p><strong>Q16.</strong> \(G=\dfrac{50}{s(s+5)}\), unity feedback: the phase margin is approximately (A) \(25^\circ\) (B) \(39^\circ\) (C) \(52^\circ\) (D) \(65^\circ\).</p>
+<p><strong>Q17.</strong> \(G=\dfrac{K}{s(s+2)(s+10)}\) has a gain margin of \(6\) dB for \(K=\) (A) \(60\) (B) \(120\) (C) \(240\) (D) \(30\).</p>
+<p><strong>Q18.</strong> An asymptotic minimum-phase magnitude plot: \(+40\) dB at \(\omega=0.1\) with slope \(-20\) dB/dec, changing to \(-40\) dB/dec at \(\omega=2\). The velocity error constant is (A) \(2\) (B) \(5\) (C) \(10\) (D) \(20\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q16 (B): \(\omega_{gc}=6.25\); PM \(=90^\circ-\tan^{-1}(1.25)=38.7^\circ\). Q17 (B): \(K_{max}=240\), GM \(=240/K=2\). Q18 (C): \(20\log(K_v/0.1)=40\Rightarrow K_v=10\); \(G=\dfrac{10}{s(1+s/2)}\).</p>
+<h2 id="s-23-7"><span class="n">23.7</span> Root-locus design</h2>
+<div class="box twomark"><div class="bt">Set 23.7</div><div class="bb"><p><strong>Q19.</strong> \(G=\dfrac{K}{s(s+6)}\): for closed-loop poles with \(\zeta=0.707\), \(K=\) (A) \(9\) (B) \(18\) (C) \(36\) (D) \(6\).</p>
+<p><strong>Q20.</strong> \(G=\dfrac{K(s+4)}{s(s+1)(s+2)(s+3)}\): centroid of the asymptotes is (A) \(-0.67\) (B) \(-2\) (C) \(-1.5\) (D) \(-2.5\).</p>
+<p><strong>Q21.</strong> \(G=\dfrac{K}{s(s+3)}\): the breakaway point and the gain there are (A) \(-1.5\), \(2.25\) (B) \(-1.5\), \(4.5\) (C) \(-3\), \(2.25\) (D) \(-1\), \(2\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q19 (B): poles \(-3\pm j3\); \(K=|s||s+6|=4.24\times4.24=18\). Q20 (A): \(n-m=3\), \((-6+4)/3=-0.67\) (angles \(60^\circ,180^\circ,300^\circ\)). Q21 (A): \(K=-s(s+3)\), \(dK/ds=0\Rightarrow s=-1.5\), \(K=2.25\).</p>
+<h2 id="s-23-8"><span class="n">23.8</span> Nyquist</h2>
+<div class="box twomark"><div class="bt">Set 23.8</div><div class="bb"><p><strong>Q22.</strong> \(G=\dfrac{3}{s(s+1)(s+2)}\) (unity feedback): the gain margin is (A) \(2\) (B) \(3\) (C) \(6\) (D) \(1\).</p>
+<p><strong>Q23.</strong> \(P=2\), and the Nyquist plot encircles \(-1\) twice <em>anticlockwise</em>. RHP poles of the closed loop: (A) 0 (B) 2 (C) 4 (D) \(-2\).</p>
+<p><strong>Q24.</strong> \(G=\dfrac{K}{s-2}\) (unity negative feedback) is stable for (A) \(K&lt;2\) (B) \(K&gt;2\) (C) \(K&gt;0\) (D) all \(K\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q22 (A): \(K_{max}=6\), so GM \(=6/3=2\) (stable, no RHP poles). Q23 (A): \(N=-2\), \(Z=P+N=0\). Q24 (B): \(s-2+K\); the Nyquist circle crosses the real axis at \(-K/2\), enclosing \(-1\) (anticlockwise, \(P=1\)) iff \(K&gt;2\).</p>
+<h2 id="s-23-9"><span class="n">23.9</span> Compensator design</h2>
+<div class="box twomark"><div class="bt">Set 23.9</div><div class="bb"><p><strong>Q25.</strong> A lead compensator must supply \(\phi_m=45^\circ\). Then \(a=p/z=\) (A) \(2.4\) (B) \(4.0\) (C) \(5.8\) (D) \(9\).</p>
+<p><strong>Q26.</strong> A lag compensator \(\dfrac{s+0.1}{s+0.01}\) multiplies the DC gain by \(10\); a type-1 loop with \(K_v=2\) then has \(K_v=\) (A) \(0.2\) (B) \(2\) (C) \(20\) (D) \(200\).</p>
+<p><strong>Q27.</strong> For \(G_c=\dfrac{s+3}{s+12}\) the frequency of maximum phase and the phase are (A) \(6\) rad/s, \(36.9^\circ\) (B) \(7.5\) rad/s, \(36.9^\circ\) (C) \(6\) rad/s, \(53^\circ\) (D) \(3\) rad/s, \(30^\circ\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q25 (C): \(\dfrac{1+0.7071}{1-0.7071}=5.83\). Q26 (C): DC gain \(0.1/0.01=10\), so \(K_v=20\). Q27 (A): \(\omega_m=\sqrt{36}=6\); \(a=4\), \(\phi_m=\sin^{-1}0.6\).</p>
+<h2 id="s-23-10"><span class="n">23.10</span> State-transition matrix and state-space</h2>
+<div class="box twomark"><div class="bt">Set 23.10</div><div class="bb"><p><strong>Q28.</strong> \(A=\begin{bmatrix}0&amp;1\\-6&amp;-5\end{bmatrix}\): \(\Phi_{11}(t)=\) (A) \(3e^{-2t}-2e^{-3t}\) (B) \(2e^{-2t}-e^{-3t}\) (C) \(e^{-2t}+e^{-3t}\) (D) \(3e^{-2t}+2e^{-3t}\).</p>
+<p><strong>Q29.</strong> \(A=\begin{bmatrix}0&amp;1\\-2&amp;-3\end{bmatrix}\), \(x(0)=[0\ 1]^T\): \(x_2(1)=\) (A) \(-0.097\) (B) \(0.233\) (C) \(0.368\) (D) \(-0.368\).</p>
+<p><strong>Q30.</strong> \(\Phi(t)=e^{-t}\begin{bmatrix}\cos2t&amp;\sin2t\\-\sin2t&amp;\cos2t\end{bmatrix}\): the matrix \(A\) and its eigenvalues are (A) \(\begin{bmatrix}-1&amp;2\\-2&amp;-1\end{bmatrix}\), \(-1\pm j2\) (B) \(\begin{bmatrix}-1&amp;-2\\2&amp;-1\end{bmatrix}\), \(-1\pm j2\) (C) \(\begin{bmatrix}0&amp;2\\-2&amp;0\end{bmatrix}\), \(\pm j2\) (D) \(\begin{bmatrix}-1&amp;0\\0&amp;-1\end{bmatrix}\), \(-1,-1\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q28 (A): \(\dfrac{s+5}{(s+2)(s+3)}=\dfrac{3}{s+2}-\dfrac2{s+3}\). Q29 (A): second column of \(\Phi\): \(x_2=-e^{-t}+2e^{-2t}\); at \(1\): \(-0.368+0.271=-0.097\). Q30 (A): \(A=\dot\Phi(0)=\begin{bmatrix}-1&amp;2\\-2&amp;-1\end{bmatrix}\).</p><div class="pager bottom"><a class="pn" href="ch22.html">&larr; GATE 1-Mark Problems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch24.html">Numerical Answer Type Problems &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 18: Operational Amplifier Fundamentals | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch18.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 18: Operational Amplifier Fundamentals | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch18.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 18</div><h1>Operational Amplifier Fundamentals</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-18-1">18.1 Ideal op-amp</a></li><li><a href="#s-18-2">18.2 Practical op-amp</a></li><li><a href="#s-18-3">18.3 Virtual short</a></li><li><a href="#s-18-4">18.4 Virtual ground</a></li><li><a href="#s-18-5">18.5 Open-loop gain</a></li><li><a href="#s-18-6">18.6 Input and output resistance</a></li><li><a href="#s-18-7">18.7 Common-mode rejection</a></li><li><a href="#s-18-8">18.8 Offset voltage</a></li><li><a href="#s-18-9">18.9 Bias and offset currents</a></li><li><a href="#s-18-10">18.10 Slew rate</a></li><li><a href="#s-18-11">18.11 Gain-bandwidth product</a></li><li><a href="#s-18-12">18.12 CMRR and PSRR</a></li><li><a href="#s-18-13">18.13 GATE op-amp assumptions</a></li></ol></details><h2 id="s-18-1"><span class="n">18.1</span> Ideal op-amp</h2>
+<p>An operational amplifier is a high-gain differential amplifier with a single-ended output, designed to be used with negative feedback.</p>
+<figure id="fig-18-1"><div class="figimgs"><img src="img/f18_sym.png" alt="" loading="lazy"></div><figcaption><b>Figure 18.1.</b> Op-amp symbol: inverting input (\(-\)), non-inverting input (\(+\)), output, and supply pins.</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Parameter</th><th class="c">Ideal</th><th class="c">Practical (e.g. 741)</th></tr></thead><tbody><tr><td>Open-loop gain \(A\)</td><td class="c">\(\infty\)</td><td class="c">\(10^5\) (100 dB)</td></tr><tr><td>Input resistance \(R_{id}\)</td><td class="c">\(\infty\)</td><td class="c">2 M\(\Omega\) (BJT), \(10^{12}\ \Omega\) (FET input)</td></tr><tr><td>Output resistance \(R_o\)</td><td class="c">0</td><td class="c">75 \(\Omega\)</td></tr><tr><td>Bandwidth</td><td class="c">\(\infty\)</td><td class="c">GBW = 1 MHz</td></tr><tr><td>CMRR</td><td class="c">\(\infty\)</td><td class="c">90 dB</td></tr><tr><td>Offset voltage \(V_{OS}\)</td><td class="c">0</td><td class="c">1–5 mV</td></tr><tr><td>Bias current \(I_B\)</td><td class="c">0</td><td class="c">80 nA</td></tr><tr><td>Slew rate</td><td class="c">\(\infty\)</td><td class="c">0.5 V/\(\mu\)s</td></tr></tbody></table></div></div>
+<h2 id="s-18-2"><span class="n">18.2</span> Practical op-amp</h2>
+<figure id="fig-18-2"><div class="figimgs"><img src="img/f18_model.png" alt="" loading="lazy"></div><figcaption><b>Figure 18.2.</b> Equivalent circuit of a practical op-amp: input resistance \(R_{id}\), controlled source \(Av_d\) (\(v_d=v_+-v_-\)) and output resistance \(R_o\).</figcaption></figure>
+<figure id="fig-18-3"><div class="figimgs"><img src="img/f18_vtc.png" alt="" loading="lazy"></div><figcaption><b>Figure 18.3.</b> Open-loop transfer characteristic: linear only for \(|v_d|&lt;V_{sat}/A\) (microvolts to sub-millivolts); saturated outside.</figcaption></figure>
+<p>The output saturates \(1\)–\(2\) V below the supply rails (\(V_{sat}\approx\pm13\) V for \(\pm15\) V supplies).</p>
+<h2 id="s-18-3"><span class="n">18.3</span> Virtual short</h2>
+<p>With negative feedback the output is finite (\(|v_o|&lt;V_{sat}\)), so \(v_d=v_o/A\to0\):</p>
+<div class="box formula"><div class="bt">Two golden rules for ideal op-amps with negative feedback</div><div class="bb"><p>1. \(v_+=v_-\) (virtual short: zero differential input voltage).<br>
+2. \(i_+=i_-=0\) (no current flows into the input terminals).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>The virtual short applies only when the feedback loop is <em>negative</em>. In a comparator or Schmitt trigger (open loop or positive feedback), \(v_+\ne v_-\) and the output is at \(\pm V_{sat}\).</p></div></div>
+<h2 id="s-18-4"><span class="n">18.4</span> Virtual ground</h2>
+<p>When the non-inverting input is grounded, the virtual short forces \(v_-=0\): the inverting terminal is a <em>virtual ground</em>: at 0 V but drawing no current (unlike a real ground). Consequently the input resistance of an inverting amplifier is \(R_1\), and summing of currents at that node is easy.</p>
+<h2 id="s-18-5"><span class="n">18.5</span> Open-loop gain</h2>
+<p>The open-loop gain has a dominant pole at \(f_p\) (\(\approx10\) Hz for a 741):
+\[A(f)=\frac{A_0}{1+jf/f_p},\qquad A_0=10^5.\]
+With feedback fraction \(\beta\): closed-loop gain \(A_{CL}=\dfrac{A}{1+A\beta}\to\dfrac1\beta\) when \(A\beta\gg1\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Non-inverting amplifier with \(\beta=1/10\) (nominal gain 10) and \(A=10^5\): \(A_{CL}=1/(10^{-5}+0.1)=9.9990\), an error of \(0.01\%\). With \(A=1000\): \(9.901\) (error 1%).</p></div></div>
+<h2 id="s-18-6"><span class="n">18.6</span> Input and output resistance</h2>
+<p>Feedback modifies impedances: series mixing at the input multiplies \(R_{in}\) by \((1+A\beta)\); shunt sampling at the output divides \(R_{out}\) by \((1+A\beta)\).</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Non-inverting: \(R_{in}=R_{id}(1+A\beta)\), \(R_{out}=\dfrac{R_o}{1+A\beta}\) &emsp;&emsp; Inverting: \(R_{in}\approx R_1\), \(R_{out}\approx\dfrac{R_o}{1+A\beta}\)</p></div></div>
+<h2 id="s-18-7"><span class="n">18.7</span> Common-mode rejection</h2>
+<p>\(v_o=A_dv_d+A_{cm}v_{cm}\), \(\mathrm{CMRR}=|A_d/A_{cm}|\); \(v_o=A_d\left(v_d+\dfrac{v_{cm}}{\mathrm{CMRR}}\right)\). A 90 dB CMRR (\(3.16\times10^4\)) means a \(1\) V common-mode signal appears as a \(32\ \mu\)V differential error.</p>
+<h2 id="s-18-8"><span class="n">18.8</span> Offset voltage</h2>
+<p>Input mismatch makes \(v_o\ne0\) at \(v_i=0\). Model it as a small DC source \(V_{OS}\) in series with one input; the output offset is amplified by the noise gain:
+\[V_{o,OS}=\left(1+\frac{R_f}{R_1}\right)V_{OS}\quad\text{(both inverting and non-inverting amplifiers)}.\]</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_{OS}=2\) mV, \(R_f=100\) k, \(R_1=1\) k: \(V_{o,OS}=101\times2=202\) mV. Trim with the offset-null pins or add a series capacitor to block DC.</p></div></div>
+<h2 id="s-18-9"><span class="n">18.9</span> Bias and offset currents</h2>
+<p>Bias current \(I_B=(I_{B+}+I_{B-})/2\); offset current \(I_{OS}=|I_{B+}-I_{B-}|\). In an inverting amplifier the bias current through \(R_f\) gives \(V_o=I_{B-}R_f\).</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Compensation: place \(R_c=R_1\|R_f\) in series with the non-inverting input; then \(V_{o,I}=\pm I_{OS}R_f\) instead of \(I_BR_f\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(I_B=80\) nA, \(R_f=100\) k\(\Omega\): \(V_o=8\) mV without compensation. With \(R_c\) and \(I_{OS}=20\) nA: \(2\) mV.</p></div></div>
+<h2 id="s-18-10"><span class="n">18.10</span> Slew rate</h2>
+<p>The maximum rate of change of the output, limited by the internal compensation capacitor charging current: \(SR=I_{max}/C_c\). For a sine of peak \(V_p\) and frequency \(f\) the required slope is \(2\pi fV_p\); no distortion if
+\[2\pi fV_p\le SR\quad\Longleftrightarrow\quad f_{FPBW}=\frac{SR}{2\pi V_p}\ (\text{full-power bandwidth}).\]</p>
+<figure id="fig-18-4"><div class="figimgs"><img src="img/f18_slew.png" alt="" loading="lazy"></div><figcaption><b>Figure 18.4.</b> Left: a sine that exceeds the slew limit becomes a triangle. Right: the maximum undistorted amplitude falls with frequency (\(\propto1/f\)).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(SR=0.5\) V/\(\mu\)s, \(V_p=10\) V: \(f_{max}=0.5\times10^6/(2\pi\times10)=7.96\) kHz.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>Slew-rate distortion depends on amplitude <em>and</em> frequency; small-signal bandwidth (GBW) is a separate limit. A signal can be within the small-signal bandwidth yet slew-limited.</p></div></div>
+<h2 id="s-18-11"><span class="n">18.11</span> Gain-bandwidth product</h2>
+<figure id="fig-18-5"><div class="figimgs"><img src="img/f18_bode.png" alt="" loading="lazy"></div><figcaption><b>Figure 18.5.</b> Open-loop response and closed-loop gains: every closed-loop response follows the open-loop curve beyond its corner; \(\text{GBW}=A_0f_p=f_T\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\text{GBW}=A_0f_p=f_T\) &emsp;&emsp; \(f_{-3\,dB}=\dfrac{\text{GBW}}{|A_{CL}|}\) &emsp; (non-inverting: noise gain \(1+R_f/R_1\))</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>GBW \(=1\) MHz. Inverting gain \(-100\) (\(R_f=100\) k, \(R_1=1\) k): noise gain \(=101\), so BW \(\approx9.9\) kHz.</p></div></div>
+<h2 id="s-18-12"><span class="n">18.12</span> CMRR and PSRR</h2>
+<p>\(\mathrm{PSRR}=\Delta V_{supply}/\Delta V_{OS}\) (in dB): how much the offset moves with supply changes (typ. \(30\ \mu\)V/V \(\to\) 90 dB).</p>
+<h2 id="s-18-13"><span class="n">18.13</span> GATE op-amp assumptions</h2>
+<p>Unless the question specifies otherwise: ideal op-amp, output saturation at \(\pm V_{sat}\) (often \(\pm\) supply), zero offsets and bias currents, infinite CMRR and GBW. State-of-the-art GATE problems then test: (1) gain calculation using virtual short, (2) saturation and clipping, (3) input resistance, and (4) frequency-limited behaviour using GBW and SR.</p>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> An ideal op-amp inverting amplifier has \(R_1=2\) k\(\Omega\), \(R_f=10\) k\(\Omega\). The gain is <span class="blank"></span>.</p>
+<p><strong>Q2.</strong> The input resistance of that amplifier (ideal op-amp) is (A) 2 k\(\Omega\) (B) 10 k\(\Omega\) (C) 12 k\(\Omega\) (D) \(\infty\).</p>
+<p><strong>Q3.</strong> \(SR=1\) V/\(\mu\)s. A sine of \(5\) V peak can be reproduced without slew distortion up to <span class="blank"></span> kHz.</p>
+<p><strong>Q4.</strong> An op-amp has GBW \(=2\) MHz. In a non-inverting amplifier of gain 20, the bandwidth is <span class="blank"></span> kHz.</p>
+<p><strong>Q5.</strong> An op-amp has CMRR \(=100\) dB. The ratio \(A_d/A_{cm}\) is <span class="blank"></span>.</p>
+<p><strong>Q6.</strong> A non-inverting amplifier of nominal gain 10 uses an op-amp with \(A=1000\). The actual gain is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(-5\). Q2: (A). Q3: \(10^6/(2\pi\times5)=31.8\) kHz. Q4: \(2\,\mathrm{MHz}/20=100\) kHz. Q5: \(10^5\). Q6: \(1/(1/1000+1/10)=9.90\).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Find \(f_{-3dB}\) for GBW \(=10\) MHz and a gain of \(-49\) (\(R_f=49\) k, \(R_1=1\) k). &emsp; [200 kHz]</li><li>\(V_{OS}=5\) mV, non-inverting gain \(=10\). Output offset? &emsp; [50 mV]</li><li>\(SR=13\) V/\(\mu\)s, \(V_p=10\) V. FPBW? &emsp; [207 kHz]</li><li>Why is \(R_c=R_1\|R_f\) used? &emsp; [Equalises the DC resistance seen by each input, so \(I_B\) produce equal drops that cancel]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch17.html">&larr; Differential Amplifiers</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch19.html">Op-Amp Amplifier Circuits &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

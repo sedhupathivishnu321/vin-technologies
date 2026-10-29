@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 23: Schmitt Triggers | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch23.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 23: Schmitt Triggers | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch23.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 23</div><h1>Schmitt Triggers</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-23-1">23.1 Positive feedback</a></li><li><a href="#s-23-2">23.2 Hysteresis</a></li><li><a href="#s-23-3">23.3 Upper threshold voltage</a></li><li><a href="#s-23-4">23.4 Lower threshold voltage</a></li><li><a href="#s-23-5">23.5 Hysteresis width</a></li><li><a href="#s-23-6">23.6 Inverting Schmitt trigger</a></li><li><a href="#s-23-7">23.7 Non-inverting Schmitt trigger</a></li><li><a href="#s-23-8">23.8 Comparator-based Schmitt trigger</a></li><li><a href="#s-23-9">23.9 Noise immunity</a></li><li><a href="#s-23-10">23.10 GATE problems</a></li></ol></details><h2 id="s-23-1"><span class="n">23.1</span> Positive feedback</h2>
+<p>A comparator with <em>positive</em> feedback (part of the output added back to the \(+\) input) is regenerative: once the output starts to move, feedback pushes it further, giving a fast, decisive transition. Because the threshold now depends on the present output state, the circuit has <em>memory</em>: this is the Schmitt trigger.</p>
+<h2 id="s-23-2"><span class="n">23.2</span> Hysteresis</h2>
+<p>There are two different thresholds: an upper one \(V_{UT}\) for rising inputs and a lower one \(V_{LT}\) for falling inputs. The difference \(H=V_{UT}-V_{LT}\) is the hysteresis (dead band).</p>
+<figure id="fig-23-1"><div class="figimgs"><img src="img/f23_vtc.png" alt="" loading="lazy"></div><figcaption><b>Figure 23.1.</b> Transfer characteristics: an inverting Schmitt (left) and a non-inverting Schmitt (right). Solid: input rising; dashed: input falling.</figcaption></figure>
+<h2 id="s-23-3"><span class="n">23.3</span> Upper threshold voltage</h2>
+<p>When the output is at \(+V_{sat}\) (or \(V_{OH}\)) the effective reference is \(V_{UT}\): for an inverting configuration, this is the point at which the input must rise to make the output flip low.</p>
+<h2 id="s-23-4"><span class="n">23.4</span> Lower threshold voltage</h2>
+<p>When the output is at \(-V_{sat}\) the reference is \(V_{LT}\): the input must fall below this for the output to flip high.</p>
+<h2 id="s-23-5"><span class="n">23.5</span> Hysteresis width</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(H=V_{UT}-V_{LT}=\dfrac{R_1}{R_1+R_2}\bigl(V_{OH}-V_{OL}\bigr)=2\beta V_{sat}\) (inverting, symmetric supplies)</p></div></div>
+<figure id="fig-23-2"><div class="figimgs"><img src="img/f23_width.png" alt="" loading="lazy"></div><figcaption><b>Figure 23.2.</b> Hysteresis width versus feedback fraction \(\beta\).</figcaption></figure>
+<h2 id="s-23-6"><span class="n">23.6</span> Inverting Schmitt trigger</h2>
+<figure id="fig-23-3"><div class="figimgs"><img src="img/f23_inv.png" alt="" loading="lazy"></div><figcaption><b>Figure 23.3.</b> Inverting Schmitt trigger. The feedback divider \(R_2\)–\(R_1\) sets \(\beta=R_1/(R_1+R_2)\).</figcaption></figure>
+<p>The voltage at the non-inverting input is \(v_+=\beta v_o\). The output flips when \(v_i\) crosses \(v_+\):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(V_{UT}=+\beta V_{sat}\), &emsp; \(V_{LT}=-\beta V_{sat}\), &emsp; \(\beta=\dfrac{R_1}{R_1+R_2}\), &emsp; \(H=2\beta V_{sat}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_1=10\) k\(\Omega\), \(R_2=90\) k\(\Omega\), \(V_{sat}=\pm12\) V: \(\beta=0.1\), \(V_{UT}=+1.2\) V, \(V_{LT}=-1.2\) V, \(H=2.4\) V. A sine input of \(5\) V peak produces a square output that is inverted (transitions occur at \(\pm1.2\) V, not at \(0\)).</p></div></div>
+<h2 id="s-23-7"><span class="n">23.7</span> Non-inverting Schmitt trigger</h2>
+<figure id="fig-23-4"><div class="figimgs"><img src="img/f23_noninv.png" alt="" loading="lazy"></div><figcaption><b>Figure 23.4.</b> Non-inverting Schmitt trigger: input applied through \(R_1\) to the \(+\) node; \(R_2\) feeds back the output.</figcaption></figure>
+<p>Node equation at \(v_+\): \(\dfrac{v_i-v_+}{R_1}=\dfrac{v_+-v_o}{R_2}\). The output flips when \(v_+=0\) (the inverting input at ground), i.e. when \(v_iR_2+v_oR_1=0\):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(V_{UT}=+\dfrac{R_1}{R_2}V_{sat}\), &emsp; \(V_{LT}=-\dfrac{R_1}{R_2}V_{sat}\), &emsp; \(H=\dfrac{2R_1}{R_2}V_{sat}\)</p></div></div>
+<p>The output is in phase with the input (non-inverting), in contrast to the inverting circuit.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_1=10\) k, \(R_2=100\) k, \(V_{sat}=\pm12\) V: \(V_{UT}=+1.2\) V, \(V_{LT}=-1.2\) V, \(H=2.4\) V.</p></div></div>
+<p><strong>Adding a reference</strong> (\(V_{ref}\) in place of ground) shifts the centre of the hysteresis loop.</p>
+<figure id="fig-23-5"><div class="figimgs"><img src="img/f23_ref.png" alt="" loading="lazy"></div><figcaption><b>Figure 23.5.</b> Inverting Schmitt with a reference voltage: the centre of the loop moves to \((1-\beta)V_{ref}\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(V_{UT}=(1-\beta)V_{ref}+\beta V_{sat}\), &emsp; \(V_{LT}=(1-\beta)V_{ref}-\beta V_{sat}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_1=R_2=10\) k (\(\beta=0.5\)), \(V_{ref}=3\) V, \(V_{sat}=\pm10\) V: \(V_{UT}=1.5+5=6.5\) V, \(V_{LT}=1.5-5=-3.5\) V, \(H=10\) V.</p></div></div>
+<h2 id="s-23-8"><span class="n">23.8</span> Comparator-based Schmitt trigger</h2>
+<p>Dedicated comparators (LM311/LM393) have an <em>open-collector</em> output: \(V_{OL}\approx0\) and \(V_{OH}=V_{pull-up}\) through \(R_p\). The formulas are the same with \(V_{OH}-V_{OL}=V_{pull-up}\) (and the pull-up resistor in parallel with the feedback network). Then \(H=\beta V_{pu}\) where \(\beta=R_1/(R_1+R_2+R_p)\) (approximately). Suits single-supply designs (thresholds within \(0\ldots V_{CC}\)).</p>
+<h2 id="s-23-9"><span class="n">23.9</span> Noise immunity</h2>
+<p>Noise near a single-threshold comparator’s threshold causes repeated spurious transitions (chatter). With hysteresis the noise must exceed \(H/2\) on either side of the reference to cause a false switching.</p>
+<figure id="fig-23-6"><div class="figimgs"><img src="img/w23_noise.png" alt="" loading="lazy"></div><figcaption><b>Figure 23.6.</b> Noisy input: the plain comparator (upper trace of the lower plot) produces multiple edges; the Schmitt trigger produces one clean edge per crossing.</figcaption></figure>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Pick \(H\) larger than the peak-to-peak noise on the input but smaller than the minimum signal swing. \(H&gt;V_{n,pp}\) ensures no false triggers.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>A Schmitt trigger does <em>not</em> filter noise; it only prevents it from causing multiple transitions across the threshold. It also adds delay (the input must travel further to trigger).</p></div></div>
+<h2 id="s-23-10"><span class="n">23.10</span> GATE problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> An inverting Schmitt trigger has \(R_1=1\) k\(\Omega\), \(R_2=9\) k\(\Omega\), \(V_{sat}=\pm10\) V. The upper threshold is <span class="blank"></span> V.</p>
+<p><strong>Q2.</strong> A non-inverting Schmitt trigger has \(R_1=10\) k\(\Omega\), \(R_2=50\) k\(\Omega\), \(V_{sat}=\pm10\) V. Its hysteresis width is <span class="blank"></span> V.</p>
+<p><strong>Q3.</strong> An inverting Schmitt with \(\beta=0.2\) and \(V_{sat}=\pm5\) V has \(H=\) <span class="blank"></span> V.</p>
+<p><strong>Q4.</strong> For an inverting Schmitt with \(V_{UT}=2\) V, \(V_{LT}=-2\) V, a triangular input of \(\pm5\) V, \(10\) Hz. The output frequency is (A) 5 Hz (B) 10 Hz (C) 20 Hz (D) 40 Hz.</p>
+<p><strong>Q5.</strong> Positive feedback in a comparator results in (A) hysteresis (B) linear gain (C) lower input resistance (D) virtual short.</p>
+<p><strong>Q6.</strong> An inverting Schmitt with \(R_1=R_2\), \(V_{ref}=3\) V, \(V_{sat}=\pm10\) V has \(V_{UT}=\) <span class="blank"></span>, \(V_{LT}=\) <span class="blank"></span> V.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(\beta=0.1\): \(V_{UT}=+1\) V. Q2: \(2\times(10/50)\times10=4\) V. Q3: \(2\times0.2\times5=2\) V. Q4: (B), one output cycle per input cycle. Q5: (A). Q6: \(\beta=0.5\): \(V_{UT}=1.5+5=6.5\), \(V_{LT}=1.5-5=-3.5\) V.</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Design an inverting Schmitt with \(V_{UT}=+2\) V, \(V_{LT}=-2\) V using \(V_{sat}=\pm10\) V and \(R_1=2\) k\(\Omega\). &emsp; [\(\beta=0.2\), \(R_2=8\) k\(\Omega\)]</li><li>A noisy signal has \(0.4\) V peak-to-peak noise and \(3\) V swing. Choose a suitable \(H\). &emsp; [\(0.5\)–\(2\) V]</li><li>For a non-inverting Schmitt with \(R_1=1\) k, \(R_2=20\) k, \(V_{sat}=15\) V: thresholds? &emsp; [\(\pm0.75\) V]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch22.html">&larr; Op-Amp Comparators</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch24.html">Oscillators &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

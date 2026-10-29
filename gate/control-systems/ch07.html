@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 7: Standard Test Signals | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Laplace transforms of test signals, the derivative/integral relation between them, and which test signal reveals which specification. Basis for steady-state error (Chapter 10).">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch07.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 7: Standard Test Signals | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Laplace transforms of test signals, the derivative/integral relation between them, and which test signal reveals which specification. Basis for steady-state error (Chapter 10)."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch07.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 7</div><h1>Standard Test Signals</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-7-1">7.1 Core concept</a></li><li><a href="#s-7-2">7.2 Relationships</a></li><li><a href="#s-7-3">7.3 Choosing a test signal</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Laplace transforms of test signals, the derivative/integral relation between them, and which test signal reveals which specification. Basis for steady-state error (Chapter 10).</p></div></div>
+<h2 id="s-7-1"><span class="n">7.1</span> Core concept</h2>
+<p>Real inputs are unknown, so systems are judged by their response to a few standard signals. They form a family in which each is the integral of the previous one.</p>
+<figure id="fig-7-1"><div class="figimgs"><img src="img/c07_signals.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.1.</b> Standard test signals: impulse, step, ramp, parabola.</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Signal</th><th>\(r(t)\)</th><th>\(R(s)\)</th><th>Tests</th></tr></thead><tbody><tr><td>Impulse</td><td>\(\delta(t)\)</td><td>\(1\)</td><td>impulse response \(h(t)\), stability</td></tr><tr><td>Step</td><td>\(u(t)\)</td><td>\(\dfrac1s\)</td><td>transient specs, position error</td></tr><tr><td>Ramp</td><td>\(t\,u(t)\)</td><td>\(\dfrac1{s^2}\)</td><td>velocity (tracking) error</td></tr><tr><td>Parabola</td><td>\(\dfrac{t^2}{2}u(t)\)</td><td>\(\dfrac1{s^3}\)</td><td>acceleration error</td></tr><tr><td>Exponential</td><td>\(e^{-at}u(t)\)</td><td>\(\dfrac1{s+a}\)</td><td>decaying inputs</td></tr><tr><td>Sinusoid</td><td>\(\sin\omega t\)</td><td>\(\dfrac{\omega}{s^2+\omega^2}\)</td><td>frequency response</td></tr></tbody></table></div></div>
+<h2 id="s-7-2"><span class="n">7.2</span> Relationships</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\delta(t)=\dfrac{d}{dt}u(t)\), \(u(t)=\dfrac{d}{dt}\big(t\,u(t)\big)\), \(t\,u(t)=\dfrac{d}{dt}\Big(\dfrac{t^2}{2}u(t)\Big)\).<br>
+For an LTI system the response to the derivative of an input is the derivative of the response: \(c_{imp}=\dfrac{d}{dt}c_{step}\), \(c_{step}=\dfrac{d}{dt}c_{ramp}\). Equivalently, \(c_{step}=\mathcal L^{-1}\{G/s\}\), \(c_{ramp}=\mathcal L^{-1}\{G/s^2\}\).</p></div></div>
+<h2 id="s-7-3"><span class="n">7.3</span> Choosing a test signal</h2>
+<p>Step: overshoot, rise time, settling time. Ramp: whether the output tracks a steadily moving target (servo, antenna). Parabola: tracking constant acceleration (missile, satellite). Impulse: gives \(h(t)\) and hence \(G(s)\); used for stability. Sinusoid: Bode/Nyquist analysis.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Unit step response of a system is \(1-e^{-3t}\). Impulse response: \(\dfrac d{dt}(1-e^{-3t})=3e^{-3t}\). Ramp response: \(\int(1-e^{-3t})dt=t-\dfrac13(1-e^{-3t})\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\mathcal L\{2t\,u(t)+3u(t)-4\delta(t)\}=\dfrac2{s^2}+\dfrac3s-4\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Each extra \(1/s\) in the input raises the input “order”: step \(\to\) ramp \(\to\) parabola. A system that follows a signal of order \(k\) with finite error needs at least \(k\) integrators (types 0, 1, 2 for step, ramp, parabola).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>The unit parabola in control is \(t^2/2\) (transform \(1/s^3\)), not \(t^2\) (transform \(2/s^3\)). Watch for the multiplier in “\(A\,t^2/2\)” vs “\(A\,t^2\)”.</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> Laplace transform of the unit ramp: (A) \(1/s\) (B) \(1/s^2\) (C) \(1/s^3\) (D) \(s\).</p>
+<p><strong>Q2.</strong> If the step response is \(c(t)\), the impulse response is (A) \(\int c\) (B) \(\dot c\) (C) \(c^2\) (D) \(c/t\).</p>
+<p><strong>Q3.</strong> The unit impulse has Laplace transform (A) \(1\) (B) \(1/s\) (C) \(s\) (D) \(0\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (A).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> \(G(s)=\dfrac1{s+2}\). Unit-step response at \(t\to\infty\) is (A) \(0\) (B) \(0.5\) (C) \(1\) (D) \(2\).</p>
+<p><strong>Q5.</strong> Step response \(=2(1-e^{-t/2})\). The impulse response is (A) \(e^{-t/2}\) (B) \(2e^{-t/2}\) (C) \(\tfrac12e^{-t/2}\) (D) \(e^{-t}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): \(G(0)=0.5\). Q5 (A): derivative \(=2\cdot\tfrac12e^{-t/2}\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> Ramp response of \(G=1/(s+1)\): value of \(c(t)-t\) as \(t\to\infty\) is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(c=t-1+e^{-t}\), so \(-1\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q7.</strong> Which are correct? (A) \(\mathcal L\{t^2u(t)\}=2/s^3\) (B) \(\delta=\dot u\) (C) ramp is the integral of step (D) impulse gives \(H(s)\) directly.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q7: all four.</p>
+<div class="box gateq"><div class="bt">Previous-year pattern</div><div class="bb"><p>A system’s unit-step response is \(c_s(t)=1-e^{-t}\). For the rectangular pulse \(u(t)-u(t-1)\), linearity and time-invariance give \(c(t)=c_s(t)-c_s(t-1)u(t-1)\); at \(t=2\) this is \((1-e^{-2})-(1-e^{-1})=e^{-1}-e^{-2}=0.233\).</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Find \(\mathcal L\{\tfrac12t^2\}\) and the input whose transform is \(5/s^2\).<br>
+<strong>T2.</strong> Step response of \(G=2/(s+2)\); then its ramp response.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(1/s^3\); \(5t\). T2: \(1-e^{-2t}\); \(t-\tfrac12(1-e^{-2t})\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(\delta\to1\), \(u\to1/s\), ramp \(\to1/s^2\), parabola \(t^2/2\to1/s^3\).</li><li>Step \(=\int\) impulse; response chain follows the same derivative/integral rule.</li><li>Step: transient; ramp: velocity error; parabola: acceleration error; impulse: \(h(t)\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch06.html">&larr; Signal Flow Graphs</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch08.html">First-Order Systems &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

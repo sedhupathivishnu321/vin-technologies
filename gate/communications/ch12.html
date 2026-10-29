@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 12: Formula Sheet, Topic Map and Mock Test | Communications | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Random processes and noise, analog and digital modulation, information theory and link budgets.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/communications/ch12.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 12: Formula Sheet, Topic Map and Mock Test | Communications | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Random processes and noise, analog and digital modulation, information theory and link budgets."><meta property="og:url" content="https://vintechnologies.co.in/gate/communications/ch12.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Communications</a></div><div class="chlabel">Chapter 12</div><h1>Formula Sheet, Topic Map and Mock Test</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-12-1">12.1 One-page formula sheet</a></li><li><a href="#s-12-2">12.2 What GATE keeps asking (by topic)</a></li><li><a href="#s-12-3">12.3 Mixed mock test</a></li><li><a href="#s-12-4">12.4 Final-week checklist</a></li></ol></details><h2 id="s-12-1"><span class="n">12.1</span> One-page formula sheet</h2>
+<div class="box formula"><div class="bt">Random processes and noise</div><div class="bb"><p>WSS: \(m_X\) const, \(R_X(\tau)\); \(R_X(0)=\) power, \(R_X(\infty)=m^2\); \(S_X=\mathcal F\{R_X\}\); \(S_Y=|H|^2S_X\).<br>
+\(N_0=kT\), \(-174\) dBm/Hz; \(v_n^2=4kTRB\); \(F=1+T_e/T_0\); Friis \(F_1+(F_2-1)/G_1\); matched filter \(2E/N_0\).</p></div></div>
+<div class="box formula"><div class="bt">Analog</div><div class="bb"><p>AM: \(P_t=P_c(1+\mu^2/2)\), \(\eta=\mu^2/(2+\mu^2)\), \(B=2W\). SSB \(B=W\). Image \(f_s+2f_{IF}\).<br>
+FM: \(\beta=\Delta f/f_m\), \(B=2(\Delta f+f_m)\), power \(A_c^2/2\). FOM: DSB/SSB 1, AM \(\eta\), FM \(\tfrac32\beta^2\).</p></div></div>
+<div class="box formula"><div class="bt">Digital</div><div class="bb"><p>\(f_s\ge2W\); \(\Delta=2m_p/2^n\); \(\sigma_q^2=\Delta^2/12\); SQNR \(6.02n+1.76\) dB; \(R_b=nf_s\).<br>
+Nyquist \(B_{min}=R_s/2\); raised cosine \((1+\alpha)R_s/2\); \(R_s=R_b/\log_2M\).<br>
+BPSK/QPSK \(Q(\sqrt{2E_b/N_0})\); coherent FSK/ASK \(Q(\sqrt{E_b/N_0})\); DPSK \(\tfrac12e^{-E_b/N_0}\); NC-FSK \(\tfrac12e^{-E_b/2N_0}\).</p></div></div>
+<div class="box formula"><div class="bt">Information and coding</div><div class="bb"><p>\(H=-\sum p\log_2p\); \(I=H(X)+H(Y)-H(X,Y)\); BSC \(1-H_b(p)\); \(C=B\log_2(1+\text{SNR})\); \(E_b/N_0\ge\ln2\).<br>
+\(d_{min}\): detect \(d-1\), correct \(\lfloor(d-1)/2\rfloor\); Hamming \((2^r-1,2^r-1-r)\); \(s=rH^T\); convolutional \(2^{K-1}\) states.<br>
+Links: \(L_{fs}=20\log d+20\log f-147.55\); \(f_d=v/\lambda\); \(B_c=1/5\sigma_\tau\); \(NA=\sqrt{n_1^2-n_2^2}\).</p></div></div>
+<h2 id="s-12-2"><span class="n">12.2</span> What GATE keeps asking (by topic)</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Topic</th><th>Recurring question patterns</th></tr></thead><tbody><tr><td>Random processes</td><td>mean/variance from \(R_X\), PSD of random-phase sinusoid, output power of filtered noise, WSS tests</td></tr><tr><td>AM / SSB</td><td>modulation index from \(s(t)\), power and efficiency, bandwidth, coherent-detection phase error, image frequency</td></tr><tr><td>FM / PM</td><td>\(\beta\), Carson bandwidth, effect of changing \(A_m\) or \(f_m\), Bessel carrier null</td></tr><tr><td>Noise in analog</td><td>FOM and output SNR, threshold, pre-emphasis</td></tr><tr><td>PCM and sampling</td><td>Nyquist rate, bits for SQNR, bit rate, slope overload, T1/E1 rates</td></tr><tr><td>Digital detection</td><td>BER with \(Q\), constellation distances, MAP thresholds, bandwidth of QPSK/QAM, Nyquist/ISI</td></tr><tr><td>Information theory</td><td>entropy, Huffman length, capacity of BSC/AWGN, Shannon limit</td></tr><tr><td>Coding</td><td>Hamming syndrome, \(d_{min}\), CRC, convolutional encoding/Viterbi</td></tr><tr><td>Links</td><td>path loss, link budget, Doppler/coherence, fibre \(NA\)</td></tr></tbody></table></div></div>
+<p>This is a map of recurring <em>ideas</em>, not a list of past papers.</p>
+<h2 id="s-12-3"><span class="n">12.3</span> Mixed mock test</h2>
+<p><strong>Instructions.</strong> 18 questions: 8 one-mark, 6 two-mark, 4 NAT. Time 30 minutes.</p>
+<div class="box onemark"><div class="bt">Section A: 1-mark</div><div class="bb"><p><strong>1.</strong> The maximum power efficiency of single-tone AM (\(\mu\le1\)) is (A) 25% (B) 33.3% (C) 50% (D) 100%.</p>
+<p><strong>2.</strong> The Nyquist rate of \(\cos4000\pi t\) is (A) 2 kHz (B) 4 kHz (C) 8 kHz (D) 1 kHz.</p>
+<p><strong>3.</strong> An FM wave with \(\Delta f=10\) kHz and \(f_m=2\) kHz has Carson bandwidth (A) 12 kHz (B) 24 kHz (C) 20 kHz (D) 4 kHz.</p>
+<p><strong>4.</strong> Ideal SQNR of an 8-bit PCM (full-scale sine) is approximately (A) 40 dB (B) 49.9 dB (C) 56 dB (D) 60 dB.</p>
+<p><strong>5.</strong> Entropy of 8 equiprobable symbols: (A) 1 (B) 2 (C) 3 (D) 8 bits.</p>
+<p><strong>6.</strong> The BER of coherent BPSK is (A) \(Q(\sqrt{E_b/N_0})\) (B) \(Q(\sqrt{2E_b/N_0})\) (C) \(\tfrac12e^{-E_b/N_0}\) (D) \(\tfrac12e^{-E_b/2N_0}\).</p>
+<p><strong>7.</strong> Voice PCM with \(f_s=8\) kHz and 8 bits has bit rate (A) 8 kbps (B) 32 kbps (C) 64 kbps (D) 128 kbps.</p>
+<p><strong>8.</strong> In a superheterodyne receiver (\(f_{IF}=455\) kHz) tuned to 1000 kHz the image is at (A) 1455 (B) 1910 (C) 545 (D) 2365 kHz.</p></div></div>
+<div class="box twomark"><div class="bt">Section B: 2-mark</div><div class="bb"><p><strong>9.</strong> A tone-modulated AM wave with \(\mu=0.6\) and carrier power 1000 W has sideband power (A) 180 W (B) 360 W (C) 600 W (D) 90 W.</p>
+<p><strong>10.</strong> BPSK at \(E_b/N_0=4\) dB: \(P_b\approx\) (A) 0.0125 (B) 0.0228 (C) 0.159 (D) \(10^{-4}\).</p>
+<p><strong>11.</strong> A 4 kHz channel with \(\text{SNR}=15\) (linear) has capacity (A) 8 kbps (B) 12 kbps (C) 16 kbps (D) 60 kbps.</p>
+<p><strong>12.</strong> Binary data at 128 kbps with raised-cosine pulses, \(\alpha=0.5\), needs bandwidth (A) 64 kHz (B) 96 kHz (C) 128 kHz (D) 192 kHz.</p>
+<p><strong>13.</strong> A rectangular pulse of amplitude 3 V and duration \(2\,\mu\)s in noise with \(N_0=10^{-9}\) W/Hz: matched-filter peak SNR (dB) is (A) 36.6 (B) 45.6 (C) 42.6 (D) 48.6.</p>
+<p><strong>14.</strong> A delta modulator (\(f_s=16\) kHz) tracks \(2\cos(2\pi500t)\) V. Minimum step to avoid slope overload: (A) 0.2 V (B) 0.39 V (C) 0.78 V (D) 1.57 V.</p></div></div>
+<div class="box natq"><div class="bt">Section C: NAT</div><div class="bb"><p><strong>15.</strong> Figure of merit (dB, one decimal) of tone FM with \(\beta=3\): <span class="blank"></span>.</p>
+<p><strong>16.</strong> Free-space path loss (dB, two decimals) at 1 GHz over 10 km: <span class="blank"></span>.</p>
+<p><strong>17.</strong> Average Huffman length (bits) for \(\{0.5,0.25,0.125,0.125\}\): <span class="blank"></span>.</p>
+<p><strong>18.</strong> Coded bits for a 50-bit message, rate-1/2 \(K=3\) convolutional code with tail bits: <span class="blank"></span>.</p></div></div>
+<h3 id="ss-4">Answers with brief working</h3>
+<p><strong>1</strong> (B). <strong>2</strong> (B): \(f=2\) kHz. <strong>3</strong> (B): \(2(10+2)\). <strong>4</strong> (B). <strong>5</strong> (C). <strong>6</strong> (B). <strong>7</strong> (C). <strong>8</strong> (B).<br>
+<strong>9</strong> (A): \(P_{SB}=\mu^2P_c/2=0.18P_c\). <strong>10</strong> (A): \(Q(2.24)\). <strong>11</strong> (C): \(4000\log_216\). <strong>12</strong> (B): \(\tfrac12(1.5)(128\text{ k})=96\) kHz. <strong>13</strong> (B): \(E=9\times2\times10^{-6}=1.8\times10^{-5}\), \(2E/N_0=36\,000\) (\(45.6\) dB). <strong>14</strong> (B): \(2\pi(500)(2)/16\,000=0.393\).<br>
+<strong>15</strong>: FOM \(=1.5\times9=13.5\) (\(11.3\) dB). <strong>16</strong>: \(92.45+20\log_{10}1+20\log_{10}10=112.45\). <strong>17</strong>: \(1.75\) (dyadic, equals the entropy). <strong>18</strong>: \(2(50+2)=104\).</p>
+<h2 id="s-12-4"><span class="n">12.4</span> Final-week checklist</h2>
+<ol><li>Practise reading \(\mu\), \(\beta\), \(\Delta f\) from a given \(s(t)\) in under 30 seconds.</li><li>Memorise the BER formulas and the quick values of \(Q(x)\).</li><li>Redo one problem each on PCM bit rate, DM slope overload and Nyquist/raised cosine bandwidth.</li><li>Do three entropy/Huffman problems and one capacity problem.</li><li>Encode and decode one (7,4) Hamming word and one convolutional example.</li><li>Review link-budget arithmetic in dB and the fibre \(NA\) formula.</li></ol><div class="pager bottom"><a class="pn" href="ch11.html">&larr; Wireless and Optical Links: Link Budget, Fading and Fibre</a><a class="pn mid" href="./">All chapters</a><span></span></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Qf": "\\mathrm{Q}", "\\EbNo": "E_b/N_0", "\\Eb": "E_b", "\\Nzero": "N_0", "\\Rb": "R_b", "\\Rs": "R_s", "\\fc": "f_c", "\\fm": "f_m", "\\Ac": "A_c", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\erfc": "\\operatorname{erfc}", "\\E": "\\operatorname{E}", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

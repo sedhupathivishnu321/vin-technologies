@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 20: Solution of State Equations | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="State-transition matrix e^{At} by Laplace transform, diagonalisation or Cayley–Hamilton; its properties; zero-input and zero-state responses; x(t) for a given x(0). Very likely 2-mark question.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch20.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 20: Solution of State Equations | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="State-transition matrix e^{At} by Laplace transform, diagonalisation or Cayley–Hamilton; its properties; zero-input and zero-state responses; x(t) for a given x(0). Very likely 2-mark question."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch20.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 20</div><h1>Solution of State Equations</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-20-1">20.1 Core concept</a></li><li><a href="#s-20-2">20.2 Computing \(e^{At}\)</a></li><li><a href="#s-20-3">20.3 Physical interpretation</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>State-transition matrix \(e^{At}\) by Laplace transform, diagonalisation or Cayley–Hamilton; its properties; zero-input and zero-state responses; \(x(t)\) for a given \(x(0)\). Very likely 2-mark question.</p></div></div>
+<h2 id="s-20-1"><span class="n">20.1</span> Core concept</h2>
+<p>For \(\dot x=Ax+Bu\), \(x(0)=x_0\):</p>
+<div class="box derive"><div class="bt">Solution</div><div class="bb"><p>Homogeneous (\(u=0\)): \(\dot x=Ax\Rightarrow x(t)=e^{At}x_0=\Phi(t)x_0\). Forced: multiply \(\dot x-Ax=Bu\) by \(e^{-At}\): \(\dfrac{d}{dt}(e^{-At}x)=e^{-At}Bu\); integrate from \(0\) to \(t\):
+\[
+x(t)=\underbrace{\Phi(t)x(0)}_{\text{zero-input}}+\underbrace{\int_0^t\Phi(t-\tau)Bu(\tau)\,d\tau}_{\text{zero-state (convolution)}},\qquad y=Cx+Du.
+\]
+In the Laplace domain: \(X(s)=(sI-A)^{-1}x(0)+(sI-A)^{-1}BU(s)\), so \(\boxed{\Phi(t)=\mathcal L^{-1}\{(sI-A)^{-1}\}}\).</p></div></div>
+<div class="box formula"><div class="bt">Properties of \(\Phi(t)=e^{At}\)</div><div class="bb"><p>\(\Phi(0)=I\); &emsp; \(\dot\Phi=A\Phi=\Phi A\); &emsp; \(\Phi(t_1+t_2)=\Phi(t_1)\Phi(t_2)\); &emsp; \(\Phi^{-1}(t)=\Phi(-t)\); &emsp; \([\Phi(t)]^k=\Phi(kt)\).<br>
+\(e^{At}=I+At+\dfrac{A^2t^2}{2!}+\cdots\). Modes: \(e^{\lambda_it}\) where \(\lambda_i\) are the eigenvalues of \(A\).</p></div></div>
+<h2 id="s-20-2"><span class="n">20.2</span> Computing \(e^{At}\)</h2>
+<ol><li><strong>Laplace:</strong> \(\Phi=\mathcal L^{-1}[(sI-A)^{-1}]\) (best for \(2\times2\)).</li><li><strong>Diagonalisation:</strong> if \(A=M\Lambda M^{-1}\) with \(M\) the eigenvector matrix, \(e^{At}=Me^{\Lambda t}M^{-1}\).</li><li><strong>Cayley–Hamilton:</strong> \(e^{At}=a_0(t)I+a_1(t)A+\cdots\); find \(a_i\) from \(e^{\lambda_kt}=a_0+a_1\lambda_k+\cdots\) for each eigenvalue.</li><li><strong>Series</strong> for nilpotent \(A\): \(A=\begin{bmatrix}0&amp;1\\0&amp;0\end{bmatrix}\Rightarrow e^{At}=I+At=\begin{bmatrix}1&amp;t\\0&amp;1\end{bmatrix}\).</li></ol>
+<div class="box example"><div class="bt">Laplace method</div><div class="bb"><p>\(A=\begin{bmatrix}0&amp;1\\-2&amp;-3\end{bmatrix}\): \((sI-A)^{-1}=\dfrac1{(s+1)(s+2)}\begin{bmatrix}s+3&amp;1\\-2&amp;s\end{bmatrix}\), so
+\[
+\Phi(t)=\begin{bmatrix}2e^{-t}-e^{-2t}&amp;e^{-t}-e^{-2t}\\-2e^{-t}+2e^{-2t}&amp;-e^{-t}+2e^{-2t}\end{bmatrix}.
+\]
+Check: \(\Phi(0)=I\); \(\dot\Phi(0)=\begin{bmatrix}-2+2&amp;-1+2\\2-4&amp;1-4\end{bmatrix}=\begin{bmatrix}0&amp;1\\-2&amp;-3\end{bmatrix}=A\). With \(x(0)=[1\ 0]^T\): \(x(t)=[\,2e^{-t}-e^{-2t},\ -2e^{-t}+2e^{-2t}\,]^T\).</p></div></div>
+<div class="box example"><div class="bt">Repeated eigenvalue</div><div class="bb"><p>\(A=\begin{bmatrix}0&amp;1\\-1&amp;-2\end{bmatrix}\): \((sI-A)^{-1}=\dfrac1{(s+1)^2}\begin{bmatrix}s+2&amp;1\\-1&amp;s\end{bmatrix}\Rightarrow\Phi=e^{-t}\begin{bmatrix}1+t&amp;t\\-t&amp;1-t\end{bmatrix}\).</p></div></div>
+<div class="box example"><div class="bt">Oscillatory</div><div class="bb"><p>\(A=\begin{bmatrix}0&amp;1\\-1&amp;0\end{bmatrix}\): \(\Phi=\begin{bmatrix}\cos t&amp;\sin t\\-\sin t&amp;\cos t\end{bmatrix}\) (a rotation; eigenvalues \(\pm j\)).</p></div></div>
+<div class="box example"><div class="bt">Cayley–Hamilton</div><div class="bb"><p>\(A=\begin{bmatrix}0&amp;1\\-2&amp;-3\end{bmatrix}\), \(\lambda=-1,-2\): \(e^{At}=a_0I+a_1A\) with \(a_0-a_1=e^{-t}\), \(a_0-2a_1=e^{-2t}\): \(a_1=e^{-t}-e^{-2t}\), \(a_0=2e^{-t}-e^{-2t}\); the \((1,1)\) entry is \(a_0=2e^{-t}-e^{-2t}\) (matches).</p></div></div>
+<div class="box example"><div class="bt">Zero-state step response</div><div class="bb"><p>\(B=\begin{bmatrix}0\\1\end{bmatrix}\), \(u=1\), \(x(0)=0\): \(X(s)=\dfrac{1}{s(s+1)(s+2)}\begin{bmatrix}1\\s\end{bmatrix}\), so \(x_1=\tfrac12-e^{-t}+\tfrac12e^{-2t}\), \(x_2=e^{-t}-e^{-2t}\) (which is \(\dot x_1\)). Steady state \(x_1\to\tfrac12\): \(-A^{-1}B=\begin{bmatrix}0.5\\0\end{bmatrix}\).</p></div></div>
+<div class="box example"><div class="bt">Diagonal \(A\)</div><div class="bb"><p>\(A=\mathrm{diag}(-1,-2)\), \(x(0)=[2\ 3]^T\): \(x(t)=[2e^{-t},\ 3e^{-2t}]^T\); \(x(1)=[0.736,\ 0.406]^T\).</p></div></div>
+<div class="box example"><div class="bt">Equilibrium</div><div class="bb"><p>For constant \(u\) the steady state solves \(0=Ax+Bu\Rightarrow x_{ss}=-A^{-1}Bu\) (stable \(A\)).</p></div></div>
+<figure id="fig-20-1"><div class="figimgs"><img src="img/c20_phase.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.1.</b> Phase portraits of \(\dot x=Ax\) for stable node, stable spiral (complex eigenvalues, negative real part), saddle (real eigenvalues of opposite sign) and centre (imaginary eigenvalues).</figcaption></figure>
+<h2 id="s-20-3"><span class="n">20.3</span> Physical interpretation</h2>
+<p>\(\Phi(t)\) maps the initial state into the state at time \(t\). Its columns are the free responses starting at each unit vector; its modes are the exponentials of the eigenvalues. Real negative eigenvalues give nodes, complex ones with negative real part give spirals, imaginary ones give sustained oscillation (centre), a positive real eigenvalue gives instability.</p>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>\(2\times2\) check: \(\Phi(0)=I\), \(\dot\Phi(0)=A\). \(\det\Phi(t)=e^{\mathrm{tr}(A)t}\). Stable iff every entry of \(\Phi\to0\). Zero-input poles vs transfer function poles coincide unless cancelled.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(e^{(A+B)t}\ne e^{At}e^{Bt}\) unless \(AB=BA\). (ii) \(e^{At}\) is not the elementwise exponential of \(A\). (iii) \(\Phi(t_1+t_2)=\Phi(t_1)\Phi(t_2)\) but \(\Phi(t)^{-1}=\Phi(-t)\), not \(1/\Phi\) elementwise. (iv) The zero-input response depends on \(x(0)\); \(G(s)\) describes only the zero-state part.</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> \(\Phi(0)=\) (A) \(0\) (B) \(A\) (C) \(I\) (D) \(e\).</p>
+<p><strong>Q2.</strong> \(\Phi^{-1}(t)=\) (A) \(\Phi(t)\) (B) \(\Phi(-t)\) (C) \(-\Phi(t)\) (D) \(\Phi^T(t)\).</p>
+<p><strong>Q3.</strong> \(\Phi(t)=\mathcal L^{-1}\{\) (A) \((sI+A)^{-1}\) (B) \((sI-A)^{-1}\) (C) \(sI-A\) (D) \(A(sI-A)\}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C). Q2 (B). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> \(A=\begin{bmatrix}0&amp;1\\-1&amp;-2\end{bmatrix}\): \(\Phi(1)_{11}=\) (A) \(e^{-1}\) (B) \(2e^{-1}\) (C) \(0.5e^{-1}\) (D) \(3e^{-1}\).</p>
+<p><strong>Q5.</strong> \(A=\begin{bmatrix}-1&amp;0\\0&amp;-3\end{bmatrix}\), \(x(0)=[1\ 1]^T\): \(x(t)=\) (A) \([e^{-t},\ e^{-3t}]^T\) (B) \([e^{t},\ e^{3t}]^T\) (C) \([e^{-t},\ e^{-t}]^T\) (D) \([1,1]^T\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): \(e^{-t}(1+t)\) at \(t=1\). Q5 (A).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> With \(A=\begin{bmatrix}0&amp;1\\-2&amp;-3\end{bmatrix}\), \(\Phi_{12}(t)\) at \(t=1\) is <span class="blank"></span> (three decimals).</p>
+<p><strong>Q7.</strong> \(A=\begin{bmatrix}-2&amp;0\\0&amp;-5\end{bmatrix}\), \(\det\Phi(0.5)=\) <span class="blank"></span> (three decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(e^{-1}-e^{-2}=0.368-0.135=0.233\). Q7: \(e^{\mathrm{tr}(A)t}=e^{-3.5}=0.030\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Which are true for \(\Phi(t)=e^{At}\)? (A) \(\Phi(t_1+t_2)=\Phi(t_1)\Phi(t_2)\) (B) \(\dot\Phi=A\Phi\) (C) \(\Phi(0)=0\) (D) \(\Phi(-t)=\Phi(t)^{-1}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (D).</p>
+<div class="box gateq"><div class="bt">Previous-year pattern</div><div class="bb"><p>Given \(\Phi(t)=\begin{bmatrix}e^{-2t}&amp;0\\0&amp;e^{-3t}\end{bmatrix}\), \(A=\dot\Phi(0)=\begin{bmatrix}-2&amp;0\\0&amp;-3\end{bmatrix}\). Given \(\Phi(t)=\begin{bmatrix}e^{-t}&amp;te^{-t}\\0&amp;e^{-t}\end{bmatrix}\): \(A=\dot\Phi(0)=\begin{bmatrix}-1&amp;1\\0&amp;-1\end{bmatrix}\) (Jordan block, repeated eigenvalue \(-1\)).</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Find \(e^{At}\) for \(A=\begin{bmatrix}0&amp;1\\0&amp;0\end{bmatrix}\).<br>
+<strong>T2.</strong> If \(\Phi(1)=\begin{bmatrix}0.5&amp;0\\0&amp;0.2\end{bmatrix}\), find \(\Phi(2)\) and \(\Phi(-1)\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(\begin{bmatrix}1&amp;t\\0&amp;1\end{bmatrix}\). T2: \(\Phi(2)=\Phi(1)^2=\mathrm{diag}(0.25,0.04)\); \(\Phi(-1)=\Phi(1)^{-1}=\mathrm{diag}(2,5)\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(x(t)=\Phi(t)x_0+\int_0^t\Phi(t-\tau)Bu(\tau)d\tau\); \(\Phi=\mathcal L^{-1}(sI-A)^{-1}\).</li><li>\(\Phi(0)=I\), \(\dot\Phi(0)=A\), \(\Phi(t_1+t_2)=\Phi(t_1)\Phi(t_2)\), \(\Phi^{-1}(t)=\Phi(-t)\).</li><li>Modes are \(e^{\lambda t}\); stable iff \(\mathrm{Re}\,\lambda_i&lt;0\).</li><li>Steady state for step: \(x_{ss}=-A^{-1}Bu\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch19.html">&larr; State Variables and State-Space Models</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch21.html">Controllability and Observability &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

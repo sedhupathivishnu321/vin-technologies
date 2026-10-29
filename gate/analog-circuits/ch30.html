@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 30: GATE Formula and Shortcut Book | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch30.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 30: GATE Formula and Shortcut Book | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch30.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 30</div><h1>GATE Formula and Shortcut Book</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-30-1">30.1 Diode formulas</a></li><li><a href="#s-30-2">30.2 Rectifier formulas</a></li><li><a href="#s-30-3">30.3 BJT formulas</a></li><li><a href="#s-30-4">30.4 MOSFET formulas</a></li><li><a href="#s-30-5">30.5 Amplifier formulas</a></li><li><a href="#s-30-6">30.6 Current-mirror formulas</a></li><li><a href="#s-30-7">30.7 Differential-amplifier formulas</a></li><li><a href="#s-30-8">30.8 Op-amp formulas</a></li><li><a href="#s-30-9">30.9 Filter formulas</a></li><li><a href="#s-30-10">30.10 Oscillator formulas</a></li><li><a href="#s-30-11">30.11 Feedback formulas</a></li><li><a href="#s-30-12">30.12 Frequency-response formulas</a></li><li><a href="#s-30-13">30.13 Stability formulas</a></li></ol></details><p>All formulae are derived in the earlier chapters; this chapter is a lookup table. Symbols follow the conventions of the preface.</p>
+<h2 id="s-30-1"><span class="n">30.1</span> Diode formulas</h2>
+<div class="box formula"><div class="bt">Diode</div><div class="bb"><p>\(I_D=I_s(e^{V_D/nV_T}-1)\), \(V_T=kT/q=26\) mV &emsp;&emsp; \(\Delta V=60\) mV per decade of \(I_D\)<br>
+\(r_d=nV_T/I_D\) &emsp;&emsp; \(C_j=\dfrac{C_{j0}}{(1+V_R/V_{bi})^m}\) &emsp;&emsp; \(C_d=\tau_TI_D/(nV_T)\)<br>
+\(V_{bi}=V_T\ln\dfrac{N_AN_D}{n_i^2}\) &emsp;&emsp; \(W\propto\sqrt{V_{bi}+V_R}\) &emsp;&emsp; \(dV_D/dT=-2\) mV/\({}^\circ\)C<br>
+Models: ideal (\(0\) V), CV (\(0.7\) V), PWL (\(V_{on}+r_dI\)). Clippers: shunt clip level \(=V_R\pm V_{on}\).<br>
+Clamper: \(V_C=V_m\pm V_R-V_{on}\); tilt \(\approx1/(2fR_LC)\) (square wave).</p></div></div>
+<h2 id="s-30-2"><span class="n">30.2</span> Rectifier formulas</h2>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th class="c">HWR</th><th class="c">FWR (CT)</th><th class="c">Bridge</th></tr></thead><tbody><tr><td>\(V_{dc}\)</td><td class="c">\(V_m/\pi\)</td><td class="c">\(2V_m/\pi\)</td><td class="c">\(2V_m/\pi\)</td></tr><tr><td>\(V_{rms}\)</td><td class="c">\(V_m/2\)</td><td class="c">\(V_m/\sqrt2\)</td><td class="c">\(V_m/\sqrt2\)</td></tr><tr><td>Ripple factor \(\gamma\)</td><td class="c">1.21</td><td class="c">0.482</td><td class="c">0.482</td></tr><tr><td>\(\eta_{max}\)</td><td class="c">40.6%</td><td class="c">81.2%</td><td class="c">81.2%</td></tr><tr><td>PIV</td><td class="c">\(V_m\)</td><td class="c">\(2V_m\)</td><td class="c">\(V_m\)</td></tr><tr><td>TUF</td><td class="c">0.287</td><td class="c">0.693</td><td class="c">0.812</td></tr><tr><td>Form factor</td><td class="c">1.57</td><td class="c">1.11</td><td class="c">1.11</td></tr></tbody></table></div></div>
+<p>Filter: \(V_r=I_{dc}/(f_rC)\) (\(f_r=f\) or \(2f\)); \(V_{dc}=V_m-V_r/2\); \(\gamma=V_r/(2\sqrt3V_{dc})\); FW \(\gamma=1/(4\sqrt3fCR_L)\). Regulation \(=(V_{NL}-V_{FL})/V_{FL}\).</p>
+<h2 id="s-30-3"><span class="n">30.3</span> BJT formulas</h2>
+<div class="box formula"><div class="bt">BJT</div><div class="bb"><p>\(I_E=I_C+I_B\); \(I_C=\beta I_B\); \(\alpha=\beta/(\beta+1)\); \(I_C=I_Se^{V_{BE}/V_T}(1+V_{CE}/V_A)\)<br>
+Biasing: fixed \(I_B=\dfrac{V_{CC}-V_{BE}}{R_B}\); C2B \(I_B=\dfrac{V_{CC}-V_{BE}}{R_B+(\beta+1)R_C}\); emitter \(I_B=\dfrac{V_{CC}-V_{BE}}{R_B+(\beta+1)R_E}\); divider \(I_B=\dfrac{V_{TH}-V_{BE}}{R_{TH}+(\beta+1)R_E}\)<br>
+Stability: fixed \(S=\beta+1\); \(S=\dfrac{(\beta+1)(1+R_B/R_E)}{\beta+1+R_B/R_E}\)<br>
+Small signal: \(g_m=I_C/V_T\); \(r_\pi=\beta/g_m\); \(r_e=\alpha/g_m\); \(r_o=V_A/I_C\); \(r_\pi=(\beta+1)r_e\); \(g_mr_o=V_A/V_T\)</p></div></div>
+<h2 id="s-30-4"><span class="n">30.4</span> MOSFET formulas</h2>
+<div class="box formula"><div class="bt">NMOS</div><div class="bb"><p>\(V_{ov}=V_{GS}-V_{th}\); Triode (\(V_{DS}&lt;V_{ov}\)): \(I_D=k_n[V_{ov}V_{DS}-V_{DS}^2/2]\); Saturation: \(I_D=\tfrac12k_nV_{ov}^2(1+\lambda V_{DS})\), \(k_n=\mu_nC_{ox}W/L\)<br>
+\(g_m=k_nV_{ov}=\sqrt{2k_nI_D}=2I_D/V_{ov}\); \(r_o=1/\lambda I_D\); \(g_{mb}=\chi g_m\), \(\chi=\dfrac{\gamma}{2\sqrt{2\phi_F+V_{SB}}}\)<br>
+\(V_{th}=V_{th0}+\gamma(\sqrt{2\phi_F+V_{SB}}-\sqrt{2\phi_F})\); \(f_T=\dfrac{g_m}{2\pi(C_{gs}+C_{gd})}\)<br>
+Depletion: \(I_D=I_{DSS}(1-V_{GS}/V_P)^2\)</p></div></div>
+<h2 id="s-30-5"><span class="n">30.5</span> Amplifier formulas</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>BJT</th><th class="c">CE (bypassed)</th><th class="c">CB</th><th class="c">CC</th></tr></thead><tbody><tr><td>\(A_v\)</td><td class="c">\(-g_m(R_C\|R_L)\)</td><td class="c">\(g_m(R_C\|R_L)\)</td><td class="c">\(\dfrac{R_L'}{R_L'+r_e}\)</td></tr><tr><td>\(R_{in}\)</td><td class="c">\(R_B\|r_\pi\)</td><td class="c">\(r_e\)</td><td class="c">\(R_B\|[r_\pi+(\beta+1)R_L']\)</td></tr><tr><td>\(R_{out}\)</td><td class="c">\(R_C\)</td><td class="c">\(R_C\)</td><td class="c">\(R_E\|\dfrac{r_\pi+R_s'}{\beta+1}\)</td></tr></tbody></table></div></div>
+<div class="center"><div class="tw"><table><thead><tr><th>MOSFET</th><th class="c">CS</th><th class="c">CG</th><th class="c">CD</th></tr></thead><tbody><tr><td>\(A_v\)</td><td class="c">\(-g_m(R_D\|R_L)\)</td><td class="c">\(g_m(R_D\|R_L)\)</td><td class="c">\(\dfrac{g_mR_L'}{1+g_mR_L'}\)</td></tr><tr><td>\(R_{in}\)</td><td class="c">\(\infty\)</td><td class="c">\(1/g_m\)</td><td class="c">\(\infty\)</td></tr><tr><td>\(R_{out}\)</td><td class="c">\(R_D\)</td><td class="c">\(R_D\)</td><td class="c">\(1/g_m\)</td></tr></tbody></table></div></div>
+<p>With degeneration: BJT \(A_v=-\dfrac{\alpha R_C'}{r_e+R_E}\); MOS \(A_v=-\dfrac{g_mR_D'}{1+g_mR_S}\).</p>
+<h2 id="s-30-6"><span class="n">30.6</span> Current-mirror formulas</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>BJT: \(I_O=\dfrac{I_{REF}}{1+2/\beta}\); MOS: \(I_O=I_{REF}\dfrac{(W/L)_2}{(W/L)_1}\); \(R_O=r_o\)<br>
+Widlar: \(I_OR_E=V_T\ln(I_{REF}/I_O)\); Wilson: \(I_O\approx I_{REF}(1-2/\beta^2)\), \(R_O\approx\beta r_o/2\); Cascode MOS: \(R_O\approx g_mr_o^2\)<br>
+Active load: \(A_v=-g_m(r_{on}\|r_{op})\)</p></div></div>
+<h2 id="s-30-7"><span class="n">30.7</span> Differential-amplifier formulas</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(v_{id}=v_1-v_2\), \(v_{ic}=(v_1+v_2)/2\); BJT pair: \(A_d=g_mR_C\) (diff. out), \(g_mR_C/2\) (single-ended), \(R_{id}=2r_\pi\)<br>
+\(A_{cm}\approx-R_C/2R_{EE}\); CMRR \(\approx g_mR_{EE}\); mirror load: \(A_d=g_m(r_{o2}\|r_{o4})\)<br>
+MOS: \(|v_{id}|_{max}=\sqrt2V_{ov}\); \(V_{OS}\approx\Delta V_{th}\); BJT \(V_{OS}\approx V_T\Delta R_C/R_C\)</p></div></div>
+<h2 id="s-30-8"><span class="n">30.8</span> Op-amp formulas</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Circuit</th><th class="c">Gain / output</th></tr></thead><tbody><tr><td>Inverting</td><td class="c">\(-R_f/R_1\)</td></tr><tr><td>Non-inverting</td><td class="c">\(1+R_f/R_1\)</td></tr><tr><td>Follower</td><td class="c">1</td></tr><tr><td>Difference (\(R_1=R_3\), \(R_2=R_4\))</td><td class="c">\((R_2/R_1)(v_2-v_1)\)</td></tr><tr><td>Summer</td><td class="c">\(-R_f\sum v_k/R_k\)</td></tr><tr><td>Instrumentation amplifier</td><td class="c">\((1+2R/R_G)(v_2-v_1)\)</td></tr><tr><td>Integrator / differentiator</td><td class="c">\(-\dfrac1{RC}\int v_i\,dt\) / \(-RC\dfrac{dv_i}{dt}\)</td></tr><tr><td>Schmitt (inv./non-inv.)</td><td class="c">\(\pm\dfrac{R_1}{R_1+R_2}V_{sat}\) / \(\pm\dfrac{R_1}{R_2}V_{sat}\)</td></tr></tbody></table></div></div>
+<p>\(SR\): \(f_{max}=SR/2\pi V_p\); GBW: \(f_{-3dB}=\text{GBW}/(1+R_f/R_1)\); CMRR(dB) \(=20\log|A_d/A_{cm}|\); output offset \(=(1+R_f/R_1)V_{OS}\).</p>
+<h2 id="s-30-9"><span class="n">30.9</span> Filter formulas</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>1st order: \(f_c=1/2\pi RC\); Butterworth: \(|H|^2=1/[1+(f/f_c)^{2n}]\), \(-20n\) dB/dec<br>
+BPF: \(f_0=\sqrt{f_Lf_H}\), \(Q=f_0/B\); notch: \(B=f_0/Q\); all-pass: \(\phi=-2\tan^{-1}\omega RC\)<br>
+Sallen–Key LP (unity gain): \(\omega_0=1/\sqrt{R_1R_2C_1C_2}\), \(Q=\sqrt{R_1R_2C_1C_2}/[C_2(R_1+R_2)]\); with gain \(K\): \(Q=1/(3-K)\)<br>
+MFB BPF: \(f_0=\dfrac{1}{2\pi C}\sqrt{\dfrac{R_1+R_2}{R_1R_2R_3}}\), \(Q=\pi f_0R_3C\), \(A_0=-R_3/2R_1\)<br>
+Order: \(n\ge\dfrac{\log[(10^{A_s/10}-1)/(10^{A_p/10}-1)]}{2\log(f_s/f_p)}\)</p></div></div>
+<h2 id="s-30-10"><span class="n">30.10</span> Oscillator formulas</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Barkhausen: \(|A\beta|=1\), \(\angle A\beta=0\).<br>
+RC phase-shift: \(f_0=\dfrac{1}{2\pi RC\sqrt6}\), \(|A|\ge29\) &emsp;&emsp; Wien: \(f_0=\dfrac{1}{2\pi RC}\), \(A\ge3\)<br>
+Colpitts: \(f_0=\dfrac{1}{2\pi\sqrt{LC_1C_2/(C_1+C_2)}}\), \(A\ge C_2/C_1\) &emsp;&emsp; Hartley: \(f_0=\dfrac{1}{2\pi\sqrt{(L_1+L_2+2M)C}}\), \(A\ge L_1/L_2\)<br>
+Crystal: \(f_s=\dfrac{1}{2\pi\sqrt{L_sC_s}}\), \(f_p=f_s\sqrt{1+C_s/C_0}\)<br>
+Relaxation (triangle): \(f=\dfrac{R_2}{4R_1RC}\)</p></div></div>
+<h2 id="s-30-11"><span class="n">30.11</span> Feedback formulas</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_f=\dfrac{A}{1+A\beta}\); \(\dfrac{dA_f}{A_f}=\dfrac{1}{1+A\beta}\dfrac{dA}{A}\); \(f_{Hf}=f_H(1+A\beta)\); \(f_{Lf}=f_L/(1+A\beta)\); \(D_f=D/(1+A\beta)\)<br>
+Series mixing: \(R_{if}=R_i(1+A\beta)\); shunt: \(R_i/(1+A\beta)\). Voltage sampling: \(R_{of}=R_o/(1+A\beta)\); current: \(R_o(1+A\beta)\)</p></div></div>
+<h2 id="s-30-12"><span class="n">30.12</span> Frequency-response formulas</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_{Lk}=\dfrac1{2\pi R_kC_k}\); overall \(f_L\approx\sqrt{\sum f_{Lk}^2}\); \(f_H\approx\dfrac{1}{2\pi\sum\tau_k}\); \(n\) identical stages: \(f_H\sqrt{2^{1/n}-1}\)<br>
+Miller: \(C_{in}=C_F(1+|A|)\); \(f_T=\dfrac{g_m}{2\pi(C_\pi+C_\mu)}\); \(f_\beta=f_T/\beta_0\); GBW\(=|A|f_H\)<br>
+2nd order: \(Q=1/2\zeta\); \(M_p=1/(2\zeta\sqrt{1-\zeta^2})\); pole: \(-45^\circ\) at \(\omega_p\), \(-5.7^\circ\) at \(0.1\omega_p\)</p></div></div>
+<h2 id="s-30-13"><span class="n">30.13</span> Stability formulas</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(1+L(s)=0\); \(\mathrm{PM}=180^\circ+\angle L(j\omega_{gc})\); \(\mathrm{GM}=-20\log|L(j\omega_{pc})|\); \(\zeta\approx\mathrm{PM}/100\)<br>
+Follower with GBW and second pole \(f_2\): \(\mathrm{PM}=90^\circ-\tan^{-1}(\text{GBW}/f_2)\)<br>
+Two-stage Miller op-amp: \(p_1\approx-1/(g_{m2}R_1R_2C_c)\), \(p_2\approx-g_{m2}/(C_1+C_2)\), \(\omega_t=g_{m1}/C_c\), \(z=g_{m2}/C_c\)</p></div></div><div class="pager bottom"><a class="pn" href="ch29.html">&larr; GATE Analog Circuit Analysis Techniques</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch31.html">GATE Previous-Year Questions — Topic Wise &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

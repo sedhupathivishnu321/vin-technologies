@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 21: Active Filters | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch21.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 21: Active Filters | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch21.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 21</div><h1>Active Filters</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-21-1">21.1 Passive versus active filters</a></li><li><a href="#s-21-2">21.2 First-order low-pass filter</a></li><li><a href="#s-21-3">21.3 First-order high-pass filter</a></li><li><a href="#s-21-4">21.4 Band-pass filter</a></li><li><a href="#s-21-5">21.5 Band-stop filter</a></li><li><a href="#s-21-6">21.6 All-pass filter</a></li><li><a href="#s-21-7">21.7 Butterworth response</a></li><li><a href="#s-21-8">21.8 Chebyshev response</a></li><li><a href="#s-21-9">21.9 Filter order</a></li><li><a href="#s-21-10">21.10 Cutoff frequency</a></li><li><a href="#s-21-11">21.11 Q-factor</a></li><li><a href="#s-21-12">21.12 Sallen–Key filters</a></li><li><a href="#s-21-13">21.13 Multiple-feedback filters</a></li><li><a href="#s-21-14">21.14 GATE filter problems</a></li></ol></details><h2 id="s-21-1"><span class="n">21.1</span> Passive versus active filters</h2>
+<p>Passive \(RC\) filters have no gain, load-dependent response, and cannot produce complex poles (high \(Q\)) without inductors. <strong>Active filters</strong> use op-amps to give gain, buffering (low output resistance), complex poles without inductors, and easy cascading. Limits: op-amp GBW (up to \(\approx\) 100 kHz–1 MHz effectively), supply requirement, noise.</p>
+<h2 id="s-21-2"><span class="n">21.2</span> First-order low-pass filter</h2>
+<figure id="fig-21-1"><div class="figimgs"><img src="img/f21_lp1.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.1.</b> First-order active low-pass filter (non-inverting).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(H(s)=\left(1+\dfrac{R_f}{R_1}\right)\dfrac{1}{1+sRC}\), &emsp; \(f_c=\dfrac1{2\pi RC}\), &emsp; \(A_0=1+R_f/R_1\), roll-off \(-20\) dB/dec.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R=10\) k, \(C=0.01\ \mu\)F: \(f_c=1.59\) kHz. With \(R_1=10\) k, \(R_f=20\) k: \(A_0=3\) (\(9.5\) dB). At \(f=10f_c\) the gain is \(3/\sqrt{101}=0.30\) (\(-10.5\) dB).</p></div></div>
+<h2 id="s-21-3"><span class="n">21.3</span> First-order high-pass filter</h2>
+<figure id="fig-21-2"><div class="figimgs"><img src="img/f21_hp1.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.2.</b> First-order active high-pass filter.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(H(s)=\left(1+\dfrac{R_f}{R_1}\right)\dfrac{sRC}{1+sRC}\), &emsp; \(f_c=\dfrac1{2\pi RC}\), roll-off \(+20\) dB/dec below \(f_c\).</p></div></div>
+<h2 id="s-21-4"><span class="n">21.4</span> Band-pass filter</h2>
+<p>Two types:</p>
+<ul><li><strong>Wide-band</strong> (\(Q&lt;10\)): a high-pass (\(f_L\)) cascaded with a low-pass (\(f_H\)), \(f_L&lt;f_H\). Centre frequency \(f_0=\sqrt{f_Lf_H}\), bandwidth \(B=f_H-f_L\), \(Q=f_0/B\).</li><li><strong>Narrow-band</strong> (\(Q&gt;10\)): multiple-feedback circuit (Section 21.13).</li></ul>
+<figure id="fig-21-3"><div class="figimgs"><img src="img/f21_bp_resp.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.3.</b> Band-pass responses for three values of \(Q\): bandwidth \(B=f_0/Q\).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>HP at \(200\) Hz cascaded with LP at \(2\) kHz: \(f_0=\sqrt{200\times2000}=632\) Hz, \(B=1800\) Hz, \(Q=0.35\) (wide-band).</p></div></div>
+<h2 id="s-21-5"><span class="n">21.5</span> Band-stop filter</h2>
+<p>A notch filter rejects a narrow band: \(H=\dfrac{1-(f/f_0)^2}{1-(f/f_0)^2+jf/(Qf_0)}\); obtained by summing a low-pass and a high-pass (\(f_L&gt;f_H\)) or with a twin-T network. Used to remove \(50\) Hz mains hum.</p>
+<figure id="fig-21-4"><div class="figimgs"><img src="img/f21_bs_resp.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.4.</b> Notch responses: a higher \(Q\) gives a narrower rejection band.</figcaption></figure>
+<h2 id="s-21-6"><span class="n">21.6</span> All-pass filter</h2>
+<p>Passes all frequencies with unity gain but shifts phase (a delay equaliser).</p>
+<figure id="fig-21-5"><div class="figimgs"><img src="img/f21_apf.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.5.</b> First-order all-pass filter with \(R_1=R_f\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(H(s)=\dfrac{1-sRC}{1+sRC}\), &emsp; \(|H|=1\), &emsp; \(\phi=-2\tan^{-1}(\omega RC)\)</p></div></div>
+<figure id="fig-21-6"><div class="figimgs"><img src="img/f21_ap_resp.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.6.</b> All-pass: flat magnitude and phase falling from \(0^\circ\) to \(-180^\circ\); it is \(-90^\circ\) at \(\omega=1/RC\).</figcaption></figure>
+<h2 id="s-21-7"><span class="n">21.7</span> Butterworth response</h2>
+<p>Maximally flat magnitude in the passband:</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(|H(f)|^2=\dfrac{A_0^2}{1+(f/f_c)^{2n}}\); roll-off \(-20n\) dB/dec; \(-3\) dB at \(f_c\) for every \(n\).<br>
+Poles lie equally spaced on a circle of radius \(\omega_c\) in the left half plane.</p></div></div>
+<figure id="fig-21-7"><div class="figimgs"><img src="img/f21_lp_resp.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.7.</b> Low-pass responses for increasing order; Chebyshev is steeper but has passband ripple.</figcaption></figure>
+<p>Second-order Butterworth has \(Q=0.707\); fourth-order: cascaded sections with \(Q=0.541\) and \(1.307\).</p>
+<h2 id="s-21-8"><span class="n">21.8</span> Chebyshev response</h2>
+<p>Equiripple passband, steeper transition than Butterworth of the same order, but ripple and non-linear phase:
+\[|H|^2=\frac{A_0^2}{1+\varepsilon^2C_n^2(f/f_c)},\qquad\varepsilon=\sqrt{10^{R_{dB}/10}-1}.\]
+Poles lie on an <em>ellipse</em>. A Chebyshev filter of order \(n\) has \(n\) passband maxima/minima; ripple \(=1\) dB \(\Rightarrow\varepsilon=0.509\).</p>
+<figure id="fig-21-8"><div class="figimgs"><img src="img/f21_poles.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.8.</b> Pole positions for fourth-order Butterworth (unit circle) and Chebyshev (ellipse) low-pass filters.</figcaption></figure>
+<h2 id="s-21-9"><span class="n">21.9</span> Filter order</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Butterworth order for pass-band edge \(f_p\) (attenuation \(A_p\) dB) and stop-band edge \(f_s\) (attenuation \(A_s\) dB):<br>
+\(n\ge\dfrac{\log\left[(10^{A_s/10}-1)/(10^{A_p/10}-1)\right]}{2\log(f_s/f_p)}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(A_p=3\) dB at \(f_p=1\) kHz, \(A_s=40\) dB at \(f_s=4\) kHz: \(n\ge\dfrac{\log(9999)}{2\log4}=\dfrac{4}{1.204}=3.32\Rightarrow n=4\). A Chebyshev filter with \(1\) dB ripple would need only about \(n=3\).</p></div></div>
+<h2 id="s-21-10"><span class="n">21.10</span> Cutoff frequency</h2>
+<p>For a first-order RC section \(f_c=1/(2\pi RC)\); for equal-component Sallen–Key \(f_c=1/(2\pi RC)\). For a cascade of \(n\) identical first-order sections, \(f_{-3dB}=f_c\sqrt{2^{1/n}-1}\) (shrinks: two identical sections give \(0.644f_c\)).</p>
+<h2 id="s-21-11"><span class="n">21.11</span> Q-factor</h2>
+<p>For a second-order low-pass \(H=\dfrac{1}{1-(f/f_0)^2+j\,f/(Qf_0)}\):</p>
+<figure id="fig-21-9"><div class="figimgs"><img src="img/f21_q.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.9.</b> Effect of \(Q\): \(Q=0.707\) maximally flat; \(Q&gt;0.707\) peaks by \(\approx20\log Q\) dB at \(f_0\).</figcaption></figure>
+<p>For a band-pass, \(Q=f_0/B\). The pole-pair angle: \(\cos\theta=1/(2Q)\).</p>
+<h2 id="s-21-12"><span class="n">21.12</span> Sallen–Key filters</h2>
+<figure id="fig-21-10"><div class="figimgs"><img src="img/f21_sk_lp.png" alt="" loading="lazy"><img src="img/f21_sk_hp.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.10.</b> Unity-gain Sallen–Key low-pass (left) and high-pass (right).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Low-pass: \(\omega_0=\dfrac1{\sqrt{R_1R_2C_1C_2}}\), \(\;Q=\dfrac{\sqrt{R_1R_2C_1C_2}}{C_2(R_1+R_2)}\); equal \(R\): \(Q=\tfrac12\sqrt{C_1/C_2}\)<br>
+High-pass: \(\omega_0=\dfrac1{\sqrt{R_1R_2C_1C_2}}\), \(\;Q=\dfrac{\sqrt{R_1R_2C_1C_2}}{R_2(C_1+C_2)}\)<br>
+With a non-inverting gain \(K\) (equal \(R\), equal \(C\)): \(Q=\dfrac{1}{3-K}\); Butterworth (\(Q=0.707\)) needs \(K=1.586\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Unity-gain Sallen–Key LP, equal \(R=10\) k, \(C_2=10\) nF, \(C_1=20\) nF: \(Q=\tfrac12\sqrt2=0.707\) (Butterworth). \(\omega_0=1/(10^4\sqrt{2\times10^{-16}})=7071\) rad/s: \(f_0=1.125\) kHz.</p></div></div>
+<h2 id="s-21-13"><span class="n">21.13</span> Multiple-feedback filters</h2>
+<figure id="fig-21-11"><div class="figimgs"><img src="img/f21_mfb.png" alt="" loading="lazy"></div><figcaption><b>Figure 21.11.</b> Multiple-feedback (MFB) band-pass filter.</figcaption></figure>
+<p>With \(C_1=C_2=C\):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_0=\dfrac{1}{2\pi C}\sqrt{\dfrac{R_1+R_2}{R_1R_2R_3}}\), &emsp; \(Q=\pi f_0R_3C\), &emsp; \(A_0=-\dfrac{R_3}{2R_1}\) (at \(f_0\))</p></div></div>
+<div class="box example"><div class="bt">Design</div><div class="bb"><p>\(f_0=1\) kHz, \(Q=10\), \(A_0=-2\), \(C=10\) nF. \(R_3=Q/(\pi f_0C)=10/(\pi\times10^3\times10^{-8})=318\) k\(\Omega\). \(R_1=R_3/(2|A_0|)=79.6\) k\(\Omega\). Solve for \(R_2\): \(\dfrac1{R_2}=(2\pi f_0C)^2R_3-\dfrac1{R_1}\Rightarrow R_2\approx0.80\) k\(\Omega\).</p></div></div>
+<h2 id="s-21-14"><span class="n">21.14</span> GATE filter problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> A first-order active low-pass filter with \(R=10\) k\(\Omega\) and \(C=15.9\) nF has \(f_c=\) <span class="blank"></span> Hz.</p>
+<p><strong>Q2.</strong> The asymptotic roll-off of a third-order Butterworth filter is (A) \(-20\) (B) \(-40\) (C) \(-60\) (D) \(-80\) dB/decade.</p>
+<p><strong>Q3.</strong> A band-pass filter has \(f_L=1\) kHz and \(f_H=4\) kHz. Its centre frequency and \(Q\) are <span class="blank"></span> kHz and <span class="blank"></span>.</p>
+<p><strong>Q4.</strong> An equal-component Sallen–Key low-pass has gain \(K=1.586\). \(Q=\) <span class="blank"></span>.</p>
+<p><strong>Q5.</strong> The phase of a first-order all-pass \(H=(1-j\omega RC)/(1+j\omega RC)\) at \(\omega=1/RC\) is <span class="blank"></span> degrees.</p>
+<p><strong>Q6.</strong> Which filter type has ripple in the passband? (A) Butterworth (B) Chebyshev type I (C) Bessel (D) first-order RC.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(1/(2\pi\times10^4\times15.9\times10^{-9})=1000\) Hz. Q2: (C). Q3: \(f_0=\sqrt{1\times4}=2\) kHz, \(B=3\) kHz, \(Q=0.667\). Q4: \(1/(3-1.586)=0.707\). Q5: \(-90^\circ\). Q6: (B).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Design a first-order HP with \(f_c=500\) Hz, \(C=0.1\ \mu\)F. &emsp; [\(R=3.18\) k\(\Omega\)]</li><li>A notch at \(50\) Hz: which quantity sets \(B=f_0/Q\)? Compute \(B\) for \(Q=10\). &emsp; [5 Hz]</li><li>What order Butterworth is required for \(A_p=3\) dB at \(2\) kHz, \(A_s=30\) dB at \(6\) kHz? &emsp; [\(n=3.14\to4\)]</li><li>Explain why Chebyshev filters give steeper roll-off. &emsp; [Ripple budget lets poles move closer to the \(j\omega\) axis]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch20.html">&larr; Op-Amp Mathematical Circuits</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch22.html">Op-Amp Comparators &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

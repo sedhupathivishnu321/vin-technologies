@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 16: Current Mirrors | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch16.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 16: Current Mirrors | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch16.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 16</div><h1>Current Mirrors</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-16-1">16.1 Concept of current copying</a></li><li><a href="#s-16-2">16.2 Basic BJT current mirror</a></li><li><a href="#s-16-3">16.3 MOS current mirror</a></li><li><a href="#s-16-4">16.4 Current-mirror accuracy</a></li><li><a href="#s-16-5">16.5 Output resistance</a></li><li><a href="#s-16-6">16.6 Compliance voltage</a></li><li><a href="#s-16-7">16.7 Widlar current source</a></li><li><a href="#s-16-8">16.8 Wilson current mirror</a></li><li><a href="#s-16-9">16.9 Cascode current mirror</a></li><li><a href="#s-16-10">16.10 Active loads</a></li><li><a href="#s-16-11">16.11 Current-source applications</a></li><li><a href="#s-16-12">16.12 GATE problems</a></li></ol></details><h2 id="s-16-1"><span class="n">16.1</span> Concept of current copying</h2>
+<p>A current mirror copies a reference current \(I_{REF}\) from one branch to another, using two matched transistors whose \(V_{BE}\) (or \(V_{GS}\)) are equal. Because IC-device currents are exponential (BJT) or quadratic (MOS) in the control voltage, equal control voltages imply proportional currents. Mirrors serve as <em>bias sources</em> (a DC current source with high small-signal resistance) and as <em>active loads</em>, replacing resistors that would take a large chip area.</p>
+<h2 id="s-16-2"><span class="n">16.2</span> Basic BJT current mirror</h2>
+<figure id="fig-16-1"><div class="figimgs"><img src="img/f16_bjt.png" alt="" loading="lazy"></div><figcaption><b>Figure 16.1.</b> Basic two-transistor BJT current mirror. \(Q_1\) is diode-connected (collector tied to base).</figcaption></figure>
+<p>Since \(V_{BE1}=V_{BE2}\) and the devices match, \(I_{C1}=I_{C2}=I_C\). KCL at the input node:
+\[I_{REF}=I_{C1}+2I_B=I_C\left(1+\frac2\beta\right)\quad\Rightarrow\quad I_O=I_{C2}=\frac{I_{REF}}{1+2/\beta}.\]</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(I_{REF}=\dfrac{V_{CC}-V_{BE}}{R}\) &emsp;&emsp; \(I_O=\dfrac{I_{REF}}{1+2/\beta}\) &emsp;&emsp; Ratio \(m\) (emitter-area ratio \(A_2/A_1\)): \(I_O=\dfrac{m\,I_{REF}}{1+(1+m)/\beta}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_{CC}=10\) V, \(R=9.3\) k\(\Omega\), \(\beta=100\): \(I_{REF}=(10-0.7)/9.3=1\) mA. \(I_O=1/(1+0.02)=0.980\) mA (error \(-2\%\)). With \(\beta=20\): \(I_O=0.909\) mA (error \(-9\%\)).</p></div></div>
+<h2 id="s-16-3"><span class="n">16.3</span> MOS current mirror</h2>
+<figure id="fig-16-2"><div class="figimgs"><img src="img/f16_mos.png" alt="" loading="lazy"></div><figcaption><b>Figure 16.2.</b> NMOS current mirror. The gate current is zero, so no systematic \(\beta\)-type error exists.</figcaption></figure>
+<p>With \(I_{REF}=\tfrac12k_n'(W/L)_1(V_{GS}-V_{th})^2\) and the same \(V_{GS}\) for \(M_2\):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(I_O=I_{REF}\dfrac{(W/L)_2}{(W/L)_1}\cdot\dfrac{1+\lambda V_{DS2}}{1+\lambda V_{DS1}}\) &emsp; (\(V_{DS1}=V_{GS}\))</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\((W/L)_1=10\), \((W/L)_2=40\), \(I_{REF}=100\ \mu\)A, \(\lambda=0\): \(I_O=400\ \mu\)A. With \(\lambda=0.02\), \(k_n'=100\ \mu\)A/V\({}^2\), \(V_{th}=0.5\) V: \(V_{ov}=0.447\) V, \(V_{GS}=0.947\) V; if \(V_{DS2}=2\) V, \(I_O=400\times\dfrac{1.04}{1.019}=408\ \mu\)A.</p></div></div>
+<h2 id="s-16-4"><span class="n">16.4</span> Current-mirror accuracy</h2>
+<p>Sources of error:</p>
+<ul><li><strong>Finite \(\beta\)</strong> (BJT): error \(\approx-2/\beta\).</li><li><strong>Finite output resistance</strong> (Early effect or \(\lambda\)): \(I_O\) depends on \(V_O\).</li><li><strong>Mismatch</strong> of \(I_S\) (BJT) or \(V_{th}\) and \(\beta\) (MOS): random offsets.</li><li><strong>Temperature gradients</strong>, layout.</li></ul>
+<figure id="fig-16-3"><div class="figimgs"><img src="img/f16_err.png" alt="" loading="lazy"></div><figcaption><b>Figure 16.3.</b> Systematic error of a basic and a Wilson BJT mirror due to base currents.</figcaption></figure>
+<h2 id="s-16-5"><span class="n">16.5</span> Output resistance</h2>
+<p>Looking into the collector (or drain) of the output transistor, \(R_O=r_{o2}=V_A/I_O\) (BJT) or \(1/(\lambda I_O)\) (MOS). It determines how closely the mirror behaves as an ideal current source.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_A=100\) V, \(I_O=1\) mA: \(r_o=100\) k\(\Omega\). A change of \(5\) V at the output changes the current by \(5/100=50\ \mu\)A (5%).</p></div></div>
+<h2 id="s-16-6"><span class="n">16.6</span> Compliance voltage</h2>
+<p>The minimum output voltage at which the mirror still works. Below it, \(Q_2\) (or \(M_2\)) leaves the active/saturation region and \(I_O\) collapses.</p>
+<figure id="fig-16-4"><div class="figimgs"><img src="img/f16_iout.png" alt="" loading="lazy"></div><figcaption><b>Figure 16.4.</b> Output characteristic of a mirror: flat above the compliance limit with slope \(1/r_o\).</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Mirror</th><th class="c">Minimum \(V_O\)</th></tr></thead><tbody><tr><td>Basic BJT</td><td class="c">\(V_{CE(sat)}\approx0.2\) V</td></tr><tr><td>Basic MOS</td><td class="c">\(V_{ov}\) (typically \(0.2\)–\(0.5\) V)</td></tr><tr><td>Wilson (BJT)</td><td class="c">\(V_{BE}+V_{CE(sat)}\approx0.9\) V</td></tr><tr><td>Simple cascode (MOS)</td><td class="c">\(V_{th}+2V_{ov}\)</td></tr></tbody></table></div></div>
+<h2 id="s-16-7"><span class="n">16.7</span> Widlar current source</h2>
+<p>Adding \(R_{E2}\) in the emitter of \(Q_2\) gives a much smaller output current for a modest resistor.</p>
+<figure id="fig-16-5"><div class="figimgs"><img src="img/f16_widlar.png" alt="" loading="lazy"></div><figcaption><b>Figure 16.5.</b> Widlar current source: \(R_{E2}\) degenerates \(Q_2\).</figcaption></figure>
+<div class="box derive"><div class="bt">Widlar relation</div><div class="bb"><p>KVL around the base loop: \(V_{BE1}=V_{BE2}+I_OR_{E2}\). With \(V_{BE}=V_T\ln(I/I_S)\):
+\[I_OR_{E2}=V_T\ln\frac{I_{REF}}{I_O}.\]
+Output resistance: \(R_O=r_{o2}\left[1+\dfrac{g_{m2}R_{E2}}{1+(R_{E2}+r_x)/r_\pi}\right]\approx r_{o2}(1+g_mR_{E2})\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Design \(I_O=10\ \mu\)A from \(I_{REF}=1\) mA (\(V_T=26\) mV): \(R_{E2}=\dfrac{0.026\ln100}{10\ \mu\mathrm A}=\dfrac{0.1197}{10\times10^{-6}}=12\) k\(\Omega\). A plain mirror would need a \(930\) k\(\Omega\) resistor for the same current.</p></div></div>
+<h2 id="s-16-8"><span class="n">16.8</span> Wilson current mirror</h2>
+<figure id="fig-16-6"><div class="figimgs"><img src="img/f16_wilson.png" alt="" loading="lazy"></div><figcaption><b>Figure 16.6.</b> Wilson mirror: \(Q_3\) senses the output current and feeds back through the \(Q_1\)–\(Q_2\) pair.</figcaption></figure>
+<p>Negative feedback makes the mirror much more accurate and gives a high output resistance:</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(I_O=I_{REF}\left(1-\dfrac{2}{\beta^2+2\beta+2}\right)\approx I_{REF}\left(1-\dfrac2{\beta^2}\right)\) &emsp;&emsp; \(R_O\approx\dfrac{\beta r_o}{2}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\beta=100\), \(r_o=100\) k\(\Omega\): error \(=2/10202=0.02\%\); \(R_O\approx5\) M\(\Omega\) (50\(\times\) the basic mirror).</p></div></div>
+<h2 id="s-16-9"><span class="n">16.9</span> Cascode current mirror</h2>
+<figure id="fig-16-7"><div class="figimgs"><img src="img/f16_cascode.png" alt="" loading="lazy"></div><figcaption><b>Figure 16.7.</b> Cascode (MOS) current mirror: \(M_4\) shields \(M_2\) from output voltage variations.</figcaption></figure>
+<p>Stacking a second transistor in each branch raises the output resistance to
+\[R_O\approx g_{m4}r_{o4}r_{o2}\quad(\text{MOS}),\qquad R_O\approx\beta r_o/2\ \text{or}\ \beta r_o\ (\text{BJT cascode}).\]</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(g_m=2\) mS, \(r_o=50\) k\(\Omega\): \(R_O=2\,\mathrm m\times(50\,\mathrm k)^2=5\) M\(\Omega\) vs. \(50\) k\(\Omega\) for the basic mirror: 100 times better. The price: minimum \(V_O\) rises to \(V_{th}+2V_{ov}\) (about \(0.9\) V for \(V_{ov}=0.2\) V).</p></div></div>
+<h2 id="s-16-10"><span class="n">16.10</span> Active loads</h2>
+<p>A current source (mirror) used as the load of an amplifier stage gives a huge small-signal load resistance (\(r_o\)) with a small DC voltage drop.</p>
+<figure id="fig-16-8"><div class="figimgs"><img src="img/f16_active.png" alt="" loading="lazy"></div><figcaption><b>Figure 16.8.</b> CS amplifier with a PMOS current-source active load.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_v=-g_{mn}(r_{on}\|r_{op})\); if \(r_{on}=r_{op}=r_o\): \(A_v=-\dfrac{g_mr_o}{2}=-\dfrac{V_A}{V_{ov}}\) (roughly)<br>
+For a resistor load \(A_v=-g_mR_D\) with \(R_D\ll r_o\) due to the DC-drop limit.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(g_{mn}=2\) mS, \(r_{on}=r_{op}=50\) k\(\Omega\): \(A_v=-2\,\mathrm m\times25\,\mathrm k=-50\). To get the same gain with a resistor one would need \(R_D=25\) k\(\Omega\), dropping \(25\) V at \(1\) mA: impossible.</p></div></div>
+<h2 id="s-16-11"><span class="n">16.11</span> Current-source applications</h2>
+<ul><li><strong>Bias:</strong> many identical branches biased from one reference (multiple outputs mirror).</li><li><strong>Active load:</strong> high-gain amplifier stages, differential pairs (Chapter 17).</li><li><strong>Level shifting:</strong> transferring signal current between supply levels.</li><li><strong>Current steering</strong> in DACs and charge pumps.</li></ul>
+<h2 id="s-16-12"><span class="n">16.12</span> GATE problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> Identical BJTs (\(\beta=100\)) form a mirror with \(I_{REF}=1\) mA. \(I_O\) (mA) is closest to (A) 1.02 (B) 0.98 (C) 0.90 (D) 1.</p>
+<p><strong>Q2.</strong> An NMOS mirror has \((W/L)_1:(W/L)_2=1:5\), \(\lambda=0\), \(I_{REF}=20\ \mu\)A. \(I_O=\) <span class="blank"></span> \(\mu\)A.</p>
+<p><strong>Q3.</strong> In a Widlar source \(I_{REF}=1\) mA, \(I_O=0.1\) mA, \(V_T=26\) mV. \(R_{E2}\) is <span class="blank"></span> \(\Omega\).</p>
+<p><strong>Q4.</strong> \(V_A=50\) V, \(I_C=0.5\) mA. The output resistance of the basic mirror is <span class="blank"></span> k\(\Omega\).</p>
+<p><strong>Q5.</strong> The output resistance of an MOS cascode mirror is approximately (A) \(r_o\) (B) \(g_mr_o^2\) (C) \(r_o/g_m\) (D) \(1/g_m\).</p>
+<p><strong>Q6.</strong> A CS amplifier has an ideal current-source load and \(g_m=1\) mS, \(r_o=100\) k\(\Omega\). \(|A_v|=\) <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: (B) \(=0.98\). Q2: 100 \(\mu\)A. Q3: \(0.026\ln10/0.1\,\mathrm{mA}=599\ \Omega\). Q4: \(50/0.5=100\) k\(\Omega\). Q5: (B). Q6: \(g_mr_o=100\).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Compute \(I_O\) for a BJT mirror with \(\beta=50\), \(I_{REF}=2\) mA. &emsp; [1.92 mA]</li><li>Design a Widlar source for \(I_O=50\ \mu\)A from \(I_{REF}=0.5\) mA. &emsp; [\(R_E=0.026\ln10/50\,\mu=1.2\) k\(\Omega\)]</li><li>MOS mirror with \(\lambda=0.05\): \(V_{DS1}=1\) V, \(V_{DS2}=5\) V. Ratio \(I_O/I_{REF}\)? &emsp; [\(1.25/1.05=1.19\)]</li><li>Why does a Wilson mirror need three transistors? &emsp; [Feedback: \(Q_3\) compensates the base-current error]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch15.html">&larr; MOSFET Frequency Response</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch17.html">Differential Amplifiers &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

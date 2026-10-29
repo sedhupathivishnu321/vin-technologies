@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 4: Feedback Principle | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Closed-loop transfer function, sensitivity, effect of feedback on gain, bandwidth, disturbance and noise. Typical: find C/R or C/D, compute the sensitivity of T with respect to G or H.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch04.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 4: Feedback Principle | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Closed-loop transfer function, sensitivity, effect of feedback on gain, bandwidth, disturbance and noise. Typical: find C/R or C/D, compute the sensitivity of T with respect to G or H."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch04.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 4</div><h1>Feedback Principle</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-4-1">4.1 Core concept</a></li><li><a href="#s-4-2">4.2 Sensitivity</a></li><li><a href="#s-4-3">4.3 Effects of negative feedback</a></li><li><a href="#s-4-4">4.4 Disturbance rejection</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Closed-loop transfer function, sensitivity, effect of feedback on gain, bandwidth, disturbance and noise. Typical: find \(C/R\) or \(C/D\), compute the sensitivity of \(T\) with respect to \(G\) or \(H\).</p></div></div>
+<h2 id="s-4-1"><span class="n">4.1</span> Core concept</h2>
+<figure id="fig-4-1"><div class="figimgs"><img src="img/c01_closed.png" alt="" loading="lazy"></div><figcaption><b>Figure 4.1.</b> Standard single-loop feedback system with forward path \(G(s)\) and feedback path \(H(s)\).</figcaption></figure>
+<div class="box derive"><div class="bt">Closed-loop transfer function</div><div class="bb"><p>\(E=R\mp HC\) and \(C=GE\). Hence \(C=G(R\mp HC)\), so
+\[
+T(s)=\frac{C}{R}=\frac{G}{1\pm GH}\quad(\text{upper sign: negative feedback}).
+\]
+Characteristic equation: \(1+G(s)H(s)=0\) (negative feedback). Open-loop TF: \(GH\). Unity feedback (\(H=1\)): \(T=\dfrac{G}{1+G}\).</p></div></div>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Negative feedback: \(\dfrac{G}{1+GH}\); positive feedback: \(\dfrac{G}{1-GH}\); error \(\dfrac{E}{R}=\dfrac1{1+GH}\); \(\dfrac{B}{R}=\dfrac{GH}{1+GH}\).</p></div></div>
+<h2 id="s-4-2"><span class="n">4.2</span> Sensitivity</h2>
+<div class="box derive"><div class="bt">Sensitivity of \(T\) to \(G\) and \(H\)</div><div class="bb"><p>\(S_x^T=\dfrac{x}{T}\dfrac{\partial T}{\partial x}\). With \(T=\dfrac{G}{1+GH}\):
+\[
+S_G^T=\frac{1}{1+GH}\quad(=S),\qquad S_H^T=-\frac{GH}{1+GH}\quad(=-\text{complementary sensitivity}).
+\]</p></div></div>
+<ul><li>Sensitivity function \(S=\dfrac1{1+GH}\), complementary sensitivity \(T=\dfrac{GH}{1+GH}\), so \(S+T=1\).</li><li>If \(|GH|\gg1\): \(S\to0\) (insensitive to plant changes) but \(S_H^T\to-1\): <strong>the feedback element must be accurate</strong>.</li></ul>
+<figure id="fig-4-2"><div class="figimgs"><img src="img/c04_sens.png" alt="" loading="lazy"></div><figcaption><b>Figure 4.2.</b> Left: \(|S|\) and \(|T|\) for \(GH=10/[s(s+1)]\); \(S+T=1\) at every frequency. Right: raising the gain \(K\) of \(K/(s+1)\) under unity feedback widens the closed-loop bandwidth.</figcaption></figure>
+<h2 id="s-4-3"><span class="n">4.3</span> Effects of negative feedback</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Quantity</th><th>Effect</th></tr></thead><tbody><tr><td>Gain</td><td>reduced by the factor \(1+GH\) (the “return difference”)</td></tr><tr><td>Sensitivity</td><td>reduced by \(1+GH\)</td></tr><tr><td>Bandwidth</td><td>increased by (about) \(1+GH\); gain\(\times\)bandwidth roughly constant</td></tr><tr><td>Disturbance</td><td>attenuated by \(1+GH\)</td></tr><tr><td>Stability</td><td>can degrade; may create oscillation for high gain</td></tr><tr><td>Time constant</td><td>reduced (faster)</td></tr><tr><td>Noise (sensor)</td><td>reproduced at the output (not rejected)</td></tr></tbody></table></div></div>
+<div class="box derive"><div class="bt">First-order system with feedback</div><div class="bb"><p>\(G=\dfrac{K}{\tau s+1}\), \(H=1\): \(T=\dfrac{K}{\tau s+1+K}=\dfrac{K/(1+K)}{\frac{\tau}{1+K}s+1}\). So the DC gain drops to \(\dfrac K{1+K}\), the time constant shrinks to \(\tau/(1+K)\), and the bandwidth \(\dfrac{1+K}{\tau}\) rises: the product is unchanged.</p></div></div>
+<h2 id="s-4-4"><span class="n">4.4</span> Disturbance rejection</h2>
+<p>With a disturbance \(D\) entering between \(G_1\) and \(G_2\):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(C=\dfrac{G_1G_2}{1+G_1G_2H}R+\dfrac{G_2}{1+G_1G_2H}D\).<br>
+Large \(G_1\) (controller gain before the disturbance entry) reduces the effect of \(D\) by a factor \(\approx G_1H\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(G_1=10\), \(G_2=1/(s+1)\), \(H=1\): \(\dfrac CD=\dfrac{1/(s+1)}{1+10/(s+1)}=\dfrac1{s+11}\); DC disturbance gain \(1/11\) vs \(1\) without feedback.</p></div></div>
+<div class="box example"><div class="bt">Sensitivity</div><div class="bb"><p>\(G=\dfrac{20}{s+2}\), \(H=0.5\) at \(s=0\): \(GH=5\). \(S_G^T=\dfrac1{1+5}=0.167\); \(S_H^T=-\dfrac5{6}=-0.833\). A \(6\%\) change in \(G\) alters \(T\) by \(1\%\).</p></div></div>
+<div class="box example"><div class="bt">Open vs closed</div><div class="bb"><p>Open-loop DC gain \(10\) with \(10\%\) drift \(\Rightarrow\) output changes \(10\%\). With unity feedback \(T(0)=\dfrac{10}{11}\); \(S=1/11\): output changes \(\approx0.9\%\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Bandwidth of unity-feedback \(K/(\tau s+1)\): \((1+K)/\tau\). Return difference \(F=1+GH\) scales gain down and sensitivity down by the <em>same</em> factor.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>Feedback reduces sensitivity to the <em>forward-path</em> \(G\) but does <strong>not</strong> reduce sensitivity to \(H\), and does not remove sensor noise. Also gain is reduced, not increased, by negative feedback.</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> For unity negative feedback with \(G=10/(s+1)\), closed-loop DC gain is (A) 10 (B) 10/11 (C) 1 (D) 0.1.</p>
+<p><strong>Q2.</strong> Sensitivity of \(T\) to \(G\) under negative feedback is (A) \(\dfrac1{1+GH}\) (B) \(\dfrac{GH}{1+GH}\) (C) \(1+GH\) (D) \(-1\).</p>
+<p><strong>Q3.</strong> Negative feedback (A) increases sensitivity (B) increases bandwidth (C) increases gain (D) eliminates noise.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (A). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> \(G=\dfrac{100}{s+10}\) with unity negative feedback. The closed-loop pole and DC gain are (A) \(-110\), \(0.91\) (B) \(-110\), \(1\) (C) \(-10\), \(0.5\) (D) \(-100\), \(0.5\).</p>
+<p><strong>Q5.</strong> A closed-loop system has \(S_G^T=0.05\) at low frequency. If \(G\) changes by \(20\%\), \(T\) changes by (A) \(1\%\) (B) \(5\%\) (C) \(20\%\) (D) \(0.05\%\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (A): \(T=100/(s+110)\), DC \(100/110\). Q5 (A).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> Open-loop \(K/(0.5s+1)\) with unity negative feedback and \(K=9\): closed-loop bandwidth (rad/s) is <span class="blank"></span>.</p>
+<p><strong>Q7.</strong> \(G=4/(s+1)\), \(H=1.5\): the closed-loop DC gain is <span class="blank"></span> (two decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(\tau=0.5\), bandwidth \((1+K)/\tau=20\). Q7: \(4/(1+6)=0.57\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Negative feedback (A) reduces gain (B) reduces sensitivity to \(G\) (C) reduces sensitivity to \(H\) (D) improves disturbance rejection.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (D).</p>
+<div class="box gateq"><div class="bt">Previous-year pattern</div><div class="bb"><p>Unity-feedback loop with controller \(G_1=K\) and plant \(G_2=1/[s(s+2)]\). For a disturbance \(D\) added at the <em>plant input</em>, \(C/D=\dfrac{G_2}{1+G_1G_2}=\dfrac1{s^2+2s+K}\); the DC gain is \(1/K\), so a larger controller gain reduces the effect of a constant disturbance. (An integrator <em>before</em> the disturbance entry point would make it \(0\).)</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Derive \(C/R\) for positive feedback.<br>
+<strong>T2.</strong> For \(G=5/(s+1)\), \(H=1\), find the closed-loop time constant.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(G/(1-GH)\). T2: \(T=5/(s+6)\), \(\tau=1/6\) s.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(T=G/(1+GH)\); return difference \(1+GH\); \(S+T=1\).</li><li>\(S_G^T=1/(1+GH)\), \(S_H^T=-GH/(1+GH)\).</li><li>Negative feedback: lowers gain, sensitivity, time constant, disturbance; widens bandwidth; can hurt stability.</li><li>Disturbance TF: \(G_2/(1+G_1G_2H)\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch03.html">&larr; Transfer Function</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch05.html">Block Diagram Representation &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

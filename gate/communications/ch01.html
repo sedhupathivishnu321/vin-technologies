@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1: Random Variables and Random Processes | Communications | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Wide-sense stationarity, autocorrelation and its properties, power spectral density via the Wiener–Khinchin theorem, filtering of random signals (S_Y=|H|^2S_X), and Gaussian processes. Typical items:">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/communications/ch01.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 1: Random Variables and Random Processes | Communications | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Wide-sense stationarity, autocorrelation and its properties, power spectral density via the Wiener–Khinchin theorem, filtering of random signals (S_Y=|H|^2S_X), and Gaussian processes. Typical items:"><meta property="og:url" content="https://vintechnologies.co.in/gate/communications/ch01.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Communications</a></div><div class="chlabel">Chapter 1</div><h1>Random Variables and Random Processes</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-1-1">1.1 Random variables: quick recall</a></li><li><a href="#s-1-2">1.2 Random processes</a></li><li><a href="#s-1-3">1.3 Power spectral density</a></li><li><a href="#s-1-4">1.4 Random signals through LTI systems</a></li><li><a href="#s-1-5">1.5 Gaussian processes</a></li><li><a href="#s-1-6">1.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Wide-sense stationarity, autocorrelation and its properties, power spectral density via the Wiener–Khinchin theorem, filtering of random signals (\(S_Y=|H|^2S_X\)), and Gaussian processes. Typical items: PSD of a random-phase sinusoid, output power of a filtered white noise, mean and variance from \(R_X(\tau)\).</p></div></div>
+<h2 id="s-1-1"><span class="n">1.1</span> Random variables: quick recall</h2>
+<p>A random variable \(X\) has distribution \(F_X(x)=P(X\le x)\) and density \(f_X(x)\). Moments: mean \(\mu=\E[X]\), mean-square \(\E[X^2]\), variance \(\sigma^2=\E[X^2]-\mu^2\). The Gaussian density \(f_X(x)=\dfrac1{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/2\sigma^2}\) gives tail probabilities
+\[
+P(X&gt;\mu+k\sigma)=Q(k),\qquad Q(x)=\frac12\erfc\!\left(\frac x{\sqrt2}\right).
+\]
+Sums of independent Gaussians are Gaussian; linear transformations preserve Gaussianity. Uncorrelated jointly Gaussian variables are independent. (Distributions in detail are in the Engineering Mathematics notes.)</p>
+<h2 id="s-1-2"><span class="n">1.2</span> Random processes</h2>
+<p>A random process \(X(t)\) is a collection of random variables indexed by time; each realisation (sample function) is a deterministic waveform. At a fixed time it is a random variable.</p>
+<div class="box formula"><div class="bt">Ensemble averages</div><div class="bb"><p>Mean: \(m_X(t)=\E[X(t)]\). &emsp; Autocorrelation: \(R_X(t_1,t_2)=\E[X(t_1)X(t_2)]\). &emsp; Autocovariance: \(C_X=R_X-m_X(t_1)m_X(t_2)\).<br>
+Cross-correlation: \(R_{XY}(t_1,t_2)=\E[X(t_1)Y(t_2)]\). Uncorrelated: \(C_{XY}=0\); orthogonal: \(R_{XY}=0\); independent \(\Rightarrow\) uncorrelated (converse true for Gaussians).</p></div></div>
+<h3 id="s-1-2-1"><span class="n">1.2.1</span> Stationarity and ergodicity</h3>
+<ul><li><strong>Strict-sense stationary (SSS)</strong>: all joint statistics are invariant to a time shift.</li><li><strong>Wide-sense stationary (WSS)</strong>: \(m_X\) is constant and \(R_X(t,t+\tau)=R_X(\tau)\) depends only on the lag. SSS (with finite second moments) \(\Rightarrow\) WSS. For a <strong>Gaussian</strong> process WSS \(\Leftrightarrow\) SSS.</li><li><strong>Ergodic</strong>: time averages of one sample function equal the ensemble averages, e.g. \(\lim\frac1{2T}\int_{-T}^{T}x(t)dt=m_X\) and \(\lim\frac1{2T}\int x(t)x(t+\tau)dt=R_X(\tau)\). Ergodic \(\Rightarrow\) stationary (not conversely). Ergodicity lets a single long record estimate power and correlation.</li></ul>
+<div class="box formula"><div class="bt">Properties of \(R_X(\tau)\) for WSS</div><div class="bb"><p>\(R_X(0)=\E[X^2]=\) average power. &emsp; \(R_X(-\tau)=R_X(\tau)\) (even). &emsp; \(|R_X(\tau)|\le R_X(0)\).<br>
+\(\lim_{|\tau|\to\infty}R_X(\tau)=m_X^2\) (for no periodic component) \(\Rightarrow\) \(m_X^2=R_X(\infty)\), variance \(=R_X(0)-R_X(\infty)\).<br>
+Periodic \(X(t)\) gives periodic \(R_X\). \(R_X\) is positive semi-definite: its transform is non-negative.</p></div></div>
+<div class="box example"><div class="bt">Reading mean and variance</div><div class="bb"><p>\(R_X(\tau)=4+6e^{-|\tau|}\): \(m_X^2=R_X(\infty)=4\Rightarrow m_X=\pm2\); power \(R_X(0)=10\); variance \(=10-4=6\). The dc power is \(4\) W, the fluctuating (ac) power \(6\) W.</p></div></div>
+<h2 id="s-1-3"><span class="n">1.3</span> Power spectral density</h2>
+<div class="box formula"><div class="bt">Wiener–Khinchin</div><div class="bb"><p>\(S_X(f)=\displaystyle\int_{-\infty}^\infty R_X(\tau)e^{-j2\pi f\tau}d\tau,\qquad R_X(\tau)=\int S_X(f)e^{j2\pi f\tau}df\).<br>
+Average power \(=R_X(0)=\displaystyle\int_{-\infty}^\infty S_X(f)df\). &emsp; \(S_X(f)\ge0\) and is even for a real process.</p></div></div>
+<div class="center"><div class="tw"><table><thead><tr><th>Process</th><th>\(R_X(\tau)\)</th><th>\(S_X(f)\)</th></tr></thead><tbody><tr><td>White noise</td><td>\(\dfrac{N_0}2\delta(\tau)\)</td><td>\(\dfrac{N_0}2\) (flat)</td></tr><tr><td>\(A\cos(2\pi f_ct+\Theta)\), \(\Theta\sim U(0,2\pi)\)</td><td>\(\dfrac{A^2}2\cos(2\pi f_c\tau)\)</td><td>\(\dfrac{A^2}4[\delta(f-f_c)+\delta(f+f_c)]\)</td></tr><tr><td>Random binary wave (\(\pm A\), bit \(T\), random start)</td><td>\(A^2\left(1-\dfrac{|\tau|}T\right),\ |\tau|&lt;T\)</td><td>\(A^2T\,\sinc^2(fT)\)</td></tr><tr><td>RC-filtered white noise</td><td>\(\dfrac{N_0}{4RC}e^{-|\tau|/RC}\)</td><td>\(\dfrac{N_0/2}{1+(2\pi fRC)^2}\)</td></tr></tbody></table></div></div>
+<p>For the random-phase sinusoid with \(A=4\): power \(=A^2/2=8\), and each spectral impulse has weight \(A^2/4=4\). For the random binary wave with \(A=1\), \(T=1\) ms: \(S_X(0)=A^2T=10^{-3}\,\)W/Hz and the first null is at \(f=1/T=1\) kHz.</p>
+<div class="box example"><div class="bt">A non-stationary process</div><div class="bb"><p>\(X(t)=A\cos\omega t\) with \(A\sim N(0,1)\): \(m_X=0\) but \(R_X(t,t+\tau)=\tfrac12[\cos\omega\tau+\cos(\omega(2t+\tau))]\) depends on \(t\), so \(X\) is not WSS. A sinusoid with random phase uniform on \([0,2\pi)\) <em>is</em> WSS.</p></div></div>
+<h2 id="s-1-4"><span class="n">1.4</span> Random signals through LTI systems</h2>
+<div class="box formula"><div class="bt">Filtering</div><div class="bb"><p>\(Y(t)=X(t)*h(t)\): \(\ m_Y=m_XH(0)\).&emsp; \(S_Y(f)=|H(f)|^2S_X(f)\).&emsp; \(R_Y(\tau)=R_X(\tau)*h(\tau)*h(-\tau)\).<br>
+Output power: \(P_Y=\displaystyle\int|H(f)|^2S_X(f)\,df\).<br>
+White noise \(N_0/2\) into a filter: \(P_Y=\dfrac{N_0}2\displaystyle\int|H(f)|^2df=N_0B_N|H(0)|^2\), with <strong>noise-equivalent bandwidth</strong> \(B_N=\dfrac1{|H(0)|^2}\displaystyle\int_0^\infty|H|^2df\) (RC low-pass: \(B_N=\dfrac\pi2f_{3dB}\)).<br>
+Differentiator: \(S_Y=(2\pi f)^2S_X\). Delay-and-add \(Y=X(t)+X(t-T)\): \(|H|^2=2+2\cos2\pi fT\) and \(R_Y(\tau)=2R_X(\tau)+R_X(\tau-T)+R_X(\tau+T)\).<br>
+Cross-spectrum: \(S_{YX}=H\,S_X\).</p></div></div>
+<div class="box example"><div class="bt">White noise through RC</div><div class="bb"><p>\(N_0/2=10^{-6}\) W/Hz, \(f_{3dB}=1\) kHz: \(P_Y=\dfrac{N_0}2\cdot2\cdot\dfrac\pi2f_{3dB}=\dfrac{N_0}{2}\pi f_{3dB}=3.14\) mW (equivalently \(N_0/4RC\)).<br>
+\(X\) with \(R_X=e^{-|\tau|}\) and \(Y(t)=X(t)+X(t-1)\): \(R_Y(0)=2R_X(0)+2R_X(1)=2+2e^{-1}=2.74\).</p></div></div>
+<h2 id="s-1-5"><span class="n">1.5</span> Gaussian processes</h2>
+<p>A process is Gaussian if every finite set of samples is jointly Gaussian; it is fully specified by its mean and autocorrelation, and the output of a linear filter driven by a Gaussian process is Gaussian. If \(X(t)\) is zero-mean Gaussian WSS with \(R_X(0)=\sigma^2\), then \(P(X(t)&gt;k\sigma)=Q(k)\) at any \(t\). For \(R_X(0)=4\): \(P(X&gt;4)=Q(2)=0.0228\).</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) WSS needs both a constant mean <em>and</em> an autocorrelation depending only on \(\tau\). (ii) \(R_X(0)\) is the <em>total</em> power, including dc; variance subtracts \(m_X^2\). (iii) Two-sided PSD \(N_0/2\) means one-sided \(N_0\). (iv) The PSD of a periodic or random-phase sinusoid is made of impulses. (v) Uncorrelated does not imply independent unless Gaussian.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Mean\({}^2\) \(=R(\infty)\); power \(=R(0)\); variance \(=R(0)-R(\infty)\). Filter output PSD: multiply by \(|H|^2\). White noise through any filter: \(P=(N_0/2)\int|H|^2df\) over \((-\infty,\infty)\).</p></div></div>
+<h2 id="s-1-6"><span class="n">1.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A random process is WSS if (A) its mean is constant and \(R_X\) depends only on \(\tau\) (B) all joint pdfs are time-invariant (C) its variance is zero (D) its mean is zero.</p>
+<p><strong>Q2.</strong> The average power of a WSS process equals (A) \(R_X(\infty)\) (B) \(R_X(0)\) (C) \(S_X(0)\) (D) \(R_X'(0)\).</p>
+<p><strong>Q3.</strong> The PSD of \(4\cos(2\pi f_ct+\Theta)\) with \(\Theta\) uniform consists of impulses of weight (A) 16 (B) 8 (C) 4 (D) 2 at \(\pm f_c\).</p>
+<p><strong>Q4.</strong> A Gaussian WSS process is always (A) ergodic (B) strict-sense stationary (C) white (D) zero-mean.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A). Q2 (B). Q3 (C): \(A^2/4=4\). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> \(R_X(\tau)=4+6e^{-|\tau|}\). The mean, and variance of \(X\) are (A) \(\pm2\), 6 (B) 4, 6 (C) \(\pm2\), 10 (D) 0, 10.</p>
+<p><strong>Q6.</strong> White noise with \(N_0/2=10^{-6}\) W/Hz drives an RC low-pass filter with \(f_{3dB}=1\) kHz. The output power is (A) 3.14 mW (B) 1 mW (C) 6.28 mW (D) 1.57 mW.</p>
+<p><strong>Q7.</strong> \(X(t)\) is zero-mean Gaussian WSS with \(R_X(0)=4\). \(P(X(t)&gt;4)=\) (A) 0.159 (B) 0.0228 (C) 0.00135 (D) 0.5.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A). Q6 (A). Q7 (B): \(\sigma=2\), \(Q(2)\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Random binary wave \(\pm1\) V with bit period \(T=1\) ms: PSD at \(f=0\) in mW/Hz: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> \(R_X(\tau)=e^{-|\tau|}\), \(Y(t)=X(t)+X(t-1)\). \(R_Y(0)\) (two decimals): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(A^2T=10^{-3}\) W/Hz \(=1\) mW/Hz. Q9: 2.74.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q10.</strong> Properties of the autocorrelation of a real WSS process: (A) even (B) maximum at \(\tau=0\) (C) its transform is non-negative (D) always decays to zero.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q10: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> PSD of white noise at the output of an ideal low-pass of bandwidth \(B\) (power)? &emsp; <strong>T2.</strong> Is \(A\cos\omega t\) (\(A\) random) WSS? &emsp; <strong>T3.</strong> \(S_Y\) for a differentiator.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(P=N_0B\). T2: no. T3: \((2\pi f)^2S_X\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>WSS: constant mean, \(R_X(\tau)\); Gaussian: WSS \(\Rightarrow\) SSS. Ergodic: time \(=\) ensemble averages.</li><li>\(R_X(0)=\) power; \(R_X(\infty)=m^2\); \(S_X=\mathcal F\{R_X\}\); power \(=\int S_X\).</li><li>Filtering: \(S_Y=|H|^2S_X\); white noise: \(S=N_0/2\), \(P=N_0B_N|H_0|^2\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="preface.html">&larr; Preface: How to Use These Notes</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch02.html">Noise, SNR and the Matched Filter &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Qf": "\\mathrm{Q}", "\\EbNo": "E_b/N_0", "\\Eb": "E_b", "\\Nzero": "N_0", "\\Rb": "R_b", "\\Rs": "R_s", "\\fc": "f_c", "\\fm": "f_m", "\\Ac": "A_c", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\erfc": "\\operatorname{erfc}", "\\E": "\\operatorname{E}", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix A: Mathematical Prerequisites | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-a.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix A: Mathematical Prerequisites | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-a.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Appendix A</div><h1>Mathematical Prerequisites</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-1">Trigonometry and hyperbolic functions</a></li><li><a href="#s-2">Series and sums</a></li><li><a href="#s-3">Calculus</a></li><li><a href="#s-4">Partial fractions</a></li><li><a href="#s-5">Linear algebra</a></li></ol></details><h2 id="s-1">Trigonometry and hyperbolic functions</h2>
+<div class="center"><p>1.4</p>
+<div class="tw"><table><tbody><tr><td>\(\sin^2\theta+\cos^2\theta=1\)</td><td>\(\sin2\theta=2\sin\theta\cos\theta\); \(\cos2\theta=\cos^2\theta-\sin^2\theta\)</td></tr><tr><td>\(\cos^2\theta=\frac{1+\cos2\theta}2\); \(\sin^2\theta=\frac{1-\cos2\theta}2\)</td><td>\(\sin A\cos B=\frac12[\sin(A+B)+\sin(A-B)]\)</td></tr><tr><td>\(\cos A\cos B=\frac12[\cos(A-B)+\cos(A+B)]\)</td><td>\(\sin A\sin B=\frac12[\cos(A-B)-\cos(A+B)]\)</td></tr><tr><td>\(\sin(\theta\pm90^\circ)=\pm\cos\theta\); \(\cos(\theta\pm90^\circ)=\mp\sin\theta\)</td><td>\(\sinh x=\frac{e^x-e^{-x}}2\), \(\cosh x=\frac{e^x+e^{-x}}2\)</td></tr><tr><td>\(\cosh^{-1}x=\ln\left(x+\sqrt{x^2-1}\right)\)</td><td>\(\tan\frac\Omega2\) (bilinear warping)</td></tr></tbody></table></div></div>
+<h2 id="s-2">Series and sums</h2>
+<ul><li>Geometric: \(\displaystyle\sum_{n=0}^{\infty}r^n=\frac1{1-r}\) (\(|r|&lt;1\)); \(\displaystyle\sum_{n=0}^{N-1}r^n=\frac{1-r^N}{1-r}\); \(\displaystyle\sum_{n=0}^\infty nr^n=\frac r{(1-r)^2}\).</li><li>\(\displaystyle\sum_{n=1}^Nn=\frac{N(N+1)}2\); \(\displaystyle\sum_{n=1}^Nn^2=\frac{N(N+1)(2N+1)}6\); \(\displaystyle\sum_{n\ \mathrm{odd}}\frac1{n^2}=\frac{\pi^2}8\).</li><li>Exponential: \(e^x=\sum x^n/n!\). Small angles: \(\sin x\approx x\), \(\cos x\approx1-x^2/2\).</li></ul>
+<h2 id="s-3">Calculus</h2>
+<ul><li>\(\int e^{at}dt=\frac1ae^{at}\); \(\int te^{at}dt=\frac{e^{at}}a\left(t-\frac1a\right)\); \(\int_0^\infty e^{-at}dt=\frac1a\); \(\int_{-\infty}^\infty\frac{dx}{1+x^2}=\pi\).</li><li>Integration by parts \(\int u\,dv=uv-\int v\,du\). Leibniz rule for \(\frac{d}{dt}\int_0^tf(t,\tau)d\tau\).</li><li>L’Hôpital: \(\lim\frac{f}{g}=\lim\frac{f'}{g'}\) for \(0/0\), \(\infty/\infty\).</li><li>\(\int_0^\infty\frac{\sin x}xdx=\frac\pi2\); \(\int_{-\infty}^\infty\sinc^2(x)dx=1\).</li></ul>
+<h2 id="s-4">Partial fractions</h2>
+<p>Distinct real: \(\frac{N(s)}{\prod(s+p_k)}=\sum\frac{A_k}{s+p_k}\), \(A_k=[(s+p_k)F]_{s=-p_k}\). Repeated \((s+p)^2\): \(\frac{A_1}{s+p}+\frac{A_2}{(s+p)^2}\), \(A_2=[(s+p)^2F]_{-p}\), \(A_1=\frac d{ds}[(s+p)^2F]_{-p}\). Improper: divide first. Complex pair: complete the square.</p>
+<h2 id="s-5">Linear algebra</h2>
+<p>\(2\times2\) inverse: \(\begin{bmatrix}a&amp;b\\c&amp;d\end{bmatrix}^{-1}=\frac1{ad-bc}\begin{bmatrix}d&amp;-b\\-c&amp;a\end{bmatrix}\). Cramer’s rule: \(x_k=\det\mathbf A_k/\det\mathbf A\). Eigenvalues: \(\det(\mathbf A-\lambda\mathbf I)=0\).</p><div class="pager bottom"><a class="pn" href="ch37.html">&larr; GATE Mock Tests</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="appendix-b.html">Complex-Number Operations &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

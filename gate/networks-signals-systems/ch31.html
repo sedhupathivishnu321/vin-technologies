@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 31: 2-Mark Problem Bank | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="31 two-mark problems in the GATE style (original problems). Target: \le3 minutes each. Worked solutions follow every group; cover them and attempt first.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch31.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 31: 2-Mark Problem Bank | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="31 two-mark problems in the GATE style (original problems). Target: \le3 minutes each. Worked solutions follow every group; cover them and attempt first."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch31.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 31</div><h1>2-Mark Problem Bank</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-1">A. Multi-step circuit analysis</a></li><li><a href="#s-2">B. Theorem-based problems</a></li><li><a href="#s-3">C. RLC transient analysis</a></li><li><a href="#s-4">D. Laplace-domain circuits</a></li><li><a href="#s-5">E. Convolution</a></li><li><a href="#s-6">F. Fourier analysis</a></li><li><a href="#s-7">G. Sampling and aliasing</a></li><li><a href="#s-8">H. \(z\)-transform</a></li><li><a href="#s-9">I. Filter design</a></li></ol></details><div class="box notebox"><div class="bt">How to use</div><div class="bb"><p>\(31\) two-mark problems in the GATE style (original problems). Target: \(\le3\) minutes each. Worked solutions follow every group; cover them and attempt first.</p></div></div>
+<h2 id="s-1">A. Multi-step circuit analysis</h2>
+<div class="box twomark"><div class="bt">Set A</div><div class="bb"><p><strong>A1.</strong> A \(12\) V source drives \(4\ \Omega\) in series with (\(6\ \Omega\parallel12\ \Omega\)). The power dissipated in the \(12\ \Omega\) resistor is (A) \(1.5\) W (B) \(3\) W (C) \(6\) W (D) \(12\) W.</p>
+<p><strong>A2.</strong> A \(10\) A source injects current into node \(A\). \(A\) connects to ground through \(5\ \Omega\) and to node \(B\) through \(5\ \Omega\); \(B\) connects to ground through \(10\ \Omega\). \(V_B=\) (A) \(25\) V (B) \(37.5\) V (C) \(50\) V (D) \(12.5\) V.</p>
+<p><strong>A3.</strong> Mesh 1 has a \(10\) V source, \(3\ \Omega\) own resistance and shares \(2\ \Omega\) with mesh 2, which has \(2\ \Omega\) own. Current in the shared resistor: (A) \(1.25\) A (B) \(2.5\) A (C) \(0.625\) A (D) \(3.75\) A.</p>
+<p><strong>A4.</strong> A source has \(V_{Th}=12\) V, \(R_{Th}=3\ \Omega\). Power in a \(6\ \Omega\) load: (A) \(8\) W (B) \(10.67\) W (C) \(12\) W (D) \(24\) W.</p>
+<p><strong>A5.</strong> Bridge: \(R_1=3\), \(R_2=6\), \(R_3=6\), \(R_4=3\), \(R_5=3\ \Omega\) (arms A–C, C–B, A–D, D–B; \(R_5\) C–D). \(R_{AB}=\) (A) \(3.6\) (B) \(4.2\) (C) \(4.5\) (D) \(6\ \Omega\).</p></div></div>
+<p><strong>Solutions.</strong> A1: \(I=12/(4+4)=1.5\) A; \(V_{12}=6\) V; \(P=36/12=3\) W (B). A2: \(V_A=1.5V_B\); \(10=V_A/5+V_B/10=0.4V_B\Rightarrow V_B=25\) V (A). A3: \([5,-2;-2,4]\mathbf I=[10,0]\): \(I_2=I_1/2\), \(4I_1=10\), \(I_1=2.5\), \(I_2=1.25\); shared current \(=I_1-I_2=1.25\) A (A). A4: \(I=12/9\), \(P=(1.333)^2\cdot6=10.67\) W (B). A5: \(\Delta\)–Y conversion gives \(4.2\ \Omega\) (B).</p>
+<h2 id="s-2">B. Theorem-based problems</h2>
+<div class="box twomark"><div class="bt">Set B</div><div class="bb"><p><strong>B1.</strong> A network has open-circuit voltage \(20\) V and short-circuit current \(4\) A. The maximum power it can deliver to a resistive load is (A) \(20\) W (B) \(80\) W (C) \(10\) W (D) \(16\) W.</p>
+<p><strong>B2.</strong> \(10\) V in series with \(5\ \Omega\) feeds a node; the node connects to ground through \(5\ \Omega\) and also receives a \(2\) A source. The node voltage is (A) \(5\) V (B) \(7.5\) V (C) \(10\) V (D) \(15\) V.</p>
+<p><strong>B3.</strong> \(\tilde V_{Th}=12\angle0^\circ\) V (rms), \(Z_{Th}=3+j4\ \Omega\). Maximum load power is (A) \(6\) W (B) \(12\) W (C) \(24\) W (D) \(48\) W.</p>
+<p><strong>B4.</strong> \(V_{oc}=4\) V, \(I_{sc}=5\) A for a network with a dependent source. Its Thevenin resistance is (A) \(0.8\ \Omega\) (B) \(1.25\ \Omega\) (C) \(1.33\ \Omega\) (D) \(4\ \Omega\).</p></div></div>
+<p><strong>Solutions.</strong> B1: \(R_{Th}=5\ \Omega\), \(P_{max}=20^2/20=20\) W (A). B2: \(10\) V alone: \(5\) V; \(2\) A alone: \(2\times2.5=5\) V; total \(10\) V (C). B3: \(144/(4\cdot3)=12\) W (B). B4: \(R_{Th}=4/5=0.8\) (A).</p>
+<h2 id="s-3">C. RLC transient analysis</h2>
+<div class="box twomark"><div class="bt">Set C</div><div class="bb"><p><strong>C1.</strong> \(H(s)=25/(s^2+6s+25)\). Percentage overshoot of the step response: (A) \(4.3\%\) (B) \(9.5\%\) (C) \(16.3\%\) (D) \(25\%\).</p>
+<p><strong>C2.</strong> A series RLC with \(L=4\) mH, \(C=1\ \mu\)F is critically damped for \(R=\) (A) \(63.2\ \Omega\) (B) \(126.5\ \Omega\) (C) \(200\ \Omega\) (D) \(400\ \Omega\).</p>
+<p><strong>C3.</strong> \(24\) V, \(R_1=4\ \Omega\), \(L=2\) H, and \(R_2=8\ \Omega\) (initially shorted) is inserted at \(t=0\). The current at \(t=0.1\) s is (A) \(2\) A (B) \(4.2\) A (C) \(6\) A (D) \(3.1\) A.</p></div></div>
+<p><strong>Solutions.</strong> C1: \(\omega_n=5\), \(\zeta=0.6\), \(\%OS=9.5\%\) (B). C2: \(2\sqrt{L/C}=2\sqrt{4000}=126.5\) (B). C3: \(i=2+4e^{-6t}\), \(i(0.1)=4.2\) A (B).</p>
+<h2 id="s-4">D. Laplace-domain circuits</h2>
+<div class="box twomark"><div class="bt">Set D</div><div class="bb"><p><strong>D1.</strong> \(\mathcal L^{-1}\left\{\frac{2s+3}{(s+1)(s+2)}\right\}\) at \(t=1\) is (A) \(0.50\) (B) \(0.37\) (C) \(1.0\) (D) \(0.14\).</p>
+<p><strong>D2.</strong> \(H(s)=\dfrac{100}{s^2+10s+100}\). Its step-response overshoot is (A) \(4.3\%\) (B) \(9.5\%\) (C) \(16.3\%\) (D) \(25\%\).</p>
+<p><strong>D3.</strong> \(H(s)=\dfrac{s+4}{s^2+5s+6}\). The final value of the step response is (A) \(0.667\) (B) \(1\) (C) \(4\) (D) \(0\).</p></div></div>
+<p><strong>Solutions.</strong> D1: \(e^{-t}+e^{-2t}\); \(0.368+0.135=0.503\) (A). D2: \(\omega_n=10\), \(2\zeta\omega_n=10\), \(\zeta=0.5\), \(16.3\%\) (C). D3: \(H(0)=4/6=0.667\) (A).</p>
+<h2 id="s-5">E. Convolution</h2>
+<div class="box twomark"><div class="bt">Set E</div><div class="bb"><p><strong>E1.</strong> \(\{1,2,1\}*\{1,1,1\}\) at \(n=2\): (A) \(1\) (B) \(3\) (C) \(4\) (D) \(2\).</p>
+<p><strong>E2.</strong> \(x(t)=u(t)-u(t-2)\): \((x*x)(2)=\) (A) \(1\) (B) \(2\) (C) \(4\) (D) \(0\).</p>
+<p><strong>E3.</strong> \(e^{-t}u(t)*e^{-2t}u(t)\) at \(t=\ln2\): (A) \(0.25\) (B) \(0.5\) (C) \(0.75\) (D) \(0.125\).</p></div></div>
+<p><strong>Solutions.</strong> E1: \(1+2+1=4\) (C). E2: triangle of base \(4\), peak \(2\) (B). E3: \(e^{-\ln2}-e^{-2\ln2}=0.5-0.25=0.25\) (A).</p>
+<h2 id="s-6">F. Fourier analysis</h2>
+<div class="box twomark"><div class="bt">Set F</div><div class="bb"><p><strong>F1.</strong> A square wave of amplitude \(\pm5\) has fundamental amplitude (A) \(3.18\) (B) \(5\) (C) \(6.37\) (D) \(7.07\).</p>
+<p><strong>F2.</strong> \(x(t)=2+3\cos t+4\sin2t\) has average power (A) \(9\) (B) \(16.5\) (C) \(25\) (D) \(29\).</p>
+<p><strong>F3.</strong> The energy of \(e^{-|t|}\) is (A) \(1\) (B) \(2\) (C) \(0.5\) (D) \(\pi\).</p>
+<p><strong>F4.</strong> The FT of \(\rect(t/2)\cos10t\) (width-\(2\) pulse) at \(\omega=10\) is (A) \(2\) (B) \(1\) (C) \(0.5\) (D) \(0\).</p></div></div>
+<p><strong>Solutions.</strong> F1: \(4A/\pi=6.37\) (C). F2: \(4+\tfrac92+\tfrac{16}2=16.5\) (B). F3: \(2\int_0^\infty e^{-2t}dt=1\) (A). F4: \(\tfrac12X_r(0)=\tfrac12\cdot2=1\) (B).</p>
+<h2 id="s-7">G. Sampling and aliasing</h2>
+<div class="box twomark"><div class="bt">Set G</div><div class="bb"><p><strong>G1.</strong> A \(1200\) Hz cosine is sampled at \(1\) kHz and ideally reconstructed. The output frequency is (A) \(1200\) Hz (B) \(200\) Hz (C) \(800\) Hz (D) \(0\).</p>
+<p><strong>G2.</strong> Nyquist rate of \(\sinc^2(1000t)\) is (A) \(1\) kHz (B) \(2\) kHz (C) \(4\) kHz (D) \(500\) Hz.</p>
+<p><strong>G3.</strong> Minimum sampling rate for a band-pass signal in \(5\)–\(6\) kHz: (A) \(12\) kHz (B) \(6\) kHz (C) \(2\) kHz (D) \(1\) kHz.</p></div></div>
+<p><strong>Solutions.</strong> G1: \(|1200-1000|=200\) (B). G2: \(\sinc(1000t)\) spectrum extends to \(500\) Hz, \(\sinc^2\) to \(1\) kHz; rate \(2\) kHz (B). G3: \(B=1\), \(\lfloor6\rfloor=6\), \(f_s=2\cdot6/6=2\) kHz (C).</p>
+<h2 id="s-8">H. \(z\)-transform</h2>
+<div class="box twomark"><div class="bt">Set H</div><div class="bb"><p><strong>H1.</strong> \(X(z)=\dfrac1{(1-0.5z^{-1})^2}\) (causal). \(x[3]=\) (A) \(0.125\) (B) \(0.5\) (C) \(0.25\) (D) \(1\).</p>
+<p><strong>H2.</strong> \(y[n]=0.5y[n-1]+x[n]\), \(x[n]=(0.5)^nu[n]\). \(y[2]=\) (A) \(0.25\) (B) \(0.5\) (C) \(0.75\) (D) \(1\).</p>
+<p><strong>H3.</strong> \(H(z)=\dfrac1{(1-0.5z^{-1})(1-2z^{-1})}\) is BIBO stable for the ROC (A) \(|z|&gt;2\) (B) \(0.5&lt;|z|&lt;2\) (C) \(|z|&lt;0.5\) (D) none.</p></div></div>
+<p><strong>Solutions.</strong> H1: \(x[n]=(n+1)0.5^n\), \(x[3]=4\cdot0.125=0.5\) (B). H2: \(y=(n+1)0.5^n\); \(y[2]=0.75\) (C). H3: unit circle in the ROC: (B).</p>
+<h2 id="s-9">I. Filter design</h2>
+<div class="box twomark"><div class="bt">Set I</div><div class="bb"><p><strong>I1.</strong> A Hamming-window FIR low-pass with transition width \(0.05\pi\) needs about (A) \(33\) (B) \(66\) (C) \(133\) (D) \(265\) taps.</p>
+<p><strong>I2.</strong> \(H_a(s)=\dfrac1{s+3}\) mapped by the bilinear transform with \(T=1\) has its pole at (A) \(0.2\) (B) \(-0.2\) (C) \(0.05\) (D) \(-5\).</p>
+<p><strong>I3.</strong> Butterworth low-pass: \(\alpha_p=3\) dB at \(\omega_p=1\), \(\alpha_s=20\) dB at \(\omega_s=2\). Minimum order: (A) \(3\) (B) \(4\) (C) \(5\) (D) \(6\).</p></div></div>
+<p><strong>Solutions.</strong> I1: \(6.6\pi/0.05\pi=132\to133\) (C). I2: \(z=\frac{1+sT/2}{1-sT/2}=\frac{1-1.5}{1+1.5}=-0.2\) (B). I3: \(N\ge\frac{\log(99/0.995)}{2\log2}=3.32\to4\) (B).</p><div class="pager bottom"><a class="pn" href="ch30.html">&larr; 1-Mark Problem Bank</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch32.html">Numerical Answer Type Problems &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

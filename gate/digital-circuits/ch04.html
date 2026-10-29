@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 4: Karnaugh Maps and Boolean Minimization | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Reading a minimal SOP/POS from a 3- or 4-variable K-map (with don’t-cares), counting prime and essential prime implicants, NAND/NOR two-level realisations, and spotting static hazards. Often combined">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch04.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 4: Karnaugh Maps and Boolean Minimization | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Reading a minimal SOP/POS from a 3- or 4-variable K-map (with don’t-cares), counting prime and essential prime implicants, NAND/NOR two-level realisations, and spotting static hazards. Often combined"><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch04.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 4</div><h1>Karnaugh Maps and Boolean Minimization</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-4-1">4.1 Why minimise?</a></li><li><a href="#s-4-2">4.2 The K-map</a></li><li><a href="#s-4-3">4.3 Quine–McCluskey (tabular) method</a></li><li><a href="#s-4-4">4.4 Two-level NAND and NOR realisations</a></li><li><a href="#s-4-5">4.5 Hazards</a></li><li><a href="#s-4-6">4.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Reading a minimal SOP/POS from a 3- or 4-variable K-map (with don’t-cares), counting prime and essential prime implicants, NAND/NOR two-level realisations, and spotting static hazards. Often combined with later chapters (MUX, decoder, PLA).</p></div></div>
+<h2 id="s-4-1"><span class="n">4.1</span> Why minimise?</h2>
+<p>Fewer product terms and literals mean fewer gates and gate inputs, less area, power and delay. The K-map is a graphical method that places logically adjacent minterms in physically adjacent cells.</p>
+<h2 id="s-4-2"><span class="n">4.2</span> The K-map</h2>
+<p>Cells are labelled in <strong>Gray-code order</strong> so that neighbouring cells (including the wrap-around ones) differ in exactly one variable.</p>
+<figure id="fig-4-1"><div class="figimgs"><img src="img/d04_kmap4.png" alt="" loading="lazy"></div><figcaption><b>Figure 4.1.</b> A 4-variable K-map with cell numbers \(m_0\ldots m_{15}\); rows \(AB\) and columns \(CD\) in Gray order \(00,01,11,10\).</figcaption></figure>
+<div class="box formula"><div class="bt">Grouping rules</div><div class="bb"><p>Group the 1s in rectangles of size \(2^k\) (\(1,2,4,8,16\)); a group of \(2^k\) cells eliminates \(k\) variables, giving a product term of \(n-k\) literals.<br>
+Groups may wrap around the edges (left–right, top–bottom, and all four corners). Groups may overlap; each should be as large as possible.<br>
+In an \(n\)-variable map each cell has exactly \(n\) neighbours.<br>
+<strong>Prime implicant (PI):</strong> a group that cannot be enlarged. <strong>Essential PI (EPI):</strong> a PI covering a 1 that no other PI covers. A minimal cover must contain all EPIs.</p></div></div>
+<h3 id="s-4-2-1"><span class="n">4.2.1</span> Procedure for minimal SOP</h3>
+<ol><li>Mark the 1s (and \(d\) for don’t-cares).</li><li>Circle every 1 that has only one possible largest group \(\Rightarrow\) EPIs.</li><li>Cover the remaining 1s with the fewest and largest additional PIs.</li><li>Read each group: keep variables that are constant across the group (1 \(\to\) uncomplemented, 0 \(\to\) complemented).</li></ol>
+<p><strong>Minimal POS:</strong> group the <em>0s</em>, read the group as an AND of complemented variables, then complement (De Morgan) to get a sum term; or minimise \(\overline F\) in SOP and complement the result.</p>
+<h3 id="s-4-2-2"><span class="n">4.2.2</span> Don’t-care conditions</h3>
+<p>Input combinations that never occur (or whose output does not matter) are marked \(d\) or \(X\). Treat each \(d\) as 1 if it enlarges a group and as 0 otherwise; never create a group made only of don’t-cares.</p>
+<div class="box example"><div class="bt">Four-variable SOP</div><div class="bb"><p>\(F(A,B,C,D)=\sum m(0,1,2,5,6,7,8,9,10,14)\).<br>
+Quad of the columns \(m_0,m_1,m_8,m_9\): \(B'C'\) (EPI). Quad \(m_2,m_6,m_{10},m_{14}\): \(CD'\) (EPI). Remaining 1s \(m_5,m_7\): group \(A'BD\).
+\[
+F=B'C'+CD'+A'BD.
+\]
+Prime implicants: \(CD',\,B'D',\,B'C',\,A'C'D,\,A'BD,\,A'BC\) (six PIs), of which two are essential. Literal count \(=2+2+3=7\).</p></div></div>
+<div class="box example"><div class="bt">Don’t-cares</div><div class="bb"><p>\(F=\sum m(1,3,7,11,15)+d(0,2,5)\). \(m_{11},m_{15},m_3,m_7\) give the quad \(CD\) (EPI). The remaining minterm \(m_1\) can be covered by \(A'D\) (using \(d_5\)) or \(A'B'\) (using \(d_0,d_2\)), both of the same cost:
+\[
+F=CD+A'D\quad\text{or}\quad F=CD+A'B'.
+\]
+Minimal forms are not always unique.</p></div></div>
+<div class="box example"><div class="bt">Equal to a XNOR</div><div class="bb"><p>\(F=\sum m(0,2,5,7,8,10,13,15)\): the corners \(m_0,m_2,m_8,m_{10}\) form \(B'D'\); the centre block \(m_5,m_7,m_{13},m_{15}\) forms \(BD\). So \(F=B'D'+BD=B\odot D\).</p></div></div>
+<div class="box example"><div class="bt">Minimal POS</div><div class="bb"><p>\(F=\sum m(0,1,2,5,8,9,10)\). Zeros: \(3,4,6,7,11,12,13,14,15\). Minimal SOP of \(\overline F=CD+BD'+AB\). Therefore
+\[
+F=(C'+D')(B'+D)(A'+B').
+\]</p></div></div>
+<h3 id="s-4-2-3"><span class="n">4.2.3</span> Five-variable maps</h3>
+<p>Draw two 4-variable maps (for \(E=0\) and \(E=1\)). Cells in the same position on the two maps are adjacent; groups may be formed across the layers. A group of 8 cells in a 5-variable map eliminates 3 variables and leaves a 2-literal term.</p>
+<h2 id="s-4-3"><span class="n">4.3</span> Quine–McCluskey (tabular) method</h2>
+<p>Systematic version of the K-map for any number of variables.</p>
+<ol><li>List minterms (and don’t-cares) in binary, grouped by the number of 1s.</li><li>Combine terms from adjacent groups that differ in a single bit; replace that bit by a dash. Repeat until no further combining is possible. Terms never combined are prime implicants.</li><li>Draw the prime-implicant chart (rows PIs, columns minterms, ignoring don’t-cares). Pick EPIs, then cover the remaining minterms with the fewest PIs (Petrick’s method if choices remain).</li></ol>
+<p>The complexity grows exponentially with the number of variables, which is why heuristic tools (Espresso) are used in practice.</p>
+<h2 id="s-4-4"><span class="n">4.4</span> Two-level NAND and NOR realisations</h2>
+<div class="box formula"><div class="bt">Conversions</div><div class="bb"><p>SOP \(\to\) <strong>NAND–NAND</strong>: \(F=\overline{\overline{P_1}\cdot\overline{P_2}\cdots}=P_1+P_2+\cdots\) by De Morgan. Number of NANDs \(=\) (number of product terms) \(+1\) (single-literal terms need no first-level gate; complemented literals need inverters).<br>
+POS \(\to\) <strong>NOR–NOR</strong>: \(F=\overline{\overline{S_1+\cdots}}\) similarly; gates \(=\) (sum terms) \(+1\).<br>
+<strong>AND–OR–INVERT</strong> and <strong>OR–AND–INVERT</strong> realise \(\overline F\) directly.</p></div></div>
+<p>For \(F=B'C'+CD'+A'BD\) a NAND–NAND circuit uses \(3+1=4\) NAND gates (with inverters for \(B',C',D',A'\) as needed).</p>
+<h2 id="s-4-5"><span class="n">4.5</span> Hazards</h2>
+<p>A <strong>static-1 hazard</strong> is a momentary 0 in an output that should remain 1 when a single input changes; a <strong>static-0 hazard</strong> is a momentary 1 in an output that should stay 0; a <strong>dynamic hazard</strong> is multiple transitions on a change that should give one.</p>
+<ul><li>In a two-level SOP circuit, a static-1 hazard exists if two adjacent 1s on the K-map are covered by <em>different</em> groups with no common group. Remedy: add the redundant (consensus) term.</li><li>Example: \(F=AB+A'C\) with \(B=C=1\) and \(A\) changing: add \(BC\) to get \(F=AB+A'C+BC\).</li><li>A hazard-free SOP must cover every pair of adjacent 1s by some product term. Hazards cause trouble only in asynchronous or clock/enable paths.</li></ul>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Do not group cells in a diagonal or in non-power-of-two counts (3, 5, 6). (ii) A minimal expression need not use all PIs, and a PI need not be in the cover; only EPIs must be. (iii) Do not use a don’t-care as the sole content of a group. (iv) Minimal POS is read from the zeros and complemented variables appear <em>uncomplemented</em> in the sum term. (v) Removing the consensus term to minimise <em>introduces</em> a hazard.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Octets and quads first (largest groups), then pairs. Count EPIs by looking at 1s with a single covering group. For \(n=4\) the number of literals in a term is \(4-k\); a quad gives 2 literals. If \(F=\sum m(2,3,6,7,10,11,14,15)\) the map is a whole column pair and the answer is just \(C\).</p></div></div>
+<h2 id="s-4-6"><span class="n">4.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The minimal SOP for \(F=\sum m(2,3,6,7,10,11,14,15)\) (four variables \(A,B,C,D\)) is (A) \(C\) (B) \(D\) (C) \(AB\) (D) \(C+D\).</p>
+<p><strong>Q2.</strong> The number of neighbouring cells of any cell in a 5-variable K-map is (A) 4 (B) 5 (C) 8 (D) 16.</p>
+<p><strong>Q3.</strong> \(F=\sum m(0,2,5,7,8,10,13,15)\) equals (A) \(B\oplus D\) (B) \(B\odot D\) (C) \(BD\) (D) \(B+D\).</p>
+<p><strong>Q4.</strong> The hazard in \(F=AB+\overline AC\) for \(B=C=1\) is removed by adding (A) \(BC\) (B) \(\overline BC\) (C) \(A\overline C\) (D) \(AC\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A): \(C=1\) in rows with \(C=1\) (cells 2,3,6,7,10,11,14,15). Q2 (B). Q3 (B). Q4 (A): consensus term.</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> For \(F=\sum m(4,5,6,7,8,12,13)\), the minimal SOP is (A) \(A'B+BC'+AC'D'\) (B) \(B+AC'D'\) (C) \(A'B+AC'\) (D) \(BC'+A'B\).</p>
+<p><strong>Q6.</strong> For \(F=\sum m(0,1,2,5,8,9,10)\) the minimal POS is (A) \((C'+D')(B'+D)(A'+B')\) (B) \((C+D)(B+D')(A+B)\) (C) \(B'D'+B'C'+A'C'D\) (D) \((B'+D)(A'+B')\).</p>
+<p><strong>Q7.</strong> \(F=\sum m(1,3,7,11,15)+d(0,2,5)\). Number of literals in a minimal SOP: (A) 2 (B) 3 (C) 4 (D) 6.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A): \(m_4,m_5,m_6,m_7\to A'B\); \(m_4,m_5,m_{12},m_{13}\to BC'\); \(m_8,m_{12}\to AC'D'\). Q6 (A) from the worked example. Q7 (C): \(CD+A'D\) has \(2+2=4\) literals.</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Number of prime implicants of \(F=\sum m(0,1,2,5,6,7,8,9,10,14)\): <span class="blank"></span>; number of essential ones: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Number of 2-input NAND gates (ignoring input inverters) in a two-level NAND–NAND realisation of \(F=AB+CD+EF\) (the output NAND has 3 inputs): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Number of literals in the minimal SOP of \(\sum m(0,2,5,7,8,10,13,15)\): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 6 and 2. Q9: 3 first-level NANDs plus 1 output NAND \(=4\) gates. Q10: \(B'D'+BD\) has 4 literals.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which statements hold? (A) Every essential prime implicant appears in every minimal SOP. (B) A minimal SOP is always unique. (C) A group of 4 cells in a 4-variable map yields a 2-literal term. (D) Don’t-cares can be used to enlarge groups.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (C), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Minimise \(\sum m(0,1,3,7)\). &emsp; <strong>T2.</strong> What does a group of 8 in a 4-variable map give? &emsp; <strong>T3.</strong> Name the remedy for a static-1 hazard.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(A'B'+BC\) (3 variables). T2: a single literal. T3: add the consensus term.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Gray-ordered map; groups \(2^k\) eliminate \(k\) variables; wrap-around adjacency; \(n\) neighbours per cell.</li><li>EPIs must appear in every minimal cover; don’t-cares only help to enlarge groups.</li><li>POS: group zeros of \(F\) (or minimise \(\overline F\) and complement).</li><li>SOP \(\to\) NAND–NAND, POS \(\to\) NOR–NOR; gates \(=\) terms \(+1\).</li><li>Static-1 hazard: two adjacent 1s in different groups; fix with the consensus term.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch03.html">&larr; Boolean Algebra, Logic Gates and Canonical Forms</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch05.html">Arithmetic Circuits, Comparators and the ALU &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix D: Final GATE Checklist | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/appendix-d.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix D: Final GATE Checklist | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/appendix-d.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Appendix D</div><h1>Final GATE Checklist</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-D-1">D.1 Must-know concepts</a></li><li><a href="#s-D-2">D.2 Must-remember equations</a></li><li><a href="#s-D-3">D.3 Frequently tested concepts</a></li><li><a href="#s-D-4">D.4 Common calculation errors</a></li><li><a href="#s-D-5">D.5 Common conceptual traps</a></li><li><a href="#s-D-6">D.6 24-hour revision sheet</a></li><li><a href="#s-D-7">D.7 7-day revision plan</a></li><li><a href="#s-D-8">D.8 Final Analog Circuits formula sheet</a></li></ol></details><h2 id="s-D-1"><span class="n">D.1</span> Must-know concepts</h2>
+<p>Diode ON/OFF analysis; rectifier parameters; BJT/MOS region tests and DC bias; small-signal parameters and the six single-stage amplifiers; current mirrors and diff-pair half circuits; op-amp golden rules and standard circuits; comparators and Schmitt thresholds; filter order and \(Q\); oscillator frequencies and gain conditions; feedback topologies; Bode-plot construction, PM and GM.</p>
+<h2 id="s-D-2"><span class="n">D.2</span> Must-remember equations</h2>
+<p>\(V_T=26\) mV; \(g_m=I_C/V_T\) (BJT) and \(2I_D/V_{ov}\) (MOS); \(r_\pi=\beta/g_m\); \(r_o=V_A/I_C\); \(A_v=-g_mR_L'\); \(A_f=A/(1+A\beta)\); \(f_c=1/2\pi RC\); \(C_M=C(1+|A|)\); \(f_T=g_m/2\pi(C_\pi+C_\mu)\); \(V_{dc}=V_m/\pi\) or \(2V_m/\pi\); \(V_{UT}=\beta V_{sat}\); PM \(=180^\circ+\angle L\).</p>
+<h2 id="s-D-3"><span class="n">D.3</span> Frequently tested concepts</h2>
+<p>Two-diode circuits; biased clippers; BJT with divider bias; CE with/without \(R_E\) bypass; source-follower gain; mirror ratio; CMRR; op-amp with saturation; Schmitt hysteresis width; Sallen–Key \(Q\); Wien/Colpitts frequency; feedback topology type; PM of a follower.</p>
+<h2 id="s-D-4"><span class="n">D.4</span> Common calculation errors</h2>
+<p>Using \(I_C\) for \(I_E\) in the base loop; forgetting \((\beta+1)R_E\); using \(V_{BE}=0.7\) for a PNP with wrong sign; quoting single-ended gain as differential (factor 2); dropping \(R_L\) in \(R_C\|R_L\); mixing rad/s and Hz; omitting \(\times20\) or \(\times10\) in dB; wrong quadratic root in MOS bias; using \(V_{sat}=\) supply when a value is given.</p>
+<h2 id="s-D-5"><span class="n">D.5</span> Common conceptual traps</h2>
+<p>Virtual short in a comparator; \(r_d\) depends on \(I_D\) not \(V_D\); clamper does not clip; PIV with a filter capacitor is \(2V_m\); Miller effect only for inverting stages; body effect only when \(V_{SB}\neq0\); feedback does not improve input-referred SNR; a Schmitt trigger does not filter noise; integrators need a DC path.</p>
+<h2 id="s-D-6"><span class="n">D.6</span> 24-hour revision sheet</h2>
+<p><strong>Hour 0–4:</strong> formula book (Ch. 30) and one-page sheets (App. C).<br>
+<strong>Hour 4–10:</strong> solve Chapter 31 (topic-wise) without notes; mark mistakes.<br>
+<strong>Hour 10–14:</strong> Level 2 and Level 3 tests (Ch. 33).<br>
+<strong>Hour 14–18:</strong> redo mistakes; re-derive: Miller, Widlar, Sallen–Key \(Q\), \(S\) factor.<br>
+<strong>Hour 18–22:</strong> traps (App. D.5), MSQ drill, sleep.<br>
+<strong>Hour 22–24:</strong> light formula recall only.</p>
+<h2 id="s-D-7"><span class="n">D.7</span> 7-day revision plan</h2>
+<div class="center"><div class="tw"><table><thead><tr><th class="c">Day</th><th>Focus</th></tr></thead><tbody><tr><td class="c">1</td><td>Diodes, clippers, clampers, rectifiers (Ch. 1–5)</td></tr><tr><td class="c">2</td><td>BJT biasing and small-signal amplifiers (Ch. 6–10)</td></tr><tr><td class="c">3</td><td>MOSFET biasing and amplifiers, frequency response (Ch. 11–15)</td></tr><tr><td class="c">4</td><td>Current mirrors, differential amplifiers, op-amp fundamentals (Ch. 16–18)</td></tr><tr><td class="c">5</td><td>Op-amp circuits, filters, comparators, Schmitt, oscillators (Ch. 19–24)</td></tr><tr><td class="c">6</td><td>Feedback, Bode, Miller, stability (Ch. 25–28)</td></tr><tr><td class="c">7</td><td>Full test (Ch. 33.8), error log, formula sheet</td></tr></tbody></table></div></div>
+<h2 id="s-D-8"><span class="n">D.8</span> Final Analog Circuits formula sheet</h2>
+<p>Print or copy Chapter 30 and the one-page sheets of Appendix C; carry them in your final revision. Pay special attention to derived quantities that GATE likes to disguise: \(g_m\) from \(I_C\) or \((k_n,I_D)\), effective load \(R_C\|R_L\|r_o\), reflected resistance \((\beta+1)R_E\), noise gain \(1+R_f/R_1\), closed-loop bandwidth GBW\(/(1+A\beta)\)-type relations, and PM from pole positions.</p><div class="pager bottom"><a class="pn" href="appendix-c.html">&larr; GATE Quick Revision Sheets</a><a class="pn mid" href="./">All chapters</a><span></span></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

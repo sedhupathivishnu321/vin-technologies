@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 6: Multiplexers, Decoders, Encoders and Code Converters | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Implementing functions with MUXes (variable-entered inputs) and decoders, building large MUX/decoder trees from small ones, priority-encoder logic and standard code converters.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch06.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 6: Multiplexers, Decoders, Encoders and Code Converters | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Implementing functions with MUXes (variable-entered inputs) and decoders, building large MUX/decoder trees from small ones, priority-encoder logic and standard code converters."><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch06.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 6</div><h1>Multiplexers, Decoders, Encoders and Code Converters</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-6-1">6.1 Multiplexer (data selector)</a></li><li><a href="#s-6-2">6.2 Demultiplexer and decoder</a></li><li><a href="#s-6-3">6.3 Encoder</a></li><li><a href="#s-6-4">6.4 Code converters</a></li><li><a href="#s-6-5">6.5 Tri-state buffers and buses</a></li><li><a href="#s-6-6">6.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Implementing functions with MUXes (variable-entered inputs) and decoders, building large MUX/decoder trees from small ones, priority-encoder logic and standard code converters.</p></div></div>
+<h2 id="s-6-1"><span class="n">6.1</span> Multiplexer (data selector)</h2>
+<p>A \(2^n:1\) MUX has \(2^n\) data inputs \(I_j\), \(n\) select lines \(S_{n-1}\dots S_0\) and one output. With select value \(j\) the output equals \(I_j\):
+\[
+Y=\sum_{j=0}^{2^n-1} m_j(S)\,I_j .
+\]
+For a \(4{:}1\) MUX, \(Y=\overline S_1\overline S_0I_0+\overline S_1S_0I_1+S_1\overline S_0I_2+S_1S_0I_3\). A MUX with an enable has \(Y=0\) (or high-impedance) when disabled.</p>
+<h3 id="s-6-1-1"><span class="n">6.1.1</span> Implementing a Boolean function with a MUX</h3>
+<div class="box formula"><div class="bt">MUX as a universal function generator</div><div class="bb"><p>A function of \(n\) variables can be implemented with a \(2^n{:}1\) MUX by tying the inputs to \(0/1\) from the truth table.<br>
+<strong>Variable-entered method:</strong> use a \(2^{n-1}{:}1\) MUX. Choose \(n-1\) variables as selects; the remaining variable \(X\) (usually the LSB) appears as data: for each pair of rows that share select value, the data input is \(0\) (both rows 0), \(1\) (both 1), \(X\) (only the row with \(X=1\) is 1) or \(\overline X\) (only the row with \(X=0\) is 1).</p></div></div>
+<div class="box example"><div class="bt">Three-variable XOR with a 4:1 MUX</div><div class="bb"><p>\(F=A\oplus B\oplus C=\sum m(1,2,4,7)\). Use \(S_1=A\), \(S_0=B\). Rows \((AB=00)\): \(m_0=0,m_1=1\Rightarrow I_0=C\). \((01)\): \(m_2=1,m_3=0\Rightarrow I_1=\overline C\). \((10)\): \(m_4=1,m_5=0\Rightarrow I_2=\overline C\). \((11)\): \(m_6=0,m_7=1\Rightarrow I_3=C\).</p></div></div>
+<div class="box example"><div class="bt">Four variables with an 8:1 MUX</div><div class="bb"><p>\(F(A,B,C,D)=\sum m(1,3,4,5,9,11,14)\) with \(S_2S_1S_0=ABC\), data from \(D\): pairs \((0,1)\to D\); \((2,3)\to D\); \((4,5)\to1\); \((6,7)\to0\); \((8,9)\to D\); \((10,11)\to D\); \((12,13)\to0\); \((14,15)\to\overline D\).<br>
+So \(I_0=I_1=I_4=I_5=D\), \(I_2=1\), \(I_3=I_6=0\), \(I_7=\overline D\).</p></div></div>
+<h3 id="s-6-1-2"><span class="n">6.1.2</span> MUX trees</h3>
+<p>A \(2^m{:}1\) MUX can be built from \(2^k{:}1\) MUXes; the number of \(2^k{:}1\) MUXes required is
+\[
+N=\frac{2^m-1}{2^k-1}\quad\text{(when it divides exactly).}
+\]
+So \(16{:}1\) from \(4{:}1\): \(\frac{15}{3}=5\) MUXes (four in the first level, one in the second); \(64{:}1\) from \(4{:}1\): \(\frac{63}{3}=21\); \(8{:}1\) from \(2{:}1\): \(7\); \(64{:}1\) from \(8{:}1\): \(\frac{63}{7}=9\). When \(m\) is not a multiple of \(k\), count level by level, rounding up (for example \(32{:}1\) from \(4{:}1\): \(8\) first-level MUXes, then \(2\), then \(1\), giving \(11\)).</p>
+<figure id="fig-6-1"><div class="figimgs"><img src="img/d06_muxtree.png" alt="" loading="lazy"></div><figcaption><b>Figure 6.1.</b> A \(16{:}1\) multiplexer built from five \(4{:}1\) MUXes.</figcaption></figure>
+<h2 id="s-6-2"><span class="n">6.2</span> Demultiplexer and decoder</h2>
+<p>A \(1{:}2^n\) DEMUX routes the data input to the output selected by \(n\) address lines. Used with the data input held at 1 it becomes an \(n{:}2^n\) <strong>decoder</strong> that activates exactly one output \(Y_j=m_j(A)\) (with enable). Active-low decoders (74x138) give \(\overline{Y_j}=\overline{m_j}\).</p>
+<div class="box formula"><div class="bt">Function realisation with a decoder</div><div class="bb"><p>Any function \(F=\sum m(\dots)\) is the OR of the corresponding decoder outputs. With an active-low decoder use a NAND: \(F=\overline{\overline{Y_{i}}\cdot\overline{Y_{j}}\cdots}\). If more than half the minterms are required, build \(\overline F\) and invert (or use a NOR with active-high outputs).<br>
+A full adder: \(S=\sum m(1,2,4,7)\), \(C_{out}=\sum m(3,5,6,7)\) from one \(3{:}8\) decoder and two OR gates.</p></div></div>
+<h3 id="s-6-2-1"><span class="n">6.2.1</span> Cascading decoders</h3>
+<p>A \(4{:}16\) decoder from \(2{:}4\) decoders: \(4+1=5\) decoders (the first decodes \(A_3A_2\) and enables one of four second-level decoders on \(A_1A_0\)). A \(3{:}8\) from two \(2{:}4\) decoders with enable uses \(A_2\) as enable of one decoder and its complement for the other.</p>
+<h2 id="s-6-3"><span class="n">6.3</span> Encoder</h2>
+<p>An encoder is the inverse of a decoder: \(2^n\) input lines, \(n\) output bits. A simple encoder assumes only one input active. A <strong>priority encoder</strong> outputs the binary code of the highest-priority active input and a valid flag \(V=\sum D_i\).</p>
+<div class="box formula"><div class="bt">8-to-3 priority encoder (\(D_7\) highest)</div><div class="bb"><p>\(Y_2=D_7+D_6+D_5+D_4\)<br>
+\(Y_1=D_7+D_6+\overline{D_5}\,\overline{D_4}\,D_3+\overline{D_5}\,\overline{D_4}\,D_2\)<br>
+\(Y_0=D_7+\overline{D_6}D_5+\overline{D_6}\,\overline{D_4}D_3+\overline{D_6}\,\overline{D_4}\,\overline{D_2}D_1\)<br>
+A plain (non-priority) octal-to-binary encoder: \(Y_2=D_4+D_5+D_6+D_7\), \(Y_1=D_2+D_3+D_6+D_7\), \(Y_0=D_1+D_3+D_5+D_7\).</p></div></div>
+<h2 id="s-6-4"><span class="n">6.4</span> Code converters</h2>
+<ul><li><strong>Binary \(\to\) Gray</strong>: \(G_3=B_3\), \(G_i=B_{i+1}\oplus B_i\) (3 XORs for 4 bits). Gray \(\to\) binary: cascaded XORs.</li><li><strong>BCD \(\to\) excess-3</strong>: add \(0011\); a 4-bit adder with constant input, or K-map logic.</li><li><strong>BCD \(\to\) seven-segment</strong>: each segment \(a\ldots g\) is a function of \(ABCD\) with \(d\) for codes \(10\)–\(15\).</li><li><strong>Parity generator/checker</strong>: XOR tree of \(n-1\) gates for \(n\) bits.</li><li><strong>Binary \(\to\) BCD</strong>: add-3 shift ("double-dabble") algorithm.</li></ul>
+<h2 id="s-6-5"><span class="n">6.5</span> Tri-state buffers and buses</h2>
+<p>A tri-state buffer has an enable: output \(=\) input when enabled, high impedance (Z) otherwise. Several tri-state outputs share a bus provided only one is enabled at a time; a MUX is the alternative with no contention possibility.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) A \(2^{n-1}{:}1\) MUX realises any \(n\)-variable function only if the data inputs may be \(0,1,X,\overline X\). (ii) The MUX-tree formula \((2^m-1)/(2^k-1)\) requires \(m\) to be a multiple of \(k\) for a clean count. (iii) A priority encoder is not the same as a simple encoder when two inputs are active. (iv) Active-low decoder outputs need NAND (not OR) to build a function.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>\(n\) variables with a \(2^{n-1}{:}1\) MUX: pair up the truth-table rows and look at the pattern \(00\to0\), \(11\to1\), \(01\to X\), \(10\to\overline X\). The sum bit of a full adder is a parity: use the XOR pattern (\(C,\overline C,\overline C,C\)). Count of \(4{:}1\) MUXes for \(4^k{:}1\): \((4^k-1)/3\).</p></div></div>
+<h2 id="s-6-6"><span class="n">6.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The number of \(4{:}1\) multiplexers needed to build a \(64{:}1\) multiplexer: (A) 16 (B) 17 (C) 21 (D) 64.</p>
+<p><strong>Q2.</strong> A \(3{:}8\) decoder with active-high outputs and one OR gate implements \(F=\sum m(1,4,6)\) by (A) OR of \(Y_1,Y_4,Y_6\) (B) AND of the same (C) NAND of \(Y_1,Y_4,Y_6\) (D) XOR of \(Y_1,Y_4,Y_6\).</p>
+<p><strong>Q3.</strong> The number of select lines for a \(32{:}1\) multiplexer: (A) 4 (B) 5 (C) 16 (D) 32.</p>
+<p><strong>Q4.</strong> A priority encoder has inputs \(D_3D_2D_1D_0=0110\) (\(D_3\) highest). The output code is (A) 00 (B) 01 (C) 10 (D) 11.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C): \((64-1)/(4-1)=21\). Q2 (A). Q3 (B). Q4 (C): highest active input is \(D_2\).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A \(4{:}1\) MUX with \(S_1=A,\ S_0=B\) implements \(F=\sum m(1,2,6,7)\) of \((A,B,C)\). The data inputs \((I_0,I_1,I_2,I_3)\) are (A) \(C,\overline C,0,1\) (B) \(C,\overline C,1,0\) (C) \(\overline C,C,0,1\) (D) \(C,C,0,1\).</p>
+<p><strong>Q6.</strong> The number of \(2{:}1\) multiplexers needed to build an \(8{:}1\) multiplexer: (A) 3 (B) 4 (C) 7 (D) 8.</p>
+<p><strong>Q7.</strong> A \(4{:}16\) decoder is built from \(2{:}4\) decoders with enable. The number of \(2{:}4\) decoders needed: (A) 4 (B) 5 (C) 8 (D) 16.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A): \(AB=00\): \(m_0=0,m_1=1\to C\); \(01\): \(m_2=1,m_3=0\to\overline C\); \(10\): \(m_4=m_5=0\to0\); \(11\): \(m_6=m_7=1\to1\). Q6 (C): \(4+2+1=7\). Q7 (B): \(4+1=5\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Number of \(3{:}8\) decoders (with enable) needed to build a \(6{:}64\) decoder: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Number of \(2{:}1\) multiplexers needed to build a \(32{:}1\) multiplexer: <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Number of 2-input XOR gates in an 8-bit even-parity generator: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(1+8=9\). Q9: 31. Q10: 7.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which statements are true? (A) A \(2^n{:}1\) MUX can realise any \(n\)-variable function. (B) A decoder plus an OR gate realises a sum of minterms. (C) A simple (non-priority) encoder is correct when several inputs are active. (D) A DEMUX with its data input tied to 1 behaves as a decoder.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Select lines of a \(64{:}1\) MUX? &emsp; <strong>T2.</strong> Implement \(F=\sum m(0,3)\) of \((A,B)\) with a \(2{:}1\) MUX, \(S=A\). &emsp; <strong>T3.</strong> Output of an octal-to-binary priority encoder if \(D_5\) and \(D_2\) are active.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 6. T2: \(F=\overline A\,\overline B+AB\), so \(I_0=\overline B\), \(I_1=B\). T3: \(101\) (\(D_5\) has higher priority).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(2^n{:}1\) MUX: \(Y=\sum m_jI_j\); \(2^{n-1}{:}1\) MUX with data \(0,1,X,\overline X\) for \(n\) variables.</li><li>MUX tree count \((2^m-1)/(2^k-1)\); decoder \(=\) minterm generator, function \(=\) OR of outputs (NAND for active-low).</li><li>Priority encoder uses highest active input; \(V=\sum D_i\).</li><li>Binary \(\to\) Gray by XOR; BCD \(\to\) excess-3 add 3.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch05.html">&larr; Arithmetic Circuits, Comparators and the ALU</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch07.html">Latches and Flip-Flops &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

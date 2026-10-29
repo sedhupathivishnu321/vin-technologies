@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 7: Baseband Transmission: Line Codes, ISI and the Nyquist Criterion | Communications | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Line-code properties (dc content, bandwidth, clocking), Nyquist’s zero-ISI criterion, minimum bandwidth R_s/2, raised-cosine roll-off bandwidth (1+\alpha)R_s/2, M-ary symbol rate, eye diagram and">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/communications/ch07.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 7: Baseband Transmission: Line Codes, ISI and the Nyquist Criterion | Communications | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Line-code properties (dc content, bandwidth, clocking), Nyquist’s zero-ISI criterion, minimum bandwidth R_s/2, raised-cosine roll-off bandwidth (1+\alpha)R_s/2, M-ary symbol rate, eye diagram and"><meta property="og:url" content="https://vintechnologies.co.in/gate/communications/ch07.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Communications</a></div><div class="chlabel">Chapter 7</div><h1>Baseband Transmission: Line Codes, ISI and the Nyquist Criterion</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-7-1">7.1 Line codes</a></li><li><a href="#s-7-2">7.2 Inter-symbol interference (ISI)</a></li><li><a href="#s-7-3">7.3 Eye diagram</a></li><li><a href="#s-7-4">7.4 Equalisation and partial response</a></li><li><a href="#s-7-5">7.5 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Line-code properties (dc content, bandwidth, clocking), Nyquist’s zero-ISI criterion, minimum bandwidth \(R_s/2\), raised-cosine roll-off bandwidth \((1+\alpha)R_s/2\), M-ary symbol rate, eye diagram and duobinary signalling.</p></div></div>
+<h2 id="s-7-1"><span class="n">7.1</span> Line codes</h2>
+<p>Binary data are mapped to pulse waveforms before transmission. Desirable properties: no dc component, small bandwidth, timing (clock) content, error-detection capability, immunity to polarity inversion, transparency to any bit pattern.</p>
+<figure id="fig-7-1"><div class="figimgs"><img src="img/c07_linecodes.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.1.</b> Line codes for the data 1 0 1 1 0 0 1: unipolar NRZ, polar NRZ, unipolar RZ, Manchester and AMI.</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Code</th><th>Average power</th><th>DC</th><th>First-null BW</th><th>Remarks</th></tr></thead><tbody><tr><td>Unipolar NRZ</td><td>\(A^2/2\)</td><td>yes</td><td>\(R_b\)</td><td>simple, impulse at \(f=0\), no clocking</td></tr><tr><td>Polar NRZ</td><td>\(A^2\)</td><td>no (equiprobable)</td><td>\(R_b\)</td><td>best SNR per power, long runs lose timing</td></tr><tr><td>Unipolar RZ (50%)</td><td>\(A^2/4\)</td><td>yes</td><td>\(2R_b\)</td><td>discrete clock line at \(R_b\)</td></tr><tr><td>Polar RZ</td><td>\(A^2/2\)</td><td>no</td><td>\(2R_b\)</td><td>timing</td></tr><tr><td>Manchester (split-phase)</td><td>\(A^2\)</td><td>no</td><td>\(2R_b\)</td><td>transition every bit, self-clocking (Ethernet)</td></tr><tr><td>Bipolar (AMI)</td><td>\(A^2/2\)</td><td>no</td><td>\(R_b\)</td><td>alternate mark inversion: error detection, no dc</td></tr></tbody></table></div></div>
+<div class="box formula"><div class="bt">PSD of polar NRZ and Manchester</div><div class="bb"><p>Polar NRZ (\(\pm A\), bit time \(T_b\)): \(S(f)=A^2T_b\,\text{sinc}^2(fT_b)\).<br>
+Manchester: \(S(f)=A^2T_b\,\text{sinc}^2\!\left(\dfrac{fT_b}2\right)\sin^2\!\left(\dfrac{\pi fT_b}2\right)\) (zero at dc).<br>
+Unipolar NRZ: \(S(f)=\dfrac{A^2T_b}4\text{sinc}^2(fT_b)+\dfrac{A^2}4\delta(f)\).</p></div></div>
+<p>AMI maps 1s to alternate \(\pm A\) and 0 to \(0\); a long run of zeros loses timing (cured by HDB3/B8ZS substitution).</p>
+<h2 id="s-7-2"><span class="n">7.2</span> Inter-symbol interference (ISI)</h2>
+<p>A bandlimited channel with impulse response \(p(t)\) spreads each pulse over several symbol intervals. The sample at \(t=kT\) is
+\[
+y(kT)=a_kp(0)+\sum_{n\ne k}a_np\big((k-n)T\big)+\text{noise},
+\]
+where the sum is the ISI.</p>
+<div class="box formula"><div class="bt">Nyquist criterion for zero ISI</div><div class="bb"><p>\(p(nT)=\begin{cases}1&amp;n=0\\0&amp;n\ne0\end{cases}\iff\displaystyle\sum_{k=-\infty}^{\infty}P\!\left(f-\dfrac kT\right)=T\).<br>
+Minimum bandwidth satisfying it: \(W_{min}=\dfrac1{2T}=\dfrac{R_s}2\) (the ideal low-pass filter, \(p(t)=\text{sinc}(t/T)\)). Max symbol rate over bandwidth \(B\): \(R_s=2B\).<br>
+<strong>Raised cosine</strong> with roll-off factor \(\alpha\in[0,1]\): bandwidth \(B=\dfrac{1+\alpha}{2T}=\dfrac{(1+\alpha)R_s}{2}\), &emsp; \(p(t)=\text{sinc}\!\left(\dfrac tT\right)\dfrac{\cos(\pi\alpha t/T)}{1-4\alpha^2t^2/T^2}\).<br>
+\(\alpha=0\): ideal (sinc); \(\alpha=1\): full cosine roll-off, \(B=1/T=R_s\), time tails decay as \(1/t^3\) (faster).<br>
+M-ary signalling: \(R_s=\dfrac{R_b}{\log_2M}\), so \(B=\dfrac{(1+\alpha)R_b}{2\log_2M}\). Spectral efficiency \(\dfrac{R_b}{B}=\dfrac{2\log_2M}{1+\alpha}\) bit/s/Hz.</p></div></div>
+<figure id="fig-7-2"><div class="figimgs"><img src="img/c07_rc.png" alt="" loading="lazy"></div><figcaption><b>Figure 7.2.</b> Raised-cosine spectra for \(\alpha=0,0.5,1\) and the corresponding pulses; all have zero crossings at nonzero multiples of \(T\).</figcaption></figure>
+<p>In practice the raised-cosine response is split as a pair of <strong>root-raised-cosine</strong> filters at transmitter and receiver, so the receiver filter is matched while the overall response satisfies the Nyquist criterion.</p>
+<div class="box example"><div class="bt">Bandwidth calculations</div><div class="bb"><p>\(R_b=64\) kbps binary, \(\alpha=0.25\): \(R_s=64\) k, \(B=\dfrac{1.25\times64}2=40\) kHz.<br>
+Same data with 4-level signalling: \(R_s=32\) k, \(B=\dfrac{1.25\times32}2=20\) kHz.<br>
+A \(3\) kHz channel with \(\alpha=0.5\) supports a binary rate \(R_b=2B/(1+\alpha)=4\) kbps.</p></div></div>
+<h2 id="s-7-3"><span class="n">7.3</span> Eye diagram</h2>
+<p>Overlaying all symbol intervals of the received waveform on an oscilloscope triggered at the symbol rate gives an <strong>eye</strong>. <em>Vertical opening</em> measures noise margin (immunity to noise); <em>horizontal opening</em> measures timing tolerance; <em>slope</em> at the sampling instant shows sensitivity to timing error; zero-crossing spread shows jitter. ISI closes the eye. For \(y_k=a_k+0.2a_{k-1}+0.1a_{k+1}\) with \(a_k=\pm1\), the worst-case ISI is \(0.3\) and the eye opening is \(1-0.3=0.7\) (peak distortion criterion).</p>
+<h2 id="s-7-4"><span class="n">7.4</span> Equalisation and partial response</h2>
+<ul><li><strong>Zero-forcing equaliser</strong>: transversal filter that forces the combined response to be Nyquist; enhances noise.</li><li><strong>MMSE and adaptive equalisers</strong> (LMS) minimise mean square error including noise; decision-feedback equalisers cancel post-cursor ISI.</li><li><strong>Duobinary (class I partial response)</strong>: \(y_k=a_k+a_{k-1}\) introduces controlled ISI, allowing the Nyquist minimum bandwidth \(R_s/2\) with a realisable \(\cos\)-shaped spectrum \(|H(f)|=2T\cos(\pi fT)\); three output levels for binary input; <strong>precoding</strong> (differential encoding) prevents error propagation. Modified duobinary has no dc component.</li></ul>
+<p>Example: \(a=-1\) before the stream \(+1,-1,-1,+1,+1\) gives \(y=0,0,-2,0,2\) (three levels \(\{-2,0,2\}\)).</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Raised-cosine bandwidth is \((1+\alpha)R_s/2\), not \((1+\alpha)R_s\). (ii) Nyquist zero ISI concerns sampling instants, not the whole waveform. (iii) Manchester’s first-null bandwidth is twice NRZ’s. (iv) Unipolar NRZ has a dc component and a spectral impulse. (v) The minimum bandwidth \(R_s/2\) is attained only by the unrealisable ideal filter (\(\alpha=0\)).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>\(B=\dfrac{(1+\alpha)R_b}{2\log_2M}\). Null-to-null BW: NRZ \(R_b\), RZ/Manchester \(2R_b\). Peak-distortion eye opening \(=1-\sum|{\rm ISI}|\).</p></div></div>
+<h2 id="s-7-5"><span class="n">7.5</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The minimum bandwidth for ISI-free transmission at symbol rate \(R_s\) is (A) \(R_s\) (B) \(R_s/2\) (C) \(2R_s\) (D) \(R_s/4\).</p>
+<p><strong>Q2.</strong> The bandwidth of a raised-cosine pulse with roll-off \(\alpha\) is (A) \((1+\alpha)R_s\) (B) \((1+\alpha)R_s/2\) (C) \(R_s/2\) (D) \(\alpha R_s\).</p>
+<p><strong>Q3.</strong> Which line code has no dc component and is self-clocking? (A) unipolar NRZ (B) polar NRZ (C) Manchester (D) unipolar RZ.</p>
+<p><strong>Q4.</strong> Duobinary signalling for binary input has (A) 2 (B) 3 (C) 4 (D) 5 output levels.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (C). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A binary data stream at 64 kbps uses raised-cosine pulses with \(\alpha=0.25\). The bandwidth is (A) 32 kHz (B) 40 kHz (C) 80 kHz (D) 64 kHz.</p>
+<p><strong>Q6.</strong> The same 64 kbps data sent as 4-level PAM with \(\alpha=0.25\) needs (A) 10 kHz (B) 20 kHz (C) 40 kHz (D) 80 kHz.</p>
+<p><strong>Q7.</strong> A channel of 3 kHz bandwidth with \(\alpha=0.5\) raised-cosine binary signalling supports at most (A) 2 kbps (B) 4 kbps (C) 6 kbps (D) 3 kbps.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (B). Q7 (B).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Eye opening for \(y_k=a_k+0.2a_{k-1}+0.1a_{k+1}\), \(a_k=\pm1\): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> First-null bandwidth (kHz) of Manchester-coded 10 kbps data: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 0.7. Q9: 20.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q10.</strong> Select the true statements. (A) The ideal sinc pulse achieves \(R_s/2\). (B) A larger \(\alpha\) gives faster-decaying tails. (C) Eye closure indicates ISI. (D) AMI has no dc component.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q10: (A), (B), (C), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(B\) for \(R_b=1\) Mbps with 16-level baseband symbols (4 bits each), \(\alpha=0\). &emsp; <strong>T2.</strong> Use of precoding in duobinary. &emsp; <strong>T3.</strong> Nyquist condition in frequency domain.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(R_s=250\) k, \(B=125\) kHz. T2: avoids error propagation. T3: \(\sum_kP(f-k/T)=T\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Line codes: NRZ \(B=R_b\), RZ/Manchester \(2R_b\); Manchester no dc, AMI no dc.</li><li>Nyquist: \(\sum P(f-k/T)=T\); \(B_{min}=R_s/2\); raised cosine \(B=(1+\alpha)R_s/2\); \(R_s=R_b/\log_2M\).</li><li>Eye opening \(=1-\) peak ISI; duobinary \(B=R_s/2\) with 3 levels and precoding.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch06.html">&larr; Sampling, Quantization, PCM, DPCM and Delta Modulation</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch08.html">Digital Modulation, Signal Space and Detection in AWGN &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Qf": "\\mathrm{Q}", "\\EbNo": "E_b/N_0", "\\Eb": "E_b", "\\Nzero": "N_0", "\\Rb": "R_b", "\\Rs": "R_s", "\\fc": "f_c", "\\fm": "f_m", "\\Ac": "A_c", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\erfc": "\\operatorname{erfc}", "\\E": "\\operatorname{E}", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

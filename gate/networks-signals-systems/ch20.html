@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 20: Frequency Response | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Output of an LTI system for a sinusoidal input, first- and second-order Bode asymptotes, phase and group delay, ideal filters (non-causal), minimum-phase and all-pass systems, linear phase">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch20.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 20: Frequency Response | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Output of an LTI system for a sinusoidal input, first- and second-order Bode asymptotes, phase and group delay, ideal filters (non-causal), minimum-phase and all-pass systems, linear phase"><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch20.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 20</div><h1>Frequency Response</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-20-1">20.1 Transfer function</a></li><li><a href="#s-20-2">20.2 Magnitude response</a></li><li><a href="#s-20-3">20.3 Phase response</a></li><li><a href="#s-20-4">20.4 Amplitude response</a></li><li><a href="#s-20-5">20.5 Poles and zeros</a></li><li><a href="#s-20-6">20.6 Bode-plot concepts</a></li><li><a href="#s-20-7">20.7 Phase delay</a></li><li><a href="#s-20-8">20.8 Group delay</a></li><li><a href="#s-20-9">20.9 Linear phase</a></li><li><a href="#s-20-10">20.10 Minimum-phase systems</a></li><li><a href="#s-20-11">20.11 Causality and frequency response</a></li><li><a href="#s-20-12">20.12 Stability and frequency response</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Output of an LTI system for a sinusoidal input, first- and second-order Bode asymptotes, phase and group delay, ideal filters (non-causal), minimum-phase and all-pass systems, linear phase \(\Rightarrow\) distortionless.</p></div></div>
+<h2 id="s-20-1"><span class="n">20.1</span> Transfer function</h2>
+<p>For a stable LTI system the frequency response is \(H(j\omega)=\displaystyle\int h(t)e^{-j\omega t}dt=H(s)|_{s=j\omega}\). Since \(e^{j\omega t}\) is an eigenfunction, the response to \(x(t)=A\cos(\omega_0t+\phi)\) is</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(y(t)=A\,|H(j\omega_0)|\cos\big(\omega_0t+\phi+\angle H(j\omega_0)\big)\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(H(s)=\dfrac{1}{1+s/1000}\), \(x=10\cos1000t\): \(H(j1000)=\dfrac1{1+j}=0.707\angle-45^\circ\), so \(y=7.07\cos(1000t-45^\circ)\).</p></div></div>
+<h2 id="s-20-2"><span class="n">20.2</span> Magnitude response</h2>
+<p>\(|H(j\omega)|\), often in decibels: \(20\log_{10}|H|\) dB. \(-3\) dB \(\Leftrightarrow|H|=0.707\) (half power); \(-6\) dB \(\Leftrightarrow0.5\); \(-20\) dB \(\Leftrightarrow0.1\); \(+20\) dB \(\Leftrightarrow10\).</p>
+<h2 id="s-20-3"><span class="n">20.3</span> Phase response</h2>
+<p>\(\angle H(j\omega)=\sum\angle(j\omega-z_k)-\sum\angle(j\omega-p_k)\). Geometric picture: vectors from each zero/pole to the point \(j\omega\) on the imaginary axis; \(|H|=K\prod|\text{zero vectors}|/\prod|\text{pole vectors}|\).</p>
+<h2 id="s-20-4"><span class="n">20.4</span> Amplitude response</h2>
+<p>For systems with a real “amplitude function” \(A(\omega)\) (e.g. linear-phase FIR), \(H(j\omega)=A(\omega)e^{-j\omega\tau}\) where \(A\) may become negative (sign change \(=\pi\) phase jump). Magnitude is \(|A|\).</p>
+<h2 id="s-20-5"><span class="n">20.5</span> Poles and zeros</h2>
+<p>A pole near the \(j\omega\) axis at \(\omega_p\) produces a peak in \(|H|\) near \(\omega_p\); a zero near the axis produces a dip; a zero <em>on</em> the axis gives an exact null (notch). Poles/zeros far from the axis have gentle effects.</p>
+<figure id="fig-20-1"><div class="figimgs"><img src="img/f20_pz.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.1.</b> Pole–zero vectors: \(|H(j\omega)|\) is the ratio of distances from zeros and poles to the point \(j\omega\). A pair of poles near the axis gives a resonant peak; zeros on the axis give notches.</figcaption></figure>
+<h2 id="s-20-6"><span class="n">20.6</span> Bode-plot concepts</h2>
+<p>For \(H(s)=K\prod(1+s/z_k)/\prod(1+s/p_k)\): on a log-frequency axis the magnitude (dB) is the sum of straight-line asymptotes.</p>
+<ul><li>Constant \(K\): flat \(20\log K\). Pole at \(p\): \(0\) dB below \(p\), then \(-20\) dB/decade. Zero at \(z\): \(0\) dB, then \(+20\) dB/decade. Origin pole: \(-20\) dB/dec through \(0\) dB at \(\omega=1\).</li><li>Phase of a pole: \(0^\circ\to-45^\circ\) at \(\omega=p\) \(\to-90^\circ\) (changes over \(0.1p\) to \(10p\), \(-45^\circ\)/decade). A zero gives the opposite sign.</li><li>Actual curve differs from the asymptote by \(3\) dB at the corner; complex poles give a peak \(\approx1/(2\zeta)\).</li></ul>
+<figure id="fig-20-2"><div class="figimgs"><img src="img/f20_bode1.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.2.</b> First-order low-pass \(H=1/(1+s/\omega_c)\): magnitude with asymptote (\(-20\) dB/dec beyond \(\omega_c\)) and phase (\(-45^\circ\) at \(\omega_c\)).</figcaption></figure>
+<div class="box example"><div class="bt">Two poles</div><div class="bb"><p>\(H(s)=\dfrac{1000}{(s+10)(s+100)}\): DC gain \(1\) (\(0\) dB). Corners at \(10\) and \(100\) rad/s: slope \(-20\) dB/dec between them, \(-40\) dB/dec beyond \(100\). At \(\omega=1000\): \(|H|=\dfrac{1000}{\sqrt{10^6+100}\sqrt{10^6+10^4}}\approx1.0\times10^{-3}\), i.e. \(-60\) dB, matching the asymptote (\(-20\log(100/10)-40\log(1000/100)=-20-40\)).</p></div></div>
+<figure id="fig-20-3"><div class="figimgs"><img src="img/f20_bode2.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.3.</b> Bode magnitude and phase of \(1000/((s+10)(s+100))\).</figcaption></figure>
+<h2 id="s-20-7"><span class="n">20.7</span> Phase delay</h2>
+<p>\(\tau_p(\omega)=-\dfrac{\angle H(j\omega)}{\omega}\): the time delay of a single sinusoid.</p>
+<h2 id="s-20-8"><span class="n">20.8</span> Group delay</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\tau_g(\omega)=-\dfrac{d\angle H(j\omega)}{d\omega}\): the delay of the <em>envelope</em> of a narrow-band signal near \(\omega\).<br>
+Example: \(H=e^{-j\omega T_0}\) (pure delay): \(\tau_p=\tau_g=T_0\). First-order low-pass: \(\angle H=-\tan^{-1}\omega\tau\), \(\tau_g=\dfrac{\tau}{1+\omega^2\tau^2}\).</p></div></div>
+<h2 id="s-20-9"><span class="n">20.9</span> Linear phase</h2>
+<p><em>Distortionless transmission</em>: \(y(t)=Kx(t-t_d)\), i.e. \(H(j\omega)=Ke^{-j\omega t_d}\): constant magnitude and <em>linear</em> phase (constant group delay) over the signal band.</p>
+<figure id="fig-20-4"><div class="figimgs"><img src="img/f20_gd.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.4.</b> Phase delay and group delay: (a) linear phase (both constant, no distortion); (b) first-order low-pass (group delay falls from \(\tau\) at DC).</figcaption></figure>
+<h2 id="s-20-10"><span class="n">20.10</span> Minimum-phase systems</h2>
+<p>A causal stable system whose zeros are also in the left half-plane is <em>minimum phase</em>: among all systems with the same \(|H|\) it has the smallest phase lag and group delay. Flipping a zero across the axis (\(s+a\to s-a\)) leaves \(|H|\) unchanged but increases the magnitude of the phase (excess phase; non-minimum phase). An <em>all-pass</em> system \(\dfrac{s-a}{s+a}\) has \(|H|=1\).</p>
+<figure id="fig-20-5"><div class="figimgs"><img src="img/f20_min.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.5.</b> \(H_1=\dfrac{s+1}{s+2}\) (minimum phase) and \(H_2=\dfrac{s-1}{s+2}\): identical magnitude, but \(H_2\) has a much larger phase magnitude (\(180^\circ\) at low frequency) and hence more group delay; \(H_2/H_1\) is all-pass.</figcaption></figure>
+<h2 id="s-20-11"><span class="n">20.11</span> Causality and frequency response</h2>
+<p>An ideal low-pass \(|H|=1\) for \(|\omega|&lt;\omega_c\) and \(0\) otherwise has \(h(t)=\dfrac{\sin\omega_ct}{\pi t}\), which is non-zero for \(t&lt;0\): not causal, not realisable. Paley–Wiener: a causal system cannot have \(|H|=0\) over a finite band.</p>
+<figure id="fig-20-6"><div class="figimgs"><img src="img/f20_ideal.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.6.</b> Ideal low-pass, high-pass, band-pass and band-stop magnitude responses (non-causal).</figcaption></figure>
+<h2 id="s-20-12"><span class="n">20.12</span> Stability and frequency response</h2>
+<p>A stable LTI system has a finite \(H(j\omega)\); the \(j\omega\) axis lies within the ROC of \(H(s)\). For a causal system this means all poles in the open LHP.</p>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A system \(H(j\omega)=e^{-j3\omega}\) has group delay (A) \(0\) (B) \(3\) (C) \(1/3\) (D) \(\omega\).</p>
+<p><strong>Q2.</strong> A \(-3\) dB point of a first-order low-pass corresponds to \(|H|=\) (A) \(0.5\) (B) \(0.707\) (C) \(0.1\) (D) \(0.3\).</p>
+<p><strong>Q3.</strong> Distortionless transmission requires (A) constant magnitude and constant phase (B) constant magnitude and linear phase (C) linear magnitude and constant phase (D) any phase.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> The input \(x=\cos t\) is applied to \(H(s)=1/(1+s)\). The output is (A) \(\cos(t-45^\circ)\) (B) \(0.707\cos(t-45^\circ)\) (C) \(0.707\cos(t+45^\circ)\) (D) \(\cos t\).</p>
+<p><strong>Q5.</strong> For \(H(j\omega)=1/(1+j\omega)\) the group delay at \(\omega=1\) is (A) \(1\) (B) \(0.5\) (C) \(0.707\) (D) \(2\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B). Q5 (B): \(\tau/(1+\omega^2\tau^2)=1/2\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> For \(H(j\omega)=1/(1+j\omega)\), \(|H|\) at \(\omega=\sqrt3\) is <span class="blank"></span>.</p>
+<p><strong>Q7.</strong> The phase delay of \(H=1/(1+j\omega)\) at \(\omega=1\) is <span class="blank"></span> s (two decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(1/\sqrt{1+3}=0.5\). Q7: phase \(=-\pi/4\), \(\tau_p=(\pi/4)/1=0.79\) s.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Which statements are true? (A) An ideal low-pass filter is non-causal. (B) A pole at \(s=-a\) (\(a&gt;0\)) gives \(-20\) dB/dec beyond \(a\). (C) All-pass systems have unit magnitude. (D) Minimum-phase systems have all poles and zeros in the RHP.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (C).</p>
+<div class="box trap"><div class="bt">Common traps in this chapter</div><div class="bb"><p>(i) Group delay is \(-d\phi/d\omega\), phase delay \(-\phi/\omega\): different in general. (ii) Using the asymptote value at the corner (\(0\) dB instead of \(-3\) dB). (iii) \(H(j\omega)\) is defined at the input frequency; no other frequency appears at the output (LTI). (iv) Phase in radians for delay computations.</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(H(s)=\dfrac{10}{s+10}\); find the output for \(x=2\cos10t\).&emsp; <strong>T2.</strong> What slope (dB/dec) does \(H=\dfrac{s}{(s+1)(s+100)}\) have at \(\omega=10\)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(H(j10)=1/(1+j)\), \(y=1.414\cos(10t-45^\circ)\). T2: zero at \(0\): \(+20\), pole at \(1\): \(-20\); pole at \(100\) not yet: net \(0\) dB/dec.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(y=A|H|\cos(\omega t+\phi+\angle H)\). dB: \(20\log|H|\); \(3\) dB \(\leftrightarrow0.707\).</li><li>Pole: \(-20\) dB/dec beyond corner, phase \(-45^\circ\) at corner; zero: \(+20\).</li><li>\(\tau_p=-\phi/\omega\); \(\tau_g=-d\phi/d\omega\). Distortionless: \(Ke^{-j\omega t_d}\).</li><li>Min phase: zeros/poles in LHP; all-pass \(\frac{s-a}{s+a}\); ideal LPF non-causal.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch19.html">&larr; Continuous-Time Fourier Transform</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch21.html">Sampling Theorem &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

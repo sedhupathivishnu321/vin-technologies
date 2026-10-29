@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 11: Wireless and Optical Links: Link Budget, Fading and Fibre | Communications | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Free-space path loss and Friis formula, link-budget arithmetic in dB, Doppler shift, coherence time/bandwidth and flat versus selective fading, Rayleigh fading penalty, cellular frequency reuse, and">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/communications/ch11.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 11: Wireless and Optical Links: Link Budget, Fading and Fibre | Communications | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Free-space path loss and Friis formula, link-budget arithmetic in dB, Doppler shift, coherence time/bandwidth and flat versus selective fading, Rayleigh fading penalty, cellular frequency reuse, and"><meta property="og:url" content="https://vintechnologies.co.in/gate/communications/ch11.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Communications</a></div><div class="chlabel">Chapter 11</div><h1>Wireless and Optical Links: Link Budget, Fading and Fibre</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-11-1">11.1 Free-space propagation</a></li><li><a href="#s-11-2">11.2 Link budget</a></li><li><a href="#s-11-3">11.3 Multipath fading</a></li><li><a href="#s-11-4">11.4 Cellular concepts (supplementary)</a></li><li><a href="#s-11-5">11.5 Optical fibre links</a></li><li><a href="#s-11-6">11.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Free-space path loss and Friis formula, link-budget arithmetic in dB, Doppler shift, coherence time/bandwidth and flat versus selective fading, Rayleigh fading penalty, cellular frequency reuse, and optical-fibre numerical aperture, attenuation and dispersion limits. This chapter covers the “fundamentals of wireless and optical links” part of the syllabus.</p></div></div>
+<h2 id="s-11-1"><span class="n">11.1</span> Free-space propagation</h2>
+<div class="box formula"><div class="bt">Friis transmission and path loss</div><div class="bb"><p>\(P_r=P_tG_tG_r\left(\dfrac{\lambda}{4\pi d}\right)^2\), &emsp; \(\lambda=c/f\).<br>
+Free-space path loss \(L_{fs}=\left(\dfrac{4\pi d}\lambda\right)^2\); in dB with \(d\) in metres and \(f\) in hertz: \(\;L_{fs}(\text{dB})=20\log_{10}d+20\log_{10}f-147.55\).<br>
+Equivalently \(L_{fs}=92.45+20\log_{10}f_{GHz}+20\log_{10}d_{km}\). Doubling the distance adds 6 dB.<br>
+EIRP \(=P_tG_t\). Effective aperture of an antenna \(A_e=G\lambda^2/4\pi\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(f=2.4\) GHz, \(d=100\) m: \(L_{fs}=40+187.6-147.55=80.05\) dB.</p></div></div>
+<h2 id="s-11-2"><span class="n">11.2</span> Link budget</h2>
+<p>Add gains and subtract losses in dB:
+\[
+P_r(\text{dBm})=P_t+G_t+G_r-L_{path}-L_{other},\qquad \text{margin}=P_r-S_{min}.
+\]
+Receiver sensitivity \(S_{min}=-174+10\log_{10}B+NF+\text{SNR}_{req}\) (Chapter 2). The link closes if \(P_r\ge S_{min}\); the excess is the <strong>fade margin</strong>.</p>
+<div class="box example"><div class="bt">900 MHz link</div><div class="bb"><p>\(P_t=20\) dBm, \(G_t=G_r=3\) dBi, \(d=5\) km: \(L_{fs}=20\log5000+20\log(9\times10^8)-147.55=105.5\) dB, \(P_r=26-105.5=-79.5\) dBm. Noise floor for \(B=200\) kHz, \(NF=6\) dB: \(-174+53+6=-115\) dBm. SNR \(=35.5\) dB.</p></div></div>
+<p><strong>Real channels.</strong> Log-distance model: \(PL(d)=PL(d_0)+10n\log_{10}(d/d_0)+X_\sigma\), with exponent \(n=2\) (free space), \(3\)–\(4\) (urban), \(X_\sigma\) log-normal shadowing (std. \(\approx8\) dB). For \(n=3.5\) a tenfold distance adds \(35\) dB. The two-ray ground-reflection model gives \(PL\propto d^4\) at large distances.</p>
+<h2 id="s-11-3"><span class="n">11.3</span> Multipath fading</h2>
+<p>Reflections, diffraction and scattering produce multiple delayed copies; they add constructively or destructively (small-scale fading).</p>
+<div class="box formula"><div class="bt">Channel parameters</div><div class="bb"><p><strong>Doppler shift</strong> \(f_d=\dfrac vcf_c\) (max). Example: \(v=100\) km/h \(=27.8\) m/s, \(f_c=900\) MHz: \(f_d=83.3\) Hz.<br>
+<strong>Coherence time</strong> \(T_c\approx\dfrac{0.423}{f_d}\) (time over which the channel is nearly constant): \(5.1\) ms in the example.<br>
+<strong>Delay spread</strong> \(\sigma_\tau\); <strong>coherence bandwidth</strong> \(B_c\approx\dfrac1{5\sigma_\tau}\): \(\sigma_\tau=1\,\mu\)s \(\Rightarrow B_c=200\) kHz.<br>
+<strong>Flat fading</strong>: signal bandwidth \(B_s\ll B_c\) (all frequencies fade together, no ISI). <strong>Frequency-selective fading</strong>: \(B_s&gt;B_c\) (ISI, needs equalisation, RAKE or OFDM).<br>
+<strong>Slow fading</strong>: symbol time \(T_s\ll T_c\); <strong>fast fading</strong>: \(T_s&gt;T_c\).</p></div></div>
+<p>Envelope statistics: <strong>Rayleigh</strong> (no line-of-sight): \(f(r)=\dfrac r{\sigma^2}e^{-r^2/2\sigma^2}\); <strong>Rician</strong> (line-of-sight with \(K\) factor); Nakagami-\(m\) generalises both.</p>
+<div class="box formula"><div class="bt">Effect on BER</div><div class="bb"><p>BPSK over flat Rayleigh fading: \(P_b=\dfrac12\left[1-\sqrt{\dfrac{\bar\gamma}{1+\bar\gamma}}\right]\approx\dfrac1{4\bar\gamma}\) (inverse-linear in the average SNR \(\bar\gamma=\bar E_b/N_0\)).<br>
+At \(\bar\gamma=10\) dB: \(P_b=0.0233\), versus \(3.9\times10^{-6}\) in AWGN: fading costs tens of dB. Remedies: <strong>diversity</strong> (time, frequency, space), with order-\(L\) diversity \(P_b\propto\bar\gamma^{-L}\); maximal-ratio combining gain; coding and interleaving; power control; MIMO.</p></div></div>
+<h2 id="s-11-4"><span class="n">11.4</span> Cellular concepts (supplementary)</h2>
+<ul><li>Frequency reuse: cells arranged in clusters of \(N=i^2+ij+j^2\) cells (e.g. 3, 4, 7, 12); co-channel reuse distance \(D=R\sqrt{3N}\); for \(N=7\), \(D/R=4.58\). Larger \(N\): less interference, lower capacity.</li><li>Handoff, sectoring and cell splitting increase capacity. Multiple access: FDMA, TDMA (GSM), CDMA (spreading, processing gain \(G_p=B_{ss}/R_b\)), OFDMA.</li></ul>
+<h2 id="s-11-5"><span class="n">11.5</span> Optical fibre links</h2>
+<figure id="fig-11-1"><div class="figimgs"><img src="img/c11_fibre.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.1.</b> Step-index fibre: core \(n_1\), cladding \(n_2&lt;n_1\); rays within the acceptance cone are guided by total internal reflection.</figcaption></figure>
+<div class="box formula"><div class="bt">Fibre parameters</div><div class="bb"><p>Numerical aperture \(NA=\sqrt{n_1^2-n_2^2}\approx n_1\sqrt{2\Delta}\), \(\Delta=\dfrac{n_1-n_2}{n_1}\); acceptance angle \(\theta_{max}=\sin^{-1}(NA)\) (from air).<br>
+Normalised frequency \(V=\dfrac{2\pi a}\lambda NA\); <strong>single-mode</strong> operation for \(V&lt;2.405\). Number of modes (multimode, step index) \(\approx V^2/2\).<br>
+Attenuation: \(P(L)=P(0)10^{-\alpha L/10}\) (\(\alpha\) dB/km); low-loss windows at \(1310\) and \(1550\) nm (\(\approx0.35\) and \(0.2\) dB/km).<br>
+<strong>Modal dispersion</strong> (step-index multimode): \(\Delta\tau\approx\dfrac{L(n_1-n_2)}c\); maximum bit rate \(B\lesssim\dfrac1{2\Delta\tau}\). Chromatic dispersion \(\Delta\tau=D\,L\,\Delta\lambda\) (\(D\) in ps/nm/km). Single-mode fibre removes modal dispersion.</p></div></div>
+<div class="box example"><div class="bt">Fibre numbers</div><div class="bb"><p>\(n_1=1.48\), \(n_2=1.46\): \(NA=\sqrt{2.1904-2.1316}=0.2425\), \(\theta_{max}=14.0^\circ\). Modal dispersion over 1 km: \(\Delta\tau=1000\times0.02/(3\times10^8)=66.7\) ns, so \(B\lesssim7.5\) Mbps for a 1 km multimode link.<br>
+<strong>Power budget</strong>: transmitter \(0\) dBm, fibre \(0.25\) dB/km \(\times80\) km \(=20\) dB, two connectors \(1\) dB, receiver sensitivity \(-28\) dBm: margin \(=0-20-1+28=7\) dB.</p></div></div>
+<p>Components: LED (multimode, low cost, wide spectrum) and laser diode (single-mode, narrow spectrum) sources; PIN photodiode and avalanche photodiode detectors; optical amplifiers (EDFA, 1550 nm); WDM multiplies capacity by carrying many wavelengths.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Path loss grows with \(f^2\) and \(d^2\) in free space: both enter as \(20\log\). (ii) Delay spread governs frequency selectivity; Doppler governs time variation. (iii) \(NA\) uses \(n_1^2-n_2^2\), not \((n_1-n_2)\). (iv) Rayleigh fading BER decays only as \(1/\bar\gamma\) (a straight line of slope \(-1\) on log scales). (v) In link budgets add gains in dB, subtract losses in dB.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>\(L_{fs}=92.45+20\log f_{GHz}+20\log d_{km}\). \(f_d=v/\lambda\). \(B_c\approx1/(5\sigma_\tau)\). \(NA=\sqrt{n_1^2-n_2^2}\). Link budget: transmit \(-\) losses \(+\) gains \(-\) sensitivity.</p></div></div>
+<h2 id="s-11-6"><span class="n">11.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> Free-space path loss increases by how many dB when the distance doubles? (A) 3 (B) 6 (C) 12 (D) 20.</p>
+<p><strong>Q2.</strong> Flat fading occurs when the signal bandwidth is (A) much larger than the coherence bandwidth (B) much smaller than the coherence bandwidth (C) equal to the Doppler spread (D) zero.</p>
+<p><strong>Q3.</strong> Single-mode operation of a step-index fibre requires \(V&lt;\) (A) 1 (B) 2.405 (C) 5 (D) 10.</p>
+<p><strong>Q4.</strong> The BER of BPSK over Rayleigh fading decreases with average SNR as (A) exponentially (B) inversely proportional (C) quadratically (D) logarithmically.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (B). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> Free-space path loss at 2.4 GHz over 100 m is (A) 60 dB (B) 80 dB (C) 100 dB (D) 120 dB.</p>
+<p><strong>Q6.</strong> A fibre with \(n_1=1.48\) and \(n_2=1.46\) has numerical aperture (A) 0.02 (B) 0.24 (C) 0.5 (D) 1.0.</p>
+<p><strong>Q7.</strong> Doppler shift for a vehicle at 100 km/h and 900 MHz carrier: (A) 8.3 Hz (B) 83 Hz (C) 830 Hz (D) 8.3 kHz.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (B). Q7 (B).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Received power (dBm, one decimal) for \(P_t=20\) dBm, \(G_t=G_r=3\) dBi, path loss 105.5 dB: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Coherence bandwidth (kHz) for an RMS delay spread of \(1\,\mu\)s (\(B_c=1/5\sigma_\tau\)): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Link margin (dB) for \(P_t=0\) dBm, fibre loss 20 dB, connector loss 1 dB and sensitivity \(-28\) dBm: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(-79.5\). Q9: 200. Q10: 7.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select the true statements. (A) Frequency-selective fading causes ISI. (B) Diversity reduces the effect of fading. (C) Rayleigh fading has a strong line-of-sight component. (D) Single-mode fibre eliminates modal dispersion.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> EIRP formula. &emsp; <strong>T2.</strong> Cluster size for \(i=2,j=1\). &emsp; <strong>T3.</strong> Unit for fibre chromatic dispersion \(D\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(P_tG_t\). T2: \(N=7\). T3: ps/(nm km).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(P_r=P_tG_tG_r(\lambda/4\pi d)^2\); \(L_{fs}=20\log d+20\log f-147.55\); budgets in dB.</li><li>\(f_d=v/\lambda\); \(T_c\approx0.423/f_d\); \(B_c\approx1/5\sigma_\tau\); Rayleigh BPSK \(P_b\approx1/4\bar\gamma\).</li><li>Fibre: \(NA=\sqrt{n_1^2-n_2^2}\), \(V&lt;2.405\) single-mode, dispersion limits bit rate, power budget.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch10.html">&larr; Error-Control Coding: Block, Cyclic and Convolutional Codes</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch12.html">Formula Sheet, Topic Map and Mock Test &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Qf": "\\mathrm{Q}", "\\EbNo": "E_b/N_0", "\\Eb": "E_b", "\\Nzero": "N_0", "\\Rb": "R_b", "\\Rs": "R_s", "\\fc": "f_c", "\\fm": "f_m", "\\Ac": "A_c", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\erfc": "\\operatorname{erfc}", "\\E": "\\operatorname{E}", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

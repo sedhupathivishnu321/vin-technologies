@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2: Node-Voltage Analysis | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="2-mark circuits with 2–3 essential nodes, often with a dependent source or a floating voltage source (supernode). Nodal analysis is the default method when the circuit has fewer nodes than meshes.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch02.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 2: Node-Voltage Analysis | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="2-mark circuits with 2–3 essential nodes, often with a dependent source or a floating voltage source (supernode). Nodal analysis is the default method when the circuit has fewer nodes than meshes."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch02.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 2</div><h1>Node-Voltage Analysis</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-2-1">2.1 Reference node and essential nodes</a></li><li><a href="#s-2-2">2.2 The node-voltage method</a></li><li><a href="#s-2-3">2.3 Matrix formulation and the conductance matrix</a></li><li><a href="#s-2-4">2.4 Supernode</a></li><li><a href="#s-2-5">2.5 Voltage sources between a node and ground</a></li><li><a href="#s-2-6">2.6 Dependent sources in nodal analysis</a></li><li><a href="#s-2-7">2.7 Special cases</a></li><li><a href="#s-2-8">2.8 Nodal analysis with current sources only</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>2-mark circuits with 2–3 essential nodes, often with a dependent source or a floating voltage source (supernode). Nodal analysis is the default method when the circuit has fewer nodes than meshes.</p></div></div>
+<h2 id="s-2-1"><span class="n">2.1</span> Reference node and essential nodes</h2>
+<p>A <strong>node</strong> is a point where two or more elements join. An <strong>essential node</strong> is one where three or more elements join (nodes that merely join two elements in series add no unknowns). One node is selected as the <strong>reference node</strong> (ground, \(0\) V); all other node voltages are measured with respect to it. If a circuit has \(n\) nodes we need \(n-1\) equations. <em>Choose as reference the node with the most branches, or the negative terminal of a voltage source</em>: this makes the source’s other end a known node voltage.</p>
+<h2 id="s-2-2"><span class="n">2.2</span> The node-voltage method</h2>
+<ol><li>Choose a reference node; label the other \(n-1\) nodes \(V_1,V_2,\ldots\)</li><li>At each non-reference node write KCL, expressing every branch current as (voltage difference)/(resistance) using Ohm’s law.</li><li>Solve the \(n-1\) simultaneous equations.</li></ol>
+<div class="box example"><div class="bt">Two-node circuit</div><div class="bb"><p>A \(6\) A source feeds node 1; \(R_1=2\ \Omega\) connects node 1 to ground, \(R_2=2\ \Omega\) connects node 1 to node 2, and \(R_3=2\ \Omega\) connects node 2 to ground (Figure <a href="ch02.html#fig-2-1">2.1</a>).<br>
+Node 1: \(\dfrac{V_1}{2}+\dfrac{V_1-V_2}{2}=6\). &emsp; Node 2: \(\dfrac{V_2-V_1}{2}+\dfrac{V_2}{2}=0\).<br>
+From node 2: \(V_2=V_1/2\). Substituting: \(V_1-\tfrac14V_1=6\Rightarrow V_1=8\) V, \(V_2=4\) V.<br>
+Current through \(R_2\): \((8-4)/2=2\) A; power from the source \(=8\times6=48\) W; check: \(8^2/2+4^2/2+2^2\cdot2=32+8+8=48\) W. ✓</p></div></div>
+<figure id="fig-2-1"><div class="figimgs"><img src="img/f2_ckA.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.1.</b> Circuit for the two-node example: \(V_1=8\) V, \(V_2=4\) V.</figcaption></figure>
+<h2 id="s-2-3"><span class="n">2.3</span> Matrix formulation and the conductance matrix</h2>
+<p>For a network of resistors and independent current sources, nodal analysis can be written by inspection as
+\[\mathbf G\mathbf V=\mathbf I\]
+with
+\[G_{kk}=\sum(\text{conductances at node }k),\qquad G_{kj}=-\sum(\text{conductances between nodes }k\text{ and }j),\]
+\[I_k=\sum(\text{source currents entering node }k).\]
+\(\mathbf G\) is symmetric when only resistors are present (reciprocal network). The diagonal is positive and dominant.</p>
+<div class="box example"><div class="bt">Three-node system</div><div class="bb"><p>For the network of Figure <a href="ch02.html#fig-2-2">2.2</a>: \(g_{10}=1\) S, \(g_{12}=1\) S, \(g_{20}=1\) S, \(g_{23}=2\) S, \(g_{30}=2\) S; sources \(4\) A into node 1 and \(2\) A into node 3.
+\[
+\begin{bmatrix}2&amp;-1&amp;0\\-1&amp;4&amp;-2\\0&amp;-2&amp;4\end{bmatrix}
+\begin{bmatrix}V_1\\V_2\\V_3\end{bmatrix}=
+\begin{bmatrix}4\\0\\2\end{bmatrix}
+\]
+From row 1: \(V_1=(4+V_2)/2\); from row 3: \(V_3=(2+2V_2)/4\). Row 2: \(-(2+\tfrac12V_2)+4V_2-(1+V_2)=0\Rightarrow V_2=1.2\) V, \(V_1=2.6\) V, \(V_3=1.1\) V.</p></div></div>
+<figure id="fig-2-2"><div class="figimgs"><img src="img/f2_3node.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.2.</b> Three-node network with element conductances marked (siemens).</figcaption></figure>
+<h2 id="s-2-4"><span class="n">2.4</span> Supernode</h2>
+<p>When a <em>voltage source</em> (independent or dependent) lies between two non-reference nodes, its current is unknown, so we cannot write KCL at either node separately. Instead:</p>
+<ol><li>Enclose the source and its two nodes in a <strong>supernode</strong>.</li><li>Write <em>one</em> KCL for the whole supernode (sum of currents leaving it through all other elements \(=0\)).</li><li>Write the <em>constraint equation</em> \(V_a-V_b=V_s\) from the source itself.</li></ol>
+<div class="box example"><div class="bt">Supernode</div><div class="bb"><p>A \(5\) A source injects into node 1. \(R_a=5\ \Omega\) connects node 1 to ground, a \(10\) V source has its \(+\) end at node 1 and \(-\) end at node 2, and \(R_b=10\ \Omega\) connects node 2 to ground (Figure <a href="ch02.html#fig-2-3">2.3</a>).<br>
+Constraint: \(V_1-V_2=10\).&emsp; Supernode KCL: \(\dfrac{V_1}{5}+\dfrac{V_2}{10}=5\).<br>
+\(\dfrac{V_2+10}{5}+\dfrac{V_2}{10}=5\Rightarrow 2V_2+20+V_2=50\Rightarrow V_2=10\) V, \(V_1=20\) V.<br>
+Check: the \(5\) A source supplies \(20\times5=100\) W. KCL at node 1 gives the current through the \(10\) V source: \(5-V_1/5=1\) A, flowing from node 1 through the source to node 2 (into its \(+\) terminal), so it absorbs \(10\times1=10\) W. Absorbed total \(=20^2/5+10^2/10+10=80+10+10=100\) W. ✓</p></div></div>
+<figure id="fig-2-3"><div class="figimgs"><img src="img/f2_super.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.3.</b> Supernode: the dashed region encloses the floating \(10\) V source.</figcaption></figure>
+<h2 id="s-2-5"><span class="n">2.5</span> Voltage sources between a node and ground</h2>
+<p>If a voltage source connects a node to ground, that node’s voltage is <em>known</em> (\(V_k=\pm V_s\)); no KCL is needed there, and you have one fewer unknown. This is why choosing the reference at the source’s negative terminal helps.</p>
+<h2 id="s-2-6"><span class="n">2.6</span> Dependent sources in nodal analysis</h2>
+<p>Treat a dependent source exactly like an independent one when writing KCL, then add <strong>one extra equation</strong> that expresses the controlling variable in terms of the node voltages. For a dependent <em>voltage</em> source between two nodes, use the supernode procedure and make the source’s constraint depend on the controlling variable.</p>
+<div class="box example"><div class="bt">VCCS</div><div class="bb"><p>\(I_s=7\) A enters node 1; \(R_1=2\ \Omega\) (node 1 to ground); \(R_2=4\ \Omega\) (node 1 to node 2); \(R_3=4\ \Omega\) (node 2 to ground); a dependent current source \(0.5V_1\) (A) draws current from node 2 to ground (Figure <a href="ch02.html#fig-2-4">2.4</a>).<br>
+Node 1: \(\dfrac{V_1}{2}+\dfrac{V_1-V_2}{4}=7\Rightarrow0.75V_1-0.25V_2=7\).<br>
+Node 2: \(\dfrac{V_2-V_1}{4}+\dfrac{V_2}{4}+0.5V_1=0\Rightarrow0.25V_1+0.5V_2=0\Rightarrow V_2=-0.5V_1\).<br>
+\(0.75V_1+0.125V_1=7\Rightarrow V_1=8\) V, \(V_2=-4\) V.</p></div></div>
+<figure id="fig-2-4"><div class="figimgs"><img src="img/f2_dep.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.4.</b> Nodal analysis with a VCCS \(0.5V_1\): \(V_1=8\) V, \(V_2=-4\) V.</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>Never leave the controlling variable as a new unknown without an extra equation. In the example above, if the control were the current through \(R_2\) you would need \(I_x=(V_1-V_2)/4\) substituted in. Count: unknowns \(=\) equations, always.</p></div></div>
+<h2 id="s-2-7"><span class="n">2.7</span> Special cases</h2>
+<ul><li><strong>Resistor in series with a current source:</strong> the resistor does not enter any KCL at the node where the source drives (the branch current is fixed by the source). The resistor can be dropped when finding node voltages.</li><li><strong>Resistor in parallel with a voltage source:</strong> it does not affect the other voltages; it only changes the source current.</li><li><strong>Two supernodes sharing a node:</strong> merge into a larger supernode.</li><li><strong>Bridge circuits:</strong> if the bridge is balanced the middle element carries no current.</li></ul>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Count first. Nodes \(-1-\)(number of voltage sources to ground)\(-\)(number of floating voltage sources) is the number of independent KCL equations. If this number is smaller than the number of independent loops, use nodal; otherwise use mesh (Chapter 3).</p></div></div>
+<h2 id="s-2-8"><span class="n">2.8</span> Nodal analysis with current sources only</h2>
+<p>With only current sources and resistors, \(\mathbf G\mathbf V=\mathbf I\) is always solvable if the resistive network is connected to the reference, and \(\mathbf G\) is invertible.</p>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> For the conductance matrix of a reciprocal resistive network, which is true? (A) \(G_{12}=-G_{21}\) (B) \(\mathbf G\) symmetric (C) \(G_{kk}&lt;0\) (D) \(\det\mathbf G=0\).</p>
+<p><strong>Q2.</strong> A \(10\) V ideal source is connected between a node and the reference node. The number of KCL equations <em>saved</em> is (A) 0 (B) 1 (C) 2 (D) depends on \(R\).</p>
+<p><strong>Q3.</strong> In nodal analysis, a floating ideal voltage source between two non-reference nodes requires (A) a mesh (B) a supernode (C) a Norton equivalent (D) no special action.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B): that node voltage is known. Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> A \(12\) A source injects into node 1. Between node 1 and ground: \(3\ \Omega\). Between node 1 and node 2: \(6\ \Omega\). Between node 2 and ground: \(3\ \Omega\). Then \(V_2=\) (A) \(6\) V (B) \(9\) V (C) \(12\) V (D) \(27\) V.</p>
+<p><strong>Q5.</strong> In the supernode example the \(5\) A source is replaced with \(8\) A. Then \(V_1\) is (A) \(40\) V (B) \(30\) V (C) \(60\) V (D) \(20\) V.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): node 2 gives \((V_2-V_1)/6+V_2/3=0\Rightarrow V_1=3V_2\); node 1: \(V_1/3+(V_1-V_2)/6=12\), i.e. \(V_2+V_2/3=12\), \(V_2=9\) V (\(V_1=27\) V). Q5 (B): \((V_2+10)/5+V_2/10=8\Rightarrow V_2=20\), \(V_1=30\) V.</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> In the three-node example, if the \(2\) A source is removed the voltage \(V_3\) becomes <span class="blank"></span> V.</p>
+<p><strong>Q7.</strong> In the VCCS example, the dependent source is changed to \(0.25V_1\) (A) with everything else the same. The value of \(V_2/V_1\) is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(2V_1-V_2=4\), \(-V_1+4V_2-2V_3=0\), \(-2V_2+4V_3=0\Rightarrow V_3=V_2/2\); then \(V_1=3V_2\), \(6V_2-V_2=4\Rightarrow V_2=0.8\), \(V_3=0.4\) V. Q7: node 2: \(-0.25V_1+0.5V_2+0.25V_1=0\Rightarrow V_2=0\), ratio \(=0\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Which of the following are correct for nodal analysis? (A) A supernode needs an extra constraint equation. (B) The conductance matrix of a resistor-only network is symmetric. (C) A voltage source connected between a node and ground removes one unknown. (D) A dependent current source requires no extra equation even if its control variable is a current.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (C). (D) is false: a current control variable must be expressed in node voltages.</p>
+<div class="box trap"><div class="bt">Common traps in this chapter</div><div class="bb"><p>(i) Writing KCL at a supernode’s two nodes separately (double counting the unknown source current). (ii) Forgetting the constraint equation. (iii) Including a resistor that is in series with a current source. (iv) Wrong sign of the injected current in \(I_k\). (v) Not expressing a dependent source’s control variable in node voltages.</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> A circuit has \(6\) nodes, one voltage source to ground and one floating voltage source. How many independent KCL equations are needed?<br>
+<strong>T2.</strong> Write the matrix equation for a two-node circuit with \(g_{10}=2\) S, \(g_{12}=1\) S, \(g_{20}=3\) S, \(I_1=5\) A, \(I_2=-1\) A and solve.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(6-1-1-1=3\). T2: \(\begin{bmatrix}3&amp;-1\\-1&amp;4\end{bmatrix}\mathbf V=\begin{bmatrix}5\\-1\end{bmatrix}\), \(\det=11\), \(V_1=(20-1)/11=1.727\) V, \(V_2=(-3+5)/11=0.182\) V.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Pick the reference node with most branches (or at a source terminal). Equations needed: \(n-1\) minus known nodes.</li><li>KCL at node: \(\sum(V_k-V_j)/R_{kj}=\) injected current. By inspection: \(\mathbf G\mathbf V=\mathbf I\), \(G_{kk}&gt;0\), \(G_{kj}&lt;0\).</li><li>Floating voltage source \(\Rightarrow\) supernode: one KCL for the pair plus \(V_a-V_b=V_s\).</li><li>Dependent sources: write KCL as usual, then express the control variable using node voltages.</li><li>Resistor in series with a current source is ignored; resistor in parallel with a voltage source is ignored (for other variables).</li><li>Use nodal if nodes \(&lt;\) meshes.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch01.html">&larr; Fundamentals of Electrical Networks</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch03.html">Mesh-Current Analysis &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

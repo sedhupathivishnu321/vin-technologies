@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 25: Control Systems Formula Book | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Everything you need in the last week, one box per topic, in syllabus order. Read it daily; every formula has been derived earlier in the book.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch25.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 25: Control Systems Formula Book | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Everything you need in the last week, one box per topic, in syllabus order. Read it daily; every formula has been derived earlier in the book."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch25.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 25</div><h1>Control Systems Formula Book</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-25-1">25.1 Standard transfer functions and terms</a></li><li><a href="#s-25-2">25.2 Feedback</a></li><li><a href="#s-25-3">25.3 Block-diagram reduction</a></li><li><a href="#s-25-4">25.4 Mason’s gain formula</a></li><li><a href="#s-25-5">25.5 Time response</a></li><li><a href="#s-25-6">25.6 Steady-state error</a></li><li><a href="#s-25-7">25.7 Stability and Routh</a></li><li><a href="#s-25-8">25.8 Frequency response, Bode and margins</a></li><li><a href="#s-25-9">25.9 Root locus</a></li><li><a href="#s-25-10">25.10 Nyquist</a></li><li><a href="#s-25-11">25.11 Controllers and compensators</a></li><li><a href="#s-25-12">25.12 State-space</a></li></ol></details><div class="box notebox"><div class="bt">How to use this chapter</div><div class="bb"><p>Everything you need in the last week, one box per topic, in syllabus order. Read it daily; every formula has been derived earlier in the book.</p></div></div>
+<h2 id="s-25-1"><span class="n">25.1</span> Standard transfer functions and terms</h2>
+<div class="box formula"><div class="bt">Transfer functions</div><div class="bb"><p>Integrator \(\frac1s\); differentiator \(s\); first order \(\frac{K}{\tau s+1}\); second order \(\frac{\omega_n^2}{s^2+2\zeta\omega_ns+\omega_n^2}\); delay \(e^{-sT}\).<br>
+\(G(s)=\mathcal L\{h(t)\}=\dfrac{Y(s)}{X(s)}\big|_{ICs=0}\); DC gain \(G(0)\); order \(=\deg(\text{denominator})\); type \(=\) number of poles of \(GH\) at \(0\).<br>
+Analogies: F–V: \(M\!\to\!L\), \(B\!\to\!R\), \(K\!\to\!1/C\). F–I: \(M\!\to\!C\), \(B\!\to\!1/R\), \(K\!\to\!1/L\).</p></div></div>
+<h2 id="s-25-2"><span class="n">25.2</span> Feedback</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(T=\dfrac{G}{1+GH}\) (negative), \(\dfrac{G}{1-GH}\) (positive). \(S=\dfrac1{1+GH}\), \(S_G^T=S\), \(S_H^T=-\dfrac{GH}{1+GH}\), \(S+T=1\).<br>
+Disturbance: \(\dfrac CD=\dfrac{G_2}{1+G_1G_2H}\). First order with feedback: DC gain \(\dfrac K{1+K}\), \(\tau_{cl}=\dfrac\tau{1+K}\), bandwidth \(\dfrac{1+K}\tau\).</p></div></div>
+<h2 id="s-25-3"><span class="n">25.3</span> Block-diagram reduction</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Cascade: \(\prod G\); parallel: \(\sum G\); loop: \(\dfrac{G}{1\pm GH}\).<br>
+Take-off past \(G\) forward: branch \(\times\frac1G\); backward: \(\times G\). Summing point past \(G\) forward: branch \(\times G\); backward: \(\times\frac1G\).<br>
+Unity conversion: \(\dfrac{G}{1+GH}=\dfrac1H\cdot\dfrac{GH}{1+GH}\). Nested: \(\dfrac{G_1G_2G_3}{1+G_2H_1+G_1G_2G_3H_2}\).</p></div></div>
+<h2 id="s-25-4"><span class="n">25.4</span> Mason’s gain formula</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(T=\dfrac{\sum P_k\Delta_k}{\Delta}\), \(\Delta=1-\sum L_i+\sum L_iL_j-\sum L_iL_jL_k+\cdots\) (non-touching sets); \(\Delta_k\): remove loops touching path \(k\).</p></div></div>
+<h2 id="s-25-5"><span class="n">25.5</span> Time response</h2>
+<div class="box formula"><div class="bt">First order</div><div class="bb"><p>\(\dfrac1{\tau s+1}\): \(c=1-e^{-t/\tau}\); \(t_r(10\text{--}90)=2.2\tau\); \(t_d=0.69\tau\); \(t_s=4\tau\) (2%), \(3\tau\) (5%); ramp error \(\tau\).</p></div></div>
+<div class="box formula"><div class="bt">Second order, \(0&lt;\zeta&lt;1\)</div><div class="bb"><p>\(\omega_d=\omega_n\sqrt{1-\zeta^2}\); \(c=1-\dfrac{e^{-\zeta\omega_nt}}{\sqrt{1-\zeta^2}}\sin(\omega_dt+\cos^{-1}\zeta)\).<br>
+\(t_p=\dfrac\pi{\omega_d}\); \(M_p=e^{-\pi\zeta/\sqrt{1-\zeta^2}}\); \(t_r=\dfrac{\pi-\cos^{-1}\zeta}{\omega_d}\); \(t_s=\dfrac4{\zeta\omega_n}\) (2%), \(\dfrac3{\zeta\omega_n}\) (5%).<br>
+\(\zeta=\dfrac{-\ln M_p}{\sqrt{\pi^2+\ln^2M_p}}\); peak ratio \(e^{-2\pi\zeta/\sqrt{1-\zeta^2}}\). Standard: \(\zeta=0.5\to16.3\%\); \(0.707\to4.3\%\); \(0.6\to9.5\%\).</p></div></div>
+<h2 id="s-25-6"><span class="n">25.6</span> Steady-state error</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(e_{ss}=\lim_{s\to0}\dfrac{sR(s)}{1+GH}\) (stable loop). \(K_p=GH(0)\), \(K_v=\lim sGH\), \(K_a=\lim s^2GH\).<br></p>
+<div class="tw"><table><tbody><tr><td class="c">Type</td><td class="c">step</td><td class="c">ramp</td><td class="c">parabola</td></tr><tr><td class="c">0</td><td class="c">\(\frac1{1+K_p}\)</td><td class="c">\(\infty\)</td><td class="c">\(\infty\)</td></tr><tr><td class="c">1</td><td class="c">0</td><td class="c">\(\frac1{K_v}\)</td><td class="c">\(\infty\)</td></tr><tr><td class="c">2</td><td class="c">0</td><td class="c">0</td><td class="c">\(\frac1{K_a}\)</td></tr></tbody></table></div>
+<p><br>
+Input amplitude \(A\) multiplies the error. Parabola \(=t^2/2\).</p></div></div>
+<h2 id="s-25-7"><span class="n">25.7</span> Stability and Routh</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Stable \(\iff\) all closed-loop poles in the open LHP. Necessary: all coefficients present and of the same sign.<br>
+Routh: sign changes in the first column \(=\) RHP roots. Zero in the first column \(\to\varepsilon\); zero row \(\to\) auxiliary polynomial \(A(s)\), use \(dA/ds\).<br>
+Cubic \(a_3s^3+a_2s^2+a_1s+a_0\): stable \(\iff\) all \(&gt;0\) and \(a_2a_1&gt;a_3a_0\).</p></div></div>
+<h2 id="s-25-8"><span class="n">25.8</span> Frequency response, Bode and margins</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\omega_r=\omega_n\sqrt{1-2\zeta^2}\), \(M_r=\dfrac{1}{2\zeta\sqrt{1-\zeta^2}}\) (\(\zeta&lt;0.707\)); \(\omega_b=\omega_n\sqrt{1-2\zeta^2+\sqrt{4\zeta^4-4\zeta^2+2}}\).<br>
+Bode slopes: \(-20\) dB/dec per pole, \(+20\) per zero; type \(N\) starts at \(-20N\); through \(20\log K\) at \(\omega=1\) (Bode form). Phase: pole \(0\to-90^\circ\) (\(-45^\circ\) at corner); integrator \(-90^\circ\); delay \(-\omega T\).<br>
+\(\mathrm{PM}=180^\circ+\angle GH(\omega_{gc})\); \(\mathrm{GM}=\dfrac{1}{|GH(\omega_{pc})|}\); \(\mathrm{PM}\approx100\zeta\). Quadratic-factor peak: \(-20\log(2\zeta\sqrt{1-\zeta^2})\) dB.</p></div></div>
+<h2 id="s-25-9"><span class="n">25.9</span> Root locus</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Angle: \(\angle GH=\pm180^\circ(2q+1)\); magnitude: \(K=\dfrac{\prod|s+p|}{\prod|s+z|}\). Real axis: odd count to the right. Asymptotes: \(n-m\); \(\theta=\dfrac{180^\circ(2q+1)}{n-m}\); \(\sigma_A=\dfrac{\sum p-\sum z}{n-m}\). Breakaway: \(\dfrac{dK}{ds}=0\). Departure: \(\phi_d=180^\circ-\sum\angle_p+\sum\angle_z\). Crossing: Routh/\(j\omega\).</p></div></div>
+<h2 id="s-25-10"><span class="n">25.10</span> Nyquist</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(Z=P+N\) (\(N\): clockwise encirclements of \(-1\)). Stable \(\iff Z=0\). Type \(N\) polar plot starts at \(-90^\circ N\); indentation arc \(180^\circ N\) clockwise. GM \(=1/|\text{crossing on negative real axis}|\); PM at \(|GH|=1\).</p></div></div>
+<h2 id="s-25-11"><span class="n">25.11</span> Controllers and compensators</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>P \(K_p\); PI \(K_p(1+\frac1{T_is})\); PD \(K_p(1+T_ds)\); PID \(K_p(1+\frac1{T_is}+T_ds)=\frac{K_ds^2+K_ps+K_i}{s}\).<br>
+ZN ultimate: PID \(K_p=0.6K_u\), \(T_i=P_u/2\), \(T_d=P_u/8\).<br>
+Lead \(\frac{1+aTs}{1+Ts}\): \(\phi_m=\sin^{-1}\frac{a-1}{a+1}\), \(\omega_m=\frac{1}{T\sqrt a}=\sqrt{zp}\), \(a=\frac{1+\sin\phi_m}{1-\sin\phi_m}\). Lag \(\frac{1+Ts}{1+\beta Ts}\): \(\omega_m=\frac{1}{T\sqrt\beta}\), high-frequency gain \(-20\log\beta\) dB.</p></div></div>
+<h2 id="s-25-12"><span class="n">25.12</span> State-space</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\dot x=Ax+Bu\), \(y=Cx+Du\), \(G=C(sI-A)^{-1}B+D\), poles \(=\mathrm{eig}(A)\).<br>
+CCF: last row of \(A=[-a_0\ -a_1\dots]\), \(B=[0\dots1]^T\), \(C=[b_0\ b_1\dots]\). OCF is the transpose.<br>
+\(\Phi(t)=e^{At}=\mathcal L^{-1}(sI-A)^{-1}\); \(\Phi(0)=I\), \(\dot\Phi(0)=A\), \(\Phi(t_1+t_2)=\Phi(t_1)\Phi(t_2)\), \(\Phi^{-1}(t)=\Phi(-t)\), \(\det\Phi=e^{\mathrm{tr}(A)t}\).<br>
+\(x(t)=\Phi(t)x_0+\int_0^t\Phi(t-\tau)Bu(\tau)d\tau\). Controllable: \(\mathrm{rank}[B\ AB\dots A^{n-1}B]=n\); observable: \(\mathrm{rank}[C;CA;\dots;CA^{n-1}]=n\).</p></div></div>
+<div class="box shortcut"><div class="bt">Ten numbers to memorise</div><div class="bb"><p>\(\zeta=0.5\to M_p=16.3\%\), \(\mathrm{PM}\approx50^\circ\). &emsp; \(\zeta=0.707\to M_p=4.3\%\), \(M_r\) absent. &emsp; \(t_s=4/\zeta\omega_n\). &emsp; \(63.2\%\) at \(\tau\). &emsp; \(\sin^{-1}\frac{a-1}{a+1}\): \(a=4\to37^\circ\), \(10\to55^\circ\). &emsp; \(K/[s(s+2)(s+4)]\): \(K_{max}=48\). &emsp; Cubic: \(a_2a_1&gt;a_0\). &emsp; Bode: \(-20\) dB/dec \(\leftrightarrow-90^\circ\). &emsp; GM: \(1/|\text{crossing}|\). &emsp; RL: \((\sum p-\sum z)/(n-m)\).</p></div></div><div class="pager bottom"><a class="pn" href="ch24.html">&larr; Numerical Answer Type Problems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch26.html">Conceptual Traps and Common Mistakes &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 9: BJT Amplifier Configurations | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch09.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 9: BJT Amplifier Configurations | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch09.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 9</div><h1>BJT Amplifier Configurations</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-9-1">9.1 Common-emitter amplifier</a></li><li><a href="#s-9-2">9.2 Common-base amplifier</a></li><li><a href="#s-9-3">9.3 Common-collector amplifier</a></li><li><a href="#s-9-4">9.4 Voltage gain comparison</a></li><li><a href="#s-9-5">9.5 Current gain comparison</a></li><li><a href="#s-9-6">9.6 Input impedance comparison</a></li><li><a href="#s-9-7">9.7 Output impedance comparison</a></li><li><a href="#s-9-8">9.8 Phase reversal</a></li><li><a href="#s-9-9">9.9 Emitter degeneration</a></li><li><a href="#s-9-10">9.10 Collector degeneration</a></li><li><a href="#s-9-11">9.11 Cascaded BJT amplifiers</a></li><li><a href="#s-9-12">9.12 GATE comparison problems</a></li></ol></details><h2 id="s-9-1"><span class="n">9.1</span> Common-emitter amplifier</h2>
+<figure id="fig-9-1"><div class="figimgs"><img src="img/f9_ce.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.1.</b> Common-emitter amplifier with voltage-divider bias, coupling capacitors \(C_1,C_2\) and emitter bypass \(C_E\).</figcaption></figure>
+<p>With \(C_E\) shorting \(R_E\) at signal frequencies and \(R_B=R_1\|R_2\):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_v=-g_m(R_C\|R_L\|r_o)\) &emsp; \(R_{in}=R_B\|r_\pi\) &emsp; \(R_{out}=R_C\|r_o\approx R_C\)<br>
+\(A_i=A_v\dfrac{R_{in}}{R_L}\) &emsp; Overall from source: \(\dfrac{v_o}{v_s}=A_v\dfrac{R_{in}}{R_{in}+R_s}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>The bias of Chapter 7 (\(R_1=36\) k, \(R_2=12\) k, \(R_C=3\) k, \(R_E=1\) k, \(\beta=100\), \(V_{CC}=12\) V) gives \(I_C=2.09\) mA. \(g_m=80.4\) mS, \(r_\pi=1.24\) k\(\Omega\), \(r_e=12.3\ \Omega\). Take \(R_L=3\) k\(\Omega\), \(R_s=1\) k\(\Omega\), \(r_o\to\infty\).<br>
+\(A_v=-80.4\,\mathrm{mS}\times(3\|3)\,\mathrm k=-121\). \(R_{in}=9\|1.24=1.09\) k\(\Omega\). \(v_o/v_s=-121\times1.09/2.09=-63\). \(R_{out}=3\) k\(\Omega\).</p></div></div>
+<figure id="fig-9-2"><div class="figimgs"><img src="img/f9_ce_ac.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.2.</b> Small-signal equivalent of the CE amplifier with bypassed \(R_E\): \(R_B=R_1\|R_2\) appears in parallel with \(r_\pi\).</figcaption></figure>
+<h2 id="s-9-2"><span class="n">9.2</span> Common-base amplifier</h2>
+<figure id="fig-9-3"><div class="figimgs"><img src="img/f9_cb.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.3.</b> Common-base amplifier: input at the emitter, base AC-grounded by bias network.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_v=g_m(R_C\|R_L)\) (non-inverting) &emsp; \(R_{in}=R_E\|r_e\approx r_e\) &emsp; \(R_{out}\approx R_C\) &emsp; \(A_i\approx\alpha\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(I_C=1\) mA, \(R_C=5\) k, \(R_L=10\) k. \(g_m=38.5\) mS; \(A_v=38.5\times3.33=128\); \(R_{in}\approx26\ \Omega\); \(A_i\approx0.99\). CB has as much voltage gain as CE but no phase inversion, extremely low \(R_{in}\), and a superb high-frequency response (no Miller effect).</p></div></div>
+<h2 id="s-9-3"><span class="n">9.3</span> Common-collector amplifier</h2>
+<figure id="fig-9-4"><div class="figimgs"><img src="img/f9_cc.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.4.</b> Common-collector (emitter-follower) amplifier.</figcaption></figure>
+<p>Let \(R_L'=R_E\|R_L\) and \(R_s'=R_s\|R_B\).</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_v=\dfrac{(\beta+1)R_L'}{r_\pi+(\beta+1)R_L'}=\dfrac{R_L'}{R_L'+r_e}\lesssim1\)<br>
+\(R_{in}=R_B\|\big[r_\pi+(\beta+1)R_L'\big]\) &emsp;&emsp; \(R_{out}=R_E\left\|\dfrac{r_\pi+R_s'}{\beta+1}\right.\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(I_E=2\) mA, \(\beta=100\), \(R_E=R_L=1\) k. \(r_e=13\ \Omega\), \(r_\pi=1.31\) k. \(R_L'=0.5\) k. \(A_v=101\times500/(1313+50500)=0.975\). \(R_{in}=R_B\|51.8\) k (with \(R_B=10\) k gives \(8.4\) k). With \(R_s'=1\) k: \(R_{out}=1\,\mathrm k\|[(1313+1000)/101=22.9\ \Omega]=22.4\ \Omega\). The follower is an excellent buffer.</p></div></div>
+<h2 id="s-9-4"><span class="n">9.4</span> Voltage gain comparison</h2>
+<p>CE and CB both give large gain: \(|A_v|=g_mR_C'\). CC gives \(A_v\lesssim1\) (never above 1).</p>
+<h2 id="s-9-5"><span class="n">9.5</span> Current gain comparison</h2>
+<p>CE: \(\beta\). CC: \(\beta+1\). CB: \(\alpha&lt;1\).</p>
+<h2 id="s-9-6"><span class="n">9.6</span> Input impedance comparison</h2>
+<p>CB: \(\approx r_e\) (tens of ohms). CE: \(r_\pi\) (kilohms). CC: \(r_\pi+(\beta+1)R_L'\) (hundreds of kilohms).</p>
+<h2 id="s-9-7"><span class="n">9.7</span> Output impedance comparison</h2>
+<p>CC: low (tens of ohms). CE: \(\approx R_C\) (kilohms). CB: \(\approx R_C\) (with a very large intrinsic \(r_o\)-like term).</p>
+<div class="center"><div class="tw"><table><thead><tr><th>Property</th><th class="c">CE</th><th class="c">CB</th><th class="c">CC</th></tr></thead><tbody><tr><td>\(A_v\)</td><td class="c">\(-g_mR_C'\) (large)</td><td class="c">\(+g_mR_C'\) (large)</td><td class="c">\(\approx+1\)</td></tr><tr><td>\(A_i\)</td><td class="c">\(\beta\)</td><td class="c">\(\alpha\approx1\)</td><td class="c">\(\beta+1\)</td></tr><tr><td>\(R_{in}\)</td><td class="c">medium (\(r_\pi\))</td><td class="c">very low (\(r_e\))</td><td class="c">high</td></tr><tr><td>\(R_{out}\)</td><td class="c">medium (\(R_C\))</td><td class="c">high (to \(R_C\))</td><td class="c">low</td></tr><tr><td>Phase</td><td class="c">\(180^\circ\)</td><td class="c">\(0^\circ\)</td><td class="c">\(0^\circ\)</td></tr><tr><td>Bandwidth</td><td class="c">Miller-limited</td><td class="c">best</td><td class="c">good</td></tr><tr><td>Use</td><td class="c">general gain stage</td><td class="c">HF, current buffer</td><td class="c">voltage buffer</td></tr></tbody></table></div></div>
+<h2 id="s-9-8"><span class="n">9.8</span> Phase reversal</h2>
+<p>The CE stage inverts because a rising \(v_{be}\) increases \(i_c\), which increases the drop across \(R_C\) and lowers \(v_o\). CB and CC do not invert.</p>
+<figure id="fig-9-5"><div class="figimgs"><img src="img/f9_phase.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.5.</b> Phase relationships: CE inverts (\(180^\circ\)), CC and CB are in phase.</figcaption></figure>
+<h2 id="s-9-9"><span class="n">9.9</span> Emitter degeneration</h2>
+<p>If \(R_E\) is not bypassed (figure below) it introduces series-series negative feedback.</p>
+<figure id="fig-9-6"><div class="figimgs"><img src="img/f9_ce_re.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.6.</b> CE amplifier with an unbypassed emitter resistor (degeneration).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_v=-\dfrac{\beta(R_C\|R_L)}{r_\pi+(\beta+1)R_E}\approx-\dfrac{\alpha(R_C\|R_L)}{r_e+R_E}\) &emsp; (with \(r_o\to\infty\))<br>
+\(R_{in,base}=r_\pi+(\beta+1)R_E\) &emsp;&emsp; \(R_{out}\approx R_C\) &emsp; \(G_m=\dfrac{g_m}{1+g_mR_E}\)</p></div></div>
+<p>Gain is now nearly \(-R_C/R_E\), independent of \(\beta\) and temperature, at the cost of gain magnitude; distortion drops and bandwidth rises by \((1+g_mR_E)\).</p>
+<figure id="fig-9-7"><div class="figimgs"><img src="img/f9_re.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.7.</b> Gain magnitude versus unbypassed \(R_E\).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Same amplifier without \(C_E\): \(r_e=12.3\ \Omega\), \(R_E=1\) k. \(A_v=-1.5\,\mathrm k/(12.3+1000)=-1.48\). \(R_{in,base}=1.24+101=102.2\) k, so \(R_{in}=9\|102.2=8.3\) k\(\Omega\). Gain is 80 times lower but the input resistance is 7.6 times higher.</p></div></div>
+<h2 id="s-9-10"><span class="n">9.10</span> Collector degeneration</h2>
+<p>Two related ideas. (1) A resistance in the collector path of the <em>load</em> (finite \(r_o\)) lowers the gain: \(A_v=-g_m(R_C\|R_L\|r_o)\). (2) A feedback resistor \(R_F\) from collector to base (see collector-to-base bias) reduces the input resistance by the Miller effect: \(R_{in}\approx R_F/(1+|A_v|)\) and lowers gain slightly, but it stabilises the bias and the gain.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_F=100\) k\(\Omega\), \(|A_v|=99\): \(R_{in}=100/100=1\) k\(\Omega\) (seen at the base).</p></div></div>
+<h2 id="s-9-11"><span class="n">9.11</span> Cascaded BJT amplifiers</h2>
+<p>Direct cascade of stages gives \(A_v=A_{v1}A_{v2}\cdots\) once each stage’s gain is computed <em>with the next stage’s input resistance as its load</em>. Useful two-transistor combinations:</p>
+<ul><li><strong>CE–CE:</strong> high gain, \(180^\circ\times2=0^\circ\).</li><li><strong>CE–CC:</strong> gain plus low output impedance (e.g. driving a low-resistance load).</li><li><strong>Cascode (CE–CB):</strong> high gain, high output resistance, small Miller effect \(\Rightarrow\) wide bandwidth.</li><li><strong>Darlington (CC–CC or CC–CE):</strong> \(\beta_{tot}\approx\beta_1\beta_2\), \(V_{BE(tot)}\approx1.4\) V.</li></ul>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Stage 1: CE with \(g_{m1}=40\) mS, \(R_{C1}=4\) k; stage 2: CE with \(r_{\pi2}=2.5\) k, \(g_{m2}=40\) mS, \(R_{C2}=4\) k, \(R_L=4\) k. \(A_{v1}=-40\,\mathrm{mS}\times(4\|2.5)\,\mathrm k=-61.5\). \(A_{v2}=-40\,\mathrm{mS}\times2\,\mathrm k=-80\). Total \(=4923=73.8\) dB. (If stage 2’s loading was ignored one would get \(-160\times-80\): wrong by 2.6\(\times\).)</p></div></div>
+<h2 id="s-9-12"><span class="n">9.12</span> GATE comparison problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> Which BJT amplifier has the lowest input resistance? (A) CE (B) CB (C) CC (D) all equal.</p>
+<p><strong>Q2.</strong> A CE amplifier has \(g_m=40\) mS, \(R_C=2\) k\(\Omega\), unbypassed \(R_E=100\ \Omega\) (ignore \(r_o\), large \(\beta\)). \(A_v=\) <span class="blank"></span>.</p>
+<p><strong>Q3.</strong> An emitter follower has \(r_\pi=1\) k\(\Omega\), \(\beta=99\), \(R_L'=1\) k\(\Omega\). Its voltage gain is <span class="blank"></span>.</p>
+<p><strong>Q4.</strong> The output resistance of an emitter follower with \(\beta=99\), \(r_\pi=1\) k\(\Omega\), \(R_s=1\) k\(\Omega\), \(R_E\to\infty\) is <span class="blank"></span> \(\Omega\).</p>
+<p><strong>Q5.</strong> The amplifier giving \(180^\circ\) phase shift between input and output at midband is (A) CE (B) CB (C) CC (D) none.</p>
+<p><strong>Q6.</strong> For a CB amplifier with \(I_E=1\) mA, the input resistance (approximately, in \(\Omega\)) is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: (B). Q2: \(-\dfrac{40\times2000\cdot10^{-3}}{1+40\times0.1}=-\dfrac{80}{5}=-16\). Q3: \(\dfrac{100\times1}{1+100}=0.99\). Q4: \((1000+1000)/100=20\ \Omega\). Q5: (A). Q6: \(\approx26\ \Omega\).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Find \(R_{in}\) of a CE stage with \(R_B=10\) k, \(r_\pi=2.5\) k. &emsp; [2 k\(\Omega\)]</li><li>Voltage gain of an emitter follower with \(R_L'=2\) k, \(r_e=25\ \Omega\). &emsp; [0.988]</li><li>Cascode of two identical CE/CB stages: what is the low-frequency gain relative to one CE stage? &emsp; [\(\approx\) same: \(-g_mR_C\); benefit is bandwidth and \(R_{out}\)]</li><li>Why is CC used as the last stage before a low-resistance load? &emsp; [Low \(R_{out}\), avoids loading the gain stage]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch08.html">&larr; BJT Small-Signal Model</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch10.html">AC Coupling and Multistage Amplifiers &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

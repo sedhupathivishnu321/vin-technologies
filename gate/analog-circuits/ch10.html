@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 10: AC Coupling and Multistage Amplifiers | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch10.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 10: AC Coupling and Multistage Amplifiers | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch10.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 10</div><h1>AC Coupling and Multistage Amplifiers</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-10-1">10.1 AC coupling concept</a></li><li><a href="#s-10-2">10.2 Coupling capacitors</a></li><li><a href="#s-10-3">10.3 Bypass capacitors</a></li><li><a href="#s-10-4">10.4 DC and AC equivalent circuits</a></li><li><a href="#s-10-5">10.5 Cascaded amplifiers</a></li><li><a href="#s-10-6">10.6 Overall voltage gain</a></li><li><a href="#s-10-7">10.7 Loading effects</a></li><li><a href="#s-10-8">10.8 Gain in decibels</a></li><li><a href="#s-10-9">10.9 Multistage amplifier analysis</a></li><li><a href="#s-10-10">10.10 GATE problems</a></li></ol></details><h2 id="s-10-1"><span class="n">10.1</span> AC coupling concept</h2>
+<p>Real amplifiers must pass the signal but not disturb each other’s DC bias. A series capacitor blocks DC and passes AC; a shunt capacitor to ground provides an AC short while leaving the DC unchanged. The capacitor reactance is \(X_C=1/(2\pi fC)\).</p>
+<ul><li>At <strong>DC</strong> (\(f=0\)): \(X_C=\infty\), so the capacitor is an open circuit.</li><li>At <strong>midband</strong>: \(X_C\approx0\), a short circuit.</li><li>At <strong>low frequency</strong>: \(X_C\) becomes comparable to the surrounding resistance, and the gain falls (Chapter 11).</li></ul>
+<h2 id="s-10-2"><span class="n">10.2</span> Coupling capacitors</h2>
+<p>\(C_1\) (input) and \(C_2\) (output) in the CE amplifier of Chapter 9 isolate the DC bias of the amplifier from the source and load. Together with the resistance they see, each forms a high-pass filter:</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_{L1}=\dfrac1{2\pi(R_s+R_i)C_1}\), &emsp;&emsp; \(f_{L2}=\dfrac1{2\pi(R_o+R_L)C_2}\)<br>
+Design rule: choose \(C\) so that \(X_C\le\dfrac{R_{seen}}{10}\) at the lowest signal frequency.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_s=1\) k, \(R_i=1.09\) k, want \(f_{L1}\le10\) Hz: \(C_1\ge1/(2\pi\times10\times2.09\,\mathrm k)=7.6\ \mu\)F; choose \(10\ \mu\)F.</p></div></div>
+<h2 id="s-10-3"><span class="n">10.3</span> Bypass capacitors</h2>
+<p>\(C_E\) across \(R_E\) gives an AC short at the emitter so the gain is \(-g_mR_C'\) rather than \(-R_C'/R_E\). It sees a very low resistance, \(R_{seen}=R_E\|\left(r_e+\dfrac{R_s'}{\beta+1}\right)\), so it must be <em>large</em>.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(r_e=12.3\ \Omega\), \(R_s'=0.9\) k, \(\beta=100\): \(R_{seen}=1000\|(12.3+8.9)=20.8\ \Omega\). For \(f_{LE}=100\) Hz: \(C_E=1/(2\pi\times100\times20.8)=76\ \mu\)F; for good margin use \(C_E\ge10/(2\pi f_L\,20.8)\approx760\ \mu\)F (a 10\(\times\) rule) if \(f_L\) must be \(\le100\) Hz for the whole amplifier.</p></div></div>
+<h2 id="s-10-4"><span class="n">10.4</span> DC and AC equivalent circuits</h2>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th>DC equivalent</th><th>AC (small-signal) equivalent</th></tr></thead><tbody><tr><td>Capacitors</td><td>open circuit</td><td>short circuit (midband)</td></tr><tr><td>Inductors</td><td>short circuit</td><td>open circuit</td></tr><tr><td>DC voltage sources</td><td>kept</td><td>replaced by short (AC ground)</td></tr><tr><td>DC current sources</td><td>kept</td><td>replaced by open circuit</td></tr><tr><td>Transistor</td><td>\(V_{BE}=0.7\), \(I_C=\beta I_B\)</td><td>hybrid-\(\pi\) (or T) model</td></tr></tbody></table></div></div>
+<figure id="fig-10-1"><div class="figimgs"><img src="img/f7_vd.png" alt="" loading="lazy"><img src="img/f9_ce_ac.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.1.</b> Left: DC equivalent of the CE amplifier (capacitors opened; identical to the voltage-divider bias circuit). Right: AC equivalent (\(V_{CC}\) and capacitors shorted, transistor replaced by hybrid-\(\pi\)).</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>The AC load seen by the collector is \(R_C\|R_L\), not \(R_C\) alone (the coupling capacitor connects \(R_L\) at AC). So the AC load line is steeper than the DC load line, and the maximum symmetrical swing is limited by whichever of cutoff or saturation is reached first: \(v_{o,max}=\min\{I_{CQ}R_{ac},\,V_{CEQ}\}\) where \(R_{ac}=R_C\|R_L\).</p></div></div>
+<h2 id="s-10-5"><span class="n">10.5</span> Cascaded amplifiers</h2>
+<figure id="fig-10-2"><div class="figimgs"><img src="img/f9_cascade.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.2.</b> Two-stage RC-coupled CE amplifier. Each stage has its own bias network; \(C_2\) couples stage 1 to stage 2.</figcaption></figure>
+<p>Each stage is designed to be biased independently; the coupling capacitor lets the two DC operating points be different.</p>
+<h2 id="s-10-6"><span class="n">10.6</span> Overall voltage gain</h2>
+<p>Model each stage by \((R_i,\ A_{vo},\ R_o)\) (input resistance, open-circuit voltage gain, output resistance):</p>
+<figure id="fig-10-3"><div class="figimgs"><img src="img/f10_model.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.3.</b> Two-stage cascade using the two-port model of each stage. Loading enters through the divider \(R_{i}\)–\(R_{o}\) at every junction.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\dfrac{v_o}{v_s}=\dfrac{R_{i1}}{R_{i1}+R_s}\cdot A_{vo1}\dfrac{R_{i2}}{R_{i2}+R_{o1}}\cdot A_{vo2}\dfrac{R_L}{R_L+R_{o2}}\)</p></div></div>
+<p>A common and costly mistake is to multiply the individual (unloaded) gains directly.</p>
+<h2 id="s-10-7"><span class="n">10.7</span> Loading effects</h2>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Each stage: \(R_i=2\) k, \(A_{vo}=-200\), \(R_o=4\) k. Source \(R_s=1\) k, load \(R_L=4\) k.<br>
+Input divider: \(2/(2+1)=0.667\).<br>
+Stage 1 output loaded by \(R_{i2}=2\) k: \(-200\times2/(2+4)=-66.7\).<br>
+Stage 2 output loaded by \(R_L\): \(-200\times4/(4+4)=-100\).<br>
+\(v_o/v_s=0.667\times(-66.7)\times(-100)=4444=73\) dB. The naive product \((-200)^2=40000\) would overestimate by 9\(\times\).</p></div></div>
+<p>Loading is reduced by making \(R_i\) of each stage large and \(R_o\) of the previous small (that is why a CC buffer is inserted).</p>
+<h2 id="s-10-8"><span class="n">10.8</span> Gain in decibels</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_v(\mathrm{dB})=20\log_{10}|A_v|\), &emsp;&emsp; \(A_p(\mathrm{dB})=10\log_{10}A_p\)<br>
+Cascade: gains in dB <strong>add</strong>: \(A_{tot}(\mathrm{dB})=\sum A_k(\mathrm{dB})\).</p></div></div>
+<figure id="fig-10-4"><div class="figimgs"><img src="img/f10_db.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.4.</b> Decibel scale: memorise \(\times2\to6\) dB, \(\times10\to20\) dB, \(\times\sqrt2\to3\) dB.</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Ratio</th><th class="c">0.1</th><th class="c">0.5</th><th class="c">0.707</th><th class="c">1</th><th class="c">2</th><th class="c">10</th><th class="c">100</th></tr></thead><tbody><tr><td>dB</td><td class="c">\(-20\)</td><td class="c">\(-6\)</td><td class="c">\(-3\)</td><td class="c">0</td><td class="c">\(+6\)</td><td class="c">\(+20\)</td><td class="c">\(+40\)</td></tr></tbody></table></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>A three-stage amplifier has stage gains \(20\) dB, \(26\) dB and \(-6\) dB (an attenuator): total \(=40\) dB, i.e. \(|A_v|=100\).</p></div></div>
+<h2 id="s-10-9"><span class="n">10.9</span> Multistage amplifier analysis</h2>
+<div class="box formula"><div class="bt">Procedure</div><div class="bb"><p>1. Solve the DC bias of each stage independently (coupling capacitors isolate them).<br>
+2. Compute \(g_m\), \(r_\pi\), \(r_o\) for each transistor.<br>
+3. Starting from the load and working backward, find each stage’s input resistance \(R_i\) (it is the load of the previous stage).<br>
+4. Compute each stage’s gain using its real load, and multiply, including the source divider.<br>
+5. Bandwidth: \(n\) identical stages have \(f_H=f_{H1}\sqrt{2^{1/n}-1}\) and \(f_L=f_{L1}/\sqrt{2^{1/n}-1}\).</p></div></div>
+<p>The bandwidth-shrinkage factor: \(n=2\): \(0.644\); \(n=3\): \(0.510\); \(n=4\): \(0.435\).</p>
+<h2 id="s-10-10"><span class="n">10.10</span> GATE problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> A voltage gain of \(1000\) corresponds to <span class="blank"></span> dB.</p>
+<p><strong>Q2.</strong> Two cascaded stages have voltage gains of \(30\) dB each. The overall \(|A_v|\) is <span class="blank"></span>.</p>
+<p><strong>Q3.</strong> An amplifier has \(R_i=10\) k, \(A_{vo}=100\), \(R_o=1\) k. It is driven by \(R_s=10\) k and loaded by \(R_L=1\) k. \(v_o/v_s=\) <span class="blank"></span>.</p>
+<p><strong>Q4.</strong> Two identical cascaded stages each have \(f_H=1\) MHz. The overall upper \(3\)-dB frequency is approximately (A) 1 MHz (B) 644 kHz (C) 500 kHz (D) 2 MHz.</p>
+<p><strong>Q5.</strong> The reactance of a \(10\ \mu\)F capacitor at \(100\) Hz is <span class="blank"></span> \(\Omega\).</p>
+<p><strong>Q6.</strong> Why is the AC load line steeper than the DC load line? (A) coupling capacitors are large (B) \(R_L\) appears in parallel with \(R_C\) for AC (C) \(V_{CC}\) is grounded (D) \(V_{BE}\) changes.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: 60. Q2: \(60\) dB \(=1000\). Q3: \(100\times\tfrac{10}{20}\times\tfrac{1}{2}=25\). Q4: (B). Q5: \(1/(2\pi\times100\times10^{-5})=159\ \Omega\). Q6: (B).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Convert \(|A_v|=0.05\) to dB. &emsp; [\(-26\) dB]</li><li>Three identical stages each with \(f_H=2\) MHz: overall \(f_H\)? &emsp; [1.02 MHz]</li><li>Find \(C\) for \(f_L=20\) Hz with \(R=50\) k\(\Omega\). &emsp; [0.16 \(\mu\)F]</li><li>List two reasons for cascading a CC stage after a CE stage. &emsp; [Lower \(R_o\); prevents load from reducing CE gain]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch09.html">&larr; BJT Amplifier Configurations</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch11.html">Frequency Response of BJT Amplifiers &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

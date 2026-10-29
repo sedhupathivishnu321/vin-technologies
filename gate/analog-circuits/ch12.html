@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 12: MOSFET Fundamentals | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch12.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 12: MOSFET Fundamentals | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch12.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 12</div><h1>MOSFET Fundamentals</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-12-1">12.1 MOS structure</a></li><li><a href="#s-12-2">12.2 Enhancement and depletion MOSFETs</a></li><li><a href="#s-12-3">12.3 NMOS and PMOS</a></li><li><a href="#s-12-4">12.4 MOSFET operating regions</a></li><li><a href="#s-12-5">12.5 Drain characteristics</a></li><li><a href="#s-12-6">12.6 Transfer characteristics</a></li><li><a href="#s-12-7">12.7 Threshold voltage</a></li><li><a href="#s-12-8">12.8 Body effect</a></li><li><a href="#s-12-9">12.9 Channel-length modulation</a></li><li><a href="#s-12-10">12.10 MOSFET as an amplifier</a></li><li><a href="#s-12-11">12.11 GATE-oriented MOSFET analysis</a></li></ol></details><h2 id="s-12-1"><span class="n">12.1</span> MOS structure</h2>
+<p>A MOSFET has four terminals: gate (G), drain (D), source (S) and body (B). A metal or polysilicon gate sits on a thin oxide (thickness \(t_{ox}\)) over a semiconductor substrate. The gate is insulated from the channel, so the DC gate current is zero, the reason MOSFET amplifiers have very high input resistance.</p>
+<figure id="fig-12-1"><div class="figimgs"><img src="img/f12_struct.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.1.</b> Cross-section of an n-channel enhancement MOSFET: \(n^+\) source and drain in a p-type substrate, gate over a thin oxide. \(L\) is the channel length.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Oxide capacitance per unit area: \(C_{ox}=\varepsilon_{ox}/t_{ox}\)<br>
+Process transconductance parameter: \(k_n'=\mu_nC_{ox}\) (typical \(100\)–\(400\ \mu\)A/V\({}^2\))<br>
+Device transconductance parameter: \(k_n=k_n'\dfrac WL\)</p></div></div>
+<h2 id="s-12-2"><span class="n">12.2</span> Enhancement and depletion MOSFETs</h2>
+<ul><li><strong>Enhancement-mode:</strong> no channel exists at \(V_{GS}=0\). A positive \(V_{GS}&gt;V_{th}\) (NMOS) <em>induces</em> an inversion channel. Normally OFF.</li><li><strong>Depletion-mode:</strong> a channel exists at \(V_{GS}=0\) (implanted). A negative \(V_{GS}\) (NMOS) <em>depletes</em> the channel until it pinches off at \(V_{GS}=V_{th}&lt;0\) (called \(V_P\)). Normally ON.</li></ul>
+<h2 id="s-12-3"><span class="n">12.3</span> NMOS and PMOS</h2>
+<figure id="fig-12-2"><div class="figimgs"><img src="img/f12_nmos.png" alt="" loading="lazy"><img src="img/f12_pmos.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.2.</b> Circuit symbols of the enhancement NMOS and PMOS. In the NMOS the source is at the lower potential; in the PMOS the source is the higher-potential terminal.</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th class="c">NMOS (enhancement)</th><th class="c">PMOS (enhancement)</th></tr></thead><tbody><tr><td>Substrate</td><td class="c">p-type</td><td class="c">n-type</td></tr><tr><td>Carriers</td><td class="c">electrons</td><td class="c">holes</td></tr><tr><td>\(V_{th}\)</td><td class="c">\(&gt;0\)</td><td class="c">\(&lt;0\)</td></tr><tr><td>ON condition</td><td class="c">\(V_{GS}&gt;V_{th}\)</td><td class="c">\(V_{GS}&lt;V_{th}\) (\(V_{SG}&gt;|V_{th}|\))</td></tr><tr><td>Current direction</td><td class="c">drain \(\to\) source</td><td class="c">source \(\to\) drain</td></tr><tr><td>Relative \(k'\)</td><td class="c">\(\mu_n\approx2\text{--}3\mu_p\) (NMOS stronger)</td><td class="c">weaker</td></tr></tbody></table></div></div>
+<p>For PMOS use the same equations with \(V_{SG}\), \(V_{SD}\), \(|V_{th}|\) and \(\mu_p\).</p>
+<h2 id="s-12-4"><span class="n">12.4</span> MOSFET operating regions</h2>
+<p>Define the <strong>overdrive voltage</strong> \(V_{ov}=V_{GS}-V_{th}\).</p>
+<figure id="fig-12-3"><div class="figimgs"><img src="img/f12_channel.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.3.</b> Channel condition in the three regions: no channel (cutoff), continuous channel (triode), and pinched-off channel (saturation).</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Region</th><th>Condition (NMOS)</th><th>Drain current</th></tr></thead><tbody><tr><td>Cutoff</td><td>\(V_{GS}&lt;V_{th}\)</td><td>\(I_D=0\)</td></tr><tr><td>Triode (linear)</td><td>\(V_{GS}&gt;V_{th}\), \(V_{DS}&lt;V_{ov}\)</td><td>\(I_D=k_n\!\left[V_{ov}V_{DS}-\tfrac12V_{DS}^2\right]\)</td></tr><tr><td>Saturation</td><td>\(V_{GS}&gt;V_{th}\), \(V_{DS}\ge V_{ov}\)</td><td>\(I_D=\tfrac12k_nV_{ov}^2(1+\lambda V_{DS})\)</td></tr></tbody></table></div></div>
+<p>For small \(V_{DS}\) in triode the device is a voltage-controlled resistor \(r_{DS}=1/(k_nV_{ov})\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(k_n'=200\ \mu\)A/V\({}^2\), \(W/L=10\) (\(k_n=2\) mA/V\({}^2\)), \(V_{th}=0.5\) V, \(V_{GS}=1\) V (\(V_{ov}=0.5\) V).<br>
+Saturation (\(V_{DS}\ge0.5\) V, take \(V_{DS}=1.5\) V, \(\lambda=0\)): \(I_D=\tfrac12\times2\,\mathrm m\times0.25=0.25\) mA.<br>
+Triode at \(V_{DS}=0.2\) V: \(I_D=2\,\mathrm m[0.5\times0.2-0.02]=0.16\) mA.<br>
+On-resistance at small \(V_{DS}\): \(r_{DS}=1/(2\,\mathrm m\times0.5)=1\) k\(\Omega\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Region test in one line: compare \(V_{DS}\) with \(V_{GS}-V_{th}\). For a PMOS use magnitudes. For a diode-connected MOSFET (\(V_{GS}=V_{DS}\)) it is <em>always</em> in saturation (when ON) because \(V_{DS}=V_{GS}&gt;V_{GS}-V_{th}\).</p></div></div>
+<h2 id="s-12-5"><span class="n">12.5</span> Drain characteristics</h2>
+<figure id="fig-12-4"><div class="figimgs"><img src="img/f12_iv.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.4.</b> Family of \(I_D\)–\(V_{DS}\) curves: triode region to the left of the dashed parabola, saturation to the right.</figcaption></figure>
+<p>The locus \(V_{DS}=V_{GS}-V_{th}\) where the saturation and triode curves meet is \(I_D=\tfrac12k_nV_{DS}^2\) (the dashed parabola).</p>
+<h2 id="s-12-6"><span class="n">12.6</span> Transfer characteristics</h2>
+<figure id="fig-12-5"><div class="figimgs"><img src="img/f12_transfer.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.5.</b> Transfer characteristic (in saturation) for an enhancement NMOS (left) and a depletion NMOS (right).</figcaption></figure>
+<p>Enhancement: \(I_D=\tfrac12k_n(V_{GS}-V_{th})^2\) for \(V_{GS}&gt;V_{th}\). Depletion (or JFET): \(I_D=I_{DSS}\left(1-\dfrac{V_{GS}}{V_P}\right)^2\) with \(I_{DSS}\) the current at \(V_{GS}=0\).</p>
+<h2 id="s-12-7"><span class="n">12.7</span> Threshold voltage</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(V_{th}=V_{FB}+2\phi_F+\dfrac{\sqrt{2q\varepsilon_{Si}N_A(2\phi_F)}}{C_{ox}}\) &emsp; with &emsp; \(\phi_F=V_T\ln\dfrac{N_A}{n_i}\)</p></div></div>
+<p>\(V_{th}\) is raised by heavier doping and thicker oxide; it is adjusted by ion implantation. Temperature coefficient \(\approx-2\) mV/\({}^\circ\)C.</p>
+<h2 id="s-12-8"><span class="n">12.8</span> Body effect</h2>
+<p>If the source-to-body voltage \(V_{SB}\ne0\) (for NMOS \(V_{SB}&gt;0\)) the threshold rises:
+\[V_{th}=V_{th0}+\gamma\left(\sqrt{2\phi_F+V_{SB}}-\sqrt{2\phi_F}\right),\qquad\gamma=\frac{\sqrt{2q\varepsilon_{Si}N_A}}{C_{ox}}.\]</p>
+<figure id="fig-12-6"><div class="figimgs"><img src="img/f12_body.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.6.</b> Threshold voltage increases with the source-body reverse bias.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_{th0}=0.5\) V, \(\gamma=0.4\ \mathrm{V^{1/2}}\), \(2\phi_F=0.7\) V, \(V_{SB}=1\) V: \(V_{th}=0.5+0.4(\sqrt{1.7}-\sqrt{0.7})=0.5+0.4(1.304-0.837)=0.687\) V.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>Body effect matters when the source is <em>not</em> at the same potential as the body: source followers, cascodes, and stacked transistors. In a common-source amplifier with \(S\) tied to \(B\) (or grounded), \(V_{SB}=0\) and there is no body effect.</p></div></div>
+<h2 id="s-12-9"><span class="n">12.9</span> Channel-length modulation</h2>
+<p>When \(V_{DS}\) rises beyond \(V_{ov}\), the pinch-off point moves toward the source, shortening the effective channel: \(I_D\propto1/L_{eff}\). Approximately
+\[I_D=\tfrac12k_nV_{ov}^2(1+\lambda V_{DS}),\qquad r_o=\frac{1}{\lambda I_D}=\frac{V_A}{I_D},\ V_A=\frac1\lambda\propto L.\]</p>
+<figure id="fig-12-7"><div class="figimgs"><img src="img/f12_clm.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.7.</b> Channel-length modulation: the extrapolated saturation lines meet at \(V_{DS}=-1/\lambda=-V_A\).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\lambda=0.1\) V\({}^{-1}\). \(I_D\) at \(V_{DS}=2\) V compared with \(1\) V: ratio \(=(1+0.2)/(1+0.1)=1.09\); \(r_o=1/(0.1\times250\,\mu\mathrm A)=40\) k\(\Omega\) at \(I_D=0.25\) mA.</p></div></div>
+<p>Longer channels have smaller \(\lambda\) (larger \(r_o\)): analogue designers use \(L\) larger than minimum.</p>
+<h2 id="s-12-10"><span class="n">12.10</span> MOSFET as an amplifier</h2>
+<p>Biased in saturation, a small change in \(V_{GS}\) produces a change in \(I_D=\tfrac12k_nV_{ov}^2\), converted to a voltage by \(R_D\).</p>
+<figure id="fig-12-8"><div class="figimgs"><img src="img/f12_vtc.png" alt="" loading="lazy"></div><figcaption><b>Figure 12.8.</b> Voltage-transfer curve of a common-source amplifier: cutoff, saturation (the amplifying region with slope \(-g_mR_D\)), and triode.</figcaption></figure>
+<p>In the saturation portion the incremental gain is \(dV_o/dV_{GS}=-g_mR_D\), where \(g_m=k_nV_{ov}=2I_D/V_{ov}\) (Chapter 14).</p>
+<h2 id="s-12-11"><span class="n">12.11</span> GATE-oriented MOSFET analysis</h2>
+<div class="box formula"><div class="bt">Recipe</div><div class="bb"><p>1. Compute \(V_{GS}\) (gate voltage minus source voltage). If \(V_{GS}&lt;V_{th}\): cutoff, \(I_D=0\).<br>
+2. Assume saturation: \(I_D=\tfrac12k_n(V_{GS}-V_{th})^2\).<br>
+3. Find \(V_{DS}\) from the drain-source loop; if \(V_{DS}&lt;V_{GS}-V_{th}\) the assumption fails: use the triode formula.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(1) Some texts define \(K=\tfrac12\mu C_{ox}W/L\) so that \(I_D=K(V_{GS}-V_{th})^2\); read the problem’s definition. (2) When solving a source-degenerated circuit you get a <em>quadratic</em>: always discard the root with \(V_{GS}&lt;V_{th}\). (3) For PMOS, apply the signs carefully: \(V_{SG}&gt;|V_{th}|\) means ON.</p></div></div>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> An NMOS has \(k_n=1\) mA/V\({}^2\), \(V_{th}=1\) V, \(V_{GS}=3\) V, \(V_{DS}=5\) V, \(\lambda=0\). \(I_D\) (mA) is <span class="blank"></span>.</p>
+<p><strong>Q2.</strong> With the same device, \(V_{GS}=3\) V and \(V_{DS}=1\) V. The region and \(I_D\) are: (A) saturation, 2 mA (B) triode, 1.5 mA (C) triode, 1 mA (D) cutoff, 0.</p>
+<p><strong>Q3.</strong> The threshold voltage of an NMOS increases when (A) \(V_{SB}\) increases (B) \(V_{SB}\) decreases (C) \(V_{GS}\) increases (D) \(V_{DS}\) increases.</p>
+<p><strong>Q4.</strong> Channel-length modulation with \(\lambda=0.05\) V\({}^{-1}\) and \(I_D=0.5\) mA gives \(r_o=\) <span class="blank"></span> k\(\Omega\).</p>
+<p><strong>Q5.</strong> A diode-connected NMOS (\(V_{GS}=V_{DS}\)) with \(V_{th}=1\) V carries current when \(V_{GS}=1.5\) V. It is in (A) cutoff (B) triode (C) saturation (D) breakdown.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(\tfrac12\times1\times(2)^2=2\) mA. Q2: \(V_{ov}=2\) V, \(V_{DS}=1&lt;2\): triode, \(I_D=1[2\times1-0.5]=1.5\) mA (B). Q3: (A). Q4: \(1/(0.05\times0.5\,\mathrm m)=40\) k\(\Omega\). Q5: (C).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>PMOS, \(|V_{th}|=0.8\) V, \(k_p=0.5\) mA/V\({}^2\), \(V_{SG}=2\) V, \(V_{SD}=3\) V: \(I_D\)? &emsp; [0.36 mA]</li><li>\(C_{ox}=8\) fF/\(\mu\)m\({}^2\), \(\mu_n=400\) cm\({}^2\)/V s. Compute \(k_n'\). &emsp; [\(\approx320\ \mu\)A/V\({}^2\)]</li><li>Depletion NMOS \(I_{DSS}=6\) mA, \(V_P=-3\) V, \(V_{GS}=-1\) V: \(I_D\)? &emsp; [2.67 mA]</li><li>Calculate \(V_{th}\) if \(V_{th0}=0.6\), \(\gamma=0.3\), \(2\phi_F=0.8\), \(V_{SB}=2\). &emsp; [0.83 V]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch11.html">&larr; Frequency Response of BJT Amplifiers</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch13.html">MOSFET Biasing &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

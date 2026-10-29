@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 19: Op-Amp Amplifier Circuits | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch19.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 19: Op-Amp Amplifier Circuits | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch19.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 19</div><h1>Op-Amp Amplifier Circuits</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-19-1">19.1 Inverting amplifier</a></li><li><a href="#s-19-2">19.2 Non-inverting amplifier</a></li><li><a href="#s-19-3">19.3 Voltage follower</a></li><li><a href="#s-19-4">19.4 Differential amplifier</a></li><li><a href="#s-19-5">19.5 Instrumentation amplifier</a></li><li><a href="#s-19-6">19.6 Summing amplifier</a></li><li><a href="#s-19-7">19.7 Weighted summing amplifier</a></li><li><a href="#s-19-8">19.8 Difference amplifier</a></li><li><a href="#s-19-9">19.9 Integrator-based amplifiers</a></li><li><a href="#s-19-10">19.10 Practical limitations</a></li><li><a href="#s-19-11">19.11 GATE problems</a></li></ol></details><h2 id="s-19-1"><span class="n">19.1</span> Inverting amplifier</h2>
+<figure id="fig-19-1"><div class="figimgs"><img src="img/f19_inv.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.1.</b> Inverting amplifier.</figcaption></figure>
+<div class="box derive"><div class="bt">Ideal analysis</div><div class="bb"><p>Virtual ground: \(v_-=0\). Current in \(R_1\): \(i=v_i/R_1\). No current enters the input, so it all flows through \(R_f\): \(v_o=0-iR_f\).</p></div></div>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_v=\dfrac{v_o}{v_i}=-\dfrac{R_f}{R_1}\), &emsp; \(R_{in}=R_1\), &emsp; \(R_{out}\approx0\)<br>
+Finite \(A\): \(A_v=-\dfrac{R_f/R_1}{1+\dfrac{1}{A}\left(1+\dfrac{R_f}{R_1}\right)}\)</p></div></div>
+<figure id="fig-19-2"><div class="figimgs"><img src="img/w19_inv.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.2.</b> Inverting amplifier with \(R_f/R_1=10\): output is 10\(\times\) larger and inverted.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_1=1\) k, \(R_f=10\) k, \(v_i=0.5\) V dc: \(v_o=-5\) V. For \(v_i=2\sin\omega t\) the output would need \(\pm20\) V: clipped at \(\pm V_{sat}\).</p></div></div>
+<figure id="fig-19-3"><div class="figimgs"><img src="img/w19_sat.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.3.</b> When \(|A_vv_i|\) exceeds the supply limit the output clips (here gain 11, input 2 V pk).</figcaption></figure>
+<h2 id="s-19-2"><span class="n">19.2</span> Non-inverting amplifier</h2>
+<figure id="fig-19-4"><div class="figimgs"><img src="img/f19_noninv.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.4.</b> Non-inverting amplifier.</figcaption></figure>
+<p>Virtual short: \(v_-=v_i\); the divider gives \(v_-=v_o\,R_1/(R_1+R_f)\).</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_v=1+\dfrac{R_f}{R_1}\), &emsp; \(R_{in}\approx\infty\) (very large), &emsp; \(R_{out}\approx0\)</p></div></div>
+<figure id="fig-19-5"><div class="figimgs"><img src="img/w19_noninv.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.5.</b> Non-inverting amplifier with \(R_f/R_1=10\): gain 11, in phase.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_1=1\) k, \(R_f=10\) k, \(v_i=0.5\) V: \(v_o=5.5\) V. Gain can never be below 1.</p></div></div>
+<h2 id="s-19-3"><span class="n">19.3</span> Voltage follower</h2>
+<p>Set \(R_f=0\) and \(R_1=\infty\): \(A_v=1\). High input resistance, low output resistance: an ideal buffer.</p>
+<figure id="fig-19-6"><div class="figimgs"><img src="img/f19_buf.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.6.</b> Voltage follower (unity-gain buffer).</figcaption></figure>
+<figure id="fig-19-7"><div class="figimgs"><img src="img/w19_buf.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.7.</b> Follower: \(v_o=v_i\).</figcaption></figure>
+<p>Use: isolate a high-impedance source from a heavy load; bandwidth equals GBW.</p>
+<h2 id="s-19-4"><span class="n">19.4</span> Differential amplifier</h2>
+<figure id="fig-19-8"><div class="figimgs"><img src="img/f19_diff.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.8.</b> Difference amplifier with \(R_3=R_1\) and \(R_4=R_2\).</figcaption></figure>
+<div class="box derive"><div class="bt">Superposition</div><div class="bb"><p>\(v_2\) alone: non-inverting gain \(\left(1+\dfrac{R_2}{R_1}\right)\) times the divider \(\dfrac{R_4}{R_3+R_4}\) at the \(+\) input. \(v_1\) alone: inverting gain \(-\dfrac{R_2}{R_1}\). With \(\dfrac{R_4}{R_3}=\dfrac{R_2}{R_1}\) the total is
+\[v_o=\frac{R_2}{R_1}\,(v_2-v_1).\]</p></div></div>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_d=\dfrac{R_2}{R_1}\), &emsp; \(R_{id}=2R_1\) (between the inputs), &emsp; input resistance of the \(v_2\) input \(=R_3+R_4\), of \(v_1\) input \(=R_1\).<br>
+Matching tolerance \(\delta\): \(\mathrm{CMRR}\approx\dfrac{1+R_2/R_1}{4\delta}\)</p></div></div>
+<figure id="fig-19-9"><div class="figimgs"><img src="img/w19_diff.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.9.</b> Difference amplifier with gain 5: only the difference of the inputs is amplified.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_1=R_3=10\) k, \(R_2=R_4=100\) k, \(v_1=1.0\), \(v_2=1.2\): \(v_o=10\times0.2=2\) V. With \(1\%\) resistors: CMRR \(\approx11/0.04=275\) (49 dB).</p></div></div>
+<h2 id="s-19-5"><span class="n">19.5</span> Instrumentation amplifier</h2>
+<figure id="fig-19-10"><div class="figimgs"><img src="img/f19_ia.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.10.</b> Three-op-amp instrumentation amplifier: a buffered input stage with gain-setting resistor \(R_G\), followed by a unity-gain difference amplifier.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(v_o=\left(1+\dfrac{2R}{R_G}\right)(v_2-v_1)\) &emsp; (output difference stage of unity gain)<br>
+Very high input resistance on both inputs, gain set by one resistor \(R_G\), high CMRR (common-mode gain of the first stage is 1).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R=25\) k, \(R_G=1\) k: gain \(=1+50=51\). For \(v_2-v_1=10\) mV: \(v_o=0.51\) V. Application: strain-gauge and ECG bridge amplifiers.</p></div></div>
+<h2 id="s-19-6"><span class="n">19.6</span> Summing amplifier</h2>
+<figure id="fig-19-11"><div class="figimgs"><img src="img/f19_sum.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.11.</b> Inverting summing amplifier.</figcaption></figure>
+<p>The virtual ground makes each input current independent: \(i_k=v_k/R_k\).</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(v_o=-R_f\left(\dfrac{v_1}{R_1}+\dfrac{v_2}{R_2}+\dfrac{v_3}{R_3}\right)\); with \(R_1=R_2=R_3=R_f\): \(v_o=-(v_1+v_2+v_3)\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_f=10\) k, \(R_1=10\) k, \(R_2=5\) k, \(R_3=2\) k, \(v_1=v_2=v_3=1\) V: \(v_o=-(1+2+5)=-8\) V.</p></div></div>
+<figure id="fig-19-12"><div class="figimgs"><img src="img/w19_sum.png" alt="" loading="lazy"></div><figcaption><b>Figure 19.12.</b> Summer combining an ac signal and a dc level (dc level shifter).</figcaption></figure>
+<h2 id="s-19-7"><span class="n">19.7</span> Weighted summing amplifier</h2>
+<p>Choosing \(R_k=R_f/w_k\) gives independent weights \(w_k\). With binary weights \(R,2R,4R,\ldots\) the circuit is a simple DAC:
+\[v_o=-V_{ref}\left(b_{n-1}+\frac{b_{n-2}}{2}+\cdots\right)\frac{R_f}{R}\]</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>3-bit weighted-resistor DAC, \(R_f=R\), \(V_{ref}=5\) V, code \(101\): \(v_o=-5\,(1+0+\tfrac14)=-6.25\) V.</p></div></div>
+<h2 id="s-19-8"><span class="n">19.8</span> Difference amplifier</h2>
+<p>(Covered in Section 19.4.) A summing/difference combination \(v_o=\dfrac{R_f}{R_1}(v_3-v_1)\) is also used as a subtractor; setting \(R_f=R_1\) gives \(v_o=v_3-v_1\) (unity-gain subtractor).</p>
+<h2 id="s-19-9"><span class="n">19.9</span> Integrator-based amplifiers</h2>
+<p>The integrator \(v_o=-\dfrac1{RC}\int v_idt\) can also be viewed as an amplifier with frequency-dependent gain \(-1/(j\omega RC)\); adding \(R_f\) in parallel with \(C\) gives the low-pass amplifier of gain \(-R_f/R_1\) and cutoff \(f_c=1/(2\pi R_fC)\) (Chapter 20). A \(C\) in series with \(R_1\) gives a high-pass (DC-blocking) amplifier of gain \(-R_f/R_1\) above \(f_L=1/(2\pi R_1C)\). These are the building blocks for active filters.</p>
+<h2 id="s-19-10"><span class="n">19.10</span> Practical limitations</h2>
+<ul><li><strong>Finite gain-bandwidth:</strong> closed-loop bandwidth \(=\text{GBW}/(1+R_f/R_1)\).</li><li><strong>Slew rate:</strong> distortion of large fast signals.</li><li><strong>Input offset and bias currents:</strong> DC output errors, especially at high gain.</li><li><strong>Output swing:</strong> clipping \(\approx1\)–\(2\) V inside supply rails; output current limit.</li><li><strong>Input common-mode range:</strong> ICMR limits the non-inverting configuration.</li><li><strong>Resistor tolerances:</strong> determine gain accuracy and CMRR of differential amplifiers.</li><li><strong>Noise:</strong> thermal noise of \(R_f\), \(R_1\) and the amplifier’s \(e_n\), \(i_n\).</li></ul>
+<h2 id="s-19-11"><span class="n">19.11</span> GATE problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> Ideal op-amp, non-inverting amplifier with \(R_1=1\) k\(\Omega\), \(R_f=9\) k\(\Omega\). Gain is <span class="blank"></span>.</p>
+<p><strong>Q2.</strong> In the summing amplifier with \(R_f=R_1=R_2=10\) k\(\Omega\), \(v_1=1\) V, \(v_2=-3\) V: \(v_o=\) <span class="blank"></span> V.</p>
+<p><strong>Q3.</strong> Difference amplifier \(R_1=R_3=1\) k, \(R_2=R_4=10\) k. \(v_1=2.00\) V, \(v_2=2.05\) V. \(v_o=\) <span class="blank"></span> V.</p>
+<p><strong>Q4.</strong> Instrumentation amplifier with \(R=50\) k\(\Omega\), \(R_G=2\) k\(\Omega\). Overall gain is <span class="blank"></span>.</p>
+<p><strong>Q5.</strong> Voltage follower with source resistance \(10\) k\(\Omega\) driving a \(100\ \Omega\) load: the gain from source to load is nearest to (A) 0.01 (B) 0.5 (C) 1 (D) 100.</p>
+<p><strong>Q6.</strong> A non-inverting amplifier of gain 10 has input \(1.5\sin\omega t\) V and saturation limits \(\pm12\) V. The output is (A) undistorted (B) clipped at \(\pm12\) V (C) zero (D) DC.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(1+9=10\). Q2: \(-(1-3)=+2\) V. Q3: \(10\times0.05=0.5\) V. Q4: \(1+2\times50/2=51\). Q5: (C), follower has infinite \(R_{in}\): no loading. Q6: ideal output would be \(\pm15\) V, beyond \(\pm12\) V: clipped, (B).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Design an inverting amplifier with \(A_v=-25\) and \(R_{in}=4\) k\(\Omega\). &emsp; [\(R_1=4\) k, \(R_f=100\) k]</li><li>Design a non-inverting amplifier with gain 6 using \(R_1=2\) k\(\Omega\). &emsp; [\(R_f=10\) k]</li><li>3-input inverting summer (\(R_f=12\) k) with weights \(1,2,3\). &emsp; [\(R_1=12\) k, \(R_2=6\) k, \(R_3=4\) k]</li><li>Why is an instrumentation amplifier better than a single op-amp differential amplifier? &emsp; [High, balanced input resistance; single-resistor gain; higher CMRR]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch18.html">&larr; Operational Amplifier Fundamentals</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch20.html">Op-Amp Mathematical Circuits &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

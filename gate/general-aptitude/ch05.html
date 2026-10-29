@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 5: Permutations, Combinations and Probability | General Aptitude | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Counting arrangements and selections (with and without repetition, circular arrangements, committees), and basic probability with dice, coins and cards, including conditional and “at least one”">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/general-aptitude/ch05.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 5: Permutations, Combinations and Probability | General Aptitude | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Counting arrangements and selections (with and without repetition, circular arrangements, committees), and basic probability with dice, coins and cards, including conditional and “at least one”"><meta property="og:url" content="https://vintechnologies.co.in/gate/general-aptitude/ch05.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">General Aptitude</a></div><div class="chlabel">Chapter 5</div><h1>Permutations, Combinations and Probability</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-5-1">5.1 Counting principles</a></li><li><a href="#s-5-2">5.2 Probability</a></li><li><a href="#s-5-3">5.3 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Counting arrangements and selections (with and without repetition, circular arrangements, committees), and basic probability with dice, coins and cards, including conditional and “at least one” events.</p></div></div>
+<h2 id="s-5-1"><span class="n">5.1</span> Counting principles</h2>
+<div class="box formula"><div class="bt">Fundamental rules</div><div class="bb"><p><strong>Multiplication:</strong> if a task has independent stages with \(m\) and \(n\) ways, the total is \(mn\). <strong>Addition:</strong> if stages are alternatives (either/or), add.<br>
+\(n!=n(n-1)\cdots1\), \(0!=1\). \(\ {}^nP_r=\dfrac{n!}{(n-r)!}\) (order matters). \(\ {}^nC_r=\dfrac{n!}{r!(n-r)!}\) (order does not matter), \({}^nC_r=\,{}^nC_{n-r}\), \({}^nC_r+\,{}^nC_{r-1}=\,{}^{n+1}C_r\).<br>
+Arrangements of \(n\) items with repeats \(p,q,r\) of the same kind: \(\dfrac{n!}{p!q!r!}\).<br>
+Circular arrangements of \(n\) distinct items: \((n-1)!\) (clockwise/anticlockwise distinct), \(\frac{(n-1)!}2\) if reflections are the same (necklace).<br>
+Handshakes among \(n\) people: \({}^nC_2\). Diagonals of an \(n\)-gon: \({}^nC_2-n\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Arrangements of LEVEL: \(\frac{5!}{2!\,2!}=30\). MISSISSIPPI: \(\frac{11!}{4!\,4!\,2!}=34650\). A committee of \(3\) from \(5\) men and \(4\) women with at least one woman: total \({}^9C_3=84\) minus all men \({}^5C_3=10\) gives \(74\).</p></div></div>
+<h3 id="s-5-1-1"><span class="n">5.1.1</span> Typical constraints</h3>
+<p><strong>Items together:</strong> glue them into one block, then multiply by the internal arrangements (A and B adjacent among \(n\) in a row: \(2\cdot(n-1)!\)). <strong>Items never together:</strong> total \(-\) together. <strong>Digits numbers:</strong> choose position by position, handling restrictions (e.g. leading digit nonzero) first. <strong>Distribution:</strong> \(n\) identical items into \(r\) boxes (each box \(\ge0\)): \({}^{n+r-1}C_{r-1}\).</p>
+<h2 id="s-5-2"><span class="n">5.2</span> Probability</h2>
+<div class="box formula"><div class="bt">Rules</div><div class="bb"><p>\(P(A)=\dfrac{\text{favourable}}{\text{total}}\) for equally likely outcomes; \(0\le P\le1\). \(P(\overline A)=1-P(A)\); \(P(A\cup B)=P(A)+P(B)-P(A\cap B)\).<br>
+Conditional: \(P(A|B)=\frac{P(A\cap B)}{P(B)}\). Independent events: \(P(A\cap B)=P(A)P(B)\).<br>
+<strong>At least one</strong> \(=1-P(\text{none})\). Binomial: \(P(k\text{ successes in }n)=\,{}^nC_kp^k(1-p)^{n-k}\). Expected value \(E=\sum xP(x)\).<br>
+<strong>Standard spaces:</strong> coin \(2\); die \(6\); two dice \(36\) (sum \(7\) in \(6\) ways); deck \(52\) (\(4\) suits \(\times\) \(13\); \(4\) aces, \(12\) face cards, \(26\) red).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Two aces drawn without replacement: \(\frac4{52}\cdot\frac3{51}=\frac1{221}\). At least one head in \(3\) tosses: \(1-\frac18=\frac78\). Two dice, sum \(7\): \(\frac16\).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Permutation vs. combination: order matters \(\Rightarrow\) \(P\). (ii) Forgetting to divide by \(p!\) for repeated letters. (iii) Drawing <em>without</em> replacement changes the second probability. (iv) Mutually exclusive \(\ne\) independent. (v) Circular arrangements use \((n-1)!\), not \(n!\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>For “at least” use the complement. For committees use \({}^nC_r\) with the constraint as a subtraction. For probability with dice, list the \(36\) outcomes. For small \(r\): \({}^nC_2=\frac{n(n-1)}2\), \({}^nC_3=\frac{n(n-1)(n-2)}6\).</p></div></div>
+<h2 id="s-5-3"><span class="n">5.3</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> \({}^5P_2=\) (A) 10 (B) 20 (C) 60 (D) 120.</p>
+<p><strong>Q2.</strong> The number of distinct arrangements of the letters of LEVEL is (A) 120 (B) 60 (C) 30 (D) 24.</p>
+<p><strong>Q3.</strong> The probability that the sum of two fair dice is \(7\) is (A) \(1/12\) (B) \(1/9\) (C) \(1/6\) (D) \(5/36\).</p>
+<p><strong>Q4.</strong> \({}^8C_3=\) (A) 24 (B) 56 (C) 336 (D) 120.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (C). Q3 (C). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A committee of \(3\) is chosen from \(5\) men and \(4\) women with at least one woman. The number of ways is (A) 84 (B) 74 (C) 64 (D) 94.</p>
+<p><strong>Q6.</strong> Two cards are drawn without replacement from a deck. The probability both are aces is (A) \(1/169\) (B) \(1/221\) (C) \(1/13\) (D) \(2/221\).</p>
+<p><strong>Q7.</strong> The number of distinct arrangements of the letters of MISSISSIPPI is (A) 34650 (B) 39916800 (C) 11!/(4!4!) (D) 69300.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (B). Q7 (A).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Circular arrangements of \(6\) distinct people: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Probability (three decimals) of at least one head in \(3\) tosses of a fair coin: <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Handshakes among \(10\) people, each pair shaking once: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(5!=120\). Q9: \(0.875\). Q10: \({}^{10}C_2=45\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which are true? (A) \({}^nC_r=\,{}^nC_{n-r}\) (B) \({}^nP_r=\,{}^nC_r\cdot r!\) (C) mutually exclusive events with positive probabilities are independent (D) \(P(\text{at least one})=1-P(\text{none})\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Ways to arrange \(4\) books on a shelf? &emsp; <strong>T2.</strong> \(P\)(exactly one head in two tosses)? &emsp; <strong>T3.</strong> \({}^6C_2\)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 24. T2: \(1/2\). T3: 15.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\({}^nP_r=\frac{n!}{(n-r)!}\), \({}^nC_r=\frac{n!}{r!(n-r)!}\); repeats divide by \(p!q!\cdots\); circular \((n-1)!\).</li><li>Together: glue into a block; not together: total \(-\) together.</li><li>\(P(A\cup B)\), \(P(A|B)\), independence multiplies; “at least one” \(=1-P(\text{none})\).</li><li>Dice: \(36\) outcomes; cards: \(52\) (\(4\) aces, \(26\) red).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch04.html">&larr; Number Systems, Powers, Exponents and Logarithms</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch06.html">Mensuration &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Rs": "\\text{\\textrupee}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

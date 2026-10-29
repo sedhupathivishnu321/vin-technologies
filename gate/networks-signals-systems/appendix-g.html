@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix G: Standard Signal Waveforms | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-g.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix G: Standard Signal Waveforms | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-g.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Appendix G</div><h1>Standard Signal Waveforms</h1><figure id="fig-G-1"><div class="figimgs"><img src="img/fG_waves.png" alt="" loading="lazy"></div><figcaption><b>Figure G.1.</b> Ten waveforms that appear repeatedly in GATE: sine, square, triangle, sawtooth, half-wave and full-wave rectified sine, pulse train, exponentially decaying pulses, unit step, impulse train.</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Waveform (peak \(V_m\))</th><th class="c">Mean</th><th class="c">RMS</th><th class="c">Fourier content</th></tr></thead><tbody><tr><td>Sine</td><td class="c">\(0\)</td><td class="c">\(V_m/\sqrt2\)</td><td class="c">fundamental only</td></tr><tr><td>Square \(\pm V_m\)</td><td class="c">\(0\)</td><td class="c">\(V_m\)</td><td class="c">odd sines, \(4V_m/n\pi\)</td></tr><tr><td>Triangle \(\pm V_m\)</td><td class="c">\(0\)</td><td class="c">\(V_m/\sqrt3\)</td><td class="c">odd cosines, \(8V_m/n^2\pi^2\)</td></tr><tr><td>Sawtooth \(\pm V_m\)</td><td class="c">\(0\)</td><td class="c">\(V_m/\sqrt3\)</td><td class="c">all sines, \(2V_m/n\pi\)</td></tr><tr><td>Half-wave rectified</td><td class="c">\(V_m/\pi\)</td><td class="c">\(V_m/2\)</td><td class="c">DC, fundamental, even harmonics</td></tr><tr><td>Full-wave rectified</td><td class="c">\(2V_m/\pi\)</td><td class="c">\(V_m/\sqrt2\)</td><td class="c">DC, even harmonics</td></tr><tr><td>Pulse train (duty \(d\))</td><td class="c">\(dV_m\)</td><td class="c">\(V_m\sqrt d\)</td><td class="c">\(c_k=dV_m\sinc(kd)\)</td></tr></tbody></table></div></div><div class="pager bottom"><a class="pn" href="appendix-f.html">&larr; z-Transform Pairs and Properties</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="appendix-h.html">Standard RLC Responses &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

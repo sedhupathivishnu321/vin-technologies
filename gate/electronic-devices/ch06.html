@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 6: Bipolar Junction Transistors: Operation, Models and Characteristics | Electronic Devices | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Operating regions, \alpha–\beta relations, leakage currents (I_{CBO}, I_{CEO}), current components and efficiency factors, Ebers–Moll equations and the Early effect.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electronic-devices/ch06.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 6: Bipolar Junction Transistors: Operation, Models and Characteristics | Electronic Devices | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Operating regions, \alpha–\beta relations, leakage currents (I_{CBO}, I_{CEO}), current components and efficiency factors, Ebers–Moll equations and the Early effect."><meta property="og:url" content="https://vintechnologies.co.in/gate/electronic-devices/ch06.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electronic Devices</a></div><div class="chlabel">Chapter 6</div><h1>Bipolar Junction Transistors: Operation, Models and Characteristics</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-6-1">6.1 Structure and operating regions</a></li><li><a href="#s-6-2">6.2 Current components and efficiency</a></li><li><a href="#s-6-3">6.3 Ebers–Moll model</a></li><li><a href="#s-6-4">6.4 Early effect (base-width modulation)</a></li><li><a href="#s-6-5">6.5 Other effects</a></li><li><a href="#s-6-6">6.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Operating regions, \(\alpha\)–\(\beta\) relations, leakage currents (\(I_{CBO}\), \(I_{CEO}\)), current components and efficiency factors, Ebers–Moll equations and the Early effect.</p></div></div>
+<h2 id="s-6-1"><span class="n">6.1</span> Structure and operating regions</h2>
+<p>A BJT has two junctions: emitter–base (EBJ) and collector–base (CBJ). The emitter is heavily doped, the base thin and lightly doped, the collector moderately doped and large.</p>
+<div class="center"><div class="tw"><table><thead><tr><th>Region</th><th class="c">EBJ</th><th class="c">CBJ</th></tr></thead><tbody><tr><td>Cutoff</td><td class="c">reverse</td><td class="c">reverse</td></tr><tr><td><strong>Forward active</strong> (amplifier)</td><td class="c"><strong>forward</strong></td><td class="c"><strong>reverse</strong></td></tr><tr><td>Saturation (closed switch)</td><td class="c">forward</td><td class="c">forward</td></tr><tr><td>Inverse active (poor \(\beta\))</td><td class="c">reverse</td><td class="c">forward</td></tr></tbody></table></div></div>
+<p>In the forward-active npn transistor electrons injected from the emitter diffuse across the thin base; most are swept into the collector by the CBJ field, a few recombine in the base, and a small hole current flows from base to emitter.</p>
+<figure id="fig-6-1"><div class="figimgs"><img src="img/e06_bjt_chars.png" alt="" loading="lazy"></div><figcaption><b>Figure 6.1.</b> Common-emitter output characteristics with the active region, saturation (\(V_{CE(sat)}\approx0.2\) V), cutoff and the Early-voltage extrapolation.</figcaption></figure>
+<div class="box formula"><div class="bt">Current relations (forward active)</div><div class="bb"><p>\(I_E=I_C+I_B\). &emsp; \(I_C=\alpha I_E+I_{CBO}\), \(\quad I_C=\beta I_B+I_{CEO}\).<br>
+\(\alpha=\dfrac{\beta}{\beta+1},\qquad \beta=\dfrac{\alpha}{1-\alpha}\); &emsp; \(\alpha=0.99\Leftrightarrow\beta=99\); \(\ \beta=100\Leftrightarrow\alpha=0.990\).<br>
+Leakage: \(I_{CEO}=(\beta+1)I_{CBO}\). &emsp; \(I_E=(\beta+1)I_B\) when leakage is neglected.<br>
+Saturation: \(I_C&lt;\beta I_B\); the forced \(\beta_{forced}=I_C/I_B&lt;\beta\). \(V_{CE(sat)}\approx0.1\)–\(0.3\) V, \(V_{BE}\approx0.7\) V.</p></div></div>
+<h2 id="s-6-2"><span class="n">6.2</span> Current components and efficiency</h2>
+<div class="box formula"><div class="bt">Why \(\alpha&lt;1\)</div><div class="bb"><p>\(\alpha=\gamma\,\alpha_T\,M\) with <strong>emitter injection efficiency</strong> \(\gamma=\dfrac{I_{En}}{I_{En}+I_{Ep}}\approx\left[1+\dfrac{D_pN_{AB}W_B}{D_nN_{DE}L_p}\right]^{-1}\) (high emitter doping \(\Rightarrow\gamma\to1\)), <strong>base transport factor</strong> \(\alpha_T=1-\dfrac{W_B^2}{2L_n^2}\) (thin base \(\Rightarrow\alpha_T\to1\)) and collector multiplication \(M\approx1\).<br>
+Hence \(\beta\approx\dfrac{2L_n^2}{W_B^2}\) for \(\gamma\approx1\), or \(\beta\approx\dfrac{D_nN_{DE}L_p}{D_pN_{AB}W_B}\) if limited by emitter efficiency.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(W_B=0.5\,\mu\)m, \(L_n=20\,\mu\)m: \(\alpha_T=1-\dfrac{(0.5)^2}{2(20)^2}=0.99969\). A thinner base or larger \(L_n\) raises \(\beta\).</p></div></div>
+<h2 id="s-6-3"><span class="n">6.3</span> Ebers–Moll model</h2>
+<p>The transistor is two back-to-back diodes plus coupled current sources.</p>
+<div class="box formula"><div class="bt">Ebers–Moll (npn)</div><div class="bb"><p>\(I_E=I_{ES}\left(e^{V_{BE}/V_T}-1\right)-\alpha_RI_{CS}\left(e^{V_{BC}/V_T}-1\right)\)<br>
+\(I_C=\alpha_FI_{ES}\left(e^{V_{BE}/V_T}-1\right)-I_{CS}\left(e^{V_{BC}/V_T}-1\right)\)<br>
+Reciprocity: \(\alpha_FI_{ES}=\alpha_RI_{CS}=I_S\).<br>
+Forward active (\(V_{BE}\gg V_T\), \(V_{BC}&lt;0\)): \(\ I_C=I_Se^{V_{BE}/V_T}\), \(\ I_B=I_C/\beta\).<br>
+Transport (Gummel–Poon) form: \(I_C=I_S\left(e^{V_{BE}/V_T}-e^{V_{BC}/V_T}\right)\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(I_S=10^{-15}\) A: at \(V_{BE}=0.7\) V, \(I_C=10^{-15}e^{0.7/0.0259}=0.547\) mA. For \(I_C=1\) mA, \(V_{BE}=0.0259\ln(10^{12})=0.716\) V. A factor-of-10 increase in \(I_C\) needs \(59.5\) mV more \(V_{BE}\).</p></div></div>
+<h2 id="s-6-4"><span class="n">6.4</span> Early effect (base-width modulation)</h2>
+<p>As \(V_{CB}\) increases the CBJ depletion region widens into the base, shrinking the neutral base width \(W_B\) and raising the collector current slightly.</p>
+<div class="box formula"><div class="bt">Early effect</div><div class="bb"><p>\(I_C=I_Se^{V_{BE}/V_T}\left(1+\dfrac{V_{CE}}{V_A}\right)\); output resistance \(r_o=\dfrac{V_A+V_{CE}}{I_C}\approx\dfrac{V_A}{I_C}\).<br>
+\(V_A\) (Early voltage, 50–200 V): the point where the extrapolated output curves meet the \(V_{CE}\) axis at \(-V_A\). Larger \(V_A\) means higher \(r_o\). \(\beta\) also rises with \(V_{CE}\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(I_C=1\,\)mA at \(V_{CE}=2\) V with \(V_A=100\) V: at \(V_{CE}=7\) V, \(I_C=1\times\dfrac{1.07}{1.02}=1.049\) mA. \(r_o=100\,\)V\(/1\) mA \(=100\,\)k\(\Omega\).</p></div></div>
+<h2 id="s-6-5"><span class="n">6.5</span> Other effects</h2>
+<ul><li><strong>Temperature</strong>: \(V_{BE}\) at fixed \(I_C\) falls \(\approx2\) mV/\({}^\circ\)C; \(I_{CBO}\) doubles per \(\sim10^\circ\)C; \(\beta\) rises with \(T\). Together they cause thermal runaway unless the bias is stabilised.</li><li><strong>Breakdown</strong>: \(BV_{CEO}&lt;BV_{CBO}\) (\(BV_{CEO}\approx BV_{CBO}/\beta^{1/n}\), \(n\approx3\)–\(6\)). <strong>Punch-through</strong>: the CBJ depletion region reaches the EBJ.</li><li><strong>High-level injection</strong>: \(\beta\) falls at large \(I_C\). At very low \(I_C\) recombination in the EBJ also lowers \(\beta\).</li><li><strong>Frequency</strong>: transit time \(\tau_F=W_B^2/2D_n\) and junction capacitances give \(f_T=g_m/[2\pi(C_\pi+C_\mu)]\) (Ch. 7).</li><li><strong>Inverse mode</strong>: swapping E and C gives \(\beta_R\ll\beta_F\) (collector lightly doped).</li></ul>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) The relation \(\beta=I_C/I_B\) holds only in the active region; in saturation \(I_C/I_B&lt;\beta\). (ii) \(I_{CEO}\) is <em>not</em> \(I_{CBO}\): it is \((\beta+1)\) times larger. (iii) \(V_{BE}\) is nearly constant (\(\approx0.7\) V) but falls with temperature. (iv) The Early effect increases \(I_C\) with \(V_{CE}\) in the active region; in saturation \(I_C\) falls steeply. (v) \(\alpha&lt;1\) always.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Active-region analysis: assume \(V_{BE}=0.7\), find \(I_B\), \(I_C=\beta I_B\), then check \(V_{CE}&gt;0.2\) V; if not, the transistor is saturated and \(I_C=(V_{CC}-V_{CE(sat)})/R_C\). \(g_m=I_C/V_T\) (\(38.6\) mS per mA).</p></div></div>
+<h2 id="s-6-6"><span class="n">6.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A BJT with \(\beta=100\) has \(\alpha=\) (A) 0.99 (B) 0.90 (C) 1.01 (D) 0.9999.</p>
+<p><strong>Q2.</strong> In the forward active region the junctions are (A) EBJ forward, CBJ reverse (B) both forward (C) both reverse (D) EBJ reverse, CBJ forward.</p>
+<p><strong>Q3.</strong> Increase of \(I_C\) with \(V_{CE}\) in the active region is due to (A) Zener effect (B) Early effect (C) punch-through (D) Miller effect.</p>
+<p><strong>Q4.</strong> \(I_{CEO}\) equals (A) \(I_{CBO}\) (B) \((\beta+1)I_{CBO}\) (C) \(\beta I_{CBO}\) (D) \(I_{CBO}/\beta\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A): \(100/101=0.990\). Q2 (A). Q3 (B). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> \(\beta=100\), \(I_B=20\,\mu\)A, \(I_{CBO}\) negligible. \(I_C\) and \(I_E\) are (A) 2 mA, 2.02 mA (B) 2 mA, 1.98 mA (C) 20 mA, 20.2 mA (D) 0.2 mA, 0.22 mA.</p>
+<p><strong>Q6.</strong> \(I_C=1\) mA at \(V_{CE}=2\) V and \(V_A=100\) V. At \(V_{CE}=7\) V the collector current is (A) 1.00 mA (B) 1.05 mA (C) 1.07 mA (D) 1.25 mA.</p>
+<p><strong>Q7.</strong> A BJT has \(I_S=10^{-15}\) A. The \(V_{BE}\) for \(I_C=1\) mA (\(V_T=25.9\) mV) is (A) 0.60 V (B) 0.72 V (C) 0.80 V (D) 0.90 V.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A): \(I_E=2.02\) mA. Q6 (B): \(1.07/1.02\). Q7 (B): \(0.716\) V.</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> \(I_{CBO}=1\) nA, \(\beta=100\). \(I_{CEO}\) (nA): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Change of \(V_{BE}\) (mV) at constant \(I_C\) when temperature rises from \(27^\circ\)C to \(127^\circ\)C (use \(-2\) mV/\({}^\circ\)C): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Output resistance (k\(\Omega\)) for \(V_A=100\) V and \(I_C=1\) mA (ignore \(V_{CE}\)): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 101. Q9: \(-200\). Q10: 100.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Choose the true statements. (A) \(\alpha&lt;1\). (B) Saturation has both junctions forward. (C) \(BV_{CEO}&gt;BV_{CBO}\). (D) Early effect increases output conductance.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(\alpha\) for \(\beta=50\). &emsp; <strong>T2.</strong> Base-width modulation is called? &emsp; <strong>T3.</strong> Reciprocity relation of E–M model.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(0.980\). T2: Early effect. T3: \(\alpha_FI_{ES}=\alpha_RI_{CS}=I_S\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Active: EBJ forward, CBJ reverse; \(I_C=\beta I_B\), \(I_E=(\beta+1)I_B\), \(\alpha=\beta/(\beta+1)\), \(I_{CEO}=(\beta+1)I_{CBO}\).</li><li>\(\alpha=\gamma\alpha_T\); thin base, heavy emitter \(\Rightarrow\) high \(\beta\).</li><li>\(I_C=I_Se^{V_{BE}/V_T}(1+V_{CE}/V_A)\); \(r_o=V_A/I_C\); \(-2\) mV/\({}^\circ\)C.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch05.html">&larr; Special Semiconductor Diodes and Optoelectronic Devices</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch07.html">BJT DC Biasing and Small-Signal Models &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\kTq": "\\dfrac{kT}{q}", "\\EF": "E_F", "\\Ei": "E_i", "\\Ec": "E_C", "\\Ev": "E_V", "\\Eg": "E_g", "\\Vbi": "V_{bi}", "\\Cox": "C_{ox}", "\\Vov": "V_{ov}", "\\gm": "g_m", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 8: AC Power and Maximum Power Transfer | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Complex power S=P+jQ, power-factor correction (find C), power-triangle manipulations with several loads, and conjugate matching for maximum power. RMS versus peak is the most common source of lost">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch08.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 8: AC Power and Maximum Power Transfer | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Complex power S=P+jQ, power-factor correction (find C), power-triangle manipulations with several loads, and conjugate matching for maximum power. RMS versus peak is the most common source of lost"><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch08.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 8</div><h1>AC Power and Maximum Power Transfer</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-8-1">8.1 Instantaneous power</a></li><li><a href="#s-8-2">8.2 Average power</a></li><li><a href="#s-8-3">8.3 Reactive power</a></li><li><a href="#s-8-4">8.4 Apparent power</a></li><li><a href="#s-8-5">8.5 Complex power</a></li><li><a href="#s-8-6">8.6 Power factor</a></li><li><a href="#s-8-7">8.7 Power-factor correction</a></li><li><a href="#s-8-8">8.8 Complex power relationships</a></li><li><a href="#s-8-9">8.9 Maximum power transfer in AC circuits</a></li><li><a href="#s-8-10">8.10 Power calculations in RLC circuits</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Complex power \(S=P+jQ\), power-factor correction (find \(C\)), power-triangle manipulations with several loads, and conjugate matching for maximum power. RMS versus peak is the most common source of lost marks.</p></div></div>
+<h2 id="s-8-1"><span class="n">8.1</span> Instantaneous power</h2>
+<p>For \(v=V_m\cos(\omega t+\theta_v)\) and \(i=I_m\cos(\omega t+\theta_i)\) with \(\phi=\theta_v-\theta_i\) (the impedance angle):
+\[p(t)=vi=\frac{V_mI_m}{2}\cos\phi+\frac{V_mI_m}{2}\cos(2\omega t+\theta_v+\theta_i).\]
+The first term is constant; the second oscillates at <em>twice</em> the supply frequency. Expanding the cosine of the difference,
+\[p(t)=P\left[1+\cos(2\omega t+2\theta_v)\right]+Q\sin(2\omega t+2\theta_v)\]
+with \(P=\tfrac12V_mI_m\cos\phi\) and \(Q=\tfrac12V_mI_m\sin\phi\). The \(P\) term never reverses; the \(Q\) term has zero average and represents energy sloshing between source and reactive elements.</p>
+<figure id="fig-8-1"><div class="figimgs"><img src="img/f8_pt.png" alt="" loading="lazy"></div><figcaption><b>Figure 8.1.</b> \(v\), \(i\) and \(p(t)\) for an inductive load (\(\phi=53.13^\circ\)). \(p(t)\) oscillates at \(2\omega\) about the average \(P\) and is negative for part of the cycle (energy returned by the inductor).</figcaption></figure>
+<h2 id="s-8-2"><span class="n">8.2</span> Average power</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(P=\dfrac{V_mI_m}2\cos\phi=V_{rms}I_{rms}\cos\phi=I_{rms}^2R=\dfrac{V_R^2}{R}\) (watts).<br>
+For a purely resistive load \(P=V_{rms}I_{rms}\); for a purely reactive load \(P=0\).</p></div></div>
+<h2 id="s-8-3"><span class="n">8.3</span> Reactive power</h2>
+<p>\(Q=V_{rms}I_{rms}\sin\phi=I_{rms}^2X\) (volt-amperes reactive, var). \(Q&gt;0\) for inductive load (current lags), \(Q&lt;0\) for capacitive load (current leads). Sign convention: an inductor <em>absorbs</em> \(+Q\) and a capacitor <em>delivers</em> reactive power (\(-Q\) absorbed).</p>
+<h2 id="s-8-4"><span class="n">8.4</span> Apparent power</h2>
+<p>\(S=V_{rms}I_{rms}\) (VA). Ratings of transformers and cables are in VA because the current they must carry depends on \(S\), not \(P\).</p>
+<h2 id="s-8-5"><span class="n">8.5</span> Complex power</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\mathbf S=\tilde V_{rms}\tilde I_{rms}^{\,*}=P+jQ\), &emsp; \(|\mathbf S|=V_{rms}I_{rms}\), &emsp; \(\mathbf S=I_{rms}^2Z=\dfrac{|V_{rms}|^2}{Z^*}\).<br>
+With <em>peak</em> phasors: \(\mathbf S=\tfrac12\tilde V\tilde I^*\).</p></div></div>
+<figure id="fig-8-2"><div class="figimgs"><img src="img/f8_tri.png" alt="" loading="lazy"></div><figcaption><b>Figure 8.2.</b> Power triangles. Inductive (lagging) load: \(Q&gt;0\); capacitive (leading) load: \(Q&lt;0\). \(S^2=P^2+Q^2\).</figcaption></figure>
+<div class="box example"><div class="bt">Complex power</div><div class="bb"><p>\(Z=6+j8\ \Omega\), \(\tilde V=100\angle0^\circ\) V (rms). \(\tilde I=100/(10\angle53.13^\circ)=10\angle-53.13^\circ\) A. \(\mathbf S=100\times10\angle+53.13^\circ=600+j800\) VA: \(P=600\) W, \(Q=800\) var (inductive), \(S=1000\) VA, pf \(=0.6\) lagging. Check: \(I^2R=100\times6=600\), \(I^2X=100\times8=800\). ✓</p></div></div>
+<h2 id="s-8-6"><span class="n">8.6</span> Power factor</h2>
+<p>\(\text{pf}=\cos\phi=P/S\). It is <strong>lagging</strong> for an inductive load (current lags voltage) and <strong>leading</strong> for a capacitive load. The pf alone does not tell you the sign of \(Q\): always state lag/lead.</p>
+<h2 id="s-8-7"><span class="n">8.7</span> Power-factor correction</h2>
+<p>Industrial loads are inductive; a low pf means large current for the same real power (higher \(I^2R\) loss in the line). Connect a <strong>shunt capacitor</strong> across the load: it supplies part of the load’s reactive power, leaving the real power unchanged.</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(Q_C=P(\tan\phi_1-\tan\phi_2)\), &emsp; \(C=\dfrac{Q_C}{\omega V_{rms}^2}\) &emsp; (\(\phi_1\): old angle, \(\phi_2\): new angle).</p></div></div>
+<div class="box example"><div class="bt">Correction to unity</div><div class="bb"><p>\(1\) kW load, pf \(0.8\) lagging, \(230\) V, \(50\) Hz.<br>
+\(Q_1=P\tan\phi_1=1000\times0.75=750\) var. To reach unity, \(Q_C=750\) var: \(C=\dfrac{750}{2\pi\cdot50\cdot230^2}=45.1\ \mu\)F.<br>
+Line current falls from \(1000/(230\times0.8)=5.43\) A to \(1000/230=4.35\) A (\(20\%\) less; line loss \(36\%\) less).</p></div></div>
+<div class="box example"><div class="bt">Correction to 0.95 lag</div><div class="bb"><p>\(\tan\phi_2=\tan(\cos^{-1}0.95)=0.3287\); \(Q_C=1000(0.75-0.3287)=421.3\) var; \(C=25.4\ \mu\)F.</p></div></div>
+<figure id="fig-8-3"><div class="figimgs"><img src="img/f8_pfc_ckt.png" alt="" loading="lazy"><img src="img/f8_pfc_ph.png" alt="" loading="lazy"></div><figcaption><b>Figure 8.3.</b> Power-factor correction: a shunt capacitor reduces the reactive current; \(I_p\) (the real component) is unchanged.</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>The capacitor must be connected in <strong>parallel</strong> (shunt) with the load so that the load voltage and real power do not change. Series compensation changes the load voltage. Over-correction gives a leading pf, and also a large current.</p></div></div>
+<h2 id="s-8-8"><span class="n">8.8</span> Complex power relationships</h2>
+<p><strong>Conservation:</strong> for any network \(\sum\mathbf S_{delivered}=\sum\mathbf S_{absorbed}\). So \(\sum P\) and \(\sum Q\) are each conserved, but \(\sum|\mathbf S|\ne|\sum\mathbf S|\).</p>
+<div class="box example"><div class="bt">Two loads in parallel</div><div class="bb"><p>Load 1: \(10\) kW, pf \(0.8\) lag \(\to\mathbf S_1=10+j7.5\) kVA. Load 2: \(5\) kW, pf \(0.6\) lead \(\to\mathbf S_2=5-j6.67\) kVA.<br>
+\(\mathbf S=15+j0.833\) kVA, \(|\mathbf S|=15.02\) kVA, pf \(=15/15.02=0.9985\) lag. (Adding the magnitudes \(12.5+8.33=20.8\) would be wrong.)</p></div></div>
+<h2 id="s-8-9"><span class="n">8.9</span> Maximum power transfer in AC circuits</h2>
+<p>For a source \(\tilde V_{Th}\) with \(Z_{Th}=R_{Th}+jX_{Th}\) and load \(Z_L=R_L+jX_L\), the load power (peak phasors) is
+\[P_L=\frac{\tfrac12|\tilde V_{Th}|^2R_L}{(R_{Th}+R_L)^2+(X_{Th}+X_L)^2}.\]</p>
+<ul><li>\(X_L\) and \(R_L\) both adjustable: \(Z_L=Z_{Th}^*\) (<strong>conjugate matching</strong>); \(P_{max}=\dfrac{|\tilde V_{Th}|^2}{8R_{Th}}\) (peak) \(=\dfrac{|V_{Th,rms}|^2}{4R_{Th}}\).</li><li>Only \(R_L\) adjustable (\(X_L\) fixed): \(R_L=\sqrt{R_{Th}^2+(X_{Th}+X_L)^2}\).</li><li>Only \(R_L\) adjustable and load purely resistive: \(R_L=|Z_{Th}|\).</li><li>Load \(|Z_L|\) adjustable with fixed angle \(\theta_L\): maximum when \(|Z_L|=|Z_{Th}|\).</li></ul>
+<figure id="fig-8-4"><div class="figimgs"><img src="img/f8_mpt_ac.png" alt="" loading="lazy"></div><figcaption><b>Figure 8.4.</b> Load power as a function of \((R_L,X_L)\) for \(Z_{Th}=1.92-j1.44\ \Omega\), \(|\tilde V_{Th}|=8\) V: a single maximum at the conjugate \(Z_L=1.92+j1.44\ \Omega\) (\(P=4.17\) W).</figcaption></figure>
+<div class="box example"><div class="bt">AC maximum power</div><div class="bb"><p>Using the Thevenin equivalent of Chapter 7: \(\tilde V_{Th}=8\angle-36.87^\circ\) V (peak), \(Z_{Th}=1.92-j1.44\ \Omega\).<br>
+Conjugate matching: \(Z_L=1.92+j1.44\ \Omega\); \(P_{max}=\dfrac{8^2}{8\times1.92}=4.17\) W.<br>
+If the load must be a pure resistor: \(R_L=|Z_{Th}|=2.4\ \Omega\), \(|\tilde I|=\dfrac8{|4.32-j1.44|}=1.757\) A, \(P=\tfrac12(1.757)^2(2.4)=3.70\) W.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>Peak versus RMS: with peak phasors \(P_{max}=|V_{Th}|^2/8R_{Th}\); with RMS phasors \(P_{max}=|V_{Th}|^2/4R_{Th}\). Also, maximum power transfer occurs at \(50\%\) efficiency, so it is not used for power lines, only for signal sources (antennas, amplifiers).</p></div></div>
+<h2 id="s-8-10"><span class="n">8.10</span> Power calculations in RLC circuits</h2>
+<ul><li>Real power is dissipated <em>only</em> in resistors: \(P=\sum I_k^2R_k\).</li><li>Reactive powers add algebraically: \(Q=\sum I_k^2X_k\) (inductive \(+\), capacitive \(-\)).</li><li>At series resonance \(Q=0\) and pf \(=1\); the source supplies only \(P=V_s^2/R\).</li></ul>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A load draws \(I=10\angle-30^\circ\) A (rms) from \(V=200\angle0^\circ\) V (rms). Its power factor is (A) \(0.5\) leading (B) \(0.866\) lagging (C) \(0.866\) leading (D) \(0.5\) lagging.</p>
+<p><strong>Q2.</strong> For maximum power transfer from a source \(Z_{Th}=3+j4\ \Omega\) to a variable complex load, the load must be (A) \(3-j4\ \Omega\) (B) \(3+j4\ \Omega\) (C) \(5\ \Omega\) (D) \(4\ \Omega\).</p>
+<p><strong>Q3.</strong> Which quantity is conserved in an AC network? (A) \(\sum|S|\) (B) \(\sum P\) and \(\sum Q\) (C) \(\sum S\) magnitude only (D) none.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B): current lags. Q2 (A). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> A \(2\) kW load at pf \(0.6\) lagging is corrected to pf \(0.8\) lagging by a shunt capacitor. The reactive power supplied by the capacitor is (A) \(0.667\) kvar (B) \(1.167\) kvar (C) \(1.5\) kvar (D) \(2.5\) kvar.</p>
+<p><strong>Q5.</strong> \(\tilde V_{Th}=20\angle0^\circ\) V (rms), \(Z_{Th}=5+j5\ \Omega\). With conjugate matching the maximum power is (A) \(20\) W (B) \(10\) W (C) \(5\) W (D) \(80\) W.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): \(\tan\phi_1=1.333\), \(\tan\phi_2=0.75\), \(Q_C=2(1.333-0.75)=1.167\) kvar. Q5 (A): \(|V|^2/4R=400/20=20\) W (rms).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> A \(230\) V (rms), \(50\) Hz supply feeds a \(1\) kW load of pf \(0.8\) lagging. The capacitor needed to raise the pf to unity is <span class="blank"></span> \(\mu\)F (nearest integer).</p>
+<p><strong>Q7.</strong> \(Z=3+j4\ \Omega\) carries \(5\) A (rms). The complex power \(P+jQ\) in VA has \(Q=\) <span class="blank"></span> var.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(750/(2\pi\cdot50\cdot230^2)=45.1\ \mu\)F \(\to45\). Q7: \(Q=I^2X=25\times4=100\) var (\(P=75\) W).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> A shunt capacitor is connected across an inductive load. Which are true? (A) Real power drawn from the source is unchanged. (B) Line current magnitude decreases (up to unity pf). (C) Load voltage changes significantly. (D) The source supplies less reactive power.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (D).</p>
+<div class="box trap"><div class="bt">Common traps in this chapter</div><div class="bb"><p>(i) Using \(\tfrac12V_mI_m\) when the data are RMS, or vice versa. (ii) Adding \(|S|\) of different loads. (iii) Forgetting lag/lead when converting pf to \(\tan\phi\). (iv) Mixing \(8R_{Th}\) and \(4R_{Th}\) in \(P_{max}\). (v) Using \(Z_L=Z_{Th}\) instead of \(Z_{Th}^*\).</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> A load has \(S=5+j5\) kVA. Find pf and state lag/lead.<br>
+<strong>T2.</strong> A source has \(Z_{Th}=10-j5\ \Omega\). Find the load for max power.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(S=7.07\) kVA, pf \(=0.707\) lagging. T2: \(Z_L=10+j5\ \Omega\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(P=VI\cos\phi\), \(Q=VI\sin\phi\), \(S=VI\) (rms); \(\mathbf S=\tilde V\tilde I^*=P+jQ\); \(S^2=P^2+Q^2\); pf \(=P/S\).</li><li>Peak phasors: \(\mathbf S=\tfrac12\tilde V\tilde I^*\). \(p(t)\) has frequency \(2\omega\).</li><li>Lagging: inductive, \(Q&gt;0\). Leading: capacitive, \(Q&lt;0\).</li><li>Correction: \(Q_C=P(\tan\phi_1-\tan\phi_2)\), \(C=Q_C/\omega V^2\) (shunt).</li><li>\(\sum P\), \(\sum Q\) conserved, \(\sum|S|\) not.</li><li>Max power: \(Z_L=Z_{Th}^*\); \(P=|V_{Th}|^2/8R_{Th}\) (peak) or \(/4R_{Th}\) (rms). \(R_L\) only: \(R_L=|Z_{Th}|\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch07.html">&larr; AC Circuit Analysis</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch09.html">First-Order Circuits &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

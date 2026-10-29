@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 11: Formula Sheet, Topic Map and Mock Test | Electronic Devices | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Semiconductor physics, junctions, BJTs, MOSFETs and device fabrication.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electronic-devices/ch11.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 11: Formula Sheet, Topic Map and Mock Test | Electronic Devices | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Semiconductor physics, junctions, BJTs, MOSFETs and device fabrication."><meta property="og:url" content="https://vintechnologies.co.in/gate/electronic-devices/ch11.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electronic Devices</a></div><div class="chlabel">Chapter 11</div><h1>Formula Sheet, Topic Map and Mock Test</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-11-1">11.1 One-page formula sheet</a></li><li><a href="#s-11-2">11.2 What GATE keeps asking (by topic)</a></li><li><a href="#s-11-3">11.3 Mixed mock test</a></li><li><a href="#s-11-4">11.4 Final-week checklist</a></li></ol></details><h2 id="s-11-1"><span class="n">11.1</span> One-page formula sheet</h2>
+<div class="box formula"><div class="bt">Semiconductor physics</div><div class="bb"><p>\(np=n_i^2\); \(n=n_ie^{(E_F-E_i)/kT}\); \(n_i\propto T^{3/2}e^{-E_g/2kT}\); \(\lambda(\mu\text{m})=1.24/E_g\).<br>
+\(\sigma=q(n\mu_n+p\mu_p)\); \(J_n=qD_n\,dn/dx\); \(D/\mu=kT/q\); \(L=\sqrt{D\tau}\); \(\Delta p(t)=\Delta p_0e^{-t/\tau}\).<br>
+\(d\mathcal E/dx=\rho/\varepsilon\); \(\;V_T=0.0259\) V; one decade \(=59.5\) mV.</p></div></div>
+<div class="box formula"><div class="bt">Diodes</div><div class="bb"><p>\(V_{bi}=V_T\ln\dfrac{N_AN_D}{n_i^2}\), \(\ W=\sqrt{\dfrac{2\varepsilon(V_{bi}-V)}q\left(\dfrac1{N_A}+\dfrac1{N_D}\right)}\), \(\ C_j\propto(V_{bi}+V_R)^{-m}\).<br>
+\(I=I_s(e^{V/\eta V_T}-1)\); \(r_d=\eta V_T/I\); \(C_d=\tau I/\eta V_T\); \(-2\) mV/\({}^\circ\)C.<br>
+Solar: \(V_{oc}=V_T\ln(1+I_{ph}/I_s)\), \(FF=P_m/V_{oc}I_{sc}\). Photodiode \(R=\eta\lambda/1.24\). Zener \(I_Z=I_R-I_L\).</p></div></div>
+<div class="box formula"><div class="bt">Transistors</div><div class="bb"><p>BJT: \(\alpha=\beta/(\beta+1)\), \(I_{CEO}=(\beta+1)I_{CBO}\), \(I_C=I_Se^{V_{BE}/V_T}(1+V_{CE}/V_A)\), \(g_m=I_C/V_T\), \(r_\pi=\beta/g_m\), \(r_o=V_A/I_C\), \(f_T=g_m/2\pi(C_\pi+C_\mu)\).<br>
+MOS: \(V_T=V_{FB}+2\phi_F+|Q_d|/C_{ox}\); \(I_D=\tfrac12k'(W/L)V_{ov}^2(1+\lambda V_{DS})\); \(g_m=2I_D/V_{ov}\); \(\gamma(\sqrt{2\phi_F+V_{SB}}-\sqrt{2\phi_F})\).<br>
+JFET: \(I_D=I_{DSS}(1-V_{GS}/V_P)^2\).<br>
+Scaling \(S\): delay \(1/S\), power/gate \(1/S^2\), power density constant.</p></div></div>
+<h2 id="s-11-2"><span class="n">11.2</span> What GATE keeps asking (by topic)</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Topic</th><th>Recurring question patterns</th></tr></thead><tbody><tr><td>Semiconductor basics</td><td>\(n,p\) from doping, Fermi-level position, direct vs indirect gap, \(\lambda\) of LED</td></tr><tr><td>Transport</td><td>\(\sigma,\rho\), Einstein relation, diffusion current from a gradient, temperature trends</td></tr><tr><td>PN junction</td><td>\(V_{bi}\), \(W\), \(x_n/x_p\), capacitance scaling, breakdown type and temperature coefficient</td></tr><tr><td>Special diodes</td><td>Zener regulator, solar-cell \(V_{oc}/FF/\eta\), photodiode, Schottky properties</td></tr><tr><td>BJT</td><td>\(\alpha\)–\(\beta\), \(I_{CEO}\), Early effect, \(g_m\), \(r_\pi\), bias point, \(f_T\)</td></tr><tr><td>MOS</td><td>regimes, \(V_T\) with body effect, \(I_D\) regions, \(g_m\), sub-threshold swing, C–V curve</td></tr><tr><td>Fabrication</td><td>oxide thickness, diffusion/implant profile, lithography resolution, yield</td></tr></tbody></table></div></div>
+<p>This is a map of recurring <em>ideas</em>, not a list of past papers.</p>
+<h2 id="s-11-3"><span class="n">11.3</span> Mixed mock test</h2>
+<p><strong>Instructions.</strong> 18 questions: 8 one-mark, 6 two-mark, 4 NAT. Time 30 minutes. Constants as in the preface.</p>
+<div class="box onemark"><div class="bt">Section A: 1-mark</div><div class="bb"><p><strong>1.</strong> Electron and hole concentrations in silicon doped with \(N_D=10^{15}\,\text{cm}^{-3}\): (A) \(10^{15}\), \(2.25\times10^{5}\) (B) \(10^{15}\), \(10^{15}\) (C) \(2.25\times10^{5}\), \(10^{15}\) (D) \(1.5\times10^{10}\) each.</p>
+<p><strong>2.</strong> The diffusion coefficient of electrons with \(\mu_n=1350\,\text{cm}^2/\text{V\,s}\) at 300 K is (A) 35 cm\({}^2\)/s (B) 1350 (C) 0.35 (D) 3.5.</p>
+<p><strong>3.</strong> Avalanche breakdown has a (A) negative temperature coefficient (B) positive temperature coefficient (C) zero (D) none.</p>
+<p><strong>4.</strong> A BJT is in the forward-active region when (A) EBJ forward, CBJ reverse (B) both forward (C) both reverse (D) EBJ reverse, CBJ forward.</p>
+<p><strong>5.</strong> An n-MOSFET is saturated for (A) \(V_{DS}&lt;V_{GS}-V_T\) (B) \(V_{DS}\ge V_{GS}-V_T\) (C) \(V_{GS}&lt;V_T\) (D) \(V_{DS}\ge V_T\).</p>
+<p><strong>6.</strong> A Schottky diode conducts by (A) minority carriers (B) majority carriers (C) tunnelling only (D) avalanche.</p>
+<p><strong>7.</strong> The short-circuit current of a solar cell is proportional to (A) \(\ln\)(light) (B) light intensity (C) temperature (D) \(V_{oc}\).</p>
+<p><strong>8.</strong> An efficient LED requires (A) indirect gap (B) direct gap (C) metal (D) insulator.</p></div></div>
+<div class="box twomark"><div class="bt">Section B: 2-mark</div><div class="bb"><p><strong>9.</strong> Built-in potential for \(N_A=N_D=10^{16}\,\text{cm}^{-3}\) in Si: (A) 0.59 V (B) 0.69 V (C) 0.79 V (D) 0.89 V.</p>
+<p><strong>10.</strong> An abrupt junction with \(V_{bi}=0.6\) V: \(C(0)/C(V_R=2.4\text{ V})\) is (A) 2 (B) \(\sqrt5\) (C) 5 (D) 4.</p>
+<p><strong>11.</strong> A BJT with \(\beta=100\) at \(I_C=0.5\) mA (\(V_T=25.9\) mV): \(g_m\) and \(r_\pi\) are (A) 19.3 mS, 5.18 k\(\Omega\) (B) 38.6 mS, 2.59 k\(\Omega\) (C) 19.3 mS, 2.59 k\(\Omega\) (D) 9.6 mS, 10.4 k\(\Omega\).</p>
+<p><strong>12.</strong> \(k_n'=200\,\mu\)A/V\({}^2\), \(W/L=5\), \(V_{ov}=0.4\) V, \(\lambda=0\), saturation. \(I_D\) is (A) 80 \(\mu\)A (B) 160 \(\mu\)A (C) 40 \(\mu\)A (D) 400 \(\mu\)A.</p>
+<p><strong>13.</strong> A Zener regulator: \(V_{in}=15\) V, \(R_s=470\,\Omega\), \(V_Z=9.1\) V, load current 5 mA. \(I_Z\) is (A) 12.6 mA (B) 7.6 mA (C) 5 mA (D) 2.6 mA.</p>
+<p><strong>14.</strong> Growing 0.5 \(\mu\)m of oxide consumes silicon of thickness (A) 0.22 \(\mu\)m (B) 0.5 \(\mu\)m (C) 0.44 \(\mu\)m (D) 1.1 \(\mu\)m.</p></div></div>
+<div class="box natq"><div class="bt">Section C: NAT</div><div class="bb"><p><strong>15.</strong> \(E_F-E_i\) (eV, two decimals) for \(n=10^{17}\,\text{cm}^{-3}\) in Si (\(kT=0.0259\), \(n_i=1.5\times10^{10}\)): <span class="blank"></span>.</p>
+<p><strong>16.</strong> Wavelength (nm) of an LED with \(E_g=2.0\) eV: <span class="blank"></span>.</p>
+<p><strong>17.</strong> \(g_{m0}\) (mS) of a JFET with \(I_{DSS}=12\) mA and \(V_P=-3\) V: <span class="blank"></span>.</p>
+<p><strong>18.</strong> Poisson yield (%, one decimal) for \(A=1.5\,\text{cm}^2\), \(D_0=1\,\text{cm}^{-2}\): <span class="blank"></span>.</p></div></div>
+<h3 id="ss-4">Answers with brief working</h3>
+<p><strong>1</strong> (A): \(p=2.25\times10^{20}/10^{15}\). <strong>2</strong> (A): \(0.0259\times1350=35\). <strong>3</strong> (B). <strong>4</strong> (A). <strong>5</strong> (B). <strong>6</strong> (B). <strong>7</strong> (B). <strong>8</strong> (B).<br>
+<strong>9</strong> (B): \(0.0259\ln(10^{32}/2.25\times10^{20})=0.695\). <strong>10</strong> (B): \(\sqrt{(0.6+2.4)/0.6}=\sqrt5\). <strong>11</strong> (A): \(g_m=0.5/25.9=19.3\) mS, \(r_\pi=100/19.3\,\text{mS}=5.18\) k\(\Omega\). <strong>12</strong> (A): \(\tfrac12(200)(5)(0.16)=80\,\mu\)A. <strong>13</strong> (B): \(I_R=5.9/470=12.55\) mA, \(I_Z=7.55\) mA. <strong>14</strong> (A): \(0.44\times0.5\).<br>
+<strong>15</strong>: \(0.0259\ln(6.67\times10^6)=0.0259\times15.71=0.41\). <strong>16</strong>: \(1240/2=620\). <strong>17</strong>: \(2\times12/3=8\). <strong>18</strong>: \(e^{-1.5}=22.3\).</p>
+<h2 id="s-11-4"><span class="n">11.4</span> Final-week checklist</h2>
+<ol><li>Redo carrier-concentration and \(E_F\) problems until you can do them in 1 minute.</li><li>Memorise junction formulae (\(V_{bi}\), \(W\), \(x_n/x_p\), \(C_j\)) and their scaling.</li><li>Practise Zener, solar-cell and photodiode calculations once each.</li><li>BJT: two bias problems (fixed, divider) and one small-signal parameter problem.</li><li>MOS: \(V_T\) with body effect, triode and saturation current, \(g_m\) and \(r_o\).</li><li>Fabrication: oxide thickness, Gaussian diffusion/implant, lithography formula.</li></ol><div class="pager bottom"><a class="pn" href="ch10.html">&larr; Integrated-Circuit Fabrication</a><a class="pn mid" href="./">All chapters</a><span></span></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\kTq": "\\dfrac{kT}{q}", "\\EF": "E_F", "\\Ei": "E_i", "\\Ec": "E_C", "\\Ev": "E_V", "\\Eg": "E_g", "\\Vbi": "V_{bi}", "\\Cox": "C_{ox}", "\\Vov": "V_{ov}", "\\gm": "g_m", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

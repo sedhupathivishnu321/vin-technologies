@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3: Differential Equations | Engineering Mathematics | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Separable and linear first-order equations, characteristic-equation solutions of constant-coefficient ODEs, complementary function plus particular integral, Euler–Cauchy equations, initial and">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/engineering-mathematics/ch03.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 3: Differential Equations | Engineering Mathematics | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Separable and linear first-order equations, characteristic-equation solutions of constant-coefficient ODEs, complementary function plus particular integral, Euler–Cauchy equations, initial and"><meta property="og:url" content="https://vintechnologies.co.in/gate/engineering-mathematics/ch03.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Engineering Mathematics</a></div><div class="chlabel">Chapter 3</div><h1>Differential Equations</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-3-1">3.1 First-order differential equations</a></li><li><a href="#s-3-2">3.2 Higher-order linear equations: CF and PI</a></li><li><a href="#s-3-3">3.3 Variation of parameters</a></li><li><a href="#s-3-4">3.4 Euler–Cauchy equation</a></li><li><a href="#s-3-5">3.5 Initial and boundary value problems</a></li><li><a href="#s-3-6">3.6 Laplace-transform solutions of ODEs</a></li><li><a href="#s-3-7">3.7 Partial differential equations: variable separation</a></li><li><a href="#s-3-8">3.8 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Separable and linear first-order equations, characteristic-equation solutions of constant-coefficient ODEs, complementary function plus particular integral, Euler–Cauchy equations, initial and boundary value problems, Laplace-transform solutions and separation of variables for PDEs.</p></div></div>
+<h2 id="s-3-1"><span class="n">3.1</span> First-order differential equations</h2>
+<div class="box formula"><div class="bt">Standard first-order types</div><div class="bb"><p><strong>Separable:</strong> \(\frac{dy}{dx}=f(x)g(y)\Rightarrow\int\frac{dy}{g(y)}=\int f(x)dx\).<br>
+<strong>Linear:</strong> \(y'+P(x)y=Q(x)\). Integrating factor \(\mu=e^{\int P\,dx}\); then \((\mu y)'=\mu Q\) and \(y=\frac1\mu\int\mu Q\,dx\).<br>
+<strong>Exact:</strong> \(M\,dx+N\,dy=0\) with \(\partial M/\partial y=\partial N/\partial x\); solution \(\int M\,dx+\int(\text{terms of }N\text{ free of }x)\,dy=c\).<br>
+<strong>Homogeneous</strong> (\(M,N\) of the same degree): put \(y=vx\). <strong>Bernoulli:</strong> \(y'+Py=Qy^n\); put \(v=y^{1-n}\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(y'+\frac2xy=x\): \(\mu=e^{2\ln x}=x^2\), so \((x^2y)'=x^3\Rightarrow y=\frac{x^2}4+\frac c{x^2}\).</p></div></div>
+<h2 id="s-3-2"><span class="n">3.2</span> Higher-order linear equations: CF and PI</h2>
+<p>The general solution of \(L[y]=f(x)\) is \(y=y_c+y_p\): the complementary function (solution of the homogeneous equation) plus a particular integral.</p>
+<div class="box formula"><div class="bt">Constant coefficients, \(ay''+by'+cy=0\)</div><div class="bb"><p>Auxiliary equation \(am^2+bm+c=0\).<br>
+Distinct real roots \(m_1,m_2\): \(y_c=C_1e^{m_1x}+C_2e^{m_2x}\).<br>
+Repeated root \(m\): \(y_c=(C_1+C_2x)e^{mx}\).<br>
+Complex roots \(\alpha\pm j\beta\): \(y_c=e^{\alpha x}(C_1\cos\beta x+C_2\sin\beta x)\).</p></div></div>
+<figure id="fig-3-1"><div class="figimgs"><img src="img/m03_ode.png" alt="" loading="lazy"></div><figcaption><b>Figure 3.1.</b> Solutions of \(y''+2\zeta y'+y=0\) with \(y(0)=1\), \(y'(0)=0\): oscillatory, critical and overdamped responses.</figcaption></figure>
+<div class="box formula"><div class="bt">Particular integral by operator \(D=d/dx\)</div><div class="bb"><p>\(f=e^{ax}\): \(y_p=\frac{e^{ax}}{\phi(a)}\) if \(\phi(a)\ne0\); otherwise multiply by \(x\) (resonance): \(y_p=x\frac{e^{ax}}{\phi'(a)}\), and for a double root \(y_p=\frac{x^2e^{ax}}{\phi''(a)}\).<br>
+\(f=\sin(ax+b)\) or \(\cos(ax+b)\): replace \(D^2\to-a^2\); if \(\phi(-a^2)=0\) multiply by \(x\).<br>
+\(f=x^n\): expand \(\frac1{\phi(D)}=(1+\cdots)^{-1}\) as a series in \(D\).<br>
+<strong>Undetermined coefficients:</strong> trial form chosen from \(f\), multiplied by \(x^s\) if it overlaps \(y_c\).</p></div></div>
+<h2 id="s-3-3"><span class="n">3.3</span> Variation of parameters</h2>
+<p>For \(y''+Py'+Qy=R\) with homogeneous solutions \(y_1,y_2\) and Wronskian \(W=y_1y_2'-y_1'y_2\):
+\[
+y_p=-y_1\int\frac{y_2R}{W}dx+y_2\int\frac{y_1R}{W}dx.
+\]
+It works for any \(R(x)\) (for example \(\sec x\), \(\tan x\)), where undetermined coefficients fails.</p>
+<h2 id="s-3-4"><span class="n">3.4</span> Euler–Cauchy equation</h2>
+<p>\(x^2y''+axy'+by=0\). Substitute \(y=x^m\): \(m(m-1)+am+b=0\). Real distinct roots give \(y=C_1x^{m_1}+C_2x^{m_2}\); repeated root \(y=(C_1+C_2\ln x)x^m\); complex \(\alpha\pm j\beta\): \(y=x^\alpha[C_1\cos(\beta\ln x)+C_2\sin(\beta\ln x)]\). Equivalent substitution \(x=e^t\) turns it into a constant-coefficient equation.</p>
+<h2 id="s-3-5"><span class="n">3.5</span> Initial and boundary value problems</h2>
+<p>An <em>initial-value problem</em> specifies \(y,y'\) at one point and (for linear equations with continuous coefficients) has a unique solution. A <em>boundary-value problem</em> specifies conditions at two points and may have none, one or infinitely many solutions.</p>
+<div class="box example"><div class="bt">Eigenvalue BVP</div><div class="bb"><p>\(y''+\lambda y=0\), \(y(0)=y(L)=0\): non-trivial solutions only for \(\lambda_n=(n\pi/L)^2\), \(y_n=\sin(n\pi x/L)\), \(n=1,2,\dots\) This is the origin of Fourier series in separation of variables.</p></div></div>
+<h2 id="s-3-6"><span class="n">3.6</span> Laplace-transform solutions of ODEs</h2>
+<div class="box formula"><div class="bt">Laplace transform pairs</div><div class="bb"><p>\(\mathcal L\{y'\}=sY-y(0)\), \(\ \mathcal L\{y''\}=s^2Y-sy(0)-y'(0)\).<br>
+\(\mathcal L\{1\}=\frac1s\), \(\ \mathcal L\{t^n\}=\frac{n!}{s^{n+1}}\), \(\ \mathcal L\{e^{at}\}=\frac1{s-a}\), \(\ \mathcal L\{\sin\omega t\}=\frac\omega{s^2+\omega^2}\), \(\ \mathcal L\{\cos\omega t\}=\frac s{s^2+\omega^2}\).<br>
+Shift: \(\mathcal L\{e^{at}f\}=F(s-a)\); \(\mathcal L\{tf\}=-F'(s)\); \(\mathcal L\{\delta(t)\}=1\).</p></div></div>
+<p>Procedure: transform the ODE, solve algebraically for \(Y(s)\) with initial conditions already included, expand in partial fractions and invert.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(y'+2y=0\), \(y(0)=3\): \(sY-3+2Y=0\Rightarrow Y=\frac3{s+2}\Rightarrow y=3e^{-2t}\). For \(y''-3y'+2y=0\), \(y(0)=0\), \(y'(0)=1\): \(Y=\frac1{(s-1)(s-2)}=\frac1{s-2}-\frac1{s-1}\), \(y=e^{2t}-e^t\).</p></div></div>
+<h2 id="s-3-7"><span class="n">3.7</span> Partial differential equations: variable separation</h2>
+<div class="box formula"><div class="bt">Canonical PDEs</div><div class="bb"><p>Heat: \(u_t=c^2u_{xx}\). Wave: \(u_{tt}=c^2u_{xx}\). Laplace: \(u_{xx}+u_{yy}=0\) (elliptic).<br>
+Assume \(u=X(x)T(t)\): \(X''/X=T'/(c^2T)=-\lambda\). Boundary conditions on \(X\) fix \(\lambda_n=(n\pi/L)^2\) and the general solution is a superposition \(\sum b_n\sin\frac{n\pi x}Le^{-c^2\lambda_nt}\) (heat) or with \(\cos(c\sqrt{\lambda_n}t)\) and \(\sin(c\sqrt{\lambda_n}t)\) (wave). Coefficients come from the initial condition via Fourier series.</p></div></div>
+<p>Classification of \(Au_{xx}+Bu_{xy}+Cu_{yy}=0\): \(B^2-4AC&lt;0\) elliptic, \(=0\) parabolic, \(&gt;0\) hyperbolic.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) The linear-ODE integrating factor is \(e^{\int P}\), not \(\int P\). (ii) Forgetting resonance: if \(e^{ax}\) is already in \(y_c\) the PI needs a factor \(x\). (iii) In Laplace solutions never forget the initial-condition terms. (iv) A BVP is not guaranteed to have a solution. (v) \(y_p\) for \(\phi(D)y=\sin\) uses \(D^2\to-a^2\) only, not \(D\to-a\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>First identify the type, since separable and linear-with-\(\mu\) cover most first-order questions. For \(y''+a^2y=\sin ax\) expect \(x\cos ax\) in \(y_p\). For stability questions the sign of the real parts of the auxiliary roots decides the behaviour as \(x\to\infty\). For Euler–Cauchy go straight to the indicial equation.</p></div></div>
+<h2 id="s-3-8"><span class="n">3.8</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The solution of \(y'=y\), \(y(0)=2\) at \(x=1\) is (A) \(2\) (B) \(2e\) (C) \(e^2\) (D) \(e\).</p>
+<p><strong>Q2.</strong> The general solution of \(y''+4y=0\) is (A) \(C_1e^{2x}+C_2e^{-2x}\) (B) \(C_1\cos2x+C_2\sin2x\) (C) \((C_1+C_2x)e^{2x}\) (D) \(C_1\cos4x+C_2\sin4x\).</p>
+<p><strong>Q3.</strong> The integrating factor of \(y'+\frac2xy=x\) is (A) \(x\) (B) \(x^2\) (C) \(e^x\) (D) \(\ln x\).</p>
+<p><strong>Q4.</strong> Laplace transform of \(\sin3t\) is (A) \(\frac3{s^2+9}\) (B) \(\frac s{s^2+9}\) (C) \(\frac1{s^2+9}\) (D) \(\frac3{s^2-9}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (B). Q4 (A).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> \(y''-3y'+2y=0\), \(y(0)=0\), \(y'(0)=1\). Then \(y(1)=\) (A) \(e^2-e\) (B) \(e-e^2\) (C) \(e^2+e\) (D) \(2e\).</p>
+<p><strong>Q6.</strong> A particular integral of \(y''-y=e^{2x}\) is (A) \(e^{2x}/3\) (B) \(e^{2x}/5\) (C) \(xe^{2x}/3\) (D) \(e^{2x}\).</p>
+<p><strong>Q7.</strong> A particular integral of \(y''+2y'+y=e^{-x}\) is (A) \(e^{-x}\) (B) \(xe^{-x}\) (C) \(\frac12x^2e^{-x}\) (D) \(\frac12e^{-x}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A): roots \(1,2\); \(y=e^{2x}-e^x\). Q6 (A): \(\phi(2)=4-1=3\). Q7 (C): double root \(-1\), \(\phi''=2\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> \(y'=2xy\), \(y(0)=1\). Then \(y(1)=e^{k}\) with \(k=\) <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> \(y'+2y=0\), \(y(0)=3\) (solve by Laplace). \(y(0.5)=\) <span class="blank"></span> (two decimals).</p>
+<p><strong>Q10.</strong> \(x^2y''+xy'-4y=0\), \(y(1)=2\), \(y'(1)=4\). Then \(y(2)=\) <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(y=e^{x^2}\), \(k=1\). Q9: \(3e^{-1}=1.10\). Q10: \(m^2=4\), \(y=Ax^2+Bx^{-2}\); \(A+B=2\), \(2A-2B=4\Rightarrow A=2,B=0\); \(y(2)=8\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which are linear ODEs? (A) \(y'+xy=0\) (B) \(yy'=x\) (C) \(y''+(\sin x)y=0\) (D) \(y''+y^2=0\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Nature of roots for critical damping of \(y''+by'+y=0\)? &emsp; <strong>T2.</strong> Eigenvalues of \(y''+\lambda y=0\), \(y(0)=y(\pi)=0\)? &emsp; <strong>T3.</strong> Type of \(u_{xx}+u_{yy}=0\)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: repeated real root, \(b=2\). T2: \(\lambda=n^2\). T3: elliptic.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Linear: \(\mu=e^{\int P}\); separable: integrate both sides; Bernoulli: \(v=y^{1-n}\).</li><li>Aux. roots decide CF: real, repeated (\(x\) factor), complex (\(e^{\alpha x}\cos/\sin\)).</li><li>PI: \(e^{ax}/\phi(a)\), resonance adds \(x\); \(\sin/\cos\): \(D^2\to-a^2\).</li><li>Euler–Cauchy: \(y=x^m\) indicial equation; Laplace: \(sY-y(0)\), \(s^2Y-sy(0)-y'(0)\).</li><li>PDE: \(X(x)T(t)\) separation, eigenvalues \((n\pi/L)^2\); \(B^2-4AC\) classification.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch02.html">&larr; Calculus</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch04.html">Vector Analysis &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\R": "\\mathbb{R}", "\\C": "\\mathbb{C}", "\\E": "\\mathrm{E}", "\\Var": "\\mathrm{Var}", "\\Cov": "\\mathrm{Cov}", "\\tr": "\\operatorname{tr}", "\\rank": "\\operatorname{rank}", "\\Res": "\\operatorname{Res}", "\\grad": "\\nabla", "\\dd": "\\mathrm{d}", "\\oiint": "\\mathop{\\oint\\!\\!\\!\\oint}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

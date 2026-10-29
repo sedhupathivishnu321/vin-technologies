@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 5: Special Semiconductor Diodes and Optoelectronic Devices | Electronic Devices | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Zener regulator calculations, Schottky versus PN diode, varactor tuning, tunnel-diode negative resistance, photodiode responsivity, solar-cell V_{oc}, fill factor and efficiency, LED wavelength.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electronic-devices/ch05.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 5: Special Semiconductor Diodes and Optoelectronic Devices | Electronic Devices | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Zener regulator calculations, Schottky versus PN diode, varactor tuning, tunnel-diode negative resistance, photodiode responsivity, solar-cell V_{oc}, fill factor and efficiency, LED wavelength."><meta property="og:url" content="https://vintechnologies.co.in/gate/electronic-devices/ch05.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electronic Devices</a></div><div class="chlabel">Chapter 5</div><h1>Special Semiconductor Diodes and Optoelectronic Devices</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-5-1">5.1 Zener diode</a></li><li><a href="#s-5-2">5.2 Schottky (metal–semiconductor) diode</a></li><li><a href="#s-5-3">5.3 Varactor (varicap) diode</a></li><li><a href="#s-5-4">5.4 Tunnel (Esaki) diode</a></li><li><a href="#s-5-5">5.5 Photodiode</a></li><li><a href="#s-5-6">5.6 Solar cell (photovoltaic)</a></li><li><a href="#s-5-7">5.7 Light-emitting diode (LED) and laser diode</a></li><li><a href="#s-5-8">5.8 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Zener regulator calculations, Schottky versus PN diode, varactor tuning, tunnel-diode negative resistance, photodiode responsivity, solar-cell \(V_{oc}\), fill factor and efficiency, LED wavelength.</p></div></div>
+<h2 id="s-5-1"><span class="n">5.1</span> Zener diode</h2>
+<p>A heavily doped PN junction designed to operate in reverse breakdown with a nearly constant voltage \(V_Z\). Parameters: \(V_Z\), knee current \(I_{Z,min}\), maximum power \(P_{Z,max}\) (so \(I_{Z,max}=P_{Z,max}/V_Z\)) and dynamic resistance \(r_z=\Delta V_Z/\Delta I_Z\) (a few ohms).</p>
+<div class="box formula"><div class="bt">Shunt regulator</div><div class="bb"><p>Series resistor current: \(I_R=\dfrac{V_{in}-V_Z}{R_s}=I_Z+I_L\).<br>
+Zener keeps regulating while \(I_{Z,min}\le I_Z\le I_{Z,max}\), i.e. \(I_L\) ranges from \(0\) to \(I_R-I_{Z,min}\).<br>
+Worst cases: \(R_s\le\dfrac{V_{in,min}-V_Z}{I_{Z,min}+I_{L,max}}\) and \(P_Z\le P_{Z,max}\) at \(V_{in,max}\), \(I_L=0\).<br>
+Output ripple \(\Delta V_o\approx\Delta V_{in}\,\dfrac{r_z}{R_s+r_z}\) (line regulation).</p></div></div>
+<div class="box example"><div class="bt">Zener regulator</div><div class="bb"><p>\(V_{in}=12\) V, \(R_s=220\,\Omega\), \(V_Z=5.1\) V, \(R_L=1\,\)k\(\Omega\). \(I_R=(12-5.1)/220=31.4\) mA, \(I_L=5.1\) mA, so \(I_Z=26.3\) mA, \(P_Z=134\) mW. If \(R_L\) is removed \(I_Z=31.4\) mA and \(P_Z=160\) mW (the worst case for power).</p></div></div>
+<h2 id="s-5-2"><span class="n">5.2</span> Schottky (metal–semiconductor) diode</h2>
+<p>A metal contact on lightly doped n-type silicon forms a rectifying barrier of height \(q\phi_B=q(\phi_M-\chi)\) (ideal Schottky–Mott rule). Conduction is by <strong>majority carriers</strong> only, so there is no minority-carrier storage and no diffusion capacitance.</p>
+<div class="box formula"><div class="bt">Schottky diode</div><div class="bb"><p>\(I=I_s(e^{V/V_T}-1)\) with \(I_s=AA^*T^2e^{-q\phi_B/kT}\) (Richardson, thermionic emission); \(I_s\) is \(10^3\)–\(10^6\times\) larger than for a PN diode.<br>
+Forward drop \(\approx0.2\)–\(0.4\) V (vs \(0.6\)–\(0.7\) V); switching time in ps; used in fast rectifiers, clamps (Schottky-clamped TTL) and RF mixers.<br>
+An <strong>ohmic contact</strong> (heavy doping or low barrier) conducts in both directions with a linear I–V.</p></div></div>
+<p>Reverse leakage is higher than in PN diodes and breakdown voltage lower (typically below 100 V).</p>
+<h2 id="s-5-3"><span class="n">5.3</span> Varactor (varicap) diode</h2>
+<p>A reverse-biased PN junction used as a voltage-controlled capacitor: \(C_j=C_{j0}/(1+V_R/V_{bi})^m\). Hyper-abrupt doping profiles raise \(m\) to \(\approx1\)–\(2\) to widen tuning range. Tuning ratio \(C(V_{min})/C(V_{max})\) is typically 3–10.</p>
+<div class="box example"><div class="bt">LC tuning</div><div class="bb"><p>\(L=10\,\mu\)H with \(C\) varying \(40\to10\) pF: \(f=1/(2\pi\sqrt{LC})\) goes from \(7.96\) to \(15.9\) MHz, a tuning ratio of exactly \(2\) (since \(f\propto C^{-1/2}\) and \(C\) changes by \(4\)).</p></div></div>
+<h2 id="s-5-4"><span class="n">5.4</span> Tunnel (Esaki) diode</h2>
+<p>Both sides are degenerately doped (\(&gt;10^{19}\) cm\({}^{-3}\)) with a very thin depletion region (\(&lt;10\) nm). At small forward bias electrons tunnel through the barrier giving a current peak \(I_P\) at \(V_P\), then, as the bands un-overlap, the current falls (<strong>negative differential resistance</strong>) to a valley \(I_V\) at \(V_V\), then rises as an ordinary diode.</p>
+<ul><li>Negative-resistance region: \(r_d=dV/dI&lt;0\); used in microwave oscillators and amplifiers with an LC load.</li><li>Very fast (tunnelling is fast), low power, low-voltage; insensitive to temperature.</li><li>In reverse bias it conducts heavily (“backward diode”).</li></ul>
+<h2 id="s-5-5"><span class="n">5.5</span> Photodiode</h2>
+<p>A reverse-biased PN or PIN junction. Photons with \(h\nu\ge E_g\) create pairs in or near the depletion region; the field sweeps them out producing a photocurrent \(I_{ph}\) proportional to optical power.</p>
+<div class="box formula"><div class="bt">Photodiode</div><div class="bb"><p>\(I=I_s(e^{V/V_T}-1)-I_{ph}\) (photocurrent adds to the reverse current).<br>
+Quantum efficiency \(\eta\) (carriers per photon); <strong>responsivity</strong> \(R=\dfrac{I_{ph}}{P_{opt}}=\dfrac{\eta q\lambda}{hc}=\dfrac{\eta\,\lambda(\mu\text{m})}{1.24}\ \text{A/W}\).<br>
+PIN: intrinsic layer widens the depletion region (more absorption, lower capacitance, higher speed). Avalanche photodiode (APD): internal gain \(M\).<br>
+Speed limits: transit time and the RC product; dark current limits the noise floor.</p></div></div>
+<p>For \(\eta=0.8\) at \(\lambda=0.85\,\mu\)m: \(R=0.548\) A/W.</p>
+<h2 id="s-5-6"><span class="n">5.6</span> Solar cell (photovoltaic)</h2>
+<p>A large-area PN junction operated in the fourth quadrant (no bias source): the photo-generated current flows opposite to the forward diode current.</p>
+<figure id="fig-5-1"><div class="figimgs"><img src="img/e05_solar.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.1.</b> Solar-cell I–V: \(I=I_{ph}-I_s(e^{V/V_T}-1)\) with the maximum-power rectangle.</figcaption></figure>
+<div class="box formula"><div class="bt">Solar-cell parameters</div><div class="bb"><p>\(I=I_{ph}-I_s\left(e^{V/\eta V_T}-1\right)\); \(\ I_{sc}=I_{ph}\); \(\ V_{oc}=\eta V_T\ln\!\left(1+\dfrac{I_{ph}}{I_s}\right)\).<br>
+Fill factor \(FF=\dfrac{P_{max}}{V_{oc}I_{sc}}=\dfrac{V_mI_m}{V_{oc}I_{sc}}\) (typically 0.7–0.85).<br>
+Efficiency \(\eta_{cell}=\dfrac{P_{max}}{P_{in}}=\dfrac{FF\,V_{oc}I_{sc}}{P_{in}}\). Standard test: \(100\) mW/cm\({}^2\) (AM1.5).<br>
+\(V_{oc}\) grows logarithmically with illumination and falls with temperature (\(\approx-2\) mV/\({}^\circ\)C); \(I_{sc}\) is proportional to illumination.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(I_{ph}=30\) mA, \(I_s=1\) nA: \(V_{oc}=0.0259\ln(3\times10^7)=0.446\) V.<br>
+\(I_{sc}=35\) mA/cm\({}^2\), \(V_{oc}=0.6\) V, \(FF=0.8\), \(A=1\) cm\({}^2\): \(P_{max}=16.8\) mW, \(\eta_{cell}=16.8\%\) under 100 mW/cm\({}^2\).</p></div></div>
+<p>Wider-gap materials give higher \(V_{oc}\) but absorb less of the spectrum: the Shockley–Queisser limit gives a maximum \(\approx30\%\) at \(E_g\approx1.3\) eV for a single junction.</p>
+<h2 id="s-5-7"><span class="n">5.7</span> Light-emitting diode (LED) and laser diode</h2>
+<p>A forward-biased PN junction in a direct-gap material (GaAs, GaAsP, GaN, InGaN): injected carriers recombine radiatively with \(h\nu\approx E_g\). Wavelength \(\lambda=1.24/E_g\): GaAs \(0.87\,\mu\)m (IR), GaAsP red, GaP green, GaN/InGaN blue. A material with \(E_g=1.9\) eV emits \(0.653\,\mu\)m (red).</p>
+<ul><li>Internal quantum efficiency: fraction of injected carriers recombining radiatively. External efficiency is lower because of total internal reflection (high refractive index). Spectral width \(\approx1.8kT/h\).</li><li>Turn-on voltage \(\approx E_g/q\) (1.8–3.5 V). Current drives output; use a series resistor \(R=(V_s-V_F)/I_F\).</li><li><strong>Laser diode</strong>: LED with a cavity (cleaved facets) and population inversion above a threshold current; emits coherent, narrow-line light.</li></ul>
+<p>Silicon is indirect, so it is not used for LEDs. An <strong>optocoupler</strong> pairs an LED with a photodetector for isolation; the current transfer ratio \(CTR=I_C/I_F\).</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Zener regulates only in breakdown and needs \(I_Z\ge I_{Z,min}\). (ii) Schottky has <em>no</em> diffusion capacitance, so it switches fast; it does not have a higher forward drop. (iii) Photodiode is used in reverse bias; solar cell in no-bias power-generating mode. (iv) \(V_{oc}\) is logarithmic in light; \(I_{sc}\) is linear. (v) Negative resistance of a tunnel diode occurs in the forward valley region, not in reverse.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Zener: find \(I_R=(V_{in}-V_Z)/R_s\) first, subtract the load current for \(I_Z\). LED colour: \(\lambda(\mu\text{m})=1.24/E_g\). Solar cell: \(P_{max}=FF\cdot V_{oc}I_{sc}\). Photodiode: \(R=\eta\lambda/1.24\).</p></div></div>
+<h2 id="s-5-8"><span class="n">5.8</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A Zener diode is operated in (A) forward bias (B) reverse breakdown (C) cutoff (D) saturation.</p>
+<p><strong>Q2.</strong> Which diode has no diffusion capacitance and fast switching? (A) PN (B) Zener (C) Schottky (D) PIN.</p>
+<p><strong>Q3.</strong> A tunnel diode exhibits (A) negative differential resistance (B) high reverse breakdown (C) constant voltage drop (D) minority-carrier storage.</p>
+<p><strong>Q4.</strong> Which material is suitable for an LED? (A) Si (B) Ge (C) GaAs (D) all of them.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (C). Q3 (A). Q4 (C).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> In the regulator \(V_{in}=12\) V, \(R_s=220\,\Omega\), \(V_Z=5.1\) V, \(R_L=1\,\)k\(\Omega\) the Zener current is (A) 5.1 mA (B) 26.3 mA (C) 31.4 mA (D) 36.5 mA.</p>
+<p><strong>Q6.</strong> A varactor tank with \(L=10\,\mu\)H and \(C=40\) pF has resonant frequency (A) 7.96 MHz (B) 15.9 MHz (C) 4 MHz (D) 1 MHz.</p>
+<p><strong>Q7.</strong> A photodiode with \(\eta=0.8\) at \(\lambda=0.85\,\mu\)m, optical power \(1\,\)mW, gives photocurrent (A) 0.55 mA (B) 0.8 mA (C) 1.0 mA (D) 0.27 mA.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (A). Q7 (A): \(R=0.548\) A/W.</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> \(V_{oc}\) (mV, nearest integer) for \(I_{ph}=30\) mA, \(I_s=1\) nA, \(V_T=25.9\) mV: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Efficiency (%) of a 1 cm\({}^2\) cell with \(I_{sc}=35\) mA, \(V_{oc}=0.6\) V, \(FF=0.8\) under 100 mW/cm\({}^2\): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Emission wavelength (nm, nearest integer) of an LED with \(E_g=1.9\) eV: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 446. Q9: 16.8. Q10: 653.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select the correct statements. (A) Schottky diode is a majority-carrier device. (B) Photodiode is operated in reverse bias. (C) Zener breakdown \((&lt;5\,\text{V})\) has a negative temperature coefficient. (D) Silicon is an efficient LED material.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Define fill factor. &emsp; <strong>T2.</strong> Why is a Schottky diode fast? &emsp; <strong>T3.</strong> Range of \(I_L\) for regulation.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(V_mI_m/(V_{oc}I_{sc})\). T2: majority carriers, no stored minority charge. T3: \(0\le I_L\le I_R-I_{Z,min}\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Zener: \(I_Z=(V_{in}-V_Z)/R_s-I_L\ge I_{Z,min}\).</li><li>Schottky: majority carrier, low \(V_F\), fast; varactor \(C\propto(V_{bi}+V_R)^{-m}\).</li><li>Tunnel: degenerate, negative resistance. Photodiode \(R=\eta\lambda/1.24\).</li><li>Solar: \(V_{oc}=V_T\ln(1+I_{ph}/I_s)\), \(FF\), \(\eta\). LED: direct gap, \(\lambda=1.24/E_g\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch04.html">&larr; The PN Junction Diode</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch06.html">Bipolar Junction Transistors: Operation, Models and Characteristics &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\kTq": "\\dfrac{kT}{q}", "\\EF": "E_F", "\\Ei": "E_i", "\\Ec": "E_C", "\\Ev": "E_V", "\\Eg": "E_g", "\\Vbi": "V_{bi}", "\\Cox": "C_{ox}", "\\Vov": "V_{ov}", "\\gm": "g_m", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

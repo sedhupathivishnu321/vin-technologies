@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 15: Formula Sheet, Topic Map and Mock Test | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Number systems, Boolean algebra, combinational and sequential logic, memories, converters and computer organization.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch15.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 15: Formula Sheet, Topic Map and Mock Test | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Number systems, Boolean algebra, combinational and sequential logic, memories, converters and computer organization."><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch15.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 15</div><h1>Formula Sheet, Topic Map and Mock Test</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-15-1">15.1 One-page formula sheet</a></li><li><a href="#s-15-2">15.2 What GATE keeps asking (by topic)</a></li><li><a href="#s-15-3">15.3 Mixed mock test</a></li><li><a href="#s-15-4">15.4 Final-week checklist</a></li></ol></details><h2 id="s-15-1"><span class="n">15.1</span> One-page formula sheet</h2>
+<div class="box formula"><div class="bt">Number systems and codes</div><div class="bb"><p>2’s complement: \(-b_{n-1}2^{n-1}+\sum b_i2^i\); range \(-2^{n-1}\ldots2^{n-1}-1\); \(V=C_{n-1}\oplus C_n\).<br>
+IEEE single: \((-1)^s1.f\times2^{e-127}\) (1/8/23); double bias 1023 (1/11/52).<br>
+Gray: \(G=B\oplus(B\gg1)\). Hamming: \(2^r\ge k+r+1\); detect \(d-1\), correct \(\lfloor(d-1)/2\rfloor\).</p></div></div>
+<div class="box formula"><div class="bt">Boolean and combinational</div><div class="bb"><p>Consensus \(AB+\overline AC+BC=AB+\overline AC\); \(A+\overline AB=A+B\); \(2^{2^n}\) functions; \(2^{2^{n-1}}\) self-dual.<br>
+FA: \(S=A\oplus B\oplus C\), \(C_o=AB+C(A\oplus B)\). CLA: \(C_{i+1}=G_i+P_iC_i\).<br>
+MUX \(2^n{:}1\): \(Y=\sum m_jI_j\); tree \((2^m-1)/(2^k-1)\). Flash ADC: \(2^n-1\) comparators.</p></div></div>
+<div class="box formula"><div class="bt">Sequential</div><div class="bb"><p>SR \(Q^+=S+\overline RQ\); JK \(J\overline Q+\overline KQ\); T \(T\oplus Q\); D \(D\).<br>
+Ring \(n\), Johnson \(2n\), LFSR \(2^n-1\). Detector length \(L\): Moore \(L+1\), Mealy \(L\).<br>
+Setup: \(T\ge t_{cq}+t_{logic,max}+t_{su}-\delta\); hold: \(t_{cq}+t_{logic,min}\ge t_h+\delta\).</p></div></div>
+<div class="box formula"><div class="bt">Technology and architecture</div><div class="bb"><p>\(P=\alpha CV^2f\); \(f_{ring}=1/(2Nt_{pd})\); LSB \(=V_{FS}/2^n\); SQNR \(=6.02n+1.76\).<br>
+Memory chips \(=(N/N_c)(m/m_c)\); ROM bits \(2^nm\); PLA points \(2np+pm\).<br>
+Pipeline time \((k+n-1)T\); CPI \(=1+\)stalls; CPU time \(=\text{IC}\cdot\text{CPI}/f\).</p></div></div>
+<h2 id="s-15-2"><span class="n">15.2</span> What GATE keeps asking (by topic)</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Topic</th><th>Recurring question patterns</th></tr></thead><tbody><tr><td>Number systems</td><td>base conversion, 2’s complement range/overflow, IEEE-754 decode</td></tr><tr><td>Boolean algebra / K-map</td><td>minimal SOP/POS with don’t-cares, count of PIs/EPIs, function equality, NAND/NOR realisation</td></tr><tr><td>Combinational blocks</td><td>function using MUX/decoder, adder-subtractor behaviour, comparator output</td></tr><tr><td>Flip-flops</td><td>characteristic equation of derived flip-flop, conversion, race-around</td></tr><tr><td>Counters / registers</td><td>modulus, sequence from given logic, ring/Johnson, ripple delay</td></tr><tr><td>FSM</td><td>detector state count, output sequence for an input string, minimisation</td></tr><tr><td>CMOS / timing</td><td>transistor count, delay, power, \(f_{max}\), hold-time fix</td></tr><tr><td>Memory / PLD</td><td>address lines, chip count, PLA/ROM size, LUT count</td></tr><tr><td>Converters</td><td>LSB, DAC output, comparators/clocks for an ADC type</td></tr><tr><td>Computer organization</td><td>addressing-mode EA, pipeline speed-up, CPI with hazards</td></tr></tbody></table></div></div>
+<p>This is a map of recurring <em>ideas</em>, not a list of past papers.</p>
+<h2 id="s-15-3"><span class="n">15.3</span> Mixed mock test</h2>
+<p><strong>Instructions.</strong> 18 questions: 8 one-mark, 6 two-mark, 4 NAT. Time 30 minutes. Answers follow.</p>
+<div class="box onemark"><div class="bt">Section A: 1-mark</div><div class="bb"><p><strong>1.</strong> The 8-bit two’s-complement representation of \(-100\): (A) 10011100 (B) 01100100 (C) 10011011 (D) 11100100.</p>
+<p><strong>2.</strong> Number of 2-input NAND gates needed for a 2:1 multiplexer (inverter built from a NAND): (A) 3 (B) 4 (C) 5 (D) 6.</p>
+<p><strong>3.</strong> Minimum flip-flops for a MOD-100 counter: (A) 6 (B) 7 (C) 10 (D) 100.</p>
+<p><strong>4.</strong> The ADC with a conversion time independent of the input and equal to \(n\) clock cycles: (A) flash (B) counter (C) SAR (D) dual-slope.</p>
+<p><strong>5.</strong> Parity bits in a (15,11) Hamming code: (A) 3 (B) 4 (C) 5 (D) 11.</p>
+<p><strong>6.</strong> Number of states of a 6-flip-flop Johnson counter: (A) 6 (B) 12 (C) 36 (D) 64.</p>
+<p><strong>7.</strong> Number of Boolean functions of 2 variables: (A) 4 (B) 8 (C) 16 (D) 32.</p>
+<p><strong>8.</strong> A memory with 12 address lines and 8 data lines has capacity: (A) 4 Kbit (B) 8 Kbit (C) 32 Kbit (D) 96 Kbit.</p></div></div>
+<div class="box twomark"><div class="bt">Section B: 2-mark</div><div class="bb"><p><strong>9.</strong> \(F=\sum m(0,1,4,5,10,11,14,15)\) of \((A,B,C,D)\) equals (A) \(A\oplus C\) (B) \(A\odot C\) (C) \(B\odot D\) (D) \(AC\).</p>
+<p><strong>10.</strong> A 16-bit ripple-carry adder: each FA has carry delay 8 ns and carry-to-sum 10 ns. Delay of the last sum bit: (A) 128 (B) 130 (C) 138 (D) 160 ns.</p>
+<p><strong>11.</strong> \(t_{cq}=0.45\), \(t_{su}=0.25\), longest logic 1.8 (ns). Maximum frequency: (A) 400 MHz (B) 444 MHz (C) 500 MHz (D) 555 MHz.</p>
+<p><strong>12.</strong> A 4-stage pipeline executes 50 instructions. Speed-up over non-pipelined: (A) 4.00 (B) 3.77 (C) 3.5 (D) 3.0.</p>
+<p><strong>13.</strong> Number of states in the minimal Mealy and Moore machines for detecting the overlapping sequence 11: (A) 2 and 3 (B) 3 and 2 (C) 2 and 2 (D) 3 and 4.</p>
+<p><strong>14.</strong> Supply voltage and clock frequency are both halved. Dynamic power becomes (A) 1/2 (B) 1/4 (C) 1/8 (D) 1/16.</p></div></div>
+<div class="box natq"><div class="bt">Section C: NAT</div><div class="bb"><p><strong>15.</strong> Number of minterms of \(F=\overline AB+\overline CD\) in four variables: <span class="blank"></span>.</p>
+<p><strong>16.</strong> Ideal SQNR of an 8-bit ADC (dB, one decimal): <span class="blank"></span>.</p>
+<p><strong>17.</strong> Transistors in a static CMOS gate \(Y=\overline{AB+CDE}\): <span class="blank"></span>.</p>
+<p><strong>18.</strong> Minimum number of 4-input LUTs for a 16-input AND: <span class="blank"></span>.</p></div></div>
+<h3 id="ss-4">Answers with brief working</h3>
+<p><strong>1</strong> (A): \(100=01100100\), invert, \(+1\) gives \(10011100\). <strong>2</strong> (B): \(\overline S\) (1), \(\overline{\overline SA}\) (1), \(\overline{SB}\) (1), output NAND (1). <strong>3</strong> (B): \(2^7=128\). <strong>4</strong> (C). <strong>5</strong> (B). <strong>6</strong> (B): \(2n\). <strong>7</strong> (C). <strong>8</strong> (C): \(2^{12}\times8=32\) Kbit.<br>
+<strong>9</strong> (B): the 1s are cells where \(A=C\); minimal SOP \(\overline A\,\overline C+AC\). <strong>10</strong> (B): \(15\times8+10\). <strong>11</strong> (A): \(T=2.5\) ns. <strong>12</strong> (B): \(200/53\). <strong>13</strong> (A): Mealy 2, Moore 3. <strong>14</strong> (C): \(P\propto V^2f\), so \(\tfrac14\cdot\tfrac12\).<br>
+<strong>15</strong>: \(4+4-1=7\). <strong>16</strong>: \(6.02\times8+1.76=49.9\). <strong>17</strong>: 5 literals \(\Rightarrow10\). <strong>18</strong>: \(\lceil15/3\rceil=5\).</p>
+<h2 id="s-15-4"><span class="n">15.4</span> Final-week checklist</h2>
+<ol><li>Re-derive two’s-complement overflow and IEEE-754 decoding once on paper.</li><li>Do five K-map problems with don’t-cares and count PIs/EPIs.</li><li>Write all flip-flop characteristic and excitation tables from memory.</li><li>For each counter type, state modulus and flip-flop count in one line.</li><li>Practise two timing problems: setup (frequency) and hold (delay to insert).</li><li>Revise CMOS PDN/PUN construction and transistor counts.</li><li>Memorise ADC type comparison and memory/PLD arithmetic.</li><li>Revisit pipeline speed-up and CPI formulas.</li></ol><div class="pager bottom"><a class="pn" href="ch14.html">&larr; Computer Organization: Instructions, Addressing, Data Path and Pipelining</a><a class="pn mid" href="./">All chapters</a><span></span></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

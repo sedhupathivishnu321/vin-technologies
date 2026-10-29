@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix F: z-Transform Pairs and Properties | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-f.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix F: z-Transform Pairs and Properties | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-f.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Appendix F</div><h1>\(z\)-Transform Pairs and Properties</h1><div class="center"><p>1.5</p>
+<div class="tw"><table><thead><tr><th>\(x[n]\)</th><th>\(X(z)\)</th><th>ROC</th></tr></thead><tbody><tr><td>\(\delta[n]\)</td><td>\(1\)</td><td>all \(z\)</td></tr><tr><td>\(u[n]\)</td><td>\(\frac1{1-z^{-1}}\)</td><td>\(|z|&gt;1\)</td></tr><tr><td>\(n\,u[n]\)</td><td>\(\frac{z^{-1}}{(1-z^{-1})^2}\)</td><td>\(|z|&gt;1\)</td></tr><tr><td>\(a^nu[n]\)</td><td>\(\frac1{1-az^{-1}}\)</td><td>\(|z|&gt;|a|\)</td></tr><tr><td>\((n+1)a^nu[n]\)</td><td>\(\frac1{(1-az^{-1})^2}\)</td><td>\(|z|&gt;|a|\)</td></tr><tr><td>\(-a^nu[-n-1]\)</td><td>\(\frac1{1-az^{-1}}\)</td><td>\(|z|&lt;|a|\)</td></tr><tr><td>\(\cos\Omega_0n\,u[n]\)</td><td>\(\frac{1-z^{-1}\cos\Omega_0}{1-2z^{-1}\cos\Omega_0+z^{-2}}\)</td><td>\(|z|&gt;1\)</td></tr><tr><td>\(r^n\sin\Omega_0n\,u[n]\)</td><td>\(\frac{rz^{-1}\sin\Omega_0}{1-2rz^{-1}\cos\Omega_0+r^2z^{-2}}\)</td><td>\(|z|&gt;r\)</td></tr><tr><td>\(a^nu[n]-a^nu[n-N]\)</td><td>\(\frac{1-a^Nz^{-N}}{1-az^{-1}}\)</td><td>\(|z|&gt;0\)</td></tr></tbody></table></div></div>
+<p><strong>Unilateral:</strong> \(x[n-1]\to z^{-1}X+x[-1]\); \(x[n-2]\to z^{-2}X+z^{-1}x[-1]+x[-2]\). <strong>Relations:</strong> \(H(e^{j\Omega})=H(z)|_{z=e^{j\Omega}}\); \(z=e^{sT}\) (sampling); bilinear \(z=\frac{1+sT/2}{1-sT/2}\).</p><div class="pager bottom"><a class="pn" href="appendix-e.html">&larr; Fourier-Transform Pairs</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="appendix-g.html">Standard Signal Waveforms &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

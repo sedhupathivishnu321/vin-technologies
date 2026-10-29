@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2: Carrier Transport: Drift, Diffusion, Mobility and Resistivity | Electronic Devices | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Drift and diffusion current densities, the Einstein relation, conductivity/resistivity numbers, diffusion length, Hall effect, and how mobility and conductivity vary with temperature.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electronic-devices/ch02.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 2: Carrier Transport: Drift, Diffusion, Mobility and Resistivity | Electronic Devices | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Drift and diffusion current densities, the Einstein relation, conductivity/resistivity numbers, diffusion length, Hall effect, and how mobility and conductivity vary with temperature."><meta property="og:url" content="https://vintechnologies.co.in/gate/electronic-devices/ch02.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electronic Devices</a></div><div class="chlabel">Chapter 2</div><h1>Carrier Transport: Drift, Diffusion, Mobility and Resistivity</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-2-1">2.1 Drift current and mobility</a></li><li><a href="#s-2-2">2.2 Diffusion current and the Einstein relation</a></li><li><a href="#s-2-3">2.3 Hall effect</a></li><li><a href="#s-2-4">2.4 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Drift and diffusion current densities, the Einstein relation, conductivity/resistivity numbers, diffusion length, Hall effect, and how mobility and conductivity vary with temperature.</p></div></div>
+<h2 id="s-2-1"><span class="n">2.1</span> Drift current and mobility</h2>
+<p>Under an electric field \(\mathcal E\) carriers acquire an average drift velocity \(v_d=\mu\mathcal E\), where the <strong>mobility</strong> \(\mu\) (cm\({}^2\)/V s) measures how freely carriers move between scattering events: \(\mu=q\tau_c/m^*\) (\(\tau_c\) mean time between collisions).</p>
+<div class="box formula"><div class="bt">Drift current</div><div class="bb"><p>\(J_n=q\,n\,\mu_n\mathcal E,\quad J_p=q\,p\,\mu_p\mathcal E\).<br>
+Conductivity \(\sigma=q(n\mu_n+p\mu_p)\); resistivity \(\rho=1/\sigma\).<br>
+Bar of length \(L\) and area \(A\): \(R=\rho L/A\).<br>
+Extrinsic n-type: \(\sigma\approx qN_D\mu_n\); intrinsic: \(\sigma_i=qn_i(\mu_n+\mu_p)\).<br>
+Minimum conductivity at \(n=n_i\sqrt{\mu_p/\mu_n}\) (not at \(n=p\)).</p></div></div>
+<div class="box example"><div class="bt">Silicon numbers</div><div class="bb"><p>\(\mu_n=1350\), \(\mu_p=480\ \text{cm}^2/\text{V\,s}\). For \(N_D=10^{16}\): \(\sigma=1.6\times10^{-19}\times10^{16}\times1350=2.16\ \text{S/cm}\), \(\rho=0.462\,\Omega\,\)cm. Intrinsic: \(\sigma_i=1.6\times10^{-19}\times1.5\times10^{10}\times1830=4.4\times10^{-6}\) S/cm, \(\rho_i=2.3\times10^5\,\Omega\,\)cm.<br>
+A bar \(L=1\) mm, cross-section \(10\,\mu\text{m}\times10\,\mu\text{m}\) of this n-type silicon: \(R=0.462\times0.1/10^{-6}=46.2\,\)k\(\Omega\).<br>
+Drift velocity at \(\mathcal E=1\,\)kV/cm: \(v_d=1350\times10^3=1.35\times10^6\) cm/s. At very high field \(v_d\) saturates at \(v_{sat}\approx10^7\) cm/s in silicon.</p></div></div>
+<h3 id="s-2-1-1"><span class="n">2.1.1</span> Scattering and the temperature dependence of mobility</h3>
+<ul><li><strong>Lattice (phonon) scattering</strong>: \(\mu_L\propto T^{-3/2}\) dominates at high \(T\).</li><li><strong>Ionised-impurity scattering</strong>: \(\mu_I\propto T^{3/2}/N_I\) dominates at low \(T\) and high doping.</li></ul>
+<p>Matthiessen’s rule: \(\dfrac1\mu=\dfrac1{\mu_L}+\dfrac1{\mu_I}\). Mobility therefore falls with increasing doping and, in the extrinsic range, falls with increasing temperature.</p>
+<h3 id="s-2-1-2"><span class="n">2.1.2</span> Temperature dependence of conductivity</h3>
+<div class="center"><div class="tw"><table><thead><tr><th>Region</th><th>Carriers</th><th>\(\sigma\) with increasing \(T\)</th></tr></thead><tbody><tr><td>Freeze-out</td><td>dopants ionise</td><td>rises</td></tr><tr><td>Extrinsic</td><td>\(n\approx N_D\) constant</td><td><em>falls</em> (mobility drops, \(\sim T^{-3/2}\))</td></tr><tr><td>Intrinsic</td><td>\(n_i\) grows exponentially</td><td>rises steeply</td></tr></tbody></table></div></div>
+<p>A metal’s resistivity increases with temperature (more scattering, fixed carriers); an intrinsic or lightly doped semiconductor’s resistivity decreases with temperature over most of the range. Hence semiconductors have a negative temperature coefficient of resistivity at high \(T\) and low doping.</p>
+<h2 id="s-2-2"><span class="n">2.2</span> Diffusion current and the Einstein relation</h2>
+<p>Carriers diffuse from high to low concentration:</p>
+<div class="box formula"><div class="bt">Diffusion</div><div class="bb"><p>\(J_n=q\,D_n\dfrac{dn}{dx},\qquad J_p=-q\,D_p\dfrac{dp}{dx}\).<br>
+Total: \(J_n=q\mu_nn\mathcal E+qD_n\dfrac{dn}{dx}\), \(\ J_p=q\mu_pp\mathcal E-qD_p\dfrac{dp}{dx}\).<br>
+<strong>Einstein relation</strong>: \(\dfrac{D}{\mu}=\dfrac{kT}{q}=V_T=0.0259\,\)V at 300 K.<br>
+Diffusion length: \(L=\sqrt{D\tau}\).</p></div></div>
+<p>In Si: \(D_n=0.0259\times1350=34.9\,\text{cm}^2/\text{s}\), \(D_p=0.0259\times480=12.4\,\text{cm}^2/\text{s}\). For \(\tau=1\,\mu\)s: \(L_n=\sqrt{34.9\times10^{-6}}=59\,\mu\)m.</p>
+<div class="box example"><div class="bt">Diffusion current</div><div class="bb"><p>\(n(x)\) falls linearly from \(10^{16}\) to \(10^{15}\,\text{cm}^{-3}\) over \(1\,\mu\)m \((10^{-4}\) cm\()\): \(dn/dx=-9\times10^{19}\,\text{cm}^{-4}\). \(J_n=1.6\times10^{-19}\times34.9\times(-9\times10^{19})\approx-503\ \text{A/cm}^2\) (electrons diffuse toward \(+x\), so the conventional current points toward \(-x\)). Magnitude \(503\,\)A/cm\({}^2\).</p></div></div>
+<p><strong>Built-in field in a non-uniformly doped bar.</strong> In equilibrium the net current is zero: \(q\mu_nn\mathcal E+qD_n\,dn/dx=0\Rightarrow\mathcal E=-\dfrac{kT}{q}\dfrac1n\dfrac{dn}{dx}\). Electron concentration falling with \(x\) gives a field pointing in \(+x\); this graded-doping field is used in drift transistors.</p>
+<h2 id="s-2-3"><span class="n">2.3</span> Hall effect</h2>
+<p>A bar carrying current \(I\) in a perpendicular magnetic field \(B\) develops a transverse voltage
+\[
+V_H=\frac{IB}{q\,n\,t}\quad(\text{n-type, } t=\text{thickness along }B),\qquad R_H=\mp\frac1{qn}\ \text{or}\ \frac1{qp}.
+\]
+The sign of \(V_H\) gives the carrier type; \(\mu=|R_H|\sigma\) gives the (Hall) mobility. Example: \(I=1\,\)mA, \(B=0.1\,\)T, \(n=10^{22}\,\text{m}^{-3}\), \(t=0.5\,\)mm: \(V_H=\dfrac{10^{-3}\times0.1}{1.6\times10^{-19}\times10^{22}\times5\times10^{-4}}=0.125\,\)mV.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(D/\mu=kT/q\) holds for both carriers but not for degenerate material. (ii) Drift current is proportional to carrier concentration, diffusion current to its <em>gradient</em>. (iii) Conductivity of an extrinsic sample decreases with temperature (mobility), not increases. (iv) The sign of \(dn/dx\) and the definition of conventional current: for electrons \(J_n=+qD_n\,dn/dx\). (v) Use cm or m consistently: \(\mu\) in cm\({}^2\)/V s with \(n\) in cm\({}^{-3}\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>\(\sigma=q n\mu\): for \(n=10^{16}\) in Si, \(\sigma\approx2.2\) S/cm; \(\rho(\Omega\,\text{cm})\approx0.46\cdot10^{16}/N_D\) for n-type, \(1.3\cdot10^{16}/N_A\) for p-type (low doping). \(D=\mu\times0.0259\).</p></div></div>
+<h2 id="s-2-4"><span class="n">2.4</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The Einstein relation at 300 K gives \(D_n/\mu_n=\) (A) 0.0259 V (B) 0.259 V (C) 1 V (D) 0.7 V.</p>
+<p><strong>Q2.</strong> In the extrinsic region the conductivity of silicon with increasing temperature (A) increases (B) decreases (C) is constant (D) becomes zero.</p>
+<p><strong>Q3.</strong> Drift current density is proportional to (A) \(dn/dx\) (B) \(n\mathcal E\) (C) \(\mathcal E^2\) (D) \(1/n\).</p>
+<p><strong>Q4.</strong> Lattice-scattering limited mobility varies with temperature as (A) \(T^{3/2}\) (B) \(T^{-3/2}\) (C) \(T^{0}\) (D) \(e^{-1/T}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A). Q2 (B). Q3 (B). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> The resistivity of n-type Si with \(N_D=10^{16}\,\text{cm}^{-3}\), \(\mu_n=1350\) is (A) 0.46 \(\Omega\) cm (B) 2.2 \(\Omega\) cm (C) 4.6 \(\Omega\) cm (D) 0.046 \(\Omega\) cm.</p>
+<p><strong>Q6.</strong> Electrons: \(D_n=35\,\text{cm}^2/\text{s}\), concentration drops linearly from \(10^{16}\) to \(10^{15}\) over \(1\,\mu\)m. The diffusion current density magnitude is (A) 50 (B) 500 (C) 5000 (D) 50 000 A/cm\({}^2\) (use \(q=1.6\times10^{-19}\)).</p>
+<p><strong>Q7.</strong> Minority-carrier lifetime \(\tau=1\,\mu\)s and \(D=35\,\text{cm}^2/\text{s}\). The diffusion length is (A) 5.9 \(\mu\)m (B) 59 \(\mu\)m (C) 590 \(\mu\)m (D) 6 mm.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A). Q6 (B): \(1.6\times10^{-19}\times35\times9\times10^{19}=504\). Q7 (B): \(\sqrt{35\times10^{-6}}=5.9\times10^{-3}\) cm.</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Resistance of the bar \(L=1\) mm, \(A=10^{-6}\,\text{cm}^2\) with \(\rho=0.462\,\Omega\) cm (k\(\Omega\), one decimal): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Hall voltage (mV) for \(I=1\) mA, \(B=0.1\) T, \(n=10^{22}\,\text{m}^{-3}\), \(t=0.5\) mm: <span class="blank"></span> (three decimals).</p>
+<p><strong>Q10.</strong> Intrinsic Si resistivity in k\(\Omega\) cm for \(n_i=1.5\times10^{10}\), \(\mu_n=1350\), \(\mu_p=480\): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 46.2. Q9: 0.125. Q10: 227.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select true statements. (A) Mobility decreases with doping. (B) Diffusion current needs a concentration gradient. (C) The Hall coefficient of p-type is positive. (D) Drift velocity grows without limit with field.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(D_p\) in Si (\(\mu_p=480\)). &emsp; <strong>T2.</strong> \(\sigma\) for \(N_A=10^{17}\) (\(\mu_p=300\)). &emsp; <strong>T3.</strong> Why does \(\rho\) of a metal rise with \(T\)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 12.4 cm\({}^2\)/s. T2: \(4.8\) S/cm. T3: more phonon scattering with fixed carrier density.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(J=q(n\mu_n+p\mu_p)\mathcal E\); \(\sigma=q(n\mu_n+p\mu_p)\); \(R=\rho L/A\).</li><li>\(J_n^{diff}=qD_n\,dn/dx\); \(D/\mu=kT/q\); \(L=\sqrt{D\tau}\).</li><li>\(\mu\propto T^{-3/2}\) (lattice), \(\mu\) falls with doping; \(v_{sat}\approx10^7\) cm/s.</li><li>Hall: \(V_H=IB/(qnt)\); sign gives carrier type.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch01.html">&larr; Energy Bands, Intrinsic and Extrinsic Semiconductors</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch03.html">Generation, Recombination, Continuity and Poisson Equations &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\kTq": "\\dfrac{kT}{q}", "\\EF": "E_F", "\\Ei": "E_i", "\\Ec": "E_C", "\\Ev": "E_V", "\\Eg": "E_g", "\\Vbi": "V_{bi}", "\\Cox": "C_{ox}", "\\Vov": "V_{ov}", "\\gm": "g_m", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

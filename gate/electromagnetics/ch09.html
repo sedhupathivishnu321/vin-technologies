@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 9: Antennas and Radiation | Electromagnetics | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Hertzian and half-wave dipole parameters, directivity versus gain, radiation resistance, effective aperture and the Friis equation, monopoles over ground and uniform linear arrays (array factor,">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electromagnetics/ch09.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 9: Antennas and Radiation | Electromagnetics | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Hertzian and half-wave dipole parameters, directivity versus gain, radiation resistance, effective aperture and the Friis equation, monopoles over ground and uniform linear arrays (array factor,"><meta property="og:url" content="https://vintechnologies.co.in/gate/electromagnetics/ch09.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electromagnetics</a></div><div class="chlabel">Chapter 9</div><h1>Antennas and Radiation</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-9-1">9.1 Radiation fundamentals</a></li><li><a href="#s-9-2">9.2 Hertzian (short) dipole</a></li><li><a href="#s-9-3">9.3 Radiation pattern, directivity and gain</a></li><li><a href="#s-9-4">9.4 Dipole and monopole antennas</a></li><li><a href="#s-9-5">9.5 Effective aperture, Friis equation</a></li><li><a href="#s-9-6">9.6 Polarization of antennas</a></li><li><a href="#s-9-7">9.7 Linear antenna arrays</a></li><li><a href="#s-9-8">9.8 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Hertzian and half-wave dipole parameters, directivity versus gain, radiation resistance, effective aperture and the Friis equation, monopoles over ground and uniform linear arrays (array factor, broadside and endfire).</p></div></div>
+<h2 id="s-9-1"><span class="n">9.1</span> Radiation fundamentals</h2>
+<p>A time-varying current radiates. Close to the antenna the fields are <em>reactive</em> (near field, \(1/r^2,1/r^3\)); far away (far field, \(r\gg\lambda\), \(r\gg D^2/\lambda\) for large apertures) the fields are a TEM wave: \(\vE\) and \(\vH\) transverse, in phase, with \(E/H=\eta_0\) and amplitude falling as \(1/r\). Power density \(S=\frac{E^2}{2\eta_0}\propto1/r^2\).</p>
+<h2 id="s-9-2"><span class="n">9.2</span> Hertzian (short) dipole</h2>
+<p>A current element \(I\,dl\) with \(dl\ll\lambda\) and uniform current.</p>
+<div class="box formula"><div class="bt">Far field and parameters</div><div class="bb"><p>\(E_\theta=j\dfrac{\eta_0\,I\,dl\,\beta\sin\theta}{4\pi r}e^{-j\beta r}\), \(\ H_\phi=E_\theta/\eta_0\). Pattern \(\propto\sin\theta\) (power \(\propto\sin^2\theta\)): doughnut, null along the axis, omnidirectional in the \(H\)-plane (\(\phi\)).<br>
+Total radiated power \(P_{rad}=40\pi^2I^2(dl/\lambda)^2\) (peak \(I\)) \(=\tfrac12I^2R_{rad}\), so
+\[
+R_{rad}=80\pi^2\left(\frac{dl}{\lambda}\right)^2\ \Omega.
+\]
+Directivity \(D=1.5\) (1.76 dBi); half-power beamwidth (HPBW) \(90^\circ\). A short dipole of finite length \(l\) with triangular current: \(R_{rad}=20\pi^2(l/\lambda)^2\).</p></div></div>
+<h2 id="s-9-3"><span class="n">9.3</span> Radiation pattern, directivity and gain</h2>
+<div class="box formula"><div class="bt">Definitions</div><div class="bb"><p>Radiation intensity \(U(\theta,\phi)=r^2S\) (W/sr); \(P_{rad}=\oiint U\,d\Omega\). <strong>Directivity</strong> \(D(\theta,\phi)=\dfrac{4\pi U}{P_{rad}}=\dfrac{U}{U_{avg}}\); \(D_{max}\) at the beam peak; isotropic \(D=1\) (0 dBi).<br>
+<strong>Gain</strong> \(G=e_{rad}D\), \(\ e_{rad}=\dfrac{R_{rad}}{R_{rad}+R_{loss}}\). Beam approximation: \(D\approx\dfrac{41253}{\theta_E\theta_H}\) (beamwidths in degrees) \(\approx\dfrac{4\pi}{\theta_E\theta_H}\) (radians).<br>
+Main lobe, side lobes, nulls, HPBW (between \(-3\) dB points), front-to-back ratio. Decibels: \(G_{dB}=10\log G\) (\(G=100\leftrightarrow20\) dB).</p></div></div>
+<figure id="fig-9-1"><div class="figimgs"><img src="img/e09_pattern.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.1.</b> Left: E-plane patterns of the Hertzian and half-wave dipoles. Right: array factor of a 4-element broadside array with \(d=\lambda/2\).</figcaption></figure>
+<h2 id="s-9-4"><span class="n">9.4</span> Dipole and monopole antennas</h2>
+<div class="box formula"><div class="bt">Half-wave dipole and quarter-wave monopole</div><div class="bb"><p>Half-wave dipole (\(l=\lambda/2\), sinusoidal current): \(E_\theta=j\dfrac{60I}{r}\dfrac{\cos(\frac\pi2\cos\theta)}{\sin\theta}\); \(R_{rad}=73\,\Omega\) (input impedance \(73+j42.5\,\Omega\), resonant at slightly shorter length); \(D=1.64\) (2.15 dBi); HPBW \(=78^\circ\); \(P_{rad}=\frac12I^2\cdot73\).<br>
+Quarter-wave monopole over a perfect ground plane: image theory gives the dipole pattern in the upper half space, \(R_{rad}=36.5\,\Omega\), \(D=3.28\) (5.15 dBi, twice the dipole because the same power goes into half the space).<br>
+Full-wave dipole: \(D\approx2.4\). Folded dipole: input impedance \(\approx4\times73=292\,\Omega\).</p></div></div>
+<h2 id="s-9-5"><span class="n">9.5</span> Effective aperture, Friis equation</h2>
+<div class="box formula"><div class="bt">Receiving antennas and links</div><div class="bb"><p>Effective aperture \(A_e=\dfrac{\lambda^2}{4\pi}G\) (for \(D\) with no loss: \(A_e=\frac{\lambda^2}{4\pi}D\)); \(P_r=S\,A_e\) for a matched, polarization-matched receiver. \(A_e=\eta_{ap}A_{phys}\) for aperture antennas.<br>
+<strong>Friis:</strong> \(P_r=P_tG_tG_r\left(\dfrac{\lambda}{4\pi R}\right)^2\). Free-space path loss \(L_{fs}=\left(\frac{4\pi R}{\lambda}\right)^2\); in dB: \(32.45+20\log f_{MHz}+20\log d_{km}\). EIRP \(=P_tG_t\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(P_t=10\,\)W, \(G_t=G_r=10\), \(f=3\,\)GHz (\(\lambda=0.1\,\)m), \(R=1\,\)km: \(P_r=10\cdot10\cdot10\left(\frac{0.1}{4\pi\cdot1000}\right)^2=6.3\times10^{-8}\) W. A \(30\) dB antenna at \(\lambda=0.3\,\)m: \(A_e=\frac{0.09\times1000}{4\pi}=7.16\,\mathrm{m^2}\). Path loss at \(1\,\)GHz, \(10\,\)km: \(32.45+60+20=112.5\) dB.</p></div></div>
+<h2 id="s-9-6"><span class="n">9.6</span> Polarization of antennas</h2>
+<p>The polarization of an antenna is that of its radiated wave in the direction considered (linear, circular, elliptical). Receive power is reduced by the polarization loss factor \(\mathrm{PLF}=\cos^2\psi\) between wave and receiver polarizations (\(\psi\) is the mismatch angle). Crossed linear polarizations: \(\mathrm{PLF}=0\). A circularly polarized wave into a linear antenna: \(\mathrm{PLF}=0.5\) (\(3\) dB loss). Opposite-sense circular polarizations do not couple.</p>
+<h2 id="s-9-7"><span class="n">9.7</span> Linear antenna arrays</h2>
+<p>\(N\) identical isotropic elements along an axis, spacing \(d\), progressive phase \(\delta\): array factor with \(\psi=\beta d\cos\theta+\delta\),</p>
+<div class="box formula"><div class="bt">Uniform linear array</div><div class="bb"><p>\(\mathrm{AF}=\dfrac{\sin(N\psi/2)}{\sin(\psi/2)}\) (maximum \(N\) at \(\psi=0\); normalised \(\mathrm{AF}/N\)). <strong>Pattern multiplication:</strong> total pattern \(=\) element pattern \(\times\) AF.<br>
+<strong>Broadside</strong> (\(\delta=0\)): main beam at \(\theta=90^\circ\) (normal to the axis). <strong>Endfire</strong> (\(\delta=-\beta d\)): beam along the axis. For the main beam at angle \(\theta_0\): \(\delta=-\beta d\cos\theta_0\).<br>
+Nulls: \(N\psi/2=\pm k\pi\), \(k=1,2,\dots\) (not a multiple of \(N\) of \(\pi\)). To avoid grating lobes \(d&lt;\lambda\) (broadside) or \(d&lt;\lambda/2\) (scanned). Directivity of a broadside array with \(d=\lambda/2\): \(D\approx N\); HPBW \(\approx0.886\lambda/(Nd)\) rad.<br>
+Binomial arrays have no side lobes; Dolph–Chebyshev arrays give the narrowest beam for a given side-lobe level.</p></div></div>
+<p>Two elements with \(d=\lambda/2\), \(\delta=0\): \(\mathrm{AF}=2\cos(\frac{\pi}2\cos\theta)\), maximum broadside, nulls along the axis.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Directivity ignores losses; gain includes the radiation efficiency. (ii) \(R_{rad}\) is defined by \(P_{rad}=\frac12I^2R_{rad}\) with <em>peak</em> current. (iii) A monopole has twice the directivity of its dipole but half the \(R_{rad}\) (\(36.5\) vs \(73\,\Omega\)). (iv) \(A_e\) is not the physical area. (v) Friis needs consistent linear (not dB) quantities and \(\lambda\), not \(f\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Convert gain in dB to a ratio first (\(10\) dB \(=10\), \(20\) dB \(=100\), \(3\) dB \(\approx2\)). \(D_{dipole}=1.64\), \(D_{short}=1.5\). For arrays find where \(\psi=0\) to locate the beam and \(N\psi/2=\pi\) for the first null. For Friis in dB: \(P_r=P_t+G_t+G_r-L_{fs}\).</p></div></div>
+<h2 id="s-9-8"><span class="n">9.8</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The maximum directivity of a Hertzian dipole is (A) 1 (B) 1.5 (C) 1.64 (D) 3.</p>
+<p><strong>Q2.</strong> The radiation resistance of a half-wave dipole is about (A) 36.5 \(\Omega\) (B) 50 \(\Omega\) (C) 73 \(\Omega\) (D) 377 \(\Omega\).</p>
+<p><strong>Q3.</strong> An isotropic radiator has directivity (A) 0 (B) 1 (C) 1.5 (D) 4\(\pi\).</p>
+<p><strong>Q4.</strong> The effective aperture of an antenna of gain \(G\) is (A) \(\lambda G/4\pi\) (B) \(\lambda^2G/4\pi\) (C) \(\lambda^2G/\pi\) (D) \(4\pi G/\lambda^2\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (C). Q3 (B). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> \(P_t=10\,\)W, \(G_t=G_r=10\), \(\lambda=0.1\,\)m, \(R=1\,\)km. The received power is closest to (A) \(6.3\) nW (B) \(63\) nW (C) \(0.63\,\mu\)W (D) \(6.3\,\mu\)W.</p>
+<p><strong>Q6.</strong> A half-wave dipole carries a peak current of \(1\,\)A. The radiated power is (A) 73 W (B) 36.5 W (C) 18.25 W (D) 146 W.</p>
+<p><strong>Q7.</strong> An antenna has gain \(100\). Its gain in dB is (A) 10 (B) 20 (C) 100 (D) 40.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B): \(6.33\times10^{-8}\) W \(=63\) nW. Q6 (B). Q7 (B).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> \(R_{rad}\) (\(\Omega\), two decimals) of a Hertzian dipole with \(dl=\lambda/10\): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> \(A_e\) (\(\mathrm{m^2}\), two decimals) of a \(30\) dB antenna at \(\lambda=0.3\,\)m: <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Approximate directivity of an antenna with \(10^\circ\times10^\circ\) beamwidths (\(41253/\theta_E\theta_H\)): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(80\pi^2(0.01)=7.90\). Q9: \(7.16\). Q10: \(412.5\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Half-wave dipole: (A) pattern is omnidirectional in the plane perpendicular to the axis (B) has nulls along the axis (C) \(D=1.64\) (D) radiates maximum along its axis.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(R_{rad}\) of a \(\lambda/4\) monopole over ground? &emsp; <strong>T2.</strong> Friis equation? &emsp; <strong>T3.</strong> Condition for endfire in a linear array?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(36.5\,\Omega\). T2: \(P_r=P_tG_tG_r(\lambda/4\pi R)^2\). T3: \(\delta=-\beta d\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Hertzian: \(D=1.5\), \(R_{rad}=80\pi^2(dl/\lambda)^2\), pattern \(\sin\theta\).</li><li>Half-wave dipole: \(R_{rad}=73\,\Omega\), \(D=1.64\), HPBW \(78^\circ\); monopole \(36.5\,\Omega\), \(D=3.28\).</li><li>\(D=4\pi U/P_{rad}\), \(G=e_{rad}D\), \(A_e=\lambda^2G/4\pi\), \(D\approx41253/\theta_E\theta_H\).</li><li>Friis \(P_r=P_tG_tG_r(\lambda/4\pi R)^2\); \(L_{fs}\) in dB \(=32.45+20\log f_{MHz}+20\log d_{km}\).</li><li>Array: \(\mathrm{AF}=\frac{\sin(N\psi/2)}{\sin(\psi/2)}\), \(\psi=\beta d\cos\theta+\delta\); broadside \(\delta=0\); endfire \(\delta=-\beta d\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch08.html">&larr; Waveguides and Optical Fibers</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch10.html">Master Problem Set and Formula Sheet &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\vE": "\\mathbf E", "\\vD": "\\mathbf D", "\\vH": "\\mathbf H", "\\vB": "\\mathbf B", "\\vJ": "\\mathbf J", "\\vS": "\\mathbf S", "\\ar": "\\mathbf a", "\\grad": "\\nabla", "\\eps": "\\varepsilon", "\\epsz": "\\varepsilon_0", "\\muz": "\\mu_0", "\\Zo": "Z_0", "\\ZL": "Z_L", "\\Gam": "\\Gamma", "\\oiint": "\\mathop{\\oint\\!\\!\\!\\oint}", "\\VSWR": "\\mathrm{VSWR}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

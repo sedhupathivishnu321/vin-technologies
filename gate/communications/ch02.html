@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2: Noise, SNR and the Matched Filter | Communications | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Thermal noise power (kTB), white and Gaussian noise models, narrowband noise components and the Rayleigh envelope, signal-to-noise ratio, noise figure and the cascade (Friis) formula, and the matched">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/communications/ch02.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 2: Noise, SNR and the Matched Filter | Communications | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Thermal noise power (kTB), white and Gaussian noise models, narrowband noise components and the Rayleigh envelope, signal-to-noise ratio, noise figure and the cascade (Friis) formula, and the matched"><meta property="og:url" content="https://vintechnologies.co.in/gate/communications/ch02.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Communications</a></div><div class="chlabel">Chapter 2</div><h1>Noise, SNR and the Matched Filter</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-2-1">2.1 Sources of noise</a></li><li><a href="#s-2-2">2.2 White Gaussian noise (AWGN)</a></li><li><a href="#s-2-3">2.3 Signal-to-noise ratio</a></li><li><a href="#s-2-4">2.4 Noise figure and noise temperature</a></li><li><a href="#s-2-5">2.5 Matched filter</a></li><li><a href="#s-2-6">2.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Thermal noise power (\(kTB\)), white and Gaussian noise models, narrowband noise components and the Rayleigh envelope, signal-to-noise ratio, noise figure and the cascade (Friis) formula, and the matched filter with its \(2E/N_0\) output SNR.</p></div></div>
+<h2 id="s-2-1"><span class="n">2.1</span> Sources of noise</h2>
+<ul><li><strong>Thermal (Johnson) noise</strong>: random motion of electrons in a resistor; Gaussian, white up to very high frequencies.</li><li><strong>Shot noise</strong>: discreteness of charge crossing a junction; \(\overline{i_n^2}=2qIB\).</li><li><strong>Flicker (\(1/f\)) noise</strong>: dominant at low frequency. <strong>Partition</strong> and <strong>quantisation</strong> noise in other blocks. External: atmospheric, man-made, cosmic.</li></ul>
+<div class="box formula"><div class="bt">Thermal noise</div><div class="bb"><p>Open-circuit rms voltage: \(\overline{v_n^2}=4kTRB\) (\(k=1.38\times10^{-23}\) J/K).<br>
+Maximum available noise power: \(P_n=kTB\) (into a matched load). One-sided PSD \(N_0=kT\); two-sided \(N_0/2\).<br>
+At \(T_0=290\) K: \(N_0=kT_0=4.0\times10^{-21}\) W/Hz \(=-174\) dBm/Hz. &emsp; \(-174\,\text{dBm}+10\log_{10}B\) gives the noise floor.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R=1\,\)k\(\Omega\), \(B=1\) MHz, \(T=290\) K: \(v_{n,rms}=\sqrt{4(1.38\times10^{-23})(290)(10^3)(10^6)}=4.0\,\mu\)V. Available noise power in \(1\) MHz: \(kTB=4\times10^{-15}\) W \(=-114\) dBm.</p></div></div>
+<h2 id="s-2-2"><span class="n">2.2</span> White Gaussian noise (AWGN)</h2>
+<p>Idealised noise with a flat PSD \(S_n(f)=N_0/2\), \(R_n(\tau)=\frac{N_0}2\delta(\tau)\), with Gaussian amplitude statistics. Samples at distinct times are uncorrelated and therefore independent. After an ideal filter the noise power is finite: low-pass of bandwidth \(B\) (passband \(-B\) to \(B\)) gives \(\sigma^2=\dfrac{N_0}2\cdot2B=N_0B\); band-pass of bandwidth \(B_T\) (positive frequencies) around \(\pm f_c\) gives \(\sigma^2=\dfrac{N_0}2\cdot2B_T=N_0B_T\). The output of a correlator with a unit-energy reference signal has variance \(N_0/2\) (used in detection, Ch. 8).</p>
+<h3 id="s-2-2-1"><span class="n">2.2.1</span> Narrowband (band-pass) noise</h3>
+<div class="box formula"><div class="bt">Quadrature representation</div><div class="bb"><p>\(n(t)=n_c(t)\cos2\pi f_ct-n_s(t)\sin2\pi f_ct\).<br>
+\(n_c\) and \(n_s\) are independent zero-mean Gaussian low-pass processes with equal variance equal to the total power of \(n(t)\): \(\sigma_c^2=\sigma_s^2=\sigma^2=\E[n^2]\).<br>
+Envelope \(r=\sqrt{n_c^2+n_s^2}\) is <strong>Rayleigh</strong>: \(f_R(r)=\dfrac r{\sigma^2}e^{-r^2/2\sigma^2}\), mean \(\sigma\sqrt{\pi/2}\); phase is uniform in \((0,2\pi)\).<br>
+Signal plus noise \(A\cos2\pi f_ct+n(t)\): envelope is <strong>Rician</strong>.</p></div></div>
+<p>For an ideal band-pass PSD \(N_0/2\) of bandwidth \(B_T\) around \(\pm f_c\): \(\sigma^2=N_0B_T\). In an AM/DSB receiver with \(B_T=2W\) this is \(2N_0W\).</p>
+<h2 id="s-2-3"><span class="n">2.3</span> Signal-to-noise ratio</h2>
+<p>\(\text{SNR}=P_s/P_n\) (power ratio); in dB \(=10\log_{10}(P_s/P_n)\). For signals expressed in voltage ratios use \(20\log_{10}\). With energy per bit: \(\dfrac{E_b}{N_0}=\text{SNR}\cdot\dfrac{B}{R_b}\) (SNR \(=E_bR_b/(N_0B)\)).</p>
+<h2 id="s-2-4"><span class="n">2.4</span> Noise figure and noise temperature</h2>
+<div class="box formula"><div class="bt">Noise figure</div><div class="bb"><p>\(F=\dfrac{\text{SNR}_{in}}{\text{SNR}_{out}}\ge1\), \(\ NF=10\log_{10}F\). Equivalent input noise temperature \(T_e=(F-1)T_0\), \(T_0=290\) K; \(F=1+T_e/T_0\).<br>
+Output noise power of a device of gain \(G\): \(N_{out}=GkB(T_s+T_e)\).<br>
+<strong>Friis cascade:</strong> \(F=F_1+\dfrac{F_2-1}{G_1}+\dfrac{F_3-1}{G_1G_2}+\cdots\) &emsp; and &emsp; \(T_e=T_1+\dfrac{T_2}{G_1}+\dfrac{T_3}{G_1G_2}+\cdots\) (linear ratios).<br>
+Attenuator (matched, loss \(L=1/G\)): \(F=L\), \(T_e=(L-1)T_0\).<br>
+System sensitivity: \(P_{min}\,(\text{dBm})=-174+10\log_{10}B+NF+\text{SNR}_{min}(\text{dB})\).</p></div></div>
+<div class="box example"><div class="bt">Receiver chain</div><div class="bb"><p>LNA: \(F_1=2\) dB \(=1.585\), \(G_1=20\) dB \(=100\); mixer/IF: \(F_2=10\) dB \(=10\). Overall \(F=1.585+\dfrac{10-1}{100}=1.675\) \(\Rightarrow\) \(2.24\) dB. The LNA gain makes the second stage almost irrelevant.<br>
+\(F=2\) dB: \(T_e=(1.585-1)\times290=170\) K.<br>
+Sensitivity for \(B=1\) MHz, \(NF=5\) dB, required SNR \(10\) dB: \(-174+60+5+10=-99\) dBm.</p></div></div>
+<h2 id="s-2-5"><span class="n">2.5</span> Matched filter</h2>
+<p>Problem: choose the receiver filter \(h(t)\) that maximises the SNR at the sampling instant \(T\) for a known pulse \(s(t)\) in white Gaussian noise of PSD \(N_0/2\).</p>
+<div class="box formula"><div class="bt">Matched filter</div><div class="bb"><p>\(h(t)=s(T-t)\) (time-reversed, delayed copy of \(s\)); \(\ H(f)=S^*(f)e^{-j2\pi fT}\).<br>
+Maximum output SNR: \(\left(\dfrac SN\right)_{max}=\dfrac{2E}{N_0}\), \(E=\displaystyle\int_0^Ts^2(t)dt\) — depends only on the pulse <em>energy</em>, not on its shape.<br>
+Output at \(t=T\): \(y(T)=E\); noise variance \(\dfrac{N_0}2E\). Equivalent to a <strong>correlator</strong>: \(y=\int_0^Tr(t)s(t)dt\) (both give the same sample at \(t=T\)).<br>
+For coloured noise, whiten first: \(H(f)=\dfrac{S^*(f)}{S_n(f)}e^{-j2\pi fT}\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Rectangular pulse of amplitude \(2\) V and duration \(1\,\mu\)s: \(E=A^2T=4\times10^{-6}\) J. With \(N_0=10^{-9}\) W/Hz: \(\text{SNR}_{max}=2E/N_0=8000\) \((39\,\text{dB})\). The matched filter for a rectangle is an integrate-and-dump circuit with \(h(t)=A\) for \(0\le t\le T\).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(N_0/2\) is two-sided; \(kT\) is the one-sided \(N_0\). (ii) Noise figure is a power ratio \(\ge1\); in dB \(\ge0\). (iii) Friis uses <em>linear</em> gains and \(F\). (iv) The matched-filter SNR depends on pulse energy only; doubling the amplitude quadruples \(E\). (v) The Rayleigh envelope has non-zero mean even though \(n_c,n_s\) have zero mean.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Noise floor: \(-174+10\log B\) dBm. Cascade: first-stage \(F\) and gain dominate. Matched-filter SNR: \(2E/N_0\); if the pulse is \(\pm A\) over \(T\) and \(E_b=A^2T\).</p></div></div>
+<h2 id="s-2-6"><span class="n">2.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The thermal noise PSD at \(T_0=290\) K is (A) \(4\times10^{-21}\) W/Hz (B) \(4\times10^{-18}\) W/Hz (C) \(4\times10^{-24}\) W/Hz (D) \(1.38\times10^{-23}\) W/Hz.</p>
+<p><strong>Q2.</strong> The envelope of narrowband Gaussian noise has a (A) Gaussian (B) Rayleigh (C) uniform (D) Rician pdf.</p>
+<p><strong>Q3.</strong> The maximum output SNR of a matched filter is (A) \(E/N_0\) (B) \(2E/N_0\) (C) \(E^2/N_0\) (D) \(4E/N_0\).</p>
+<p><strong>Q4.</strong> An attenuator of 3 dB at 290 K has a noise figure of (A) 0 dB (B) 1.5 dB (C) 3 dB (D) 6 dB.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A). Q2 (B). Q3 (B). Q4 (C).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> LNA \(F_1=2\) dB, \(G_1=20\) dB followed by a stage with \(F_2=10\) dB. The overall noise figure is (A) 2.24 dB (B) 12 dB (C) 3 dB (D) 10 dB.</p>
+<p><strong>Q6.</strong> A resistor of \(1\,\)k\(\Omega\) at 290 K with 1 MHz bandwidth has rms thermal noise voltage (A) 4 \(\mu\)V (B) 40 \(\mu\)V (C) 0.4 \(\mu\)V (D) 4 mV.</p>
+<p><strong>Q7.</strong> A rectangular pulse of amplitude 2 V and duration \(1\,\mu\)s in white noise with \(N_0=10^{-9}\) W/Hz. The matched-filter peak SNR in dB is (A) 36 (B) 39 (C) 42 (D) 33.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A). Q6 (A). Q7 (B): \(8000\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Noise temperature (K, nearest integer) of an amplifier with \(NF=2\) dB: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Receiver sensitivity (dBm): \(B=1\) MHz, \(NF=5\) dB, required SNR 10 dB: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 170. Q9: \(-99\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q10.</strong> Select the true statements. (A) Thermal noise is Gaussian. (B) Noise figure can be less than 1. (C) The matched filter output SNR depends only on \(E/N_0\). (D) In a cascade the first stage dominates \(F\) if its gain is large.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q10: (A), (C), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(-174\) dBm/Hz means? &emsp; <strong>T2.</strong> Impulse response of the matched filter for \(s(t)\) on \([0,T]\). &emsp; <strong>T3.</strong> \(T_e\) of a noiseless device.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(kT_0\) in dBm. T2: \(s(T-t)\). T3: 0 K (\(F=1\)).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(P_n=kTB\); \(N_0=kT\); \(-174\) dBm/Hz; \(v_n^2=4kTRB\).</li><li>\(n(t)=n_c\cos-n_s\sin\); \(\sigma_c^2=\sigma_s^2=\sigma^2\); envelope Rayleigh, phase uniform.</li><li>\(F=1+T_e/T_0\); Friis; attenuator \(F=L\).</li><li>Matched filter \(h=s(T-t)\), \(\text{SNR}_{max}=2E/N_0\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch01.html">&larr; Random Variables and Random Processes</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch03.html">Amplitude Modulation and Receivers &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Qf": "\\mathrm{Q}", "\\EbNo": "E_b/N_0", "\\Eb": "E_b", "\\Nzero": "N_0", "\\Rb": "R_b", "\\Rs": "R_s", "\\fc": "f_c", "\\fm": "f_m", "\\Ac": "A_c", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\erfc": "\\operatorname{erfc}", "\\E": "\\operatorname{E}", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

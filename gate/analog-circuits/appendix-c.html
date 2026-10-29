@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appendix C: GATE Quick Revision Sheets | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/appendix-c.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix C: GATE Quick Revision Sheets | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/appendix-c.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Appendix C</div><h1>GATE Quick Revision Sheets</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-C-1">C.1 One-page diode revision</a></li><li><a href="#s-C-2">C.2 One-page BJT revision</a></li><li><a href="#s-C-3">C.3 One-page MOSFET revision</a></li><li><a href="#s-C-4">C.4 One-page current-mirror revision</a></li><li><a href="#s-C-5">C.5 One-page differential-amplifier revision</a></li><li><a href="#s-C-6">C.6 One-page op-amp revision</a></li><li><a href="#s-C-7">C.7 One-page filter revision</a></li><li><a href="#s-C-8">C.8 One-page oscillator revision</a></li><li><a href="#s-C-9">C.9 One-page stability revision</a></li></ol></details><h2 id="s-C-1"><span class="n">C.1</span> One-page diode revision</h2>
+<div class="box formula"><div class="bt">Diode in 60 seconds</div><div class="bb"><p>\(I=I_s(e^{V/nV_T}-1)\); \(V_T=26\) mV; \(\times10\) current \(\to+60\) mV; \(r_d=26/I(\mathrm{mA})\) \(\Omega\); \(-2\) mV/\({}^\circ\)C; \(C_j\propto(V_R)^{-1/2}\); \(C_d\propto I\).<br>
+<strong>Method:</strong> assume ON/OFF \(\to\) solve \(\to\) check \(I&gt;0\) / \(V&lt;0.7\).<br>
+Clipper level \(=V_R\pm0.7\); clamper \(V_C=V_m\pm V_R-0.7\); HWR \(V_m/\pi\), FWR \(2V_m/\pi\); ripple \(1.21/0.482\); PIV \(V_m\) (bridge), \(2V_m\) (CT); filter \(V_r=I/(f_rC)\).</p></div></div>
+<h2 id="s-C-2"><span class="n">C.2</span> One-page BJT revision</h2>
+<div class="box formula"><div class="bt">BJT in 60 seconds</div><div class="bb"><p>Active: BE fwd, BC rev. \(I_C=\beta I_B\), \(I_E=(\beta+1)I_B\), \(V_{BE}=0.7\), \(V_{CE(sat)}=0.2\).<br>
+Bias: divider stiff \(\Rightarrow I_E=(V_B-0.7)/R_E\). \(S=\dfrac{(\beta+1)(1+R_B/R_E)}{\beta+1+R_B/R_E}\).<br>
+\(g_m=I_C/V_T\); \(r_\pi=\beta/g_m\); \(r_e=1/g_m\); \(r_o=V_A/I_C\).<br>
+CE: \(-g_mR_C'\); CB: \(+g_mR_C'\), \(R_{in}=r_e\); CC: \(\approx1\), \(R_{out}=(r_\pi+R_s)/(\beta+1)\). Unbypassed \(R_E\): \(-R_C'/(r_e+R_E)\).<br>
+\(f_H\): \(C_\pi+C_\mu(1+g_mR_L')\); \(f_T=g_m/2\pi(C_\pi+C_\mu)\).</p></div></div>
+<h2 id="s-C-3"><span class="n">C.3</span> One-page MOSFET revision</h2>
+<div class="box formula"><div class="bt">MOSFET in 60 seconds</div><div class="bb"><p>\(V_{ov}=V_{GS}-V_{th}\); sat if \(V_{DS}\ge V_{ov}\): \(I_D=\tfrac12k_nV_{ov}^2(1+\lambda V_{DS})\); triode: \(k_n[V_{ov}V_{DS}-V_{DS}^2/2]\).<br>
+\(g_m=\sqrt{2k_nI_D}=2I_D/V_{ov}\); \(r_o=1/\lambda I_D\); \(g_{mb}=\chi g_m\).<br>
+CS \(-g_mR_D'\); CG \(+g_mR_D'\), \(R_{in}=1/g_m\); CD \(g_mR_L'/(1+g_mR_L')\), \(R_{out}=1/g_m\). Degeneration \(-g_mR_D'/(1+g_mR_S)\).<br>
+Body effect raises \(V_{th}\) when \(V_{SB}&gt;0\). Bias quadratic: discard root with \(V_{GS}&lt;V_{th}\).</p></div></div>
+<h2 id="s-C-4"><span class="n">C.4</span> One-page current-mirror revision</h2>
+<div class="box formula"><div class="bt">Mirrors in 60 seconds</div><div class="bb"><p>BJT \(I_O=I_{REF}/(1+2/\beta)\); MOS \(I_O=I_{REF}(W/L)_2/(W/L)_1\); \(R_O=r_o\).<br>
+Widlar \(I_OR_E=V_T\ln(I_{REF}/I_O)\); Wilson error \(\approx2/\beta^2\), \(R_O\approx\beta r_o/2\); cascode \(R_O\approx g_mr_o^2\), compliance \(V_{th}+2V_{ov}\).<br>
+Active load gain \(=g_m(r_{on}\|r_{op})\).</p></div></div>
+<h2 id="s-C-5"><span class="n">C.5</span> One-page differential-amplifier revision</h2>
+<div class="box formula"><div class="bt">Diff-amp in 60 seconds</div><div class="bb"><p>\(v_{id}=v_1-v_2\); \(v_{ic}=(v_1+v_2)/2\). Half circuits: DM (virtual ground) and CM (\(2R_{EE}\)).<br>
+\(A_d=g_mR_C\) (diff-out); single-ended \(=g_mR_C/2\); \(R_{id}=2r_\pi\). \(A_{cm}=-R_C/2R_{EE}\); CMRR \(=g_mR_{EE}\).<br>
+MOS: all current steers at \(\sqrt2V_{ov}\); mirror load \(A_d=g_m(r_o\|r_o)\). \(V_{OS}\approx\Delta V_{th}\); ICMR set by tail compliance and load.</p></div></div>
+<h2 id="s-C-6"><span class="n">C.6</span> One-page op-amp revision</h2>
+<div class="box formula"><div class="bt">Op-amp in 60 seconds</div><div class="bb"><p>Rules: \(v_+=v_-\), \(i_\pm=0\) (negative feedback only).<br>
+Inv \(-R_f/R_1\) (\(R_{in}=R_1\)); non-inv \(1+R_f/R_1\); buffer 1; diff \((R_2/R_1)(v_2-v_1)\); summer \(-R_f\sum v_k/R_k\); IA \((1+2R/R_G)\).<br>
+Integrator \(-\int v_i/RC\); diff \(-RC\,\dot v_i\); \(f_{FP}=SR/2\pi V_p\); BW \(=\) GBW\(/\)noise gain; \(V_{o,OS}=(1+R_f/R_1)V_{OS}\).<br>
+Comparator: \(\pm V_{sat}\); Schmitt inv \(\pm\beta V_{sat}\), non-inv \(\pm(R_1/R_2)V_{sat}\).</p></div></div>
+<h2 id="s-C-7"><span class="n">C.7</span> One-page filter revision</h2>
+<div class="box formula"><div class="bt">Filters in 60 seconds</div><div class="bb"><p>\(f_c=1/2\pi RC\); Butterworth \(|H|^2=1/[1+(f/f_c)^{2n}]\), \(-20n\) dB/dec; \(Q=0.707\) for \(n=2\).<br>
+BPF \(f_0=\sqrt{f_Lf_H}\), \(Q=f_0/B\); notch \(B=f_0/Q\); all-pass \(\phi=-2\tan^{-1}\omega RC\).<br>
+SK (equal): \(Q=1/(3-K)\); SK unity-gain LP: \(Q=\sqrt{R_1R_2C_1C_2}/[C_2(R_1+R_2)]\).<br>
+MFB: \(Q=\pi f_0R_3C\), \(A_0=-R_3/2R_1\). Chebyshev: ripple, steeper, poles on an ellipse.</p></div></div>
+<h2 id="s-C-8"><span class="n">C.8</span> One-page oscillator revision</h2>
+<div class="box formula"><div class="bt">Oscillators in 60 seconds</div><div class="bb"><p>Barkhausen: \(|A\beta|=1\), \(\angle=0\); start-up \(&gt;1\).<br>
+RC phase-shift \(f=1/(2\pi RC\sqrt6)\), \(A\ge29\); Wien \(f=1/2\pi RC\), \(A\ge3\).<br>
+Colpitts \(f=1/2\pi\sqrt{LC_1C_2/(C_1+C_2)}\); Hartley \(1/2\pi\sqrt{(L_1+L_2+2M)C}\); crystal \(f_s&lt;f_p\), \(Q\sim10^5\).<br>
+Triangle generator \(f=R_2/(4R_1RC)\).</p></div></div>
+<h2 id="s-C-9"><span class="n">C.9</span> One-page stability revision</h2>
+<div class="box formula"><div class="bt">Stability in 60 seconds</div><div class="bb"><p>\(A_f=A/(1+A\beta)\); PM \(=180+\angle L(\omega_{gc})\); GM \(=-20\log|L(\omega_{pc})|\); PM \(\ge45^\circ\), GM \(\ge10\) dB.<br>
+\(\zeta\approx\) PM\(/100\); overshoot: \(30^\circ\to42\%\), \(45^\circ\to23\%\), \(60^\circ\to9\%\).<br>
+Follower PM \(=90-\tan^{-1}(\text{GBW}/f_2)\). Rate of closure \(\le20\) dB/dec. Miller \(C_c\): \(p_1\downarrow\), \(p_2\uparrow\), \(\omega_t=g_{m1}/C_c\); RHP zero \(g_{m2}/C_c\).</p></div></div><div class="pager bottom"><a class="pn" href="appendix-b.html">&larr; Essential Graphs</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="appendix-d.html">Final GATE Checklist &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

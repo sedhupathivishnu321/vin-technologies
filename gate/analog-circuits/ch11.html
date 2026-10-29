@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 11: Frequency Response of BJT Amplifiers | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch11.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 11: Frequency Response of BJT Amplifiers | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch11.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 11</div><h1>Frequency Response of BJT Amplifiers</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-11-1">11.1 Frequency-response concept</a></li><li><a href="#s-11-2">11.2 Low-frequency response</a></li><li><a href="#s-11-3">11.3 Coupling-capacitor effects</a></li><li><a href="#s-11-4">11.4 Bypass-capacitor effects</a></li><li><a href="#s-11-5">11.5 High-frequency response</a></li><li><a href="#s-11-6">11.6 Internal transistor capacitances</a></li><li><a href="#s-11-7">11.7 Miller effect</a></li><li><a href="#s-11-8">11.8 Hybrid-\(\pi\) high-frequency model</a></li><li><a href="#s-11-9">11.9 Lower and upper cutoff frequencies</a></li><li><a href="#s-11-10">11.10 Bandwidth</a></li><li><a href="#s-11-11">11.11 Gain-bandwidth relationship</a></li><li><a href="#s-11-12">11.12 Bode plots</a></li><li><a href="#s-11-13">11.13 GATE frequency-response problems</a></li></ol></details><h2 id="s-11-1"><span class="n">11.1</span> Frequency-response concept</h2>
+<p>A real amplifier’s gain is flat only over a middle band. At low frequencies the coupling and bypass capacitors reduce the gain; at high frequencies the transistor’s internal capacitances do. The <em>bandwidth</em> is \(\mathrm{BW}=f_H-f_L\), where \(f_L,f_H\) are the frequencies at which the gain has fallen by \(3\) dB (\(1/\sqrt2\)) from the midband value \(A_M\).</p>
+<figure id="fig-11-1"><div class="figimgs"><img src="img/f11_bode.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.1.</b> Bode magnitude and phase of a band-pass amplifier: high-pass corner \(f_L\), low-pass corner \(f_H\).</figcaption></figure>
+<h2 id="s-11-2"><span class="n">11.2</span> Low-frequency response</h2>
+<p>Each capacitor with the resistance it sees forms a first-order high-pass section with cutoff \(f=1/(2\pi R_{eq}C)\) and transfer function \(\dfrac{jf/f_L}{1+jf/f_L}\).</p>
+<h2 id="s-11-3"><span class="n">11.3</span> Coupling-capacitor effects</h2>
+<figure id="fig-11-2"><div class="figimgs"><img src="img/f11_lf_in.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.2.</b> Input coupling network: \(C_1\) with \(R_s+R_i\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_{L1}=\dfrac1{2\pi(R_s+R_i)C_1}\) &emsp; \(f_{L2}=\dfrac1{2\pi(R_C+R_L)C_2}\) &emsp; (output; \(R_o\approx R_C\))</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Amplifier of Chapter 9: \(R_s=1\) k, \(R_i=1.09\) k, \(C_1=10\ \mu\)F: \(f_{L1}=7.6\) Hz. \(R_C=R_L=3\) k, \(C_2=10\ \mu\)F: \(f_{L2}=1/(2\pi\times6\,\mathrm k\times10\ \mu)=2.65\) Hz.</p></div></div>
+<h2 id="s-11-4"><span class="n">11.4</span> Bypass-capacitor effects</h2>
+<figure id="fig-11-3"><div class="figimgs"><img src="img/f11_lf_e.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.3.</b> Emitter network: \(R_E\) in parallel with \(C_E\). Its impedance rises at low frequency, reducing gain.</figcaption></figure>
+<p>\(C_E\) sees \(R_{seen}=R_E\|\left(r_e+\dfrac{R_s'}{\beta+1}\right)\) and gives
+\[f_{LE}=\frac1{2\pi R_{seen}C_E}.\]</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_{seen}=20.8\ \Omega\), \(C_E=100\ \mu\)F: \(f_{LE}=76.5\) Hz. This is usually the <strong>dominant</strong> low-frequency pole because \(R_{seen}\) is so small.</p></div></div>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Overall lower cutoff for several sections: \(f_L\approx\sqrt{f_{L1}^2+f_{L2}^2+f_{LE}^2}\) (or the largest one if it dominates).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\sqrt{7.6^2+2.65^2+76.5^2}=77\) Hz.</p></div></div>
+<figure id="fig-11-4"><div class="figimgs"><img src="img/f11_lf.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.4.</b> Overlaying three RC sections: the highest cutoff sets the overall \(f_L\).</figcaption></figure>
+<h2 id="s-11-5"><span class="n">11.5</span> High-frequency response</h2>
+<ul><li>Coupling and bypass capacitors are short circuits.</li><li>Internal capacitances of the transistor cannot be neglected and shunt the signal path.</li><li>The gain falls with a slope of \(-20\) dB/decade per pole above \(f_H\).</li></ul>
+<h2 id="s-11-6"><span class="n">11.6</span> Internal transistor capacitances</h2>
+<ul><li>\(C_\pi=C_{je}+C_{de}\): base–emitter (junction + diffusion), typically \(10\)–\(100\) pF.</li><li>\(C_\mu\): base–collector depletion capacitance, \(0.5\)–\(5\) pF; small but vital because of the Miller effect.</li><li>\(r_x\): base spreading resistance (\(10\)–\(100\ \Omega\)), often ignored.</li></ul>
+<h2 id="s-11-7"><span class="n">11.7</span> Miller effect</h2>
+<div class="box derive"><div class="bt">Miller’s theorem</div><div class="bb"><p>An impedance \(Z_F\) connected between input node 1 and output node 2 with \(v_2=A\,v_1\) can be replaced by \(Z_1=\dfrac{Z_F}{1-A}\) at the input and \(Z_2=\dfrac{Z_F}{1-1/A}\) at the output. For a capacitor \(C_\mu\) with \(A=-g_mR_L'\) (large):
+\[C_{M,in}=C_\mu(1+g_mR_L'),\qquad C_{M,out}=C_\mu\left(1+\frac1{g_mR_L'}\right)\approx C_\mu.\]</p></div></div>
+<figure id="fig-11-5"><div class="figimgs"><img src="img/f11_miller.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.5.</b> Miller effect: the input capacitance is multiplied by \((1+|A_v|)\).</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>Miller multiplication applies only to <em>inverting</em> stages (CE, CS); it is the main reason a CE amplifier’s bandwidth is small. It does not apply to CB or CC (no gain feedback path through \(C_\mu\) from a high-gain inverting node).</p></div></div>
+<h2 id="s-11-8"><span class="n">11.8</span> Hybrid-\(\pi\) high-frequency model</h2>
+<figure id="fig-11-6"><div class="figimgs"><img src="img/f11_hf.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.6.</b> High-frequency hybrid-\(\pi\) model with \(C_\pi\) and \(C_\mu\). \(R_L'=r_o\|R_C\|R_L\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_T=\dfrac{g_m}{2\pi(C_\pi+C_\mu)}\) &emsp;&emsp; \(f_\beta=\dfrac{f_T}{\beta_0}\) &emsp;&emsp; \(|h_{fe}(f)|\approx\dfrac{f_T}{f}\) for \(f\gg f_\beta\)</p></div></div>
+<figure id="fig-11-7"><div class="figimgs"><img src="img/f11_ft.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.7.</b> Short-circuit current gain vs. frequency: \(f_\beta\) is the \(-3\) dB point, \(f_T\) the unity-gain frequency.</figcaption></figure>
+<h2 id="s-11-9"><span class="n">11.9</span> Lower and upper cutoff frequencies</h2>
+<p>With the Miller equivalent (figure below):</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(C_{in}=C_\pi+C_\mu(1+g_mR_L')\), &emsp; \(R_{th}=(R_s\|R_B)\|r_\pi\) (with \(r_x\) ignored)<br>
+\(f_H\approx\dfrac1{2\pi R_{th}C_{in}}\) (dominant input pole); output pole \(\dfrac1{2\pi R_L'C_\mu}\) is much higher.</p></div></div>
+<figure id="fig-11-8"><div class="figimgs"><img src="img/f11_miller.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.8.</b> Circuit with the Miller-equivalent capacitances.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(g_m=80.4\) mS, \(f_T=400\) MHz, \(C_\mu=2\) pF. \(C_\pi+C_\mu=g_m/(2\pi f_T)=32\) pF, so \(C_\pi=30\) pF. \(R_L'=1.5\) k, \(g_mR_L'=121\). \(C_{in}=30+2\times122=274\) pF. \(R_{th}=(0.9\,\mathrm k)\|1.24\,\mathrm k=522\ \Omega\). \(f_H=1/(2\pi\times522\times274\ \mathrm{pF})=1.1\) MHz. Output pole: \(1/(2\pi\times1.5\,\mathrm k\times2\ \mathrm{pF})=53\) MHz (negligible).</p></div></div>
+<h2 id="s-11-10"><span class="n">11.10</span> Bandwidth</h2>
+<p>\(\mathrm{BW}=f_H-f_L\approx f_H\) when \(f_H\gg f_L\). Bandwidth is improved by: lowering \(R_{th}\) (small \(R_s\)), lowering \(R_L'\) (hence lower gain), using a cascode (removes Miller multiplication), or using negative feedback.</p>
+<h2 id="s-11-11"><span class="n">11.11</span> Gain-bandwidth relationship</h2>
+<p>For a single-pole amplifier the product \(|A_M|\times f_H\) is (nearly) constant. Lowering the gain (e.g. by adding an unbypassed \(R_E\), or by reducing \(R_L'\)) raises bandwidth by the same factor.</p>
+<figure id="fig-11-9"><div class="figimgs"><img src="img/f11_gbw.png" alt="" loading="lazy"></div><figcaption><b>Figure 11.9.</b> Constant gain–bandwidth product: trading gain for bandwidth.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Stage above: \(|A_M|=121\), \(f_H=1.1\) MHz: GBW \(\approx133\) MHz. If \(R_L'\) is halved to \(0.75\) k, the gain halves to \(60\) and \(C_{in}=30+2(1+60.3)=152.6\) pF; \(f_H\) becomes \(1/(2\pi\times522\times152.6\,\mathrm{pF})=2.0\) MHz: roughly double, GBW is preserved (within \(10\%\)).</p></div></div>
+<h2 id="s-11-12"><span class="n">11.12</span> Bode plots</h2>
+<div class="box formula"><div class="bt">Rules for asymptotic Bode magnitude</div><div class="bb"><p>Pole at \(f_p\): slope changes by \(-20\) dB/dec (phase \(-45^\circ\) at \(f_p\), from \(0\) to \(-90^\circ\)).<br>
+Zero at \(f_z\): slope changes by \(+20\) dB/dec (phase \(+45^\circ\) at \(f_z\)).<br>
+At \(f_p\) the true gain is \(3\) dB below the asymptote. Phase at \(0.1f_p\) and \(10f_p\): \(-5.7^\circ\) and \(-84.3^\circ\).</p></div></div>
+<p>The plot above has a zero at the origin (\(+20\) dB/dec), a pole at \(f_L\) that flattens it, and a pole at \(f_H\) that brings the slope to \(-20\) dB/dec.</p>
+<h2 id="s-11-13"><span class="n">11.13</span> GATE frequency-response problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> An RC high-pass filter with \(R=10\) k\(\Omega\) and \(C=1.59\ \mu\)F has a cutoff frequency of <span class="blank"></span> Hz.</p>
+<p><strong>Q2.</strong> \(C_\mu=2\) pF, \(|A_v|=50\). The Miller input capacitance contributed is <span class="blank"></span> pF.</p>
+<p><strong>Q3.</strong> A BJT has \(f_T=200\) MHz and \(\beta_0=100\). \(f_\beta\) is <span class="blank"></span> MHz.</p>
+<p><strong>Q4.</strong> A single-pole amplifier has midband gain \(100\) and \(f_H=1\) MHz. The frequency at which the gain magnitude is unity is closest to (A) 1 MHz (B) 10 MHz (C) 100 MHz (D) 1 GHz.</p>
+<p><strong>Q5.</strong> A transfer function has poles at \(1\) kHz and \(100\) kHz and no zeros. The high-frequency asymptotic slope beyond \(100\) kHz is (A) \(-20\) (B) \(-40\) (C) \(-60\) (D) \(0\) dB/decade.</p>
+<p><strong>Q6.</strong> At \(f=f_H\) of a single-pole low-pass, the phase of the gain (relative to midband) is <span class="blank"></span> degrees.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(1/(2\pi\times10^4\times1.59\times10^{-6})=10\) Hz. Q2: \(2\times51=102\) pF. Q3: 2 MHz. Q4: (C) 100 MHz. Q5: (B) \(-40\). Q6: \(-45^\circ\).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Compute \(f_{LE}\) for \(R_{seen}=30\ \Omega\), \(C_E=470\ \mu\)F. &emsp; [11.3 Hz]</li><li>\(f_T=500\) MHz, \(g_m=100\) mS, \(C_\mu=1\) pF. Find \(C_\pi\). &emsp; [\(\approx30.8\) pF]</li><li>CE amplifier: \(R_{th}=1\) k, \(C_{in}=100\) pF; \(f_H=?\) &emsp; [1.59 MHz]</li><li>Why does adding \(R_E\) (unbypassed) extend bandwidth? &emsp; [Gain falls by \((1+g_mR_E)\), GBW constant]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch10.html">&larr; AC Coupling and Multistage Amplifiers</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch12.html">MOSFET Fundamentals &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

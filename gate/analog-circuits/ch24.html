@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 24: Oscillators | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch24.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 24: Oscillators | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch24.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 24</div><h1>Oscillators</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-24-1">24.1 Oscillation principle</a></li><li><a href="#s-24-2">24.2 Barkhausen criterion</a></li><li><a href="#s-24-3">24.3 Phase and magnitude conditions</a></li><li><a href="#s-24-4">24.4 RC phase-shift oscillator</a></li><li><a href="#s-24-5">24.5 Wien-bridge oscillator</a></li><li><a href="#s-24-6">24.6 LC oscillators</a></li><li><a href="#s-24-7">24.7 Hartley oscillator</a></li><li><a href="#s-24-8">24.8 Colpitts oscillator</a></li><li><a href="#s-24-9">24.9 Crystal oscillator</a></li><li><a href="#s-24-10">24.10 Frequency calculations</a></li><li><a href="#s-24-11">24.11 Amplitude stabilisation</a></li><li><a href="#s-24-12">24.12 GATE problems</a></li></ol></details><h2 id="s-24-1"><span class="n">24.1</span> Oscillation principle</h2>
+<p>An oscillator generates a periodic waveform with no input signal. It is an amplifier with positive feedback: noise or the switch-on transient is amplified, fed back in phase and reinforced, until nonlinearity limits the amplitude.</p>
+<figure id="fig-24-1"><div class="figimgs"><img src="img/f24_fb.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.1.</b> Feedback oscillator: a portion \(\beta v_o\) of the output is fed back as the input.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_f=\dfrac{A}{1-A\beta}\): an output exists with zero input if \(A\beta=1\).</p></div></div>
+<h2 id="s-24-2"><span class="n">24.2</span> Barkhausen criterion</h2>
+<div class="box formula"><div class="bt">Barkhausen criterion (sustained oscillation)</div><div class="bb"><p>\(|A(j\omega_0)\beta(j\omega_0)|=1\) &emsp; and &emsp; \(\angle A\beta=0^\circ\) (or \(360^\circ n\)) at \(\omega_0\).<br>
+For start-up: \(|A\beta|&gt;1\) initially.</p></div></div>
+<h2 id="s-24-3"><span class="n">24.3</span> Phase and magnitude conditions</h2>
+<p>The phase condition sets the frequency; the magnitude condition sets the required gain. The loop-gain plot below shows that the conditions hold at one frequency only.</p>
+<figure id="fig-24-2"><div class="figimgs"><img src="img/f24_barkhausen.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.2.</b> Loop gain of a Wien-bridge oscillator with \(A=3\): magnitude \(=1\) and phase \(=0\) simultaneously at \(f_0\) only.</figcaption></figure>
+<figure id="fig-24-3"><div class="figimgs"><img src="img/w24_start.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.3.</b> Oscillation start-up: the amplitude grows exponentially while \(|A\beta|&gt;1\) and settles when nonlinearity brings \(|A\beta|\) back to 1.</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>If \(|A\beta|&lt;1\) the oscillation dies out; if \(|A\beta|&gt;1\) permanently, the amplitude grows until the output saturates and the waveform is distorted (square-ish). The equilibrium \(|A\beta|=1\) is reached only through amplitude control.</p></div></div>
+<h2 id="s-24-4"><span class="n">24.4</span> RC phase-shift oscillator</h2>
+<figure id="fig-24-4"><div class="figimgs"><img src="img/f24_rcps.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.4.</b> RC phase-shift oscillator: an inverting amplifier followed by a three-section \(RC\) ladder that provides an extra \(180^\circ\).</figcaption></figure>
+<p>Each section adds up to \(90^\circ\); three sections provide \(180^\circ\) at one frequency (where each contributes \(60^\circ\)).</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_0=\dfrac{1}{2\pi RC\sqrt6}\), &emsp; \(\beta(f_0)=-\dfrac1{29}\), &emsp; \(|A|\ge29\) i.e. \(R_f\ge29R\).</p></div></div>
+<figure id="fig-24-5"><div class="figimgs"><img src="img/f24_ps.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.5.</b> Phase contributed by one, two and three RC sections.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R=10\) k\(\Omega\), \(C=10\) nF: \(f_0=1/(2\pi\times10^4\times10^{-8}\times2.449)=650\) Hz. Required \(R_f=29R=290\) k\(\Omega\) (use a pot and adjust for a clean sine).</p></div></div>
+<h2 id="s-24-5"><span class="n">24.5</span> Wien-bridge oscillator</h2>
+<figure id="fig-24-6"><div class="figimgs"><img src="img/f24_wien.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.6.</b> Wien-bridge oscillator: series-RC/parallel-RC positive feedback and a resistive divider \(R_f,R_1\) for negative feedback.</figcaption></figure>
+<p>The Wien network has \(\beta=\dfrac{1}{3+j(\omega RC-1/\omega RC)}\), real and equal to \(1/3\) at \(\omega_0=1/RC\).</p>
+<figure id="fig-24-7"><div class="figimgs"><img src="img/f24_wien_resp.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.7.</b> Magnitude and phase of the Wien network: \(|\beta|=1/3\) at \(f_0\), phase \(0^\circ\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_0=\dfrac{1}{2\pi RC}\), &emsp; required gain \(A=1+\dfrac{R_f}{R_1}\ge3\), i.e. \(R_f\ge2R_1\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R=10\) k, \(C=16\) nF: \(f_0=995\) Hz. Choose \(R_1=10\) k, \(R_f=20.5\) k (slightly \(&gt;2R_1\) for start-up).</p></div></div>
+<p>Amplitude stabilisation: a tungsten lamp (positive temperature coefficient) or diode limiter in \(R_f\) automatically lowers the gain as the amplitude grows.</p>
+<h2 id="s-24-6"><span class="n">24.6</span> LC oscillators</h2>
+<p>At high frequencies (\(&gt;\) 100 kHz) \(RC\) networks become impractical; LC tanks give high \(Q\) and stability. General three-reactance oscillator: reactances \(X_1\) (base–emitter), \(X_2\) (collector–emitter) and \(X_3\) (collector–base) with \(X_1+X_2+X_3=0\) at resonance and \(X_1,X_2\) of the <em>same</em> type: capacitors give Colpitts; inductors give Hartley.</p>
+<h2 id="s-24-7"><span class="n">24.7</span> Hartley oscillator</h2>
+<figure id="fig-24-8"><div class="figimgs"><img src="img/f24_hartley.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.8.</b> Hartley oscillator (bias network not shown): tapped inductor \(L_1,L_2\) and capacitor \(C\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_0=\dfrac{1}{2\pi\sqrt{(L_1+L_2+2M)\,C}}\) &emsp;&emsp; \(|A|\ge\dfrac{L_1}{L_2}\) (approximately; \(L_1\) at the collector, \(L_2\) at the base)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(L_1=L_2=50\ \mu\)H, \(M=0\), \(C=100\) pF: \(L_{eq}=100\ \mu\)H, \(f_0=1/(2\pi\sqrt{10^{-4}\times10^{-10}})=1.59\) MHz. Required gain \(\ge1\) (in practice several).</p></div></div>
+<h2 id="s-24-8"><span class="n">24.8</span> Colpitts oscillator</h2>
+<figure id="fig-24-9"><div class="figimgs"><img src="img/f24_colpitts.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.9.</b> Colpitts oscillator: inductor \(L\) and a capacitive divider \(C_1,C_2\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(f_0=\dfrac{1}{2\pi\sqrt{L\,C_{eq}}}\), &emsp; \(C_{eq}=\dfrac{C_1C_2}{C_1+C_2}\) &emsp;&emsp; \(|A|\ge\dfrac{C_2}{C_1}\) (\(C_1\) at the collector, \(C_2\) at the base)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(L=10\ \mu\)H, \(C_1=C_2=100\) pF: \(C_{eq}=50\) pF, \(f_0=1/(2\pi\sqrt{10^{-5}\times5\times10^{-11}})=7.12\) MHz. For \(C_1=200\) pF, \(C_2=100\) pF: \(C_{eq}=66.7\) pF, \(f_0=6.16\) MHz, \(A\ge0.5\).</p></div></div>
+<h2 id="s-24-9"><span class="n">24.9</span> Crystal oscillator</h2>
+<p>A quartz crystal is a piezoelectric resonator with an extremely high \(Q\) (\(10^4\)–\(10^6\)) and excellent temperature stability.</p>
+<figure id="fig-24-10"><div class="figimgs"><img src="img/f24_xtal_eq.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.10.</b> Electrical equivalent circuit of a crystal: series branch \(L_s,C_s,R_s\) in parallel with the holder capacitance \(C_0\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Series resonance: \(f_s=\dfrac{1}{2\pi\sqrt{L_sC_s}}\) &emsp;&emsp; Parallel resonance: \(f_p=f_s\sqrt{1+\dfrac{C_s}{C_0}}\) (\(f_p&gt;f_s\), very close)<br>
+\(Q=\dfrac{\omega_sL_s}{R_s}\)</p></div></div>
+<figure id="fig-24-11"><div class="figimgs"><img src="img/f24_xtal.png" alt="" loading="lazy"></div><figcaption><b>Figure 24.11.</b> Reactance of a crystal: inductive between \(f_s\) and \(f_p\) (the narrow band in which crystal oscillators such as Pierce and Colpitts variants operate).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(L_s=2\) H, \(C_s=0.01267\) pF, \(C_0=3\) pF, \(R_s=100\ \Omega\). \(f_s=1.000\) MHz, \(f_p=1.000\times\sqrt{1+0.004223}=1.00211\) MHz (a \(0.2\%\) window), \(Q=2\pi\times10^6\times2/100=1.26\times10^5\).</p></div></div>
+<h2 id="s-24-10"><span class="n">24.10</span> Frequency calculations</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Oscillator</th><th>\(f_0\)</th><th>Gain requirement</th></tr></thead><tbody><tr><td>RC phase-shift (3 sections)</td><td>\(\dfrac{1}{2\pi RC\sqrt6}\)</td><td>\(|A|\ge29\)</td></tr><tr><td>Wien bridge</td><td>\(\dfrac{1}{2\pi RC}\)</td><td>\(A\ge3\)</td></tr><tr><td>Hartley</td><td>\(\dfrac1{2\pi\sqrt{(L_1+L_2+2M)C}}\)</td><td>\(A\ge L_1/L_2\)</td></tr><tr><td>Colpitts</td><td>\(\dfrac1{2\pi\sqrt{L\,C_1C_2/(C_1+C_2)}}\)</td><td>\(A\ge C_2/C_1\)</td></tr><tr><td>Crystal</td><td>\(f_s\) (series) or between \(f_s\) and \(f_p\)</td><td>\(|A|\ge1\) (\(R_s\) loss)</td></tr></tbody></table></div></div>
+<h2 id="s-24-11"><span class="n">24.11</span> Amplitude stabilisation</h2>
+<p>Without control, \(|A\beta|\) is slightly larger than 1 at start-up and the amplitude grows until the amplifier saturates. Techniques: (1) diodes or Zeners in the feedback path that increase attenuation at large signal levels; (2) a lamp or thermistor in the gain-setting network; (3) a JFET as a voltage-controlled resistor with automatic gain control; (4) transistor nonlinearity (self-limiting biasing in LC oscillators).</p>
+<h2 id="s-24-12"><span class="n">24.12</span> GATE problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> A Wien-bridge oscillator has \(R=1.59\) k\(\Omega\), \(C=0.1\ \mu\)F. Its frequency is <span class="blank"></span> Hz.</p>
+<p><strong>Q2.</strong> The minimum gain of a three-section RC phase-shift oscillator (op-amp inverting) is <span class="blank"></span>.</p>
+<p><strong>Q3.</strong> A Colpitts oscillator has \(L=1\) mH, \(C_1=C_2=200\) pF. \(f_0=\) <span class="blank"></span> kHz.</p>
+<p><strong>Q4.</strong> The Barkhausen criterion requires (A) \(|A\beta|=1\), \(\angle A\beta=0^\circ\) (B) \(|A\beta|=0\) (C) \(|A\beta|=1\), \(\angle=180^\circ\) (D) \(A=1\).</p>
+<p><strong>Q5.</strong> For a crystal, the relationship between the series and parallel resonance frequencies is (A) \(f_s&gt;f_p\) (B) \(f_s&lt;f_p\) (C) \(f_s=f_p\) (D) unrelated.</p>
+<p><strong>Q6.</strong> A Hartley oscillator with \(L_1=L_2=1\) mH (\(M=0\)), \(C=100\) pF: \(f_0=\) <span class="blank"></span> kHz.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(1/(2\pi\times1590\times10^{-7})=1000\) Hz. Q2: 29. Q3: \(C_{eq}=100\) pF; \(f_0=1/(2\pi\sqrt{10^{-3}\times10^{-10}})=503\) kHz. Q4: (A). Q5: (B). Q6: \(L_{eq}=2\) mH; \(f_0=1/(2\pi\sqrt{2\times10^{-3}\times10^{-10}})=356\) kHz.</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Design a Wien oscillator for \(5\) kHz using \(C=10\) nF. &emsp; [\(R=3.18\) k\(\Omega\)]</li><li>Find \(f_0\) of an RC phase-shift oscillator with \(R=1\) k, \(C=0.1\ \mu\)F. &emsp; [650 Hz]</li><li>State why \(R_f\) slightly above \(2R_1\) is used in the Wien oscillator. &emsp; [Ensure start-up (\(|A\beta|&gt;1\))]</li><li>Why is a crystal oscillator more stable than an LC oscillator? &emsp; [Very high \(Q\) (\(&gt;10^4\)) and low temperature coefficient]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch23.html">&larr; Schmitt Triggers</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch25.html">Feedback Amplifiers &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 13: Sample-and-Hold Circuits, DACs and ADCs | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Resolution and LSB size, R-2R and weighted-resistor DAC outputs, number of comparators in a flash ADC, conversion time of counter, SAR and dual-slope converters, quantization error and SQNR.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch13.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 13: Sample-and-Hold Circuits, DACs and ADCs | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Resolution and LSB size, R-2R and weighted-resistor DAC outputs, number of comparators in a flash ADC, conversion time of counter, SAR and dual-slope converters, quantization error and SQNR."><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch13.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 13</div><h1>Sample-and-Hold Circuits, DACs and ADCs</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-13-1">13.1 Sample-and-hold</a></li><li><a href="#s-13-2">13.2 Quantization</a></li><li><a href="#s-13-3">13.3 Digital-to-analog converters</a></li><li><a href="#s-13-4">13.4 Analog-to-digital converters</a></li><li><a href="#s-13-5">13.5 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Resolution and LSB size, R-2R and weighted-resistor DAC outputs, number of comparators in a flash ADC, conversion time of counter, SAR and dual-slope converters, quantization error and SQNR.</p></div></div>
+<h2 id="s-13-1"><span class="n">13.1</span> Sample-and-hold</h2>
+<p>A sample-and-hold (S/H) circuit tracks the input while the switch is closed (sample mode) and freezes it on a capacitor when the switch opens (hold mode), so that an ADC sees a constant value during conversion. A buffer amplifier isolates the capacitor at the input and output.</p>
+<ul><li><strong>Acquisition time</strong>: time for the capacitor to charge to within the specified error after the switch closes (\(\approx n\ln2\cdot R_{on}C\) for \(n\)-bit accuracy).</li><li><strong>Aperture time/jitter</strong>: uncertainty in the instant of sampling; limits the maximum input frequency.</li><li><strong>Droop rate</strong>: \(\dfrac{dV}{dt}=\dfrac{I_{leak}}{C_H}\) during hold.</li><li><strong>Feedthrough, charge injection</strong> (pedestal error) from the switch.</li></ul>
+<p>Larger \(C_H\) means less droop but slower acquisition.</p>
+<h2 id="s-13-2"><span class="n">13.2</span> Quantization</h2>
+<p>An \(n\)-bit converter with full-scale range \(V_{FS}\) resolves</p>
+<div class="box formula"><div class="bt">Resolution</div><div class="bb"><p>\(\text{LSB}=\dfrac{V_{FS}}{2^n}\) (for a range \([0,V_{FS}]\) with \(2^n\) steps). Number of levels \(2^n\); percentage resolution \(=\dfrac1{2^n-1}\times100\%\).<br>
+Quantization error \(\in[-\tfrac12\text{LSB},+\tfrac12\text{LSB}]\) (rounding quantizer), rms \(=\text{LSB}/\sqrt{12}\).<br>
+Ideal SQNR for a full-scale sine: \(\text{SQNR}=6.02\,n+1.76\ \text{dB}\).</p></div></div>
+<p>Sampling must satisfy \(f_s\ge2f_{max}\) (Nyquist); an anti-aliasing filter precedes the S/H.</p>
+<h2 id="s-13-3"><span class="n">13.3</span> Digital-to-analog converters</h2>
+<h3 id="s-13-3-1"><span class="n">13.3.1</span> Binary-weighted resistor DAC</h3>
+<p>Resistors \(R,2R,4R,\dots,2^{n-1}R\) switch the reference into the summing node of an inverting op-amp: \(V_o=-R_fV_{ref}\sum_{i}\dfrac{b_i}{R_i}\). It needs a wide resistor ratio (\(2^{n-1}\)) which limits accuracy for large \(n\).</p>
+<h3 id="s-13-3-2"><span class="n">13.3.2</span> R-2R ladder DAC</h3>
+<p>Only two resistor values are used; the ladder halves the current at each node. In the voltage-mode (non-inverting) version</p>
+<div class="box formula"><div class="bt">R-2R ladder</div><div class="bb"><p>\(V_{out}=V_{ref}\displaystyle\sum_{i=0}^{n-1}\frac{b_i}{2^{\,n-i}}=V_{ref}\,\frac{N}{2^n}\), where \(N\) is the binary input read as an integer. Full scale \(=V_{ref}\,(1-2^{-n})\). With an inverting op-amp stage the output is \(-V_{ref}N/2^n\) (times the gain).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>4-bit R-2R, \(V_{ref}=8\,\)V, input \(1011_2=11\): \(V_{out}=8\times11/16=5.5\,\)V. LSB \(=0.5\,\)V, full scale \(7.5\,\)V.<br>
+10-bit, \(V_{ref}=10\,\)V: LSB \(=9.766\,\)mV, full scale \(9.990\,\)V.</p></div></div>
+<p>Performance terms: offset, gain error, <strong>DNL</strong> (deviation of a step from 1 LSB; monotonic if \(\text{DNL}&gt;-1\) LSB), <strong>INL</strong> (deviation from the ideal straight line), settling time and glitch energy.</p>
+<h2 id="s-13-4"><span class="n">13.4</span> Analog-to-digital converters</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Type</th><th>Hardware / idea</th><th>Conversion time</th><th>Comment</th></tr></thead><tbody><tr><td>Flash (parallel)</td><td>\(2^n-1\) comparators, \(2^n\) resistors, priority encoder</td><td>1 clock (fastest)</td><td>large, power hungry</td></tr><tr><td>Counter (ramp)</td><td>DAC + counter + comparator</td><td>up to \(2^n\) clocks (avg \(2^{n-1}\))</td><td>slow, simple</td></tr><tr><td>Tracking</td><td>up/down counter follows input</td><td>small if input changes slowly</td><td></td></tr><tr><td>Successive approximation (SAR)</td><td>DAC + SAR register + comparator, binary search</td><td>\(n\) clocks</td><td>most common, medium speed</td></tr><tr><td>Dual-slope</td><td>integrator, fixed-time then reference discharge</td><td>up to \(2\cdot2^n\) clocks</td><td>high accuracy, rejects mains hum</td></tr><tr><td>\(\Sigma\Delta\)</td><td>oversampling, noise shaping</td><td>many samples</td><td>high resolution, audio</td></tr></tbody></table></div></div>
+<h3 id="s-13-4-1"><span class="n">13.4.1</span> Successive approximation</h3>
+<p>Starting from the MSB, set each bit to 1, compare the DAC output with \(V_{in}\) and keep the bit if \(V_{DAC}\le V_{in}\). Exactly \(n\) clock cycles regardless of the input value.</p>
+<div class="box example"><div class="bt">8-bit SAR, \(V_{ref}=5\,\)V, \(V_{in}=3.2\,\)V</div><div class="bb"><p>LSB \(=19.53\,\)mV; the final code is \(\lfloor3.2/0.01953\rfloor=163\). Trial sequence: \(10000000\) (2.5 V, keep), \(11000000\) (3.75 V, drop), \(10100000\) (3.125 V, keep), \(10110000\) (drop), \(10101000\) (drop), \(10100100\) (3.203 V \(&gt;3.2\), drop), \(10100010\) (keep), \(10100011\) (3.184 V, keep). Result \(10100011=163\).</p></div></div>
+<h3 id="s-13-4-2"><span class="n">13.4.2</span> Dual-slope</h3>
+<p>The input is integrated for a fixed time \(T_1=2^nT_{clk}\), then the integrator is discharged by \(-V_{ref}\) in time \(T_2\): \(T_2=T_1\,V_{in}/V_{ref}\), so the count is proportional to \(V_{in}\) and independent of \(R\), \(C\) and clock stability (to first order). Choosing \(T_1\) as a multiple of the mains period (20 ms) rejects 50 Hz pickup.</p>
+<h3 id="s-13-4-3"><span class="n">13.4.3</span> Flash</h3>
+<p>A resistor string of \(2^n\) equal resistors generates \(2^n-1\) thresholds; one comparator per threshold; a priority encoder converts the thermometer code to binary. \(n=8\): 255 comparators. Hardware doubles with each added bit.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) A flash ADC needs \(2^n-1\) comparators, not \(2^n\). (ii) SAR conversion time is \(n\) clocks, independent of input. (iii) Counter-ADC time depends on the input amplitude (up to \(2^n\) clocks). (iv) Full-scale output of an \(n\)-bit DAC is \(V_{ref}(1-2^{-n})\), not \(V_{ref}\). (v) SQNR \(6.02n+1.76\) dB holds for a full-scale sinusoid only.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>LSB \(=V_{FS}/2^n\); code \(=\lfloor V_{in}/\text{LSB}\rfloor\). DAC output \(=\text{LSB}\times N\). Speed order: flash \(&gt;\) SAR \(&gt;\) counter \(&gt;\) dual-slope. Each extra bit adds 6 dB of SQNR.</p></div></div>
+<h2 id="s-13-5"><span class="n">13.5</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> Comparators in a 6-bit flash ADC: (A) 6 (B) 32 (C) 63 (D) 64.</p>
+<p><strong>Q2.</strong> The conversion time of an \(n\)-bit SAR ADC with clock \(f_c\) is (A) \(2^n/f_c\) (B) \(n/f_c\) (C) \(1/f_c\) (D) \(n^2/f_c\).</p>
+<p><strong>Q3.</strong> The resolution (LSB) of a 10-bit DAC with a 5 V full-scale range: (A) 4.88 mV (B) 9.77 mV (C) 0.5 V (D) 1 mV.</p>
+<p><strong>Q4.</strong> The fastest ADC type is (A) dual-slope (B) counter (C) flash (D) SAR.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C). Q2 (B). Q3 (A): \(5/1024=4.883\,\)mV. Q4 (C).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A 4-bit R-2R DAC with \(V_{ref}=8\,\)V receives \(1011\). The output is (A) 5.0 V (B) 5.5 V (C) 6.0 V (D) 11 V.</p>
+<p><strong>Q6.</strong> A 10-bit counter-type ADC is clocked at 2 MHz. Maximum conversion time: (A) 5 \(\mu\)s (B) 512 \(\mu\)s (C) 1024 \(\mu\)s (D) 256 \(\mu\)s.</p>
+<p><strong>Q7.</strong> An 8-bit ADC with 5 V full scale converts 3.2 V. The output code is (A) 10100000 (B) 10100011 (C) 10100100 (D) 11001000.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (B): \(1024/(2\times10^6)=512\,\mu\)s. Q7 (B): \(163\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> A hold capacitor droops at \(I_{leak}/C_H\) with \(I_{leak}=1\,\)nA and \(C_H=10\,\)pF. Droop over 20 \(\mu\)s (mV): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Ideal SQNR of a 12-bit ADC (dB): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Maximum conversion time of an 8-bit dual-slope ADC clocked at 100 kHz (\(T_1+T_2\) with \(T_2\le T_1=2^n\) clocks), in ms: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(dV/dt=100\,\)V/s; \(\times20\,\mu\)s \(=2\,\)mV. Q9: \(6.02\times12+1.76=74.0\). Q10: \(2\times256/10^5=5.12\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select the true statements. (A) A flash ADC needs \(2^n-1\) comparators. (B) SAR conversion time depends on the input. (C) Dual-slope converters can reject mains interference. (D) The R-2R DAC needs only two resistor values.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (C), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> LSB of a 12-bit, 4.096 V ADC. &emsp; <strong>T2.</strong> Bits needed for SQNR \(\ge60\,\)dB. &emsp; <strong>T3.</strong> Comparators in 4-bit flash.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 1 mV. T2: \((60-1.76)/6.02=9.68\to10\) bits. T3: 15.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>LSB \(=V_{FS}/2^n\); error \(\pm\tfrac12\)LSB; SQNR \(6.02n+1.76\) dB.</li><li>R-2R: \(V_o=V_{ref}N/2^n\). Flash \(2^n-1\) comparators; SAR \(n\) clocks; counter \(\le2^n\); dual-slope \(\le2\cdot2^n\).</li><li>S/H droop \(I/C\); Nyquist \(f_s\ge2f_{max}\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch12.html">&larr; Memories and Programmable Logic Devices</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch14.html">Computer Organization: Instructions, Addressing, Data Path and Pipelining &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

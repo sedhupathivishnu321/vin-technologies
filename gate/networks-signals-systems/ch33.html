@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 33: Multiple-Select Problems | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="MSQ: one or more options correct; no partial credit for a wrong option, and marks are awarded only when the exact correct set is chosen. Judge each option separately as True/False. 24 original">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch33.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 33: Multiple-Select Problems | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="MSQ: one or more options correct; no partial credit for a wrong option, and marks are awarded only when the exact correct set is chosen. Judge each option separately as True/False. 24 original"><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch33.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 33</div><h1>Multiple-Select Problems</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-33-1">33.1 Conceptual MSQs</a></li><li><a href="#s-33-2">33.2 Circuit-property MSQs</a></li><li><a href="#s-33-3">33.3 LTI-system MSQs</a></li><li><a href="#s-33-4">33.4 Stability and causality MSQs</a></li><li><a href="#s-33-5">33.5 Transform MSQs</a></li><li><a href="#s-33-6">33.6 Filter MSQs</a></li></ol></details><div class="box notebox"><div class="bt">How to use</div><div class="bb"><p>MSQ: one or more options correct; <em>no partial credit for a wrong option</em>, and marks are awarded only when the exact correct set is chosen. Judge each option separately as True/False. \(24\) original problems with reasons.</p></div></div>
+<h2 id="s-33-1"><span class="n">33.1</span> Conceptual MSQs</h2>
+<div class="box msqq"><div class="bt">Set 33.1</div><div class="bb"><p><strong>Q1.</strong> For a linear circuit: (A) superposition holds for voltages and currents (B) superposition holds for power (C) a Thevenin equivalent exists at any two terminals (D) reciprocity always holds.</p>
+<p><strong>Q2.</strong> Energy signals: (A) \(e^{-2t}u(t)\) (B) \(\rect(t)\) (C) \(\sin t\) (D) \(u(t)\).</p>
+<p><strong>Q3.</strong> Even functions: (A) \(\cos3t\) (B) \(t\sin t\) (C) \(t^3\) (D) \(|t|\).</p>
+<p><strong>Q4.</strong> Quantities that cannot change instantaneously in a circuit with finite sources: (A) \(v_C\) (B) \(i_L\) (C) \(i_C\) (D) \(v_R\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: (A), (C). (B) power is quadratic; (D) fails with dependent sources. Q2: (A), (B). Q3: (A), (B), (D). Q4: (A), (B).</p>
+<h2 id="s-33-2"><span class="n">33.2</span> Circuit-property MSQs</h2>
+<div class="box msqq"><div class="bt">Set 33.2</div><div class="bb"><p><strong>Q5.</strong> Reciprocity holds for (A) linear bilateral passive networks with one source (B) networks with dependent sources (C) networks with diodes (D) a resistive T-network.</p>
+<p><strong>Q6.</strong> A two-port is symmetric <em>and</em> reciprocal. Then (A) \(z_{11}=z_{22}\) (B) \(z_{12}=z_{21}\) (C) \(A=D\) (D) \(AD-BC=1\).</p>
+<p><strong>Q7.</strong> At series RLC resonance: (A) \(|V_L|=|V_C|\) (B) power factor is unity (C) \(|Z|\) is minimum (D) current is minimum.</p>
+<p><strong>Q8.</strong> Maximum power transfer from a DC Thevenin source: (A) \(R_L=R_{Th}\) (B) efficiency \(50\%\) (C) \(P=V_{Th}^2/4R_{Th}\) (D) efficiency is maximum.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5: (A), (D). Q6: all four. Q7: (A), (B), (C). Q8: (A), (B), (C).</p>
+<h2 id="s-33-3"><span class="n">33.3</span> LTI-system MSQs</h2>
+<div class="box msqq"><div class="bt">Set 33.3</div><div class="bb"><p><strong>Q9.</strong> An LTI system is causal if (A) \(h(t)=0\) for \(t&lt;0\) (B) the ROC of \(H(s)\) is to the right of its rightmost pole (C) the output depends only on present and past inputs (D) all poles are in the left half-plane.</p>
+<p><strong>Q10.</strong> Time-invariant systems: (A) \(y=x(t-2)\) (B) \(y=x(2t)\) (C) \(y=x^2(t)\) (D) \(y=t\,x(t)\).</p>
+<p><strong>Q11.</strong> Linear systems: (A) \(y=x+2\) (B) \(y=dx/dt\) (C) \(y=\int_{-\infty}^tx\,d\tau\) (D) \(y=x^2\).</p>
+<p><strong>Q12.</strong> Convolution: (A) \(x*h=h*x\) (B) \(\int(x*h)=\int x\int h\) (C) \(x*(h_1+h_2)=x*h_1+x*h_2\) (D) duration of \(x*h\) is the larger of the two durations.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q9: (A), (B), (C); (D) is a stability condition. Q10: (A), (C). Q11: (B), (C). Q12: (A), (B), (C); durations add.</p>
+<h2 id="s-33-4"><span class="n">33.4</span> Stability and causality MSQs</h2>
+<div class="box msqq"><div class="bt">Set 33.4</div><div class="bb"><p><strong>Q13.</strong> Causal DT systems that are BIBO stable: (A) \(\frac1{1-0.5z^{-1}}\) (B) \(\frac1{1+0.9z^{-1}}\) (C) \(\frac1{1-1.1z^{-1}}\) (D) \(\frac1{1-z^{-1}}\).</p>
+<p><strong>Q14.</strong> Causal CT systems that are BIBO stable: (A) \(\frac1{s+1}\) (B) \(\frac1{s-1}\) (C) \(\frac1{s^2+4}\) (D) \(\frac1{s^2+2s+5}\).</p>
+<p><strong>Q15.</strong> Non-causal impulse responses: (A) \(e^{-|t|}\) (B) \(e^{-t}u(t)\) (C) \(\delta(t+1)\) (D) \(u(t-1)\).</p>
+<p><strong>Q16.</strong> Regarding the ROC of the \(z\)-transform: (A) a causal sequence has an exterior ROC (B) stability requires the unit circle in the ROC (C) the ROC may contain poles (D) finite-duration sequences have ROC covering all \(z\) except possibly \(0\), \(\infty\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q13: (A), (B). Q14: (A), (D). Q15: (A), (C). Q16: (A), (B), (D).</p>
+<h2 id="s-33-5"><span class="n">33.5</span> Transform MSQs</h2>
+<div class="box msqq"><div class="bt">Set 33.5</div><div class="bb"><p><strong>Q17.</strong> Fourier transform: (A) \(x(t-t_0)\leftrightarrow e^{-j\omega t_0}X\) (B) time shift leaves \(|X|\) unchanged (C) \(|X|\) is even for real \(x\) (D) \(X(t)\leftrightarrow2\pi x(-\omega)\).</p>
+<p><strong>Q18.</strong> The final-value theorem can be applied to (A) \(\frac1{s(s+1)}\) (B) \(\frac1{s^2+1}\) (C) \(\frac1{s(s-1)}\) (D) \(\frac1{s+2}\).</p>
+<p><strong>Q19.</strong> \(\frac1{1-az^{-1}}\) is the \(z\)-transform of (A) \(a^nu[n]\) with \(|z|&gt;|a|\) (B) \(-a^nu[-n-1]\) with \(|z|&lt;|a|\) (C) \(a^nu[-n]\) (D) \(a^{|n|}\).</p>
+<p><strong>Q20.</strong> DTFT: (A) periodic with \(2\pi\) (B) \(|X|\) even for real \(x\) (C) convolution \(\leftrightarrow\) product (D) never contains impulses.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q17: all four. Q18: (A), (D) (poles of \(sX\) in the LHP; (B) on the axis, (C) in the RHP). Q19: (A), (B). Q20: (A), (B), (C).</p>
+<h2 id="s-33-6"><span class="n">33.6</span> Filter MSQs</h2>
+<div class="box msqq"><div class="bt">Set 33.6</div><div class="bb"><p><strong>Q21.</strong> Linear-phase FIR: (A) symmetric \(h\) gives linear phase (B) Type III has zeros at \(z=\pm1\) (C) group delay \(=(N-1)/2\) (D) Type II can be a high-pass.</p>
+<p><strong>Q22.</strong> Windows: (A) Blackman has the widest main lobe of the standard windows (B) rectangular has the narrowest (C) Hamming peak sidelobe \(\approx-41\) dB (D) Hann peak sidelobe \(\approx-13\) dB.</p>
+<p><strong>Q23.</strong> IIR design: (A) bilinear transform avoids aliasing (B) impulse invariance maps \(\Omega=\omega T\) but aliases (C) Butterworth is equiripple (D) Chebyshev-I needs a lower order than Butterworth for the same specification.</p>
+<p><strong>Q24.</strong> Structures: (A) direct form II uses \(\max(M,N)\) delays (B) cascade forms are less sensitive to coefficient quantisation (C) FIR filters are unconditionally stable (D) IIR filters can have exactly linear phase (causal, real, stable).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q21: (A), (B), (C). Q22: (A), (B), (C); Hann is \(-31\) dB. Q23: (A), (B), (D). Q24: (A), (B), (C); causal stable IIR filters cannot have exactly linear phase.</p><div class="pager bottom"><a class="pn" href="ch32.html">&larr; Numerical Answer Type Problems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch34.html">Formula Handbook &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

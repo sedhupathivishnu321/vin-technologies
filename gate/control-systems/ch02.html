@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2: Mathematical Modeling of Physical Systems | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Write the differential equation of a mechanical or electrical system, form its transfer function, use force–voltage and force–current analogies, and reduce a DC servo motor to K/(\tau s+1) or">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch02.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 2: Mathematical Modeling of Physical Systems | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Write the differential equation of a mechanical or electrical system, form its transfer function, use force–voltage and force–current analogies, and reduce a DC servo motor to K/(\tau s+1) or"><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch02.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 2</div><h1>Mathematical Modeling of Physical Systems</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-2-1">2.1 Core concept</a></li><li><a href="#s-2-2">2.2 Mechanical systems</a></li><li><a href="#s-2-3">2.3 Electrical systems</a></li><li><a href="#s-2-4">2.4 Analogies</a></li><li><a href="#s-2-5">2.5 Electromechanical systems: armature-controlled DC motor</a></li><li><a href="#s-2-6">2.6 Physical interpretation</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Write the differential equation of a mechanical or electrical system, form its transfer function, use force–voltage and force–current analogies, and reduce a DC servo motor to \(K/(\tau s+1)\) or \(K/[s(\tau s+1)]\).</p></div></div>
+<h2 id="s-2-1"><span class="n">2.1</span> Core concept</h2>
+<p>A model is an equation (or block) relating input to output. For lumped, linear, time-invariant systems it is an ordinary differential equation with constant coefficients. Modelling assumptions: small displacements (linear springs), viscous (velocity-proportional) friction, rigid masses, negligible inductance/armature reaction unless stated.</p>
+<h2 id="s-2-2"><span class="n">2.2</span> Mechanical systems</h2>
+<h3 id="s-2-2-1"><span class="n">2.2.1</span> Translational</h3>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Mass: \(f=M\ddot x\). Viscous damper: \(f=B\dot x\). Spring: \(f=Kx\). Newton’s law: \(\sum f=M\ddot x\).<br>
+Mass–spring–damper: \(M\ddot x+B\dot x+Kx=f(t)\ \Rightarrow\ \dfrac{X(s)}{F(s)}=\dfrac{1}{Ms^2+Bs+K}\).</p></div></div>
+<figure id="fig-2-1"><div class="figimgs"><img src="img/c02_msd.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.1.</b> Translational mass–spring–damper. Free-body: \(f-B\dot x-Kx=M\ddot x\).</figcaption></figure>
+<h3 id="s-2-2-2"><span class="n">2.2.2</span> Rotational</h3>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Inertia: \(T=J\ddot\theta\). Damper: \(T=B\dot\theta\). Torsional spring: \(T=K\theta\).<br>
+\(J\ddot\theta+B\dot\theta+K\theta=T(t)\Rightarrow \dfrac{\Theta(s)}{T(s)}=\dfrac{1}{Js^2+Bs+K}\).<br>
+Gear train (ratio \(N=N_1/N_2\)): \(\theta_2=\theta_1/N\); reflected inertia to shaft 1: \(J_1+J_2N^2\).</p></div></div>
+<h2 id="s-2-3"><span class="n">2.3</span> Electrical systems</h2>
+<p>For a series RLC with output across \(C\) (Figure <a href="ch02.html#fig-2-2">2.2</a>):
+\begin{equation*}
+V_i=RI+L\dfrac{dI}{dt}+\dfrac1C\int I\,dt,\qquad \dfrac{V_o}{V_i}=\dfrac{1}{LCs^2+RCs+1}.
+\end{equation*}</p>
+<figure id="fig-2-2"><div class="figimgs"><img src="img/c02_rlc.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.2.</b> Series RLC network.</figcaption></figure>
+<h2 id="s-2-4"><span class="n">2.4</span> Analogies</h2>
+<p>Comparing \(M\ddot x+B\dot x+Kx=f\) with \(L\ddot q+R\dot q+q/C=v\):</p>
+<div class="center"><div class="tw"><table><thead><tr><th>Mechanical (translational)</th><th>Force–voltage (F–V)</th><th>Force–current (F–I)</th></tr></thead><tbody><tr><td>Force \(f\)</td><td>voltage \(v\)</td><td>current \(i\)</td></tr><tr><td>Mass \(M\)</td><td>inductance \(L\)</td><td>capacitance \(C\)</td></tr><tr><td>Damper \(B\)</td><td>resistance \(R\)</td><td>conductance \(1/R\)</td></tr><tr><td>Spring \(K\)</td><td>elastance \(1/C\)</td><td>reciprocal inductance \(1/L\)</td></tr><tr><td>Displacement \(x\)</td><td>charge \(q\)</td><td>flux \(\phi\)</td></tr><tr><td>Velocity \(v\)</td><td>current \(i\)</td><td>voltage \(e\)</td></tr><tr><td>Series connection (same force)</td><td>parallel</td><td>series</td></tr></tbody></table></div></div>
+<p>In the F–V analogy elements that share the same <em>velocity</em> appear in series electrically; in F–I they appear in parallel (nodal analysis: masses and springs at nodes, ground is the reference).</p>
+<h2 id="s-2-5"><span class="n">2.5</span> Electromechanical systems: armature-controlled DC motor</h2>
+<div class="box derive"><div class="bt">Armature-controlled DC motor (constant field)</div><div class="bb"><p>Armature: \(v_a=R_ai_a+L_a\dfrac{di_a}{dt}+e_b\), back emf \(e_b=K_b\omega\). Torque: \(T_m=K_ti_a\). Mechanical: \(T_m=J\dot\omega+b\omega\) (load torque zero). In Laplace form
+\begin{align*}
+I_a&amp;=\frac{V_a-K_b\Omega}{L_as+R_a},\qquad K_tI_a=(Js+b)\Omega\\
+\Rightarrow\ \frac{\Omega}{V_a}&amp;=\frac{K_t}{(L_as+R_a)(Js+b)+K_tK_b},\qquad \frac{\Theta}{V_a}=\frac{K_t}{s\left[(L_as+R_a)(Js+b)+K_tK_b\right]}.
+\end{align*}
+If \(L_a\) is negligible: \(\dfrac{\Omega}{V_a}=\dfrac{K_m}{\tau_ms+1}\) with \(K_m=\dfrac{K_t}{R_ab+K_tK_b}\) and \(\tau_m=\dfrac{R_aJ}{R_ab+K_tK_b}\).</p></div></div>
+<figure id="fig-2-3"><div class="figimgs"><img src="img/c02_dcmotor.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.3.</b> Block diagram of the armature-controlled DC motor; the back-emf loop is an inherent (electrical) negative feedback that increases damping.</figcaption></figure>
+<ul><li><strong>Tachogenerator:</strong> output voltage \(e=K_g\dot\theta\), so \(E/\Theta=K_gs\).</li><li><strong>Two-phase ac servo motor:</strong> \(\Theta/E_c=K_m/[s(\tau_ms+1)]\) (position), with the speed–torque slope providing damping.</li><li><strong>Sensors:</strong> potentiometer (position), tacho (speed), encoder, LVDT, thermocouple. <strong>Actuators:</strong> motor, hydraulic cylinder, valve, heater.</li></ul>
+<div class="box example"><div class="bt">Mass–spring–damper</div><div class="bb"><p>\(M=1\) kg, \(B=3\) N s/m, \(K=2\) N/m: \(G=\dfrac{1}{s^2+3s+2}=\dfrac1{(s+1)(s+2)}\); poles \(-1,-2\) (overdamped); \(\omega_n=\sqrt2\), \(\zeta=3/(2\sqrt2)=1.06\).</p></div></div>
+<div class="box example"><div class="bt">DC motor</div><div class="bb"><p>\(R_a=2\ \Omega\), \(J=0.5\), \(b=0\), \(K_t=K_b=1\), \(L_a\approx0\): \(\dfrac{\Omega}{V_a}=\dfrac{1}{2(0.5)s+0+1}=\dfrac1{s+1}\): \(K_m=1\), \(\tau_m=1\) s.</p></div></div>
+<div class="box example"><div class="bt">F–I analogue</div><div class="bb"><p>A mass \(M\) with spring \(K\) to ground and damper \(B\) to ground driven by force \(f\) \(\Rightarrow\) current source \(f\) feeding \(C=M\), \(G=1/B\), \(L=1/K\) in parallel; velocity is the node voltage.</p></div></div>
+<h2 id="s-2-6"><span class="n">2.6</span> Physical interpretation</h2>
+<p>Mass and inductance store kinetic energy, spring and capacitor store potential energy, damper and resistor dissipate. Back-emf is why a motor’s speed saturates: the faster it spins, the smaller the net armature voltage.</p>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>For \(M\ddot x+B\dot x+Kx=f\): \(\omega_n=\sqrt{K/M}\), \(\zeta=\dfrac{B}{2\sqrt{KM}}\). Same in F–V: \(\omega_n=1/\sqrt{LC}\), \(\zeta=\tfrac R2\sqrt{C/L}\) (series RLC, output across \(C\)).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) F–V analogy maps mass \(\leftrightarrow\) \(L\), but F–I maps mass \(\leftrightarrow\) \(C\). (ii) Gear ratio: inertia reflected to the other shaft scales as <em>square</em> of the ratio. (iii) Back-emf \(K_b\omega\) is proportional to speed, not to current.</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> In the force–voltage analogy, mass corresponds to (A) resistance (B) capacitance (C) inductance (D) conductance.</p>
+<p><strong>Q2.</strong> In the force–current analogy, a spring corresponds to (A) capacitor (B) inductor (C) resistor (D) voltage source.</p>
+<p><strong>Q3.</strong> Neglecting \(L_a\), the armature-controlled DC motor speed response to a step in \(V_a\) is (A) ramp (B) first-order exponential (C) oscillatory (D) sinusoidal.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C). Q2 (B): \(1/K\leftrightarrow L\). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> For \(2\ddot x+8\dot x+18x=f\), the damping ratio is (A) \(0.5\) (B) \(0.67\) (C) \(1\) (D) \(1.33\).</p>
+<p><strong>Q5.</strong> A motor with \(J_1=1\) drives through gears \(N_1/N_2=1/4\) (\(N=1/4\), load side larger) a load \(J_2=16\) on shaft 2. Inertia reflected to shaft 1 is (A) \(2\) (B) \(17\) (C) \(5\) (D) \(256\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): \(\zeta=8/(2\sqrt{2\cdot18})=8/12=0.667\). Q5 (A): \(J_1+J_2N^2=1+16/16=2\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> Armature-controlled motor, \(L_a\) neglected: \(R_a=1\ \Omega\), \(K_t=K_b=0.5\) V s/rad, \(J=0.1\), \(b=0\). The time constant is <span class="blank"></span> s.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(\tau=R_aJ/(K_tK_b)=0.1/0.25=0.4\) s.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q7.</strong> Which are correct? (A) Tacho gives \(E/\Theta=Ks\) (B) Back-emf \(\propto\) speed (C) Spring stores kinetic energy (D) F–V analogy: damper \(\leftrightarrow\) resistance.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q7: (A), (B), (D).</p>
+<div class="box gateq"><div class="bt">Previous-year pattern</div><div class="bb"><p>\(G(s)=X(s)/F(s)\) for a mass on a spring with damper; the unit-step force gives steady-state displacement \(1/K\) (final value). E.g. \(K=4\) gives \(0.25\) m.</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Write the transfer function of a series RLC with output across \(R\).<br>
+<strong>T2.</strong> Give \(\zeta\) and \(\omega_n\) for \(M=1\), \(B=2\), \(K=25\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(\dfrac{RCs}{LCs^2+RCs+1}\). T2: \(\omega_n=5\), \(\zeta=0.2\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(M\ddot x+B\dot x+Kx=f\); \(G=1/(Ms^2+Bs+K)\); \(\omega_n=\sqrt{K/M}\), \(\zeta=B/2\sqrt{KM}\).</li><li>F–V: \(M\to L\), \(B\to R\), \(K\to1/C\); F–I: \(M\to C\), \(B\to1/R\), \(K\to1/L\).</li><li>DC motor: \(\Theta/V_a=K_t/\{s[(L_as+R_a)(Js+b)+K_tK_b]\}\); \(L_a\to0\): \(K_m/(\tau_ms+1)\).</li><li>Reflected inertia across gears scales with the ratio squared.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch01.html">&larr; Introduction to Control Systems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch03.html">Transfer Function &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

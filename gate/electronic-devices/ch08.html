@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 8: MOS Capacitor and MOSFET Operation | Electronic Devices | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="MOS capacitor regimes and C–V curve, threshold voltage formula, drain-current equations in triode and saturation, channel-length modulation, body effect and sub-threshold slope. Numerical I_D, g_m,">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electronic-devices/ch08.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 8: MOS Capacitor and MOSFET Operation | Electronic Devices | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="MOS capacitor regimes and C–V curve, threshold voltage formula, drain-current equations in triode and saturation, channel-length modulation, body effect and sub-threshold slope. Numerical I_D, g_m,"><meta property="og:url" content="https://vintechnologies.co.in/gate/electronic-devices/ch08.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electronic Devices</a></div><div class="chlabel">Chapter 8</div><h1>MOS Capacitor and MOSFET Operation</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-8-1">8.1 The MOS capacitor</a></li><li><a href="#s-8-2">8.2 MOSFET operation</a></li><li><a href="#s-8-3">8.3 Body effect</a></li><li><a href="#s-8-4">8.4 Sub-threshold conduction</a></li><li><a href="#s-8-5">8.5 Types of MOSFET</a></li><li><a href="#s-8-6">8.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>MOS capacitor regimes and C–V curve, threshold voltage formula, drain-current equations in triode and saturation, channel-length modulation, body effect and sub-threshold slope. Numerical \(I_D\), \(g_m\), \(r_o\) and \(V_T\) problems are routine.</p></div></div>
+<h2 id="s-8-1"><span class="n">8.1</span> The MOS capacitor</h2>
+<p>A metal (or heavily doped poly-Si) gate, an oxide of thickness \(t_{ox}\) and a semiconductor substrate. Take a p-type substrate (\(N_A\)) as the reference. The Fermi potential is \(\phi_F=V_T\ln(N_A/n_i)\).</p>
+<figure id="fig-8-1"><div class="figimgs"><img src="img/e08_cv.png" alt="" loading="lazy"></div><figcaption><b>Figure 8.1.</b> High-frequency MOS C–V curve for a p-type substrate: accumulation (\(C\to C_{ox}\)), depletion (falling), inversion (\(C_{min}\), then flat at high frequency).</figcaption></figure>
+<div class="center"><div class="tw"><table><thead><tr><th>Gate voltage</th><th>Regime</th><th>Surface condition</th></tr></thead><tbody><tr><td>\(V_G&lt;V_{FB}\)</td><td>accumulation</td><td>holes pile up at the interface</td></tr><tr><td>\(V_{FB}&lt;V_G&lt;V_T\)</td><td>depletion</td><td>holes pushed away, ionised acceptors form \(Q_d\)</td></tr><tr><td>\(V_G&gt;V_T\)</td><td>inversion</td><td>electrons form a channel (\(\psi_s\ge2\phi_F\))</td></tr></tbody></table></div></div>
+<div class="box formula"><div class="bt">MOS capacitor</div><div class="bb"><p>Oxide capacitance per area: \(C_{ox}=\dfrac{\varepsilon_{ox}}{t_{ox}}\) (\(t_{ox}=10\) nm: \(3.45\times10^{-7}\) F/cm\({}^2\) \(=3.45\) fF/\(\mu\)m\({}^2\)).<br>
+Maximum depletion width at the onset of strong inversion (\(\psi_s=2\phi_F\)): \(W_{max}=\sqrt{\dfrac{2\varepsilon_s(2\phi_F)}{qN_A}}\), \(\ Q_d=-qN_AW_{max}\).<br>
+Flat-band voltage: \(V_{FB}=\phi_{ms}-\dfrac{Q_{ox}}{C_{ox}}\) (\(\phi_{ms}\) metal–semiconductor work-function difference, \(Q_{ox}\) fixed oxide charge).<br>
+<strong>Threshold voltage (n-channel):</strong> \(V_T=V_{FB}+2\phi_F+\dfrac{\sqrt{2\varepsilon_sqN_A(2\phi_F)}}{C_{ox}}\).<br>
+Capacitances: accumulation \(C=C_{ox}\); depletion \(C=\dfrac{C_{ox}C_d}{C_{ox}+C_d}\) with \(C_d=\varepsilon_s/W\); minimum \(C_{min}=\dfrac{C_{ox}(\varepsilon_s/W_{max})}{C_{ox}+\varepsilon_s/W_{max}}\). In inversion at low frequency \(C\to C_{ox}\) (minority carriers follow); at high frequency (or deep depletion) \(C\) stays at \(C_{min}\).</p></div></div>
+<div class="box example"><div class="bt">MOS numbers</div><div class="bb"><p>\(N_A=10^{17}\), \(t_{ox}=10\) nm, \(V_{FB}=-0.9\) V. \(\phi_F=0.0259\ln(10^{17}/1.5\times10^{10})=0.407\) V, \(2\phi_F=0.814\) V. \(W_{max}=0.103\,\mu\)m, \(|Q_d|/C_{ox}=0.476\) V, so \(V_T=-0.9+0.814+0.476=0.39\) V. \(C_{min}/C_{ox}=0.226\). Positive oxide charge or a lower work-function gate shifts \(V_T\) negative; substrate doping up raises \(V_T\).</p></div></div>
+<h2 id="s-8-2"><span class="n">8.2</span> MOSFET operation</h2>
+<p>A MOSFET adds a source and drain (n\({}^+\) for n-channel) at the two ends of the channel. For \(V_{GS}&gt;V_T\) an inversion channel connects them and the drain current \(I_D\) flows when \(V_{DS}&gt;0\). Define the overdrive \(V_{ov}=V_{GS}-V_T\).</p>
+<figure id="fig-8-2"><div class="figimgs"><img src="img/e08_mos_iv.png" alt="" loading="lazy"></div><figcaption><b>Figure 8.2.</b> n-MOSFET \(I_D\)–\(V_{DS}\) curves for several \(V_{GS}\); triode for \(V_{DS}&lt;V_{ov}\), saturation beyond the parabola peak.</figcaption></figure>
+<div class="box formula"><div class="bt">Square-law model (n-channel, enhancement)</div><div class="bb"><p>Cut-off: \(V_{GS}&lt;V_T\): \(I_D\approx0\).<br>
+<strong>Triode (linear):</strong> \(V_{DS}&lt;V_{ov}\): \(\ I_D=\mu_nC_{ox}\dfrac WL\left[V_{ov}V_{DS}-\dfrac{V_{DS}^2}{2}\right]\). Small \(V_{DS}\): \(r_{ds}=\left[\mu_nC_{ox}\dfrac WLV_{ov}\right]^{-1}\).<br>
+<strong>Saturation:</strong> \(V_{DS}\ge V_{ov}\): \(\ I_D=\dfrac12\mu_nC_{ox}\dfrac WL V_{ov}^2\,(1+\lambda V_{DS})\).<br>
+Define \(k_n'=\mu_nC_{ox}\) (process transconductance, e.g. \(100\,\mu\)A/V\({}^2\)).<br>
+p-channel: same with \(V_{GS},V_{DS},V_T&lt;0\) and \(\mu_p\).</p></div></div>
+<p><strong>Pinch-off.</strong> At \(V_{DS}=V_{ov}\) the channel charge at the drain end goes to zero; for larger \(V_{DS}\) the pinch-off point moves toward the source and the voltage in excess drops across the depleted region. In saturation \(I_D\) is nearly independent of \(V_{DS}\).</p>
+<p><strong>Channel-length modulation.</strong> The effective channel \(L-\Delta L\) shortens with \(V_{DS}\), increasing \(I_D\) slightly: \(\lambda\approx1/V_A'\) (\(V_A'\propto L\)), giving finite output resistance.</p>
+<div class="box example"><div class="bt">Drain currents</div><div class="bb"><p>\(k_n'=100\,\mu\)A/V\({}^2\), \(W/L=10\), \(V_T=0.5\) V, \(V_{GS}=1.0\) V (\(V_{ov}=0.5\) V).<br>
+Saturation, \(\lambda=0\): \(I_D=\tfrac12(100\,\mu)(10)(0.25)=125\,\mu\)A. With \(\lambda=0.1\,\text{V}^{-1}\) at \(V_{DS}=2\) V: \(125\times1.2=150\,\mu\)A.<br>
+Triode at \(V_{DS}=0.2\) V: \(I_D=100\,\mu\times10\times(0.5\times0.2-0.02)=80\,\mu\)A.<br>
+\(g_m=\dfrac{2I_D}{V_{ov}}=500\,\mu\)S,  \(r_o=\dfrac1{\lambda I_D}=80\,\)k\(\Omega\).</p></div></div>
+<h3 id="s-8-2-1"><span class="n">8.2.1</span> Transconductance and output resistance</h3>
+<div class="box formula"><div class="bt">Small-signal parameters (saturation)</div><div class="bb"><p>\(g_m=\dfrac{\partial I_D}{\partial V_{GS}}=\mu_nC_{ox}\dfrac WLV_{ov}=\dfrac{2I_D}{V_{ov}}=\sqrt{2\mu_nC_{ox}\dfrac WLI_D}\).<br>
+\(r_o=\dfrac{1}{\lambda I_D}\approx\dfrac{V_A}{I_D}\). &emsp; Intrinsic gain \(g_mr_o=\dfrac{2}{\lambda V_{ov}}\).</p></div></div>
+<h2 id="s-8-3"><span class="n">8.3</span> Body effect</h2>
+<p>When the source is at a higher potential than the substrate (\(V_{SB}&gt;0\)) the depletion charge increases, raising the threshold:
+\[
+V_T=V_{T0}+\gamma\left(\sqrt{2\phi_F+V_{SB}}-\sqrt{2\phi_F}\right),\qquad\gamma=\frac{\sqrt{2q\varepsilon_sN_A}}{C_{ox}}.
+\]
+For \(N_A=10^{17}\), \(t_{ox}=10\) nm: \(\gamma=0.53\,\text{V}^{1/2}\); with \(V_{SB}=2\) V the threshold rises by \(0.53(\sqrt{0.814+2}-\sqrt{0.814})=0.41\) V. The substrate acts as a second gate with \(g_{mb}=\chi g_m\), \(\chi=\dfrac{\gamma}{2\sqrt{2\phi_F+V_{SB}}}\).</p>
+<h2 id="s-8-4"><span class="n">8.4</span> Sub-threshold conduction</h2>
+<p>For \(V_{GS}&lt;V_T\) the current is not zero: \(I_D\propto e^{qV_{GS}/(nkT)}\) (diffusion). The <strong>sub-threshold swing</strong> \(S=\dfrac{dV_{GS}}{d\log_{10}I_D}=\ln10\,\dfrac{kT}{q}\left(1+\dfrac{C_d}{C_{ox}}\right)\ge59.5\) mV/decade at 300 K. With \(C_d/C_{ox}=0.3\), \(S=77.5\) mV/dec. A smaller \(S\) (thin oxide, fully depleted SOI, FinFET) gives lower leakage at a given \(V_T\).</p>
+<h2 id="s-8-5"><span class="n">8.5</span> Types of MOSFET</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Type</th><th>Channel at \(V_{GS}=0\)?</th><th>\(V_T\) sign</th></tr></thead><tbody><tr><td>n-enhancement</td><td>no</td><td>\(+\)</td></tr><tr><td>n-depletion</td><td>yes</td><td>\(-\)</td></tr><tr><td>p-enhancement</td><td>no</td><td>\(-\)</td></tr><tr><td>p-depletion</td><td>yes</td><td>\(+\)</td></tr></tbody></table></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Saturation is \(V_{DS}\ge V_{GS}-V_T\), not \(V_{DS}\ge V_T\). (ii) \(g_m=2I_D/V_{ov}\) only in the square-law model; for a BJT \(g_m=I_C/V_T\) regardless of the bias point. (iii) In the triode region the factor \(\tfrac12\) is absent from \(V_{ov}V_{DS}\). (iv) Body effect raises \(V_T\) for an n-MOSFET when \(V_{SB}&gt;0\). (v) Channel-length modulation increases \(I_D\); it is not body effect.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>\(I_{D,sat}=\tfrac12k_n'(W/L)V_{ov}^2\); double \(W/L\) doubles \(I_D\); double \(V_{ov}\) quadruples \(I_D\). Sketch the boundary \(I_D=\tfrac12k'(W/L)V_{DS}^2\) to decide triode or saturation. Switch on-resistance for small \(V_{DS}\): \(1/(k'(W/L)V_{ov})\).</p></div></div>
+<h2 id="s-8-6"><span class="n">8.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> Strong inversion in a p-type MOS capacitor begins when the surface potential is (A) \(\phi_F\) (B) \(2\phi_F\) (C) \(0\) (D) \(V_{bi}\).</p>
+<p><strong>Q2.</strong> An n-MOSFET is in saturation when (A) \(V_{DS}&lt;V_{GS}-V_T\) (B) \(V_{DS}\ge V_{GS}-V_T\) (C) \(V_{GS}&lt;V_T\) (D) \(V_{DS}=0\).</p>
+<p><strong>Q3.</strong> Increasing \(V_{SB}\) in an n-MOSFET (A) lowers \(V_T\) (B) raises \(V_T\) (C) leaves \(V_T\) unchanged (D) makes it a depletion device.</p>
+<p><strong>Q4.</strong> The minimum sub-threshold swing at 300 K is approximately (A) 60 mV/dec (B) 26 mV/dec (C) 120 mV/dec (D) 0.7 V/dec.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (B). Q4 (A).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> \(k_n'=100\,\mu\)A/V\({}^2\), \(W/L=10\), \(V_T=0.5\) V, \(V_{GS}=1\) V, \(V_{DS}=2\) V, \(\lambda=0\). \(I_D\) is (A) 125 \(\mu\)A (B) 250 \(\mu\)A (C) 500 \(\mu\)A (D) 62.5 \(\mu\)A.</p>
+<p><strong>Q6.</strong> Same device at \(V_{DS}=0.2\) V. \(I_D\) is (A) 80 \(\mu\)A (B) 125 \(\mu\)A (C) 100 \(\mu\)A (D) 40 \(\mu\)A.</p>
+<p><strong>Q7.</strong> For \(N_A=10^{17}\) the Fermi potential \(\phi_F\) (\(n_i=1.5\times10^{10}\), \(V_T=25.9\) mV) is (A) 0.21 V (B) 0.41 V (C) 0.60 V (D) 0.81 V.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A). Q6 (A). Q7 (B).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> \(g_m\) (\(\mu\)S) for \(I_D=125\,\mu\)A at \(V_{ov}=0.5\) V: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Output resistance (k\(\Omega\)) for \(\lambda=0.1\,\text{V}^{-1}\), \(I_D=125\,\mu\)A (ignore \(V_{DS}\) factor): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Threshold shift (V, two decimals) from the body effect for \(\gamma=0.53\), \(2\phi_F=0.81\) V, \(V_{SB}=2\) V: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 500. Q9: 80. Q10: \(0.53(\sqrt{2.81}-\sqrt{0.81})=0.53(1.676-0.9)=0.41\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select the true statements. (A) Channel-length modulation gives finite \(r_o\). (B) The MOS capacitor is in accumulation for \(V_G&lt;V_{FB}\) (p-type). (C) Body effect lowers \(V_T\). (D) Doubling \(W/L\) doubles \(I_D\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(C_{ox}\) for \(t_{ox}=5\) nm. &emsp; <strong>T2.</strong> Triode vs saturation boundary? &emsp; <strong>T3.</strong> Write \(V_T\) of an n-MOS.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(6.9\times10^{-7}\) F/cm\({}^2\). T2: \(V_{DS}=V_{GS}-V_T\). T3: \(V_{FB}+2\phi_F+\sqrt{2\varepsilon qN_A(2\phi_F)}/C_{ox}\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Regimes: accumulation, depletion, inversion at \(\psi_s=2\phi_F\); \(V_T=V_{FB}+2\phi_F+|Q_d|/C_{ox}\).</li><li>Triode \(\mu C_{ox}(W/L)[V_{ov}V_{DS}-V_{DS}^2/2]\); saturation \(\tfrac12\mu C_{ox}(W/L)V_{ov}^2(1+\lambda V_{DS})\).</li><li>\(g_m=2I_D/V_{ov}\), \(r_o=1/\lambda I_D\); body effect \(\gamma(\sqrt{2\phi_F+V_{SB}}-\sqrt{2\phi_F})\); \(S\ge59.5\) mV/dec.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch07.html">&larr; BJT DC Biasing and Small-Signal Models</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch09.html">JFET, MOSFET Small-Signal Models, CMOS and Scaling &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\kTq": "\\dfrac{kT}{q}", "\\EF": "E_F", "\\Ei": "E_i", "\\Ec": "E_C", "\\Ev": "E_V", "\\Eg": "E_g", "\\Vbi": "V_{bi}", "\\Cox": "C_{ox}", "\\Vov": "V_{ov}", "\\gm": "g_m", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

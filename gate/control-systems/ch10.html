@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 10: Steady-State Analysis and System Type | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Static error constants K_p,K_v,K_a; error for step, ramp and parabolic inputs by system type; find gain K for a given error; effect of disturbances. Guaranteed 1–2 questions per paper.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch10.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 10: Steady-State Analysis and System Type | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Static error constants K_p,K_v,K_a; error for step, ramp and parabolic inputs by system type; find gain K for a given error; effect of disturbances. Guaranteed 1–2 questions per paper."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch10.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 10</div><h1>Steady-State Analysis and System Type</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-10-1">10.1 Core concept</a></li><li><a href="#s-10-2">10.2 System type</a></li><li><a href="#s-10-3">10.3 Static error constants</a></li><li><a href="#s-10-4">10.4 Superposition of inputs</a></li><li><a href="#s-10-5">10.5 Effect of a disturbance</a></li><li><a href="#s-10-6">10.6 Solved examples</a></li><li><a href="#s-10-7">10.7 Physical interpretation</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Static error constants \(K_p,K_v,K_a\); error for step, ramp and parabolic inputs by system type; find gain \(K\) for a given error; effect of disturbances. Guaranteed 1–2 questions per paper.</p></div></div>
+<h2 id="s-10-1"><span class="n">10.1</span> Core concept</h2>
+<p>The response has a <strong>transient</strong> part (dies out) and a <strong>steady-state</strong> part. The steady-state error is \(e_{ss}=\lim_{t\to\infty}e(t)\), computed by the final-value theorem provided \(sE(s)\) has all poles in the LHP, i.e. <strong>the closed loop must be stable</strong>.</p>
+<div class="box derive"><div class="bt">Error in a negative-feedback loop</div><div class="bb"><p>\(E(s)=R(s)-B(s)=\dfrac{R(s)}{1+G(s)H(s)}\), so
+\[
+e_{ss}=\lim_{s\to0}sE(s)=\lim_{s\to0}\dfrac{sR(s)}{1+G(s)H(s)}.
+\]
+(For \(H\neq1\) this is the <em>actuating</em> error \(r-b\); the true output error \(r-c\) is obtained by converting to an equivalent unity-feedback loop with \(G_{eq}=G/(1+G(H-1))\).)</p></div></div>
+<h2 id="s-10-2"><span class="n">10.2</span> System type</h2>
+<p>The <strong>type</strong> of a system is the number of poles of \(G(s)H(s)\) at the origin. Write \(GH=\dfrac{K\prod(1+T_is)}{s^N\prod(1+T_ks)}\); then type \(=N\) and \(K\) is the <em>error (gain) constant</em> in the form where all factors equal \(1\) at \(s=0\).</p>
+<h2 id="s-10-3"><span class="n">10.3</span> Static error constants</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(K_p=\lim_{s\to0}G(s)H(s)\), &emsp; \(K_v=\lim_{s\to0}s\,G(s)H(s)\), &emsp; \(K_a=\lim_{s\to0}s^2G(s)H(s)\).</p></div></div>
+<div class="center"><p>1.35</p>
+<div class="tw"><table><tbody><tr><td class="c"></td><td colspan="3" class="c">Error constants</td><td colspan="3" class="c">Steady-state error for</td></tr><tr><td class="c">Type</td><td class="c">\(K_p\)</td><td class="c">\(K_v\)</td><td class="c">\(K_a\)</td><td class="c">unit step</td><td class="c">unit ramp</td><td class="c">unit parabola</td></tr><tr><td class="c">0</td><td class="c">\(K\)</td><td class="c">\(0\)</td><td class="c">\(0\)</td><td class="c">\(\dfrac1{1+K}\)</td><td class="c">\(\infty\)</td><td class="c">\(\infty\)</td></tr><tr><td class="c">1</td><td class="c">\(\infty\)</td><td class="c">\(K\)</td><td class="c">\(0\)</td><td class="c">\(0\)</td><td class="c">\(\dfrac1K\)</td><td class="c">\(\infty\)</td></tr><tr><td class="c">2</td><td class="c">\(\infty\)</td><td class="c">\(\infty\)</td><td class="c">\(K\)</td><td class="c">\(0\)</td><td class="c">\(0\)</td><td class="c">\(\dfrac1K\)</td></tr><tr><td class="c">3</td><td class="c">\(\infty\)</td><td class="c">\(\infty\)</td><td class="c">\(\infty\)</td><td class="c">\(0\)</td><td class="c">\(0\)</td><td class="c">\(0\)</td></tr></tbody></table></div></div>
+<p>For an input of magnitude \(A\) (step \(Au\), ramp \(At\), parabola \(At^2/2\)) multiply the error by \(A\): \(\dfrac{A}{1+K_p},\ \dfrac{A}{K_v},\ \dfrac{A}{K_a}\).</p>
+<figure id="fig-10-1"><div class="figimgs"><img src="img/c10_type.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.1.</b> Unity-feedback loops with \(G=\tfrac{10}{s+1}\) (type 0, step: finite error), \(\tfrac{10}{s(s+1)}\) (type 1, ramp: constant error \(0.1\)), and \(\tfrac{10(s+1)}{s^2}\) (type 2, ramp: zero error).</figcaption></figure>
+<h2 id="s-10-4"><span class="n">10.4</span> Superposition of inputs</h2>
+<p>For \(r(t)=A_0+A_1t+\tfrac12A_2t^2\) the total error is \(\dfrac{A_0}{1+K_p}+\dfrac{A_1}{K_v}+\dfrac{A_2}{K_a}\), and it is \(\infty\) if any term is infinite.</p>
+<h2 id="s-10-5"><span class="n">10.5</span> Effect of a disturbance</h2>
+<p>With \(D\) entering between \(G_1\) and \(G_2\) and \(H=1\), the output caused by \(D\) is \(C_d=\dfrac{G_2}{1+G_1G_2}D\); with \(R=0\) the error is \(E_d=-C_d\), giving
+\[
+e_{ss,d}=-\lim_{s\to0}\dfrac{sG_2(s)}{1+G_1(s)G_2(s)}D(s).
+\]
+The steady error to a step disturbance is reduced by making \(G_1(0)\) large or by putting an integrator <em>ahead of the disturbance</em> (in \(G_1\)), not after it.</p>
+<h2 id="s-10-6"><span class="n">10.6</span> Solved examples</h2>
+<div class="box example"><div class="bt">Type 1</div><div class="bb"><p>\(G=\dfrac{10}{s(s+2)}\), \(H=1\): \(K_v=\dfrac{10}{2}=5\); ramp error \(=0.2\); step error \(=0\); parabolic \(=\infty\).</p></div></div>
+<div class="box example"><div class="bt">Type 2</div><div class="bb"><p>\(G=\dfrac{20(s+1)}{s^2(s+4)}\): \(K_a=\dfrac{20}{4}=5\); parabolic error for \(\tfrac12t^2\): \(0.2\); ramp error \(0\).</p></div></div>
+<div class="box example"><div class="bt">Type 0</div><div class="bb"><p>\(G=\dfrac{10}{(s+1)(s+2)}\): \(K_p=5\); step error \(=\dfrac1{6}\).</p></div></div>
+<div class="box example"><div class="bt">Design</div><div class="bb"><p>\(G=\dfrac{K}{s(s+5)}\): to keep the ramp error \(\le0.05\), \(K_v=K/5\ge20\Rightarrow K\ge100\). (Stability holds for all \(K&gt;0\), and \(\zeta=\dfrac{5}{2\sqrt{100}}=0.25\) at \(K=100\): a high overshoot: a trade-off between accuracy and transient response.)</p></div></div>
+<div class="box example"><div class="bt">Combined input</div><div class="bb"><p>Type-1 with \(K_v=4\) and input \(2+3t\): step error \(0\), ramp \(3/4\); total \(0.75\).</p></div></div>
+<div class="box example"><div class="bt">Non-unity \(H\)</div><div class="bb"><p>\(G=\dfrac{10}{s(s+1)}\), \(H=0.5\): \(GH=\dfrac{5}{s(s+1)}\), \(K_v=5\), actuating error for a unit ramp \(=0.2\).</p></div></div>
+<h2 id="s-10-7"><span class="n">10.7</span> Physical interpretation</h2>
+<p>Each integrator in the loop forces one order of input error to zero: to hold zero error against a constant input the controller must keep “pushing” with an integrated (accumulated) error. Higher type \(\Rightarrow\) better steady-state accuracy but worse stability margins.</p>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Type tells the error class: type \(N\) has finite non-zero error for the \(N\)th-order input, zero error for lower orders, and \(\infty\) for higher. Compute \(K_v\), \(K_a\) by stripping the \(s^N\) factor and setting \(s=0\) in the rest. Only the low-frequency (DC) part of \(G\) matters.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Do not apply the formulas if the closed loop is unstable. (ii) Type is from the <em>open-loop</em> \(GH\) (including \(H\)). (iii) The error constants are defined with the standard form: \(G=\dfrac{K(s+z)}{s(s+p)}\) has \(K_v=\dfrac{Kz}{p}\), not \(K\). (iv) Parabolic input is \(t^2/2\); for \(t^2\) the error doubles. (v) Type is not the order.</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> A type-1 unity-feedback system has zero steady-state error for (A) step (B) ramp (C) parabola (D) all.</p>
+<p><strong>Q2.</strong> \(G=\dfrac{K}{s(s+1)}\): \(K_v=\) (A) \(0\) (B) \(K\) (C) \(\infty\) (D) \(1/K\).</p>
+<p><strong>Q3.</strong> Type-0 system, unit step: \(e_{ss}=\) (A) \(0\) (B) \(\dfrac1{1+K_p}\) (C) \(\dfrac1{K_v}\) (D) \(\infty\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A). Q2 (B). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> \(G=\dfrac{50(s+2)}{s(s+5)(s+10)}\) (unity feedback). Ramp error is (A) \(0.5\) (B) \(1\) (C) \(0.25\) (D) \(2\).</p>
+<p><strong>Q5.</strong> Input \(r=4t\) and \(G=\dfrac{K}{s(s+4)}\). For \(e_{ss}\le0.2\) the minimum \(K\) is (A) \(20\) (B) \(40\) (C) \(80\) (D) \(10\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (A): \(K_v=\dfrac{50\cdot2}{5\cdot10}=2\), so \(e=0.5\). Q5 (C): \(K_v=K/4\), \(e=4/K_v=16/K\le0.2\Rightarrow K\ge80\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> \(G=\dfrac{10}{s^2(s+5)}\): steady-state error for \(r=\tfrac12t^2\) is <span class="blank"></span>.</p>
+<p><strong>Q7.</strong> \(G(s)=\dfrac{9}{(s+3)(s+1)}\): step error is <span class="blank"></span> (two decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(K_a=10/5=2\), \(e=0.5\). Q7: \(K_p=3\), \(e=1/4=0.25\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> For a type-2 unity-feedback stable system: (A) zero step error (B) zero ramp error (C) finite parabola error (D) \(K_v=0\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (C).</p>
+<div class="box gateq"><div class="bt">Previous-year pattern</div><div class="bb"><p>A unity-feedback system with \(G=\dfrac{K(s+3)}{s(s+1)(s+5)}\) has ramp error \(0.1\): \(K_v=\dfrac{3K}{5}=10\Rightarrow K=16.7\). (Check stability of \(s^3+6s^2+(5+K)s+3K\): needs \(6(5+K)&gt;3K\), true for \(K&gt;0\).)</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Find \(K_p,K_v,K_a\) for \(G=\dfrac{20}{s^2(s+2)}\).<br>
+<strong>T2.</strong> Type-1, \(K_v=10\): error for \(r=5+2t\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(K_p=K_v=\infty\), \(K_a=10\). T2: \(0.2\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(e_{ss}=\lim sR/(1+GH)\); stable loop required.</li><li>\(K_p=GH(0)\), \(K_v=\lim sGH\), \(K_a=\lim s^2GH\).</li><li>Type \(N\): error is finite for \(N\)th-order input, zero below, \(\infty\) above.</li><li>Errors: \(\tfrac{A}{1+K_p},\ \tfrac{A}{K_v},\ \tfrac{A}{K_a}\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch09.html">&larr; Second-Order Systems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch11.html">Stability of Control Systems &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

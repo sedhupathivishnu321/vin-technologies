@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 33: Mixed GATE Practice Tests | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch33.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 33: Mixed GATE Practice Tests | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch33.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 33</div><h1>Mixed GATE Practice Tests</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-33-1">33.1 Level 1 — Fundamental</a></li><li><a href="#s-33-2">33.2 Level 2 — Standard GATE</a></li><li><a href="#s-33-3">33.3 Level 3 — Advanced</a></li><li><a href="#s-33-4">33.4 Numerical Answer Type</a></li><li><a href="#s-33-5">33.5 Multiple Select Questions</a></li><li><a href="#s-33-6">33.6 Multiple Choice Questions</a></li><li><a href="#s-33-7">33.7 Conceptual traps</a></li><li><a href="#s-33-8">33.8 Full-length Analog Circuits test</a></li></ol></details><p>All questions are original and pattern-based. Answers with short working follow each section. Use \(V_T=26\) mV, \(V_{BE}=V_{on}=0.7\) V unless stated.</p>
+<h2 id="s-33-1"><span class="n">33.1</span> Level 1 — Fundamental</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>1.</strong> Under reverse bias the depletion width of a PN junction (A) increases (B) decreases (C) is unchanged (D) vanishes.</p>
+<p><strong>2.</strong> The virtual-short property of an ideal op-amp with negative feedback means (A) \(v_+=v_-\) (B) \(v_o=0\) (C) \(i_o=0\) (D) \(A=0\).</p>
+<p><strong>3.</strong> A BJT is in the forward-active region when (A) both junctions forward (B) BE forward, BC reverse (C) both reverse (D) BE reverse, BC forward.</p>
+<p><strong>4.</strong> PIV of each diode of a bridge rectifier fed with peak \(V_m\) is (A) \(V_m\) (B) \(2V_m\) (C) \(V_m/2\) (D) \(V_m/\pi\).</p>
+<p><strong>5.</strong> Inverting amplifier, \(R_1=1\) k, \(R_f=10\) k. Gain (A) \(+10\) (B) \(-10\) (C) \(-11\) (D) \(-0.1\).</p>
+<p><strong>6.</strong> The Barkhausen condition for sustained oscillation is (A) \(A\beta=1\angle0^\circ\) (B) \(A\beta=0\) (C) \(A\beta=-1\angle0^\circ\) for positive feedback (D) \(A=\beta\).</p>
+<p><strong>7.</strong> An NMOS is in saturation when (A) \(V_{DS}\ge V_{GS}-V_{th}\) (B) \(V_{DS}&lt;V_{GS}-V_{th}\) (C) \(V_{GS}&lt;V_{th}\) (D) \(V_{DS}=0\).</p>
+<p><strong>8.</strong> A voltage gain of 100 is (A) 20 dB (B) 40 dB (C) 100 dB (D) 10 dB.</p>
+<p><strong>9.</strong> Negative feedback (A) desensitises the gain (B) increases distortion (C) reduces bandwidth (D) makes gain infinite.</p>
+<p><strong>10.</strong> The Colpitts oscillator uses (A) a capacitive divider (B) a tapped inductor (C) a crystal (D) an RC ladder.</p>
+<p><strong>11.</strong> The voltage gain of a voltage follower is (A) 0 (B) 1 (C) \(\infty\) (D) \(-1\).</p>
+<p><strong>12.</strong> An ideal integrator with a square-wave input produces (A) triangle (B) sine (C) square (D) impulses.</p></div></div>
+<p class="ans"><strong>Answers: </strong>1 A; 2 A; 3 B; 4 A; 5 B; 6 A; 7 A; 8 B; 9 A; 10 A; 11 B; 12 A.</p>
+<h2 id="s-33-2"><span class="n">33.2</span> Level 2 — Standard GATE</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>1.</strong> \(10\) V source, \(2\) k\(\Omega\), Si diode in series: \(I=\) <span class="blank"></span> mA.</p>
+<p><strong>2.</strong> Divider bias (\(V_{TH}=3\) V, \(R_{TH}=9\) k, \(R_E=1\) k, \(\beta=100\)): \(I_C=\) <span class="blank"></span> mA.</p>
+<p><strong>3.</strong> CE stage with \(g_m=40\) mS, \(R_C=R_L=5\) k\(\Omega\): \(A_v=\) <span class="blank"></span>.</p>
+<p><strong>4.</strong> NMOS \(k_n=1\) mA/V\({}^2\), \(V_{GS}=2.5\) V, \(V_{th}=1\) V (saturation): \(I_D=\) <span class="blank"></span> mA.</p>
+<p><strong>5.</strong> Miller: \(C_\mu=2\) pF, \(|A_v|=99\): extra input capacitance <span class="blank"></span> pF.</p>
+<p><strong>6.</strong> BJT mirror, \(\beta=100\), \(I_{REF}=1\) mA: \(I_O=\) <span class="blank"></span> mA.</p>
+<p><strong>7.</strong> Difference amplifier with \(R_2/R_1=10\), \(v_2-v_1=50\) mV: \(v_o=\) <span class="blank"></span> V.</p>
+<p><strong>8.</strong> Inverting Schmitt, \(\beta=0.1\), \(V_{sat}=\pm12\) V: \(V_{UT}=\) <span class="blank"></span> V.</p>
+<p><strong>9.</strong> First-order LP: \(R=10\) k\(\Omega\), \(C=10\) nF: \(f_c=\) <span class="blank"></span> kHz.</p>
+<p><strong>10.</strong> Wien oscillator with \(R=10\) k\(\Omega\), \(C=16\) nF: \(f_0=\) <span class="blank"></span> Hz.</p>
+<p><strong>11.</strong> Follower, GBW \(=1\) MHz, second pole \(2\) MHz: PM \(=\) <span class="blank"></span>\({}^\circ\).</p>
+<p><strong>12.</strong> \(A=1000\), \(\beta=0.09\): \(A_f=\) <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>1: \(9.3/2=4.65\). 2: \(2.09\). 3: \(-40\,\mathrm m\times2.5\,\mathrm k=-100\). 4: \(\tfrac12\times1\times2.25=1.125\). 5: \(2\times100=198\). 6: \(0.98\). 7: \(0.5\). 8: \(1.2\). 9: \(1.59\). 10: \(995\). 11: \(63.4\). 12: \(10.99\).</p>
+<h2 id="s-33-3"><span class="n">33.3</span> Level 3 — Advanced</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>1.</strong> MOS divider bias: \(V_{DD}=10\) V, \(R_1=200\) k, \(R_2=100\) k, \(R_S=1\) k, \(R_D=2\) k, \(V_{th}=1\) V, \(k_n=2\) mA/V\({}^2\). Find \(I_D\) and \(V_{DS}\).</p>
+<p><strong>2.</strong> Two-stage CE amplifier: \(g_{m1}=g_{m2}=40\) mS, \(R_{C1}=4\) k, \(r_{\pi2}=2.5\) k, \(R_{C2}=R_L=4\) k. Overall gain in dB.</p>
+<p><strong>3.</strong> Widlar source for \(I_O=10\ \mu\)A from \(I_{REF}=1\) mA: \(R_E\).</p>
+<p><strong>4.</strong> MOS pair with mirror load: \(g_m=0.447\) mS, \(r_{o2}=r_{o4}=100\) k\(\Omega\): \(A_d\).</p>
+<p><strong>5.</strong> Order of a Butterworth low-pass: \(A_p=3\) dB at \(1\) kHz, \(A_s=40\) dB at \(4\) kHz.</p>
+<p><strong>6.</strong> Op-amp GBW \(=10\) MHz, inverting gain \(-49\): \(f_{-3dB}\).</p>
+<p><strong>7.</strong> Crystal with \(L_s=2\) H, \(C_s=0.01267\) pF, \(C_0=3\) pF: \(f_s\) and \(f_p\).</p>
+<p><strong>8.</strong> \(L(s)=100/[(1+s/10^3)(1+s/10^5)(1+s/10^6)]\): phase margin.</p></div></div>
+<p class="ans"><strong>Answers: </strong>1: \(I_D=1.226\) mA, \(V_{DS}=6.32\) V. 2: \(A_{v1}=-61.5\), \(A_{v2}=-80\): \(4923\to73.8\) dB. 3: \(12\) k\(\Omega\). 4: \(22\). 5: \(4\). 6: \(200\) kHz. 7: \(1.000\) MHz, \(1.0021\) MHz. 8: \(48.1^\circ\).</p>
+<h2 id="s-33-4"><span class="n">33.4</span> Numerical Answer Type</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>1.</strong> \(I_D=0.5\) mA, \(r_d\) (\(n=1\), \(V_T=26\) mV) in \(\Omega\): <span class="blank"></span>.</p>
+<p><strong>2.</strong> Half-wave rectifier \(V_m=31.4\) V: \(V_{dc}=\) <span class="blank"></span> V.</p>
+<p><strong>3.</strong> BJT \(\alpha=0.995\): \(\beta=\) <span class="blank"></span>.</p>
+<p><strong>4.</strong> MOS \(I_D=0.2\) mA, \(V_{ov}=0.2\) V: \(g_m=\) <span class="blank"></span> mS.</p>
+<p><strong>5.</strong> CMRR \(=80\) dB: \(A_d/A_{cm}=\) <span class="blank"></span>.</p>
+<p><strong>6.</strong> \(SR=0.5\) V/\(\mu\)s, \(V_p=8\) V: \(f_{max}\) in kHz <span class="blank"></span>.</p>
+<p><strong>7.</strong> Notch \(f_0=50\) Hz, \(Q=10\): bandwidth <span class="blank"></span> Hz.</p>
+<p><strong>8.</strong> \(L=10\ \mu\)H, \(C_1=C_2=100\) pF Colpitts: \(f_0\) in MHz <span class="blank"></span>.</p>
+<p><strong>9.</strong> \(A=100\), \(\beta=0.1\): \(A_f\) <span class="blank"></span>.</p>
+<p><strong>10.</strong> \(|L(j\omega_{pc})|=0.1\): GM in dB <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>1: \(52\). 2: \(10\). 3: \(199\). 4: \(2\). 5: \(10^4\). 6: \(9.95\). 7: \(5\). 8: \(7.12\). 9: \(9.09\). 10: \(20\).</p>
+<h2 id="s-33-5"><span class="n">33.5</span> Multiple Select Questions</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>1.</strong> For a forward-biased Si diode as temperature rises at constant current: (A) \(V_D\) decreases (B) \(I_s\) increases (C) reverse leakage increases (D) \(r_d\) decreases.</p>
+<p><strong>2.</strong> Voltage-series negative feedback: (A) \(R_{in}\) increases (B) \(R_{out}\) decreases (C) bandwidth increases (D) distortion increases.</p>
+<p><strong>3.</strong> Inverting stages: (A) CE (B) inverting op-amp (C) CS (D) emitter follower.</p>
+<p><strong>4.</strong> Ideal op-amp with negative feedback: (A) \(v_+=v_-\) (B) input currents zero (C) \(R_{out}=0\) (D) gain depends on \(A\).</p>
+<p><strong>5.</strong> A Schmitt trigger: (A) has hysteresis (B) uses positive feedback (C) output has two levels (D) is a linear amplifier.</p>
+<p><strong>6.</strong> BJT small-signal: (A) \(g_m\propto I_C\) (B) \(r_\pi\propto\beta/I_C\) (C) \(r_o\propto V_A/I_C\) (D) \(g_m\propto\beta\).</p>
+<p><strong>7.</strong> LC oscillators: (A) Colpitts (B) Hartley (C) Wien (D) RC phase-shift.</p>
+<p><strong>8.</strong> A stable feedback system (min-phase): (A) PM \(&gt;0\) (B) GM \(&gt;0\) dB (C) \(\angle L=-200^\circ\) at \(\omega_{gc}\) (D) Nyquist encircles \(-1\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>1: A, B, C. 2: A, B, C. 3: A, B, C. 4: A, B, C. 5: A, B, C. 6: A, B, C. 7: A, B. 8: A, B.</p>
+<h2 id="s-33-6"><span class="n">33.6</span> Multiple Choice Questions</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>1.</strong> The dominant contributor to the lower cutoff of a CE amplifier is usually (A) \(C_1\) (B) \(C_2\) (C) \(C_E\) (D) \(C_\mu\).</p>
+<p><strong>2.</strong> Which stage has no Miller multiplication? (A) CE (B) CS (C) CB/CG (D) inverting op-amp.</p>
+<p><strong>3.</strong> The CMRR of a differential pair is improved by (A) raising \(R_{EE}\) (B) lowering \(R_{EE}\) (C) raising \(R_C\) (D) lowering \(\beta\).</p>
+<p><strong>4.</strong> A source follower’s gain is reduced by (A) body effect (B) channel-length modulation only (C) \(C_{gd}\) (D) none.</p>
+<p><strong>5.</strong> Integrator with \(RC=1\) ms and a \(1\) V step: output slope (A) \(-1\) V/ms (B) \(+1\) V/ms (C) \(-1\) V/s (D) 0.</p>
+<p><strong>6.</strong> The stability factor of fixed bias is (A) \(\beta+1\) (B) 1 (C) \(\beta\) (D) \(1/\beta\).</p>
+<p><strong>7.</strong> Chebyshev filters have (A) passband ripple (B) flat passband (C) constant delay (D) no zeros.</p>
+<p><strong>8.</strong> CMOS Wilson mirror requires (A) 3 transistors (B) 2 (C) 5 (D) 1.</p>
+<p><strong>9.</strong> A comparator with hysteresis (A) reduces chatter (B) increases bandwidth (C) is a low-pass (D) linear.</p>
+<p><strong>10.</strong> An op-amp used as a comparator has (A) no feedback (B) negative feedback (C) unity gain (D) virtual short.</p></div></div>
+<p class="ans"><strong>Answers: </strong>1 C; 2 C; 3 A; 4 A; 5 A; 6 A; 7 A; 8 A; 9 A; 10 A.</p>
+<h2 id="s-33-7"><span class="n">33.7</span> Conceptual traps</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p>State true or false and give the reason.<br>
+<strong>1.</strong> \(r_d\) depends on the DC voltage across the diode. <strong>2.</strong> \(g_m\) of a BJT depends on \(\beta\). <strong>3.</strong> In a source follower with body effect the gain exceeds \(g_mR/(1+g_mR)\). <strong>4.</strong> A clamper changes the peak-to-peak amplitude. <strong>5.</strong> The virtual short holds in a Schmitt trigger. <strong>6.</strong> The bridge rectifier PIV is \(2V_m\). <strong>7.</strong> Series mixing decreases input resistance. <strong>8.</strong> A pole in the RHP is stable.</p></div></div>
+<p class="ans"><strong>Answers: </strong>1 False: depends on \(I_D\). 2 False: \(g_m=I_C/V_T\). 3 False: reduced. 4 False: only shifts. 5 False: positive feedback, saturated output. 6 False: \(V_m\). 7 False: increases. 8 False: unstable.</p>
+<h2 id="s-33-8"><span class="n">33.8</span> Full-length Analog Circuits test</h2>
+<p><strong>Time: 50 minutes; 30 marks</strong> (ten 1-mark and ten 2-mark questions).</p>
+<div class="box gateq"><div class="bt">Part A: 1 mark each</div><div class="bb"><p><strong>1.</strong> Depletion width of a forward-biased junction (A) decreases (B) increases (C) unchanged.</p>
+<p><strong>2.</strong> Emitter-follower output resistance is (A) low (B) high (C) \(R_C\) (D) \(\infty\).</p>
+<p><strong>3.</strong> CMRR of an ideal pair with ideal tail source is (A) 0 (B) 1 (C) \(\infty\) (D) \(g_m\).</p>
+<p><strong>4.</strong> Miller effect increases the input capacitance of (A) inverting amplifiers (B) followers only (C) CB only (D) none.</p>
+<p><strong>5.</strong> An ideal integrator introduces a phase (A) \(+90^\circ\) (B) \(-90^\circ\) (C) \(0\) (D) \(180^\circ\) relative to \(\sin\) (with inversion included).</p>
+<p><strong>6.</strong> Sustained oscillation requires \(A\beta=\) (A) \(1\angle0^\circ\) (B) \(0\) (C) \(-1\) (D) \(\infty\).</p>
+<p><strong>7.</strong> The ripple factor of an ideal full-wave rectifier is (A) 0.482 (B) 1.21 (C) 0.406 (D) 0.</p>
+<p><strong>8.</strong> The Wilson mirror has (A) 3 (B) 2 (C) 4 transistors.</p>
+<p><strong>9.</strong> Fourth-order Butterworth roll-off is (A) \(-80\) (B) \(-40\) (C) \(-20\) (D) \(-60\) dB/dec.</p>
+<p><strong>10.</strong> Series mixing feedback (A) raises \(R_{in}\) (B) lowers \(R_{in}\) (C) no change.</p></div></div>
+<div class="box gateq"><div class="bt">Part B: 2 marks each</div><div class="bb"><p><strong>11.</strong> Shunt clipper with \(3\) V battery, \(0.7\) V diode, \(v_i=10\sin\omega t\): maximum output (V).</p>
+<p><strong>12.</strong> Fixed bias \(V_{CC}=9\) V, \(R_B=300\) k, \(R_C=2\) k, \(\beta=90\): \(V_{CE}\) (V).</p>
+<p><strong>13.</strong> CE with unbypassed \(R_E=100\ \Omega\), \(g_m=80\) mS, \(R_C\|R_L=2\) k: \(A_v\).</p>
+<p><strong>14.</strong> MOS divider bias (\(V_{DD}=10\), \(R_1=200\)k, \(R_2=100\)k, \(R_S=1\)k, \(V_{th}=1\), \(k_n=2\) mA/V\({}^2\)): \(I_D\) (mA).</p>
+<p><strong>15.</strong> Widlar: \(I_{REF}=1\) mA, \(I_O=10\ \mu\)A: \(R_E\) (k\(\Omega\)).</p>
+<p><strong>16.</strong> BJT pair, \(g_m=19.2\) mS, \(R_{EE}=100\) k, single-ended: CMRR.</p>
+<p><strong>17.</strong> Summer \(R_f=10\)k, \(R_1=10\)k, \(R_2=5\)k, \(R_3=2\)k, inputs \(1\) V each: \(v_o\) (V).</p>
+<p><strong>18.</strong> Sallen–Key (equal \(R\), \(C\)) Butterworth needs gain \(K=\) ?</p>
+<p><strong>19.</strong> Wien oscillator, \(R=10\) k, \(C=16\) nF: \(f_0\) (Hz).</p>
+<p><strong>20.</strong> Follower, GBW \(=1\) MHz, second pole \(500\) kHz: PM (\({}^\circ\)).</p></div></div>
+<p class="ans"><strong>Answers: </strong><strong>Part A:</strong> 1 A; 2 A; 3 C; 4 A; 5 A (cosine leads sine); 6 A; 7 A; 8 A; 9 A; 10 A. <strong>Part B:</strong> 11: \(3.7\). 12: \(I_C=2.49\) mA, \(V_{CE}=4.02\). 13: \(-17.8\). 14: \(1.226\). 15: \(12\). 16: \(1920\) (\(65.7\) dB). 17: \(-8\). 18: \(1.586\). 19: \(995\). 20: \(90-\tan^{-1}(2)=26.6^\circ\).</p><div class="pager bottom"><a class="pn" href="ch32.html">&larr; GATE Previous-Year Questions — Year Wise</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="appendix-a.html">Mathematical Tools &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

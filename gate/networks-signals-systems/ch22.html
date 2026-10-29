@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 22: Discrete-Time Signals and Systems | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Sequence operations (downsampling, upsampling, folding), difference equations \to impulse response, causality/stability of DT systems, FIR vs IIR. These feed straight into the DTFT, z-transform and">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch22.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 22: Discrete-Time Signals and Systems | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Sequence operations (downsampling, upsampling, folding), difference equations \to impulse response, causality/stability of DT systems, FIR vs IIR. These feed straight into the DTFT, z-transform and"><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch22.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 22</div><h1>Discrete-Time Signals and Systems</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-22-1">22.1 Discrete-time sequences</a></li><li><a href="#s-22-2">22.2 Elementary sequences</a></li><li><a href="#s-22-3">22.3 Sequence operations</a></li><li><a href="#s-22-4">22.4 Periodicity</a></li><li><a href="#s-22-5">22.5 Energy and power</a></li><li><a href="#s-22-6">22.6 Discrete-time LTI systems</a></li><li><a href="#s-22-7">22.7 Difference equations</a></li><li><a href="#s-22-8">22.8 Impulse response</a></li><li><a href="#s-22-9">22.9 Stability and causality</a></li><li><a href="#s-22-10">22.10 Discrete convolution</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Sequence operations (downsampling, upsampling, folding), difference equations \(\to\) impulse response, causality/stability of DT systems, FIR vs IIR. These feed straight into the DTFT, \(z\)-transform and filter chapters.</p></div></div>
+<h2 id="s-22-1"><span class="n">22.1</span> Discrete-time sequences</h2>
+<p>A sequence \(x[n]\), \(n\in\mathbb Z\), may be written as a list (with the origin marked), a formula, or a stem plot. Any sequence is a sum of scaled, shifted impulses: \(x[n]=\sum_kx[k]\delta[n-k]\).</p>
+<h2 id="s-22-2"><span class="n">22.2</span> Elementary sequences</h2>
+<ul><li><strong>Unit impulse</strong> \(\delta[n]\), <strong>unit step</strong> \(u[n]=\sum_{k\le n}\delta[k]\), <strong>ramp</strong> \(r[n]=nu[n]\); \(\delta[n]=u[n]-u[n-1]\).</li><li><strong>Real exponential</strong> \(a^nu[n]\): decays for \(|a|&lt;1\), grows for \(|a|&gt;1\), alternates for \(a&lt;0\).</li><li><strong>Complex exponential</strong> \(e^{j\Omega_0n}\); <strong>sinusoid</strong> \(\cos(\Omega_0n+\phi)\): frequency \(\Omega_0\) rad/sample, equivalent to \(\Omega_0+2\pi\).</li><li><strong>Damped sinusoid</strong> \(r^n\cos(\Omega_0n)u[n]\).</li></ul>
+<h2 id="s-22-3"><span class="n">22.3</span> Sequence operations</h2>
+<ul><li><strong>Shift</strong> \(x[n-n_0]\) (delay for \(n_0&gt;0\)). <strong>Folding</strong> \(x[-n]\).</li><li><strong>Downsampling (decimation)</strong> \(y[n]=x[Mn]\): keeps every \(M\)th sample; can alias.</li><li><strong>Upsampling (expansion)</strong> \(y[n]=x[n/L]\) if \(L\mid n\), else \(0\): inserts \(L-1\) zeros.</li></ul>
+<figure id="fig-22-1"><div class="figimgs"><img src="img/f22_ops.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.1.</b> Sequence operations on \(x[n]=\{1,2,3,4,5,6\}\) (\(n=0..5\)): delay by 2, fold, downsample \(x[2n]=\{1,3,5\}\), upsample by \(2\).</figcaption></figure>
+<h2 id="s-22-4"><span class="n">22.4</span> Periodicity</h2>
+<p>\(x[n+N]=x[n]\) with integer \(N&gt;0\). \(\cos(\Omega_0n)\) is periodic iff \(\Omega_0/2\pi\) is rational; \(N=2\pi m/\Omega_0\) (Chapter 15). The sum of two periodic sequences has period \(\mathrm{LCM}(N_1,N_2)\).</p>
+<h2 id="s-22-5"><span class="n">22.5</span> Energy and power</h2>
+<p>\(E=\sum|x[n]|^2\); \(P=\lim\frac1{2N+1}\sum_{-N}^{N}|x[n]|^2\); periodic: \(P=\frac1N\sum_{n=0}^{N-1}|x[n]|^2\). \(a^nu[n]\) (\(|a|&lt;1\)): \(E=\frac1{1-|a|^2}\).</p>
+<h2 id="s-22-6"><span class="n">22.6</span> Discrete-time LTI systems</h2>
+<p>Output \(y[n]=x[n]*h[n]=\sum_kx[k]h[n-k]\). <strong>Causal</strong> iff \(h[n]=0\) for \(n&lt;0\); <strong>BIBO stable</strong> iff \(\sum|h[n]|&lt;\infty\); <strong>FIR</strong> if \(h\) has finite length (always stable), <strong>IIR</strong> if infinite.</p>
+<h2 id="s-22-7"><span class="n">22.7</span> Difference equations</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\displaystyle\sum_{k=0}^{N}a_ky[n-k]=\sum_{m=0}^{M}b_mx[n-m]\) (usually \(a_0=1\)). Non-recursive (all \(a_{k\ge1}=0\)): FIR. Recursive: IIR. Solve by iteration, or as (natural response \(\propto\lambda^n\) from \(\sum a_k\lambda^{N-k}=0\)) \(+\) (forced response). With “initial rest” the system is LTI and causal.</p></div></div>
+<figure id="fig-22-2"><div class="figimgs"><img src="img/f22_blk.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.2.</b> Block diagrams: first-order IIR \(y[n]=ay[n-1]+x[n]\) (left) and 3-tap FIR \(y=b_0x[n]+b_1x[n-1]+b_2x[n-2]\) (right). \(z^{-1}\) is a unit delay.</figcaption></figure>
+<h2 id="s-22-8"><span class="n">22.8</span> Impulse response</h2>
+<div class="box example"><div class="bt">First-order IIR</div><div class="bb"><p>\(y[n]=0.5y[n-1]+x[n]\), initial rest, \(x=\delta[n]\): \(y[0]=1\), \(y[1]=0.5\), \(y[2]=0.25\Rightarrow h[n]=(0.5)^nu[n]\). Step response \(s[n]=\sum_{k=0}^nh[k]=2\big(1-0.5^{n+1}\big)\): \(1,\ 1.5,\ 1.75,\ \ldots\to2\). In general \(s[\infty]=\sum h=\dfrac1{1-a}\).</p></div></div>
+<div class="box example"><div class="bt">FIR moving average</div><div class="bb"><p>\(y[n]=\tfrac13\big(x[n]+x[n-1]+x[n-2]\big)\): \(h=\{\tfrac13,\tfrac13,\tfrac13\}\); causal, stable, DC gain \(1\).</p></div></div>
+<div class="box example"><div class="bt">Differencer</div><div class="bb"><p>\(y[n]=x[n]-x[n-1]\): \(h=\{1,-1\}\); DC gain \(0\) (a high-pass).</p></div></div>
+<figure id="fig-22-3"><div class="figimgs"><img src="img/f22_h.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.3.</b> Impulse responses of \(y[n]=ay[n-1]+x[n]\) for \(a=0.5\), \(0.9\), \(-0.5\), \(1.1\). Only \(|a|&lt;1\) is stable; \(a&lt;0\) alternates.</figcaption></figure>
+<h2 id="s-22-9"><span class="n">22.9</span> Stability and causality</h2>
+<p>For \(h[n]=a^nu[n]\): \(\sum|a|^n=\dfrac1{1-|a|}\) finite iff \(|a|&lt;1\). \(y[n]-1.5y[n-1]=x[n]\) has \(h=1.5^nu[n]\): unstable. A causal system with characteristic roots \(\lambda_k\) is stable iff all \(|\lambda_k|&lt;1\).</p>
+<h2 id="s-22-10"><span class="n">22.10</span> Discrete convolution</h2>
+<p>Covered in Chapter 17: length \(L_x+L_h-1\), polynomial multiplication. Example: cascading \(y=x[n]+x[n-1]\) with itself gives \(h=\{1,2,1\}\).</p>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> \(h[n]=a^nu[n]\) is BIBO stable iff (A) \(a&lt;1\) (B) \(|a|&lt;1\) (C) \(|a|\le1\) (D) \(a&gt;0\).</p>
+<p><strong>Q2.</strong> \(y[n]=x[2n]\) is (A) LTI (B) linear, time-varying (C) non-linear (D) causal.</p>
+<p><strong>Q3.</strong> An FIR system is always (A) unstable (B) stable (C) IIR (D) non-causal.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> \(x[n]=\{1,2,3,4,5,6\}\) (\(n=0..5\)). The sequence \(x[2n]\) is (A) \(\{1,3,5\}\) (B) \(\{2,4,6\}\) (C) \(\{1,2,3\}\) (D) \(\{1,0,3,0,5\}\).</p>
+<p><strong>Q5.</strong> \(y[n]=0.8y[n-1]+x[n]\). The steady-state output for the unit step input is (A) \(1\) (B) \(4\) (C) \(5\) (D) \(0.8\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (A). Q5 (C): \(1/(1-0.8)=5\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> \(\sum_n|h[n]|\) for \(h[n]=(0.5)^nu[n]\) is <span class="blank"></span>.</p>
+<p><strong>Q7.</strong> The energy of \(h[n]=(0.5)^nu[n]\) is <span class="blank"></span> (two decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(2\). Q7: \(4/3=1.33\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Which are causal? (A) \(y[n]=x[n]+x[n-1]\) (B) \(y[n]=x[n+1]\) (C) \(y[n]=0.5y[n-1]+x[n]\) (D) \(y[n]=x[-n]\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (C).</p>
+<div class="box trap"><div class="bt">Common traps in this chapter</div><div class="bb"><p>(i) The upsampled sequence has zeros inserted; the downsampled one discards samples (aliasing). (ii) \(x[n/L]\) is defined only at multiples of \(L\). (iii) \(|a|=1\) is marginal, not stable. (iv) Iterating a difference equation requires the correct initial conditions.</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Impulse response of \(y[n]=x[n]+2x[n-1]+3x[n-2]\)? &emsp; <strong>T2.</strong> Is \(y[n]-y[n-1]=x[n]\) stable?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(\{1,2,3\}\). T2: \(h=u[n]\), \(\sum|h|=\infty\): unstable (an accumulator).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(\delta[n]\), \(u[n]\), \(a^nu[n]\); \(x[n]=\sum x[k]\delta[n-k]\). \(x[Mn]\) decimates; \(x[n/L]\) expands with zeros.</li><li>DT LTI: causal iff \(h[n]=0\) (\(n&lt;0\)); stable iff \(\sum|h|&lt;\infty\). FIR always stable.</li><li>\(y[n]=ay[n-1]+x[n]\Rightarrow h=a^nu[n]\), stable iff \(|a|&lt;1\), DC gain \(\frac1{1-a}\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch21.html">&larr; Sampling Theorem</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch23.html">Discrete-Time Fourier Transform &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

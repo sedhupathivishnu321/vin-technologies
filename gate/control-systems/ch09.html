@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 9: Second-Order Systems | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="The single most repeated topic: \omega_n, \zeta, M_p, t_p, t_s, t_r; find them from G(s) (open- or closed-loop) and vice versa. Expect one 2-mark calculation each year.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch09.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 9: Second-Order Systems | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="The single most repeated topic: \omega_n, \zeta, M_p, t_p, t_s, t_r; find them from G(s) (open- or closed-loop) and vice versa. Expect one 2-mark calculation each year."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch09.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 9</div><h1>Second-Order Systems</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-9-1">9.1 Core concept</a></li><li><a href="#s-9-2">9.2 Cases by damping</a></li><li><a href="#s-9-3">9.3 Derivation of the specifications (underdamped)</a></li><li><a href="#s-9-4">9.4 Effect of the parameters</a></li><li><a href="#s-9-5">9.5 Solved examples</a></li><li><a href="#s-9-6">9.6 Physical interpretation</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>The single most repeated topic: \(\omega_n\), \(\zeta\), \(M_p\), \(t_p\), \(t_s\), \(t_r\); find them from \(G(s)\) (open- or closed-loop) and vice versa. Expect one 2-mark calculation each year.</p></div></div>
+<h2 id="s-9-1"><span class="n">9.1</span> Core concept</h2>
+<div class="box formula"><div class="bt">Standard form</div><div class="bb"><p>\(\dfrac{C(s)}{R(s)}=\dfrac{\omega_n^2}{s^2+2\zeta\omega_ns+\omega_n^2}\); poles \(s=-\zeta\omega_n\pm j\omega_n\sqrt{1-\zeta^2}=-\sigma\pm j\omega_d\).<br>
+\(\omega_n\) natural frequency, \(\zeta\) damping ratio, \(\sigma=\zeta\omega_n\) damping (attenuation) factor, \(\omega_d=\omega_n\sqrt{1-\zeta^2}\) damped frequency.<br>
+Unity feedback on \(G=\dfrac{\omega_n^2}{s(s+2\zeta\omega_n)}\) gives this form.</p></div></div>
+<figure id="fig-9-1"><div class="figimgs"><img src="img/c09_poles.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.1.</b> Left: pole geometry, \(\omega_n\) is the radius, \(\cos\phi=\zeta\). Right: constant-\(\zeta\) lines are radial, constant \(\sigma\) are vertical lines, constant \(\omega_n\) are circles.</figcaption></figure>
+<h2 id="s-9-2"><span class="n">9.2</span> Cases by damping</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>\(\zeta\)</th><th>Poles</th><th>Step response</th></tr></thead><tbody><tr><td>\(0\) (undamped)</td><td>\(\pm j\omega_n\)</td><td>\(1-\cos\omega_nt\): sustained oscillation</td></tr><tr><td>\(0&lt;\zeta&lt;1\) (under)</td><td>complex pair, LHP</td><td>oscillatory, overshoot</td></tr><tr><td>\(\zeta=1\) (critical)</td><td>double real \(-\omega_n\)</td><td>\(1-(1+\omega_nt)e^{-\omega_nt}\): fastest without overshoot</td></tr><tr><td>\(\zeta&gt;1\) (over)</td><td>two real, \(-\omega_n(\zeta\pm\sqrt{\zeta^2-1})\)</td><td>sluggish, no overshoot</td></tr><tr><td>\(\zeta&lt;0\)</td><td>RHP</td><td>growing: unstable</td></tr></tbody></table></div></div>
+<figure id="fig-9-2"><div class="figimgs"><img src="img/c09_zeta.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.2.</b> Unit-step response for \(\zeta=0,0.2,0.5,0.707,1,2\) (time normalised by \(\omega_n\)).</figcaption></figure>
+<h2 id="s-9-3"><span class="n">9.3</span> Derivation of the specifications (underdamped)</h2>
+<div class="box derive"><div class="bt">Step response</div><div class="bb"><p>\(C(s)=\dfrac{\omega_n^2}{s(s^2+2\zeta\omega_ns+\omega_n^2)}\). Partial fractions:
+\[
+c(t)=1-\dfrac{e^{-\zeta\omega_nt}}{\sqrt{1-\zeta^2}}\sin(\omega_dt+\phi),\qquad \phi=\cos^{-1}\zeta.
+\]
+<strong>Peak time:</strong> \(\dot c=0\Rightarrow\sin\omega_dt=0\), first non-trivial root \(\omega_dt_p=\pi\): \(t_p=\pi/\omega_d\).<br>
+<strong>Overshoot:</strong> \(c(t_p)=1+e^{-\zeta\pi/\sqrt{1-\zeta^2}}\), so \(M_p=e^{-\pi\zeta/\sqrt{1-\zeta^2}}\).<br>
+<strong>Rise time (\(0\to100\%\)):</strong> \(c(t_r)=1\Rightarrow\sin(\omega_dt_r+\phi)=0\Rightarrow t_r=\dfrac{\pi-\phi}{\omega_d}\).<br>
+<strong>Settling time:</strong> envelope \(e^{-\zeta\omega_nt}/\sqrt{1-\zeta^2}=0.02\Rightarrow t_s\approx\dfrac{4}{\zeta\omega_n}\) (2%); \(\dfrac{3}{\zeta\omega_n}\) (5%).</p></div></div>
+<figure id="fig-9-3"><div class="figimgs"><img src="img/c09_specs.png" alt="" loading="lazy"></div><figcaption><b>Figure 9.3.</b> The specifications for \(\zeta=0.3\), \(\omega_n=1\): overshoot \(37\%\), \(t_p=3.29\), \(t_r=1.97\), \(t_s(2\%)\approx13.3\).</figcaption></figure>
+<div class="box formula"><div class="bt">Specifications</div><div class="bb"><p>\(t_p=\dfrac\pi{\omega_d}\), &emsp; \(M_p=\exp\!\left(-\dfrac{\pi\zeta}{\sqrt{1-\zeta^2}}\right)\times100\%\), &emsp; \(t_r=\dfrac{\pi-\cos^{-1}\zeta}{\omega_d}\),<br>
+\(t_s=\dfrac{4}{\zeta\omega_n}\) (2%) or \(\dfrac3{\zeta\omega_n}\) (5%), &emsp; \(t_d\approx\dfrac{1+0.7\zeta}{\omega_n}\).<br>
+Ratio of successive peaks: \(\exp\!\left(-\dfrac{2\pi\zeta}{\sqrt{1-\zeta^2}}\right)\); logarithmic decrement \(\delta=\dfrac{2\pi\zeta}{\sqrt{1-\zeta^2}}\).<br>
+Inverse: \(\zeta=\dfrac{-\ln M_p}{\sqrt{\pi^2+\ln^2M_p}}\) (\(M_p\) as a fraction).</p></div></div>
+<div class="center"><div class="tw"><table><tbody><tr><td>\(\zeta\)</td><td class="c">0.1</td><td class="c">0.2</td><td class="c">0.3</td><td class="c">0.4</td><td class="c">0.5</td><td class="c">0.6</td><td class="c">0.707</td></tr><tr><td>\(M_p\) (%)</td><td class="c">72.9</td><td class="c">52.7</td><td class="c">37.2</td><td class="c">25.4</td><td class="c">16.3</td><td class="c">9.5</td><td class="c">4.3</td></tr></tbody></table></div></div>
+<h2 id="s-9-4"><span class="n">9.4</span> Effect of the parameters</h2>
+<ul><li>Larger \(\zeta\) \(\Rightarrow\) smaller overshoot (depends only on \(\zeta\)).</li><li>Larger \(\omega_n\) at fixed \(\zeta\) \(\Rightarrow\) faster response (shorter \(t_p\), \(t_r\), \(t_s\)), same overshoot.</li><li>Pole at fixed real part \(\sigma=\zeta\omega_n\): same \(t_s\) regardless of \(\omega_d\).</li><li>Extra zero in the LHP near the poles increases overshoot and speeds up the rise; an extra far-left pole slows the rise (dominant-pole approximation).</li></ul>
+<h2 id="s-9-5"><span class="n">9.5</span> Solved examples</h2>
+<div class="box example"><div class="bt">Specifications</div><div class="bb"><p>\(\dfrac{C}{R}=\dfrac{25}{s^2+6s+25}\): \(\omega_n=5\), \(2\zeta\omega_n=6\Rightarrow\zeta=0.6\), \(\omega_d=4\). \(M_p=e^{-\pi(0.6)/0.8}=e^{-2.356}=9.5\%\); \(t_p=\pi/4=0.785\) s; \(t_r=(\pi-0.927)/4=0.554\) s; \(t_s(2\%)=4/3=1.33\) s.</p></div></div>
+<div class="box example"><div class="bt">Open-loop given</div><div class="bb"><p>\(G=\dfrac{16}{s(s+4)}\), unity feedback: \(T=\dfrac{16}{s^2+4s+16}\), \(\omega_n=4\), \(\zeta=0.5\), \(M_p=16.3\%\), \(t_s=4/2=2\) s. Ramp error \(1/K_v=4/16=0.25\).</p></div></div>
+<div class="box example"><div class="bt">Design from overshoot</div><div class="bb"><p>Require \(M_p=20\%\): \(\ln0.2=-1.609\); \(\zeta=\dfrac{1.609}{\sqrt{9.870+2.590}}=0.456\).</p></div></div>
+<div class="box example"><div class="bt">Gain variation</div><div class="bb"><p>\(G=\dfrac{K}{s(s+2)}\), unity feedback: \(\omega_n=\sqrt K\), \(\zeta=\dfrac1{\sqrt K}\). Increasing \(K\) from \(1\) to \(4\): \(\zeta\) falls from \(1\) to \(0.5\) (overshoot appears, \(16\%\)) while \(\omega_n\) rises from \(1\) to \(2\).</p></div></div>
+<h2 id="s-9-6"><span class="n">9.6</span> Physical interpretation</h2>
+<p>\(\zeta\) is a measure of energy dissipation per cycle: a spring–mass system with small damping rings, a shock absorber (\(\zeta\approx0.7\)) settles quickly with little overshoot. In feedback design a high gain buys speed but pushes \(\zeta\) down.</p>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>(i) \(\zeta=0.707\Rightarrow M_p=4.3\%\); \(\zeta=0.5\Rightarrow16.3\%\). (ii) \(t_s\cdot\text{Re}(p)=4\) (2%). (iii) Real-part of the pole gives \(t_s\); imaginary part gives \(t_p\): \(t_p=\pi/\text{Im}\). (iv) For \(s^2+as+b\): \(\omega_n=\sqrt b\), \(\zeta=a/(2\sqrt b)\).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(\omega_n\) is <em>not</em> the frequency of oscillation; \(\omega_d\) is. (ii) The overshoot formula holds for the <em>standard form with no zeros</em>; a zero changes it. (iii) \(t_r\) uses \(\omega_d\), not \(\omega_n\). (iv) Compute \(\zeta\) from the <em>closed-loop</em> denominator, not from \(G(s)\). (v) \(\phi=\cos^{-1}\zeta\) (in radians in \(t_r\)).</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> Characteristic equation \(s^2+4s+16=0\): \(\zeta=\) (A) \(0.25\) (B) \(0.5\) (C) \(1\) (D) \(2\).</p>
+<p><strong>Q2.</strong> The overshoot of the step response depends on (A) \(\omega_n\) only (B) \(\zeta\) only (C) both (D) neither.</p>
+<p><strong>Q3.</strong> Poles at \(-2\pm j2\): the \(2\%\) settling time is (A) \(1\) (B) \(2\) (C) \(4\) (D) \(8\) s.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B): \(\omega_n=4\), \(2\zeta\cdot4=4\). Q2 (B). Q3 (B): \(4/2\).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> For \(\dfrac{100}{s^2+12s+100}\) the percentage overshoot is (A) \(0.95\) (B) \(9.5\) (C) \(16.3\) (D) \(25.4\).</p>
+<p><strong>Q5.</strong> A unity-feedback system with \(G=\dfrac{K}{s(s+10)}\) has \(\zeta=0.5\) when \(K=\) (A) \(50\) (B) \(100\) (C) \(25\) (D) \(200\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (B): \(\omega_n=10\), \(\zeta=0.6\). Q5 (B): \(\omega_n=\sqrt K\), \(2\zeta\omega_n=10\Rightarrow\omega_n=10\), \(K=100\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> \(\dfrac{C}{R}=\dfrac{9}{s^2+3s+9}\). Peak time \(=\) <span class="blank"></span> s (two decimals).</p>
+<p><strong>Q7.</strong> \(\zeta=0.5\), \(\omega_n=10\): \(2\%\) settling time \(=\) <span class="blank"></span> s.</p>
+<p><strong>Q8.</strong> Two successive peaks in a decaying oscillation have ratio \(0.5\): \(\zeta=\) <span class="blank"></span> (two decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(\omega_n=3\), \(\zeta=0.5\), \(\omega_d=2.598\), \(t_p=1.21\). Q7: \(0.8\). Q8: \(\ln2=2\pi\zeta/\sqrt{1-\zeta^2}\Rightarrow\zeta=0.110\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q9.</strong> For \(0&lt;\zeta&lt;1\): (A) poles are complex (B) overshoot is present (C) \(t_s=4/(\zeta\omega_n)\) (D) \(\omega_d&gt;\omega_n\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q9: (A), (B), (C).</p>
+<div class="box gateq"><div class="bt">Previous-year pattern</div><div class="bb"><p>Given \(M_p\) and \(t_p\) of a standard second-order system: get \(\zeta\) from \(M_p\), then \(\omega_d=\pi/t_p\) and \(\omega_n=\omega_d/\sqrt{1-\zeta^2}\). E.g. \(M_p=16.3\%\) (\(\zeta=0.5\)), \(t_p=0.5\) s: \(\omega_d=6.28\), \(\omega_n=7.25\); \(C/R=\dfrac{52.6}{s^2+7.25s+52.6}\).</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Derive \(t_p\) from \(\dot c(t)=0\).<br>
+<strong>T2.</strong> Find \(\zeta,\omega_n,M_p,t_s\) for \(\dfrac{4}{s^2+2s+4}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: see derivation. T2: \(\omega_n=2\), \(\zeta=0.5\), \(M_p=16.3\%\), \(t_s=4\) s.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(s^2+2\zeta\omega_ns+\omega_n^2\); poles \(-\zeta\omega_n\pm j\omega_d\).</li><li>\(M_p=e^{-\pi\zeta/\sqrt{1-\zeta^2}}\); \(t_p=\pi/\omega_d\); \(t_s=4/\zeta\omega_n\); \(t_r=(\pi-\cos^{-1}\zeta)/\omega_d\).</li><li>\(\zeta=0\) oscillates, \(\zeta=1\) critical, \(\zeta&gt;1\) overdamped.</li><li>Higher \(\omega_n\) = faster; higher \(\zeta\) = less overshoot.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch08.html">&larr; First-Order Systems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch10.html">Steady-State Analysis and System Type &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

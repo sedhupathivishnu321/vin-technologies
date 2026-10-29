@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 17: Convolution | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Graphical/analytical convolution of standard signals (rect*rect, exponentials, steps), DT convolution of short sequences, duration/area/shift properties. A 2-mark convolution question appears in most">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch17.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 17: Convolution | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Graphical/analytical convolution of standard signals (rect*rect, exponentials, steps), DT convolution of short sequences, duration/area/shift properties. A 2-mark convolution question appears in most"><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch17.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 17</div><h1>Convolution</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-17-1">17.1 Convolution concept</a></li><li><a href="#s-17-2">17.2 Continuous-time convolution</a></li><li><a href="#s-17-3">17.3 Graphical convolution</a></li><li><a href="#s-17-4">17.4 Mathematical convolution</a></li><li><a href="#s-17-5">17.5 Properties of convolution</a></li><li><a href="#s-17-6">17.6 Discrete-time convolution</a></li><li><a href="#s-17-7">17.7 Graphical DT convolution</a></li><li><a href="#s-17-8">17.8 Convolution using unit impulses</a></li><li><a href="#s-17-9">17.9 Step-response relationship</a></li><li><a href="#s-17-10">17.10 LTI-system analysis using convolution</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Graphical/analytical convolution of standard signals (rect\(*\)rect, exponentials, steps), DT convolution of short sequences, duration/area/shift properties. A 2-mark convolution question appears in most papers.</p></div></div>
+<h2 id="s-17-1"><span class="n">17.1</span> Convolution concept</h2>
+<p>For an LTI system, write the input as a weighted sum (integral) of shifted impulses; by linearity and time-invariance the output is the same sum of shifted impulse responses. This is convolution.</p>
+<h2 id="s-17-2"><span class="n">17.2</span> Continuous-time convolution</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(y(t)=x(t)*h(t)=\displaystyle\int_{-\infty}^{\infty}x(\tau)\,h(t-\tau)\,d\tau=\int_{-\infty}^{\infty}h(\tau)\,x(t-\tau)\,d\tau.\)</p></div></div>
+<h2 id="s-17-3"><span class="n">17.3</span> Graphical convolution</h2>
+<ol><li>Draw \(x(\tau)\) and \(h(\tau)\) against the dummy variable \(\tau\).</li><li><strong>Flip</strong> \(h(\tau)\to h(-\tau)\).</li><li><strong>Shift</strong> by \(t\): \(h(t-\tau)\) (right for \(t&gt;0\)).</li><li><strong>Multiply</strong> \(x(\tau)h(t-\tau)\) and <strong>integrate</strong> (area of the overlap).</li><li>Repeat for each range of \(t\) (before overlap, partial overlap, full overlap, after).</li></ol>
+<figure id="fig-17-1"><div class="figimgs"><img src="img/f17_graph.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.1.</b> Graphical convolution of two unit rectangles (\(0\le t\le1\)). Top: \(x(\tau)\) (blue) and flipped, shifted \(h(t-\tau)\) (red) at \(t=0.5\), \(1\), \(1.5\); the overlap areas are \(y(0.5)=0.5\), \(y(1)=1\), \(y(1.5)=0.5\). Bottom: the resulting triangle \(y(t)\).</figcaption></figure>
+<div class="box example"><div class="bt">Rect \(*\) rect</div><div class="bb"><p>\(x=h=u(t)-u(t-1)\). For \(0\le t\le1\) the overlap is \(t\); for \(1\le t\le2\) it is \(2-t\); else \(0\). So \(y(t)\) is a triangle on \([0,2]\) with peak \(1\) at \(t=1\). For two rectangles of width \(2\): peak \(=2\) at \(t=2\), base \([0,4]\).</p></div></div>
+<h2 id="s-17-4"><span class="n">17.4</span> Mathematical convolution</h2>
+<div class="box example"><div class="bt">Exponentials</div><div class="bb"><p>\(x=e^{-t}u(t)\), \(h=e^{-2t}u(t)\): \(y(t)=\displaystyle\int_0^te^{-\tau}e^{-2(t-\tau)}d\tau=e^{-2t}\int_0^te^{\tau}d\tau=e^{-t}-e^{-2t}\), \(t\ge0\).<br>
+General: \(e^{-at}u*e^{-bt}u=\dfrac{e^{-bt}-e^{-at}}{a-b}u(t)\) (\(a\ne b\)); \(e^{-at}u*e^{-at}u=te^{-at}u(t)\).</p></div></div>
+<div class="box example"><div class="bt">Step response</div><div class="bb"><p>\(x=u(t)\), \(h=e^{-t}u(t)\): \(y=\int_0^te^{-\tau}d\tau=1-e^{-t}\). In general \(u*h=\int_{-\infty}^th\) (the step response). Also \(u*u=r(t)=t\,u(t)\).</p></div></div>
+<figure id="fig-17-2"><div class="figimgs"><img src="img/f17_exp.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.2.</b> \(x=e^{-t}u(t)\), \(h=e^{-2t}u(t)\) and \(y=e^{-t}-e^{-2t}\) (peak at \(t=\ln2\), value \(0.25\)).</figcaption></figure>
+<h2 id="s-17-5"><span class="n">17.5</span> Properties of convolution</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Property</th><th>Statement</th></tr></thead><tbody><tr><td>Commutative</td><td>\(x*h=h*x\)</td></tr><tr><td>Associative</td><td>\((x*h_1)*h_2=x*(h_1*h_2)\)</td></tr><tr><td>Distributive</td><td>\(x*(h_1+h_2)=x*h_1+x*h_2\)</td></tr><tr><td>Identity</td><td>\(x*\delta=x\); \(x*\delta(t-t_0)=x(t-t_0)\)</td></tr><tr><td>Shift</td><td>\(x(t-a)*h(t-b)=y(t-a-b)\)</td></tr><tr><td>Scaling</td><td>\(x(at)*h(at)=\frac1{|a|}y(at)\)</td></tr><tr><td>Derivative</td><td>\(\frac{d}{dt}(x*h)=x'*h=x*h'\)</td></tr><tr><td>Area</td><td>\(\int y=\left(\int x\right)\left(\int h\right)\) (DC gain product)</td></tr><tr><td>Width</td><td>duration\((y)=\) duration\((x)+\) duration\((h)\); support \([a_1+b_1,\ a_2+b_2]\)</td></tr><tr><td>Causal \(*\) causal</td><td>causal</td></tr></tbody></table></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Before computing, use the support rule and the area rule as a check: \(x\) on \([1,3]\) and \(h\) on \([-1,2]\) give \(y\) on \([0,5]\); area of \(y=\) area(\(x\))\(\times\)area(\(h\)).</p></div></div>
+<h2 id="s-17-6"><span class="n">17.6</span> Discrete-time convolution</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(y[n]=\displaystyle\sum_{k=-\infty}^{\infty}x[k]h[n-k]\); length \(L_x+L_h-1\); \(x[n]*\delta[n-n_0]=x[n-n_0]\); \(x*u=\) running sum \(\sum_{k\le n}x[k]\).</p></div></div>
+<h2 id="s-17-7"><span class="n">17.7</span> Graphical DT convolution</h2>
+<ul><li><strong>Table (sliding) method:</strong> flip \(h\), slide over \(x\), sum products at each \(n\).</li><li><strong>Polynomial method:</strong> treat \(x[n]\) and \(h[n]\) as coefficients of polynomials in \(z^{-1}\); multiply the polynomials.</li></ul>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(x=\{1,2,3\}\) (\(n=0,1,2\)), \(h=\{1,1\}\): \(y=\{1,\,2+1,\,3+2,\,3\}=\{1,3,5,3\}\); sums \(6\times2=12\) (\(1+3+5+3\)). ✓<br>
+\(x=\{1,2,1\}\), \(h=\{1,-1\}\): \(y=\{1,1,-1,-1\}\) (a first difference; area \(=0\) because \(\sum h=0\)).<br>
+\(x=\{1,2,1\}\), \(h=\{1,1,1\}\): \(y=\{1,3,4,3,1\}\).</p></div></div>
+<figure id="fig-17-3"><div class="figimgs"><img src="img/f17_dt.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.3.</b> Stem plots of \(x[n]=\{1,2,3\}\), \(h[n]=\{1,1\}\) and \(y[n]=\{1,3,5,3\}\).</figcaption></figure>
+<h2 id="s-17-8"><span class="n">17.8</span> Convolution using unit impulses</h2>
+<p>If \(x(t)=\sum_kA_k\delta(t-t_k)\) then \(x*h=\sum_kA_kh(t-t_k)\): a superposition of shifted copies of \(h\). E.g. \([\delta(t)+\delta(t-2)]*\rect(t)\) gives two unit rectangles (echoes).</p>
+<h2 id="s-17-9"><span class="n">17.9</span> Step-response relationship</h2>
+<p>\(y=x*h\); derivative property: \(y'=x*h'\). Since \(h=s'\), \(y=x'*s\): an input of piecewise-constant pieces gives a sum of shifted step responses.</p>
+<h2 id="s-17-10"><span class="n">17.10</span> LTI-system analysis using convolution</h2>
+<p>For a system with \(h(t)=e^{-t}u(t)\) and \(x=u(t)-u(t-2)\): \(y=s(t)-s(t-2)\) with \(s=1-e^{-t}\): \(y=(1-e^{-t})u(t)-(1-e^{-(t-2)})u(t-2)\); \(y(2)=1-e^{-2}=0.865\).</p>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> \(x(t)*\delta(t-2)=\) (A) \(x(t+2)\) (B) \(x(t-2)\) (C) \(x(2t)\) (D) \(2x(t)\).</p>
+<p><strong>Q2.</strong> The convolution of a sequence of length \(4\) with one of length \(5\) has length (A) 4 (B) 5 (C) 8 (D) 9.</p>
+<p><strong>Q3.</strong> If \(\int x=2\) and \(\int h=3\) then \(\int(x*h)=\) (A) 5 (B) 6 (C) 1.5 (D) 0.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (C): \(4+5-1=8\). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> \(x[n]=\{1,2,1\}\) (starting at \(n=0\)) convolved with \(h[n]=\{1,1,1\}\): \(y[2]=\) (A) \(1\) (B) \(3\) (C) \(4\) (D) \(2\).</p>
+<p><strong>Q5.</strong> \(x(t)=u(t)-u(t-2)\) is convolved with itself. The value at \(t=2\) is (A) \(1\) (B) \(2\) (C) \(4\) (D) \(0\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (C). Q5 (B): triangle of base \([0,4]\) and peak \(2\) at \(t=2\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> \(e^{-t}u(t)*e^{-2t}u(t)\) evaluated at \(t=1\) is <span class="blank"></span> (three decimals).</p>
+<p><strong>Q7.</strong> \(x[n]=\{1,2,3\}\), \(h[n]=\{1,1\}\): \(\sum_ny[n]=\) <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(e^{-1}-e^{-2}=0.368-0.135=0.233\). Q7: \(6\times2=12\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Which are true? (A) convolution is commutative (B) \(x*u\) is the running integral of \(x\) (C) \(x(t-1)*h(t-2)=y(t-3)\) (D) \(x*\delta'=x\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (C). (D) is false: \(x*\delta'=x'\).</p>
+<div class="box trap"><div class="bt">Common traps in this chapter</div><div class="bb"><p>(i) Forgetting to flip. (ii) Wrong limits: the overlap ranges change at breakpoints. (iii) Assuming the length of DT convolution is \(L_x+L_h\) (it is \(-1\)). (iv) Shifting only one signal by both delays in the shift property: delays <em>add</em>. (v) Confusing convolution with correlation (no flip).</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(u(t)*u(t)=?\) &emsp; <strong>T2.</strong> \(x=\{1,-1\}\), \(h=\{1,2,3\}\): find \(y\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(r(t)=tu(t)\). T2: \(y=\{1,\,2-1,\,3-2,\,-3\}=\{1,1,1,-3\}\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(y=\int x(\tau)h(t-\tau)d\tau\); flip, shift, multiply, integrate. DT: \(\sum x[k]h[n-k]\), length \(L_x+L_h-1\).</li><li>\(x*\delta(t-t_0)=x(t-t_0)\); \(x*u=\int_{-\infty}^tx\); \(u*u=r\).</li><li>rect\(*\)rect \(=\) triangle (base \(2T\), peak \(T\) for width \(T\)).</li><li>\(e^{-at}u*e^{-bt}u=\frac{e^{-bt}-e^{-at}}{a-b}u\); equal rates: \(te^{-at}u\).</li><li>Support adds; area multiplies; delays add.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch16.html">&larr; Linear Time-Invariant Systems</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch18.html">Fourier Series &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

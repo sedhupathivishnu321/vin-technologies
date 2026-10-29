@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="style.css?v=3">
+<style>.chips a.bk{background:var(--cream);border:1px solid var(--amber);color:var(--brown);border-radius:10px;padding:7px 14px;font-size:.9rem;font-weight:600;text-decoration:none}.chips a.bk:hover{background:var(--y1)}</style>
 <meta name="google-site-verification" content="iNr89UHtxR-AbMc3zWkveLHa-VXhbtNFKXAc5bJwi3k" />
 <link rel="canonical" href="https://vintechnologies.co.in/">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -44,7 +45,7 @@
 <header><div class="wrap nav">
   <a class="logo" href="#home"><img src="assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
   <nav><ul>
-    <li><a href="#learn">Learn</a></li><li><a href="#gate">GATE</a></li><li><a href="#app">App</a></li><li><a href="lab/">Circuits</a></li><li><a href="lab/network/">Networks</a></li><li><a href="lab/trainer/">Trainers</a></li><li><a href="labs/">Labs</a></li>
+    <li><a href="#learn">Learn</a></li><li><a href="#gate">GATE</a></li><li><a href="gate/">Notes</a></li><li><a href="#app">App</a></li><li><a href="lab/">Circuits</a></li><li><a href="lab/network/">Networks</a></li><li><a href="lab/trainer/">Trainers</a></li><li><a href="labs/">Labs</a></li>
     <li><a href="#colleges">Colleges</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li>
   </ul></nav>
   <button class="menu" aria-label="Menu">☰</button>
@@ -76,15 +77,16 @@
 <section class="alt" id="gate"><div class="wrap">
   <div class="eyebrow">GATE Preparation</div><h2>Built around the GATE ECE syllabus</h2>
   <p class="lead">Every topic is mapped to the exam syllabus so you always know what to study. Always cross-check the latest official GATE brochure for the current year.</p>
+  <p><a class="btn green" href="gate/">Read the free GATE ECE study notes</a></p>
   <div class="tabs">
     <button class="tab on" data-p="p1">Engineering Maths</button><button class="tab" data-p="p2">Networks &amp; Signals</button>
     <button class="tab" data-p="p3">Electronics</button><button class="tab" data-p="p4">Comm &amp; EM</button><button class="tab" data-p="p5">Control</button>
   </div>
-  <div id="p1" class="panel on chips"><span>Linear Algebra</span><span>Calculus</span><span>Differential Equations</span><span>Vector Calculus</span><span>Complex Analysis</span><span>Probability &amp; Statistics</span><span>Numerical Methods</span></div>
-  <div id="p2" class="panel chips"><span>Network Solution Methods</span><span>Network Theorems</span><span>Transient Response</span><span>Sinusoidal Steady State</span><span>Two-Port Networks</span><span>LTI Systems</span><span>Fourier Series &amp; Transform</span><span>Laplace &amp; Z-Transform</span><span>Sampling</span></div>
-  <div id="p3" class="panel chips"><span>Semiconductor Physics</span><span>Diodes</span><span>BJT &amp; MOSFET</span><span>Small-Signal Models</span><span>Op-Amps</span><span>Feedback &amp; Oscillators</span><span>Combinational Logic</span><span>Sequential Logic</span><span>Microprocessors (8085)</span><span>ADC / DAC</span></div>
-  <div id="p4" class="panel chips"><span>Analog Modulation</span><span>Digital Modulation</span><span>Noise in Communications</span><span>Information Theory</span><span>Maxwell's Equations</span><span>Plane Waves</span><span>Transmission Lines</span><span>Waveguides</span><span>Antennas</span></div>
-  <div id="p5" class="panel chips"><span>Transfer Functions</span><span>Block Diagrams &amp; SFG</span><span>Routh–Hurwitz</span><span>Root Locus</span><span>Bode &amp; Nyquist</span><span>State-Space</span><span>Compensators</span></div>
+  <div id="p1" class="panel on chips"><span>Linear Algebra</span><span>Calculus</span><span>Differential Equations</span><span>Vector Calculus</span><span>Complex Analysis</span><span>Probability &amp; Statistics</span><span>Numerical Methods</span><a class="bk" href="gate/engineering-mathematics/">Read: Engineering Mathematics notes</a><a class="bk" href="gate/general-aptitude/">Read: General Aptitude notes</a></div>
+  <div id="p2" class="panel chips"><span>Network Solution Methods</span><span>Network Theorems</span><span>Transient Response</span><span>Sinusoidal Steady State</span><span>Two-Port Networks</span><span>LTI Systems</span><span>Fourier Series &amp; Transform</span><span>Laplace &amp; Z-Transform</span><span>Sampling</span><a class="bk" href="gate/networks-signals-systems/">Read: Networks, Signals &amp; Systems notes</a></div>
+  <div id="p3" class="panel chips"><span>Semiconductor Physics</span><span>Diodes</span><span>BJT &amp; MOSFET</span><span>Small-Signal Models</span><span>Op-Amps</span><span>Feedback &amp; Oscillators</span><span>Combinational Logic</span><span>Sequential Logic</span><span>Microprocessors (8085)</span><span>ADC / DAC</span><a class="bk" href="gate/electronic-devices/">Read: Electronic Devices notes</a><a class="bk" href="gate/analog-circuits/">Read: Analog Circuits notes</a><a class="bk" href="gate/digital-circuits/">Read: Digital Circuits notes</a></div>
+  <div id="p4" class="panel chips"><span>Analog Modulation</span><span>Digital Modulation</span><span>Noise in Communications</span><span>Information Theory</span><span>Maxwell's Equations</span><span>Plane Waves</span><span>Transmission Lines</span><span>Waveguides</span><span>Antennas</span><a class="bk" href="gate/communications/">Read: Communications notes</a><a class="bk" href="gate/electromagnetics/">Read: Electromagnetics notes</a></div>
+  <div id="p5" class="panel chips"><span>Transfer Functions</span><span>Block Diagrams &amp; SFG</span><span>Routh–Hurwitz</span><span>Root Locus</span><span>Bode &amp; Nyquist</span><span>State-Space</span><span>Compensators</span><a class="bk" href="gate/control-systems/">Read: Control Systems notes</a></div>
 </div></section>
 
 <section id="app"><div class="wrap">
@@ -154,7 +156,7 @@
 
 <footer><div class="wrap foot">
   <div>© <span id="year"></span> VIN Technologies · Made in India</div>
-  <div><a href="#learn">Learn</a><a href="#gate">GATE</a><a href="#app">App</a><a href="/lab/">Circuit Simulator</a><a href="/lab/network/">Network Lab</a><a href="/lab/trainer/">8085/8051 Trainers</a><a href="/labs/">Lab Experiments</a><a href="#contact">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+  <div><a href="#learn">Learn</a><a href="#gate">GATE</a><a href="/gate/">GATE Notes</a><a href="#app">App</a><a href="/lab/">Circuit Simulator</a><a href="/lab/network/">Network Lab</a><a href="/lab/trainer/">8085/8051 Trainers</a><a href="/labs/">Lab Experiments</a><a href="#contact">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
 </div></footer>
 <script src="script.js"></script>
 </body>

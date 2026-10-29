@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 10: Logic Families and Static CMOS Implementations | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Building gates from pull-up and pull-down networks, transistor counts, noise margins, propagation delay (RC and logical effort), fan-in and fan-out, and dynamic power \alpha CV^2f. Includes the">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch10.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 10: Logic Families and Static CMOS Implementations | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Building gates from pull-up and pull-down networks, transistor counts, noise margins, propagation delay (RC and logical effort), fan-in and fan-out, and dynamic power \alpha CV^2f. Includes the"><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch10.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 10</div><h1>Logic Families and Static CMOS Implementations</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-10-1">10.1 The CMOS inverter</a></li><li><a href="#s-10-2">10.2 Static CMOS gate design</a></li><li><a href="#s-10-3">10.3 Propagation delay</a></li><li><a href="#s-10-4">10.4 Power dissipation</a></li><li><a href="#s-10-5">10.5 Other logic families (revision)</a></li><li><a href="#s-10-6">10.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Building gates from pull-up and pull-down networks, transistor counts, noise margins, propagation delay (RC and logical effort), fan-in and fan-out, and dynamic power \(\alpha CV^2f\). Includes the legacy TTL numbers that still appear in questions.</p></div></div>
+<h2 id="s-10-1"><span class="n">10.1</span> The CMOS inverter</h2>
+<p>A PMOS (pull-up) and an NMOS (pull-down) share the gate and drain. For \(V_{in}=0\) the PMOS conducts and \(V_{out}=V_{DD}\); for \(V_{in}=V_{DD}\) the NMOS conducts and \(V_{out}=0\). In steady state one transistor is always off, so there is (ideally) no DC path from \(V_{DD}\) to ground.</p>
+<div class="box formula"><div class="bt">Inverter parameters</div><div class="bb"><p>Switching threshold (\(V_{in}=V_{out}=V_M\), both transistors in saturation):
+\[
+V_M=\frac{V_{Tn}+r\,(V_{DD}-|V_{Tp}|)}{1+r},\qquad r=\sqrt{\frac{\beta_p}{\beta_n}},\ \ \beta=\mu C_{ox}\frac WL .
+\]
+A symmetric inverter (\(\beta_n=\beta_p\), \(V_{Tn}=|V_{Tp}|\)) has \(V_M=V_{DD}/2\); since \(\mu_n\approx2\)–\(3\,\mu_p\), make \((W/L)_p\approx2\)–\(3\,(W/L)_n\).<br>
+Noise margins: \(NM_H=V_{OH}-V_{IH}\), \(\ NM_L=V_{IL}-V_{OL}\), with \(V_{OH}=V_{DD}\) and \(V_{OL}=0\) for CMOS.</p></div></div>
+<div class="box example"><div class="bt">Switching threshold</div><div class="bb"><p>\(V_{DD}=1.8\,\)V, \(V_{Tn}=|V_{Tp}|=0.4\,\)V. Equal \(\beta\): \(V_M=0.9\,\)V. If \(\beta_p/\beta_n=4\) (\(r=2\)): \(V_M=\dfrac{0.4+2(1.8-0.4)}{3}=1.07\,\)V (the threshold moves toward \(V_{DD}\) when the PMOS is stronger).</p></div></div>
+<h2 id="s-10-2"><span class="n">10.2</span> Static CMOS gate design</h2>
+<figure id="fig-10-1"><div class="figimgs"><img src="img/d10_cmos_nand.png" alt="" loading="lazy"></div><figcaption><b>Figure 10.1.</b> Two-input static CMOS NAND gate: series NMOS pull-down, parallel PMOS pull-up.</figcaption></figure>
+<div class="box formula"><div class="bt">Pull-up / pull-down rule</div><div class="bb"><p>A static CMOS gate has a <strong>pull-down network (PDN)</strong> of NMOS devices that conducts when the function’s complement \(\overline F\) should pull the output low, and a <strong>pull-up network (PUN)</strong> of PMOS devices that is the <em>dual</em>. AND \(\to\) series in the PDN, OR \(\to\) parallel in the PDN; the PUN swaps series and parallel.<br>
+\(n\)-input NAND or NOR: \(2n\) transistors. Every static CMOS gate is <em>inverting</em>; AND and OR need an extra inverter (\(2n+2\) transistors).<br>
+Complex gate \(F=\overline{AB+C}\): PDN = (\(A\) series \(B\)) parallel \(C\); PUN = (\(A\) parallel \(B\)) series \(C\); 6 transistors.<br>
+\(F=\overline{AB+CD}\) (AOI22): 8 transistors.</p></div></div>
+<div class="center"><div class="tw"><table><thead><tr><th>Gate</th><th class="c">PDN</th><th class="c">PUN</th><th class="c">Transistors</th></tr></thead><tbody><tr><td>Inverter</td><td class="c">1 NMOS</td><td class="c">1 PMOS</td><td class="c">2</td></tr><tr><td>NAND2</td><td class="c">2 NMOS series</td><td class="c">2 PMOS parallel</td><td class="c">4</td></tr><tr><td>NOR2</td><td class="c">2 NMOS parallel</td><td class="c">2 PMOS series</td><td class="c">4</td></tr><tr><td>NAND3</td><td class="c">3 series</td><td class="c">3 parallel</td><td class="c">6</td></tr><tr><td>AND2</td><td class="c">NAND2 + inverter</td><td class="c"></td><td class="c">6</td></tr><tr><td>XOR2 (static, with input inverters)</td><td class="c"></td><td class="c"></td><td class="c">12 (fewer with transmission gates)</td></tr></tbody></table></div></div>
+<p>Series stacks are slower (higher resistance), so series devices are made wider. NOR gates are worse than NAND gates because series PMOS (low mobility) are slow.</p>
+<h3 id="s-10-2-1"><span class="n">10.2.1</span> Pass-transistor and transmission-gate logic</h3>
+<p>An NMOS pass transistor passes a strong 0 but a weak 1 (\(V_{DD}-V_{Tn}\), threshold drop); a PMOS passes a strong 1 but a weak 0. A <strong>transmission gate</strong> (NMOS and PMOS in parallel with complementary controls) passes both levels without a drop and is used for MUXes, XOR gates and latches.</p>
+<h2 id="s-10-3"><span class="n">10.3</span> Propagation delay</h2>
+<div class="box formula"><div class="bt">Delay definitions and RC model</div><div class="bb"><p>\(t_{pHL}\): time from the input crossing 50% to the output falling through 50%; \(t_{pLH}\) for the rising output. \(\ t_{pd}=\tfrac12(t_{pHL}+t_{pLH})\). Rise/fall times are measured between 10% and 90% (or 20% and 80%).<br>
+First-order RC model: \(t_{pHL}\approx0.69\,R_nC_L\), \(\ t_{pLH}\approx0.69\,R_pC_L\) (with \(R_{n,p}\) the equivalent on-resistance).<br>
+Series stack of \(k\) equal devices: resistance \(kR\), so delay rises with fan-in (roughly quadratically when the internal node capacitances are included, as in the Elmore model).<br>
+Load capacitance \(C_L=C_{wire}+\sum C_{gate}\) grows linearly with fan-out.</p></div></div>
+<p><strong>Fan-in</strong> is the number of inputs of a gate; large fan-in means long series stacks and slow gates (practically \(\le4\)). <strong>Fan-out</strong> is the number of gate inputs driven; for CMOS the DC fan-out is essentially unlimited (gate current is zero) but the delay increases linearly with fan-out because of the capacitive load.</p>
+<h3 id="s-10-3-1"><span class="n">10.3.1</span> Logical effort (compact form)</h3>
+<div class="box formula"><div class="bt">Logical effort</div><div class="bb"><p>Gate delay \(d=g\,h+p\) in units of \(\tau\), where \(g\) is the logical effort, \(h=C_{out}/C_{in}\) the electrical effort and \(p\) the parasitic delay. Inverter: \(g=1\), \(p=1\). NAND2: \(g=4/3\); NOR2: \(g=5/3\); NAND\(k\): \(g=(k+2)/3\); NOR\(k\): \(g=(2k+1)/3\).<br>
+For a path of \(N\) stages: \(F=GBH\), optimum stage effort \(\hat f=F^{1/N}\), and minimum delay \(D=N\,F^{1/N}+P\).</p></div></div>
+<h3 id="s-10-3-2"><span class="n">10.3.2</span> Critical path delay</h3>
+<p>The critical path is the longest (slowest) combinational path from a register output (or input) to a register input; it fixes the minimum clock period:
+\[
+T_{clk}\ge t_{cq}+t_{pd,max}+t_{su}.
+\]
+Add the gate delays along each candidate path. A <em>false path</em> may be topologically long but never sensitised.</p>
+<h2 id="s-10-4"><span class="n">10.4</span> Power dissipation</h2>
+<div class="box formula"><div class="bt">CMOS power</div><div class="bb"><p>Dynamic (switching): \(P_{dyn}=\alpha\,C_L V_{DD}^2 f\), where \(\alpha\) is the switching activity. Energy per full charge–discharge cycle \(=C_LV_{DD}^2\); energy stored on the capacitor \(\tfrac12C_LV_{DD}^2\).<br>
+Short-circuit: current while both devices conduct during an input transition. Static: sub-threshold and gate leakage.<br>
+Power–delay product \(=P\cdot t_{pd}\). Reducing \(V_{DD}\) cuts power quadratically.</p></div></div>
+<h2 id="s-10-5"><span class="n">10.5</span> Other logic families (revision)</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Family</th><th class="c">\(V_{OH}\) (min)</th><th class="c">\(V_{OL}\) (max)</th><th class="c">\(V_{IH}\) (min)</th><th class="c">\(V_{IL}\) (max)</th></tr></thead><tbody><tr><td>Standard TTL</td><td class="c">2.4 V</td><td class="c">0.4 V</td><td class="c">2.0 V</td><td class="c">0.8 V</td></tr></tbody></table></div></div>
+<p>TTL noise margins: \(NM_H=2.4-2.0=0.4\,\)V, \(NM_L=0.8-0.4=0.4\,\)V. Fan-out \(=\min\!\left(\dfrac{I_{OL}}{I_{IL}},\dfrac{I_{OH}}{I_{IH}}\right)=\dfrac{16\,\text{mA}}{1.6\,\text{mA}}=10\) for standard TTL. Open-collector outputs allow wired-AND and bus interfacing with an external pull-up. ECL operates the BJTs out of saturation for the highest speed and has a negative supply. Tri-state outputs add a high-impedance state.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) In a NAND gate NMOS are in <em>series</em>, PMOS in <em>parallel</em>; the reverse holds for NOR. (ii) Static CMOS cannot implement a non-inverting function in one stage. (iii) Dynamic power depends on \(V_{DD}^2\) but not on the transistor on-resistance. (iv) CMOS DC fan-out is not the limitation; capacitive load is.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Transistor count of a single-stage gate \(=2\times\) (number of literals). For \(\overline{(A+B)(C+D)}\): PDN is (A||B) in series with (C||D). Power scales as \(V^2f\); delay scales roughly as \(C_L/\!\left(\beta(V_{DD}-V_T)\right)\).</p></div></div>
+<h2 id="s-10-6"><span class="n">10.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The number of transistors in a static CMOS 4-input NOR gate: (A) 4 (B) 6 (C) 8 (D) 10.</p>
+<p><strong>Q2.</strong> In a static CMOS NAND gate, the NMOS transistors are connected (A) in parallel (B) in series (C) in a bridge (D) not at all.</p>
+<p><strong>Q3.</strong> If \(V_{DD}\) is halved at the same frequency and capacitance, dynamic power becomes (A) 1/2 (B) 1/4 (C) 1/8 (D) unchanged.</p>
+<p><strong>Q4.</strong> A CMOS PDN has \(A\) in series with (\(B\) parallel \(C\)). The gate computes \(F=\) (A) \(\overline{A+BC}\) (B) \(\overline{A(B+C)}\) (C) \(A(B+C)\) (D) \(\overline{AB+C}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C). Q2 (B). Q3 (B). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A CMOS inverter has \(V_{DD}=1.8\) V, \(V_{Tn}=|V_{Tp}|=0.4\) V, \(\beta_p/\beta_n=4\). The switching threshold is approximately (A) 0.9 V (B) 1.07 V (C) 1.2 V (D) 1.4 V.</p>
+<p><strong>Q6.</strong> Five identical inverters in a chain each have \(t_{pHL}=2\) ns, \(t_{pLH}=3\) ns. The delay from a rising input to the last stage output (ns): (A) 10 (B) 12 (C) 13 (D) 15.</p>
+<p><strong>Q7.</strong> A static CMOS gate implements \(F=\overline{AB+CD+E}\). The number of transistors is (A) 6 (B) 8 (C) 10 (D) 12.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (B): rising input \(\to\) stage 1 output falls (2), then rises (3), falls (2), rises (3), falls (2): \(12\). Q7 (C): five literals \(\Rightarrow10\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> \(\alpha=0.2\), \(C_L=50\,\)fF, \(V_{DD}=1.2\,\)V, \(f=500\,\)MHz. Dynamic power (\(\mu\)W): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> A 5-stage ring oscillator has \(t_{pd}=0.2\,\)ns per inverter. Oscillation frequency (MHz): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> A path with total effort \(F=64\) is driven with 3 stages of inverters (\(p_{inv}=1\)). Minimum delay in units of \(\tau\): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(0.2\times50\text{ fF}\times1.44\times500\text{ MHz}=7.2\,\mu\)W. Q9: \(f=1/(2Nt_{pd})=1/(10\times0.2\text{ ns})=500\) MHz. Q10: \(f=4\) per stage, \(D=3(4+1)=15\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select true statements. (A) Dynamic power is proportional to switching frequency. (B) A NAND2 uses series NMOS devices. (C) Ideal static CMOS dissipates large DC power. (D) \(NM_H=V_{OH}-V_{IH}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Transistors in a CMOS 3-input NAND. &emsp; <strong>T2.</strong> TTL fan-out for \(I_{OL}=16\,\)mA, \(I_{IL}=1.6\,\)mA. &emsp; <strong>T3.</strong> Formula for \(f_{osc}\) of an \(N\)-stage ring oscillator.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 6. T2: 10. T3: \(f=1/(2Nt_{pd})\) (\(N\) odd).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>PDN = function of \(\overline F\) (series=AND, parallel=OR); PUN = dual. \(2n\) transistors for \(n\) literals.</li><li>\(V_M\) from \(\beta\) ratio; \(NM_H=V_{OH}-V_{IH}\), \(NM_L=V_{IL}-V_{OL}\).</li><li>\(t_{pd}=\tfrac12(t_{pHL}+t_{pLH})\); fan-in slows the gate, fan-out loads it.</li><li>\(P_{dyn}=\alpha C V_{DD}^2f\); ring oscillator \(1/(2Nt_{pd})\); \(D=NF^{1/N}+P\).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch09.html">&larr; Finite State Machines: Mealy, Moore and State Minimization</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch11.html">Timing: Setup, Hold, Clock Skew and Pipelining &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

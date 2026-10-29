@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 10: Error-Control Coding: Block, Cyclic and Convolutional Codes | Communications | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Linear block codes (G, H, syndrome, d_{min}), Hamming codes, cyclic codes and CRC, convolutional encoding with trellis/Viterbi decoding, code rate, d_{free} and error-correcting capability.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/communications/ch10.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 10: Error-Control Coding: Block, Cyclic and Convolutional Codes | Communications | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Linear block codes (G, H, syndrome, d_{min}), Hamming codes, cyclic codes and CRC, convolutional encoding with trellis/Viterbi decoding, code rate, d_{free} and error-correcting capability."><meta property="og:url" content="https://vintechnologies.co.in/gate/communications/ch10.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Communications</a></div><div class="chlabel">Chapter 10</div><h1>Error-Control Coding: Block, Cyclic and Convolutional Codes</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-10-1">10.1 Principles</a></li><li><a href="#s-10-2">10.2 Linear block codes</a></li><li><a href="#s-10-3">10.3 Cyclic codes and CRC</a></li><li><a href="#s-10-4">10.4 Convolutional codes</a></li><li><a href="#s-10-5">10.5 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Linear block codes (\(G\), \(H\), syndrome, \(d_{min}\)), Hamming codes, cyclic codes and CRC, convolutional encoding with trellis/Viterbi decoding, code rate, \(d_{free}\) and error-correcting capability.</p></div></div>
+<h2 id="s-10-1"><span class="n">10.1</span> Principles</h2>
+<p>Redundant bits are added so that the receiver can detect (ARQ) or correct (FEC) errors. A block code maps \(k\) message bits to \(n\) code bits: \((n,k)\) code, <strong>rate</strong> \(R_c=k/n\), redundancy \(n-k\). The <strong>Hamming distance</strong> \(d(\mathbf x,\mathbf y)\) counts differing positions; the minimum distance \(d_{min}\) determines performance:</p>
+<div class="box formula"><div class="bt">Capability</div><div class="bb"><p>Detect \(d_{min}-1\) errors; correct \(t=\left\lfloor\dfrac{d_{min}-1}2\right\rfloor\) errors; detect \(e\) and correct \(t\) together if \(d_{min}\ge e+t+1\); correct \(d_{min}-1\) erasures.<br>
+Singleton bound: \(d_{min}\le n-k+1\). Hamming bound (binary): \(2^{n-k}\ge\sum_{i=0}^t\binom ni\); equality for <strong>perfect</strong> codes (Hamming codes, repetition codes of odd length, Golay).</p></div></div>
+<div class="box example"><div class="bt">Repetition code</div><div class="bb"><p>\((3,1)\) repeats each bit three times, \(d_{min}=3\), \(t=1\), \(R_c=1/3\). For a BSC with \(p=0.01\) the decoded bit error probability (majority vote) is \(3p^2(1-p)+p^3=2.98\times10^{-4}\), a reduction of \(\approx34\) times at one-third the rate.</p></div></div>
+<h2 id="s-10-2"><span class="n">10.2</span> Linear block codes</h2>
+<p>A linear code is a \(k\)-dimensional subspace of \(\mathrm{GF}(2)^n\): the sum of codewords is a codeword and \(\mathbf0\) is one.</p>
+<div class="box formula"><div class="bt">Matrix description</div><div class="bb"><p>Generator matrix (systematic) \(G=[\,I_k\mid P\,]\): \(\ \mathbf c=\mathbf mG=[\mathbf m\mid\mathbf mP]\).<br>
+Parity-check matrix \(H=[\,P^T\mid I_{n-k}\,]\): \(\ GH^T=0\), \(\ \mathbf cH^T=\mathbf0\).<br>
+Received \(\mathbf r=\mathbf c+\mathbf e\): syndrome \(\mathbf s=\mathbf rH^T=\mathbf eH^T\). For a single error the syndrome equals the column of \(H\) at the error position.<br>
+\(d_{min}=\) minimum weight of a non-zero codeword \(=\) smallest number of linearly dependent columns of \(H\).<br>
+Number of codewords \(2^k\); number of correctable error patterns (syndromes) \(2^{n-k}\).</p></div></div>
+<h3 id="s-10-2-1"><span class="n">10.2.1</span> Hamming codes</h3>
+<p>\((n,k)=(2^r-1,\,2^r-1-r)\), \(d_{min}=3\) (single-error correcting, double-error detecting), perfect. The columns of \(H\) are all non-zero \(r\)-bit vectors, so the syndrome directly gives the error position. Extended Hamming (\(2^r,\,2^r-1-r\)) adds an overall parity bit: \(d_{min}=4\) (SEC-DED).</p>
+<div class="box example"><div class="bt">(7,4) Hamming code</div><div class="bb"><p>\(P=\begin{bmatrix}1&amp;1&amp;0\\0&amp;1&amp;1\\1&amp;1&amp;1\\1&amp;0&amp;1\end{bmatrix}\), \(G=[I_4|P]\). Message \(1011\Rightarrow\) parity \(=\mathbf mP=(1{+}0{+}1{+}1,\ 1{+}0{+}1{+}0,\ 0{+}0{+}1{+}1)=(1,0,0)\), codeword \(1011\,100\).<br>
+Received \(1001100\) (bit 3 in error): \(\mathbf s=\mathbf rH^T=(1,1,1)\), which is column 3 of \(H=[P^T|I]\); flip bit 3 to recover \(1011100\).<br>
+Weight distribution: one word of weight 0, seven of weight 3, seven of weight 4, one of weight 7: \(d_{min}=3\).</p></div></div>
+<h2 id="s-10-3"><span class="n">10.3</span> Cyclic codes and CRC</h2>
+<p>A cyclic shift of a codeword is a codeword. Codewords are multiples of the <strong>generator polynomial</strong> \(g(x)\) of degree \(n-k\), which divides \(x^n+1\).</p>
+<div class="box formula"><div class="bt">Cyclic codes</div><div class="bb"><p>Systematic encoding: \(c(x)=x^{n-k}m(x)+\big[x^{n-k}m(x)\bmod g(x)\big]\).<br>
+Syndrome \(s(x)=r(x)\bmod g(x)\) (\(=0\) iff valid). Parity-check polynomial \(h(x)=(x^n+1)/g(x)\).<br>
+\((7,4)\) Hamming: \(g(x)=x^3+x+1\) (\(x^7+1=(x+1)(x^3+x+1)(x^3+x^2+1)\)). Encoding by shift registers with \(n-k\) stages.<br>
+<strong>CRC</strong>: a cyclic code used for detection; detects all burst errors of length \(\le n-k\), all odd errors if \((x+1)\mid g(x)\), and double errors if \(g\) is primitive-like. CRC-16 and CRC-32 are standard; message \(1001\) with \(g=1011\) gives remainder \(110\), codeword \(1001110\).</p></div></div>
+<p><strong>Burst errors</strong> are handled by interleaving (spreading adjacent bits over many codewords) or by Reed–Solomon codes (non-binary, symbol-level, optimal \(d_{min}=n-k+1\); used in CDs, DVB).</p>
+<h2 id="s-10-4"><span class="n">10.4</span> Convolutional codes</h2>
+<p>Output depends on the current and the previous \(K-1\) input bits (constraint length \(K\), memory \(K-1\)), produced by modulo-2 sums of shift-register taps.</p>
+<div class="box formula"><div class="bt">Rate-1/2, \(K=3\) code with \(g_1=111_2\) (7), \(g_2=101_2\) (5)</div><div class="bb"><p>Rate \(R_c=\dfrac kn=\dfrac12\); number of encoder states \(2^{K-1}=4\); each input bit gives 2 output bits.<br>
+A message of \(L\) bits followed by \(K-1\) tail zeros produces \(n(L+K-1)\) coded bits (rate slightly below \(1/2\)).<br>
+Free distance \(d_{free}=5\) (minimum weight of any path that leaves and returns to the all-zero state); hard-decision decoding corrects \(\lfloor(d_{free}-1)/2\rfloor=2\) errors in a constraint-length span.</p></div></div>
+<div class="box example"><div class="bt">Encoding</div><div class="bb"><p>Input \(1\,0\,1\,1\) followed by tail \(0\,0\) (initial state 00): output pairs \(11,\ 10,\ 00,\ 01,\ 01,\ 11\).<br>
+State diagram: states are the two previous bits \((u_{k-1},u_{k-2})\); the trellis repeats the same 4-state pattern each step.</p></div></div>
+<h3 id="s-10-4-1"><span class="n">10.4.1</span> Viterbi decoding</h3>
+<p>The Viterbi algorithm finds the maximum-likelihood path through the trellis: at each time and state keep only the <em>survivor</em>, the path with the smallest accumulated metric (Hamming distance for hard decisions, Euclidean for soft decisions), then trace back from the final state. Complexity is \(2^{K-1}\) path metrics per step: linear in message length, exponential in \(K\).</p>
+<div class="box example"><div class="bt">Viterbi</div><div class="bb"><p>Transmitted \(11\,10\,00\,01\,01\,11\) but received \(11\,10\,\mathbf{10}\,01\,01\,11\) (one channel error). The minimum-metric path ends in state 00 with metric \(1\) and decodes to \(1\,0\,1\,1\,0\,0\): the error is corrected and the tail bits are discarded, giving the message \(1011\).</p></div></div>
+<p><strong>Coding gain.</strong> Soft-decision Viterbi decoding gains about 2 dB more than hard decision. <strong>Puncturing</strong> raises the rate (e.g. \(2/3\), \(3/4\)) by deleting some coded bits. <strong>Turbo and LDPC codes</strong> approach the Shannon limit using iterative decoding.</p>
+<h3 id="s-10-4-2"><span class="n">10.4.2</span> ARQ</h3>
+<p>Stop-and-wait, go-back-\(N\), selective repeat: request retransmission when an error is detected (CRC). Hybrid ARQ combines FEC and ARQ.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(d_{min}\) of a linear code equals the minimum non-zero weight, not the average. (ii) Syndrome zero does not guarantee no error (an undetectable pattern is itself a codeword). (iii) Convolutional rate is \(k/n\), but the effective rate is reduced by tail bits. (iv) Hamming \((7,4)\) detects 2 errors but corrects only 1. (v) Number of states is \(2^{K-1}\), not \(2^K\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Hamming \((2^r-1,2^r-1-r)\). \(t=\lfloor(d_{min}-1)/2\rfloor\). Syndrome \(\to\) error position via \(H\) columns. CRC remainder: modulo-2 division of \(m(x)x^{n-k}\) by \(g(x)\). Convolutional coded length \(=n\,(L+K-1)\).</p></div></div>
+<h2 id="s-10-5"><span class="n">10.5</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The minimum distance of a \((7,4)\) Hamming code is (A) 2 (B) 3 (C) 4 (D) 7.</p>
+<p><strong>Q2.</strong> The number of parity bits of a \((15,11)\) Hamming code is (A) 3 (B) 4 (C) 5 (D) 11.</p>
+<p><strong>Q3.</strong> To correct 2 errors a code must have \(d_{min}\ge\) (A) 3 (B) 4 (C) 5 (D) 6.</p>
+<p><strong>Q4.</strong> The number of states of a rate-1/2 convolutional encoder with constraint length \(K=4\) is (A) 4 (B) 8 (C) 16 (D) 2.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (B). Q3 (C). Q4 (B): \(2^{K-1}\).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> With the \((7,4)\) code above (parity bits last), the received word \(1001100\) has the error at bit position (A) 1 (B) 3 (C) 5 (D) 7.</p>
+<p><strong>Q6.</strong> A \((3,1)\) repetition code on a BSC with \(p=0.01\) has decoded error probability about (A) \(10^{-2}\) (B) \(3\times10^{-4}\) (C) \(10^{-6}\) (D) \(3\times10^{-2}\).</p>
+<p><strong>Q7.</strong> Message \(1001\) with generator \(x^3+x+1\) gives the systematic cyclic codeword (A) 1001110 (B) 1001011 (C) 1001101 (D) 1001100.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (B). Q7 (A).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Total coded bits for a 100-bit message with tail bits, rate-1/2, \(K=3\): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> \(d_{free}\) of the \((7,5)\) \(K=3\) code: <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Rate of the \((15,11)\) Hamming code (two decimals): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(2\times102=204\). Q9: 5. Q10: 0.73.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Select the true statements. (A) The all-zero word is a codeword of every linear code. (B) The Viterbi algorithm gives ML decoding. (C) Hamming codes are perfect. (D) Convolutional codes have fixed block length.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(t\) for \(d_{min}=6\). &emsp; <strong>T2.</strong> Convolutional output for input \(1\) from state 00 (\(g=7,5\)). &emsp; <strong>T3.</strong> Why interleave?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 2 (detects 5). T2: \(11\). T3: converts burst errors into scattered errors.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\((n,k)\), \(R_c=k/n\); detect \(d_{min}-1\), correct \(\lfloor(d_{min}-1)/2\rfloor\); \(G=[I|P]\), \(H=[P^T|I]\), \(s=rH^T\).</li><li>Hamming \((2^r-1,2^r-1-r)\), \(d_{min}=3\), perfect; cyclic \(g(x)\mid x^n+1\); CRC detects bursts \(\le n-k\).</li><li>Convolutional: \(2^{K-1}\) states, Viterbi ML, \(d_{free}=5\) for (7,5).</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch09.html">&larr; Information Theory: Entropy, Capacity and Source Coding</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch11.html">Wireless and Optical Links: Link Budget, Fading and Fibre &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Qf": "\\mathrm{Q}", "\\EbNo": "E_b/N_0", "\\Eb": "E_b", "\\Nzero": "N_0", "\\Rb": "R_b", "\\Rs": "R_s", "\\fc": "f_c", "\\fm": "f_m", "\\Ac": "A_c", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\erfc": "\\operatorname{erfc}", "\\E": "\\operatorname{E}", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

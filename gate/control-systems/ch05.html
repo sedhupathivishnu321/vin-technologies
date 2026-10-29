@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 5: Block Diagram Representation | Control Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Reduce a multi-loop block diagram to a single transfer function. Reliable 2-mark question: the trick is knowing which summing/take-off point to move and what to multiply by.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/control-systems/ch05.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 5: Block Diagram Representation | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Reduce a multi-loop block diagram to a single transfer function. Reliable 2-mark question: the trick is knowing which summing/take-off point to move and what to multiply by."><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch05.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 5</div><h1>Block Diagram Representation</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-5-1">5.1 Core concept</a></li><li><a href="#s-5-2">5.2 Basic reductions</a></li><li><a href="#s-5-3">5.3 Moving points: the rules</a></li><li><a href="#s-5-4">5.4 Reduction procedure</a></li><li><a href="#s-5-5">5.5 Worked examples</a></li><li><a href="#s-5-6">5.6 Physical interpretation</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Reduce a multi-loop block diagram to a single transfer function. Reliable 2-mark question: the trick is knowing which summing/take-off point to move and what to multiply by.</p></div></div>
+<h2 id="s-5-1"><span class="n">5.1</span> Core concept</h2>
+<p>A block diagram shows signal flow between subsystems. Elements: <strong>block</strong> (transfer function), <strong>summing point</strong> (algebraic sum, signs at the arrows), <strong>take-off (pick-off) point</strong> (copies a signal without loading it), and <strong>arrows</strong> (signal direction).</p>
+<h2 id="s-5-2"><span class="n">5.2</span> Basic reductions</h2>
+<div class="box formula"><div class="bt">Standard combinations</div><div class="bb"><p>Cascade: \(G_1G_2\). &emsp; Parallel: \(G_1\pm G_2\). &emsp; Negative feedback loop: \(\dfrac{G}{1+GH}\). &emsp; Positive: \(\dfrac{G}{1-GH}\).<br>
+Unity-feedback conversion: \(\dfrac{G}{1+GH}=\dfrac{1}{H}\cdot\dfrac{GH}{1+GH}\).</p></div></div>
+<h2 id="s-5-3"><span class="n">5.3</span> Moving points: the rules</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Move</th><th>What to do</th></tr></thead><tbody><tr><td>Take-off point from <em>before</em> \(G\) to <em>after</em> \(G\)</td><td>put a block \(1/G\) in the taken-off branch</td></tr><tr><td>Take-off point from <em>after</em> \(G\) to <em>before</em> \(G\)</td><td>put a block \(G\) in the taken-off branch</td></tr><tr><td>Summing point from <em>before</em> \(G\) to <em>after</em> \(G\) (for the added signal)</td><td>put \(G\) in that branch</td></tr><tr><td>Summing point from <em>after</em> \(G\) to <em>before</em> \(G\)</td><td>put \(1/G\) in that branch</td></tr><tr><td>Two adjacent summing points</td><td>may be interchanged and merged</td></tr><tr><td>Take-off past a summing point</td><td><em>not</em> allowed directly: add a matching summing branch</td></tr></tbody></table></div></div>
+<p>The guiding idea: the total transfer from every input to every output must stay unchanged, so a block “crossed” by a branch must be compensated by that block or its inverse.</p>
+<h2 id="s-5-4"><span class="n">5.4</span> Reduction procedure</h2>
+<ol><li>Combine cascade blocks and parallel blocks.</li><li>Eliminate inner (nested) feedback loops first.</li><li>Shift summing/take-off points only to free the loops that interlace (cross).</li><li>Repeat until one block remains; check the sign of every loop.</li></ol>
+<h2 id="s-5-5"><span class="n">5.5</span> Worked examples</h2>
+<figure id="fig-5-1"><div class="figimgs"><img src="img/c05_ex1.png" alt="" loading="lazy"></div><figcaption><b>Figure 5.1.</b> Nested loops: inner \(H_1\) around \(G_2\), outer \(H_2\) around \(G_1G_2G_3\).</figcaption></figure>
+<div class="box example"><div class="bt">Nested loop</div><div class="bb"><p>Inner loop \(G_2\) with \(H_1\): \(G_2'=\dfrac{G_2}{1+G_2H_1}\). Outer: forward path \(G_1G_2'G_3\), feedback \(H_2\):
+\[
+\dfrac CR=\dfrac{G_1G_2G_3}{1+G_2H_1+G_1G_2G_3H_2}.
+\]
+Numbers: \(G_1=10\), \(G_2=\dfrac1{s+1}\), \(G_3=\dfrac1{s+2}\), \(H_1=H_2=1\): denominator \(1+\dfrac1{s+1}+\dfrac{10}{(s+1)(s+2)}=\dfrac{s^2+4s+14}{(s+1)(s+2)}\), so \(\dfrac CR=\dfrac{10}{s^2+4s+14}\): \(\omega_n=\sqrt{14}\), \(\zeta=\dfrac{4}{2\sqrt{14}}=0.53\).</p></div></div>
+<div class="box example"><div class="bt">Moving a take-off point</div><div class="bb"><p>In a cascade \(G_1\to G_2\) a feedback \(H\) is taken from the output of \(G_1\) (between the blocks) back to the input summer. To make it a standard loop around \(G_1G_2\), move the take-off to the output of \(G_2\): it now sees an extra factor \(G_2\), so put \(G_2\) in the branch and the feedback becomes \(H/G_2\). Then \(\dfrac CR=\dfrac{G_1G_2}{1+G_1G_2\cdot H/G_2}=\dfrac{G_1G_2}{1+G_1H}\), agreeing with the direct result (loop \(G_1H\) only).</p></div></div>
+<div class="box example"><div class="bt">Parallel + feedback</div><div class="bb"><p>Forward path \(G_1+G_2\) (parallel), feedback \(H\): \(\dfrac{G_1+G_2}{1+(G_1+G_2)H}\).</p></div></div>
+<div class="box example"><div class="bt">Two inputs</div><div class="bb"><p>For \(R\) and disturbance \(D\): superpose. With \(D\) entering after \(G_1\), \(\dfrac CD=\dfrac{G_2}{1+G_1G_2H}\) and \(\dfrac CR=\dfrac{G_1G_2}{1+G_1G_2H}\); total \(C=\dfrac CRR+\dfrac CDD\).</p></div></div>
+<h2 id="s-5-6"><span class="n">5.6</span> Physical interpretation</h2>
+<p>Reduction is algebra on the equations \(C=GE\), \(E=R-HC\), block by block; the diagram only organises the equations. Loops multiply around the circuit; parallel paths add.</p>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>For a single-loop system: \(\dfrac{\text{forward-path gain}}{1+\text{loop gain}}\) with the sign of the loop gain set by the feedback sign. For several <em>touching</em> loops, the denominator is \(1+\sum(\text{loop gains for negative feedback})\). Use Mason’s formula (next chapter) when loops interlace.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) Moving a take-off point across a summing point without compensation. (ii) Forgetting that a block that is passed in the branch must be compensated: take-off before\(\to\)after needs \(1/G\), after\(\to\)before needs \(G\); summing point before\(\to\)after needs \(G\), after\(\to\)before needs \(1/G\). (iii) Wrong sign on positive-feedback inner loops: \(G/(1-GH)\). (iv) Cancelling \(G\) against \(1/G\) when both are functions of \(s\) and unstable.</p></div></div>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> Two blocks \(G_1\), \(G_2\) in parallel with the outputs summed: (A) \(G_1G_2\) (B) \(G_1+G_2\) (C) \(G_1/G_2\) (D) \(\dfrac{G_1}{1+G_1G_2}\).</p>
+<p><strong>Q2.</strong> A take-off point is moved <em>after</em> block \(G\). The branch must be multiplied by (A) \(1/G\) (B) \(G\) (C) \(1\) (D) \(-G\).</p>
+<p><strong>Q3.</strong> Positive feedback loop with forward gain \(G\) and feedback \(H\): (A) \(\dfrac{G}{1+GH}\) (B) \(\dfrac{G}{1-GH}\) (C) \(\dfrac{GH}{1+GH}\) (D) \(GH\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B). Q2 (A). Q3 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q4.</strong> A unity negative feedback loop has \(G(s)=\dfrac{1}{(s+1)^2}\). \(C/R=\) (A) \(\dfrac1{s^2+2s+2}\) (B) \(\dfrac{1}{s^2+2s+1}\) (C) \(\dfrac{1}{s^2+2s}\) (D) \(\dfrac{1}{s+2}\).</p>
+<p><strong>Q5.</strong> In the nested-loop example set \(G_1=G_2=G_3=1\), \(H_1=1\), \(H_2=2\). Then \(C/R=\) (A) \(\dfrac14\) (B) \(\dfrac13\) (C) \(\dfrac12\) (D) \(\dfrac15\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q4 (A): \(\dfrac{1}{(s+1)^2+1}\). Q5 (A): \(\dfrac{1}{1+1+2}=\dfrac14\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q6.</strong> Same as Q5 but \(H_1=0.5\), \(H_2=1\): \(C/R=\) <span class="blank"></span> (two decimals).</p>
+<p><strong>Q7.</strong> \(G_1=2,\ G_2=3,\ H=0.5\) in the form \(\dfrac{G_1G_2}{1+G_1G_2H}\): value <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q6: \(\dfrac1{1+0.5+1}=0.40\). Q7: \(6/(1+3)=1.5\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q8.</strong> Which are valid block-diagram moves? (A) take-off past a block (with \(G\) or \(1/G\) compensation) (B) interchange two summing points (C) move a take-off past a summing point with no change (D) combine parallel blocks.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: (A), (B), (D).</p>
+<div class="box gateq"><div class="bt">Previous-year pattern</div><div class="bb"><p>A unity-feedback system has forward path \(G_1G_2\) with an extra feedback \(H_2\) from the output of \(G_1\) to the input of \(G_1\): \(C/R=\dfrac{G_1G_2}{1+G_1H_2+G_1G_2}\). With \(G_1=\dfrac1s\), \(G_2=\dfrac1{s+1}\), \(H_2=1\): \(\dfrac{1}{s(s+1)+(s+1)+1}=\dfrac1{s^2+2s+2}\).</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Reduce: forward \(G_1G_2\), inner feedback \(H_1\) around \(G_2\), outer unity feedback. Write \(C/R\).<br>
+<strong>T2.</strong> What compensation is needed to move a summing point from after \(G\) to before \(G\)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(\dfrac{G_1G_2}{1+G_2H_1+G_1G_2}\). T2: multiply the added branch by \(1/G\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Cascade \(\times\); parallel \(+\); loop \(G/(1\pm GH)\).</li><li>Take-off point: moving forward past \(G\) \(\Rightarrow\) branch gets \(1/G\); backward \(\Rightarrow\) \(G\). Summing point (added signal): forward \(\Rightarrow\) \(G\); backward \(\Rightarrow\) \(1/G\).</li><li>Eliminate inner loops first; superpose for multiple inputs.</li><li>Interlacing loops: switch to Mason’s rule.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch04.html">&larr; Feedback Principle</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch06.html">Signal Flow Graphs &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

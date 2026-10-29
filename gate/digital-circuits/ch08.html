@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 8: Counters and Shift Registers | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Modulus and flip-flop count, ripple versus synchronous counters and their maximum clock frequency, modulo-N design by reset, ring and Johnson counters, sequence generation by excitation tables, LFSRs">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch08.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 8: Counters and Shift Registers | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Modulus and flip-flop count, ripple versus synchronous counters and their maximum clock frequency, modulo-N design by reset, ring and Johnson counters, sequence generation by excitation tables, LFSRs"><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch08.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 8</div><h1>Counters and Shift Registers</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-8-1">8.1 Asynchronous (ripple) counters</a></li><li><a href="#s-8-2">8.2 Synchronous counters</a></li><li><a href="#s-8-3">8.3 Ring and Johnson counters</a></li><li><a href="#s-8-4">8.4 Shift registers</a></li><li><a href="#s-8-5">8.5 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Modulus and flip-flop count, ripple versus synchronous counters and their maximum clock frequency, modulo-\(N\) design by reset, ring and Johnson counters, sequence generation by excitation tables, LFSRs and shift-register operations.</p></div></div>
+<h2 id="s-8-1"><span class="n">8.1</span> Asynchronous (ripple) counters</h2>
+<p>In a ripple counter only the first flip-flop receives the external clock; each subsequent stage is clocked by the output of the previous one. With T flip-flops (\(T=1\)) triggered on the <em>falling</em> edge and clocked from \(Q\), the counter counts up; clocked from \(\overline Q\) it counts down (the reverse holds for rising-edge devices).</p>
+<figure id="fig-8-1"><div class="figimgs"><img src="img/d08_ripple.png" alt="" loading="lazy"></div><figcaption><b>Figure 8.1.</b> 3-bit ripple counter: outputs \(Q_0\), \(Q_1\), \(Q_2\) for eight input clock pulses (falling-edge triggered).</figcaption></figure>
+<div class="box formula"><div class="bt">Ripple-counter facts</div><div class="bb"><p>An \(n\)-flip-flop counter has modulus \(2^n\) and divides the clock by \(2^n\); the MSB output has frequency \(f_{clk}/2^n\).<br>
+Delays accumulate: the settled output requires \(n\,t_{pd}\), so the clock period must satisfy \(T_{clk}\ge n\,t_{pd}\) if the count is to be read without glitches: \(f_{max}\approx\dfrac{1}{n\,t_{pd}}\).<br>
+Number of flip-flops for modulus \(N\): \(n=\lceil\log_2 N\rceil\).</p></div></div>
+<h3 id="s-8-1-1"><span class="n">8.1.1</span> Modulo-\(N\) ripple counter (reset method)</h3>
+<p>Let the counter run to \(N\) and then clear all flip-flops asynchronously. For MOD-6 (states 0–5) detect \(N=6=110_2\) with a NAND of \(Q_2\) and \(Q_1\) feeding the active-low CLEAR. The state 110 exists only momentarily (a <em>glitch</em>) before reset: such counters are not suited to decoding that state.</p>
+<div class="box example"><div class="bt">MOD-10</div><div class="bb"><p>Four flip-flops, reset when \(Q_3Q_1=1\) (count 1010 = 10). Sequence 0–9; the state 1010 appears for about \(t_{pd}\) of the reset gate.<br>
+Cascading MOD-\(m\) and MOD-\(n\) counters gives MOD-\(mn\): MOD-6 followed by MOD-10 divides by 60 (seconds/minutes).</p></div></div>
+<h2 id="s-8-2"><span class="n">8.2</span> Synchronous counters</h2>
+<p>All flip-flops are clocked simultaneously, and the combinational logic computes each next state. For an \(n\)-bit binary up counter with T (or J=K) flip-flops:
+\[
+T_0=1,\quad T_1=Q_0,\quad T_2=Q_1Q_0,\quad T_i=Q_{i-1}Q_{i-2}\cdots Q_0 .
+\]
+For a down counter use \(\overline Q\) instead of \(Q\).</p>
+<div class="box formula"><div class="bt">Maximum clock frequency</div><div class="bb"><p>\(T_{clk}\ge t_{cq}+t_{logic}+t_{su}\), where \(t_{logic}\) is the delay of the AND/XOR logic ahead of the slowest flip-flop. For a synchronous counter this is independent of \(n\) if wide AND gates are available, otherwise it grows with the AND chain.</p></div></div>
+<p>Synchronous counters are faster and glitch-free (all outputs change after \(t_{cq}\)), at the cost of extra gates.</p>
+<h3 id="s-8-2-1"><span class="n">8.2.1</span> Designing a synchronous counter</h3>
+<ol><li>Draw the state table (present state \(\to\) next state) for the required sequence; unused states are don’t-cares.</li><li>For each transition, read the flip-flop inputs from the excitation table.</li><li>Minimise each input with K-maps (using the unused states as don’t-cares).</li><li>Check the unused states: does the counter reach the main sequence (self-starting) or lock out?</li></ol>
+<div class="box example"><div class="bt">Sequence counter with JK flip-flops</div><div class="bb"><p>Count \(0\to1\to2\to3\to4\to0\) (MOD-5, three flip-flops \(Q_2Q_1Q_0\), unused 5,6,7 are don’t-cares).<br>
+Transitions: \(000\to001,\ 001\to010,\ 010\to011,\ 011\to100,\ 100\to000\).<br>
+From the JK excitation table: \(J_0=\overline{Q_2}\) (as \(K_0=1\)), \(J_1=Q_0\), \(K_1=Q_0\), \(J_2=Q_1Q_0\), \(K_2=1\).<br>
+Check \(011\to100\): \(J_2=1\Rightarrow Q_2:0\to1\); \(K_1=Q_0=1\Rightarrow Q_1:1\to0\); \(K_0=1\Rightarrow Q_0:1\to0\). \(\checkmark\)<br>
+Lock-out check: \(101\to010\), \(110\to010\), \(111\to000\), so every unused state enters the main sequence (self-starting).</p></div></div>
+<h2 id="s-8-3"><span class="n">8.3</span> Ring and Johnson counters</h2>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th>Ring counter</th><th>Johnson (twisted-ring) counter</th></tr></thead><tbody><tr><td>Feedback</td><td>\(Q_{n-1}\to D_0\)</td><td>\(\overline{Q_{n-1}}\to D_0\)</td></tr><tr><td>States used</td><td>\(n\)</td><td>\(2n\)</td></tr><tr><td>Flip-flops for MOD-\(N\)</td><td>\(N\)</td><td>\(N/2\)</td></tr><tr><td>Decoding</td><td>none (one-hot)</td><td>2-input AND per state</td></tr><tr><td>Self-start</td><td>needs preset (one-hot start)</td><td>may enter unused cycles</td></tr></tbody></table></div></div>
+<p>A 4-bit Johnson counter (shift right, feedback \(\overline{Q_0}\to D_3\)) cycles \(0000,1000,1100,1110,1111,0111,0011,0001\): 8 states, one bit changes per clock (no decoding glitches). A 4-bit ring counter initialised to 1000 cycles through 4 states.</p>
+<h2 id="s-8-4"><span class="n">8.4</span> Shift registers</h2>
+<p>A shift register is a chain of D flip-flops; on each clock the stored word moves one position.</p>
+<div class="center"><div class="tw"><table><thead><tr><th>Type</th><th>Use</th></tr></thead><tbody><tr><td>SISO</td><td>delay line; \(n\) clocks delay</td></tr><tr><td>SIPO</td><td>serial-to-parallel conversion (receiver)</td></tr><tr><td>PISO</td><td>parallel-to-serial conversion (transmitter); needs load/shift control</td></tr><tr><td>PIPO</td><td>storage register</td></tr><tr><td>Universal</td><td>shift left/right, parallel load, hold (4:1 MUX per stage)</td></tr></tbody></table></div></div>
+<p>Shifting a binary number left by one position multiplies it by 2; shifting right divides by 2 (arithmetic shift preserves the sign bit). To shift in a serial word of \(n\) bits requires \(n\) clock pulses; a serial adder uses one FA and one carry flip-flop and takes \(n\) cycles.</p>
+<h3 id="s-8-4-1"><span class="n">8.4.1</span> Linear-feedback shift register (LFSR)</h3>
+<p>An \(n\)-bit shift register with an XOR feedback of selected taps generates pseudo-random sequences. With a primitive polynomial the period is \(2^n-1\) (all states except all-zeros, which is a lock-up state for XOR feedback).</p>
+<div class="box example"><div class="bt">LFSR</div><div class="bb"><p>3 bits, shift left, new bit \(=Q_2\oplus Q_1\), seed \(001\): \(001\to010\to101\to011\to111\to110\to100\to001\) (period \(7=2^3-1\)). A 4-bit LFSR with taps \(Q_3\oplus Q_2\) (polynomial \(x^4+x^3+1\)) has period 15. LFSRs are used for CRC, scramblers and built-in self-test.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) A ripple counter cannot be clocked as fast as a synchronous one; decoded outputs can glitch. (ii) A MOD-\(N\) counter by reset passes through state \(N\) briefly. (iii) A Johnson counter has \(2n\) states but may have invalid cycles if not self-correcting. (iv) A 4-bit register cannot count mod 17.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Johnson with \(n\) flip-flops: MOD \(2n\). Ring: MOD \(n\). Binary: MOD \(2^n\). LFSR (primitive): MOD \(2^n-1\). Cascaded counters multiply moduli. Use T inputs \(T_i=\prod_{j&lt;i}Q_j\) for synchronous up counters.</p></div></div>
+<h2 id="s-8-5"><span class="n">8.5</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The number of flip-flops needed for a MOD-37 counter: (A) 5 (B) 6 (C) 7 (D) 37.</p>
+<p><strong>Q2.</strong> A 5-bit Johnson counter has (A) 5 states (B) 10 states (C) 31 states (D) 32 states.</p>
+<p><strong>Q3.</strong> A ring counter with 8 flip-flops has modulus (A) 8 (B) 16 (C) 255 (D) 256.</p>
+<p><strong>Q4.</strong> Maximum possible period of an 8-bit XOR-feedback LFSR: (A) 8 (B) 255 (C) 256 (D) 128.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (B): \(2^6=64\ge37\). Q2 (B). Q3 (A). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A 3-bit ripple counter uses flip-flops with \(t_{pd}=15\,\)ns. The maximum clock frequency for a stable count (MHz, using \(f=1/(n\,t_{pd})\)) is approximately (A) 66.7 (B) 22.2 (C) 15 (D) 8.3.</p>
+<p><strong>Q6.</strong> Two counters, MOD-12 and MOD-10, are cascaded (the second clocked once per full cycle of the first). The overall modulus is (A) 22 (B) 120 (C) 100 (D) 12.</p>
+<p><strong>Q7.</strong> A synchronous counter uses JK flip-flops with \(J_2=K_2=Q_1Q_0\), \(J_1=K_1=Q_0\), \(J_0=K_0=1\). The sequence from 011 is (A) 100 (B) 010 (C) 111 (D) 000.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B): \(1/(3\times15\text{ ns})=22.2\) MHz. Q6 (B). Q7 (A): \(Q_2\) toggles (\(Q_1Q_0=1\)), \(Q_1\) toggles, \(Q_0\) toggles: \(011\to100\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> A synchronous counter: \(t_{cq}=5\,\)ns, AND-gate delay \(=4\,\)ns (one level), \(t_{su}=3\,\)ns. Maximum clock frequency (MHz, two decimals): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> A 4-bit Johnson counter is clocked at \(1\,\)MHz. Frequency of any output (kHz): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Minimum number of flip-flops for a Johnson counter that must count 18 states: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(T=5+4+3=12\) ns \(\Rightarrow83.33\) MHz. Q9: the pattern repeats every \(2n=8\) clocks, so \(1000/8=125\) kHz. Q10: \(18/2=9\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which statements are true? (A) Johnson counters have only one bit change per clock. (B) Ring counters are one-hot. (C) A ripple counter’s propagation delay is independent of \(n\). (D) An LFSR with XOR feedback cannot reach all-zeros from a non-zero seed.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Moduli of 4-bit binary, ring and Johnson counters? &emsp; <strong>T2.</strong> T inputs of a 4-bit synchronous up counter? &emsp; <strong>T3.</strong> Reset condition for MOD-6 (async)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 16, 4, 8. T2: \(T_0=1,T_1=Q_0,T_2=Q_1Q_0,T_3=Q_2Q_1Q_0\). T3: \(Q_2Q_1=1\) (state 110).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Ripple: modulus \(2^n\), \(f_{max}=1/(nt_{pd})\); synchronous: \(T\ge t_{cq}+t_{logic}+t_{su}\).</li><li>MOD-\(N\): \(\lceil\log_2N\rceil\) FFs; cascade multiplies; reset counters glitch.</li><li>Ring \(n\), Johnson \(2n\), LFSR \(2^n-1\).</li><li>Design: state table \(\to\) excitation table \(\to\) K-map \(\to\) lock-out check.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch07.html">&larr; Latches and Flip-Flops</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch09.html">Finite State Machines: Mealy, Moore and State Minimization &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

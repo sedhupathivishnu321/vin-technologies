@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 17: Differential Amplifiers | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch17.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 17: Differential Amplifiers | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch17.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 17</div><h1>Differential Amplifiers</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-17-1">17.1 Differential-mode operation</a></li><li><a href="#s-17-2">17.2 Common-mode operation</a></li><li><a href="#s-17-3">17.3 BJT differential pair</a></li><li><a href="#s-17-4">17.4 MOS differential pair</a></li><li><a href="#s-17-5">17.5 Differential gain</a></li><li><a href="#s-17-6">17.6 Common-mode gain</a></li><li><a href="#s-17-7">17.7 Common-mode rejection ratio</a></li><li><a href="#s-17-8">17.8 Tail current source</a></li><li><a href="#s-17-9">17.9 Active loads</a></li><li><a href="#s-17-10">17.10 Output resistance</a></li><li><a href="#s-17-11">17.11 Input common-mode range</a></li><li><a href="#s-17-12">17.12 Offset voltage</a></li><li><a href="#s-17-13">17.13 GATE numerical problems</a></li></ol></details><h2 id="s-17-1"><span class="n">17.1</span> Differential-mode operation</h2>
+<p>A differential pair amplifies the <em>difference</em> of two inputs and rejects what they have in common. Decompose any input pair:</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(v_{id}=v_1-v_2\), &emsp;&emsp; \(v_{ic}=\dfrac{v_1+v_2}{2}\), &emsp;&emsp; \(v_1=v_{ic}+\dfrac{v_{id}}{2}\), &emsp; \(v_2=v_{ic}-\dfrac{v_{id}}{2}\)<br>
+Output: \(v_o=A_dv_{id}+A_{c}v_{ic}\)</p></div></div>
+<p>For purely differential drive the tail node does not move: it is a <em>virtual ground</em>, and each side behaves as a CE (CS) stage with its emitter (source) grounded.</p>
+<h2 id="s-17-2"><span class="n">17.2</span> Common-mode operation</h2>
+<p>For equal inputs \(v_1=v_2=v_{ic}\) both halves carry equal currents; the tail resistance sees twice the emitter current, so each half-circuit has \(2R_{EE}\) in its emitter. A good pair gives very little common-mode output.</p>
+<h2 id="s-17-3"><span class="n">17.3</span> BJT differential pair</h2>
+<figure id="fig-17-1"><div class="figimgs"><img src="img/f17_bjt.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.1.</b> BJT differential pair with resistive loads and a tail current source \(I_{EE}\).</figcaption></figure>
+<p>Large-signal behaviour with \(v_{id}=v_{B1}-v_{B2}\):
+\[i_{C1}=\frac{\alpha I_{EE}}{1+e^{-v_{id}/V_T}},\qquad i_{C2}=\frac{\alpha I_{EE}}{1+e^{+v_{id}/V_T}},\qquad i_{C1}-i_{C2}=\alpha I_{EE}\tanh\frac{v_{id}}{2V_T}.\]</p>
+<figure id="fig-17-2"><div class="figimgs"><img src="img/f17_vtc.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.2.</b> Transfer characteristics. BJT pair: linear only up to \(\approx\pm V_T\); beyond \(\pm4V_T\) all current flows in one device. MOS pair: full switching at \(\sqrt2V_{ov}\).</figcaption></figure>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Rule of thumb: the BJT pair is linear to within 1% for \(|v_{id}|&lt;10\) mV. Larger \(|v_{id}|\) (beyond \(\approx4V_T=100\) mV) fully steers the tail current.</p></div></div>
+<h2 id="s-17-4"><span class="n">17.4</span> MOS differential pair</h2>
+<figure id="fig-17-3"><div class="figimgs"><img src="img/f17_mos.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.3.</b> MOS differential pair with resistive loads and tail source \(I_{SS}\).</figcaption></figure>
+<p>Each side carries \(I_{SS}/2\) at balance. With \(V_{ov}=\sqrt{I_{SS}/k_n}\) (the overdrive of each device at balance):
+\[i_{D1}-i_{D2}=\frac{k_nv_{id}}{2}\sqrt{\frac{4I_{SS}}{k_n}-v_{id}^2},\qquad|v_{id}|_{max}=\sqrt2\,V_{ov}.\]
+The MOS pair is linear over a wider input range (a few hundred mV) but has a lower \(g_m\).</p>
+<h2 id="s-17-5"><span class="n">17.5</span> Differential gain</h2>
+<p>Using the half-circuit (\(v_{id}/2\) at each input, virtual ground at the tail):</p>
+<figure id="fig-17-4"><div class="figimgs"><img src="img/f17_dm_half.png" alt="" loading="lazy"><img src="img/f17_cm_half.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.4.</b> Half-circuits. Left: differential mode; the emitter is a virtual ground. Right: common mode; \(2R_{EE}\) appears in each emitter.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>BJT: \(A_d=\dfrac{v_{o1}-v_{o2}}{v_{id}}=g_mR_C\) (differential output); &emsp; single-ended output: \(\dfrac{v_{o1}}{v_{id}}=-\dfrac{g_mR_C}{2}\)<br>
+MOS: \(A_d=g_mR_D\) (differential) or \(-\dfrac{g_mR_D}{2}\) (single-ended)<br>
+Differential input resistance: BJT \(R_{id}=2r_\pi\); MOS \(R_{id}=\infty\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>BJT pair, \(I_{EE}=1\) mA (\(I_C=0.5\) mA each), \(\beta=100\), \(R_C=10\) k\(\Omega\). \(g_m=0.5/26=19.2\) mS, \(r_\pi=5.2\) k\(\Omega\). Differential output: \(A_d=19.2\,\mathrm m\times10\,\mathrm k=192\); single-ended \(96\). \(R_{id}=2r_\pi=10.4\) k\(\Omega\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>MOS pair, \(I_{SS}=200\ \mu\)A, \(k_n=1\) mA/V\({}^2\), \(R_D=20\) k\(\Omega\). \(I_D=100\ \mu\)A; \(V_{ov}=\sqrt{2\times0.1/1}=0.447\) V; \(g_m=0.447\) mS. \(A_d=0.447\,\mathrm m\times20\,\mathrm k=8.9\) (diff.), \(4.5\) (single-ended).</p></div></div>
+<h2 id="s-17-6"><span class="n">17.6</span> Common-mode gain</h2>
+<p>For single-ended output from the common-mode half circuit (BJT, \(r_o\) neglected):
+\[A_{cm}=\frac{v_{o1}}{v_{ic}}=-\frac{\alpha R_C}{2R_{EE}+r_e}\approx-\frac{R_C}{2R_{EE}}.\]
+If both outputs are used differentially and the circuit is perfectly symmetric, \(A_{cm,diff}=0\); a mismatch \(\Delta R_C/R_C\) gives \(A_{cm,diff}\approx\dfrac{R_C}{2R_{EE}}\dfrac{\Delta R_C}{R_C}\).</p>
+<h2 id="s-17-7"><span class="n">17.7</span> Common-mode rejection ratio</h2>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(\mathrm{CMRR}=\left|\dfrac{A_d}{A_{cm}}\right|\), &emsp; \(\mathrm{CMRR(dB)}=20\log_{10}\left|\dfrac{A_d}{A_{cm}}\right|\)<br>
+Single-ended output (matched): \(\mathrm{CMRR}\approx g_mR_{EE}\) &emsp; (with \(A_d=g_mR_C/2\), \(A_{cm}=R_C/2R_{EE}\))</p></div></div>
+<figure id="fig-17-5"><div class="figimgs"><img src="img/f17_cmrr.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.5.</b> CMRR grows with the tail resistance: hence the tail is made a current source.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(g_m=19.2\) mS, \(R_{EE}=100\) k\(\Omega\): \(A_{cm}=-10\,\mathrm k/200\,\mathrm k=-0.05\), single-ended \(A_d=96\): CMRR \(=1920\) (\(65.7\) dB). With a BJT mirror tail having \(R_{EE}=1\) M\(\Omega\): \(85.7\) dB.</p></div></div>
+<h2 id="s-17-8"><span class="n">17.8</span> Tail current source</h2>
+<p>A resistor tail wastes headroom: to get \(R_{EE}=100\) k\(\Omega\) at \(I_{EE}=1\) mA would need \(100\) V. Instead, a current source (BJT/MOS mirror, Chapter 16) has \(R_{EE}=r_o\) (\(50\)–\(500\) k\(\Omega\)) with a compliance of only a few hundred mV, and can be improved by a cascode or Wilson mirror.</p>
+<h2 id="s-17-9"><span class="n">17.9</span> Active loads</h2>
+<p>Replacing \(R_C\) by a current mirror converts the pair to a high-gain stage with single-ended output and <em>no 3 dB loss</em>.</p>
+<figure id="fig-17-6"><div class="figimgs"><img src="img/f17_mirror.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.6.</b> MOS differential pair with a PMOS current-mirror load: \(M_3\) mirrors the current of \(M_1\) into the output node.</figcaption></figure>
+<p>The mirror copies \(i_{d1}\) to the output; the output node also receives \(-i_{d2}\). So the two half signals <em>add</em>: \(i_o=g_m v_{id}\).</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_d=\dfrac{v_o}{v_{id}}=g_m\,(r_{o2}\|r_{o4})\) &emsp;&emsp; \(R_{out}=r_{o2}\|r_{o4}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(g_m=0.447\) mS, \(r_{o2}=r_{o4}=100\) k\(\Omega\): \(A_d=0.447\,\mathrm m\times50\,\mathrm k=22\); with a resistive load of \(20\) k\(\Omega\) single-ended it would be only \(4.5\).</p></div></div>
+<h2 id="s-17-10"><span class="n">17.10</span> Output resistance</h2>
+<p>Differential output: \(R_{od}=2R_C\) (BJT) or \(2R_D\) (MOS). With active load: \(r_{o2}\|r_{o4}\), tens to hundreds of k\(\Omega\).</p>
+<h2 id="s-17-11"><span class="n">17.11</span> Input common-mode range</h2>
+<p>Range of \(v_{ic}\) over which all transistors stay in the proper region.</p>
+<figure id="fig-17-7"><div class="figimgs"><img src="img/f17_icmr.png" alt="" loading="lazy"></div><figcaption><b>Figure 17.7.</b> Input common-mode range: bounded by the tail source’s compliance at the bottom and by the load transistors at the top.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>MOS pair, \(V_{DD}=5\), \(V_{SS}=-5\), \(R_D=10\) k, \(I_D=0.1\) mA, \(V_{th}=1\), \(k_n=1\) mA/V\({}^2\) (\(V_{GS}=1.447\) V), tail compliance \(0.5\) V. Upper: \(V_{IC,max}=V_{DD}-I_DR_D+V_{th}=5-1+1=5\) V. Lower: \(V_{IC,min}=-5+0.5+1.447=-3.05\) V. So ICMR \(=[-3.05,\,5]\) V.</p></div></div>
+<h2 id="s-17-12"><span class="n">17.12</span> Offset voltage</h2>
+<p>An ideal pair has \(v_o=0\) when \(v_1=v_2\). Mismatch produces an output offset; the <em>input offset voltage</em> \(V_{OS}\) is the differential input that nulls the output.</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>BJT: \(V_{OS}\approx V_T\left(\dfrac{\Delta R_C}{R_C}+\dfrac{\Delta I_S}{I_S}\right)\) &emsp;&emsp; MOS: \(V_{OS}\approx\Delta V_{th}+\dfrac{V_{ov}}2\left(\dfrac{\Delta R_D}{R_D}+\dfrac{\Delta(W/L)}{W/L}\right)\)<br>
+Bias current \(I_B=\dfrac{I_{EE}}{2(\beta+1)}\); offset current \(I_{OS}=I_{B1}-I_{B2}\).</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\Delta R_C/R_C=1\%\): \(V_{OS}=26\,\mathrm{mV}\times0.01=0.26\) mV. Input-referred offset current \(I_{OS}\) of \(10\%\) of \(I_B=5\ \mu\)A is \(0.5\ \mu\)A.</p></div></div>
+<h2 id="s-17-13"><span class="n">17.13</span> GATE numerical problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> A differential amplifier has \(A_d=100\) and \(A_{cm}=0.01\). CMRR (dB) is <span class="blank"></span>.</p>
+<p><strong>Q2.</strong> \(I_{EE}=2\) mA, \(R_C=5\) k\(\Omega\), \(V_T=26\) mV, single-ended output. \(|A_d|=\) <span class="blank"></span>.</p>
+<p><strong>Q3.</strong> \(v_1=3.1\) V, \(v_2=2.9\) V. \(v_{id}=\) <span class="blank"></span> V and \(v_{ic}=\) <span class="blank"></span> V.</p>
+<p><strong>Q4.</strong> \(r_\pi=2.6\) k\(\Omega\). The differential input resistance of the BJT pair is <span class="blank"></span> k\(\Omega\).</p>
+<p><strong>Q5.</strong> With an ideal tail current source (\(R_{EE}=\infty\)) the CMRR of a perfectly matched pair is (A) 0 (B) 1 (C) \(\infty\) (D) \(g_mR_C\).</p>
+<p><strong>Q6.</strong> The differential gain of a MOS pair with active mirror load is (A) \(g_mR_D/2\) (B) \(g_m(r_{o2}\|r_{o4})\) (C) \(g_m R_D\) (D) \(2g_mr_o\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(10^4\to80\) dB. Q2: \(I_C=1\) mA, \(g_m=38.5\) mS; single-ended \(|A_d|=g_mR_C/2=96\). Q3: \(0.2\) V, \(3.0\) V. Q4: \(5.2\) k\(\Omega\). Q5: (C). Q6: (B).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Compute CMRR (dB) for \(g_m=40\) mS, \(R_{EE}=50\) k\(\Omega\). &emsp; [66 dB]</li><li>MOS pair with \(I_{SS}=100\ \mu\)A, \(V_{ov}=0.2\) V: \(g_m\)? &emsp; [0.5 mS]</li><li>BJT pair, \(I_{EE}=0.2\) mA, \(\beta=100\): \(I_B\) each? &emsp; [0.99 \(\mu\)A]</li><li>Explain why mirror loads double the gain compared with a single-ended resistor load. &emsp; [Both \(i_{d1}\) and \(i_{d2}\) contribute at the output]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch16.html">&larr; Current Mirrors</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch18.html">Operational Amplifier Fundamentals &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

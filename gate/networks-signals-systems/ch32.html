@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 32: Numerical Answer Type Problems | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="30 NAT problems (original, GATE style). No options: compute and enter the number. Answers with working follow each set; official GATE NAT tolerances are usually \pm small, so keep 2–3 significant">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/networks-signals-systems/ch32.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 32: Numerical Answer Type Problems | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="30 NAT problems (original, GATE style). No options: compute and enter the number. Answers with working follow each set; official GATE NAT tolerances are usually \pm small, so keep 2–3 significant"><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/ch32.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Chapter 32</div><h1>Numerical Answer Type Problems</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-32-1">32.1 Circuit NAT problems</a></li><li><a href="#s-32-2">32.2 AC power NAT</a></li><li><a href="#s-32-3">32.3 Transient NAT</a></li><li><a href="#s-32-4">32.4 Fourier NAT</a></li><li><a href="#s-32-5">32.5 Sampling NAT</a></li><li><a href="#s-32-6">32.6 \(z\)-transform NAT</a></li><li><a href="#s-32-7">32.7 Digital-filter NAT</a></li></ol></details><div class="box notebox"><div class="bt">How to use</div><div class="bb"><p>\(30\) NAT problems (original, GATE style). No options: compute and enter the number. Answers with working follow each set; official GATE NAT tolerances are usually \(\pm\) small, so keep 2–3 significant digits.</p></div></div>
+<h2 id="s-32-1"><span class="n">32.1</span> Circuit NAT problems</h2>
+<div class="box natq"><div class="bt">Set 32.1</div><div class="bb"><p><strong>N1.</strong> A cube is made of twelve \(6\ \Omega\) resistors. The resistance between opposite (body-diagonal) corners is <span class="blank"></span> \(\Omega\).</p>
+<p><strong>N2.</strong> A \(12\) V source with \(4\ \Omega\) internal resistance drives a \(4\ \Omega\) load. Load power = <span class="blank"></span> W.</p>
+<p><strong>N3.</strong> An \(8\) A source feeds a node having \(4\ \Omega\) and \(12\ \Omega\) to ground, and also a \(6\ \Omega\) resistor in series with \(3\ \Omega\) to ground. The node voltage is <span class="blank"></span> V.</p>
+<p><strong>N4.</strong> \(R_{Th}\) of a network consisting of \(6\ \Omega\) in parallel with (\(2\ \Omega\) in series with \(4\ \Omega\)), seen at its terminals: <span class="blank"></span> \(\Omega\).</p>
+<p><strong>N5.</strong> \(24\) V is applied to \(6\ \Omega\) in series with (\(3\ \Omega\parallel6\ \Omega\)). The power in the \(3\ \Omega\) resistor is <span class="blank"></span> W.</p></div></div>
+<p class="ans"><strong>Answers: </strong>N1: \(5R/6=5\). N2: \(I=1.5\) A, \(P=9\) W. N3: \(4\parallel12=3\); \(6+3=9\); \(3\parallel9=2.25\); \(V=8\times2.25=18\). N4: \(6\parallel6=3\). N5: \(3\parallel6=2\), \(I=24/8=3\) A, \(V=6\) V, \(P=36/3=12\) W.</p>
+<h2 id="s-32-2"><span class="n">32.2</span> AC power NAT</h2>
+<div class="box natq"><div class="bt">Set 32.2</div><div class="bb"><p><strong>N6.</strong> \(2\) kW load at \(0.8\) pf lagging on \(230\) V, \(50\) Hz is corrected to \(0.95\) lagging. Capacitor: <span class="blank"></span> \(\mu\)F (nearest integer).</p>
+<p><strong>N7.</strong> \(Z=3+j4\ \Omega\) carries \(5\) A rms. Real power: <span class="blank"></span> W.</p>
+<p><strong>N8.</strong> \(\tilde V_{Th}=10\angle0^\circ\) V (<em>peak</em>), \(Z_{Th}=2+j2\ \Omega\). Maximum load power: <span class="blank"></span> W.</p>
+<p><strong>N9.</strong> A series RLC (\(R=5\ \Omega\)) at resonance is driven by \(10\) V rms. Power: <span class="blank"></span> W.</p></div></div>
+<p class="ans"><strong>Answers: </strong>N6: \(Q_1=2(0.75)=1.5\) kvar; \(\tan\phi_2=0.3287\); \(Q_C=0.8426\) kvar; \(C=842.6/(2\pi\cdot50\cdot230^2)=50.7\to51\ \mu\)F. N7: \(25\times3=75\). N8: \(100/(8\cdot2)=6.25\). N9: \(100/5=20\).</p>
+<h2 id="s-32-3"><span class="n">32.3</span> Transient NAT</h2>
+<div class="box natq"><div class="bt">Set 32.3</div><div class="bb"><p><strong>N10.</strong> An RC circuit (\(R=10\) k\(\Omega\), \(C=1\ \mu\)F) charges toward \(5\) V from \(0\). The time to reach \(4\) V is <span class="blank"></span> ms.</p>
+<p><strong>N11.</strong> \(20\) V is applied at \(t=0\) to \(R=10\ \Omega\), \(L=1\) H in series (\(i(0)=0\)). \(i(0.1\text{ s})=\) <span class="blank"></span> A.</p>
+<p><strong>N12.</strong> A series RLC has \(R=1\ \Omega\), \(L=1\) H, \(C=1\) F. Step-response percentage overshoot: <span class="blank"></span>%.</p>
+<p><strong>N13.</strong> Second-order system with \(\omega_n=10\) rad/s, \(\zeta=0.6\): peak time \(=\) <span class="blank"></span> s.</p></div></div>
+<p class="ans"><strong>Answers: </strong>N10: \(\tau=10\) ms; \(4=5(1-e^{-t/\tau})\Rightarrow t=\tau\ln5=16.1\) ms. N11: \(2(1-e^{-1})=1.264\). N12: \(\zeta=0.5\), \(16.3\%\). N13: \(\omega_d=8\), \(t_p=\pi/8=0.393\).</p>
+<h2 id="s-32-4"><span class="n">32.4</span> Fourier NAT</h2>
+<div class="box natq"><div class="bt">Set 32.4</div><div class="bb"><p><strong>N14.</strong> DC value of a full-wave rectified sine of peak \(10\) V: <span class="blank"></span> V.</p>
+<p><strong>N15.</strong> Fraction of power in the fundamental of a \(\pm1\) square wave: <span class="blank"></span>.</p>
+<p><strong>N16.</strong> \(|X(j\omega)|\) of \(e^{-2t}u(t)\) at \(\omega=2\): <span class="blank"></span>.</p>
+<p><strong>N17.</strong> \(X(0)\) for a rectangular pulse of height \(3\) and width \(4\): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>N14: \(2\cdot10/\pi=6.37\). N15: \(8/\pi^2=0.811\). N16: \(1/\sqrt{8}=0.354\). N17: \(12\).</p>
+<h2 id="s-32-5"><span class="n">32.5</span> Sampling NAT</h2>
+<div class="box natq"><div class="bt">Set 32.5</div><div class="bb"><p><strong>N18.</strong> A \(2.7\) kHz tone is sampled at \(2\) kHz. Apparent frequency: <span class="blank"></span> kHz.</p>
+<p><strong>N19.</strong> Nyquist rate of \(\cos200\pi t+\cos600\pi t\): <span class="blank"></span> Hz.</p>
+<p><strong>N20.</strong> Minimum bandpass sampling rate for \(40\)–\(46\) kHz: <span class="blank"></span> kHz (two decimals).</p>
+<p><strong>N21.</strong> Zero-order-hold gain at \(f_s/2\) relative to DC: <span class="blank"></span> dB (two decimals).</p></div></div>
+<p class="ans"><strong>Answers: </strong>N18: \(|2.7-2|=0.7\). N19: \(f_m=300\) Hz, rate \(600\). N20: \(B=6\), \(\lfloor46/6\rfloor=7\); \(f_s=2\cdot46/7=13.14\) (range \(13.14\ldots13.33\)). N21: \(20\log_{10}\sinc(0.5)=20\log_{10}0.6366=-3.92\).</p>
+<h2 id="s-32-6"><span class="n">32.6</span> \(z\)-transform NAT</h2>
+<div class="box natq"><div class="bt">Set 32.6</div><div class="bb"><p><strong>N22.</strong> \(X(z)=\dfrac{z}{z-0.8}\) (causal): \(x[5]=\) <span class="blank"></span> (three decimals).</p>
+<p><strong>N23.</strong> DC gain of \(H(z)=\dfrac{1+z^{-1}}{1-0.5z^{-1}}\): <span class="blank"></span>.</p>
+<p><strong>N24.</strong> Pole magnitude of \(H=\dfrac1{1-1.2z^{-1}+0.5z^{-2}}\): <span class="blank"></span> (three decimals).</p>
+<p><strong>N25.</strong> \(x[\infty]\) for \(X=\dfrac1{(1-z^{-1})(1-0.5z^{-1})}\): <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>N22: \(0.8^5=0.328\). N23: \(2/0.5=4\). N24: \(|p|=\sqrt{0.5}=0.707\). N25: \(1/0.5=2\).</p>
+<h2 id="s-32-7"><span class="n">32.7</span> Digital-filter NAT</h2>
+<div class="box natq"><div class="bt">Set 32.7</div><div class="bb"><p><strong>N26.</strong> Hamming-window FIR, transition width \(0.2\pi\): taps \(\approx\) <span class="blank"></span>.</p>
+<p><strong>N27.</strong> Rectangular-window FIR, transition width \(0.1\pi\): taps \(\approx\) <span class="blank"></span>.</p>
+<p><strong>N28.</strong> Minimum Butterworth order for \(\alpha_p=1\) dB at \(1\) kHz, \(\alpha_s=40\) dB at \(2\) kHz: <span class="blank"></span>.</p>
+<p><strong>N29.</strong> Minimum Chebyshev-I order for the same specification: <span class="blank"></span>.</p>
+<p><strong>N30.</strong> Bilinear design (\(T=1\)) of a digital cutoff \(0.5\pi\): analogue prewarped cutoff <span class="blank"></span> rad/s.</p></div></div>
+<p class="ans"><strong>Answers: </strong>N26: \(6.6\pi/0.2\pi=33\). N27: \(1.8\pi/0.1\pi=18\). N28: \(7.62\to8\). N29: \(4.54\to5\). N30: \(2\tan(\pi/4)=2\).</p><div class="pager bottom"><a class="pn" href="ch31.html">&larr; 2-Mark Problem Bank</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch33.html">Multiple-Select Problems &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

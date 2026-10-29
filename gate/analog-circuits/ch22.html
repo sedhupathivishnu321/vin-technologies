@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 22: Op-Amp Comparators | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch22.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 22: Op-Amp Comparators | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch22.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 22</div><h1>Op-Amp Comparators</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-22-1">22.1 Comparator principle</a></li><li><a href="#s-22-2">22.2 Zero-crossing detector</a></li><li><a href="#s-22-3">22.3 Inverting comparator</a></li><li><a href="#s-22-4">22.4 Non-inverting comparator</a></li><li><a href="#s-22-5">22.5 Reference-voltage comparator</a></li><li><a href="#s-22-6">22.6 Window comparator</a></li><li><a href="#s-22-7">22.7 Output saturation</a></li><li><a href="#s-22-8">22.8 GATE waveform problems</a></li></ol></details><h2 id="s-22-1"><span class="n">22.1</span> Comparator principle</h2>
+<p>A comparator compares an input voltage with a reference and gives a two-level (digital-like) output. An op-amp used <em>open loop</em> (no feedback) acts as a comparator because its huge gain drives the output into saturation for any \(|v_+-v_-|\) larger than \(V_{sat}/A\approx0.1\) mV.</p>
+<figure id="fig-22-1"><div class="figimgs"><img src="img/f22_vtc.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.1.</b> Comparator transfer curve: \(v_o=+V_{sat}\) if \(v_+&gt;v_-\) and \(-V_{sat}\) if \(v_+&lt;v_-\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(v_o=\begin{cases}+V_{sat},&amp;v_+&gt;v_-\\-V_{sat},&amp;v_+&lt;v_-\end{cases}\)&emsp;&emsp;\(V_{sat}\approx V_{CC}-(1\text{--}2)\ \mathrm V\)</p></div></div>
+<p>The virtual short does <em>not</em> apply because there is no negative feedback. A dedicated comparator IC (LM311, LM339) has an open-collector output and faster response (about \(100\)–\(200\) ns) than a general-purpose op-amp.</p>
+<h2 id="s-22-2"><span class="n">22.2</span> Zero-crossing detector</h2>
+<p>The reference is \(0\) V: the output changes state whenever the input crosses zero.</p>
+<figure id="fig-22-2"><div class="figimgs"><img src="img/f22_zcd.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.2.</b> Non-inverting zero-crossing detector.</figcaption></figure>
+<figure id="fig-22-3"><div class="figimgs"><img src="img/w22_zcd.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.3.</b> Non-inverting ZCD: positive input \(\Rightarrow+V_{sat}\), negative input \(\Rightarrow-V_{sat}\).</figcaption></figure>
+<p>Applications: sine-to-square conversion, phase detection, timing (measure the time between crossings). The output edge is not perfectly vertical: it is limited by the slew rate.</p>
+<h2 id="s-22-3"><span class="n">22.3</span> Inverting comparator</h2>
+<p>Signal at the inverting input, reference at the non-inverting input:</p>
+<figure id="fig-22-4"><div class="figimgs"><img src="img/f22_zcd_inv.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.4.</b> Inverting zero-crossing detector (\(V_{ref}=0\)).</figcaption></figure>
+<figure id="fig-22-5"><div class="figimgs"><img src="img/w22_zcd_inv.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.5.</b> Inverting ZCD: output is high while the input is negative.</figcaption></figure>
+<h2 id="s-22-4"><span class="n">22.4</span> Non-inverting comparator</h2>
+<p>Signal at the non-inverting input: the output is high when \(v_i&gt;V_{ref}\); low when \(v_i&lt;V_{ref}\). Same as Section 22.2 when \(V_{ref}=0\); the output is in phase with the input crossing.</p>
+<h2 id="s-22-5"><span class="n">22.5</span> Reference-voltage comparator</h2>
+<figure id="fig-22-6"><div class="figimgs"><img src="img/f22_ref.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.6.</b> Comparator with a DC reference voltage at the inverting input.</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>Switching occurs at \(v_i=V_{ref}\). For \(v_i=V_m\sin\omega t\) the output is high for \(\theta_1&lt;\omega t&lt;\pi-\theta_1\) with \(\theta_1=\sin^{-1}(V_{ref}/V_m)\).<br>
+Duty cycle \(D=\dfrac{\pi-2\theta_1}{2\pi}=\dfrac12-\dfrac{\theta_1}{\pi}\)</p></div></div>
+<figure id="fig-22-7"><div class="figimgs"><img src="img/w22_ref.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.7.</b> Reference comparator with \(V_{ref}=2\) V, \(v_i=5\sin\omega t\): output high for \(36.9\%\) of the period.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(V_m=5\), \(V_{ref}=2\): \(\theta_1=23.6^\circ\); high from \(23.6^\circ\) to \(156.4^\circ\): \(D=132.8/360=36.9\%\). A negative \(V_{ref}=-2\) gives \(D=63.1\%\).</p></div></div>
+<h2 id="s-22-6"><span class="n">22.6</span> Window comparator</h2>
+<p>Two comparators with reference levels \(V_L&lt;V_H\) detect whether the input lies inside a window.</p>
+<figure id="fig-22-8"><div class="figimgs"><img src="img/f22_window.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.8.</b> Window comparator (out-of-window detector). \(D_1,D_2\) form a wired-OR: \(v_o\) is high when \(v_i&gt;V_H\) or \(v_i&lt;V_L\).</figcaption></figure>
+<figure id="fig-22-9"><div class="figimgs"><img src="img/w22_window.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.9.</b> Out-of-window detector, \(V_L=-1\) V, \(V_H=3\) V, \(v_i=5\sin\omega t\).</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Fraction of time <em>outside</em> the window: \(v_i&gt;3\): \(\theta\) from \(36.9^\circ\) to \(143.1^\circ\) (\(106.3^\circ\)); \(v_i&lt;-1\): from \(191.5^\circ\) to \(348.5^\circ\) (\(156.9^\circ\)). Total \(263.2^\circ/360^\circ=73.1\%\). Applications: over/under-voltage monitors, battery-voltage checks, go/no-go testers.</p></div></div>
+<h2 id="s-22-7"><span class="n">22.7</span> Output saturation</h2>
+<p>The output can never exceed \(\pm V_{sat}\). With a comparator driving a logic gate the output must be clamped (Zener, or open-collector output with a pull-up to logic supply) to give proper levels: e.g. \(+5\) V/\(0\) V.</p>
+<figure id="fig-22-10"><div class="figimgs"><img src="img/w22_sat.png" alt="" loading="lazy"></div><figcaption><b>Figure 22.10.</b> Output saturation: a tiny differential input drives the comparator to a rail; the transition region is essentially vertical.</figcaption></figure>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(1) A comparator has no \(-3\) dB bandwidth in the usual sense: what matters is the propagation delay (\(\approx\) slew-limited transition from \(-V_{sat}\) to \(+V_{sat}\)). (2) With a slowly varying or noisy input, an open-loop comparator chatters near the threshold: see Chapter 23. (3) Do not apply the virtual-short rule.</p></div></div>
+<h2 id="s-22-8"><span class="n">22.8</span> GATE waveform problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> An ideal comparator has \(V_{ref}=1\) V and a triangular input from \(0\) to \(4\) V. The fraction of the period for which the output is high (non-inverting) is <span class="blank"></span>.</p>
+<p><strong>Q2.</strong> \(v_i=10\sin\omega t\), non-inverting comparator with \(V_{ref}=5\) V. The duty cycle of the output is (A) 16.7% (B) 33.3% (C) 50% (D) 66.7%.</p>
+<p><strong>Q3.</strong> A window comparator with \(V_L=2\) V, \(V_H=4\) V is given a \(3\) V DC input. The out-of-window output is <span class="blank"></span> (high/low).</p>
+<p><strong>Q4.</strong> A 741 has \(v_+-v_-=1\) mV in open loop with \(\pm15\) V supplies. The output is closest to (A) \(+1\) V (B) \(+100\) V (C) \(+13\) V (D) 0.</p>
+<p><strong>Q5.</strong> For an inverting ZCD driven by \(8\sin\omega t\) with \(\pm12\) V saturation, the output during the first half-cycle is (A) \(+12\) (B) \(-12\) (C) 0 (D) \(-8\) V.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \((4-1)/4=75\%\). Q2: (B): \((180^\circ-2\times30^\circ)/360^\circ=33.3\%\). Q3: low (inside the window). Q4: (C) \(\approx+13\) V. Q5: (B).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Duty cycle for \(V_m=8\), \(V_{ref}=4\) (non-inverting). &emsp; [33.3%]</li><li>Design a window detector for \(4.5\le v\le5.5\) V. &emsp; [\(V_L=4.5\) V, \(V_H=5.5\) V]</li><li>Why do dedicated comparators outperform op-amps in speed? &emsp; [No compensation capacitor; saturation-tolerant output stage]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch21.html">&larr; Active Filters</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch23.html">Schmitt Triggers &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

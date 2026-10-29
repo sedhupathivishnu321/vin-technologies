@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2: Calculus | Engineering Mathematics | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Limits (standard forms and L’Hôpital), differentiability, maxima/minima, Taylor series, standard integrals and Leibniz rule, Mean Value Theorems, multiple integrals with change of order or variables.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/engineering-mathematics/ch02.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 2: Calculus | Engineering Mathematics | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Limits (standard forms and L’Hôpital), differentiability, maxima/minima, Taylor series, standard integrals and Leibniz rule, Mean Value Theorems, multiple integrals with change of order or variables."><meta property="og:url" content="https://vintechnologies.co.in/gate/engineering-mathematics/ch02.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Engineering Mathematics</a></div><div class="chlabel">Chapter 2</div><h1>Calculus</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-2-1">2.1 Limits and continuity</a></li><li><a href="#s-2-2">2.2 Differentiation and partial derivatives</a></li><li><a href="#s-2-3">2.3 Maxima and minima</a></li><li><a href="#s-2-4">2.4 Taylor and Maclaurin expansions</a></li><li><a href="#s-2-5">2.5 Integration</a></li><li><a href="#s-2-6">2.6 Multiple integrals and volume</a></li><li><a href="#s-2-7">2.7 Mean value and integral theorems</a></li><li><a href="#s-2-8">2.8 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Limits (standard forms and L’Hôpital), differentiability, maxima/minima, Taylor series, standard integrals and Leibniz rule, Mean Value Theorems, multiple integrals with change of order or variables.</p></div></div>
+<h2 id="s-2-1"><span class="n">2.1</span> Limits and continuity</h2>
+<div class="box formula"><div class="bt">Standard limits</div><div class="bb"><p>\(\lim_{x\to0}\frac{\sin x}{x}=1\), \(\ \frac{\tan x}{x}\to1\), \(\ \frac{1-\cos x}{x^2}\to\frac12\), \(\ \frac{e^x-1}{x}\to1\), \(\ \frac{\ln(1+x)}x\to1\), \(\ (1+x)^{1/x}\to e\), \(\ (1+\tfrac ax)^x\to e^a\) (\(x\to\infty\)).<br>
+L’Hôpital: if \(f/g\) is \(0/0\) or \(\infty/\infty\), then \(\lim f/g=\lim f'/g'\) (when the latter exists).</p></div></div>
+<p>\(f\) is continuous at \(a\) if \(\lim_{x\to a}f(x)=f(a)\). Differentiability implies continuity, not conversely (\(|x|\) at \(0\)). A continuous function on \([a,b]\) is bounded and attains its extrema (Weierstrass) and takes every intermediate value.</p>
+<h2 id="s-2-2"><span class="n">2.2</span> Differentiation and partial derivatives</h2>
+<p>Chain, product and quotient rules are assumed; useful: \(\frac{d}{dx}a^x=a^x\ln a\), \(\frac{d}{dx}x^x=x^x(1+\ln x)\), \(\frac d{dx}\sin^{-1}x=\frac1{\sqrt{1-x^2}}\), \(\frac d{dx}\tan^{-1}x=\frac1{1+x^2}\).<br>
+For \(z=f(x,y)\): \(dz=f_xdx+f_ydy\); \(f_{xy}=f_{yx}\) if continuous. Chain rule: \(\frac{dz}{dt}=f_x\dot x+f_y\dot y\). Euler’s theorem: if \(f\) is homogeneous of degree \(n\), \(xf_x+yf_y=nf\).</p>
+<h2 id="s-2-3"><span class="n">2.3</span> Maxima and minima</h2>
+<div class="box formula"><div class="bt">Stationary points</div><div class="bb"><p>Single variable: \(f'(a)=0\); \(f''(a)&gt;0\Rightarrow\) minimum, \(f''(a)&lt;0\Rightarrow\) maximum; if \(f''(a)=0\) look at the first non-zero derivative of order \(n\): odd \(\Rightarrow\) inflection, even \(\Rightarrow\) extremum.<br>
+Two variables: \(f_x=f_y=0\) and \(D=f_{xx}f_{yy}-f_{xy}^2\). \(D&gt;0,f_{xx}&gt;0\): minimum; \(D&gt;0,f_{xx}&lt;0\): maximum; \(D&lt;0\): saddle; \(D=0\): inconclusive.</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(f=x^3-3xy+y^3\): \(f_x=3x^2-3y=0\), \(f_y=3y^2-3x=0\Rightarrow(0,0),(1,1)\). \(D=36xy-9\). At \((0,0)\): \(D=-9&lt;0\) saddle. At \((1,1)\): \(D=27&gt;0\), \(f_{xx}=6&gt;0\), minimum with \(f=-1\).</p></div></div>
+<h2 id="s-2-4"><span class="n">2.4</span> Taylor and Maclaurin expansions</h2>
+<p>\(f(x)=\sum\frac{f^{(n)}(a)}{n!}(x-a)^n\); Maclaurin is \(a=0\).</p>
+<div class="box formula"><div class="bt">Maclaurin series</div><div class="bb"><p>\(e^x=\sum\frac{x^n}{n!}\), \(\ \sin x=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots\), \(\ \cos x=1-\frac{x^2}{2!}+\cdots\), \(\ \frac1{1-x}=\sum x^n\ (|x|&lt;1)\), \(\ \ln(1+x)=x-\frac{x^2}2+\frac{x^3}3-\cdots\), \(\ (1+x)^m=1+mx+\frac{m(m-1)}{2!}x^2+\cdots\)</p></div></div>
+<figure id="fig-2-1"><div class="figimgs"><img src="img/m02_taylor.png" alt="" loading="lazy"></div><figcaption><b>Figure 2.1.</b> Taylor polynomials of \(\sin x\) about \(0\) approach the function over a wider range as the degree grows.</figcaption></figure>
+<h2 id="s-2-5"><span class="n">2.5</span> Integration</h2>
+<div class="box formula"><div class="bt">Useful results</div><div class="bb"><p>\(\int_0^{\pi/2}\sin^nx\,dx=\int_0^{\pi/2}\cos^nx\,dx=\frac{(n-1)(n-3)\cdots}{n(n-2)\cdots}\times\{\pi/2\text{ if }n\text{ even};\,1\text{ if odd}\}\).<br>
+Even function: \(\int_{-a}^af=2\int_0^af\); odd: \(0\). Property: \(\int_0^af(x)dx=\int_0^af(a-x)dx\).<br>
+Leibniz: \(\frac d{dx}\int_{u(x)}^{v(x)}f(t)dt=f(v)v'-f(u)u'\).<br>
+Gamma function: \(\Gamma(n+1)=n\Gamma(n)=n!\), \(\Gamma(\tfrac12)=\sqrt\pi\); \(\int_0^\infty x^{n}e^{-x}dx=n!\).</p></div></div>
+<p><strong>Improper integrals.</strong> \(\int_1^\infty x^{-p}dx\) converges iff \(p&gt;1\); \(\int_0^1x^{-p}dx\) converges iff \(p&lt;1\). \(\int_{-\infty}^{\infty}e^{-x^2}dx=\sqrt\pi\).</p>
+<h2 id="s-2-6"><span class="n">2.6</span> Multiple integrals and volume</h2>
+<p>Order of integration can be swapped by redrawing the region (Fubini). Polar: \(dA=r\,dr\,d\theta\); cylindrical: \(dV=r\,dr\,d\theta\,dz\); spherical: \(dV=r^2\sin\theta\,dr\,d\theta\,d\phi\). Volume of a sphere \(\frac43\pi R^3\), area of a circle \(\pi R^2\). Jacobian: \(dx\,dy=|J|du\,dv\) with \(J=\partial(x,y)/\partial(u,v)\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(\int_0^1\!\int_x^1 e^{y^2}dy\,dx\): swap order: \(\int_0^1\!\int_0^y e^{y^2}dx\,dy=\int_0^1ye^{y^2}dy=\frac{e-1}2\).</p></div></div>
+<h2 id="s-2-7"><span class="n">2.7</span> Mean value and integral theorems</h2>
+<div class="box formula"><div class="bt">Mean value theorems</div><div class="bb"><p><strong>Rolle:</strong> \(f\) continuous on \([a,b]\), differentiable inside, \(f(a)=f(b)\Rightarrow\exists c:f'(c)=0\).<br>
+<strong>Lagrange MVT:</strong> \(\exists c\in(a,b):f'(c)=\frac{f(b)-f(a)}{b-a}\).<br>
+<strong>Cauchy MVT:</strong> \(\frac{f'(c)}{g'(c)}=\frac{f(b)-f(a)}{g(b)-g(a)}\).<br>
+<strong>Integral MVT:</strong> \(\int_a^bf=f(c)(b-a)\) for some \(c\); the average value of \(f\) is \(\frac1{b-a}\int_a^bf\).<br>
+<strong>Fundamental theorem:</strong> \(\frac d{dx}\int_a^xf=f(x)\).</p></div></div>
+<p>Line and surface integrals (and the theorems of Green, Gauss and Stokes that connect them to double and volume integrals) are developed in Chapter 4.</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) L’Hôpital applies only to \(0/0\) or \(\infty/\infty\). (ii) \(D=0\) at a stationary point does not give a saddle. (iii) A function with \(f'(c)=0\) need not have an extremum (\(x^3\)). (iv) Check convergence before evaluating improper integrals. (v) The Maclaurin series of \(\ln(1+x)\) converges only for \(-1&lt;x\le1\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Replace each function by its first non-vanishing Taylor term when taking limits at \(0\). For Wallis integrals use the alternating product and the \(\pi/2\) rule. For “average value” and “a point \(c\)” questions think MVT. For swapped integrals draw the region.</p></div></div>
+<h2 id="s-2-8"><span class="n">2.8</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> \(\lim_{x\to0}\frac{\sin 3x}{x}=\) (A) 0 (B) 1 (C) 3 (D) \(\infty\).</p>
+<p><strong>Q2.</strong> \(\int_{-1}^{1}x^3dx=\) (A) 0 (B) \(1/2\) (C) 1 (D) 2.</p>
+<p><strong>Q3.</strong> The Maclaurin series of \(e^{x}\) has coefficient of \(x^3\) equal to (A) \(1/2\) (B) \(1/3\) (C) \(1/6\) (D) \(1\).</p>
+<p><strong>Q4.</strong> A function with \(f(a)=f(b)\), continuous and differentiable between, has by Rolle’s theorem a point where (A) \(f=0\) (B) \(f'=0\) (C) \(f''=0\) (D) \(f'=1\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C). Q2 (A), odd integrand. Q3 (C). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> \(\lim_{x\to0}\frac{e^x-1-x}{x^2}=\) (A) 0 (B) \(1/2\) (C) 1 (D) \(\infty\).</p>
+<p><strong>Q6.</strong> The minimum value of \(f(x)=x^2-4x+7\) is (A) 2 (B) 3 (C) 4 (D) 7.</p>
+<p><strong>Q7.</strong> \(\int_0^{\pi/2}\sin^4x\,dx=\) (A) \(3\pi/16\) (B) \(\pi/4\) (C) \(3\pi/8\) (D) \(\pi/8\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B): \(e^x-1-x\approx x^2/2\). Q6 (B): vertex at \(x=2\), \(f=3\). Q7 (A): \(\frac{3\cdot1}{4\cdot2}\cdot\frac\pi2=\frac{3\pi}{16}\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> \(\int_0^\infty x^3e^{-x}dx=\) <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> The area of the disc \(x^2+y^2\le4\) (polar integration) is \(k\pi\) with \(k=\) <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Average value of \(f(x)=x^2\) over \([0,3]\) is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(\Gamma(4)=6\). Q9: \(\int_0^{2\pi}\!\int_0^2r\,dr\,d\theta=4\pi\), \(k=4\). Q10: \(\frac13\cdot\frac{27}3=3\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which of the following improper integrals converge? (A) \(\int_1^\infty x^{-2}dx\) (B) \(\int_1^\infty x^{-1}dx\) (C) \(\int_0^1x^{-1/2}dx\) (D) \(\int_0^1x^{-1}dx\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(\lim_{x\to0}(1-\cos x)/x^2\)? &emsp; <strong>T2.</strong> Nature of \((0,0)\) for \(f=x^2-y^2\)? &emsp; <strong>T3.</strong> \(\Gamma(1/2)\)?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(1/2\). T2: saddle (\(D=-4&lt;0\)). T3: \(\sqrt\pi\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Use Taylor leading terms for limits; L’Hôpital only for indeterminate forms.</li><li>Stationary: \(f'=0\); 2-variable test with \(D=f_{xx}f_{yy}-f_{xy}^2\).</li><li>Series: \(e^x,\sin x,\cos x,\ln(1+x),(1+x)^m,\frac1{1-x}\).</li><li>Even/odd integrals, Wallis formula, \(\Gamma(n+1)=n!\), Leibniz rule.</li><li>Rolle, Lagrange, Cauchy, integral MVT; \(p\)-test for improper integrals.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch01.html">&larr; Linear Algebra</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch03.html">Differential Equations &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\R": "\\mathbb{R}", "\\C": "\\mathbb{C}", "\\E": "\\mathrm{E}", "\\Var": "\\mathrm{Var}", "\\Cov": "\\mathrm{Cov}", "\\tr": "\\operatorname{tr}", "\\rank": "\\operatorname{rank}", "\\Res": "\\operatorname{Res}", "\\grad": "\\nabla", "\\dd": "\\mathrm{d}", "\\oiint": "\\mathop{\\oint\\!\\!\\!\\oint}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

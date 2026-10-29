@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1: Number Systems and Arithmetic | Digital Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Base conversion, range of n-bit signed numbers, two’s-complement arithmetic with overflow detection, and IEEE-754 decoding. These are 1-mark staples and the arithmetic reappears in every later">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/digital-circuits/ch01.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 1: Number Systems and Arithmetic | Digital Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Base conversion, range of n-bit signed numbers, two’s-complement arithmetic with overflow detection, and IEEE-754 decoding. These are 1-mark staples and the arithmetic reappears in every later"><meta property="og:url" content="https://vintechnologies.co.in/gate/digital-circuits/ch01.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Digital Circuits</a></div><div class="chlabel">Chapter 1</div><h1>Number Systems and Arithmetic</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-1-1">1.1 Binary, octal, decimal and hexadecimal</a></li><li><a href="#s-1-2">1.2 Arithmetic in other bases</a></li><li><a href="#s-1-3">1.3 Signed number representations</a></li><li><a href="#s-1-4">1.4 Fixed-point arithmetic</a></li><li><a href="#s-1-5">1.5 Floating-point basics (IEEE-754)</a></li><li><a href="#s-1-6">1.6 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Base conversion, range of \(n\)-bit signed numbers, two’s-complement arithmetic with overflow detection, and IEEE-754 decoding. These are 1-mark staples and the arithmetic reappears in every later chapter.</p></div></div>
+<h2 id="s-1-1"><span class="n">1.1</span> Binary, octal, decimal and hexadecimal</h2>
+<p>A positional number with base (radix) \(r\) and digits \(d_{n-1}\dots d_0.d_{-1}\dots d_{-m}\) has value
+\[
+N=\sum_{i=-m}^{n-1} d_i\,r^{\,i}.
+\]
+Binary \(r=2\) (digits 0,1), octal \(r=8\), decimal \(r=10\), hexadecimal \(r=16\) (digits 0–9, A–F with A=10, …, F=15).</p>
+<div class="box formula"><div class="bt">Conversion rules</div><div class="bb"><p><strong>Any base \(\to\) decimal:</strong> expand with the weights above.<br>
+<strong>Decimal integer \(\to\) base \(r\):</strong> repeated division by \(r\), read remainders bottom-to-top.<br>
+<strong>Decimal fraction \(\to\) base \(r\):</strong> repeated multiplication by \(r\), read integer parts top-to-bottom.<br>
+<strong>Binary \(\leftrightarrow\) octal:</strong> group 3 bits (from the radix point outward). <strong>Binary \(\leftrightarrow\) hex:</strong> group 4 bits.<br>
+Number of digits needed for \(N\) in base \(r\): \(\lfloor\log_r N\rfloor+1\).</p></div></div>
+<div class="box example"><div class="bt">Conversions</div><div class="bb"><p>(a) \((1101.101)_2=8+4+1+\tfrac12+\tfrac18=13.625\).<br>
+(b) \((45)_{10}\): \(45=101101_2\) (32+8+4+1). In octal: group \(101\,101\to 55_8\). In hex: \(0010\,1101\to 2D_{16}\).<br>
+(c) \((0.7)_{10}\) in binary: \(0.7\times2=1.4\ (1)\), \(0.4\times 2=0.8\ (0)\), \(0.8\times 2=1.6\ (1)\), \(0.6\times 2=1.2\ (1)\), \(0.2\times2=0.4\ (0)\), \(0.4\to\) repeats: \(0.1\overline{0110}\dots_2\), a non-terminating fraction.<br>
+(d) \((3A.8)_{16}=3\cdot16+10+8/16=58.5\).</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>A decimal fraction terminates in base \(r\) only if its denominator (in lowest terms) has only prime factors of \(r\). So \(0.1_{10}\) is non-terminating in binary: this is why floating-point \(0.1+0.2\ne0.3\).</p></div></div>
+<h2 id="s-1-2"><span class="n">1.2</span> Arithmetic in other bases</h2>
+<p>Add digit by digit with carry when the digit sum \(\ge r\). Binary: \(0+0=0\), \(0+1=1\), \(1+1=10\), \(1+1+1=11\). Subtraction borrows \(r\) from the next column. Multiplication is shift-and-add.</p>
+<div class="box example"><div class="bt">Unknown base</div><div class="bb"><p>\((121)_r=(36)_{10}\): \(r^2+2r+1=(r+1)^2=36\Rightarrow r=5\).<br>
+\((54)_r=(40)_{10}\): \(5r+4=40\Rightarrow r=7.2\), not an integer, so no such base exists.<br>
+\(5\times6=(33)_r\): \(30=3r+3\Rightarrow r=9\).</p></div></div>
+<h2 id="s-1-3"><span class="n">1.3</span> Signed number representations</h2>
+<p>For \(n\) bits there are three classical schemes.</p>
+<div class="center"><div class="tw"><table><thead><tr><th></th><th class="c">Sign-magnitude</th><th class="c">1’s complement</th><th class="c">2’s complement</th></tr></thead><tbody><tr><td>Range</td><td class="c">\(-(2^{n-1}-1)\dots+(2^{n-1}-1)\)</td><td class="c">\(-(2^{n-1}-1)\dots+(2^{n-1}-1)\)</td><td class="c">\(-2^{n-1}\dots+(2^{n-1}-1)\)</td></tr><tr><td>Zero</td><td class="c">two (\(+0,-0\))</td><td class="c">two</td><td class="c">one</td></tr><tr><td>Negation</td><td class="c">flip MSB</td><td class="c">flip all bits</td><td class="c">flip all bits, add 1</td></tr><tr><td>Distinct values</td><td class="c">\(2^n-1\)</td><td class="c">\(2^n-1\)</td><td class="c">\(2^n\)</td></tr><tr><td>Arithmetic</td><td class="c">needs sign logic</td><td class="c">end-around carry</td><td class="c">ordinary adder</td></tr></tbody></table></div></div>
+<div class="box formula"><div class="bt">Two’s complement</div><div class="bb"><p>Value of an \(n\)-bit word \(b_{n-1}\dots b_0\): \(\;V=-b_{n-1}2^{n-1}+\sum_{i=0}^{n-2}b_i2^i\).<br>
+\(2\)’s complement of \(N\) in \(n\) bits \(=2^n-N\). &emsp; Sign extension: replicate the MSB.<br>
+Subtraction: \(A-B=A+(\overline{B}+1)\) using the same adder.</p></div></div>
+<div class="box example"><div class="bt">Two’s complement</div><div class="bb"><p>\(-37\) in 8 bits: \(37=00100101\), flip \(\to11011010\), add 1 \(\to 11011011\) (\(=219=256-37\)). Check: \(-128+64+16+8+2+1=-37\). <br>
+\(8\)-bit \(11110000_2\) is \(-128+64+32+16=-16\).</p></div></div>
+<h3 id="ss-4">Overflow</h3>
+<p>Overflow in two’s-complement addition occurs when two operands of the <em>same sign</em> produce a result of the <em>opposite</em> sign:
+\[
+V = C_{n-1}\oplus C_{n},
+\]
+the XOR of the carry into and the carry out of the MSB. Adding operands of opposite signs never overflows. For unsigned addition, overflow is simply carry-out \(C_n=1\).</p>
+<div class="box example"><div class="bt">Overflow</div><div class="bb"><p>\(01110000_2(+112)+01000000_2(+64)=10110000_2\): sign flipped, overflow (\(176&gt;127\)). Carries: into MSB 1, out of MSB 0, so \(V=1\).<br>
+\(10000000(-128)+11111111(-1)=1\,01111111\): discard the carry; the 8-bit result \(01111111=+127\) is wrong: overflow (\(-129&lt;-128\)); carry into MSB 0, out 1, \(V=1\).</p></div></div>
+<h2 id="s-1-4"><span class="n">1.4</span> Fixed-point arithmetic</h2>
+<p>A fixed-point format \(Qm.n\) has \(m\) integer bits (including sign) and \(n\) fractional bits; value \(=\text{integer}/2^n\). Resolution \(2^{-n}\). Range for signed two’s complement: \(-2^{m-1}\ \text{to}\ 2^{m-1}-2^{-n}\).</p>
+<p>Addition is ordinary integer addition when formats are aligned. Multiplying \(Qm_1.n_1\) by \(Qm_2.n_2\) gives \(Q(m_1+m_2).(n_1+n_2)\) (a double-width product), usually truncated or rounded back.</p>
+<div class="box example"><div class="bt">Q-format</div><div class="bb"><p>\(Q4.4\) stored as \(0110\,1000_2=104\); value \(=104/16=6.5\). Resolution \(1/16=0.0625\). Range \(-8\ldots+7.9375\). Product of \(Q4.4\) numbers \(6.5\times 1.5\): integers \(104\times24=2496\), shifted by 8 fractional bits: \(2496/256=9.75\), which overflows \(Q4.4\) (max \(7.9375\)) unless saturated.</p></div></div>
+<h2 id="s-1-5"><span class="n">1.5</span> Floating-point basics (IEEE-754)</h2>
+<p>A floating-point number is \((-1)^s\times M\times 2^{E}\).</p>
+<div class="center"><div class="tw"><table><thead><tr><th>Format</th><th class="c">Sign</th><th class="c">Exponent bits</th><th class="c">Fraction bits</th><th class="c">Bias</th></tr></thead><tbody><tr><td>Single (32-bit)</td><td class="c">1</td><td class="c">8</td><td class="c">23</td><td class="c">127</td></tr><tr><td>Double (64-bit)</td><td class="c">1</td><td class="c">11</td><td class="c">52</td><td class="c">1023</td></tr></tbody></table></div></div>
+<div class="box formula"><div class="bt">IEEE-754 decoding</div><div class="bb"><p>Normalised (\(0&lt;e&lt;e_{\max}\)): \(\;x=(-1)^s\,(1.f)_2\times2^{\,e-\text{bias}}\) &emsp; (hidden leading 1).<br>
+Denormal (\(e=0,\ f\neq0\)): \(x=(-1)^s(0.f)_2\times2^{1-\text{bias}}\). Zero: \(e=0,f=0\).<br>
+Infinity: \(e=\text{all 1s},f=0\). NaN: \(e=\text{all 1s},f\ne0\).<br>
+Single precision: largest finite \(\approx3.4\times10^{38}\), machine epsilon \(2^{-23}\) (about \(7\) decimal digits).</p></div></div>
+<div class="box example"><div class="bt">Decode and encode</div><div class="bb"><p>Single precision word <code>0xC1480000</code> \(=1\,10000010\,1001000\ldots0\). \(s=1\), \(e=130\Rightarrow\) exponent \(3\), mantissa \(1.1001_2=1.5625\). Value \(=-1.5625\times8=-12.5\).<br>
+Encode \(0.15625=0.00101_2=1.01_2\times2^{-3}\): \(e=127-3=124=01111100_2\), \(f=01000\ldots0\): <code>0x3E200000</code>.</p></div></div>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) The hidden bit is not stored. (ii) Biased exponent is stored as unsigned; the true exponent can be negative. (iii) Floating-point addition needs alignment of exponents; result rounding means addition is <em>not associative</em>. (iv) Spacing of floats grows with magnitude; relative error is bounded by \(2^{-24}\) (rounding), not absolute.</p></div></div>
+<h2 id="s-1-6"><span class="n">1.6</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The 8-bit two’s-complement representation of \(-45\) is (A) <code>11010011</code> (B) <code>11010010</code> (C) <code>10101101</code> (D) <code>00101101</code>.</p>
+<p><strong>Q2.</strong> The range of an \(n\)-bit two’s-complement integer is (A) \(-2^{n}\dots2^n-1\) (B) \(-2^{n-1}\dots2^{n-1}-1\) (C) \(-(2^{n-1}-1)\dots2^{n-1}-1\) (D) \(0\dots 2^n-1\).</p>
+<p><strong>Q3.</strong> \((2F)_{16}\) in octal is (A) 57 (B) 47 (C) 75 (D) 137.</p>
+<p><strong>Q4.</strong> How many distinct values can a sign-magnitude \(n\)-bit word represent? (A) \(2^n\) (B) \(2^n-1\) (C) \(2^{n-1}\) (D) \(2^{n-1}-1\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (A): \(45=00101101\), flip \(11010010\), \(+1=11010011\). Q2 (B). Q3 (A): \(0010\,1111=101\,111=57_8\). Q4 (B): \(+0\) and \(-0\) coincide as a value.</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> In 8-bit two’s complement, \(A=01101100\) and \(B=01001010\). The sum \(A+B\) and overflow flag are (A) <code>10110110</code>, \(V=1\) (B) <code>10110110</code>, \(V=0\) (C) <code>00110110</code>, \(V=0\) (D) <code>00110110</code>, \(V=1\).</p>
+<p><strong>Q6.</strong> A single-precision float has bit pattern <code>0x40490FDB</code>. Its value is approximately (A) \(1.57\) (B) \(3.14\) (C) \(6.28\) (D) \(0.785\).</p>
+<p><strong>Q7.</strong> In which base \(r\) does \(5\times6=(33)_r\)? (A) 6 (B) 8 (C) 9 (D) 10.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A): \(108+74=182&gt;127\); same-sign operands with negative result, so \(V=1\); \(182-256=-74=10110110\). Q6 (B): \(e=0x80=128\Rightarrow2^1\); mantissa \(1.5707964\); \(2\times 1.5707964=3.14159\). Q7 (C): \(30=3r+3\Rightarrow r=9\).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Smallest number of bits to represent all integers from \(-300\) to \(+300\) in two’s complement: <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> The decimal value of the Q3.5 number <code>10110100</code> (two’s complement, 3 integer bits including sign) is <span class="blank"></span> (two decimals).</p>
+<p><strong>Q10.</strong> Number of mantissa (fraction) bits in IEEE-754 single precision is <span class="blank"></span>; the exponent bias is <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: need \(2^{n-1}\ge301\Rightarrow n=10\) (range \(-512\dots511\)). Q9: integer \(=-128+32+16+4+2=-74\); \(-74/32=-2.3125\approx-2.31\). Q10: 23, 127.</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Which are true for 2’s-complement? (A) one representation of zero (B) overflow can occur when adding numbers of opposite sign (C) negation is invert-and-add-1 (D) the range is asymmetric.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (C), (D).</p>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Reading a two’s-complement number: if MSB=1, invert and add 1 to get the magnitude and attach a minus sign. For quick overflow checks, compare the signs of operands and result; for subtraction, treat \(A-B\) as \(A+(-B)\) first.</p></div></div>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> Convert \((123.45)_{10}\) integer part to hex. &emsp; <strong>T2.</strong> Range of 6-bit signed 2’s complement? &emsp; <strong>T3.</strong> Decode single-precision \(0\,01111111\,1000\ldots0\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(123=7B_{16}\). T2: \(-32\dots31\). T3: \(1.5\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>Positional value \(\sum d_ir^i\); integer division/fraction multiplication for conversion; group 3 or 4 bits for octal or hex.</li><li>2’s complement: invert \(+1\); range \(-2^{n-1}\dots2^{n-1}-1\); \(V=C_{n-1}\oplus C_n\) for signed overflow, carry-out for unsigned.</li><li>Q\(m.n\): value \(=\) int\(/2^n\); product width adds.</li><li>IEEE single: 1/8/23, bias 127; double: 1/11/52, bias 1023; hidden 1; \(e=0\) denormal; \(e\) all ones \(\Rightarrow\) \(\infty\)/NaN.</li></ul></div></div><div class="pager bottom"><a class="pn" href="preface.html">&larr; Preface: How to Use These Notes</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch02.html">Binary Codes and Error Detection &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\NAND": "\\overline{\\,\\cdot\\,}", "\\xor": "\\oplus", "\\tpd": "t_{pd}", "\\tsu": "t_{su}", "\\thold": "t_{h}", "\\tcq": "t_{cq}", "\\Vdd": "V_{DD}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 25: Feedback Amplifiers | Analog Circuits | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/analog-circuits/ch25.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 25: Feedback Amplifiers | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch25.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 25</div><h1>Feedback Amplifiers</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-25-1">25.1 Positive and negative feedback</a></li><li><a href="#s-25-2">25.2 Feedback topology</a></li><li><a href="#s-25-3">25.3 Voltage-series feedback</a></li><li><a href="#s-25-4">25.4 Voltage-shunt feedback</a></li><li><a href="#s-25-5">25.5 Current-series feedback</a></li><li><a href="#s-25-6">25.6 Current-shunt feedback</a></li><li><a href="#s-25-7">25.7 Gain with feedback</a></li><li><a href="#s-25-8">25.8 Desensitivity</a></li><li><a href="#s-25-9">25.9 Bandwidth improvement</a></li><li><a href="#s-25-10">25.10 Distortion reduction</a></li><li><a href="#s-25-11">25.11 Noise reduction</a></li><li><a href="#s-25-12">25.12 Input/output impedance changes</a></li><li><a href="#s-25-13">25.13 GATE problems</a></li></ol></details><h2 id="s-25-1"><span class="n">25.1</span> Positive and negative feedback</h2>
+<p>Feeding part of the output back to the input creates a loop. If the fed-back signal <em>subtracts</em> from the input (negative feedback), gain falls but many properties improve; if it <em>adds</em> (positive feedback), gain rises and the circuit may become an oscillator or a regenerative comparator.</p>
+<figure id="fig-25-1"><div class="figimgs"><img src="img/f25_block.png" alt="" loading="lazy"></div><figcaption><b>Figure 25.1.</b> General feedback amplifier: mixer, basic amplifier \(A\), feedback network \(\beta\).</figcaption></figure>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_f=\dfrac{x_o}{x_s}=\dfrac{A}{1+A\beta}\) (negative feedback), &emsp; loop gain \(T=A\beta\), &emsp; amount of feedback \(=1+A\beta\)<br>
+If \(A\beta\gg1\): \(A_f\approx\dfrac1\beta\) (set by passive components only).</p></div></div>
+<figure id="fig-25-2"><div class="figimgs"><img src="img/f25_gain.png" alt="" loading="lazy"></div><figcaption><b>Figure 25.2.</b> Closed-loop gain versus open-loop gain: for large \(A\beta\) the closed-loop gain saturates at \(1/\beta\).</figcaption></figure>
+<h2 id="s-25-2"><span class="n">25.2</span> Feedback topology</h2>
+<p>Two decisions define the four topologies:</p>
+<ul><li><strong>Sampling at the output:</strong> <em>voltage</em> sampling (feedback network in parallel with the output; \(v_o\) sampled, \(R_o\) decreases) or <em>current</em> sampling (in series with the load; \(i_o\) sampled, \(R_o\) increases).</li><li><strong>Mixing at the input:</strong> <em>series</em> mixing (voltages subtract; \(R_i\) increases) or <em>shunt</em> mixing (currents subtract; \(R_i\) decreases).</li></ul>
+<figure id="fig-25-3"><div class="figimgs"><img src="img/f25_topo.png" alt="" loading="lazy"></div><figcaption><b>Figure 25.3.</b> The four feedback topologies and the gain type of each basic amplifier.</figcaption></figure>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p><strong>How to identify the topology.</strong> <em>Sampling:</em> set \(v_o=0\) (short the load). If the feedback signal disappears \(\Rightarrow\) voltage sampling; if it remains \(\Rightarrow\) current sampling. <em>Mixing:</em> at the input node, if the source and feedback voltages are in series with the amplifier input \(\Rightarrow\) series; if source and feedback currents join at a node \(\Rightarrow\) shunt.</p></div></div>
+<h2 id="s-25-3"><span class="n">25.3</span> Voltage-series feedback</h2>
+<p><em>Voltage amplifier</em> (\(A_v=v_o/v_s\), \(\beta=v_f/v_o\)). Examples: non-inverting op-amp amplifier, emitter follower, two-stage CE with feedback divider.</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_{vf}=\dfrac{A_v}{1+A_v\beta}\), &emsp; \(R_{if}=R_i(1+A_v\beta)\), &emsp; \(R_{of}=\dfrac{R_o}{1+A_v\beta}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Op-amp non-inverting: \(A=10^4\), \(\beta=R_1/(R_1+R_f)=0.01\): \(A_f=10^4/101=99.0\); \(R_{if}=101R_i\); \(R_{of}=R_o/101\).</p></div></div>
+<h2 id="s-25-4"><span class="n">25.4</span> Voltage-shunt feedback</h2>
+<p><em>Transresistance amplifier</em> (\(R_m=v_o/i_s\), \(\beta=i_f/v_o\) in siemens). Examples: inverting op-amp amplifier, collector-to-base BJT stage, photodiode transimpedance amplifier.</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(R_{mf}=\dfrac{R_m}{1+R_m\beta}\to\dfrac1\beta=R_f\), &emsp; \(R_{if}=\dfrac{R_i}{1+R_m\beta}\), &emsp; \(R_{of}=\dfrac{R_o}{1+R_m\beta}\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(R_m=100\) k\(\Omega\), \(\beta=1/R_f=1/10\,\mathrm{k}\Omega=0.1\) mS: \(R_m\beta=10\); \(R_{mf}=100/11=9.09\) k\(\Omega\) (\(\approx R_f\)). Input resistance falls by 11\(\times\): a good current-input circuit.</p></div></div>
+<h2 id="s-25-5"><span class="n">25.5</span> Current-series feedback</h2>
+<p><em>Transconductance amplifier</em> (\(G_m=i_o/v_s\), \(\beta=v_f/i_o\) in ohms). Examples: CE with unbypassed emitter resistor, op-amp voltage-to-current converter.</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(G_{mf}=\dfrac{G_m}{1+G_m\beta}\to\dfrac1\beta\), &emsp; \(R_{if}=R_i(1+G_m\beta)\), &emsp; \(R_{of}=R_o(1+G_m\beta)\)</p></div></div>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>CE stage with \(R_E=1\) k\(\Omega\) unbypassed: \(\beta=R_E\), \(G_m=g_m=40\) mS: \(G_mR_E=40\); \(G_{mf}=40/41=0.976\) mS (\(\approx1/R_E\)); \(R_{of}=41r_o\). The collector current is set almost solely by \(R_E\).</p></div></div>
+<h2 id="s-25-6"><span class="n">25.6</span> Current-shunt feedback</h2>
+<p><em>Current amplifier</em> (\(A_i=i_o/i_s\), \(\beta=i_f/i_o\)). Example: two-stage CE amplifier with a resistor from the output emitter back to the first base.</p>
+<div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(A_{if}=\dfrac{A_i}{1+A_i\beta}\to\dfrac1\beta\), &emsp; \(R_{if}=\dfrac{R_i}{1+A_i\beta}\), &emsp; \(R_{of}=R_o(1+A_i\beta)\)</p></div></div>
+<div class="center"><div class="tw"><table><thead><tr><th>Topology</th><th class="c">Voltage-series</th><th class="c">Voltage-shunt</th><th class="c">Current-series</th><th class="c">Current-shunt</th></tr></thead><tbody><tr><td>Stabilises</td><td class="c">voltage gain</td><td class="c">transresistance</td><td class="c">transconductance</td><td class="c">current gain</td></tr><tr><td>\(R_{in}\)</td><td class="c">\(\uparrow\)</td><td class="c">\(\downarrow\)</td><td class="c">\(\uparrow\)</td><td class="c">\(\downarrow\)</td></tr><tr><td>\(R_{out}\)</td><td class="c">\(\downarrow\)</td><td class="c">\(\downarrow\)</td><td class="c">\(\uparrow\)</td><td class="c">\(\uparrow\)</td></tr><tr><td>Ideal for</td><td class="c">voltage amp.</td><td class="c">I-to-V converter</td><td class="c">V-to-I converter</td><td class="c">current amp.</td></tr></tbody></table></div></div>
+<h2 id="s-25-7"><span class="n">25.7</span> Gain with feedback</h2>
+<p>Take the gain type appropriate to the topology. Notes for practical circuits: (1) <em>Loading:</em> the feedback network loads both input and output; the basic amplifier \(A\) must be computed <em>including</em> these loading effects (with \(R_s\), \(R_L\) and the feedback network’s input/output resistances). (2) \(\beta\) is the feedback network’s transfer function, for the appropriate quantities. (3) The sign of \(A\beta\) must be positive for negative feedback.</p>
+<h2 id="s-25-8"><span class="n">25.8</span> Desensitivity</h2>
+<p>Differentiating \(A_f=A/(1+A\beta)\):
+\[\frac{dA_f}{A_f}=\frac{1}{1+A\beta}\,\frac{dA}{A}.\]
+The fractional change in closed-loop gain is smaller than that of the basic amplifier by the factor \(1+A\beta\) (the <em>desensitivity</em>).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(A=1000\), \(\beta=0.09\): \(A_f=1000/91=10.99\). If \(A\) drops by 20% (to 800): \(A_f=800/73=10.96\), a change of only \(0.27\%\) (first-order estimate \(20/91=0.22\%\)).</p></div></div>
+<h2 id="s-25-9"><span class="n">25.9</span> Bandwidth improvement</h2>
+<p>For a single-pole amplifier \(A(s)=A_0/(1+s/\omega_H)\):
+\[A_f(s)=\frac{A_0/(1+A_0\beta)}{1+s/\omega_H(1+A_0\beta)}\quad\Rightarrow\quad f_{Hf}=f_H(1+A_0\beta),\quad f_{Lf}=\frac{f_L}{1+A_0\beta},\quad A_f\,f_{Hf}=A_0f_H.\]</p>
+<figure id="fig-25-4"><div class="figimgs"><img src="img/f25_bw.png" alt="" loading="lazy"></div><figcaption><b>Figure 25.4.</b> Feedback trades gain for bandwidth: the gain-bandwidth product is unchanged.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(A_0=1000\), \(f_H=10\) kHz, \(\beta=0.09\): \(1+A_0\beta=91\), \(A_f=10.99\), \(f_{Hf}=910\) kHz.</p></div></div>
+<h2 id="s-25-10"><span class="n">25.10</span> Distortion reduction</h2>
+<p>Distortion (and other error signals generated inside the loop) is reduced by \((1+A\beta)\) when the input is increased to maintain the same output amplitude:
+\[D_f=\frac{D}{1+A\beta}.\]</p>
+<figure id="fig-25-5"><div class="figimgs"><img src="img/f25_dist.png" alt="" loading="lazy"></div><figcaption><b>Figure 25.5.</b> Feedback linearises the amplifier: the compressive transfer curve becomes nearly straight, and output distortion falls.</figcaption></figure>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>\(D=10\%\), \(A\beta=99\): \(D_f=0.1\%\).</p></div></div>
+<h2 id="s-25-11"><span class="n">25.11</span> Noise reduction</h2>
+<p>Noise generated <em>inside</em> the loop (e.g. power-supply hum, later-stage noise) is also divided by \(1+A\beta\), provided the signal is restored to the same level by more input drive. Noise entering <em>with</em> the input signal is not reduced (SNR is unchanged): feedback does not improve the SNR of the source.</p>
+<h2 id="s-25-12"><span class="n">25.12</span> Input/output impedance changes</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Mixing</th><th>\(R_{if}\)</th><th>Sampling \(\to R_{of}\)</th></tr></thead><tbody><tr><td>Series</td><td>\(R_i(1+A\beta)\)</td><td>Voltage: \(R_o/(1+A\beta)\)</td></tr><tr><td>Shunt</td><td>\(R_i/(1+A\beta)\)</td><td>Current: \(R_o(1+A\beta)\)</td></tr></tbody></table></div></div>
+<p><strong>Mnemonic:</strong> <em>series and current tend to raise resistances; shunt and voltage tend to lower them.</em></p>
+<h2 id="s-25-13"><span class="n">25.13</span> GATE problems</h2>
+<div class="box gateq"><div class="bt">GATE-Pattern Problem</div><div class="bb"><p><strong>Q1.</strong> \(A=100\), \(\beta=0.1\) (negative feedback). \(A_f=\) <span class="blank"></span>.</p>
+<p><strong>Q2.</strong> \(A=2000\), \(\beta=0.05\). If \(A\) changes by \(10\%\), \(A_f\) changes by approximately <span class="blank"></span>%.</p>
+<p><strong>Q3.</strong> The inverting op-amp amplifier employs (A) voltage-series (B) voltage-shunt (C) current-series (D) current-shunt feedback.</p>
+<p><strong>Q4.</strong> A voltage-series feedback amplifier has \(R_i=10\) k\(\Omega\) and \(A\beta=99\). \(R_{if}=\) <span class="blank"></span> M\(\Omega\).</p>
+<p><strong>Q5.</strong> A voltage-shunt amplifier has \(R_o=1\) k\(\Omega\), \(A\beta=9\). \(R_{of}=\) <span class="blank"></span> \(\Omega\).</p>
+<p><strong>Q6.</strong> \(f_H=20\) kHz, \(A=200\), \(\beta=0.05\). \(f_{Hf}=\) <span class="blank"></span> kHz and \(A_f=\) <span class="blank"></span>.</p>
+<p><strong>Q7.</strong> Current-series feedback (A) increases \(R_{in}\) and \(R_{out}\) (B) decreases both (C) increases \(R_{in}\), decreases \(R_{out}\) (D) decreases \(R_{in}\), increases \(R_{out}\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1: \(100/11=9.09\). Q2: \(A\beta=100\); \(10/101\approx0.099\%\). Q3: (B). Q4: \(10\times100=1\) M\(\Omega\). Q5: \(1000/10=100\ \Omega\). Q6: \(A\beta=10\): \(f_{Hf}=20\times11=220\) kHz; \(A_f=200/11=18.2\). Q7: (A).</p>
+<div class="box practice"><div class="bt">Practice</div><div class="bb"><ol><li>Design \(\beta\) for \(A_f=20\) with \(A=10^4\) (voltage-series). &emsp; [\(\beta\approx0.05\)]</li><li>Find the distortion with feedback if \(D=5\%\), \(A\beta=49\). &emsp; [0.1%]</li><li>Which topology gives the most stable transconductance? &emsp; [current-series]</li><li>State two consequences of \(A\beta\gg1\). &emsp; [\(A_f\approx1/\beta\); gain independent of the active device]</li></ol></div></div><div class="pager bottom"><a class="pn" href="ch24.html">&larr; Oscillators</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch26.html">Frequency Response of Amplifiers &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\VT": "V_T", "\\gm": "g_m", "\\ro": "r_o", "\\rpi": "r_\\pi", "\\Vov": "V_{ov}", "\\Av": "A_v", "\\Rin": "R_{in}", "\\Rout": "R_{out}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 6: Reflection, Refraction and Power Flow | Electromagnetics | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Normal-incidence \Gamma, \tau and standing waves; Snell’s law, Brewster angle and total internal reflection; the Poynting vector and average power density.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/electromagnetics/ch06.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 6: Reflection, Refraction and Power Flow | Electromagnetics | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Normal-incidence \Gamma, \tau and standing waves; Snell’s law, Brewster angle and total internal reflection; the Poynting vector and average power density."><meta property="og:url" content="https://vintechnologies.co.in/gate/electromagnetics/ch06.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Electromagnetics</a></div><div class="chlabel">Chapter 6</div><h1>Reflection, Refraction and Power Flow</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-6-1">6.1 Normal incidence</a></li><li><a href="#s-6-2">6.2 Refraction and oblique incidence</a></li><li><a href="#s-6-3">6.3 Poynting vector and power flow</a></li><li><a href="#s-6-4">6.4 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Normal-incidence \(\Gamma\), \(\tau\) and standing waves; Snell’s law, Brewster angle and total internal reflection; the Poynting vector and average power density.</p></div></div>
+<h2 id="s-6-1"><span class="n">6.1</span> Normal incidence</h2>
+<p>A wave in medium 1 (\(\eta_1\)) strikes a planar boundary with medium 2 (\(\eta_2\)) at \(z=0\).</p>
+<div class="box formula"><div class="bt">Reflection and transmission</div><div class="bb"><p>\(\Gamma=\dfrac{E_r}{E_i}=\dfrac{\eta_2-\eta_1}{\eta_2+\eta_1}\), \(\ \tau=\dfrac{E_t}{E_i}=\dfrac{2\eta_2}{\eta_2+\eta_1}=1+\Gamma\).<br>
+Standing-wave ratio \(s=\dfrac{1+|\Gamma|}{1-|\Gamma|}\); \(|\Gamma|=\dfrac{s-1}{s+1}\).<br>
+Power: \(\dfrac{P_r}{P_i}=|\Gamma|^2\), \(\ \dfrac{P_t}{P_i}=1-|\Gamma|^2=\dfrac{4\eta_1\eta_2}{(\eta_1+\eta_2)^2}\).<br>
+Perfect conductor (\(\eta_2=0\)): \(\Gamma=-1\), \(\tau=0\), full standing wave with \(E=0\) at the wall. Perfect dielectric \(\to\) dielectric: \(\Gamma\) real.</p></div></div>
+<figure id="fig-6-1"><div class="figimgs"><img src="img/e06_standing.png" alt="" loading="lazy"></div><figcaption><b>Figure 6.1.</b> Standing-wave magnitude in medium 1 for \(\Gamma=0\), \(0.5\) and \(-1\) (PEC).</figcaption></figure>
+<p>The maxima are \(|E_i|(1+|\Gamma|)\) and the minima \(|E_i|(1-|\Gamma|)\), spaced \(\lambda/2\) apart and separated by \(\lambda/4\) from each other; for a PEC the first \(E\) minimum is at the wall.</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Air to dielectric \(\eps_r=4\): \(\eta_2=188.5\,\Omega\), \(\Gamma=\frac{188.5-377}{188.5+377}=-\frac13\), \(\tau=\frac23\), \(s=\frac{1+1/3}{1-1/3}=2\). Reflected power \(=\frac19\), transmitted power \(=\frac89=88.9\%\). Check: \(\tau^2\frac{\eta_1}{\eta_2}=\frac49\cdot2=\frac89\).</p></div></div>
+<h2 id="s-6-2"><span class="n">6.2</span> Refraction and oblique incidence</h2>
+<div class="box formula"><div class="bt">Snell and special angles</div><div class="bb"><p>Snell: \(\sqrt{\eps_1\mu_1}\sin\theta_i=\sqrt{\eps_2\mu_2}\sin\theta_t\) (for \(\mu_1=\mu_2\): \(n_1\sin\theta_i=n_2\sin\theta_t\), \(n=\sqrt{\eps_r}\)), \(\theta_r=\theta_i\).<br>
+<strong>Brewster angle</strong> (zero reflection for parallel/TM polarization, \(\mu_1=\mu_2\)): \(\tan\theta_B=\dfrac{n_2}{n_1}=\sqrt{\dfrac{\eps_2}{\eps_1}}\); \(\theta_B+\theta_t=90^\circ\).<br>
+<strong>Critical angle</strong> (only if \(n_1&gt;n_2\)): \(\sin\theta_c=\dfrac{n_2}{n_1}\); for \(\theta_i&gt;\theta_c\) total internal reflection (TIR), the transmitted wave is evanescent.</p></div></div>
+<p>Perpendicular (TE) polarization has no Brewster angle for nonmagnetic media; the Fresnel coefficients are \(\Gamma_\perp=\frac{\eta_2\cos\theta_i-\eta_1\cos\theta_t}{\eta_2\cos\theta_i+\eta_1\cos\theta_t}\), \(\Gamma_\parallel=\frac{\eta_2\cos\theta_t-\eta_1\cos\theta_i}{\eta_2\cos\theta_t+\eta_1\cos\theta_i}\).</p>
+<div class="box example"><div class="bt">Solved Example</div><div class="bb"><p>Air to glass (\(n=1.5\)): \(\theta_B=\tan^{-1}1.5=56.3^\circ\). Glass to air: \(\theta_c=\sin^{-1}(1/1.5)=41.8^\circ\). Air to glass at \(\theta_i=30^\circ\): \(\sin\theta_t=0.5/1.5\), \(\theta_t=19.5^\circ\).</p></div></div>
+<h2 id="s-6-3"><span class="n">6.3</span> Poynting vector and power flow</h2>
+<div class="box formula"><div class="bt">Poynting</div><div class="bb"><p>Instantaneous power density \(\vS=\vE\times\vH\) (W/m\({}^2\)), along the direction of propagation. Time average (phasors, peak amplitudes): \(\vS_{av}=\tfrac12\mathrm{Re}(\vE\times\vH^*)\).<br>
+Plane wave in a lossless medium: \(S_{av}=\dfrac{E_0^2}{2\eta}=\tfrac12\eta H_0^2\). Free space: \(S_{av}=\dfrac{E_0^2}{2\cdot377}\).<br>
+<strong>Poynting theorem:</strong> \(-\oiint\vS\cdot d\mathbf S=\dfrac{d}{dt}\iiint\left(\tfrac12\eps E^2+\tfrac12\mu H^2\right)dV+\iiint\sigma E^2dV\) (power flowing in = stored-energy rate + ohmic loss).</p></div></div>
+<p>For a standing wave, \(S_{av}=0\) in a PEC situation (all power reflected); in a lossless medium energy is shared equally between \(\vE\) and \(\vH\): \(\tfrac12\eps E^2=\tfrac12\mu H^2\).</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) \(\tau=1+\Gamma\) for the field, not for power. (ii) Brewster angle exists for parallel (TM) polarization only. (iii) TIR needs the <em>denser</em> medium first. (iv) \(S_{av}=E_0^2/2\eta\) uses the <em>peak</em> amplitude; with RMS drop the \(\frac12\). (v) The reflection coefficient depends on the <em>ratio</em> of impedances, which may be changed for \(\mu\) as well as \(\eps\).</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>Normal incidence: write \(\Gamma=\frac{\eta_2-\eta_1}{\eta_2+\eta_1}\) then \(s\) and power fractions. For \(\eps_r\) values \(4,9,16\) the impedances are \(\eta_0/2,\eta_0/3,\eta_0/4\). For the Brewster/critical angle questions just compute \(\tan^{-1}\) or \(\sin^{-1}\) of the index ratio.</p></div></div>
+<h2 id="s-6-4"><span class="n">6.4</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> Brewster angle for air to glass (\(n=1.5\)) is (A) \(33.7^\circ\) (B) \(41.8^\circ\) (C) \(56.3^\circ\) (D) \(90^\circ\).</p>
+<p><strong>Q2.</strong> The reflection coefficient at a perfect conductor is (A) 0 (B) \(+1\) (C) \(-1\) (D) \(j\).</p>
+<p><strong>Q3.</strong> The critical angle at a glass (\(n=1.5\)) to air boundary is (A) \(41.8^\circ\) (B) \(56.3^\circ\) (C) \(33.7^\circ\) (D) \(90^\circ\).</p>
+<p><strong>Q4.</strong> The unit of the Poynting vector is (A) W (B) W/m\({}^2\) (C) J/m\({}^3\) (D) V/m.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C). Q2 (C). Q3 (A). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> A wave in air strikes a dielectric with \(\eps_r=4\) at normal incidence. \(\Gamma=\) (A) \(+1/3\) (B) \(-1/3\) (C) \(+1/2\) (D) \(-1/2\).</p>
+<p><strong>Q6.</strong> For the same boundary the fraction of power transmitted is (A) \(1/9\) (B) \(2/3\) (C) \(8/9\) (D) \(4/9\).</p>
+<p><strong>Q7.</strong> For \(|\Gamma|=1/3\) the standing-wave ratio is (A) 1.5 (B) 2 (C) 3 (D) 4.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (B). Q6 (C). Q7 (B).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> SWR for \(|\Gamma|=0.6\): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Refraction angle (degrees, one decimal) for \(\theta_i=30^\circ\), air to \(n=1.5\): <span class="blank"></span>.</p>
+<p><strong>Q10.</strong> Average power density (W/m\({}^2\), one decimal) of a free-space wave with \(E_0=377\) V/m: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: \(1.6/0.4=4\). Q9: \(\sin^{-1}(1/3)=19.5\). Q10: \(377^2/(2\cdot377)=188.5\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q11.</strong> Total internal reflection requires (A) \(n_1&gt;n_2\) (B) \(\theta_i&gt;\theta_c\) (C) works for both polarizations (D) \(n_1&lt;n_2\).</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q11: (A), (B), (C).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> \(\tau\) in terms of \(\Gamma\)? &emsp; <strong>T2.</strong> Brewster condition? &emsp; <strong>T3.</strong> \(\vS_{av}\) expression?</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: \(1+\Gamma\). T2: \(\tan\theta_B=n_2/n_1\) (TM). T3: \(\frac12\mathrm{Re}(\vE\times\vH^*)\).</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(\Gamma=\frac{\eta_2-\eta_1}{\eta_2+\eta_1}\), \(\tau=1+\Gamma\), \(s=\frac{1+|\Gamma|}{1-|\Gamma|}\), transmitted power \(1-|\Gamma|^2\).</li><li>Snell \(n_1\sin\theta_i=n_2\sin\theta_t\); \(\tan\theta_B=n_2/n_1\) (TM); \(\sin\theta_c=n_2/n_1\).</li><li>PEC: \(\Gamma=-1\), \(E_t=0\) at the wall.</li><li>\(\vS=\vE\times\vH\), \(S_{av}=E_0^2/2\eta\); Poynting theorem balances stored energy and loss.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch05.html">&larr; Uniform Plane Waves</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch07.html">Transmission Lines &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\vE": "\\mathbf E", "\\vD": "\\mathbf D", "\\vH": "\\mathbf H", "\\vB": "\\mathbf B", "\\vJ": "\\mathbf J", "\\vS": "\\mathbf S", "\\ar": "\\mathbf a", "\\grad": "\\nabla", "\\eps": "\\varepsilon", "\\epsz": "\\varepsilon_0", "\\muz": "\\mu_0", "\\Zo": "Z_0", "\\ZL": "Z_L", "\\Gam": "\\Gamma", "\\oiint": "\\mathop{\\oint\\!\\!\\!\\oint}", "\\VSWR": "\\mathrm{VSWR}", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

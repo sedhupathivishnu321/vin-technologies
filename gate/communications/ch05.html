@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1809600514096697">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 5: Noise in Analog Modulation and Efficiency Comparison | Communications | GATE ECE Notes | VIN Technologies</title>
+<meta name="description" content="Figure of merit (FOM) of DSB-SC, SSB, AM and FM receivers, the effect of \beta on FM output SNR, threshold effect, pre-/de-emphasis, and the bandwidth–power trade-off between schemes.">
+<link rel="canonical" href="https://vintechnologies.co.in/gate/communications/ch05.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 5: Noise in Analog Modulation and Efficiency Comparison | Communications | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Figure of merit (FOM) of DSB-SC, SSB, AM and FM receivers, the effect of \beta on FM output SNR, threshold effect, pre-/de-emphasis, and the bandwidth–power trade-off between schemes."><meta property="og:url" content="https://vintechnologies.co.in/gate/communications/ch05.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?v=3">
+<link rel="stylesheet" href="/gate/notes.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script>
+<script>window.LL_NOGATE=true</script>
+<script src="/lab/shared/config.js?v=3"></script>
+<script src="/lab/shared/account.js?v=3"></script>
+</head>
+<body class="notes-page">
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
+<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
+<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Communications</a></div><div class="chlabel">Chapter 5</div><h1>Noise in Analog Modulation and Efficiency Comparison</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-5-1">5.1 Reference: baseband SNR</a></li><li><a href="#s-5-2">5.2 Linear modulation</a></li><li><a href="#s-5-3">5.3 Frequency modulation</a></li><li><a href="#s-5-4">5.4 Comparison of analog schemes</a></li><li><a href="#s-5-5">5.5 GATE problems</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Figure of merit (FOM) of DSB-SC, SSB, AM and FM receivers, the effect of \(\beta\) on FM output SNR, threshold effect, pre-/de-emphasis, and the bandwidth–power trade-off between schemes.</p></div></div>
+<h2 id="s-5-1"><span class="n">5.1</span> Reference: baseband SNR</h2>
+<p>Let the message have power \(P\) and bandwidth \(W\), and the channel add white noise of PSD \(N_0/2\). The reference SNR is that of a baseband system with the same transmitted power:
+\[
+\text{SNR}_{base}=\frac{P}{N_0W}.
+\]
+The <strong>channel SNR</strong> \(\text{SNR}_C=\dfrac{\text{average transmitted (received) power}}{N_0W}\) and the <strong>figure of merit</strong> \(\text{FOM}=\dfrac{\text{SNR}_O}{\text{SNR}_C}\) compares each scheme with this baseband benchmark.</p>
+<h2 id="s-5-2"><span class="n">5.2</span> Linear modulation</h2>
+<div class="box formula"><div class="bt">Output SNR with coherent detection</div><div class="bb"><p><strong>DSB-SC:</strong> \(\text{SNR}_O=\dfrac{A_c^2P}{2N_0W}=\text{SNR}_C\), FOM \(=1\).<br>
+<strong>SSB:</strong> \(\text{SNR}_O=\dfrac{A_c^2P}{4N_0W}=\text{SNR}_C\), FOM \(=1\) (half the noise bandwidth compensates the half signal power).<br>
+<strong>AM with envelope detector (large SNR):</strong> \(\text{SNR}_O=\dfrac{A_c^2k_a^2P}{2N_0W}\), \(\ \text{SNR}_C=\dfrac{A_c^2(1+k_a^2P)}{2N_0W}\),
+\[
+\text{FOM}=\frac{k_a^2P}{1+k_a^2P}=\eta\ \ (\text{the power efficiency}),\ \ \text{tone: }\frac{\mu^2}{2+\mu^2}\ (\text{max }\tfrac13).
+\]</p></div></div>
+<p>So AM is always inferior to DSB-SC/SSB in noise performance by the factor \(\eta\) (the carrier wastes power). Envelope detection has a <strong>threshold</strong>: below a carrier-to-noise ratio of about \(10\) dB the output SNR falls rapidly (noise dominates the envelope and the message is lost), whereas coherent detection of AM has no threshold.</p>
+<h2 id="s-5-3"><span class="n">5.3</span> Frequency modulation</h2>
+<p>Above threshold (large carrier-to-noise ratio) with a limiter and discriminator:</p>
+<div class="box formula"><div class="bt">FM receiver</div><div class="bb"><p>\(\text{SNR}_O=\dfrac{3A_c^2k_f^2P}{2N_0W^3}\), \(\ \text{SNR}_C=\dfrac{A_c^2}{2N_0W}\), hence \(\ \text{FOM}=\dfrac{3k_f^2P}{W^2}\).<br>
+Tone modulation (\(P=A_m^2/2\), \(f_m=W\), \(\beta=k_fA_m/W\)): \(\ \text{FOM}=\dfrac32\beta^2\).<br>
+PM (tone): FOM \(=k_p^2P=\dfrac{\beta^2}2\), with \(\beta=k_pA_m\).<br>
+Discriminator output noise PSD is <strong>parabolic</strong>: \(S_{n_o}(f)\propto f^2\), so high message frequencies suffer most.</p></div></div>
+<div class="box example"><div class="bt">FM versus AM</div><div class="bb"><p>\(\beta=5\) (commercial FM): FOM \(=\tfrac32\times25=37.5\) (\(15.7\) dB). Tone AM with \(\mu=1\): FOM \(=\tfrac13\) (\(-4.8\) dB). FM thus gains \(15.7+4.8=20.5\) dB over AM at the same channel SNR (a factor \(112.5\)).<br>
+For \(\text{SNR}_C=40\) dB: DSB-SC/SSB: \(40\) dB; AM (\(\mu=1\)): \(35.2\) dB; FM (\(\beta=5\)): \(55.7\) dB.<br>
+AM with \(\mu=0.5\): FOM \(=1/9\) (\(-9.5\) dB); with \(\text{SNR}_C=30\) dB output SNR \(=20.5\) dB.</p></div></div>
+<p><strong>Bandwidth–SNR exchange.</strong> \(\text{SNR}_O\propto\beta^2\text{SNR}_C\) while \(B_T\approx2(\beta+1)W\): doubling \(\beta\) from 5 to 10 quadruples the output SNR (\(+6\) dB) but increases the bandwidth from \(180\) to \(330\) kHz (\(W=15\) kHz). This trade-off, absent in AM, is the key advantage of wideband FM; it only holds above threshold.</p>
+<h3 id="s-5-3-1"><span class="n">5.3.1</span> FM threshold effect</h3>
+<p>When the carrier-to-noise ratio \(\rho=\dfrac{A_c^2}{2N_0B_T}\) drops below \(\approx10\) dB, noise spikes (clicks) appear in the discriminator output and \(\text{SNR}_O\) collapses faster than linearly. The threshold rises with \(\beta\) (a wider bandwidth admits more noise). Threshold extension: PLL or FM-feedback demodulators.</p>
+<h3 id="s-5-3-2"><span class="n">5.3.2</span> Pre-emphasis and de-emphasis</h3>
+<p>Because FM noise grows as \(f^2\) while speech/music energy falls with \(f\), a high-frequency boost (pre-emphasis, time constant \(\tau=75\,\mu\)s, corner \(1/2\pi\tau=2.1\) kHz) is applied at the transmitter and a matching low-pass (de-emphasis) after the discriminator. The signal is restored while the output noise is reduced; for \(W=15\) kHz the improvement is
+\[
+I=\frac{(W/f_d)^3}{3\left[(W/f_d)-\arctan(W/f_d)\right]}=21.3\approx13.3\ \text{dB}\quad(f_d=2.1\,\text{kHz}).
+\]</p>
+<h2 id="s-5-4"><span class="n">5.4</span> Comparison of analog schemes</h2>
+<div class="center"><div class="tw"><table><thead><tr><th>Scheme</th><th class="c">Bandwidth</th><th class="c">FOM</th><th class="c">Threshold</th><th>Comment</th></tr></thead><tbody><tr><td>DSB-SC</td><td class="c">\(2W\)</td><td class="c">1</td><td class="c">none (coherent)</td><td>carrier recovery needed</td></tr><tr><td>SSB</td><td class="c">\(W\)</td><td class="c">1</td><td class="c">none</td><td>best bandwidth efficiency</td></tr><tr><td>AM (envelope)</td><td class="c">\(2W\)</td><td class="c">\(\le\tfrac13\)</td><td class="c">yes</td><td>simple receiver</td></tr><tr><td>NBFM</td><td class="c">\(2W\)</td><td class="c">small</td><td class="c">–</td><td>mobile radio</td></tr><tr><td>WBFM</td><td class="c">\(2(\beta+1)W\)</td><td class="c">\(\tfrac32\beta^2\)</td><td class="c">yes (\(\sim10\) dB)</td><td>high fidelity, uses bandwidth</td></tr></tbody></table></div></div>
+<p><strong>Power efficiency</strong>: SSB and DSB-SC \(&gt;\) AM. <strong>Bandwidth efficiency</strong>: SSB \(&gt;\) VSB \(&gt;\) AM = DSB \(&gt;\) FM. FM trades bandwidth for noise immunity and also has a constant-envelope signal (non-linear power amplifiers can be used).</p>
+<div class="box trap"><div class="bt">Conceptual Trap</div><div class="bb"><p>(i) FOM for AM is \(\eta\), not \(\mu^2\). (ii) The FM improvement \(\tfrac32\beta^2\) applies only above threshold. (iii) Output noise PSD in FM is parabolic, not flat. (iv) SSB and DSB-SC have identical FOM although SSB uses half the bandwidth. (v) Increasing \(\beta\) increases both \(\text{SNR}_O\) and bandwidth.</p></div></div>
+<div class="box shortcut"><div class="bt">GATE Shortcut</div><div class="bb"><p>FOM table: DSB-SC 1, SSB 1, AM tone \(\mu^2/(2+\mu^2)\), FM tone \(\tfrac32\beta^2\). Convert to dB with \(10\log_{10}\). Output SNR (dB) \(=\text{SNR}_C\) (dB) \(+\) FOM (dB).</p></div></div>
+<h2 id="s-5-5"><span class="n">5.5</span> GATE problems</h2>
+<div class="box onemark"><div class="bt">GATE 1-Mark Problems</div><div class="bb"><p><strong>Q1.</strong> The figure of merit of a coherent DSB-SC receiver is (A) 1/3 (B) 1/2 (C) 1 (D) 2.</p>
+<p><strong>Q2.</strong> The maximum FOM of a tone-modulated AM receiver (envelope detector, \(\mu\le1\)) is (A) 1 (B) 1/2 (C) 1/3 (D) 3/2.</p>
+<p><strong>Q3.</strong> The noise PSD at an FM discriminator output varies with \(f\) as (A) constant (B) \(f\) (C) \(f^2\) (D) \(1/f\).</p>
+<p><strong>Q4.</strong> Pre-emphasis in FM is applied to (A) reduce bandwidth (B) improve high-frequency SNR (C) reduce power (D) remove the carrier.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q1 (C). Q2 (C). Q3 (C). Q4 (B).</p>
+<div class="box twomark"><div class="bt">GATE 2-Mark Problems</div><div class="bb"><p><strong>Q5.</strong> Tone FM with \(\beta=5\) has FOM (dB) of (A) 15.7 (B) 7.8 (C) 37.5 (D) 20.5.</p>
+<p><strong>Q6.</strong> \(\text{SNR}_C=40\) dB. The output SNR of AM with \(\mu=1\) (tone), envelope detector, is (A) 35.2 dB (B) 40 dB (C) 44.8 dB (D) 55.7 dB.</p>
+<p><strong>Q7.</strong> For tone FM, raising \(\beta\) from 5 to 10 changes the output SNR (above threshold) by (A) \(+3\) dB (B) \(+6\) dB (C) \(+12\) dB (D) none.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q5 (A). Q6 (A). Q7 (B).</p>
+<div class="box natq"><div class="bt">Numerical Answer Type (NAT)</div><div class="bb"><p><strong>Q8.</strong> Gain (dB, one decimal) of tone FM with \(\beta=5\) over tone AM with \(\mu=1\) at the same \(\text{SNR}_C\): <span class="blank"></span>.</p>
+<p><strong>Q9.</strong> Bandwidth (kHz) for \(\beta=10\), \(W=15\) kHz: <span class="blank"></span>.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q8: 20.5. Q9: \(2\times11\times15=330\).</p>
+<div class="box msqq"><div class="bt">Multiple Select (MSQ)</div><div class="bb"><p><strong>Q10.</strong> Select the true statements. (A) Coherent detection has no threshold. (B) FM output noise is flat. (C) FM trades bandwidth for SNR. (D) AM FOM \(\le1/3\) for a tone.</p></div></div>
+<p class="ans"><strong>Answers: </strong>Q10: (A), (C), (D).</p>
+<div class="box chtest"><div class="bt">Chapter Test</div><div class="bb"><p><strong>T1.</strong> FOM of SSB. &emsp; <strong>T2.</strong> Effect of de-emphasis on the message. &emsp; <strong>T3.</strong> Threshold carrier-to-noise ratio of an FM discriminator.</p></div></div>
+<p class="ans"><strong>Answers: </strong>T1: 1. T2: restores the original spectrum. T3: about 10 dB.</p>
+<div class="box revision"><div class="bt">One-Page Revision</div><div class="bb"><ul><li>\(\text{SNR}_{base}=P/N_0W\); FOM\(=\text{SNR}_O/\text{SNR}_C\).</li><li>DSB-SC, SSB: 1. AM: \(\eta\) (\(\le\tfrac13\)). FM tone: \(\tfrac32\beta^2\); threshold \(\approx10\) dB.</li><li>FM noise PSD \(\propto f^2\); pre-/de-emphasis (\(75\,\mu\)s) gives \(\approx13\) dB.</li></ul></div></div><div class="pager bottom"><a class="pn" href="ch04.html">&larr; Angle Modulation: FM and PM</a><a class="pn mid" href="./">All chapters</a><a class="pn" href="ch06.html">Sampling, Quantization, PCM, DPCM and Delta Modulation &rarr;</a></div></main>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>window.addEventListener('DOMContentLoaded',function(){if(!window.renderMathInElement)return;renderMathInElement(document.querySelector('main'),{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\begin{align*}',right:'\\end{align*}',display:true},{left:'\\begin{equation*}',right:'\\end{equation*}',display:true}],macros:{"\\dddot": "\\overset{\\cdot\\cdot\\cdot}{#1}", "\\emph": "\\textit{#1}", "\\Qf": "\\mathrm{Q}", "\\EbNo": "E_b/N_0", "\\Eb": "E_b", "\\Nzero": "N_0", "\\Rb": "R_b", "\\Rs": "R_s", "\\fc": "f_c", "\\fm": "f_m", "\\Ac": "A_c", "\\abs": "\\left|#1\\right|", "\\jw": "j\\omega", "\\jj": "\\mathrm{j}", "\\ud": "\\,\\mathrm{d}", "\\ut": "u(t)", "\\un": "u[n]", "\\dt": "\\delta(t)", "\\dn": "\\delta[n]", "\\FT": "\\overset{\\mathcal F}{\\longleftrightarrow}", "\\LTp": "\\overset{\\mathcal L}{\\longleftrightarrow}", "\\ZTp": "\\overset{\\mathcal Z}{\\longleftrightarrow}", "\\DTFTp": "\\overset{\\mathrm{DTFT}}{\\longleftrightarrow}", "\\FSp": "\\overset{\\mathrm{FS}}{\\longleftrightarrow}", "\\Rth": "R_{Th}", "\\Vth": "V_{Th}", "\\Rn": "R_{N}", "\\In": "I_N", "\\ROC": "\\mathrm{ROC}", "\\GM": "\\mathrm{GM}", "\\PM": "\\mathrm{PM}", "\\Mp": "M_p", "\\ess": "e_{ss}", "\\wn": "\\omega_n", "\\wdd": "\\omega_d", "\\wgc": "\\omega_{gc}", "\\wpc": "\\omega_{pc}", "\\Gs": "G(s)", "\\Hs": "H(s)", "\\GH": "G(s)H(s)", "\\erfc": "\\operatorname{erfc}", "\\E": "\\operatorname{E}", "\\sinc": "\\operatorname{sinc}", "\\rect": "\\operatorname{rect}", "\\tri": "\\operatorname{tri}", "\\sgn": "\\operatorname{sgn}", "\\Real": "\\operatorname{Re}", "\\Imag": "\\operatorname{Im}"},throwOnError:false,strict:false});});</script>
+<footer><div class="wrap foot"><div>© <span id="year"></span> VIN Technologies · Made in India</div>
+<div><a href="/gate/">GATE Notes</a><a href="/lab/">Circuit Simulator</a><a href="/labs/">Lab Experiments</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body></html>

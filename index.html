@@ -40,7 +40,13 @@
 <script>window.LL_NOGATE=true</script>
 <script src="/lab/shared/config.js?v=3"></script>
 <script src="/lab/shared/account.js?v=3"></script>
-<style>.chips a.bk{display:none}.nbook{flex-basis:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(20,33,61,.07)}.nbbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--line)}.nbl{font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);margin-right:4px}.nbt{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px;font:inherit;font-size:.86rem;font-weight:600;color:var(--mute);cursor:pointer}.nbt.on{background:var(--amber);border-color:var(--amber);color:#3b2300}.nbopen{margin-left:auto;font-size:.85rem;font-weight:600;color:var(--blue);text-decoration:none}.nbframe{display:block;width:100%;height:min(78vh,820px);min-height:480px;border:0;background:#fff}</style>
+<style>.mazebox{margin:34px 0 0;width:min(100%,380px);background:rgba(255,255,255,.72);border:1px solid rgba(146,64,14,.16);border-radius:18px;padding:12px;box-shadow:0 14px 40px rgba(20,33,61,.12);backdrop-filter:blur(4px)}
+.mazebox canvas{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;background:#fffdf5}
+.mazebar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px;font-size:.78rem;color:var(--mute);font-weight:600}
+.mazebar button{font:inherit;font-size:.78rem;font-weight:700;color:var(--brown);background:var(--cream);border:1px solid var(--amber);border-radius:99px;padding:4px 12px;cursor:pointer}
+.mazebar button:hover{background:var(--y1)}
+@media (min-width:1280px){.mazebox{position:absolute;right:clamp(20px,4vw,72px);top:50%;transform:translateY(-50%);margin:0;width:min(32vw,470px)}}
+.chips a.bk{display:none}.nbook{flex-basis:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(20,33,61,.07)}.nbbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--line)}.nbl{font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);margin-right:4px}.nbt{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px;font:inherit;font-size:.86rem;font-weight:600;color:var(--mute);cursor:pointer}.nbt.on{background:var(--amber);border-color:var(--amber);color:#3b2300}.nbopen{margin-left:auto;font-size:.85rem;font-weight:600;color:var(--blue);text-decoration:none}.nbframe{display:block;width:100%;height:min(78vh,820px);min-height:480px;border:0;background:#fff}</style>
 </head>
 <body>
 <header><div class="wrap nav">
@@ -60,6 +66,10 @@
   <div class="cta"><a class="btn amber" href="lab/">Open the Simulator</a><a class="btn primary" href="#app">Explore the App</a><a class="btn green" href="#gate">GATE ECE Syllabus</a><a class="btn" href="#contact">Get in touch</a></div>
   <hr class="div">
   <div class="badges"><span>Concept-first lessons</span><span>Topic-wise practice</span><span>Mock tests</span><span>Circuit simulation</span></div>
+  <div class="mazebox" id="mazebox" aria-label="Animated maze that generates and solves itself">
+    <canvas id="maze" role="img" aria-label="A maze being carved by depth-first search and solved by breadth-first search"></canvas>
+    <div class="mazebar"><span id="mazecap">Auto maze</span><button type="button" id="mazenew">New maze</button></div>
+  </div>
 </div></section>
 
 <section id="learn"><div class="wrap">
@@ -180,6 +190,108 @@
     t.addEventListener('click',function(){var p=document.getElementById(t.dataset.p); if(p) load(p);});
   });
   var first=document.querySelector('.panel.on'); if(first) load(first);
+})();
+</script>
+<script>
+/* Self-playing maze: depth-first carve, breadth-first solve, runner follows the shortest path, repeat. */
+(function(){
+  var cv=document.getElementById('maze'); if(!cv||!cv.getContext) return;
+  var ctx=cv.getContext('2d'), cap=document.getElementById('mazecap'), btn=document.getElementById('mazenew');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N=17, PAD=8, W=0, cs=0, dpr=1;
+  var C={ink:'#14213d',amber:'rgba(245,158,11,.38)',head:'#d97706',path:'#2563eb',goal:'#16a34a',start:'#92400e',cell:'#fffdf5',trail:'rgba(37,99,235,.18)'};
+  var walls,seen,stack,cur,dist,parent,queue,qi,explored,path,runner,state,hold,count=0,goalFound;
+  function idx(x,y){return y*N+x}
+  function rnd(n){return Math.floor(Math.random()*n)}
+  var DX=[0,1,0,-1],DY=[-1,0,1,0]; // top,right,bottom,left
+  function init(){
+    walls=[];seen=[];dist=[];parent=[];explored=[];
+    for(var i=0;i<N*N;i++){walls.push([1,1,1,1]);seen.push(0);dist.push(-1);parent.push(-1);explored.push(0)}
+    cur=idx(rnd(N),rnd(N));seen[cur]=1;stack=[cur];path=[];runner=0;goalFound=false;queue=[];qi=0;
+    state='carve';count++;
+    if(cap)cap.textContent='Maze #'+count+' · carving (DFS)';
+    if(reduce){while(state==='carve')carveStep();while(state==='solve')solveStep();state='done';runner=path.length-1;if(cap)cap.textContent='Maze #'+count+' · shortest path '+path.length+' cells'}
+  }
+  function carveStep(){
+    if(!stack.length){state='solve';queue=[0];dist[0]=0;explored[0]=1;qi=0;if(cap)cap.textContent='Maze #'+count+' · solving (BFS)';return}
+    var c=stack[stack.length-1],x=c%N,y=(c/N)|0,opts=[];
+    for(var d=0;d<4;d++){var nx=x+DX[d],ny=y+DY[d];if(nx>=0&&ny>=0&&nx<N&&ny<N&&!seen[idx(nx,ny)])opts.push(d)}
+    if(!opts.length){stack.pop();cur=stack.length?stack[stack.length-1]:c;return}
+    var d=opts[rnd(opts.length)],n=idx(x+DX[d],y+DY[d]);
+    walls[c][d]=0;walls[n][(d+2)%4]=0;seen[n]=1;stack.push(n);cur=n;
+  }
+  function solveStep(){
+    var goal=N*N-1;
+    if(qi>=queue.length||goalFound){ // finished expanding: trace back
+      var p=[],c=goal;while(c!==-1){p.push(c);c=parent[c]}p.reverse();path=p;state='run';runner=0;
+      if(cap)cap.textContent='Maze #'+count+' · shortest path '+path.length+' cells';return}
+    var c=queue[qi++],x=c%N,y=(c/N)|0;
+    for(var d=0;d<4;d++){
+      if(walls[c][d])continue;var nx=x+DX[d],ny=y+DY[d],n=idx(nx,ny);
+      if(dist[n]!==-1)continue;dist[n]=dist[c]+1;parent[n]=c;explored[n]=1;queue.push(n);
+      if(n===goal){goalFound=true}
+    }
+  }
+  function size(){
+    var w=cv.clientWidth||300;dpr=Math.min(window.devicePixelRatio||1,2);
+    cv.width=Math.round(w*dpr);cv.height=Math.round(w*dpr);W=w;cs=(W-2*PAD)/N;
+  }
+  function cx(i){return PAD+((i%N)+.5)*cs}
+  function cy(i){return PAD+(((i/N)|0)+.5)*cs}
+  function draw(){
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,W);
+    ctx.fillStyle=C.cell;ctx.fillRect(0,0,W,W);
+    var i,x,y;
+    for(i=0;i<N*N;i++){
+      x=PAD+(i%N)*cs;y=PAD+((i/N)|0)*cs;
+      if(explored[i]){ctx.fillStyle=C.amber;ctx.fillRect(x,y,cs,cs)}
+    }
+    if(state==='carve'&&seen[cur]){ctx.fillStyle=C.head;ctx.fillRect(PAD+(cur%N)*cs,PAD+((cur/N)|0)*cs,cs,cs)}
+    // solved path (full faint line) and the runner's travelled part
+    if(path.length>1){
+      ctx.lineCap='round';ctx.lineJoin='round';
+      ctx.strokeStyle=C.trail;ctx.lineWidth=cs*.5;ctx.beginPath();
+      for(i=0;i<path.length;i++){i?ctx.lineTo(cx(path[i]),cy(path[i])):ctx.moveTo(cx(path[i]),cy(path[i]))}
+      ctx.stroke();
+      var upto=Math.min(path.length-1,Math.floor(runner));
+      ctx.strokeStyle=C.path;ctx.lineWidth=cs*.3;ctx.beginPath();ctx.moveTo(cx(path[0]),cy(path[0]));
+      for(i=1;i<=upto;i++)ctx.lineTo(cx(path[i]),cy(path[i]));
+      var fr=runner-upto,px=cx(path[upto]),py=cy(path[upto]);
+      if(upto<path.length-1){px+=(cx(path[upto+1])-px)*fr;py+=(cy(path[upto+1])-py)*fr;ctx.lineTo(px,py)}
+      ctx.stroke();
+      ctx.fillStyle=C.path;ctx.shadowColor='rgba(37,99,235,.7)';ctx.shadowBlur=10;ctx.beginPath();ctx.arc(px,py,cs*.3,0,6.2832);ctx.fill();ctx.shadowBlur=0;
+    }
+    // start and goal
+    ctx.fillStyle=C.start;ctx.beginPath();ctx.arc(cx(0),cy(0),cs*.26,0,6.2832);ctx.fill();
+    ctx.fillStyle=C.goal;ctx.beginPath();ctx.arc(cx(N*N-1),cy(N*N-1),cs*.26,0,6.2832);ctx.fill();
+    // walls
+    ctx.strokeStyle=C.ink;ctx.lineWidth=Math.max(1.6,cs*.1);ctx.lineCap='round';ctx.beginPath();
+    for(i=0;i<N*N;i++){
+      x=PAD+(i%N)*cs;y=PAD+((i/N)|0)*cs;var w=walls[i];
+      if(w[0]){ctx.moveTo(x,y);ctx.lineTo(x+cs,y)}
+      if(w[1]){ctx.moveTo(x+cs,y);ctx.lineTo(x+cs,y+cs)}
+      if(w[2]&&((i/N)|0)===N-1){ctx.moveTo(x,y+cs);ctx.lineTo(x+cs,y+cs)}
+      if(w[3]&&(i%N)===0){ctx.moveTo(x,y);ctx.lineTo(x,y+cs)}
+    }
+    ctx.stroke();
+  }
+  var last=0,acc=0,running=true,visible=true;
+  function frame(t){
+    requestAnimationFrame(frame);
+    if(!visible||document.hidden){last=t;return}
+    var dt=Math.min(64,t-last);last=t;acc+=dt;
+    if(!reduce){
+      if(state==='carve'){var k=Math.max(2,Math.round(N*N/80));for(var s=0;s<k&&state==='carve';s++)carveStep()}
+      else if(state==='solve'){for(var s2=0;s2<3&&state==='solve';s2++)solveStep()}
+      else if(state==='run'){runner+=dt/55;if(runner>=path.length-1){runner=path.length-1;state='hold';hold=0}}
+      else if(state==='hold'){hold+=dt;if(hold>1800)init()}
+    }
+    draw();
+  }
+  if('IntersectionObserver' in window){new IntersectionObserver(function(e){visible=e[0].isIntersecting},{threshold:.05}).observe(cv)}
+  window.addEventListener('resize',function(){size();draw()});
+  if(btn)btn.addEventListener('click',function(){init()});
+  size();init();requestAnimationFrame(frame);
 })();
 </script>
 </body>

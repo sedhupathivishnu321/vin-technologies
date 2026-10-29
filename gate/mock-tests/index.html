@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GATE ECE Chapter-wise Mock Tests: 137 tests, 20,550 questions | VIN Technologies</title>
+<link rel="canonical" href="https://vintechnologies.co.in/gate/mock-tests/">
+<meta name="description" content="Free chapter-wise GATE ECE mock tests for all 9 subjects: 150 MCQs per chapter with figures, answers and worked explanations. Exam mode with GATE negative marking, and practice mode.">
+<link rel="stylesheet" href="app.css">
+<style>
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:10}
+.tab{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px;font-weight:600;color:var(--ink)}
+.tab.on{background:var(--acc);border-color:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){.tab.on{color:#0e1424}}
+.tab small{font-weight:400;opacity:.8;margin-left:4px}
+.sblurb{color:var(--mut);margin:6px 0 4px}
+</style>
+</head><body>
+<header class="top"><div class="wrap"><a class="brand" href="index.html">GATE ECE <span>Mock Tests</span></a><span class="sp"></span><a class="pill" href="/gate/" style="text-decoration:none;margin-right:8px">&larr; Study notes</a><a class="pill" href="/" style="text-decoration:none;margin-right:8px">VIN Technologies</a><span class="pill" id="tot"></span></div></header>
+<main class="wrap">
+<h1>Chapter-wise Mock Tests</h1>
+<p class="sub">Every chapter has its own test of 150 MCQs with figures (circuits, graphs, waveforms, diagrams), four choices, the correct answer and a worked explanation. Choose a subject:</p>
+<div class="tabs" id="tabs"></div>
+<div id="list"></div>
+</main>
+<footer>Works offline — open this folder's index.html in any modern browser. Scores are stored only in your browser.</footer>
+<script src="data/meta.js"></script>
+<script>
+(function(){
+  var best={}; try{best=JSON.parse(localStorage.getItem('mock-best')||'{}')}catch(e){}
+  var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')};
+  var cur=(location.hash||'').slice(1);
+  if(!META.some(function(s){return s.id===cur}))cur='nss';
+  var total=0,have=0;
+  META.forEach(function(S){S.parts.forEach(function(P){P.c.forEach(function(c){total++;if(c.m)have++})})});
+  document.getElementById('tot').textContent=have+' chapter tests · '+(have*150).toLocaleString()+' questions';
+  function draw(){
+    var t='';META.forEach(function(S){var n=0,h=0;S.parts.forEach(function(P){P.c.forEach(function(c){n++;if(c.m)h++})});
+      t+='<button class="tab'+(S.id===cur?' on':'')+'" data-s="'+S.id+'">'+esc(S.title)+'<small>'+h+'</small></button>'});
+    document.getElementById('tabs').innerHTML=t;
+    var S=META.filter(function(x){return x.id===cur})[0],h='<p class="sblurb">'+esc(S.blurb)+'</p>';
+    S.parts.forEach(function(P){
+      if(S.parts.length>1)h+='<div class="part">'+esc(P.p)+'</div>';
+      h+='<div class="grid" style="margin-top:10px">';
+      P.c.forEach(function(c){
+        var b=best[S.id+c.n];
+        if(!c.m){h+='<div class="ccard" style="opacity:.55"><div class="no">CHAPTER '+c.n+'</div><h3>'+esc(c.t)+'</h3><div class="meta">coming soon</div></div>';return}
+        h+='<a class="ccard" href="test.html?s='+S.id+'&c='+c.n+'"><div class="no">CHAPTER '+c.n+'</div><h3>'+esc(c.t)+'</h3><div class="meta">150 MCQs · '+c.m+' marks</div>'+(b!=null?'<div class="best">Best: '+b.toFixed(2)+' / '+c.m+'</div>':'')+'</a>';
+      });
+      h+='</div>';
+    });
+    document.getElementById('list').innerHTML=h;
+    document.querySelectorAll('.tab').forEach(function(e){e.onclick=function(){cur=e.dataset.s;location.hash=cur;draw()}});
+  }
+  draw();
+})();
+</script>
+</body></html>

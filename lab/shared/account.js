@@ -91,7 +91,7 @@
     p.append(h("small", {}, ["Browser storage: " + mb(u) + " of " + mb(LIMIT) + " MB used (oldest work is removed first when full)"]), h("div", { "class": "llbar" }, [h("i", { style: "width:" + pct + "%" })]));
     var c = h("button", { type: "button" }, ["Clear local cache"]);
     c.onclick = function () { if (confirm("Delete the projects stored in this browser? Copies in your Google Drive are kept.")) { managedKeys().forEach(function (k) { if (!/theme/.test(k)) rawRemove.call(ls, k); }); saveMeta({}); toast("Local cache cleared"); renderPop(); } };
-    p.append(c, h("small", { style: "margin-top:8px" }, [h("a", { href: "/privacy/", target: "_blank", rel: "noopener" }, ["Privacy policy"])]));
+    p.append(c, h("small", { style: "margin-top:8px" }, [h("a", { href: "/privacy/", target: "_blank", rel: "noopener" }, ["Privacy policy"]), " · ", h("a", { href: "/terms/", target: "_blank", rel: "noopener" }, ["Terms of service"])]));
   }
   function mount() {
     css();

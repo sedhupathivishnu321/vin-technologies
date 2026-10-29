@@ -9,18 +9,19 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 20: Op-Amp Mathematical Circuits | Analog Circuits | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Diode circuits, small-signal amplifiers, op-amps, feedback, oscillators and power stages."><meta property="og:url" content="https://vintechnologies.co.in/gate/analog-circuits/ch20.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
-<link rel="stylesheet" href="/style.css?v=4">
+<link rel="stylesheet" href="/style.css?v=7">
 <link rel="stylesheet" href="/protect.css?v=1"><script src="/protect.js?v=1"></script>
-<link rel="stylesheet" href="/gate/notes.css?v=2">
+<link rel="stylesheet" href="/gate/notes.css?v=4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 <script>window.LL_NOGATE=true;if(window.top!==window.self){document.documentElement.className+=' emb'}else{var ad=document.createElement('script');ad.async=true;ad.crossOrigin='anonymous';ad.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697';document.head.appendChild(ad)}</script>
 <script src="/lab/shared/config.js?v=3"></script>
 <script src="/lab/shared/account.js?v=3"></script>
 </head>
 <body class="notes-page">
-<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
-<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
-<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 20</div><h1>Op-Amp Mathematical Circuits</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-20-1">20.1 Ideal integrator</a></li><li><a href="#s-20-2">20.2 Practical integrator</a></li><li><a href="#s-20-3">20.3 Ideal differentiator</a></li><li><a href="#s-20-4">20.4 Practical differentiator</a></li><li><a href="#s-20-5">20.5 Integrator frequency response</a></li><li><a href="#s-20-6">20.6 Differentiator frequency response</a></li><li><a href="#s-20-7">20.7 Stability limitations</a></li><li><a href="#s-20-8">20.8 Noise amplification</a></li><li><a href="#s-20-9">20.9 Waveform generation</a></li><li><a href="#s-20-10">20.10 GATE problems</a></li></ol></details><h2 id="s-20-1"><span class="n">20.1</span> Ideal integrator</h2>
+<a class="skip" href="#main">Skip to content</a>
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a><nav class="nn" aria-label="Main"><a href="/gate/" aria-current="page">Notes</a><a href="/gate/mock-tests/">Mock Tests</a><a href="/lab/">Circuits</a><a href="/lab/network/">Networks</a><a href="/lab/trainer/">Trainers</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav>
+</div></header>
+<main id="main" class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Analog Circuits</a></div><div class="chlabel">Chapter 20</div><h1>Op-Amp Mathematical Circuits</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-20-1">20.1 Ideal integrator</a></li><li><a href="#s-20-2">20.2 Practical integrator</a></li><li><a href="#s-20-3">20.3 Ideal differentiator</a></li><li><a href="#s-20-4">20.4 Practical differentiator</a></li><li><a href="#s-20-5">20.5 Integrator frequency response</a></li><li><a href="#s-20-6">20.6 Differentiator frequency response</a></li><li><a href="#s-20-7">20.7 Stability limitations</a></li><li><a href="#s-20-8">20.8 Noise amplification</a></li><li><a href="#s-20-9">20.9 Waveform generation</a></li><li><a href="#s-20-10">20.10 GATE problems</a></li></ol></details><h2 id="s-20-1"><span class="n">20.1</span> Ideal integrator</h2>
 <figure id="fig-20-1"><div class="figimgs"><img src="img/f20_int.png" alt="" loading="lazy"></div><figcaption><b>Figure 20.1.</b> Ideal (Miller) integrator: \(R\) at the input, \(C\) in the feedback path.</figcaption></figure>
 <p>Virtual ground: \(i=v_i/R=C\,d(0-v_o)/dt\), so</p>
 <div class="box formula"><div class="bt">Key Formulae</div><div class="bb"><p>\(v_o(t)=-\dfrac1{RC}\int_0^tv_i\,dt+v_o(0)\), &emsp;&emsp; \(\dfrac{V_o(s)}{V_i(s)}=-\dfrac{1}{sRC}\), &emsp;&emsp; \(\left|\dfrac{V_o}{V_i}\right|=\dfrac1{\omega RC}\), phase \(+90^\circ\).</p></div></div>

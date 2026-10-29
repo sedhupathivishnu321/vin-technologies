@@ -12,11 +12,9 @@
 <link rel="apple-touch-icon" href="/assets/icon-180.png">
 <meta name="theme-color" content="#fffdf5">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=4">
-<style>.chips a.bk{background:var(--cream);border:1px solid var(--amber);color:var(--brown);border-radius:10px;padding:7px 14px;font-size:.9rem;font-weight:600;text-decoration:none}.chips a.bk:hover{background:var(--y1)}</style>
+<link rel="stylesheet" href="style.css?v=7">
+<style>.chips a.bk{display:none}</style>
 <meta name="google-site-verification" content="iNr89UHtxR-AbMc3zWkveLHa-VXhbtNFKXAc5bJwi3k" />
 <link rel="canonical" href="https://vintechnologies.co.in/">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -40,38 +38,70 @@
 <script>window.LL_NOGATE=true</script>
 <script src="/lab/shared/config.js?v=3"></script>
 <script src="/lab/shared/account.js?v=3"></script>
-<style>.mazebox{margin:34px 0 0;width:min(100%,380px);background:rgba(255,255,255,.72);border:1px solid rgba(146,64,14,.16);border-radius:18px;padding:12px;box-shadow:0 14px 40px rgba(20,33,61,.12);backdrop-filter:blur(4px)}
-.mazebox canvas{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;background:#fffdf5}
-.mazebar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px;font-size:.78rem;color:var(--mute);font-weight:600}
-.mazebar button{font:inherit;font-size:.78rem;font-weight:700;color:var(--brown);background:var(--cream);border:1px solid var(--amber);border-radius:99px;padding:4px 12px;cursor:pointer}
-.mazebar button:hover{background:var(--y1)}
-@media (min-width:1280px){.mazebox{position:absolute;right:clamp(20px,4vw,72px);top:50%;transform:translateY(-50%);margin:0;width:min(32vw,470px)}}
-.mazebtns{display:flex;gap:6px;flex-wrap:wrap}.mazebtns button.on{background:var(--amber);border-color:var(--amber);color:#3b2300}.mazebox [hidden]{display:none!important}.mazebox canvas{outline:none;cursor:pointer}.mazebox canvas:focus-visible{box-shadow:0 0 0 3px rgba(37,99,235,.45)}.mazebox canvas.playing{touch-action:none}.mazepad{display:flex;justify-content:center;gap:8px;margin-top:8px}.mazepad button{width:46px;height:40px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:1.1rem;cursor:pointer;color:var(--ink)}.mazepad button:active{background:var(--y1)}.mazetip{margin-top:6px;font-size:.74rem;color:var(--mute);line-height:1.4}@media (min-width:1280px){.hero{min-height:740px;display:flex;align-items:center}.hero .wrap{width:100%}}.chips a.bk{display:none}.nbook{flex-basis:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(20,33,61,.07)}.nbbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--line)}.nbl{font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);margin-right:4px}.nbt{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px;font:inherit;font-size:.86rem;font-weight:600;color:var(--mute);cursor:pointer}.nbt.on{background:var(--amber);border-color:var(--amber);color:#3b2300}.nbopen{margin-left:auto;font-size:.85rem;font-weight:600;color:var(--blue);text-decoration:none}.nbframe{display:block;width:100%;height:min(78vh,820px);min-height:480px;border:0;background:#fff}</style>
+<style>
+.mazebox{margin:36px 0 0;width:min(100%,380px);background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:12px;box-shadow:var(--shadow-2)}
+.mazebox canvas{display:block;width:100%;aspect-ratio:1/1;border-radius:var(--r);background:var(--soft);outline:none;cursor:pointer}
+.mazebox canvas:focus-visible{box-shadow:0 0 0 3px rgba(3,105,161,.45)}.mazebox canvas.playing{touch-action:none}.mazebox [hidden]{display:none!important}
+.mazebar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;font-size:.78rem;color:var(--mute);font-weight:600}
+.mazebar button{font:inherit;font-size:.78rem;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line-2);border-radius:99px;min-height:32px;padding:0 12px;cursor:pointer;transition:background-color .15s,border-color .15s}
+.mazebar button:hover{background:var(--soft-2);border-color:var(--ink)}
+.mazebtns{display:flex;gap:6px;flex-wrap:wrap}.mazebtns button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.mazepad{display:flex;justify-content:center;gap:8px;margin-top:10px}.mazepad button{width:48px;height:44px;border:1px solid var(--line-2);border-radius:var(--r-sm);background:#fff;font-size:1.1rem;cursor:pointer;color:var(--ink)}.mazepad button:active{background:var(--accent-l)}
+.mazetip{margin-top:8px;font-size:.76rem;color:var(--mute);line-height:1.4}
+@media (min-width:1280px){.mazebox{position:absolute;right:clamp(20px,4vw,72px);top:50%;transform:translateY(-50%);margin:0;width:min(32vw,470px)}.hero{min-height:720px;display:flex;align-items:center}.hero .wrap{width:100%}}
+.chips a.bk{display:none}
+.nbook{flex-basis:100%;margin-top:14px;border:1px solid var(--line);border-radius:var(--r-lg);background:#fff;overflow:hidden;box-shadow:var(--shadow-2)}
+.nbbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
+.nbl{font-weight:700;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-right:6px}
+.nbt{background:#fff;border:1px solid var(--line-2);border-radius:99px;min-height:36px;padding:0 14px;font:inherit;font-size:.86rem;font-weight:500;color:var(--mute);cursor:pointer;transition:background-color .15s,color .15s}
+.nbt:hover{color:var(--ink);border-color:var(--ink)}
+.nbt.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600}
+.nbopen{margin-left:auto;font-size:.86rem;font-weight:600;color:var(--accent);text-decoration:none}
+.nbframe{display:block;width:100%;height:min(78vh,820px);min-height:480px;border:0;background:#fff}
+section h2+.grid,section h2+details,section h2+.contact,section h2+.steps{margin-top:28px}
+.fgrid{display:grid;gap:32px;grid-template-columns:minmax(220px,1.4fr) repeat(3,minmax(140px,1fr))}
+.fgrid h4{margin:0 0 10px;color:#fff;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+.fgrid a{display:block;margin:0;padding:5px 0;color:#cbd5e1}.fgrid a:hover{color:#fff}
+.fgrid p{margin:0 0 8px;color:#94a3b8;max-width:34ch}
+.fbar{margin-top:28px;padding-top:18px;border-top:1px solid var(--navy-2);color:#94a3b8;font-size:.85rem}
+@media(max-width:820px){.fgrid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.fgrid{grid-template-columns:1fr}}
+.field{display:grid;gap:6px}.field label{font-weight:600;font-size:.88rem}
+</style>
 <link rel="stylesheet" href="/protect.css?v=1"><script src="/protect.js?v=1"></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header><div class="wrap nav">
   <a class="logo" href="#home"><img src="assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
-  <nav><ul>
-    <li><a href="#learn">Learn</a></li><li><a href="#gate">GATE</a></li><li><a href="gate/">Notes</a></li><li><a href="gate/mock-tests/">Mock Tests</a></li><li><a href="#app">App</a></li><li><a href="lab/">Circuits</a></li><li><a href="lab/network/">Networks</a></li><li><a href="lab/trainer/">Trainers</a></li><li><a href="labs/">Labs</a></li>
-    <li><a href="#colleges">Colleges</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li>
+  <nav aria-label="Main"><ul id="mainnav">
+    <li><a href="gate/">Notes</a></li><li><a href="gate/mock-tests/">Mock Tests</a></li><li><a href="lab/">Circuits</a></li><li><a href="lab/network/">Networks</a></li><li><a href="lab/trainer/">Trainers</a></li><li><a href="labs/">Labs</a></li><li><a href="#contact">Contact</a></li>
   </ul></nav>
-  <button class="menu" aria-label="Menu">☰</button>
+  <button class="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav">Menu</button>
 </div></header>
 
-<main>
+<main id="main">
 <section class="hero" id="home"><div class="wrap">
   <span class="pill">Electronics Engineering · GATE Preparation</span>
   <h1>Master Electronics.<br><span class="grad">Crack GATE.</span></h1>
   <p>VIN Technologies builds an app that helps Electronics &amp; Communication students understand the concepts, practise the problems and test themselves — all in one place.</p>
-  <div class="cta"><a class="btn amber" href="lab/">Open the Simulator</a><a class="btn primary" href="#app">Explore the App</a><a class="btn green" href="#gate">GATE ECE Syllabus</a><a class="btn" href="#contact">Get in touch</a></div>
-  <hr class="div">
-  <div class="badges"><span>Concept-first lessons</span><span>Topic-wise practice</span><span>Mock tests</span><span>Circuit simulation</span></div>
+  <div class="cta"><a class="btn primary" href="gate/mock-tests/">Take a mock test</a><a class="btn amber" href="lab/">Open the simulator</a><a class="btn green" href="gate/">Read the study notes</a></div>
+  <div class="stats"><div><b>9</b><span>GATE ECE subjects with study notes</span></div><div><b>20,550</b><span>mock-test questions in 137 tests</span></div><div><b>98</b><span>online lab experiments</span></div><div><b>Free</b><span>circuit &amp; network simulators</span></div></div>
   <div class="mazebox" id="mazebox" aria-label="Animated maze that generates and solves itself">
     <canvas id="maze" tabindex="0" role="application" aria-label="A maze being carved by depth-first search and solved by breadth-first search"></canvas>
     <div class="mazebar"><span id="mazecap">Auto maze</span><span class="mazebtns"><button type="button" id="mzWatch" class="on" aria-pressed="true">Watch</button><button type="button" id="mzPlay" aria-pressed="false">Play</button><button type="button" id="mzHint" hidden>Hint</button><button type="button" id="mazenew">New</button></span></div>
     <div class="mazepad" id="mazepad" hidden><button type="button" data-d="0" aria-label="Move up">&#8593;</button><button type="button" data-d="3" aria-label="Move left">&#8592;</button><button type="button" data-d="2" aria-label="Move down">&#8595;</button><button type="button" data-d="1" aria-label="Move right">&#8594;</button></div>
     <div class="mazetip" id="mazetip">The maze builds and solves itself. Press Play to take over.</div>
+  </div>
+</div></section>
+
+<section class="alt" id="start"><div class="wrap">
+  <div class="eyebrow">Start here</div><h2>Everything you need to prepare, in one place</h2>
+  <p class="lead">Read a chapter, solve it, simulate it, then test yourself. Each tool is free and runs in your browser.</p>
+  <div class="grid">
+    <a class="card" href="gate/"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2zM12 6v14"/></svg></div><h3>Study notes</h3><p>One book per GATE ECE subject: concepts, standard results, worked examples and common traps.</p><span class="more">Read the notes</span></a>
+    <a class="card" href="gate/mock-tests/"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></div><h3>Mock tests</h3><p>150 questions per chapter with figures, answers and worked explanations. Exam mode with GATE negative marking.</p><span class="more">Take a test</span></a>
+    <a class="card" href="lab/"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M7.5 15h9"/></svg></div><h3>Circuit simulator</h3><p>Build and probe analog and digital circuits from a library of 190+ parts, right in the browser.</p><span class="more">Open the simulator</span></a>
+    <a class="card" href="labs/"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/></svg></div><h3>Lab experiments</h3><p>98 ready-made electronics and networking experiments with objective, procedure, theory and viva questions.</p><span class="more">Browse experiments</span></a>
   </div>
 </div></section>
 
@@ -127,7 +157,7 @@
 </div></section>
 
 <section id="why"><div class="wrap">
-  <div class="eyebrow">Why VIN Technologies</div><h2>Learning that respects the student</h2><br>
+  <div class="eyebrow">Why VIN Technologies</div><h2>Learning that respects the student</h2>
   <div class="grid">
     <div class="card"><h3>Concept before shortcut</h3><p>We teach the "why" so you can solve unfamiliar problems, not just memorised ones.</p></div>
     <div class="card"><h3>Exam-aligned</h3><p>Content mapped to the GATE ECE syllabus and question style.</p></div>
@@ -143,7 +173,7 @@
 </div></section>
 
 <section id="faq"><div class="wrap">
-  <div class="eyebrow">FAQ</div><h2>Common questions</h2><br>
+  <div class="eyebrow">FAQ</div><h2>Common questions</h2>
   <details><summary>Who is the app for?</summary><p>B.E./B.Tech Electronics &amp; Communication students and anyone preparing for GATE ECE.</p></details>
   <details><summary>Does it cover the whole GATE ECE syllabus?</summary><p>Content is organised around the GATE ECE syllabus. Please check the official GATE brochure for the latest changes each year.</p></details>
   <details><summary>Is it only for GATE?</summary><p>No. The lessons and simulator are useful for semester coursework and lab work too.</p></details>
@@ -151,16 +181,16 @@
 </div></section>
 
 <section class="alt" id="contact"><div class="wrap">
-  <div class="eyebrow">Contact</div><h2>Let's talk</h2><br>
+  <div class="eyebrow">Contact</div><h2>Let's talk</h2>
   <div class="contact">
     <div><p class="lead">Questions, feedback or partnership ideas? Send us a message.</p>
       <p><strong>Email:</strong> <a id="mail" href="#"></a></p>
       <p><strong>Location:</strong> India</p></div>
     <form id="cf">
-      <input name="name" placeholder="Your name" required>
-      <input name="email" type="email" placeholder="Your email" required>
-      <select name="topic"><option>General</option><option>GATE preparation</option><option>College / institution</option><option>Feedback</option></select>
-      <textarea name="msg" rows="4" placeholder="Your message" required></textarea>
+      <div class="field"><label for="cf-name">Your name</label><input id="cf-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="cf-email">Your email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="cf-topic">Topic</label><select id="cf-topic" name="topic"><option>General</option><option>GATE preparation</option><option>College / institution</option><option>Feedback</option></select></div>
+      <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="msg" rows="4" required></textarea></div>
       <button class="btn primary" type="submit">Send message</button>
       <span class="note">Opens your email app with the message ready to send.</span>
     </form>
@@ -168,9 +198,14 @@
 </div></section>
 </main>
 
-<footer><div class="wrap foot">
-  <div>© <span id="year"></span> VIN Technologies · Made in India</div>
-  <div><a href="#learn">Learn</a><a href="#gate">GATE</a><a href="/gate/">GATE Notes</a><a href="#app">App</a><a href="/lab/">Circuit Simulator</a><a href="/lab/network/">Network Lab</a><a href="/lab/trainer/">8085/8051 Trainers</a><a href="/labs/">Lab Experiments</a><a href="#contact">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><a class="logo" href="#home" style="color:#fff;padding:0"><img src="assets/vin-mark.png" alt="" width="36" height="36"><b style="color:#fff">VIN <span style="color:#7dd3fc">TECHNOLOGIES</span></b></a><p style="margin-top:14px">Learning tools for Electronics &amp; Communication students and GATE ECE aspirants.</p></div>
+    <div><h4>Study</h4><a href="/gate/">GATE study notes</a><a href="/gate/mock-tests/">Mock tests</a><a href="#gate">GATE syllabus</a><a href="#learn">Core subjects</a></div>
+    <div><h4>Practise</h4><a href="/lab/">Circuit simulator</a><a href="/lab/network/">Network lab</a><a href="/lab/trainer/">8085/8051 trainers</a><a href="/labs/">Lab experiments</a></div>
+    <div><h4>Company</h4><a href="#colleges">For colleges</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+  </div>
+  <div class="fbar">© <span id="year"></span> VIN Technologies · Made in India</div>
 </div></footer>
 <script src="script.js"></script>
 <script>
@@ -204,7 +239,7 @@
   var padEl=document.getElementById('mazepad'), tipEl=document.getElementById('mazetip');
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mode='watch', level=1, N=17, PAD=8, W=300, cs=1, dpr=1, count=0;
-  var C={ink:'#14213d',amber:'rgba(245,158,11,.38)',head:'#d97706',path:'#2563eb',goal:'#16a34a',start:'#92400e',cell:'#fffdf5',trail:'rgba(37,99,235,.18)',hint:'#16a34a'};
+  var C={ink:'#0f172a',amber:'rgba(3,105,161,.16)',head:'#0369a1',path:'#0369a1',goal:'#15803d',start:'#0f172a',cell:'#f8fafc',trail:'rgba(3,105,161,.16)',hint:'#15803d'};
   var walls,seen,stack,cur,dist,parent,queue,qi,explored,path,runner,state,hold,goalFound;
   var pc,ppx,ppy,trail,moves,t0,tEnd,hintPath,hintUntil,best,capT=0;
   var DX=[0,1,0,-1],DY=[-1,0,1,0]; // up, right, down, left

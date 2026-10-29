@@ -9,18 +9,19 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Chapter 14: Bode Plot | Control Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Sketch/read asymptotic Bode plots, find the transfer function from a plot, compute \omega_{gc}, \omega_{pc}, GM and PM. Very common 2-mark topic; the trick is fluent use of slopes (20 dB/decade per"><meta property="og:url" content="https://vintechnologies.co.in/gate/control-systems/ch14.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
-<link rel="stylesheet" href="/style.css?v=4">
+<link rel="stylesheet" href="/style.css?v=7">
 <link rel="stylesheet" href="/protect.css?v=1"><script src="/protect.js?v=1"></script>
-<link rel="stylesheet" href="/gate/notes.css?v=2">
+<link rel="stylesheet" href="/gate/notes.css?v=4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 <script>window.LL_NOGATE=true;if(window.top!==window.self){document.documentElement.className+=' emb'}else{var ad=document.createElement('script');ad.async=true;ad.crossOrigin='anonymous';ad.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697';document.head.appendChild(ad)}</script>
 <script src="/lab/shared/config.js?v=3"></script>
 <script src="/lab/shared/account.js?v=3"></script>
 </head>
 <body class="notes-page">
-<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
-<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
-<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 14</div><h1>Bode Plot</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-14-1">14.1 Core concept</a></li><li><a href="#s-14-2">14.2 Standard factors</a></li><li><a href="#s-14-3">14.3 Procedure to draw the magnitude plot</a></li><li><a href="#s-14-4">14.4 Solved examples</a></li><li><a href="#s-14-5">14.5 Physical interpretation</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Sketch/read asymptotic Bode plots, find the transfer function from a plot, compute \(\omega_{gc}\), \(\omega_{pc}\), GM and PM. Very common 2-mark topic; the trick is fluent use of slopes (20 dB/decade per pole) and corner frequencies.</p></div></div>
+<a class="skip" href="#main">Skip to content</a>
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a><nav class="nn" aria-label="Main"><a href="/gate/" aria-current="page">Notes</a><a href="/gate/mock-tests/">Mock Tests</a><a href="/lab/">Circuits</a><a href="/lab/network/">Networks</a><a href="/lab/trainer/">Trainers</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav>
+</div></header>
+<main id="main" class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Control Systems</a></div><div class="chlabel">Chapter 14</div><h1>Bode Plot</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-14-1">14.1 Core concept</a></li><li><a href="#s-14-2">14.2 Standard factors</a></li><li><a href="#s-14-3">14.3 Procedure to draw the magnitude plot</a></li><li><a href="#s-14-4">14.4 Solved examples</a></li><li><a href="#s-14-5">14.5 Physical interpretation</a></li></ol></details><div class="box notebox"><div class="bt">GATE Focus</div><div class="bb"><p>Sketch/read asymptotic Bode plots, find the transfer function from a plot, compute \(\omega_{gc}\), \(\omega_{pc}\), GM and PM. Very common 2-mark topic; the trick is fluent use of slopes (20 dB/decade per pole) and corner frequencies.</p></div></div>
 <h2 id="s-14-1"><span class="n">14.1</span> Core concept</h2>
 <p>A Bode plot has two graphs against \(\log\omega\): <strong>magnitude in dB</strong> (\(20\log_{10}|G(j\omega)|\)) and <strong>phase in degrees</strong>. Because \(\log\) turns products into sums, the plot of \(G=K\prod(\cdots)\) is the sum of the plots of each factor.</p>
 <h2 id="s-14-2"><span class="n">14.2</span> Standard factors</h2>

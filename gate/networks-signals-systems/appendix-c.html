@@ -9,18 +9,19 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="article"><meta property="og:site_name" content="VIN Technologies"><meta property="og:title" content="Appendix C: Differential Equations | Networks, Signals and Systems | GATE ECE Notes | VIN Technologies"><meta property="og:description" content="Circuit analysis, transients, Laplace and Fourier methods, sampling, the z-transform and digital filters."><meta property="og:url" content="https://vintechnologies.co.in/gate/networks-signals-systems/appendix-c.html"><meta property="og:image" content="https://vintechnologies.co.in/og-image.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png"><link rel="shortcut icon" href="/favicon.ico">
-<link rel="stylesheet" href="/style.css?v=4">
+<link rel="stylesheet" href="/style.css?v=7">
 <link rel="stylesheet" href="/protect.css?v=1"><script src="/protect.js?v=1"></script>
-<link rel="stylesheet" href="/gate/notes.css?v=2">
+<link rel="stylesheet" href="/gate/notes.css?v=4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 <script>window.LL_NOGATE=true;if(window.top!==window.self){document.documentElement.className+=' emb'}else{var ad=document.createElement('script');ad.async=true;ad.crossOrigin='anonymous';ad.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697';document.head.appendChild(ad)}</script>
 <script src="/lab/shared/config.js?v=3"></script>
 <script src="/lab/shared/account.js?v=3"></script>
 </head>
 <body class="notes-page">
-<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a>
-<nav class="nn"><a href="/gate/">GATE Notes</a><a href="/lab/">Circuits</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav></div></header>
-<main class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Appendix C</div><h1>Differential Equations</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-1">First order: \(\dfrac{dx}{dt}+\dfrac x\tau=f(t)\)</a></li><li><a href="#s-2">Second order: \(\ddot x+2\alpha\dot x+\omega_0^2x=f\)</a></li><li><a href="#s-3">Particular solutions (undetermined coefficients)</a></li></ol></details><h2 id="s-1">First order: \(\dfrac{dx}{dt}+\dfrac x\tau=f(t)\)</h2>
+<a class="skip" href="#main">Skip to content</a>
+<header><div class="wrap nav"><a class="logo" href="/"><img src="/assets/vin-mark.png" alt="VIN Technologies logo" width="44" height="44"><b>VIN <span>TECHNOLOGIES</span></b></a><nav class="nn" aria-label="Main"><a href="/gate/" aria-current="page">Notes</a><a href="/gate/mock-tests/">Mock Tests</a><a href="/lab/">Circuits</a><a href="/lab/network/">Networks</a><a href="/lab/trainer/">Trainers</a><a href="/labs/">Labs</a><a href="/#contact">Contact</a></nav>
+</div></header>
+<main id="main" class="nt"><div class="crumbs"><a href="/gate/">GATE Notes</a> &rsaquo; <a href="./">Networks, Signals and Systems</a></div><div class="chlabel">Appendix C</div><h1>Differential Equations</h1><details class="ctoc"><summary>In this chapter</summary><ol><li><a href="#s-1">First order: \(\dfrac{dx}{dt}+\dfrac x\tau=f(t)\)</a></li><li><a href="#s-2">Second order: \(\ddot x+2\alpha\dot x+\omega_0^2x=f\)</a></li><li><a href="#s-3">Particular solutions (undetermined coefficients)</a></li></ol></details><h2 id="s-1">First order: \(\dfrac{dx}{dt}+\dfrac x\tau=f(t)\)</h2>
 <p>Homogeneous solution \(Ke^{-t/\tau}\); particular solution by inspection. For DC input \(x_p=\tau f\); complete solution \(x=x_\infty+(x(0)-x_\infty)e^{-t/\tau}\).</p>
 <h2 id="s-2">Second order: \(\ddot x+2\alpha\dot x+\omega_0^2x=f\)</h2>
 <div class="center"><div class="tw"><table><thead><tr><th>Roots</th><th>Condition</th><th>Homogeneous solution</th></tr></thead><tbody><tr><td>real, distinct</td><td>\(\alpha&gt;\omega_0\)</td><td>\(A_1e^{s_1t}+A_2e^{s_2t}\)</td></tr><tr><td>real, equal</td><td>\(\alpha=\omega_0\)</td><td>\((A_1+A_2t)e^{-\alpha t}\)</td></tr><tr><td>complex \(-\alpha\pm j\omega_d\)</td><td>\(\alpha&lt;\omega_0\)</td><td>\(e^{-\alpha t}(B_1\cos\omega_dt+B_2\sin\omega_dt)\)</td></tr></tbody></table></div></div>

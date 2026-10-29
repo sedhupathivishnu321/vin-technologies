@@ -1,4 +1,16 @@
-.lab section{padding:0;background:none;border:0}.lab section:before{display:none}.lab{padding:40px clamp(20px,4vw,72px) 70px;max-width:none}.lab h1{font-size:clamp(1.7rem,4vw,2.4rem);margin:6px 0 8px;line-height:1.15}.lab h2{font-size:1.15rem;margin:30px 0 8px;text-transform:none}
-.lab p,.lab li{color:var(--ink);line-height:1.65}.lab ol,.lab ul{padding-left:22px}.lab .lead{color:var(--mute)}.crumb{color:var(--mute);font-size:.88rem;margin:0}
-.rel{columns:2;column-gap:30px;list-style:none;padding:0}.rel li{margin:4px 0;break-inside:avoid}.lab h2 small{color:var(--mute);font-weight:400}
+/* Lab experiment pages. Pairs with /style.css */
+.lab{padding:40px clamp(20px,4vw,72px) 80px;max-width:none}
+.lab section{padding:0;background:none;border:0}.lab section:before{display:none}
+.lab h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;margin:8px 0 10px;line-height:1.12}
+.lab h2{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;margin:36px 0 10px;text-transform:none;padding-top:20px;border-top:1px solid var(--line)}
+.lab h2 small{color:var(--mute);font-weight:500}
+.lab p,.lab li{color:var(--ink);line-height:1.7}
+.lab ol,.lab ul{padding-left:24px}.lab li{margin:6px 0}
+.lab .lead{color:var(--mute);font-size:1.08rem;max-width:68ch}
+.crumb{color:var(--mute);font-size:.88rem;margin:0}.crumb a{color:var(--mute)}.crumb a:hover{color:var(--accent)}
+/* related-experiment link lists */
+.rel{columns:2;column-gap:28px;list-style:none;padding:0}
+.rel li{margin:4px 0;break-inside:avoid}
+.rel a{display:block;padding:9px 12px;border:1px solid var(--line);border-radius:var(--r-sm);color:var(--ink);background:#fff;min-height:44px;transition:border-color .15s,background-color .15s}
+.rel a:hover{border-color:var(--accent);background:var(--accent-l);text-decoration:none;color:var(--accent-d)}
 @media(max-width:600px){.rel{columns:1}}

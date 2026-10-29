@@ -1,8 +1,9 @@
-:root{--bg:#f4f6fb;--card:#fff;--ink:#14213d;--mut:#5b6785;--line:#dfe4ef;--acc:#1d5fd6;--acc2:#e8f0ff;--ok:#16794a;--okb:#e3f5ea;--bad:#b3261e;--badb:#fdecea;--mark:#7b3fc4;--warn:#9a6700;--shadow:0 1px 3px rgba(20,33,61,.08),0 6px 20px rgba(20,33,61,.06)}
+@font-face{font-family:Inter;font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/inter-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212}
+:root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--mut:#475569;--line:#e2e8f0;--acc:#0369a1;--acc2:#e0f2fe;--ok:#16794a;--okb:#e3f5ea;--bad:#b3261e;--badb:#fdecea;--mark:#7b3fc4;--warn:#9a6700;--shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.06)}
 @media (prefers-color-scheme:dark){:root{--bg:#0e1424;--card:#171f35;--ink:#e8ecf7;--mut:#9aa6c4;--line:#2a3555;--acc:#6ea0ff;--acc2:#1d2a4d;--ok:#5fd59a;--okb:#14352a;--bad:#ff8a80;--badb:#3b1d1f;--mark:#c79bff;--warn:#f0c14b;--shadow:none}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+body{margin:0;font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
 a{color:var(--acc)}
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(14px,3vw,32px)}
 header.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
@@ -109,3 +110,15 @@ footer{color:var(--mut);font-size:13px;text-align:center;padding:26px 0 40px}
 .katex-display{margin:.6em 0;overflow-x:auto;overflow-y:hidden}
 @media print{header.top,.side,.nav,.filters{display:none}.rv{break-inside:avoid}}
 @media (max-width:700px){header.top{position:static}.pill#ttl{font-size:12px}}
+
+/* v2: design-system alignment */
+h1,h2,h3{letter-spacing:-.02em}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+button,.btn{min-height:44px;transition:background-color .15s,border-color .15s,filter .15s}
+.ccard{border-radius:16px;transition:transform .15s,border-color .15s,box-shadow .15s}
+.ccard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,.1)}
+header.top .wrap{min-height:64px}
+.brand{font-weight:700;letter-spacing:-.01em}
+.pill{padding:6px 12px;font-size:12.5px}
+a.pill{min-height:32px;display:inline-flex;align-items:center}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}

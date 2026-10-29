@@ -87,3 +87,7 @@ h2.part{font-size:15px!important;letter-spacing:.06em;text-transform:uppercase;c
 code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:.92em}
 @media print{header,footer,.pager,.ctoc{display:none}}
 main.nt h1,main.nt h2,main.nt h3{text-transform:none;letter-spacing:0}
+/* embedded in the home page reader */
+.emb header,.emb footer,.emb .crumbs{display:none}
+.emb main.nt{padding:14px 16px 28px;font-size:16px}
+.emb body.notes-page{background:#fff}

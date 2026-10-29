@@ -40,6 +40,7 @@
 <script>window.LL_NOGATE=true</script>
 <script src="/lab/shared/config.js?v=3"></script>
 <script src="/lab/shared/account.js?v=3"></script>
+<style>.chips a.bk{display:none}.nbook{flex-basis:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(20,33,61,.07)}.nbbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--line)}.nbl{font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);margin-right:4px}.nbt{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px;font:inherit;font-size:.86rem;font-weight:600;color:var(--mute);cursor:pointer}.nbt.on{background:var(--amber);border-color:var(--amber);color:#3b2300}.nbopen{margin-left:auto;font-size:.85rem;font-weight:600;color:var(--blue);text-decoration:none}.nbframe{display:block;width:100%;height:min(78vh,820px);min-height:480px;border:0;background:#fff}</style>
 </head>
 <body>
 <header><div class="wrap nav">
@@ -82,11 +83,11 @@
     <button class="tab on" data-p="p1">Engineering Maths</button><button class="tab" data-p="p2">Networks &amp; Signals</button>
     <button class="tab" data-p="p3">Electronics</button><button class="tab" data-p="p4">Comm &amp; EM</button><button class="tab" data-p="p5">Control</button>
   </div>
-  <div id="p1" class="panel on chips"><span>Linear Algebra</span><span>Calculus</span><span>Differential Equations</span><span>Vector Calculus</span><span>Complex Analysis</span><span>Probability &amp; Statistics</span><span>Numerical Methods</span><a class="bk" href="gate/engineering-mathematics/">Read: Engineering Mathematics notes</a><a class="bk" href="gate/general-aptitude/">Read: General Aptitude notes</a></div>
-  <div id="p2" class="panel chips"><span>Network Solution Methods</span><span>Network Theorems</span><span>Transient Response</span><span>Sinusoidal Steady State</span><span>Two-Port Networks</span><span>LTI Systems</span><span>Fourier Series &amp; Transform</span><span>Laplace &amp; Z-Transform</span><span>Sampling</span><a class="bk" href="gate/networks-signals-systems/">Read: Networks, Signals &amp; Systems notes</a></div>
-  <div id="p3" class="panel chips"><span>Semiconductor Physics</span><span>Diodes</span><span>BJT &amp; MOSFET</span><span>Small-Signal Models</span><span>Op-Amps</span><span>Feedback &amp; Oscillators</span><span>Combinational Logic</span><span>Sequential Logic</span><span>Microprocessors (8085)</span><span>ADC / DAC</span><a class="bk" href="gate/electronic-devices/">Read: Electronic Devices notes</a><a class="bk" href="gate/analog-circuits/">Read: Analog Circuits notes</a><a class="bk" href="gate/digital-circuits/">Read: Digital Circuits notes</a></div>
-  <div id="p4" class="panel chips"><span>Analog Modulation</span><span>Digital Modulation</span><span>Noise in Communications</span><span>Information Theory</span><span>Maxwell's Equations</span><span>Plane Waves</span><span>Transmission Lines</span><span>Waveguides</span><span>Antennas</span><a class="bk" href="gate/communications/">Read: Communications notes</a><a class="bk" href="gate/electromagnetics/">Read: Electromagnetics notes</a></div>
-  <div id="p5" class="panel chips"><span>Transfer Functions</span><span>Block Diagrams &amp; SFG</span><span>Routh–Hurwitz</span><span>Root Locus</span><span>Bode &amp; Nyquist</span><span>State-Space</span><span>Compensators</span><a class="bk" href="gate/control-systems/">Read: Control Systems notes</a></div>
+  <div id="p1" class="panel on chips"><span>Linear Algebra</span><span>Calculus</span><span>Differential Equations</span><span>Vector Calculus</span><span>Complex Analysis</span><span>Probability &amp; Statistics</span><span>Numerical Methods</span><div class="nbook"><div class="nbbar"><span class="nbl">Study notes</span><button type="button" class="nbt on" data-slug="engineering-mathematics">Engineering Mathematics</button><button type="button" class="nbt" data-slug="general-aptitude">General Aptitude</button><a class="nbopen" href="gate/engineering-mathematics/">Open full page &#8599;</a></div><iframe class="nbframe" title="GATE ECE study notes" loading="lazy" data-slug="engineering-mathematics"></iframe></div></div>
+  <div id="p2" class="panel chips"><span>Network Solution Methods</span><span>Network Theorems</span><span>Transient Response</span><span>Sinusoidal Steady State</span><span>Two-Port Networks</span><span>LTI Systems</span><span>Fourier Series &amp; Transform</span><span>Laplace &amp; Z-Transform</span><span>Sampling</span><div class="nbook"><div class="nbbar"><span class="nbl">Study notes</span><button type="button" class="nbt on" data-slug="networks-signals-systems">Networks, Signals &amp; Systems</button><a class="nbopen" href="gate/networks-signals-systems/">Open full page &#8599;</a></div><iframe class="nbframe" title="GATE ECE study notes" loading="lazy" data-slug="networks-signals-systems"></iframe></div></div>
+  <div id="p3" class="panel chips"><span>Semiconductor Physics</span><span>Diodes</span><span>BJT &amp; MOSFET</span><span>Small-Signal Models</span><span>Op-Amps</span><span>Feedback &amp; Oscillators</span><span>Combinational Logic</span><span>Sequential Logic</span><span>Microprocessors (8085)</span><span>ADC / DAC</span><div class="nbook"><div class="nbbar"><span class="nbl">Study notes</span><button type="button" class="nbt on" data-slug="electronic-devices">Electronic Devices</button><button type="button" class="nbt" data-slug="analog-circuits">Analog Circuits</button><button type="button" class="nbt" data-slug="digital-circuits">Digital Circuits</button><a class="nbopen" href="gate/electronic-devices/">Open full page &#8599;</a></div><iframe class="nbframe" title="GATE ECE study notes" loading="lazy" data-slug="electronic-devices"></iframe></div></div>
+  <div id="p4" class="panel chips"><span>Analog Modulation</span><span>Digital Modulation</span><span>Noise in Communications</span><span>Information Theory</span><span>Maxwell's Equations</span><span>Plane Waves</span><span>Transmission Lines</span><span>Waveguides</span><span>Antennas</span><div class="nbook"><div class="nbbar"><span class="nbl">Study notes</span><button type="button" class="nbt on" data-slug="communications">Communications</button><button type="button" class="nbt" data-slug="electromagnetics">Electromagnetics</button><a class="nbopen" href="gate/communications/">Open full page &#8599;</a></div><iframe class="nbframe" title="GATE ECE study notes" loading="lazy" data-slug="communications"></iframe></div></div>
+  <div id="p5" class="panel chips"><span>Transfer Functions</span><span>Block Diagrams &amp; SFG</span><span>Routh–Hurwitz</span><span>Root Locus</span><span>Bode &amp; Nyquist</span><span>State-Space</span><span>Compensators</span><div class="nbook"><div class="nbbar"><span class="nbl">Study notes</span><button type="button" class="nbt on" data-slug="control-systems">Control Systems</button><a class="nbopen" href="gate/control-systems/">Open full page &#8599;</a></div><iframe class="nbframe" title="GATE ECE study notes" loading="lazy" data-slug="control-systems"></iframe></div></div>
 </div></section>
 
 <section id="app"><div class="wrap">
@@ -159,5 +160,27 @@
   <div><a href="#learn">Learn</a><a href="#gate">GATE</a><a href="/gate/">GATE Notes</a><a href="#app">App</a><a href="/lab/">Circuit Simulator</a><a href="/lab/network/">Network Lab</a><a href="/lab/trainer/">8085/8051 Trainers</a><a href="/labs/">Lab Experiments</a><a href="#contact">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
 </div></footer>
 <script src="script.js"></script>
+<script>
+(function(){
+  function load(panel){
+    var f=panel.querySelector('.nbframe'); if(!f) return;
+    if(!f.getAttribute('src')){f.src='gate/'+f.dataset.slug+'/';}
+  }
+  document.querySelectorAll('.nbook').forEach(function(box){
+    var f=box.querySelector('.nbframe'), open=box.querySelector('.nbopen');
+    box.querySelectorAll('.nbt').forEach(function(b){
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.nbt').forEach(function(x){x.classList.remove('on')});
+        b.classList.add('on'); f.dataset.slug=b.dataset.slug;
+        f.src='gate/'+b.dataset.slug+'/'; open.href='gate/'+b.dataset.slug+'/';
+      });
+    });
+  });
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click',function(){var p=document.getElementById(t.dataset.p); if(p) load(p);});
+  });
+  var first=document.querySelector('.panel.on'); if(first) load(first);
+})();
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:linear-gradient(135deg,var(--y1),#fff 55%);background-attachment:fixed;color:var(--ink);line-height:1.65}
 h1,h2,h3,.logo,.btn,.eyebrow{font-family:Poppins,Inter,system-ui,sans-serif}
 a{color:var(--blue);text-decoration:none}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.wrap{max-width:none;margin:0 auto;padding:0 clamp(20px,4vw,72px)}
 header{position:sticky;top:0;z-index:10;background:rgba(255,253,245,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.4px;color:var(--ink);font-size:1.05rem}.logo b{font-weight:800}.logo span{color:var(--blue)}

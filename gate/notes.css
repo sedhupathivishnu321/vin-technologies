@@ -4,7 +4,7 @@ body.notes-page{background:#fff}
 .notes-page .nn a{color:var(--ink);font-weight:600;font-size:14px;text-decoration:none}
 .notes-page .nn a:hover{color:var(--amber-d)}
 .notes-page .nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-main.nt{max-width:860px;margin:0 auto;padding:26px 18px 56px;line-height:1.62;color:var(--ink);font-size:16.5px}
+main.nt{max-width:none;margin:0 auto;padding:26px clamp(18px,4vw,72px) 56px;line-height:1.62;color:var(--ink);font-size:16.5px}
 main.nt h1{font-family:Poppins,Inter,sans-serif;font-size:clamp(26px,4.4vw,36px);line-height:1.2;margin:4px 0 14px}
 main.nt h2{font-family:Poppins,Inter,sans-serif;font-size:clamp(20px,3.2vw,25px);margin:34px 0 8px;line-height:1.25}
 main.nt h2 .n,main.nt h3 .n{color:var(--amber-d);margin-right:4px}

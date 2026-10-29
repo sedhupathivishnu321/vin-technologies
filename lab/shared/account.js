@@ -55,6 +55,7 @@
       ".llacct .avatar{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--acc,#2f6fed);color:#fff;font-size:12px;font-weight:700}.llacct .avatar.out{background:var(--line,#d9dfe8);color:var(--mute,#6b7686)}.llacct.site{margin-left:12px}.llpop{position:absolute;right:0;top:36px;width:290px;background:var(--panel,#fff);color:var(--text,#1c2430);border:1px solid var(--line,#d9dfe8);border-radius:10px;box-shadow:0 12px 32px rgba(20,30,50,.25);padding:12px;z-index:200}" +
       ".llacct.fixed .llpop{top:auto;bottom:36px}.llpop p{margin:0 0 8px}.llpop small{color:var(--mute,#6b7686);display:block;margin-bottom:8px}" +
       ".llpop button{height:28px;padding:0 10px;margin:2px 4px 2px 0;border-radius:6px;border:1px solid var(--line,#d9dfe8);background:var(--panel,#fff);color:inherit;cursor:pointer;font:inherit}.llpop button.pri{background:var(--acc,#2f6fed);border-color:var(--acc,#2f6fed);color:#fff}" +
+      ".llpop{width:240px;top:40px;border-radius:12px;padding:14px;box-shadow:0 14px 36px rgba(20,30,50,.2);text-align:left}.llpop small{font-size:12px;margin:0}.llpop .who{display:flex;flex-direction:column;margin-bottom:4px}.llpop .who span{color:var(--mute,#6b7686);font-size:12px;overflow:hidden;text-overflow:ellipsis}.llpop .stat{font-size:12px;color:var(--mute,#6b7686);margin-bottom:10px}.llpop .btns{display:flex;gap:6px;margin-bottom:12px}.llpop .legal{margin-top:10px;text-align:center}.llpop .legal a{color:inherit}.llpop button{height:32px;padding:0 12px;margin:0;border-radius:8px;font-weight:500;flex:1}.llpop button.wide{width:100%}.llbar{height:4px;margin:2px 0 6px}" +
       ".llbar{height:6px;border-radius:3px;background:var(--line,#d9dfe8);overflow:hidden;margin:4px 0 8px}.llbar i{display:block;height:100%;background:var(--acc,#2f6fed)}" +
       ".lltoast{position:fixed;left:50%;bottom:48px;transform:translateX(-50%);background:var(--panel,#fff);color:var(--text,#1c2430);border:1px solid var(--line,#d9dfe8);border-radius:8px;box-shadow:0 12px 32px rgba(20,30,50,.25);padding:8px 14px;z-index:300;font:13px system-ui,sans-serif}.lltoast button{margin-left:10px;border:1px solid var(--line,#d9dfe8);background:var(--acc,#2f6fed);color:#fff;border-radius:6px;padding:3px 10px;cursor:pointer}"]);
     document.head.append(s);
@@ -69,41 +70,39 @@
     if (!el.btn) return;
     var cls = st.state === "ready" ? "ok" : st.state === "busy" ? "busy" : st.state === "error" || st.state === "expired" ? "err" : "";
     el.btn.innerHTML = "";
-    if (st.state === "out") el.btn.append(h("span", { "class": "avatar out" }, ["☺"]), "Sign in"); else el.btn.append(h("span", { "class": "avatar" }, [(st.name || st.email || "?").charAt(0).toUpperCase()]), h("span", { "class": "dot " + cls }), label());
-    el.btn.title = st.state === "out" ? "Sign in with Google to keep your work in your own Google Drive" : st.state === "ready" ? "Synced with your Google Drive" : st.state === "expired" ? "Session expired: click to reconnect" : "Account";
+    if (st.state === "out") el.btn.append(h("span", { "class": "avatar out" }, ["☺"]), h("span", { "class": "lbl" }, ["Sign in"])); else el.btn.append(h("span", { "class": "avatar" }, [(st.name || st.email || "?").charAt(0).toUpperCase()]), h("span", { "class": "dot " + cls }), h("span", { "class": "lbl" }, [label()]));
+    el.btn.title = st.state === "out" ? "Sign in with Google" : st.state === "ready" ? "Synced with your Google Drive" : st.state === "expired" ? "Session expired: click to reconnect" : "Account";
     if (!el.pop.hidden) renderPop();
   }
   function renderPop() {
     var p = el.pop; p.innerHTML = "";
     var u = used(), pct = Math.min(100, (u / LIMIT) * 100);
     if (st.state === "out") {
-      p.append(h("p", {}, ["Sign in to keep your projects in ", h("b", {}, ["your own Google Drive"]), " and open them on any computer."]),
-        h("small", {}, ["Saved in a private app folder that only LEARNERS LAB can open. VIN Technologies and GitHub never receive your files. Without signing in, work stays in this browser only."]));
-      var b = h("button", { "class": "pri", type: "button" }, ["Sign in with Google"]); b.onclick = signIn; p.append(b);
+      var b = h("button", { "class": "pri wide", type: "button" }, ["Continue with Google"]); b.onclick = signIn; p.append(b);
     } else {
-      p.append(h("p", {}, [st.name || st.email, h("br"), h("small", {}, [st.email])]));
-      p.append(h("small", {}, [st.state === "ready" ? ("Synced" + (st.last ? " at " + st.last : "")) : st.state === "busy" ? "Syncing..." : st.state === "expired" ? "Session expired, reconnect to sync." : st.state === "error" ? "Last sync failed: " + (st.err || "network error") : "Not connected in this session."]));
-      if (st.state === "idle" || st.state === "expired") { var r = h("button", { "class": "pri", type: "button" }, ["Reconnect"]); r.onclick = signIn; p.append(r); }
-      else { var s = h("button", { type: "button" }, ["Sync now"]); s.onclick = function () { pull(true); }; p.append(s); }
-      var o = h("button", { type: "button" }, ["Sign out"]); o.onclick = signOut; p.append(o);
+      p.append(h("div", { "class": "who" }, [h("b", {}, [st.name || st.email.split("@")[0]]), h("span", {}, [st.email])]));
+      var status = st.state === "ready" ? "Synced" + (st.last ? " " + st.last : "") : st.state === "busy" ? "Syncing…" : st.state === "expired" ? "Session expired" : st.state === "error" ? "Sync failed" : "Not connected";
+      p.append(h("div", { "class": "stat" }, [status]));
+      var row = h("div", { "class": "btns" });
+      if (st.state === "idle" || st.state === "expired") { var r = h("button", { "class": "pri", type: "button" }, ["Reconnect"]); r.onclick = signIn; row.append(r); }
+      else { var s = h("button", { type: "button" }, ["Sync now"]); s.onclick = function () { pull(true); }; row.append(s); }
+      var o = h("button", { type: "button" }, ["Sign out"]); o.onclick = signOut; row.append(o);
+      p.append(row);
+      p.append(h("div", { "class": "llbar", title: "Browser storage" }, [h("i", { style: "width:" + pct + "%" })]), h("small", {}, [mb(u) + " / " + mb(LIMIT) + " MB stored in this browser"]));
     }
-    p.append(h("hr", { style: "border:0;border-top:1px solid var(--line,#d9dfe8);margin:8px 0" }));
-    p.append(h("small", {}, ["Browser storage: " + mb(u) + " of " + mb(LIMIT) + " MB used (oldest work is removed first when full)"]), h("div", { "class": "llbar" }, [h("i", { style: "width:" + pct + "%" })]));
-    var c = h("button", { type: "button" }, ["Clear local cache"]);
-    c.onclick = function () { if (confirm("Delete the projects stored in this browser? Copies in your Google Drive are kept.")) { managedKeys().forEach(function (k) { if (!/theme/.test(k)) rawRemove.call(ls, k); }); saveMeta({}); toast("Local cache cleared"); renderPop(); } };
-    p.append(c, h("small", { style: "margin-top:8px" }, [h("a", { href: "/privacy/", target: "_blank", rel: "noopener" }, ["Privacy policy"]), " · ", h("a", { href: "/terms/", target: "_blank", rel: "noopener" }, ["Terms of service"])]));
+    p.append(h("small", { "class": "legal" }, [h("a", { href: "/privacy/", target: "_blank", rel: "noopener" }, ["Privacy"]), " · ", h("a", { href: "/terms/", target: "_blank", rel: "noopener" }, ["Terms"])]));
   }
   // ---------------------------------------------------------------- sign-in gate (config: requireSignIn)
   function showGate() {
     if (el.gate) return;
     el.gate = h("div", { id: "llgate", role: "dialog", "aria-modal": "true", "aria-label": "Sign in required", style: "position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg,#f3f5f8);font:14px/1.5 system-ui,'Segoe UI',sans-serif;color:var(--text,#1c2430)" });
-    var card = h("div", { style: "max-width:420px;width:100%;background:var(--panel,#fff);border:1px solid var(--line,#d9dfe8);border-radius:14px;box-shadow:0 12px 32px rgba(20,30,50,.18);padding:26px;text-align:center" });
-    var btn = h("button", { type: "button", style: "margin-top:16px;height:40px;padding:0 22px;border-radius:8px;border:0;background:var(--acc,#2f6fed);color:#fff;font:600 14px system-ui,sans-serif;cursor:pointer" }, ["Sign in with Google"]);
+    var card = h("div", { style: "max-width:340px;width:100%;background:var(--panel,#fff);border:1px solid var(--line,#d9dfe8);border-radius:14px;box-shadow:0 12px 32px rgba(20,30,50,.18);padding:28px 26px;text-align:center" });
+    var btn = h("button", { type: "button", style: "margin-top:18px;height:42px;width:100%;padding:0 22px;border-radius:8px;border:0;background:var(--acc,#2f6fed);color:#fff;font:600 14px system-ui,sans-serif;cursor:pointer" }, ["Sign in with Google"]);
     btn.onclick = signIn;
     var title = (document.title || "LEARNERS LAB").split("|")[0].split("—")[0].trim();
-    card.append(h("h2", { style: "margin:0 0 8px;font-size:20px" }, ["Sign in to open " + title]),
-      h("p", { style: "margin:0;color:var(--mute,#6b7686)" }, ["LEARNERS LAB simulators and trainer kits are free. Sign in with Google to use them; your projects are then kept in your own Google Drive."]), btn,
-      h("p", { style: "margin:14px 0 0;font-size:12px;color:var(--mute,#6b7686)" }, ["By signing in you agree to the ", h("a", { href: "/terms/", target: "_blank", rel: "noopener" }, ["Terms"]), " and ", h("a", { href: "/privacy/", target: "_blank", rel: "noopener" }, ["Privacy Policy"]), "."]));
+    card.append(h("img", { src: "/assets/icon-192.png", alt: "", width: "56", height: "56", style: "border-radius:14px;display:block;margin:0 auto 12px" }),
+      h("h2", { style: "margin:0;font-size:20px" }, ["Sign in to continue"]), btn,
+      h("p", { style: "margin:14px 0 0;font-size:12px;color:var(--mute,#6b7686)" }, [h("a", { href: "/privacy/", target: "_blank", rel: "noopener" }, ["Privacy"]), " · ", h("a", { href: "/terms/", target: "_blank", rel: "noopener" }, ["Terms"])]));
     el.gate.append(card);
     document.documentElement.append(el.gate);
     document.body.setAttribute("inert", "");
@@ -152,7 +151,7 @@
   function signOut() {
     try { if (st.token && window.google) google.accounts.oauth2.revoke(st.token, function () {}); } catch (e) { /* ignore */ }
     st = { state: "out", email: "", name: "", token: "", pushT: 0, last: "", fileId: "" }; try { rawRemove.call(ls, "ll:acct"); } catch (e) { /* ignore */ }
-    el.pop.hidden = true; render(); if (GATED) showGate(); else toast("Signed out. Your work stays in this browser.");
+    el.pop.hidden = true; render(); if (GATED) showGate(); else toast("Signed out");
   }
   function api(url, opt) {
     opt = opt || {}; opt.headers = Object.assign({ Authorization: "Bearer " + st.token }, opt.headers || {});
@@ -177,8 +176,8 @@
       });
       saveMeta(m);
       return push().then(function () {
-        done(manual ? "Synced with Google Drive" : "Signed in as " + st.email);
-        if (newer.length) toast("Newer work from your Drive was loaded.", "Reload to open it", function () { location.reload(); });
+        done(manual ? "Synced with Google Drive" : "Signed in");
+        if (newer.length) toast("Newer work found in your Drive", "Reload", function () { location.reload(); });
       });
     }).catch(fail);
   }

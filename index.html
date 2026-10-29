@@ -46,7 +46,7 @@
 .mazebar button{font:inherit;font-size:.78rem;font-weight:700;color:var(--brown);background:var(--cream);border:1px solid var(--amber);border-radius:99px;padding:4px 12px;cursor:pointer}
 .mazebar button:hover{background:var(--y1)}
 @media (min-width:1280px){.mazebox{position:absolute;right:clamp(20px,4vw,72px);top:50%;transform:translateY(-50%);margin:0;width:min(32vw,470px)}}
-.chips a.bk{display:none}.nbook{flex-basis:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(20,33,61,.07)}.nbbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--line)}.nbl{font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);margin-right:4px}.nbt{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px;font:inherit;font-size:.86rem;font-weight:600;color:var(--mute);cursor:pointer}.nbt.on{background:var(--amber);border-color:var(--amber);color:#3b2300}.nbopen{margin-left:auto;font-size:.85rem;font-weight:600;color:var(--blue);text-decoration:none}.nbframe{display:block;width:100%;height:min(78vh,820px);min-height:480px;border:0;background:#fff}</style>
+.mazebtns{display:flex;gap:6px;flex-wrap:wrap}.mazebtns button.on{background:var(--amber);border-color:var(--amber);color:#3b2300}.mazebox [hidden]{display:none!important}.mazebox canvas{outline:none;cursor:pointer}.mazebox canvas:focus-visible{box-shadow:0 0 0 3px rgba(37,99,235,.45)}.mazebox canvas.playing{touch-action:none}.mazepad{display:flex;justify-content:center;gap:8px;margin-top:8px}.mazepad button{width:46px;height:40px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:1.1rem;cursor:pointer;color:var(--ink)}.mazepad button:active{background:var(--y1)}.mazetip{margin-top:6px;font-size:.74rem;color:var(--mute);line-height:1.4}@media (min-width:1280px){.hero{min-height:740px;display:flex;align-items:center}.hero .wrap{width:100%}}.chips a.bk{display:none}.nbook{flex-basis:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(20,33,61,.07)}.nbbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--line)}.nbl{font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);margin-right:4px}.nbt{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px;font:inherit;font-size:.86rem;font-weight:600;color:var(--mute);cursor:pointer}.nbt.on{background:var(--amber);border-color:var(--amber);color:#3b2300}.nbopen{margin-left:auto;font-size:.85rem;font-weight:600;color:var(--blue);text-decoration:none}.nbframe{display:block;width:100%;height:min(78vh,820px);min-height:480px;border:0;background:#fff}</style>
 </head>
 <body>
 <header><div class="wrap nav">
@@ -67,8 +67,10 @@
   <hr class="div">
   <div class="badges"><span>Concept-first lessons</span><span>Topic-wise practice</span><span>Mock tests</span><span>Circuit simulation</span></div>
   <div class="mazebox" id="mazebox" aria-label="Animated maze that generates and solves itself">
-    <canvas id="maze" role="img" aria-label="A maze being carved by depth-first search and solved by breadth-first search"></canvas>
-    <div class="mazebar"><span id="mazecap">Auto maze</span><button type="button" id="mazenew">New maze</button></div>
+    <canvas id="maze" tabindex="0" role="application" aria-label="A maze being carved by depth-first search and solved by breadth-first search"></canvas>
+    <div class="mazebar"><span id="mazecap">Auto maze</span><span class="mazebtns"><button type="button" id="mzWatch" class="on" aria-pressed="true">Watch</button><button type="button" id="mzPlay" aria-pressed="false">Play</button><button type="button" id="mzHint" hidden>Hint</button><button type="button" id="mazenew">New</button></span></div>
+    <div class="mazepad" id="mazepad" hidden><button type="button" data-d="0" aria-label="Move up">&#8593;</button><button type="button" data-d="3" aria-label="Move left">&#8592;</button><button type="button" data-d="2" aria-label="Move down">&#8595;</button><button type="button" data-d="1" aria-label="Move right">&#8594;</button></div>
+    <div class="mazetip" id="mazetip">The maze builds and solves itself. Press Play to take over.</div>
   </div>
 </div></section>
 
@@ -193,79 +195,127 @@
 })();
 </script>
 <script>
-/* Self-playing maze: depth-first carve, breadth-first solve, runner follows the shortest path, repeat. */
+/* Maze: builds itself, solves itself (Watch) or lets you play it (Play); every finished maze is followed by a new one. */
 (function(){
   var cv=document.getElementById('maze'); if(!cv||!cv.getContext) return;
-  var ctx=cv.getContext('2d'), cap=document.getElementById('mazecap'), btn=document.getElementById('mazenew');
+  var ctx=cv.getContext('2d'), cap=document.getElementById('mazecap');
+  var bWatch=document.getElementById('mzWatch'), bPlay=document.getElementById('mzPlay'), bHint=document.getElementById('mzHint'), bNew=document.getElementById('mazenew');
+  var padEl=document.getElementById('mazepad'), tipEl=document.getElementById('mazetip');
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var N=17, PAD=8, W=0, cs=0, dpr=1;
-  var C={ink:'#14213d',amber:'rgba(245,158,11,.38)',head:'#d97706',path:'#2563eb',goal:'#16a34a',start:'#92400e',cell:'#fffdf5',trail:'rgba(37,99,235,.18)'};
-  var walls,seen,stack,cur,dist,parent,queue,qi,explored,path,runner,state,hold,count=0,goalFound;
+  var mode='watch', level=1, N=17, PAD=8, W=300, cs=1, dpr=1, count=0;
+  var C={ink:'#14213d',amber:'rgba(245,158,11,.38)',head:'#d97706',path:'#2563eb',goal:'#16a34a',start:'#92400e',cell:'#fffdf5',trail:'rgba(37,99,235,.18)',hint:'#16a34a'};
+  var walls,seen,stack,cur,dist,parent,queue,qi,explored,path,runner,state,hold,goalFound;
+  var pc,ppx,ppy,trail,moves,t0,tEnd,hintPath,hintUntil,best,capT=0;
+  var DX=[0,1,0,-1],DY=[-1,0,1,0]; // up, right, down, left
   function idx(x,y){return y*N+x}
   function rnd(n){return Math.floor(Math.random()*n)}
-  var DX=[0,1,0,-1],DY=[-1,0,1,0]; // top,right,bottom,left
+  function cx(i){return PAD+((i%N)+.5)*cs}
+  function cy(i){return PAD+(((i/N)|0)+.5)*cs}
+  function bestKey(){return 'vinMazeBest'+N}
+  function loadBest(){try{var v=parseFloat(localStorage.getItem(bestKey()));best=isFinite(v)?v:0}catch(e){best=0}}
+  function saveBest(sec){if(!best||sec<best){best=sec;try{localStorage.setItem(bestKey(),String(sec))}catch(e){}}}
+
   function init(){
+    N=mode==='play'?Math.min(25,11+2*(level-1)):17; cs=(W-2*PAD)/N;
     walls=[];seen=[];dist=[];parent=[];explored=[];
     for(var i=0;i<N*N;i++){walls.push([1,1,1,1]);seen.push(0);dist.push(-1);parent.push(-1);explored.push(0)}
     cur=idx(rnd(N),rnd(N));seen[cur]=1;stack=[cur];path=[];runner=0;goalFound=false;queue=[];qi=0;
+    pc=0;trail=[0];moves=0;t0=0;tEnd=0;hintPath=null;hintUntil=0;ppx=cx(0);ppy=cy(0);loadBest();
     state='carve';count++;
-    if(cap)cap.textContent='Maze #'+count+' · carving (DFS)';
-    if(reduce){while(state==='carve')carveStep();while(state==='solve')solveStep();state='done';runner=path.length-1;if(cap)cap.textContent='Maze #'+count+' · shortest path '+path.length+' cells'}
+    if(reduce){while(state==='carve')carveStep();if(mode==='watch'){while(state==='solve')solveStep();state='done';runner=path.length-1}}
+    setCaption();
   }
   function carveStep(){
-    if(!stack.length){state='solve';queue=[0];dist[0]=0;explored[0]=1;qi=0;if(cap)cap.textContent='Maze #'+count+' · solving (BFS)';return}
-    var c=stack[stack.length-1],x=c%N,y=(c/N)|0,opts=[];
-    for(var d=0;d<4;d++){var nx=x+DX[d],ny=y+DY[d];if(nx>=0&&ny>=0&&nx<N&&ny<N&&!seen[idx(nx,ny)])opts.push(d)}
+    if(!stack.length){
+      if(mode==='play'){state='play'}
+      else{state='solve';queue=[0];dist[0]=0;explored[0]=1;qi=0}
+      setCaption();return}
+    var c=stack[stack.length-1],x=c%N,y=(c/N)|0,opts=[],d;
+    for(d=0;d<4;d++){var nx=x+DX[d],ny=y+DY[d];if(nx>=0&&ny>=0&&nx<N&&ny<N&&!seen[idx(nx,ny)])opts.push(d)}
     if(!opts.length){stack.pop();cur=stack.length?stack[stack.length-1]:c;return}
-    var d=opts[rnd(opts.length)],n=idx(x+DX[d],y+DY[d]);
+    d=opts[rnd(opts.length)];var n=idx(x+DX[d],y+DY[d]);
     walls[c][d]=0;walls[n][(d+2)%4]=0;seen[n]=1;stack.push(n);cur=n;
   }
   function solveStep(){
     var goal=N*N-1;
-    if(qi>=queue.length||goalFound){ // finished expanding: trace back
-      var p=[],c=goal;while(c!==-1){p.push(c);c=parent[c]}p.reverse();path=p;state='run';runner=0;
-      if(cap)cap.textContent='Maze #'+count+' · shortest path '+path.length+' cells';return}
-    var c=queue[qi++],x=c%N,y=(c/N)|0;
+    if(qi>=queue.length||goalFound){
+      var p=[],c=goal;while(c!==-1){p.push(c);c=parent[c]}p.reverse();path=p;state='run';runner=0;setCaption();return}
+    var c2=queue[qi++],x=c2%N,y=(c2/N)|0;
     for(var d=0;d<4;d++){
-      if(walls[c][d])continue;var nx=x+DX[d],ny=y+DY[d],n=idx(nx,ny);
-      if(dist[n]!==-1)continue;dist[n]=dist[c]+1;parent[n]=c;explored[n]=1;queue.push(n);
-      if(n===goal){goalFound=true}
+      if(walls[c2][d])continue;var n=idx(x+DX[d],y+DY[d]);
+      if(dist[n]!==-1)continue;dist[n]=dist[c2]+1;parent[n]=c2;explored[n]=1;queue.push(n);
+      if(n===goal)goalFound=true;
     }
+  }
+  function bfsFrom(s){ // full BFS for hints
+    var g=N*N-1,par=new Array(N*N).fill(-2),q=[s],h=0;par[s]=-1;
+    while(h<q.length){var c=q[h++];if(c===g)break;var x=c%N,y=(c/N)|0;
+      for(var d=0;d<4;d++){if(walls[c][d])continue;var n=idx(x+DX[d],y+DY[d]);if(par[n]!==-2)continue;par[n]=c;q.push(n)}}
+    var p=[],c3=g;while(c3!==-1&&par[c3]!==-2){p.push(c3);c3=par[c3]}return p.reverse();
+  }
+  function elapsed(){return t0?((state==='won'?tEnd:performance.now())-t0)/1000:0}
+  function setCaption(){
+    var t;
+    if(mode==='watch'){
+      t=state==='carve'?'building (DFS)':state==='solve'?'solving (BFS)':'shortest path '+path.length+' cells';
+      cap.textContent='Maze #'+count+' · '+t;
+    }else if(state==='carve'){cap.textContent='Level '+level+' · building…'}
+    else if(state==='won'){cap.textContent='Solved! '+moves+' moves · '+elapsed().toFixed(1)+' s'+(best?' · best '+best.toFixed(1)+' s':'')}
+    else{cap.textContent='Level '+level+' · '+moves+' moves · '+elapsed().toFixed(1)+' s'+(best?' · best '+best.toFixed(1)+' s':'')}
+  }
+  function setMode(m){
+    mode=m;level=1;
+    bWatch.classList.toggle('on',m==='watch');bPlay.classList.toggle('on',m==='play');
+    bWatch.setAttribute('aria-pressed',m==='watch');bPlay.setAttribute('aria-pressed',m==='play');
+    bHint.hidden=m!=='play';padEl.hidden=m!=='play';cv.classList.toggle('playing',m==='play');
+    if(tipEl)tipEl.textContent=m==='play'?'Reach the green dot. Arrow keys / WASD, swipe, tap or use the pad. A new, bigger maze builds after every win.':'The maze builds and solves itself. Press Play to take over.';
+    init();
+    if(m==='play'){try{cv.focus({preventScroll:true})}catch(e){}}
+  }
+  function tryMove(d){
+    if(mode!=='play'||state!=='play'||walls[pc][d])return;
+    var x=pc%N,y=(pc/N)|0,n=idx(x+DX[d],y+DY[d]);
+    if(!moves)t0=performance.now();
+    pc=n;moves++;hintPath=null;
+    if(trail.length>1&&trail[trail.length-2]===n)trail.pop();else trail.push(n);
+    if(reduce){ppx=cx(pc);ppy=cy(pc)}
+    if(n===N*N-1){state='won';tEnd=performance.now();hold=0;saveBest(elapsed())}
+    setCaption();
   }
   function size(){
     var w=cv.clientWidth||300;dpr=Math.min(window.devicePixelRatio||1,2);
     cv.width=Math.round(w*dpr);cv.height=Math.round(w*dpr);W=w;cs=(W-2*PAD)/N;
+    if(pc!=null){ppx=cx(pc);ppy=cy(pc)}
   }
-  function cx(i){return PAD+((i%N)+.5)*cs}
-  function cy(i){return PAD+(((i/N)|0)+.5)*cs}
-  function draw(){
+  function line(arr,from){ctx.beginPath();for(var i=from||0;i<arr.length;i++){i===(from||0)?ctx.moveTo(cx(arr[i]),cy(arr[i])):ctx.lineTo(cx(arr[i]),cy(arr[i]))}ctx.stroke()}
+  function draw(now){
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,W);
     ctx.fillStyle=C.cell;ctx.fillRect(0,0,W,W);
     var i,x,y;
-    for(i=0;i<N*N;i++){
-      x=PAD+(i%N)*cs;y=PAD+((i/N)|0)*cs;
-      if(explored[i]){ctx.fillStyle=C.amber;ctx.fillRect(x,y,cs,cs)}
-    }
+    for(i=0;i<N*N;i++){if(explored[i]){ctx.fillStyle=C.amber;ctx.fillRect(PAD+(i%N)*cs,PAD+((i/N)|0)*cs,cs,cs)}}
     if(state==='carve'&&seen[cur]){ctx.fillStyle=C.head;ctx.fillRect(PAD+(cur%N)*cs,PAD+((cur/N)|0)*cs,cs,cs)}
-    // solved path (full faint line) and the runner's travelled part
-    if(path.length>1){
-      ctx.lineCap='round';ctx.lineJoin='round';
-      ctx.strokeStyle=C.trail;ctx.lineWidth=cs*.5;ctx.beginPath();
-      for(i=0;i<path.length;i++){i?ctx.lineTo(cx(path[i]),cy(path[i])):ctx.moveTo(cx(path[i]),cy(path[i]))}
-      ctx.stroke();
-      var upto=Math.min(path.length-1,Math.floor(runner));
+    ctx.lineCap='round';ctx.lineJoin='round';
+    if(mode==='watch'&&path.length>1){
+      ctx.strokeStyle=C.trail;ctx.lineWidth=cs*.5;line(path);
+      var upto=Math.min(path.length-1,Math.floor(runner)),fr=runner-upto,px=cx(path[upto]),py=cy(path[upto]);
       ctx.strokeStyle=C.path;ctx.lineWidth=cs*.3;ctx.beginPath();ctx.moveTo(cx(path[0]),cy(path[0]));
       for(i=1;i<=upto;i++)ctx.lineTo(cx(path[i]),cy(path[i]));
-      var fr=runner-upto,px=cx(path[upto]),py=cy(path[upto]);
       if(upto<path.length-1){px+=(cx(path[upto+1])-px)*fr;py+=(cy(path[upto+1])-py)*fr;ctx.lineTo(px,py)}
       ctx.stroke();
       ctx.fillStyle=C.path;ctx.shadowColor='rgba(37,99,235,.7)';ctx.shadowBlur=10;ctx.beginPath();ctx.arc(px,py,cs*.3,0,6.2832);ctx.fill();ctx.shadowBlur=0;
     }
-    // start and goal
+    if(mode==='play'&&(state==='play'||state==='won')){
+      if(trail.length>1){ctx.strokeStyle=C.trail;ctx.lineWidth=cs*.42;line(trail)}
+      if(hintPath&&now<hintUntil){ctx.strokeStyle=C.hint;ctx.lineWidth=cs*.2;ctx.setLineDash([cs*.3,cs*.3]);line(hintPath);ctx.setLineDash([])}
+    }
+    // start and goal (the goal pulses after a win)
     ctx.fillStyle=C.start;ctx.beginPath();ctx.arc(cx(0),cy(0),cs*.26,0,6.2832);ctx.fill();
-    ctx.fillStyle=C.goal;ctx.beginPath();ctx.arc(cx(N*N-1),cy(N*N-1),cs*.26,0,6.2832);ctx.fill();
-    // walls
-    ctx.strokeStyle=C.ink;ctx.lineWidth=Math.max(1.6,cs*.1);ctx.lineCap='round';ctx.beginPath();
+    var gr=cs*.26;if(state==='won')gr=cs*(.3+.18*Math.abs(Math.sin(now/160)));
+    ctx.fillStyle=C.goal;ctx.beginPath();ctx.arc(cx(N*N-1),cy(N*N-1),gr,0,6.2832);ctx.fill();
+    if(mode==='play'&&(state==='play'||state==='won')){
+      ctx.fillStyle=C.path;ctx.shadowColor='rgba(37,99,235,.8)';ctx.shadowBlur=12;ctx.beginPath();ctx.arc(ppx,ppy,cs*.31,0,6.2832);ctx.fill();ctx.shadowBlur=0;
+    }
+    ctx.strokeStyle=C.ink;ctx.lineWidth=Math.max(1.6,cs*.1);ctx.beginPath();
     for(i=0;i<N*N;i++){
       x=PAD+(i%N)*cs;y=PAD+((i/N)|0)*cs;var w=walls[i];
       if(w[0]){ctx.moveTo(x,y);ctx.lineTo(x+cs,y)}
@@ -275,23 +325,48 @@
     }
     ctx.stroke();
   }
-  var last=0,acc=0,running=true,visible=true;
+  var last=0,visible=true;
   function frame(t){
     requestAnimationFrame(frame);
     if(!visible||document.hidden){last=t;return}
-    var dt=Math.min(64,t-last);last=t;acc+=dt;
+    var dt=Math.min(64,t-last);last=t;
     if(!reduce){
-      if(state==='carve'){var k=Math.max(2,Math.round(N*N/80));for(var s=0;s<k&&state==='carve';s++)carveStep()}
+      if(state==='carve'){var k=mode==='play'?Math.max(3,Math.round(N*N/40)):Math.max(2,Math.round(N*N/80));for(var s=0;s<k&&state==='carve';s++)carveStep()}
       else if(state==='solve'){for(var s2=0;s2<3&&state==='solve';s2++)solveStep()}
       else if(state==='run'){runner+=dt/55;if(runner>=path.length-1){runner=path.length-1;state='hold';hold=0}}
       else if(state==='hold'){hold+=dt;if(hold>1800)init()}
-    }
-    draw();
+      else if(state==='won'){hold+=dt;if(hold>1800){level++;init()}}
+      if(mode==='play'&&pc!=null){var a=Math.min(1,dt/70);ppx+=(cx(pc)-ppx)*a;ppy+=(cy(pc)-ppy)*a}
+    }else if(state==='won'){hold+=dt;if(hold>1800){level++;init()}}
+    if(mode==='play'&&state==='play'&&t-capT>250){capT=t;setCaption()}
+    draw(t);
   }
+  // controls
+  var KEYS={ArrowUp:0,ArrowRight:1,ArrowDown:2,ArrowLeft:3,w:0,d:1,s:2,a:3,W:0,D:1,S:2,A:3};
+  cv.addEventListener('keydown',function(e){
+    if(!(e.key in KEYS))return;e.preventDefault();
+    if(mode==='watch'){setMode('play');return}
+    tryMove(KEYS[e.key]);
+  });
+  var ps=null;
+  cv.addEventListener('pointerdown',function(e){
+    ps={x:e.clientX,y:e.clientY};try{cv.focus({preventScroll:true})}catch(er){}
+    if(mode==='watch'){setMode('play');ps=null}
+  });
+  cv.addEventListener('pointerup',function(e){
+    if(!ps||mode!=='play')return;var dx=e.clientX-ps.x,dy=e.clientY-ps.y,d;ps=null;
+    if(Math.sqrt(dx*dx+dy*dy)>24){d=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?2:0)}
+    else{var r=cv.getBoundingClientRect(),tx=(e.clientX-r.left)/r.width*W,ty=(e.clientY-r.top)/r.height*W,ex=tx-cx(pc),ey=ty-cy(pc);d=Math.abs(ex)>Math.abs(ey)?(ex>0?1:3):(ey>0?2:0)}
+    tryMove(d);
+  });
+  padEl.addEventListener('click',function(e){var b=e.target.closest('button[data-d]');if(b){tryMove(+b.dataset.d);try{cv.focus({preventScroll:true})}catch(er){}}});
+  bWatch.addEventListener('click',function(){setMode('watch')});
+  bPlay.addEventListener('click',function(){setMode('play')});
+  bNew.addEventListener('click',function(){init();if(mode==='play'){try{cv.focus({preventScroll:true})}catch(er){}}});
+  bHint.addEventListener('click',function(){if(mode==='play'&&state==='play'){hintPath=bfsFrom(pc);hintUntil=performance.now()+3000}try{cv.focus({preventScroll:true})}catch(er){}});
   if('IntersectionObserver' in window){new IntersectionObserver(function(e){visible=e[0].isIntersecting},{threshold:.05}).observe(cv)}
-  window.addEventListener('resize',function(){size();draw()});
-  if(btn)btn.addEventListener('click',function(){init()});
-  size();init();requestAnimationFrame(frame);
+  window.addEventListener('resize',function(){size()});
+  size();setMode('watch');requestAnimationFrame(frame);
 })();
 </script>
 </body>

@@ -52,7 +52,7 @@
     var s = h("style", {}, [".llacct{position:relative;flex:none;font:13px/1.4 system-ui,'Segoe UI',sans-serif}.llacct.fixed{position:fixed;right:10px;bottom:10px;z-index:90}" +
       ".llacct>button.main{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:6px;border:1px solid var(--line,#d9dfe8);background:var(--panel,#fff);color:var(--text,#1c2430);cursor:pointer;white-space:nowrap;font:inherit;font-weight:500}" +
       ".llacct>button.main:hover{border-color:var(--acc,#2f6fed)}.llacct .dot{width:8px;height:8px;border-radius:50%;background:#7b838d}.llacct .dot.ok{background:#1f9d55}.llacct .dot.busy{background:#f08c00}.llacct .dot.err{background:#e5383b}" +
-      ".llpop{position:absolute;right:0;top:36px;width:290px;background:var(--panel,#fff);color:var(--text,#1c2430);border:1px solid var(--line,#d9dfe8);border-radius:10px;box-shadow:0 12px 32px rgba(20,30,50,.25);padding:12px;z-index:200}" +
+      ".llacct .avatar{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--acc,#2f6fed);color:#fff;font-size:12px;font-weight:700}.llacct .avatar.out{background:var(--line,#d9dfe8);color:var(--mute,#6b7686)}.llacct.site{margin-left:12px}.llpop{position:absolute;right:0;top:36px;width:290px;background:var(--panel,#fff);color:var(--text,#1c2430);border:1px solid var(--line,#d9dfe8);border-radius:10px;box-shadow:0 12px 32px rgba(20,30,50,.25);padding:12px;z-index:200}" +
       ".llacct.fixed .llpop{top:auto;bottom:36px}.llpop p{margin:0 0 8px}.llpop small{color:var(--mute,#6b7686);display:block;margin-bottom:8px}" +
       ".llpop button{height:28px;padding:0 10px;margin:2px 4px 2px 0;border-radius:6px;border:1px solid var(--line,#d9dfe8);background:var(--panel,#fff);color:inherit;cursor:pointer;font:inherit}.llpop button.pri{background:var(--acc,#2f6fed);border-color:var(--acc,#2f6fed);color:#fff}" +
       ".llbar{height:6px;border-radius:3px;background:var(--line,#d9dfe8);overflow:hidden;margin:4px 0 8px}.llbar i{display:block;height:100%;background:var(--acc,#2f6fed)}" +
@@ -69,7 +69,7 @@
     if (!el.btn) return;
     var cls = st.state === "ready" ? "ok" : st.state === "busy" ? "busy" : st.state === "error" || st.state === "expired" ? "err" : "";
     el.btn.innerHTML = "";
-    el.btn.append(h("span", { "class": "dot " + cls }), label());
+    if (st.state === "out") el.btn.append(h("span", { "class": "avatar out" }, ["☺"]), "Sign in"); else el.btn.append(h("span", { "class": "avatar" }, [(st.name || st.email || "?").charAt(0).toUpperCase()]), h("span", { "class": "dot " + cls }), label());
     el.btn.title = st.state === "out" ? "Sign in with Google to keep your work in your own Google Drive" : st.state === "ready" ? "Synced with your Google Drive" : st.state === "expired" ? "Session expired: click to reconnect" : "Account";
     if (!el.pop.hidden) renderPop();
   }
@@ -116,8 +116,8 @@
     el.btn = h("button", { "class": "main", type: "button", "aria-haspopup": "true" });
     el.pop = h("div", { "class": "llpop", hidden: "" });
     el.root.append(el.btn, el.pop);
-    var host = document.querySelector(".r1") || document.querySelector("header");
-    if (host) { var grow = host.querySelector(".grow"); (grow && grow.parentNode === host ? grow.after(el.root) : host.append(el.root)); } else { el.root.classList.add("fixed"); document.body.append(el.root); }
+    var host = document.querySelector(".r1") || document.querySelector("header .nav") || document.querySelector("header");
+    if (host && host.classList.contains("nav")) { el.root.classList.add("site"); var mn = host.querySelector(".menu"); if (mn) mn.before(el.root); else host.append(el.root); } else if (host) { var grow = host.querySelector(".grow"); (grow && grow.parentNode === host ? grow.after(el.root) : host.append(el.root)); } else { el.root.classList.add("fixed"); document.body.append(el.root); }
     el.btn.onclick = function (e) { e.stopPropagation(); el.pop.hidden = !el.pop.hidden; if (!el.pop.hidden) renderPop(); };
     document.addEventListener("click", function (e) { if (!el.root.contains(e.target)) el.pop.hidden = true; });
     render();
@@ -199,7 +199,7 @@
   window.addEventListener("pagehide", function () { if (st.state === "ready" && st.token && st.pushT) { try { push(); } catch (e) { /* best effort */ } } });
 
   window.LLAccount = { used: used, limit: LIMIT, signIn: signIn, signOut: signOut, sync: function () { return pull(true); } };
-  var GATED = !!CLIENT && CFG.requireSignIn !== false;
+  var GATED = !!CLIENT && CFG.requireSignIn !== false && !window.LL_NOGATE;
   function start() { if (CLIENT) { mount(); if (GATED && st.state === "out") showGate(); } }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();

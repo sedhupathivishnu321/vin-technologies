@@ -3,4 +3,4 @@
  *   authorised JavaScript origins: https://vintechnologies.co.in). While empty, the Sign in button is hidden.
  * requireSignIn: true = visitors must sign in with Google before the simulators open (only takes effect once googleClientId is set).
  * cacheLimitMB: the most the simulators may keep in the visitor's browser (oldest work is removed first). */
-window.LL_CONFIG = { googleClientId: "", cacheLimitMB: 8, requireSignIn: true };
+window.LL_CONFIG = { googleClientId: "125720671346-5dre30aa93ed45d7q4uoa1l9h0m5416v.apps.googleusercontent.com", cacheLimitMB: 8, requireSignIn: false };

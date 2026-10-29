@@ -32,7 +32,13 @@
     var add = (k.length + String(v).length) * 2, old = sizeOf(k);
     if (add > LIMIT) throw new DOMException("LEARNERS LAB cache limit (" + (LIMIT / 1048576) + " MB) exceeded by a single item", "QuotaExceededError");
     if (used() - old + add > LIMIT && !evictFor(add - old, k)) throw new DOMException("LEARNERS LAB cache limit exceeded", "QuotaExceededError");
-    rawSet.call(this, k, v);
+    try { rawSet.call(this, k, v); } catch (e) {
+      // the browser's own quota is lower than our limit: drop the oldest work until the write fits
+      var m0 = meta(), ks = managedKeys().filter(function (x) { return x !== k && !/theme/.test(x); }).sort(function (a, b) { return (m0[a] || 0) - (m0[b] || 0); }), ok = false;
+      while (ks.length && !ok) { var d = ks.shift(); rawRemove.call(ls, d); delete m0[d]; try { rawSet.call(this, k, v); ok = true; } catch (e2) { /* keep evicting */ } }
+      saveMeta(m0);
+      if (!ok) throw e;
+    }
     var m = meta(); m[k] = Date.now(); saveMeta(m);
     if (SYNCED.test(k)) schedulePush();
   };

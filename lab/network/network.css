@@ -3,7 +3,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none !important}
 html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
-body{background:var(--bg);color:var(--text);font:13px/1.45 "Segoe UI","Inter",system-ui,-apple-system,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font:13px/1.45 "Times New Roman",Times,serif;-webkit-font-smoothing:antialiased}
 input,select,button,textarea{font:inherit;color:inherit}
 a{color:var(--acc2);text-decoration:none}
 button{cursor:pointer;background:none;border:0;padding:0}

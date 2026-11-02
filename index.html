@@ -239,7 +239,7 @@ section h2+.grid,section h2+details,section h2+.contact,section h2+.steps{margin
   var padEl=document.getElementById('mazepad'), tipEl=document.getElementById('mazetip');
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mode='watch', level=1, N=17, PAD=8, W=300, cs=1, dpr=1, count=0;
-  var C={ink:'#0f172a',amber:'rgba(3,105,161,.16)',head:'#0369a1',path:'#0369a1',goal:'#15803d',start:'#0f172a',cell:'#f8fafc',trail:'rgba(3,105,161,.16)',hint:'#15803d'};
+  var C={ink:'#0f172a',amber:'rgba(122,92,20,.16)',head:'#7a5c14',path:'#7a5c14',goal:'#15803d',start:'#0f172a',cell:'#f8fafc',trail:'rgba(3,105,161,.16)',hint:'#15803d'};
   var walls,seen,stack,cur,dist,parent,queue,qi,explored,path,runner,state,hold,goalFound;
   var pc,ppx,ppy,trail,moves,t0,tEnd,hintPath,hintUntil,best,capT=0;
   var DX=[0,1,0,-1],DY=[-1,0,1,0]; // up, right, down, left

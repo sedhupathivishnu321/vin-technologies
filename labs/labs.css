@@ -11,6 +11,6 @@
 /* related-experiment link lists */
 .rel{columns:2;column-gap:28px;list-style:none;padding:0}
 .rel li{margin:4px 0;break-inside:avoid}
-.rel a{display:block;padding:9px 12px;border:1px solid var(--line);border-radius:var(--r-sm);color:var(--ink);background:#fff;min-height:44px;transition:border-color .15s,background-color .15s}
+.rel a{display:block;padding:9px 12px;border:1px solid var(--line);border-radius:var(--r-sm);color:var(--ink);background:var(--card);min-height:44px;transition:border-color .15s,background-color .15s}
 .rel a:hover{border-color:var(--accent);background:var(--accent-l);text-decoration:none;color:var(--accent-d)}
 @media(max-width:600px){.rel{columns:1}}

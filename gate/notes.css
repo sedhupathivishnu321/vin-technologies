@@ -1,5 +1,5 @@
 /* GATE ECE study notes (book pages). Pairs with /style.css (tokens: --ink --mute --line --soft --accent ...). */
-body.notes-page{background:#fff}
+body.notes-page{background:var(--bg)}
 main.nt{max-width:none;margin:0 auto;padding:32px clamp(18px,4vw,72px) 72px;line-height:1.7;color:var(--ink);font-size:17px}
 main.nt h1{font-size:clamp(1.9rem,4.4vw,2.7rem);line-height:1.12;font-weight:800;letter-spacing:-.03em;margin:6px 0 16px}
 main.nt h2{font-size:clamp(1.35rem,3vw,1.75rem);font-weight:700;letter-spacing:-.02em;margin:40px 0 10px;line-height:1.25;padding-top:8px;border-top:1px solid var(--line)}
@@ -17,7 +17,7 @@ main.nt a{color:var(--accent)}
 .ctoc ol{margin:4px 0 12px;padding-left:20px;columns:2;column-gap:32px;font-size:.92rem}
 @media (max-width:640px){.ctoc ol{columns:1}}
 /* callout boxes: neutral card with a coloured title bar */
-.box{border:1px solid var(--line);border-left-width:4px;border-radius:var(--r);margin:22px 0;overflow:hidden;background:#fff}
+.box{border:1px solid var(--line);border-left-width:4px;border-radius:var(--r);margin:22px 0;overflow:hidden;background:var(--card)}
 .box .bt{font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:9px 16px;color:var(--bx,var(--ink));background:var(--bxl,var(--soft))}
 .box .bb{padding:6px 18px 12px;overflow-x:auto}
 .box .bb>p:first-child{margin-top:10px}
@@ -74,7 +74,7 @@ ol.toc a:hover{background:var(--soft)}
 .tn{min-width:30px;color:var(--accent);font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
 h2.part{font-size:.8rem!important;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:36px 0 6px!important;border-top:0!important;padding-top:0!important;font-weight:700!important}
 .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px;margin:14px 0}
-.bcard{display:block;border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;text-decoration:none;color:var(--ink);background:#fff;box-shadow:var(--shadow-1);transition:box-shadow .18s,border-color .18s,transform .18s}
+.bcard{display:block;border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;text-decoration:none;color:var(--ink);background:var(--card);box-shadow:var(--shadow-1);transition:box-shadow .18s,border-color .18s,transform .18s}
 .bcard:hover{border-color:var(--accent);box-shadow:var(--shadow-2);transform:translateY(-2px);text-decoration:none}
 .bcard h3{margin:0 0 6px!important;font-size:1.1rem!important}
 .bcard p{margin:0 0 10px;font-size:.92rem;color:var(--mute);line-height:1.5}
@@ -87,5 +87,5 @@ main.nt h1,main.nt h2,main.nt h3{text-transform:none}
 /* embedded in the home page reader */
 .emb header,.emb footer,.emb .crumbs,.emb .skip{display:none}
 .emb main.nt{padding:14px 16px 28px;font-size:16px}
-.emb body.notes-page{background:#fff}
+.emb body.notes-page{background:var(--bg)}
 main.nt{overflow-wrap:break-word}

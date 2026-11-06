@@ -34,7 +34,7 @@
     var saved = store(true);
     var b = best();
     app.innerHTML =
-      '<div class="start panel"><span class="pill">Chapter ' + n + ' · Mock Test</span><h1>' + esc(M.title) + '</h1>' +
+      '<div class="start panel"><span class="pill">' + (S0 === 'final' ? 'Full-length test' : 'Chapter ' + n + ' · Mock Test') + '</span><h1>' + esc(M.title) + '</h1>' +
       '<p class="sub">' + esc(M.stitle) + ' · GATE ECE</p>' +
       '<div class="stats"><div class="stat"><b>' + M.qs.length + '</b><span>MCQs</span></div><div class="stat"><b>' + M.marks + '</b><span>total marks</span></div>' +
       '<div class="stat"><b>' + Math.round(M.qs.length * 1.2) + ' min</b><span>exam duration</span></div>' + (b != null ? '<div class="stat"><b>' + b.toFixed(2) + '</b><span>your best score</span></div>' : '') + '</div>' +
@@ -151,7 +151,7 @@
       return '<tr><td>' + esc(k) + '</td><td class="n">' + t.n + '</td><td class="n">' + t.ok + '</td><td class="n">' + t.wr + '</td><td class="n">' + t.sk + '</td><td class="n">' + t.sc.toFixed(2) + '</td><td><div class="bar"><i style="width:' + pc + '%"></i></div></td></tr>';
     }).join('');
     app.innerHTML =
-      '<div class="panel"><span class="pill">Result · Chapter ' + n + '</span><h1 style="margin-top:8px">' + esc(M.title) + '</h1>' +
+      '<div class="panel"><span class="pill">Result · ' + (S0 === 'final' ? 'Full-length test' : 'Chapter ' + n) + '</span><h1 style="margin-top:8px">' + esc(M.title) + '</h1>' +
       '<div class="big">' + sc.toFixed(2) + ' <span style="font-size:20px;color:var(--mut)">/ ' + M.marks + '</span></div>' +
       '<div class="rgrid"><div class="stat"><b style="color:var(--ok)">' + ok + '</b><span>correct</span></div><div class="stat"><b style="color:var(--bad)">' + wr + '</b><span>wrong</span></div><div class="stat"><b style="color:var(--warn)">' + sk + '</b><span>unanswered</span></div>' +
       '<div class="stat"><b>' + (ok + wr ? Math.round(100 * ok / (ok + wr)) : 0) + '%</b><span>accuracy</span></div><div class="stat"><b>' + fmt(used) + '</b><span>time used</span></div></div>' +
@@ -183,7 +183,7 @@
   sc.src = 'data/' + S0 + '/ch' + pad + '.js';
   sc.onload = function () {
     M = window.MOCK; document.title = 'Ch ' + n + ' · ' + M.title + ' — Mock Test';
-    $('#ttl').textContent = M.stitle + ' · Ch ' + n;
+    $('#ttl').textContent = S0 === 'final' ? M.title : M.stitle + ' · Ch ' + n;
     var bk = document.getElementById('back'); if (bk) bk.href = 'index.html#' + S0;
     var s = store(true);
     start();

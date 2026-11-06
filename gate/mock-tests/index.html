@@ -29,7 +29,7 @@
   if(!META.some(function(s){return s.id===cur}))cur='final';
   var total=0,have=0;
   META.forEach(function(S){S.parts.forEach(function(P){P.c.forEach(function(c){total++;if(c.m)have++})})});
-  document.getElementById('tot').textContent=have+' tests · '+((have-1)*150+58).toLocaleString()+' questions';
+  document.getElementById('tot').textContent=have+' tests · '+((have-26)*150+58+25*65).toLocaleString()+' questions';
   function draw(){
     var t='';META.forEach(function(S){var n=0,h=0;S.parts.forEach(function(P){P.c.forEach(function(c){n++;if(c.m)h++})});
       t+='<button class="tab'+(S.id===cur?' on':'')+'" data-s="'+S.id+'">'+esc(S.title)+'<small>'+h+'</small></button>'});
@@ -40,8 +40,8 @@
       h+='<div class="grid" style="margin-top:10px">';
       P.c.forEach(function(c){
         var b=best[S.id+c.n];
-        if(!c.m){h+='<div class="ccard" style="opacity:.55"><div class="no">CHAPTER '+c.n+'</div><h3>'+esc(c.t)+'</h3><div class="meta">coming soon</div></div>';return}
-        h+='<a class="ccard" href="test.html?s='+S.id+'&c='+c.n+'"><div class="no">CHAPTER '+c.n+'</div><h3>'+esc(c.t)+'</h3><div class="meta">150 MCQs · '+c.m+' marks</div>'+(b!=null?'<div class="best">Best: '+b.toFixed(2)+' / '+c.m+'</div>':'')+'</a>';
+        if(!c.m){h+='<div class="ccard" style="opacity:.55"><div class="no">'+(S.id==='final'?'FULL TEST':'CHAPTER '+c.n)+'</div><h3>'+esc(c.t)+'</h3><div class="meta">coming soon</div></div>';return}
+        h+='<a class="ccard" href="test.html?s='+S.id+'&c='+c.n+'"><div class="no">'+(S.id==='final'?'FULL TEST':'CHAPTER '+c.n)+'</div><h3>'+esc(c.t)+'</h3><div class="meta">150 MCQs · '+c.m+' marks</div>'+(b!=null?'<div class="best">Best: '+b.toFixed(2)+' / '+c.m+'</div>':'')+'</a>';
       });
       h+='</div>';
     });

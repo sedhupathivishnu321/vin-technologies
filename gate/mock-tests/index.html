@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809600514096697" crossorigin="anonymous"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GATE ECE Chapter-wise Mock Tests: 137 tests, 20,550 questions | VIN Technologies</title>
 <link rel="canonical" href="https://vintechnologies.co.in/gate/mock-tests/">
 <meta name="description" content="Free chapter-wise GATE ECE mock tests for all 9 subjects: 150 MCQs per chapter with figures, answers and worked explanations. Exam mode with GATE negative marking, and practice mode.">
@@ -26,10 +26,10 @@
   var best={}; try{best=JSON.parse(localStorage.getItem('mock-best')||'{}')}catch(e){}
   var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')};
   var cur=(location.hash||'').slice(1);
-  if(!META.some(function(s){return s.id===cur}))cur='nss';
+  if(!META.some(function(s){return s.id===cur}))cur='final';
   var total=0,have=0;
   META.forEach(function(S){S.parts.forEach(function(P){P.c.forEach(function(c){total++;if(c.m)have++})})});
-  document.getElementById('tot').textContent=have+' chapter tests · '+(have*150).toLocaleString()+' questions';
+  document.getElementById('tot').textContent=have+' tests · '+((have-1)*150+58).toLocaleString()+' questions';
   function draw(){
     var t='';META.forEach(function(S){var n=0,h=0;S.parts.forEach(function(P){P.c.forEach(function(c){n++;if(c.m)h++})});
       t+='<button class="tab'+(S.id===cur?' on':'')+'" data-s="'+S.id+'">'+esc(S.title)+'<small>'+h+'</small></button>'});

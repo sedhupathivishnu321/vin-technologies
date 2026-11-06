@@ -49,7 +49,7 @@
     modes.forEach(function (i) { i.onchange = function () { $('#mExam').classList.toggle('on', modes[0].checked); $('#mPrac').classList.toggle('on', modes[1].checked); }; });
     $('#bGo').onclick = function () {
       var mode = modes[1].checked ? 'practice' : 'exam';
-      S = { mode: mode, ans: M.qs.map(function () { return null; }), mk: M.qs.map(function () { return 0; }), vis: M.qs.map(function () { return 0; }), cur: 0, left: Math.round(M.qs.length * 72), t0: Date.now(), done: false, spent: M.qs.map(function () { return 0; }) };
+      S = { mode: mode, ans: M.qs.map(function () { return null; }), mk: M.qs.map(function () { return 0; }), vis: M.qs.map(function () { return 0; }), cur: 0, left: (M.dur ? M.dur * 60 : Math.round(M.qs.length * 72)), t0: Date.now(), done: false, spent: M.qs.map(function () { return 0; }) };
       S.vis[0] = 1; run();
     };
     if ($('#bResume')) $('#bResume').onclick = function () { S = saved; run(); };
@@ -145,7 +145,7 @@
       else { wr++; t.wr++; sc -= neg(q); t.sc -= neg(q); }
     });
     best(sc);
-    var used = S.mode === 'exam' ? Math.round(M.qs.length * 72 - S.left) : S.spent.reduce(function (a, b) { return a + b; }, 0);
+    var used = S.mode === 'exam' ? Math.round((M.dur ? M.dur * 60 : M.qs.length * 72) - S.left) : S.spent.reduce(function (a, b) { return a + b; }, 0);
     var rows = Object.keys(topics).sort(function (a, b) { return topics[a].ok / topics[a].n - topics[b].ok / topics[b].n; }).map(function (k) {
       var t = topics[k], pc = Math.round(100 * t.ok / t.n);
       return '<tr><td>' + esc(k) + '</td><td class="n">' + t.n + '</td><td class="n">' + t.ok + '</td><td class="n">' + t.wr + '</td><td class="n">' + t.sk + '</td><td class="n">' + t.sc.toFixed(2) + '</td><td><div class="bar"><i style="width:' + pc + '%"></i></div></td></tr>';

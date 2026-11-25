@@ -6,7 +6,7 @@
   var params = new URLSearchParams(location.search);
   var n = parseInt(params.get('m'), 10) || 1;
   var pad = (n < 10 ? '0' : '') + n;
-  var KEY = 'ugcnet-mock-' + pad;
+  var KEY = 'ugcnet2-mock-' + pad;
   var LET = ['A', 'B', 'C', 'D'];
   var DEFAULT_MIN = 180;
   var app = $('#app');

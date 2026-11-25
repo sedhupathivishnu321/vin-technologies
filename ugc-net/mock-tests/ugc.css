@@ -1,0 +1,21 @@
+/* UGC NET mock additions on top of /gate/mock-tests/app.css */
+.durbox{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;margin:16px 0;background:var(--card)}
+.durbox label{display:block}.durbox label b{display:block;font-size:16px}.durbox label small{color:var(--mut)}
+.durin{display:flex;align-items:center;gap:10px;margin:10px 0}
+.durin input{width:120px;font:inherit;font-size:18px;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.durin input:focus{outline:2px solid var(--acc);outline-offset:1px}
+.durq{display:flex;flex-wrap:wrap;gap:8px}.durq button{font-size:13px;padding:5px 12px}
+.tmsub{text-align:center;color:var(--mut);font-size:13px;margin-top:-4px}
+.ptabs{display:flex;gap:6px;margin:12px 0 8px}.ptabs button{flex:1;font-weight:600}
+.ptabs button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.cnt{text-align:center;font-size:13px;color:var(--mut);margin:8px 0}
+.passage{text-align:left;line-height:1.6;max-height:340px;overflow:auto;padding:4px 2px}
+.passage p{margin:.5em 0 0}
+.ditable{text-align:left}.ditable .tb{margin:8px 0}.ditable small{color:var(--mut)}
+.keygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px;margin:8px 0 16px}
+.kc{display:flex;flex-direction:column;align-items:center;border:1.5px solid var(--line);border-radius:8px;padding:4px 2px;text-decoration:none;color:var(--ink);line-height:1.15}
+.kc .kn{font-size:11px;color:var(--mut)}.kc b{font-size:18px}.kc small{font-size:11px}
+.kc.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.kc.wr{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.kc.sk{opacity:.75}
+@media print{header,footer,.nav,.filters,#rv,.exam{display:none!important}.panel{box-shadow:none;border:0}}

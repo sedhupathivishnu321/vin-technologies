@@ -1,0 +1,1 @@
+window.UMETA=[{"n": 1, "t": "UGC NET Mock Test 1", "q": 150, "m": 300}, {"n": 2, "t": "UGC NET Mock Test 2", "q": 150, "m": 300}, {"n": 3, "t": "UGC NET Mock Test 3", "q": 150, "m": 300}, {"n": 4, "t": "UGC NET Mock Test 4", "q": 150, "m": 300}, {"n": 5, "t": "UGC NET Mock Test 5", "q": 150, "m": 300}];
